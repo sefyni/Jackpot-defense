@@ -1,0 +1,13 @@
+JACKPOT DEFENSE v6-202610062203
+
+Mettre ce dossier en ligne (gratuit), puis l'installer :
+1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
+   (GitHub Pages, Netlify, Cloudflare Pages…). index.html doit être à la racine.
+2. Ouvre l'adresse obtenue :
+   - iPhone : Safari > bouton Partager > « Sur l'écran d'accueil »
+   - Android : Chrome > menu ⋮ > « Installer l'application » (ou « Ajouter à l'écran d'accueil »)
+   - PC : Chrome ou Edge > icône « Installer » dans la barre d'adresse
+3. Après la 1re ouverture, le jeu marche aussi sans internet.
+
+Ta progression reste sur chaque appareil. Pour la transférer :
+Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
