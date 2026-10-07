@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v7-202610071710
+JACKPOT DEFENSE v8-202610072313
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,19 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v8
+- Niveaux : 6 actes de 5 manches. Chaque acte a sa couleur de cartes (Carreaux, Cœurs, Piques, Trèfles, Figures, puis la Table du Baron), annonce son boss dès sa 1re manche, monte en tension, et finit sur son boss. La manche d'après, on souffle un peu.
+- Les boss sont de vrais pics : leur vague n'est plus réduite de moitié, ils enragent à mi-vie (plus vite, plus fort, cartes plus rapides), et chacun a ses PV réglés pour être la manche la plus dure de son acte.
+- La BILLE remplace « toucher une carte pour la viser » : appuie sur ta base, tire en arrière, lâche. Elle cogne, repousse, coupe les sorts, casse les boucliers et marque sa cible (ta base la vise en priorité). Elle revient vers toi : un coup de flipper pile au bon moment = REBOND (+50 % de dégâts, cumulable). Sur PC : clic droit maintenu, ou la touche Z.
+- L'Horloger : bien plus faible en commun, rare et ultime (rouleaux 8, 15, 22 % moins vite). Sa vraie force n'arrive qu'en SECRÈTE : plus aucune accélération, STOP pile, et il montre le symbole qui va tomber.
+- Nouveau Punch-o-matic : au marché noir, pour 500 or, l'Inspecteur passe ton jeton ULTIME dans sa machine et te le rend en SECRÈTE (+25 % de puissance et sa capacité secrète). Une fois par visite, et il refuse les communs, rares, mix, maudits, fous et faux, en le faisant savoir. La Collection secrète montre ce que fait chaque secret découvert (verrouillé sinon). Les anciens tickets disparaissent.
+- Madame Nox : sa prophétie ne dit vrai qu'une fois sur trois. Avec un jeton Chance ULTIME : deux fois sur trois, et elle voit le vert une fois sur deux. En SECRÈTE : elle ne ment plus, et voit le vert quatre fois sur cinq.
+- Boss final : le Baron, à la manche 30 (le Joker Noir devient son bras droit). Une scène d'arrivée, des répliques qui changent selon le nombre de fois où tu l'as battu (il se moque, puis il te prend au sérieux), et une musique breakcore qui change à chaque vie.
+  1re vie, la grande donne : toutes les cartes, et ses figures reviennent (tant qu'une vit, il ne prend que la moitié des dégâts).
+  2e vie, sans chapeau : il le perd et s'énerve. Ses sorts (Rien ne va plus, Carton rouge, La Main du Baron, Tapis !, Bluff, La Rafle) et ses As : Pique noire, Saignée, Pluie de diamants, Ronces. Ta BILLE coupe ses sorts.
+  3e vie, le Baron joue : fléchettes, billard, roulette et poker, obligatoires. Chaque jeu perdu retourne un ami contre toi (fléchettes de Dina, boules de Momo, cocktails de Zaza) ; chaque jeu gagné le garde de ton côté. Toutes les 20 s, la roue de Nox : rouge = +10 % de dégâts pour eux, noir = +15 % pour toi (ça s'additionne).
+  Victoire : 2 jetons fous à choisir parmi 4 dans sa caisse, et dès ta 4e victoire contre lui, le Zapotron en jeton bonus.
 
 Nouveautés de la v7
 - Corrigé : le marché noir pendant qu'un client arrive (la partie restait bloquée).
