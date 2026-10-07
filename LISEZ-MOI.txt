@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v6-202610062203
+JACKPOT DEFENSE v7-202610071710
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,3 +11,19 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v7
+- Corrigé : le marché noir pendant qu'un client arrive (la partie restait bloquée).
+- Corrigé : acheter un sort n'efface plus jamais un ancien sort.
+- Corrigé : le « r » de « soir » sur l'écran de lancement (mobile).
+- Corrigé : glisser un jeton dans le rack le pose là où tu le lâches (avant, il filait tout en haut sur PC et tablette).
+- Sorts : 4 au maximum, Bombe et Gel compris. Plus d'échange : on les vend (moitié prix) au marché noir ou dans Infos > Boissons et sorts.
+- Boss : tant qu'un boss est en vie, ses cartes arrivent sans fin. Elles s'arrêtent dès qu'il tombe.
+- Dégâts par seconde en direct (panneau de gauche sur PC, pastille en haut à droite sur téléphone) et nouvel onglet Infos > Dégâts : d'où viennent tes dégâts, et ce que chaque jeton apporte (avec / sans, au banc d'essai). Aussi dans la fiche de chaque jeton.
+- Machine : un triple obtenu en relançant a sa propre animation et son propre son.
+- Jeton Roulette : la roue tourne en grand au début de la manche.
+- Doublons : rien ne se perd. Chaque niveau au-delà d'ultime devient une étoile (+5 % de puissance, jusqu'à +50 %).
+- Miroir : affiche compatible / incompatible avec un lien vers le jeton copié, s'allume quand l'effet copié se déclenche, se cumule (miroir du miroir), et la part de flipper copiée sur le Croupier brille en argent.
+- Ranger ses jetons : Monter / Descendre sur PC, flèches du clavier partout.
+- Touches modifiables : Options > Contrôles (deux touches par action, 1 à 4 aussi en AZERTY sans Maj). Machine au clavier : 1-2-3, R, E.
+- Le combo s'électrise au lieu de prendre feu : plus le MULT monte, plus l'électricité prend de place et grésille fort.

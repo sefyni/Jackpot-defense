@@ -253,6 +253,45 @@ body.combat #stage::before{background:rgba(20,13,31,.55)}
 .reels.win .payline{animation:pwin .45s 5 alternate}
 .reels.bad .payline{animation:pbad .3s 6 alternate}
 .reels.rel .payline{animation:prel .35s 5 alternate}
+/* triple en relance : les 3 rouleaux s'allument en or l'un après l'autre, un jeton ultime jaillit avec ses rayons */
+.reels.gold .payline{box-shadow:0 0 0 3px #ffcc4d,0 0 22px #ffcc4d;animation:pwin .3s 8 alternate 1s}
+.reels.gold .reel::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:8px;box-shadow:inset 0 0 0 3px #ffcc4d,inset 0 0 24px rgba(255,204,77,.85);background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.85) 45%,transparent 60%) no-repeat;background-size:260% 100%;opacity:0;animation:rtGold 1.6s var(--gd,.4s) both}
+@keyframes rtGold{0%{opacity:0;background-position:120% 0}12%{opacity:1}55%{background-position:-60% 0}100%{opacity:1;background-position:-60% 0}}
+.rtrip{position:absolute;inset:-34px -14px;z-index:6;display:grid;place-items:center;pointer-events:none}
+.rtrip .rt-rays{position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,214,90,.55) 0 9deg,transparent 9deg 22deg);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);opacity:0;animation:rtRays 2.6s .9s both}
+@keyframes rtRays{0%{opacity:0;rotate:0deg;scale:.4}15%{opacity:1;scale:1}85%{opacity:1}100%{opacity:0;rotate:140deg;scale:1.15}}
+.rtrip .rt-chip{position:relative;width:clamp(64px,22%,96px);opacity:0;filter:drop-shadow(0 0 14px rgba(255,204,77,.9));animation:rtChip 2.4s .95s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes rtChip{0%{opacity:0;transform:translateY(40px) scale(.2) rotateY(0)}22%{opacity:1;transform:translateY(-8px) scale(1.25) rotateY(720deg)}35%{transform:scale(1) rotateY(720deg)}85%{opacity:1;transform:scale(1) rotateY(720deg)}100%{opacity:0;transform:scale(.6) rotateY(900deg)}}
+.rtrip b{position:absolute;left:-10px;right:-10px;text-align:center;white-space:nowrap;font:700 clamp(22px,6.6vw,40px)/1 var(--f-pix);letter-spacing:.12em;color:#fff3c4;text-shadow:0 3px 0 #b8862a,0 6px 0 #6b4c16,0 0 0 #000,0 0 22px rgba(255,204,77,.9),0 0 3px #000;opacity:0}
+.rtrip .rt-l1{top:0;animation:rtTxt 2.3s 1s both}
+
+@keyframes rtTxt{0%{opacity:0;transform:scale(2.6) rotate(-8deg)}14%{opacity:1;transform:scale(.92) rotate(2deg)}22%{transform:none}85%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
+.led.gold{color:#ffe08a;text-shadow:0 0 10px rgba(255,204,77,.9);animation:ledGold .25s 8 alternate}
+@keyframes ledGold{to{color:#fff;text-shadow:0 0 18px #ffcc4d}}
+/* la roue du jeton Roulette, au début de la manche */
+.rlw{position:absolute;z-index:13;left:50%;top:63%;translate:-50% -50%;width:min(74vw,300px);display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 14px 16px;border-radius:22px;background:rgba(14,9,24,.86);box-shadow:inset 0 0 0 3px #2fbf71,0 0 0 4px #000,0 18px 40px rgba(0,0,0,.6);cursor:pointer;animation:rlIn .35s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes rlIn{from{opacity:0;scale:.6}}
+.rlw.out{animation:rlOut .3s ease-in both}
+@keyframes rlOut{to{opacity:0;scale:.85}}
+.rl-t{font:700 18px/1 var(--f-pix);letter-spacing:.12em;color:var(--cream);text-align:center}
+.rl-wheel{position:relative;width:min(56vw,210px);aspect-ratio:1}
+.rl-disc{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 0 #000)}
+.rl-disc text{font:700 26px var(--f-pix);fill:#fff3e6;paint-order:stroke;stroke:#140d1f;stroke-width:3px}
+.rl-hub{position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;translate:-50% -50%;color:var(--gold)}
+.rl-hub .ico{width:100%;height:100%;display:block}
+.rl-ptr{position:absolute;left:50%;top:-10px;translate:-50% 0;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:20px solid var(--gold);filter:drop-shadow(0 2px 0 #000)}
+.rl-res{min-height:40px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.rl-res b{font:700 20px/1.1 var(--f-pix)}
+.rl-res small{font-size:12px;color:var(--muted)}
+.rl-res em{font-style:normal;margin-top:4px;font-weight:700;font-size:14px;color:var(--gold);animation:ledGold .25s 6 alternate}
+.rlw.won{box-shadow:inset 0 0 0 3px #5fd68a,0 0 0 4px #000,0 0 40px rgba(95,214,138,.5)}
+.rlw.won .rl-t,.rlw.won .rl-res b{color:#7dff9b}
+.rlw.lost{box-shadow:inset 0 0 0 3px #ff5c6c,0 0 0 4px #000,0 0 40px rgba(255,92,108,.45)}
+.rlw.lost .rl-t,.rlw.lost .rl-res b{color:#ff7a88}
+.rlw.won .rl-wheel,.rlw.lost .rl-wheel{animation:rlPop .4s ease-out}
+@keyframes rlPop{40%{scale:1.08}}
+body.lpc .rlw{top:60%;width:320px}
+body.lpc .rl-wheel{width:220px}
 @keyframes pwin{to{box-shadow:0 0 0 4px #ffe08a,0 0 26px #ffd34d}}
 @keyframes pbad{to{box-shadow:0 0 0 4px #9dff8e,0 0 22px #3bd14a}}
 @keyframes prel{to{box-shadow:0 0 0 4px #8fd3ff,0 0 22px #3bb8ff}}
@@ -868,6 +907,37 @@ body.combat #stage::before{background:rgba(20,13,31,.16)}
 #rack .rack-slots{padding-bottom:16px}
 .chip.ping{animation:ping .34s cubic-bezier(.2,1.6,.4,1)}
 @keyframes ping{40%{transform:scale(1.22) rotate(-6deg);filter:brightness(1.5)}}
+/* Miroir : la copie dit si elle est compatible, et une liaison argentée la relie au jeton copié */
+.slot .mbadge{position:absolute;right:-3px;top:-3px;z-index:4;width:44%;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;font:700 11px/1 var(--f-pix);pointer-events:none}
+.slot .mbadge.ok{background:#e8eef9;color:#383250;box-shadow:0 0 0 2px #5fd68a,0 0 8px rgba(95,214,138,.7)}
+.slot .mbadge.ok .ico{width:72%;height:72%}
+.slot .mbadge.no{background:#2a1222;color:#ff7a88;box-shadow:0 0 0 2px #ff5c6c}
+.slot .mtag{position:absolute;left:50%;bottom:calc(100% + 3px);z-index:4;transform:translateX(-50%);padding:1px 4px;border-radius:4px;font:700 8px/1.2 var(--f-pix);letter-spacing:.04em;white-space:nowrap;pointer-events:none}
+.slot .mtag.ok{background:#173d2a;color:#7dff9b;box-shadow:0 0 0 1px #5fd68a}
+.slot .mtag.no{background:#3a1220;color:#ff9aa5;box-shadow:0 0 0 1px #ff5c6c}
+body.combat .slot .mtag{display:none}
+.slot.mup .mtag{bottom:calc(100% + 15px)}
+.slot.mlink::before{content:"";position:absolute;left:-12px;top:42%;width:12px;height:4px;border-radius:2px;z-index:2;background:repeating-linear-gradient(90deg,#e8f0ff 0 3px,rgba(232,240,255,.25) 3px 5px);box-shadow:0 0 8px rgba(223,233,255,.9);animation:mlinkFlow .6s linear infinite}
+@keyframes mlinkFlow{to{background-position:5px 0}}
+.slot.mirsrc .chip{box-shadow:0 0 0 2px rgba(232,240,255,.85),0 0 10px rgba(223,233,255,.6)}
+.slot.mirping .chip{filter:drop-shadow(0 0 7px #e8f0ff) brightness(1.25)}
+.slot.mirping .mbadge.ok{animation:ping .34s cubic-bezier(.2,1.6,.4,1)}
+body.lpc .slot.mlink::before{left:31px;top:-9px;width:4px;height:10px;background:repeating-linear-gradient(180deg,#e8f0ff 0 3px,rgba(232,240,255,.25) 3px 5px)}
+body.lpc .slot .mbadge{right:auto;left:38px;top:2px;width:22px}
+body.lpc .slot .mtag{display:none}
+body.lpc .sinfo small em.mok{color:#7dff9b;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+body.lpc .sinfo small em.mno{color:#ff8a98;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.dhead .rar i.over{font-style:normal;color:var(--gold);margin-left:4px;letter-spacing:.02em}
+.dmir .mstat{font-size:14px;line-height:1.35;margin:4px 0}
+.dmir .mstat b{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:5px;font-size:11px;letter-spacing:.08em}
+.dmir .mstat.ok b{background:#173d2a;color:#7dff9b;box-shadow:inset 0 0 0 1px #5fd68a}
+.dmir .mstat.no b{background:#3a1220;color:#ff9aa5;box-shadow:inset 0 0 0 1px #ff5c6c}
+.dmir .mstat.flip{color:#dfe9ff}
+.dmir .mstat.flip b{display:inline;padding:0;margin:0;background:none;box-shadow:none;font-size:inherit;color:#fff}
+.dmir .msrc{display:inline-flex;align-items:center;gap:5px;font-weight:700;vertical-align:middle}
+.dmir .msrc .chip{width:22px}
+.dmir .mcaps{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:3px;font-size:13px;color:var(--muted)}
+.dmir .mcaps b{color:var(--cream);margin-right:4px}
 .slot .jping{position:absolute;left:50%;bottom:94%;z-index:5;transform:translateX(-50%);padding:2px 5px 3px;border-radius:6px;background:var(--pc,#ffcc4d);font:700 12px/1 var(--f-pix);font-style:normal;color:var(--pd,#231b35);white-space:nowrap;pointer-events:none;box-shadow:0 0 0 2px #120a1e,0 3px 0 2px rgba(0,0,0,.45);animation:jpUp .9s ease-out forwards}
 @keyframes jpUp{0%{opacity:0;transform:translate(-50%,6px) scale(.6)}16%{opacity:1;transform:translate(-50%,-2px) scale(1.14)}30%{transform:translate(-50%,-4px) scale(1)}72%{opacity:1;transform:translate(-50%,-10px) scale(1)}100%{opacity:0;transform:translate(-50%,-18px) scale(.96)}}
 .jtip{position:fixed;z-index:72;width:min(290px,calc(100vw - 16px));padding:10px 12px 8px;border-radius:12px;background:#fff3e6;color:#231b35;box-shadow:0 0 0 3px #231b35,0 8px 0 rgba(0,0,0,.35);font-size:14px;line-height:1.28;text-align:left}
@@ -963,16 +1033,30 @@ body.lpc.combat #stage::before{background:rgba(12,8,20,.35)}
 .lp-box.hit{animation:lpHit .45s cubic-bezier(.2,1.7,.4,1)}
 @keyframes lpBump{40%{transform:scale(1.07)}}
 @keyframes lpHit{0%{transform:scale(1)}25%{transform:scale(1.25) rotate(-6deg);filter:brightness(1.6)}60%{transform:scale(.95) rotate(3deg)}100%{transform:none}}
-/* le multiplicateur prend feu quand il grimpe */
-.lp-box.mult::before,.lp-box.mult::after{content:"";position:absolute;left:4px;right:4px;bottom:62%;height:0;border-radius:50% 50% 30% 30%;background:radial-gradient(ellipse at 50% 100%,#fff3a0 0 18%,#ffb347 35%,#ff5c2d 60%,transparent 72%);filter:blur(1px);opacity:0;pointer-events:none;transform-origin:50% 100%;z-index:-1}
-.lp-box.mult.fire::before{height:46px;opacity:.95;animation:flame .38s ease-in-out infinite alternate}
-.lp-box.mult.fire::after{left:18%;right:18%;height:34px;opacity:.85;animation:flame .29s ease-in-out infinite alternate-reverse;background:radial-gradient(ellipse at 50% 100%,#fff 0 12%,#ffe066 32%,#ff8a3d 58%,transparent 72%)}
-.lp-box.mult.inferno::before{height:70px;left:-6px;right:-6px;animation-duration:.22s}
-.lp-box.mult.inferno::after{height:54px;animation-duration:.18s}
-.lp-box.mult.fire{box-shadow:inset 0 -5px 0 rgba(0,0,0,.25),0 4px 0 rgba(0,0,0,.55),0 0 22px rgba(255,120,60,.55)}
-@keyframes flame{0%{transform:scaleY(.82) scaleX(1.04) skewX(-4deg)}100%{transform:scaleY(1.12) scaleX(.94) skewX(5deg)}}
-.lp-tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.05);font-size:13px;color:var(--muted)}
-.lp-tot b{font:700 21px/1 var(--f-pix);color:var(--cream);font-variant-numeric:tabular-nums}
+/* le combo s'électrise quand le MULT grimpe (les arcs sont dessinés sur #elc, ici le halo et le grésillement) */
+.lp-box.mult.el1{box-shadow:inset 0 -5px 0 rgba(0,0,0,.25),0 4px 0 rgba(0,0,0,.55),0 0 0 2px rgba(150,220,255,.55),0 0 16px rgba(110,200,255,.55)}
+.lp-box.mult.el2{box-shadow:inset 0 -5px 0 rgba(0,0,0,.25),0 4px 0 rgba(0,0,0,.55),0 0 0 2px #bfeaff,0 0 26px rgba(110,200,255,.8),0 0 46px rgba(176,124,255,.45);animation:elBuzz .09s steps(2) infinite}
+.lp-box.mult.el3{box-shadow:inset 0 -5px 0 rgba(0,0,0,.25),0 4px 0 rgba(0,0,0,.55),0 0 0 3px #fff,0 0 34px #6ec8ff,0 0 70px rgba(176,124,255,.7);animation:elBuzz .06s steps(2) infinite}
+.lp-box.mult.el2 b,.lp-box.mult.el3 b{text-shadow:0 3px 0 rgba(0,0,0,.4),0 0 10px #bfeaff}
+@keyframes elBuzz{50%{filter:brightness(1.18) saturate(1.2);transform:translate(.5px,-.5px)}}
+#elc{position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.hud-score .hm{font-style:normal;margin-left:4px;padding:1px 4px;border-radius:5px;background:#3a1430;color:#ffb3c0;font-size:11px;box-shadow:0 0 0 1px rgba(255,138,150,.5)}
+.hud-score .hm.el2,.hud-score .hm.el3{background:#1d2a4a;color:#fff;box-shadow:0 0 0 1px #bfeaff,0 0 10px rgba(110,200,255,.8)}
+.lp-tot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:8px;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.05);font-size:13px;color:var(--muted)}
+.lp-tot>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.lp-tot span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.lp-tot b{font:700 19px/1 var(--f-pix);color:var(--cream);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lp-t2{position:relative;padding-left:8px;border-left:2px solid rgba(255,255,255,.08);cursor:help}
+.lp-t2 b{color:#ffb36b}
+.lp-t2 i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap}
+.lp-t2.up b{animation:dpsUp .35s ease-out}
+@keyframes dpsUp{30%{transform:scale(1.18);color:#fff3a8}}
+/* téléphone : la pastille des dégâts par seconde, en haut à droite de la table */
+.dpsm{position:absolute;z-index:14;top:8px;right:10px;display:flex;align-items:baseline;gap:5px;padding:4px 9px 5px;border-radius:999px;background:rgba(14,9,24,.72);box-shadow:inset 0 0 0 2px rgba(255,179,107,.35);pointer-events:none;font-variant-numeric:tabular-nums}
+.dpsm b{font:700 16px/1 var(--f-pix);color:#ffb36b}
+.dpsm small{font-size:10px;letter-spacing:.06em;color:var(--muted)}
+.dpsm.boss{top:74px}
+body.lpc .dpsm{display:none}
 .lp-base{padding:8px 10px 9px;border-radius:14px;background:var(--panel);box-shadow:inset 0 0 0 3px var(--edge),0 4px 0 #000;display:flex;flex-direction:column;gap:5px}
 .lp-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--cream)}
 .lp-row small{font-size:11px;letter-spacing:.16em;color:var(--muted);font-weight:700}
@@ -1093,6 +1177,15 @@ body.nocrt #crt{display:none}
 .oslide input::-moz-range-thumb{width:24px;height:24px;border:0;border-radius:50%;background:radial-gradient(circle,#2a1d44 0 40%,transparent 41%),repeating-conic-gradient(from 7.5deg,#ff5c6c 0 15deg,#fff3e6 15deg 30deg);box-shadow:0 0 0 3px #000}
 .okeys{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:6px}
 .okey{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;background:rgba(0,0,0,.22);font-size:14px;color:var(--cream)}
+.okey.bind span{flex:1;min-width:0}
+.okey .kb{flex:none;min-width:78px;padding:5px 8px;border:0;border-radius:7px;background:var(--cream);color:var(--ink);font:700 13px/1.1 var(--f-pix);box-shadow:0 3px 0 #8d7fa8;cursor:pointer}
+.okey .kb:hover{background:#fff}
+.okey .kb.wait{background:var(--gold);animation:kbWait .5s infinite alternate}
+@keyframes kbWait{to{background:#fff3c4}}
+.okctx{margin:10px 0 6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.okhelp{font-size:14px;color:var(--muted);margin-bottom:4px}
+.okhelp em{font-style:normal;color:var(--gold)}
+.okeys.fixed{margin-top:10px}
 kbd{flex:none;min-width:116px;padding:4px 8px;border-radius:7px;background:var(--cream);color:var(--ink);font:700 13px/1.1 var(--f-pix);text-align:center;box-shadow:0 3px 0 #8d7fa8}
 .ostats2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
 .ost{padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 2px rgba(255,255,255,.05)}
@@ -1126,7 +1219,46 @@ kbd{flex:none;min-width:116px;padding:4px 8px;border-radius:7px;background:var(-
 .ri-it b{display:block;font:700 15px/1.1 var(--f-pix);color:var(--cream)}
 .ri-it b i{font-style:normal;color:var(--gold);font-size:12px}
 .ri-it small{display:block;font-size:12px;color:var(--muted)}
+.ri-it.sp{grid-template-columns:34px minmax(0,1fr) auto}
+.ri-sell{min-height:30px;font-size:13px;padding:0 9px;white-space:nowrap}
+.mini.armed,.ri-sell.armed{background:var(--red);color:#fff;box-shadow:0 3px 0 var(--red-d)}
 .ri-note{font-size:14px;color:var(--muted)}
+/* onglet Dégâts */
+#ri-body h4 i{font-style:normal;font-size:11px;letter-spacing:.08em;color:var(--dim);margin-left:6px;text-transform:none}
+.dg-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dg-kpis div{display:flex;flex-direction:column;gap:3px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.25)}
+.dg-kpis b{font:700 22px/1 var(--f-pix);color:#ffb36b;font-variant-numeric:tabular-nums}
+.dg-kpis small{font-size:11.5px;color:var(--muted);line-height:1.15}
+.dg-src{display:grid;gap:4px;margin-top:8px}
+.dgs,.dgb{display:grid;align-items:center;gap:8px;font-size:13px;color:var(--cream)}
+.dgs{grid-template-columns:96px minmax(0,1fr) 44px}
+.dgs i,.dgb-bar{height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+.dgs em,.dgb-bar em{display:block;height:100%;width:var(--w,0%);border-radius:5px;background:linear-gradient(90deg,#ff9a3d,#ffcc4d);transition:width .35s ease-out}
+.dgs b,.dgb-pc{font:700 13px/1 var(--f-pix);text-align:right;font-variant-numeric:tabular-nums}
+.dg-tot{margin:6px 0 8px;padding:7px 10px;border-radius:10px;background:rgba(0,0,0,.25);font-size:13px;color:var(--muted)}
+.dg-tot b{color:var(--cream)}
+.dg-bench{display:grid;gap:6px}
+.dgb{grid-template-columns:34px minmax(0,150px) minmax(0,1fr) 56px;padding:4px 8px 4px 4px;border-radius:10px;background:rgba(0,0,0,.2)}
+.dgb .chip{width:34px}
+@media (max-width:520px){.dgb{grid-template-columns:30px minmax(0,92px) minmax(0,1fr) 50px;gap:6px}.dgb .chip{width:30px}.dgs{grid-template-columns:84px minmax(0,1fr) 40px}}
+.dgb b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.dgb-pc{color:#7dff6b}
+.dgb.neg .dgb-bar em{background:linear-gradient(90deg,#ff5c6c,#ff9aa5)}
+.dgb.neg .dgb-pc{color:#ff7a88}
+.dgb.flat .dgb-pc{color:var(--dim)}
+/* fiche d'un jeton : avec / sans */
+.dbench .cbx{display:grid;gap:5px}
+.cb-top{display:flex;align-items:baseline;gap:8px}
+.cb-pc{font:700 24px/1 var(--f-pix)}
+.cb-pc.up{color:#7dff6b}.cb-pc.down{color:#ff6b7a}.cb-pc.flat{color:var(--muted)}
+.cb-top span{font-size:12.5px;color:var(--muted)}
+.cb-row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.cb-row i{display:block;height:10px;border-radius:5px;width:var(--w);min-width:2px}
+.cb-row.wo i{background:linear-gradient(90deg,#6b5590,#8d7fa8)}
+.cb-row.wi i{background:linear-gradient(90deg,#ff9a3d,#ffcc4d)}
+.cb-row b{font:700 13px/1 var(--f-pix);color:var(--cream);font-variant-numeric:tabular-nums}
+.cb-row b small{font-size:10px;color:var(--dim);margin-left:1px}
+.cb-note{margin:2px 0 0;font-size:12px;color:var(--dim);line-height:1.25}
 .ri-note b{color:var(--cream)}
 .ri-next{display:flex;flex-direction:column;gap:5px}
 .ri-r{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.25);font-size:15px;color:var(--cream)}
@@ -1203,17 +1335,20 @@ body.lpc .vs-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .boot.go .bt-chip{animation:btChip 1s cubic-bezier(.3,1.25,.5,1) 1.25s both}
 @keyframes btChip{0%{opacity:1;transform:translateY(-75vh) rotateY(0)}55%{transform:translateY(0) rotateY(1080deg) scale(1.15,.82)}70%{transform:translateY(-14px) scale(.95,1.06) rotateY(1260deg)}100%{opacity:1;transform:rotateY(1440deg)}}
 .bt-tag{margin-top:clamp(14px,2.4vw,26px);display:flex;flex-direction:column;align-items:center;gap:6px;font:600 clamp(15px,2.2vw,26px)/1.1 var(--f-pix);letter-spacing:.2em;color:var(--muted)}
-.bt-tag span{opacity:0}
-.boot.go .bt-tag span:first-child{animation:btType .5s steps(12) 1.75s both}
-.boot.go .bt-tag span:last-child{animation:btType .36s steps(8) 2.25s both;color:var(--red);text-shadow:0 0 18px rgba(255,92,108,.6)}
-@keyframes btType{0%{opacity:1;clip-path:inset(0 100% 0 0)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+/* la phrase s'écrit lettre par lettre (plus de clip-path : sur mobile, Safari gardait le dernier cran et coupait le R de « soir ») */
+.bt-tag span{display:block;text-align:center}
+.bt-tag span:last-child{color:var(--red);text-shadow:0 0 18px rgba(255,92,108,.6)}
+.bt-tag i{font-style:normal;opacity:0}
+.boot.go .bt-tag span:first-child i{animation:btKey .05s linear both;animation-delay:calc(1.75s + var(--j) * .02s)}
+.boot.go .bt-tag span:last-child i{animation:btKey .05s linear both;animation-delay:calc(2.25s + var(--j) * .028s)}
+@keyframes btKey{0%{opacity:0}100%{opacity:1}}
 .bt-flash{position:absolute;left:0;right:0;top:0;bottom:0;background:#fff;opacity:0;pointer-events:none}
 .boot.go .bt-flash{animation:btFlash .42s ease-out both}
 @keyframes btFlash{0%{opacity:.95;transform:scaleX(.06) scaleY(.004)}35%{opacity:.95;transform:scaleX(1) scaleY(.006)}100%{opacity:0;transform:scaleX(1) scaleY(1)}}
 .boot.out{animation:btOut .45s ease-in both;pointer-events:none}
 @keyframes btOut{to{opacity:0;transform:scale(1.07);filter:brightness(1.8)}}
 @keyframes btBlink{50%{opacity:.2}}
-.boot.fast .bt-logo span,.boot.fast .bt-l2,.boot.fast .bt-chip,.boot.fast .bt-tag span{animation-duration:.01s!important;animation-delay:0s!important}
+.boot.fast .bt-logo span,.boot.fast .bt-l2,.boot.fast .bt-chip,.boot.fast .bt-tag i{animation-duration:.01s!important;animation-delay:0s!important}
 
 /* ---------- écran titre ---------- */
 .tleft{display:flex;flex-direction:column;align-items:center;gap:16px}
@@ -1354,7 +1489,7 @@ body.lpc .vs-card.locked p{display:none}
 .offer{position:relative}
 body.lpc .mk-wrap{width:min(100%,600px)}
 body.lpc .mk-scene{height:190px}
-body.lpc .mk-body .offers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body.lpc .mk-body .offers{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 body.lpc .offer{grid-template-columns:46px minmax(0,1fr);grid-template-rows:auto auto;align-items:start;gap:6px 9px;padding:9px}
 body.lpc .offer .oicon,body.lpc .offer .slotico{width:44px;grid-row:1 / span 2}
 body.lpc .offer .slotico{width:44px;height:44px;font-size:18px}
@@ -1364,11 +1499,36 @@ body.lpc .offer .obuy{grid-column:2;flex-direction:row;min-width:0}
 body.lpc .offer .obuy .mini{flex:1;padding:6px 6px;font-size:13px}
 .oprice{display:block;font:700 17px/1 var(--f-pix);color:var(--gold);text-align:center;padding:4px 0}
 .insp{cursor:pointer}
-body.lpc .mk-scene{height:172px}
+body.lpc .mk-scene{height:138px}
 body.lpc .offer .otext>span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .offer .orep{align-items:center}
 .offer .orep em{font-style:normal;font-size:12px;color:#ffb3bd}
-body.lpc .mk-body{gap:8px;padding:10px 10px 9px}
+/* tes sorts (marché noir) : 4 places, vendables, jamais échangés */
+.mk-spells{position:relative;display:grid;gap:6px;padding:8px 9px 9px;border-radius:12px;background:rgba(0,0,0,.28);box-shadow:inset 0 0 0 2px #3a2c52}
+.mks-h{display:flex;align-items:baseline;gap:8px;font-size:12px;color:var(--muted);min-width:0}
+.mks-h b{font:700 12px/1 var(--f-pix);letter-spacing:.14em;color:var(--cream);white-space:nowrap}
+.mks-h i{font-style:normal;color:var(--gold);font-weight:700}
+.mks-h small{margin-left:auto;font-size:11px;line-height:1.15;color:var(--dim);text-align:right}
+.mks-l{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.mks{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px 5px;border-radius:10px;background:var(--panel-2);box-shadow:inset 0 0 0 2px var(--sc,#3a2c52);min-width:0}
+.mks.e{justify-content:center;background:transparent;box-shadow:inset 0 0 0 2px #3a2c52;opacity:.75;min-height:74px}
+.mks-k{position:absolute;left:6px;top:5px;font:700 10px/1 var(--f-pix);font-style:normal;color:var(--dim)}
+.mks-ic{width:24px;height:24px;color:var(--sc)}
+.mks-ic .ico{width:100%;height:100%;display:block}
+.mks b{font-size:12px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.mks .mini{font-size:11px;padding:0 4px;min-height:24px;width:100%;white-space:nowrap}
+.mks small{font-size:11px;color:var(--dim)}
+/* PC : une seule rangée compacte (le marché tient dans l'écran sans défiler) */
+body.lpc .mk-spells{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px;padding:6px 8px}
+body.lpc .mks-h{flex-direction:column;align-items:flex-start;gap:3px}
+body.lpc .mks-h small{display:none}
+body.lpc .mks{display:grid;grid-template-columns:22px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:6px;row-gap:3px;padding:5px 6px}
+body.lpc .mks.e{display:flex;min-height:0;height:100%}
+body.lpc .mks-k{display:none}
+body.lpc .mks-ic{grid-row:1 / span 2;width:22px;height:22px}
+body.lpc .mks b{text-align:left;justify-self:start}
+body.lpc .mks .mini{min-height:20px;font-size:11px}
+body.lpc .mk-body{gap:6px;padding:8px 9px 8px}
 
 /* ---------- poker du Baron : cartes lisibles, mains nommées, classement, Zaza ---------- */
 .pk{width:min(100%,520px)}
@@ -1662,7 +1822,7 @@ body.lpc .vs-sub{font-size:13px}
       <small>SCORE DE LA MANCHE</small>
       <div class="lp-eq"><div class="lp-box pts" id="lp-ptsbox"><b id="lp-pts">0</b></div><i class="x">×</i><div class="lp-box mult" id="lp-multbox"><b id="lp-mult">1,0</b></div></div>
       <div class="lp-goal" id="lp-goal"><div class="lp-grow"><span id="lp-glab">OBJECTIF</span><b><i id="lp-gnow">0</i><em id="lp-gval"> / 0</em></b></div><div class="lp-gbar"><i id="lp-gfill"></i></div></div>
-      <div class="lp-tot"><span>Score total</span><b id="lp-total">0</b></div>
+      <div class="lp-tot"><div class="lp-t1"><span>Score total</span><b id="lp-total">0</b></div><div class="lp-t2" id="lp-dpsbox"><span>Dégâts / s</span><b id="lp-dps">—</b><i id="lp-dpsavg"></i></div></div>
     </div>
     <div class="lp-base">
       <div class="lp-row"><small>BASE</small><span class="lp-fl" id="lp-floors"></span></div>
@@ -1693,6 +1853,7 @@ body.lpc .vs-sub{font-size:13px}
     <canvas id="cv" aria-label="Arène : ta base au centre, entourée de son flipper. Glisse le doigt pour le tourner, tape une carte pour la cibler."></canvas>
     <div id="bossbar" hidden><b id="bb-name">BOSS</b><div class="bb"><i id="bb-fill"></i></div><small id="bb-sub"></small></div>
     <div id="debuffs"></div>
+    <div id="dpsm" class="dpsm" hidden aria-label="Dégâts par seconde"><b id="dpsm-v">0</b><small>dégâts/s</small></div>
     <div id="statusbar" hidden></div>
     <div id="banner" aria-live="polite"></div>
     <div id="toast" aria-live="polite"></div>
@@ -2020,6 +2181,7 @@ body.lpc .vs-sub{font-size:13px}
         </div>
         <div class="mk-body">
           <div class="offers" id="k-offers"></div>
+          <div class="mk-spells" id="k-spells"></div>
           <div class="mk-foot"><span class="mk-gold"><span class="coin" aria-hidden="true"></span>Ton or <b id="k-gold">0</b></span><button class="btn ghost small" id="k-leave">Retour au bar</button></div>
         </div>
       </div>
@@ -2125,7 +2287,7 @@ body.lpc .vs-sub{font-size:13px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Prototype v6</p>
+  <p class="proto">Prototype v7</p>
 </section>
 
 <section id="over" class="full" hidden>
@@ -2287,9 +2449,10 @@ body.lpc .vs-sub{font-size:13px}
     <p class="bt-tag" aria-hidden="true"><span>LA MAISON GAGNE TOUJOURS.</span><span>SAUF CE SOIR.</span></p>
   </div>
   <button class="bt-press" id="bt-press"><b>▶ INSÉRER UN JETON</b><small>clique n'importe où pour lancer la machine</small></button>
-  <p class="bt-proto">Prototype v6 · son conseillé</p>
+  <p class="bt-proto">Prototype v7 · son conseillé</p>
 </section>
 <canvas id="fxc" aria-hidden="true"></canvas>
+<canvas id="elc" aria-hidden="true"></canvas>
 <div id="crt" aria-hidden="true"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="icondefs"></defs></svg>
 <script>
@@ -2542,6 +2705,11 @@ const BAL = {
   floorHp: 50, postHp: 22, postR: 3, postRad: 27,
   relBase: 10, relR: 2.5, relPaid: 12,
   spinV: 13, nudge: .22, cloverRun: 3,
+  // l'escorte du boss : tant qu'un boss vit, des cartes arrivent sans fin (moitié d'or et de points, pour ne pas « farmer »)
+  escGold: .5, escCap: 14, escGap0: 4, escGapMin: 2, escGapK: .97,
+  // doublons : chaque niveau au-delà d'ultime = une étoile (+5 % de puissance), jusqu'à +50 %
+  // (à +10 % / +100 %, le bot « bon » passait de 4 % à 20 % de victoires : trop fort)
+  stackOver: .05, stackPmax: 1.5,
 };
 
 /* ---------- jokers (les « fous » ne sortent que chez le Parieur) ---------- */
@@ -2607,10 +2775,10 @@ const JOKERS = [
     T => `Booste ses deux voisins (+${pct(.6 * T)}).`,
     () => `Ses voisins montent d'un niveau (commun → rare → ultime).`] },
   { id: 'miroir', name: 'Miroir', fam: 'Soutien', col: '#d8d2e6', dark: '#383250', caps: [
-    T => `Copie le jeton à sa gauche à ${pct(.4 * T)} de puissance.`,
-    T => `Copie le jeton à sa gauche à ${pct(.7 * T)} de puissance.`,
-    T => `Copie parfaite du jeton à sa gauche (${pct(T)}).`,
-    () => `Copie aussi le jeton à sa droite.`] },
+    T => `Copie le jeton juste avant lui (à gauche, au-dessus sur PC) à ${pct(.4 * T)} de puissance. Derrière un autre Miroir, il copie à travers lui : les copies s'additionnent.`,
+    T => `Copie à ${pct(.7 * T)} de puissance.`,
+    T => `Copie parfaite (${pct(T)}).`,
+    () => `Copie aussi le jeton juste après lui.`] },
   { id: 'flambeur', name: 'Flambeur', fam: 'Risque', col: '#ff4d4d', dark: '#1b1022', caps: [
     T => `+${pct(.4 * T)} de dégâts. Mais ta base prend +25${NB}% de dégâts.`,
     T => `+${pct(.3 * T)} de dégâts en plus, et chaque critique rapporte 1 or.`,
@@ -2775,14 +2943,15 @@ const SPELLS = {
 const SPELL_FROM = { gelcanon: 7, ralenti: 7, briseur: 9, inversion: 12, leurre: 14, silence: 16 };
 /* ---------- tes sorts à toi (barre du bas) : Bombe et Gel au départ, les autres au marché noir ---------- */
 const PSPELLS = {
-  bomb: { name: 'Bombe', icon: 'dynamite', col: '#ff6a4d', base: true, txt: 'Touche-la puis vise un endroit : explosion qui assomme et repousse les cartes.' },
-  gel: { name: 'Gel', icon: 'givre', col: '#8fe3ff', base: true, txt: 'Gèle les cartes autour de ta base.' },
+  bomb: { name: 'Bombe', icon: 'dynamite', col: '#ff6a4d', base: true, price: 45, txt: 'Touche-la puis vise un endroit : explosion qui assomme et repousse les cartes.' },
+  gel: { name: 'Gel', icon: 'givre', col: '#8fe3ff', base: true, price: 45, txt: 'Gèle les cartes autour de ta base.' },
   tornade: { name: 'Tornade', icon: 'tornade', col: '#bff5e8', cd: 18, price: 70, txt: `Un tourbillon repousse toutes les cartes proches de ta base et les étourdit 1,5${NB}s.` },
   orage: { name: 'Orage', icon: 'foudre', col: '#ffe066', cd: 22, price: 85, txt: 'La foudre frappe les 6 cartes les plus costaudes de la table (×5 dégâts).' },
   bouclier: { name: 'Bouclier', icon: 'rempart', col: '#9fd8ff', cd: 26, price: 75, txt: `Ta base ne prend plus aucun dégât pendant 3${NB}s, et les tirs qui la touchent repartent.` },
   surchauffe: { name: 'Surchauffe', icon: 'surchauffe', col: '#ff9a3d', cd: 20, price: 80, txt: `Ton canon tire 3× plus vite pendant 4${NB}s.` },
 };
-const SPELL_SLOTS = 4;
+const SPELL_SLOTS = 4;   // 4 sorts au maximum, Bombe et Gel compris. On ne les échange pas : on les vend.
+const spellSellValue = id => Math.max(1, Math.round((PSPELLS[id].price || 45) * .5));
 const ELITES = {
   rapide: { name: 'Rapide', icon: 'rapide', col: '#5fd4c4' },
   costaud: { name: 'Costaud', icon: 'costaud', col: '#ff9a3d' },
@@ -2891,6 +3060,8 @@ const LINES = {
   slot: ['Une place de plus dans ton rack. Tombée d\'un fourgon. Le fourgon va bien.'],
   item: ['Ça part vite. Comme les témoins.', 'Article neuf. Le numéro de série a juste… disparu.'],
   spell: ['Un sort ? Saisi chez une voyante. Elle l\'avait pas vu venir.', 'Ce grimoire était sous scellés. Maintenant il est sous ton bras.'],
+  spellFull: ['Quatre sorts, c\'est le maximum légal. Revends-m\'en un d\'abord.', 'Ta tête est pleine. Vide-la un peu : je rachète tes sorts, moitié prix.'],
+  spellSold: ['Je te le rachète. Moitié prix, c\'est le tarif du recel.', 'Un sort d\'occasion. Je trouverai un pigeon.'],
   broke: ['Reviens quand t\'auras de quoi payer. Ou de quoi me corrompre.', "Pas d'or, pas de marchandise. Et pas de pitié."],
   poke: ['Arrête de me fixer. C\'est suspect.', 'Tu veux voir mon badge ? Il est faux. Mon flingue, lui, est vrai.', 'Je fume pas. Je fais de la fumée. Nuance.', 'Le chat là-bas ? C\'est mon indic. Il est nul.', 'Mon revolver s\'appelle Bernard. Lui, il a un prénom.', 'Tu achètes, ou tu fais une déposition ?', 'Psst… le Baron triche. Je le sais, c\'est moi qui lui vends les cartes.'],
   hint: ['Mon prénom ? Achète encore un peu, et peut-être…', 'Tu veux mon prénom ? Ça se mérite. Ça s\'achète, surtout.'],
@@ -2932,7 +3103,7 @@ const TIPS = {
   abil: '<b>BOMBE</b> : touche-la, puis vise un endroit. <b>GEL</b> : gèle les cartes autour de ta base. Les parades parfaites les rechargent plus vite.',
   machine: 'Touche un rouleau pour le <b>STOPPER</b>, ou STOP pour tout arrêter. Ensuite, garde des rouleaux (<b>HOLD</b>) et relance les autres. Moins il reste de rouleaux, plus ils tournent vite : l\'<b>Horloger</b> les ralentit.',
   bar: 'Le bar de Zaza : à chaque manche, <b>3 boissons</b> (canon, flipper, base) qui durent toute la partie, et <b>2 shots</b> qui durent une manche.',
-  stack: 'Pose un jeton sur un jeton <b>identique</b> pour les <b>empiler</b> : commun + commun = rare, rare + commun = ultime. Ça libère une place.',
+  stack: 'Un <b>doublon</b> ! Pose-le sur le jeton du même type pour les <b>empiler</b> : commun + commun = rare, rare + commun = ultime. Rien ne se perd : chaque niveau au-delà d\'ultime devient une <b>étoile ★</b> (+5 % de puissance). Et ça libère une place.',
   tapis: 'Plus que 3 cartes : elles font <b>TAPIS</b> et foncent sur toi !',
   elite: 'Une carte <b>élite</b> ! Son badge te dit son bonus. Elle rapporte plus d\'or.',
   dv_vent: '<b>Vent du large</b> : quand « RAFALE ! » s\'affiche, tourne ton flipper <b>face au vent</b> (du côté des flèches) : il arrête les débris sans s\'abîmer. Les cartes poussées par le vent foncent sur toi.',
@@ -3029,22 +3200,33 @@ const jokerTypes = j => j.kind === 'faux' ? [] : j.parts.map(p => p.t);
 
 const fousPool = () => FOUS.concat(GIFT_FOUS.filter(id => G.meta.gifts && G.meta.gifts[JK[id].gift]));
 /* ---------- empiler deux jetons du même joker ---------- */
+/* ---------- les doublons : rien ne se perd ----------
+   Un doublon (même type qu'un de tes jetons) s'empile : les niveaux s'additionnent (commun + commun = rare…).
+   Chaque niveau qui dépasse ULTIME devient une ÉTOILE : +5 % de puissance, jusqu'à +50 % (10 étoiles).
+   Un doublon d'un jeton déjà ultime n'est donc jamais inutile. Deux types différents donnent un Mix. */
 function stackResult(A, B) {
   if (!A || !B || A === B) return null;
   const bad = k => k === 'faux' || k === 'maudit' || k === 'fou';
   if (bad(A.kind) || bad(B.kind)) return null;
   if (!A.parts.some(p => B.parts.some(q => q.t === p.t))) return null;
   const parts = A.parts.map(p => ({ t: p.t, lv: Math.min(3, p.lv) }));
-  let changed = false;
+  let changed = false, excess = 0;
   for (const q of B.parts) {
     const p = parts.find(x => x.t === q.t);
-    if (p) { const nl = Math.min(3, p.lv + q.lv); if (nl !== p.lv) { p.lv = nl; changed = true; } }
+    if (p) { const sum = p.lv + Math.min(3, q.lv), nl = Math.min(3, sum); excess += sum - nl; if (nl !== p.lv) { p.lv = nl; changed = true; } }
     else if (parts.length < 2) { parts.push({ t: q.t, lv: Math.min(3, q.lv) }); changed = true; }
     else return null;
   }
-  if (!changed) return null;
+  const p0 = Math.max(A.p, B.p), pw = Math.min(BAL.stackPmax, Math.round((p0 + BAL.stackOver * excess) * 100) / 100);
+  if (!changed && pw <= A.p + .001) return null;   // déjà au maximum : plus rien à absorber
   parts.sort((a, b) => b.lv - a.lv);
-  return { kind: kindFromParts(parts), parts, p: Math.max(A.p, B.p) };
+  return { kind: kindFromParts(parts), parts, p: pw, over: pw - p0 > .001 ? pw - p0 : 0, lvUp: changed };
+}
+// ce que donne l'empilement, en mots : « ultime », « ultime · +1★ », « +3★ (+15 %) »…
+const starsOf = over => Math.round(over / BAL.stackOver);
+function stackLabel(res) {
+  const r = rarLabel(res).toLowerCase(), n = res.over ? starsOf(res.over) : 0, o = n ? `+${n}★ (+${Math.round(res.over * 100)}${NB}%)` : '';
+  return res.lvUp ? r + (o ? ' · ' + o : '') : o;
 }
 function stackPartner(j, list) { return (list || G.run.jokers).find(x => stackResult(x, j)); }
 
@@ -3088,7 +3270,14 @@ function computeStats(run) {
     }
   }
   const has = list.map(() => new Set());
-  const add = (t, lv, P, i) => { for (let k = 1; k <= Math.min(3, lv); k++) T[t][k] += P; if (lv >= 3 && G.meta.punched[t] && !JK[t].fou) T[t][4] += P; has[i].add(t); };
+  const Tm = {};   // la part apportée par les Miroirs (pour l'afficher, ex. le flipper argenté)
+  const add = (t, lv, P, i, fromMirror) => {
+    for (let k = 1; k <= Math.min(3, lv); k++) T[t][k] += P;
+    if (lv >= 3 && G.meta.punched[t] && !JK[t].fou) T[t][4] += P;
+    if (fromMirror) { const m = Tm[t] || (Tm[t] = [0, 0, 0, 0, 0]); for (let k = 1; k <= Math.min(3, lv); k++) m[k] += P; }
+    has[i].add(t);
+  };
+  const mirrors = [];
   let flamb = 0;
   for (let i = 0; i < n; i++) {
     if (!on[i]) continue;
@@ -3098,11 +3287,26 @@ function computeStats(run) {
       const P = jk.p * pun(pt.t) * mul[i], lv = Math.min(3, pt.lv + lvb[i]);
       if (pt.t === 'flambeur') flamb++;
       if (pt.t === 'miroir') {
+        // le Miroir copie son voisin du dessus (à gauche sur téléphone). Si ce voisin est lui-même un Miroir,
+        // il regarde à travers : miroir du miroir, les copies s'additionnent. L'Ampli et le Mime ne se copient pas.
         const f = (lv >= 3 ? 1 : lv >= 2 ? .7 : .4) * P;
-        const srcs = [i - 1]; if (lv >= 3 && G.meta.punched.miroir) srcs.push(i + 1);
-        for (const s of srcs) {
-          if (s < 0 || s >= n || !on[s]) continue;
-          for (const q of list[s].parts) if (q.t !== 'miroir' && q.t !== 'ampli' && q.t !== 'mime') add(q.t, Math.min(3, q.lv + lvb[s]), f * list[s].p * pun(q.t), i);
+        const dirs = [-1]; if (lv >= 3 && G.meta.punched.miroir) dirs.push(1);
+        for (const d of dirs) {
+          let s = i + d, hops = 0;
+          while (s >= 0 && s < n && on[s] && list[s].parts.every(q => q.t === 'miroir') && hops < 8) { s += d; hops++; }
+          const rec = { i, d, src: s, hops, f, types: [], why: '' };
+          if (s < 0 || s >= n) rec.why = hops ? 'rien au bout de la chaîne de miroirs' : d < 0 ? 'aucun jeton avant lui' : 'aucun jeton après lui';
+          else if (!on[s]) rec.why = list[s].kind === 'faux' ? 'une contrefaçon ne se copie pas' : 'ce jeton a été volé';
+          else {
+            for (const q of list[s].parts) {
+              if (q.t === 'miroir') continue;
+              if (q.t === 'ampli' || q.t === 'mime') { rec.why = `${q.t === 'ampli' ? 'l\'Ampli' : 'le Mime'} ne se copie pas`; continue; }
+              add(q.t, Math.min(3, q.lv + lvb[s]), f * list[s].p * pun(q.t), i, true);
+              rec.types.push(q.t);
+            }
+          }
+          rec.ok = rec.types.length > 0;
+          mirrors.push(rec);
         }
       }
       add(pt.t, lv, P, i);
@@ -3129,7 +3333,7 @@ function computeStats(run) {
   }
   const c = id => combos.has(id);
   const up = run.up || {}, U = k => up[k] || 0, bo = run.boost || {};
-  const s = { T, curses, combos, links };
+  const s = { T, curses, combos, links, mirrors, Tm };
   const fl = T.flambeur;
   let dm = (1 + .4 * fl[1] + .3 * fl[2] + .4 * fl[3]) * (1 + .45 * T.pacte[1]) * (1 + .15 * U('calibre')) * (bo.piment ? 1.3 : 1);
   const ro = run.roulette;
@@ -3156,6 +3360,9 @@ function computeStats(run) {
   s.eShotMul = T.chronos[1] > 0 ? .75 : 1;
   s.takeMul = (c('banque') ? 1 : Math.pow(1.25, flamb)) * (hasMalus(run, 'verre') ? 1.4 : 1);
   s.rakeHalf = BAL.rakeHalf * (1 + Math.min(1, .3 * T.croupier[1])) * (1 + .18 * U('taille'));
+  // copier un Croupier : son élargissement s'ajoute (même plafond, +100 %). La part du Miroir est dessinée en argent.
+  const tmC = Tm.croupier ? Tm.croupier[1] : 0;
+  s.rakeMirror = tmC > 0 ? s.rakeHalf - BAL.rakeHalf * (1 + Math.min(1, .3 * (T.croupier[1] - tmC))) * (1 + .18 * U('taille')) : 0;
   s.rake2 = U('double_r') > 0;
   let dur = BAL.rakeDur + (T.rempart[2] > 0 ? Math.min(4, Math.max(1, Math.round(T.rempart[2]))) : 0) + (c('forteresse') ? 2 : 0) + U('solide') + (run.rakeBonus || 0);
   if (hasMalus(run, 'saboteur')) dur -= 2;
@@ -3320,6 +3527,17 @@ const Snd = (() => {
     jackpot() { [523, 659, 784, 1046, 1318, 1568].forEach((f, i) => tone(f, .16, 'square', .06, null, i * .07)); [0, .25, .5].forEach(d => tone(2093, .6, 'sine', .06, null, .5 + d, true)); },
     malus() { tone(240, .55, 'sawtooth', .1, 70); },
     relance() { tone(400, .22, 'square', .055, 1300); },
+    // RÉSERVÉ au triple obtenu en relançant : la bande rembobine, trois cloches (une par rouleau), la caisse, puis l'accord en or
+    relTriple() {
+      noise(.42, .11, 500, 'bandpass', 0, 7000, 2.5);
+      tone(160, .4, 'sawtooth', .035, 1900);
+      tone(240, .4, 'square', .02, 2600, .03);
+      [84, 88, 91].forEach((m, i) => { const t = .42 + i * .16; tone(mtof(m), .7, 'sine', .07, null, t, true); tone(mtof(m) * 2.76, .25, 'sine', .018, null, t); clack(t, .05, 4200); });
+      noise(.09, .16, 1800, 'bandpass', .95, null, 1.5); tone(mtof(96), .5, 'square', .035, null, .97); tone(mtof(103), .4, 'square', .025, null, 1.04);
+      for (let i = 0; i < 16; i++) clack(1.0 + i * .035 + arnd(0, .02), .045, arnd(3000, 5000));
+      chord([72, 76, 79, 84, 88], 1.3, 'triangle', .03, 1.08, true);
+      chord([60, 67], 1.3, 'sine', .05, 1.08, true);
+    },
     suspense() { tone(300, 1.1, 'triangle', .045, 900); },
     rise() { noise(1.0, .2, 220, 'lowpass', 0, 80); tone(55, .9, 'sine', .16, 40); },
     round() { tone(880, .12, 'triangle', .06); tone(1320, .2, 'triangle', .06, null, .12); },
@@ -3587,8 +3805,8 @@ const haptic = ms => { if (G.headless) return; try { if (navigator.vibrate) navi
 /* ---------- ambiances : vent, feu, brouillard, foule du bar, casino, gouttes ---------- */
 const Amb = (() => {
   const L = {}, want = {};
-  const BASE = { wind: .5, fire: .45, fog: .4, crowd: .26, casino: 1, drip: .5 };
-  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0;
+  const BASE = { wind: .5, fire: .45, fog: .4, crowd: .26, casino: 1, drip: .5, elec: .32 };
+  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0, crackE = 0;
   function noiseSrc(ac) { const s = ac.createBufferSource(); s.buffer = AU.nbuf; s.loop = true; s.start(ac.currentTime, Math.random() * .9); return s; }
   function lfo(ac, f, depth, param, nodes) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = f; g.gain.value = depth; o.connect(g); g.connect(param); o.start(); nodes.push(o); return o; }
   function make(name) {
@@ -3623,6 +3841,17 @@ const Amb = (() => {
       s.connect(b1); b1.connect(g1); g1.connect(out); s.connect(b2); b2.connect(g2); g2.connect(out);
       lfo(ac, .31, .18, g1.gain, o.nodes); lfo(ac, .53, .12, g1.gain, o.nodes); lfo(ac, 3.1, .14, g2.gain, o.nodes); lfo(ac, 4.7, .08, g2.gain, o.nodes); lfo(ac, .21, 160, b2.frequency, o.nodes);
       o.nodes.push(s);
+    } else if (name === 'elec') {
+      // l'électricité du combo : un bourdonnement de transfo (50 Hz et ses harmoniques) et un grésillement haché
+      const h1 = ac.createOscillator(), h2 = ac.createOscillator(), bp = ac.createBiquadFilter(), hg = ac.createGain();
+      h1.type = 'sawtooth'; h1.frequency.value = 50; h2.type = 'square'; h2.frequency.value = 100.7;
+      bp.type = 'bandpass'; bp.frequency.value = 180; bp.Q.value = 1.4; hg.gain.value = .5;
+      h1.connect(bp); h2.connect(bp); bp.connect(hg); hg.connect(out); h1.start(); h2.start();
+      const s = noiseSrc(ac), hp = ac.createBiquadFilter(), sz = ac.createGain(), trem = ac.createGain();
+      hp.type = 'bandpass'; hp.frequency.value = 4200; hp.Q.value = .7; sz.gain.value = .2; trem.gain.value = .6;
+      s.connect(hp); hp.connect(trem); trem.connect(sz); sz.connect(out);
+      lfo(ac, 13, .4, trem.gain, o.nodes); lfo(ac, 31, .2, trem.gain, o.nodes);
+      o.nodes.push(h1, h2, s); Object.assign(o, { bp, hg, sz });
     } else if (name === 'drip') {
       const s = noiseSrc(ac), lp = ac.createBiquadFilter(), g = ac.createGain();
       lp.type = 'lowpass'; lp.frequency.value = 160; g.gain.value = .6; s.connect(lp); lp.connect(g); g.connect(out);
@@ -3672,6 +3901,14 @@ const Amb = (() => {
       const lit = cb.fires.filter(z => z.state === 'on').length;
       crackT -= dt * (2 + lit * 5);
       while (crackT < 0) { crackT += arnd(.3, 1); crackle(.6 + lit * .2); }
+    }
+    // électricité : plus le combo grimpe, plus ça grésille et ça claque
+    if (L.elec && want.elec) {
+      const lv = want.elec;
+      L.elec.bp.frequency.setTargetAtTime(150 + lv * 520, t, .08);
+      L.elec.sz.gain.setTargetAtTime(.12 + lv * .75, t, .08);
+      crackE -= dt * (1 + lv * 26);
+      while (crackE < 0) { crackE += arnd(.04, .35); crackle(.35 + lv * 1.1); }
     }
     const now = performance.now();
     if (on && want.crowd > 0) {
@@ -4570,7 +4807,7 @@ function checkGoal(cb) {
   cb.skipped = n; dbg('skipped', n);
   if (gold > 0 && !hasMalus(G.run, 'greve')) addGold(gold * cb.stats.goldMul, 'skip');
   if (!G.headless) {
-    banner('OBJECTIF ATTEINT !', n ? `plus de renforts · +${Math.round(gold * cb.stats.goldMul)} or · finis les cartes restantes` : 'plus de renforts : finis les cartes restantes', 'good', 1.6);
+    banner('OBJECTIF ATTEINT !', bossUp(cb) ? 'mais tant que le boss vit, ses cartes arrivent : abats-le !' : n ? `plus de renforts · +${Math.round(gold * cb.stats.goldMul)} or · finis les cartes restantes` : 'plus de renforts : finis les cartes restantes', 'good', 1.6);
     Snd.goal(); haptic(60);
     fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: 120, col: '95,214,138', life: .7, max: .7 });
   }
@@ -4586,6 +4823,30 @@ function spawnReinf(cb) {
   }
   cb.total += g; cb.reinfN++;
   if (cb.reinfN === 1) { dbg('reinf'); dbg('reinf_ratio', roundScoreLive(cb) / cb.goal); dbg('reinf_alive', cb.enemies.filter(e => !e.dead).length); if (!G.headless) banner('RENFORTS !', `atteins ${fmtS(cb.goal)} points pour les arrêter`, 'bad', 1.3); }
+}
+/* ---------- l'escorte du boss : tant qu'un boss est sur la table, ses cartes arrivent sans fin ----------
+   Elle prend le relais dès que la vague prévue est distribuée, ignore l'objectif de points,
+   et s'arrête net quand il n'y a plus aucun boss en vie (les renforts normaux reprennent si l'objectif manque). */
+const bossUp = cb => cb.bosses.some(b => !b.dead);
+const ESCORT_TYPES = ['coureur', 'soldat', 'paire', 'blinde', 'tricheur'];
+function bossEscort(cb) {
+  if (!bossUp(cb)) { if (cb.escT != null) { cb.escT = null; dbg('esc_stop'); } return; }
+  if (cb.spawn.slice(cb.spawnIdx).some(x => !ENEMIES[x.type].boss)) return;   // la vague prévue n'est pas finie
+  if (cb.escT == null) { if (!cb.escGap) cb.escGap = BAL.escGap0; cb.escT = cb.t + (cb.escN ? cb.escGap : 1.2); }
+  if (cb.t < cb.escT) return;
+  let alive = 0;
+  for (const e of cb.enemies) if (!e.dead && !e.boss && e.ai !== 'decoy' && e.ai !== 'guard') alive++;
+  if (alive < BAL.escCap) {
+    const n = cb.escN || 0, g = Math.min(4, 2 + (rnd() < .35 ? 1 : 0) + Math.floor(n / 8)), ang = rand(0, TAU);
+    // l'escorte : des cartes de base au corps à corps (pas de tireurs, de sorciers ni d'élites)
+    let pool = cb.reinfTypes.filter(t => ESCORT_TYPES.includes(t));
+    if (!pool.length) pool = ['coureur', 'soldat'];
+    for (let k = 0; k < g; k++) spawnEnemy(pick(pool), ang + rand(-.35, .35), { hpMul: 1, escort: true });
+    cb.total += g; cb.escN = n + 1;
+    if (cb.escN === 1) { dbg('esc'); if (!G.headless) banner('LE BOSS APPELLE SES CARTES', 'tant qu\'il vit, elles arrivent sans fin', 'bad', 1.6); }
+    cb.escGap = Math.max(BAL.escGapMin, cb.escGap * BAL.escGapK);
+  }
+  cb.escT = cb.t + cb.escGap;
 }
 function buildPosts() {
   const cb = G.cb, n = cb.stats.posts;
@@ -4618,6 +4879,7 @@ function refreshStats() {
 }
 function finishRound() {
   const run = G.run, s = G.cb.stats, r = run.round;
+  if (!G.headless && G.cb.dps) run.lastDps = { r, avg: dpsAvg(G.cb), peak: G.cb.dps.peak, tot: G.cb.dps.tot, src: dpsSources(G.cb, 9) };
   const score = scoreRound(run, G.cb);
   const bonus = Math.round(BAL.roundBonus0 + BAL.roundBonusR * Math.min(r, 30));
   let interest = 0;
@@ -4670,6 +4932,7 @@ function spawnEnemy(type, ang, o = {}) {
   if (e.elite === 'cuirasse') e.armor = .6;
   if (e.elite === 'dore') { e.hp *= 1.5; e.maxHp = e.hp; e.gold *= 3; }
   if (e.elite) e.gold *= 1.5;
+  if (o.escort) { e.escort = true; e.gold *= BAL.escGold; }
   if (o.fake) { e.fake = true; e.real = o.real; }
   cb.enemies.push(e);
   aiInit(e, o);
@@ -4743,8 +5006,9 @@ function updateCombat(dt) {
     while (cb.spawnIdx < cb.spawn.length && cb.spawn[cb.spawnIdx].t <= cb.t) { const sp = cb.spawn[cb.spawnIdx++]; spawnEnemy(sp.type, sp.ang, sp); }
     if (!cb.ended && !run.over) {
       checkGoal(cb);
-      // les renforts n'arrivent que si les cartes restantes ne suffiront pas pour l'objectif
-      if (!cb.goalHit && cb.spawnIdx >= cb.spawn.length && (cb.reinfN > 0 || goalShort(cb))) {
+      bossEscort(cb);
+      // les renforts n'arrivent que si les cartes restantes ne suffiront pas pour l'objectif (pendant un boss, c'est son escorte qui vient)
+      if (!cb.goalHit && !bossUp(cb) && cb.spawnIdx >= cb.spawn.length && (cb.reinfN > 0 || goalShort(cb))) {
         if (cb.reinfT == null) cb.reinfT = cb.t + .8;
         if (cb.t >= cb.reinfT) {
           if (goalShort(cb) || cb.enemies.every(e => e.dead || e.ai === 'decoy')) { spawnReinf(cb); cb.reinfGap = Math.max(1.1, cb.reinfGap * .95); }
@@ -4755,6 +5019,7 @@ function updateCombat(dt) {
   }
   for (const k in cb.hex) if (cb.hex[k] > 0) cb.hex[k] -= dt;
   if (cb.shotFreeze > 0) cb.shotFreeze -= dt;
+  if (!cb.demo) tickDps(cb, dt);
   tickSpells(cb, dt);
   updateRake(dt);
   for (const e of cb.enemies) if (!e.dead) updateEnemy(e, dt);
@@ -4796,6 +5061,77 @@ function updateCombat(dt) {
       if (!G.headless) uiRoundCleared();
     }
   }
+}
+/* ================= le combo en électricité (remplace les flammes) =================
+   Elle grandit avec ton MULT : quelques étincelles dès ×1,4, des arcs qui débordent vers ×2,5,
+   un orage qui mord sur la table au-delà de ×4. Elle bourdonne et crépite d'autant plus fort,
+   et chaque hausse du mult lâche une décharge. */
+const ELEC = { c: null, g: null, arcs: [], I: 0, acc: 0, burst: 0, w: 0, h: 0, drawn: false };
+const elecLevel = m => clamp((m - 1.3) / 3, 0, 1);
+function elecKick(n) { ELEC.burst = Math.min(1.6, ELEC.burst + (n || .6)); }
+function jagPath(x, y, ang, len, seg, amp) {
+  const pts = [[x, y]], c = Math.cos(ang), s2 = Math.sin(ang);
+  for (let i = 1; i <= seg; i++) { const d = len * i / seg, off = i < seg ? (Math.random() - .5) * 2 * amp : 0; pts.push([x + c * d - s2 * off, y + s2 * d + c * off]); }
+  return pts;
+}
+function elecSpawn(r, I, big) {
+  // un point au hasard sur le bord de la boîte, l'arc part vers l'extérieur
+  let u = Math.random() * 2 * (r.width + r.height), x, y, nx, ny;
+  if (u < r.width) { x = r.left + u; y = r.top; nx = 0; ny = -1; }
+  else if ((u -= r.width) < r.height) { x = r.right; y = r.top + u; nx = 1; ny = 0; }
+  else if ((u -= r.height) < r.width) { x = r.right - u; y = r.bottom; nx = 0; ny = 1; }
+  else { u -= r.width; x = r.left; y = r.bottom - u; nx = -1; ny = 0; }
+  const ang = Math.atan2(ny, nx) + (Math.random() - .5) * 1.7;
+  const len = (6 + 125 * Math.pow(I, 1.35)) * (.45 + Math.random() * .55) * (big ? 1.8 : 1);
+  const seg = 4 + Math.floor(len / 9), amp = 2 + len * .12;
+  const a = { pts: jagPath(x, y, ang, len, seg, amp), life: .06 + Math.random() * .1, w: 1 + I * 1.7 + (big ? 1 : 0), br: null };
+  a.max = a.life;
+  if (len > 28 && Math.random() < .45 + I * .35) { const k = 1 + Math.floor(Math.random() * (a.pts.length - 2)), p = a.pts[k]; a.br = jagPath(p[0], p[1], ang + (Math.random() < .5 ? -1 : 1) * (.5 + Math.random() * .7), len * .45, 3 + Math.floor(len / 22), amp * .7); }
+  ELEC.arcs.push(a);
+}
+function elecBridge(r1, r2, I) {
+  // un arc qui saute des POINTS au MULT, par-dessus le ×
+  const x1 = r1.right - 3, y1 = r1.top + r1.height * (.25 + Math.random() * .5), x2 = r2.left + 3, y2 = r2.top + r2.height * (.25 + Math.random() * .5);
+  ELEC.arcs.push({ pts: jagPath(x1, y1, Math.atan2(y2 - y1, x2 - x1), Math.hypot(x2 - x1, y2 - y1), 6, 3 + I * 5), life: .07 + Math.random() * .06, max: .13, w: 1.2 + I * 1.6, br: null });
+}
+function elecFrame(dt) {
+  const E = ELEC;
+  if (!E.c) { E.c = $('#elc'); if (!E.c) return; }
+  const cb = G.cb, live = G.mode === 'combat' && !!cb && !cb.demo && !cb.ended && !G.paused && !G.headless && !!G.run;
+  const tgt = live ? elecLevel(liveMult(G.run, cb)) : 0;
+  E.I += (tgt - E.I) * Math.min(1, dt * 2.5);
+  E.burst = Math.max(0, E.burst - dt * 1.8);
+  if (!live) { E.arcs.length = 0; E.burst = 0; }
+  const I = E.I, act = live && !G.reduced && (I > .01 || E.burst > .02);
+  Amb.set('elec', live ? Math.min(1.4, I * 1.1 + E.burst * .45) : 0);
+  if (!act && !E.arcs.length) { if (E.drawn) { E.g.clearRect(0, 0, E.c.width, E.c.height); E.drawn = false; } return; }
+  const d = Math.min(2, devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  if (E.w !== w * d || E.h !== h * d || !E.g) { E.c.width = w * d; E.c.height = h * d; E.w = w * d; E.h = h * d; E.g = E.c.getContext('2d'); }
+  const g = E.g; g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h); E.drawn = true;
+  const anchor = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
+  if (act && anchor) {
+    const r = anchor.getBoundingClientRect();
+    if (r.width) {
+      E.acc += dt * (I * 34 + E.burst * 70) * (OPT().parts ? 1 : .4);
+      while (E.acc >= 1) { E.acc--; elecSpawn(r, I, E.burst > .5 && Math.random() < .45); }
+      if (LAY.pc && I > .4 && Math.random() < dt * (5 + I * 16)) { const p = $('#lp-ptsbox'); if (p) elecBridge(p.getBoundingClientRect(), r, I); }
+    }
+  }
+  // dessin : halo bleu électrique, frange violette, cœur blanc qui scintille
+  g.lineCap = 'round'; g.lineJoin = 'round';
+  for (let i = E.arcs.length - 1; i >= 0; i--) {
+    const a = E.arcs[i]; a.life -= dt;
+    if (a.life <= 0) { E.arcs.splice(i, 1); continue; }
+    const al = Math.min(1, a.life / a.max * 1.6) * (Math.random() < .2 ? .45 : 1);
+    for (const P of [a.pts, a.br]) {
+      if (!P) continue;
+      g.beginPath(); g.moveTo(P[0][0], P[0][1]); for (let k = 1; k < P.length; k++) g.lineTo(P[k][0], P[k][1]);
+      g.strokeStyle = `rgba(110,200,255,${.26 * al})`; g.lineWidth = a.w * 4.4; g.stroke();
+      g.strokeStyle = `rgba(176,124,255,${.38 * al})`; g.lineWidth = a.w * 2.2; g.stroke();
+      g.strokeStyle = `rgba(255,255,255,${.95 * al})`; g.lineWidth = a.w * .9; g.stroke();
+    }
+  }
+  if (E.arcs.length > 180) E.arcs.splice(0, E.arcs.length - 180);
 }
 function startTapis() {
   const cb = G.cb;
@@ -5613,6 +5949,7 @@ function updateBullets(dt) {
 function onBulletHit(e, b) {
   const cb = G.cb, s = cb.stats, T = s.T;
   if (e.shield > 0 && b.kind === 'b') {
+    if (!cb.demo) trackDmg(cb, Math.min(b.dmg, e.shield), 'bullet');
     e.shield -= b.dmg;
     e.flash = .05;
     if (!G.headless) { Snd.shield(); if (e.shield <= 0) { floater(e.x, e.y - e.r - 2, 'BOUCLIER BRISÉ', '#c3cde0', 3.8); burst(e.x, e.y, '#c3cde0', 10, 36, 1, .4); } }
@@ -5654,17 +5991,48 @@ function dealDmg(e, amt, o) {
   if (s.combos.has('choc') && e.burnT > 0 && (e.slowT > 0 || e.frzT > 0)) d *= 1.6;
   if (e.blindT > 0 && T.terre[3] > 0) d *= 1.25;
   if (s.crevard) d *= 1 + .4 * crevK();
+  const hp0 = Math.max(0, e.hp);
   e.hp -= d; e.flash = .07;
+  if (!cb.demo) trackDmg(cb, Math.min(d, hp0), o.src);
   run.stats.dmg += d;
   if (e.st.phase === 'open') e.st.dmgOpen += d;
   if (T.vampire[2] > 0 && o.src !== 'burn') cb.lifesteal += d * .03 * T.vampire[2];
   if (!G.headless && (o.crit || o.big)) floater(e.x, e.y - e.r - 1, fmtN(d), o.crit ? '#ffffff' : '#ffd36b', o.crit ? 4.6 : 5.2);
   if (e.hp <= 0) { killEnemy(e, o); return; }
   if (o.src === 'bullet' && T.sniper[4] > 0 && e.hp < e.maxHp * (e.boss ? .05 : .15)) {
+    if (!cb.demo) trackDmg(cb, Math.max(0, e.hp), 'bullet');
     e.hp = 0;
     if (!G.headless) floater(e.x, e.y - e.r - 1, 'EXÉCUTÉ', '#ff5a5a', 4);
     killEnemy(e, o);
   }
+}
+/* ---------- dégâts par seconde : ce que ta base inflige vraiment (sans compter le surplus sur une carte déjà morte) ---------- */
+const DPS_N = 16, DPS_STEP = .25;   // fenêtre glissante : 16 × 0,25 s = 4 s
+const DPS_SRC = { orageS: 'Orage (sort)', bomb: 'Bombe (sort)', bullet: 'Canon', reflect: 'Flipper', rake: 'Flipper', burn: 'Brûlure', chain: 'Foudre', orage: 'Foudre', giant: 'Foudre', expl: 'Explosions', nuke: 'Explosions', poison: 'Poison', shard: 'Givre', wave: 'Vagues', drain: 'Vampire', ring: 'Onde', hole: 'Trou noir', beam: 'Rayon', ally: 'Alliés', queue: 'Billard' };
+function dpsOf(cb) { return cb.dps || (cb.dps = { tot: 0, buf: new Float64Array(DPS_N), i: 0, acc: 0, act: 0, src: {}, peak: 0, win: 0 }); }
+function trackDmg(cb, v, src) {
+  if (!(v > 0)) return;
+  const D = dpsOf(cb);
+  D.tot += v; D.buf[D.i] += v;
+  const k = DPS_SRC[src] || 'Autres'; D.src[k] = (D.src[k] || 0) + v;
+}
+function tickDps(cb, dt) {
+  const D = dpsOf(cb);
+  D.acc += dt;
+  if (cb.enemies.some(e => !e.dead && e.ai !== 'decoy')) D.act += dt;
+  while (D.acc >= DPS_STEP) {
+    D.acc -= DPS_STEP;
+    let sum = 0; for (let k = 0; k < DPS_N; k++) sum += D.buf[k];
+    D.win = sum / (DPS_N * DPS_STEP);
+    if (D.win > D.peak) D.peak = D.win;
+    D.i = (D.i + 1) % DPS_N; D.buf[D.i] = 0;
+  }
+}
+// moyenne de la manche, sur le temps où il y avait des cartes à abattre
+const dpsAvg = cb => { const D = cb && cb.dps; return D && D.act > 1 ? D.tot / D.act : 0; };
+function dpsSources(cb, n) {
+  const D = cb && cb.dps; if (!D || !D.tot) return [];
+  return Object.entries(D.src).sort((a, b) => b[1] - a[1]).slice(0, n || 9).map(([k, v]) => [k, v / D.tot]);
 }
 function killEnemy(e, o) {
   if (e.dead) return;
@@ -5733,7 +6101,7 @@ function chainLightning(src, nOver, sure) {
   }
   if (paths.length && !G.headless) { fxPush({ type: 'bolt', paths, life: .2, max: .2 }); Snd.zap(); }
 }
-function queueExplosion(x, y, rad, dmg, o) { G.cb.explQ.push({ x, y, rad, dmg, t: o.delay || 0, exclude: o.exclude, ignite: o.ignite, color: o.color || 'dyn', small: !!o.small, stun: o.stun || 0, kb: o.kb || 0 }); }
+function queueExplosion(x, y, rad, dmg, o) { G.cb.explQ.push({ x, y, rad, dmg, t: o.delay || 0, exclude: o.exclude, ignite: o.ignite, color: o.color || 'dyn', small: !!o.small, stun: o.stun || 0, kb: o.kb || 0, src: o.src || 'expl' }); }
 function updateExplosions(dt) {
   const q = G.cb.explQ;
   if (!q.length) return;
@@ -5751,7 +6119,7 @@ function explode(ex) {
     if (e.dead || e.id === ex.exclude) continue;
     const dx = e.x - ex.x, dy = e.y - ex.y, rr2 = ex.rad + e.r;
     if (dx * dx + dy * dy <= rr2 * rr2) {
-      dealDmg(e, ex.dmg, { src: 'expl' });
+      dealDmg(e, ex.dmg, { src: ex.src });
       if (e.dead) continue;
       if (ex.ignite) { e.burnT = 3; e.burnDps = Math.max(e.burnDps, s.dmg * .35 * Math.max(1, s.T.brasier[1])); }
       if (ex.stun) e.stunT = Math.max(e.stunT, e.boss ? ex.stun * .3 : ex.stun);
@@ -5941,7 +6309,7 @@ function updateBombs(dt) {
     b.t -= dt;
     if (b.t > 0) continue;
     cb.bombs.splice(i, 1);
-    queueExplosion(b.x, b.y, cb.stats.bombR, cb.stats.dmg * cb.stats.bombMul, { color: 'dyn', stun: .6, kb: 90, ignite: cb.stats.combos.has('napalm') });
+    queueExplosion(b.x, b.y, cb.stats.bombR, cb.stats.dmg * cb.stats.bombMul, { color: 'dyn', stun: .6, kb: 90, ignite: cb.stats.combos.has('napalm'), src: 'bomb' });
     douseFires(b.x, b.y, cb.stats.bombR, false);
     if (!G.headless) { shake(6); cb.flash = .12; cb.flashCol = '255,210,140'; }
   }
@@ -6276,6 +6644,17 @@ function drawOneRake(cb, rk, main) {
   const UP = G.run && !cb.demo ? (G.run.up || {}) : {};
   drawFlipperSkin(ctx, id, R, a, half, { lift, tired, flash: rk.flash > 0, swing: sw, t: cb.t, flip, studs: UP.renvoi || 0, gloss: UP.huile || 0 });
   if (rk.flash > 0 || sw) ctx.restore();
+  // un Miroir qui copie le Croupier : les bouts du flipper qu'il ajoute brillent en argent
+  if (s.rakeMirror > .004) {
+    const m = s.rakeMirror, sh = .55 + .35 * Math.sin(cb.t * 5);
+    ctx.save(); ctx.lineCap = 'round'; ctx.shadowColor = '#dfe9ff'; ctx.shadowBlur = 6;
+    for (const sd of [-1, 1]) {
+      const a1 = a + sd * (half - m), a2 = a + sd * half;
+      ctx.strokeStyle = `rgba(232,240,255,${sh})`; ctx.lineWidth = 2.4;
+      ctx.beginPath(); ctx.arc(0, 0, R + .2, Math.min(a1, a2), Math.max(a1, a2)); ctx.stroke();
+    }
+    ctx.restore();
+  }
   // la solidité : une rangée de petites lampes sous le flipper
   const n = Math.max(1, rk.max), sp = Math.min(.09, half * 1.3 / Math.max(1, n - 1));
   for (let i = 0; i < n; i++) {
@@ -6925,13 +7304,18 @@ function updateHUD() {
   const gold = String(Math.floor(run.gold));
   if (hc.gold !== gold) { const up = hc.gold != null && +gold > +hc.gold, down = hc.gold != null && +gold < +hc.gold; setTxt('#h-gold', gold); const b = $('#h-goldbox'); if (up || down) { b.classList.remove('bump', 'spend'); void b.offsetWidth; b.classList.add(up ? 'bump' : 'spend'); } hc.gold = gold; }
   const inCombat = G.mode === 'combat' && cb && !cb.demo;
-  const scH = inCombat && cb.goal ? `<b>${fmtN(roundScoreLive(cb))}</b><i>/${fmtN(cb.goal)}${cb.goalHit ? ' ✓' : ''}</i>` : inCombat ? `<b>${fmtS(ptsOf(cb).chips)}</b><i>×${fmtM(liveMult(run, cb))}</i>` : `<svg class="ii" viewBox="0 0 100 100"><use href="#i-star"/></svg>${fmtS(run.score || 0)}`;
+  const mlt = inCombat ? liveMult(run, cb) : 1, elv = elecLevel(mlt);
+  if (inCombat && !LAY.pc) { if (hc.hmV != null && mlt > hc.hmV + .001) elecKick(.5 + Math.min(.8, mlt - hc.hmV)); hc.hmV = mlt; }
+  const scH = inCombat && cb.goal ? `<b>${fmtN(roundScoreLive(cb))}</b><i>/${fmtN(cb.goal)}${cb.goalHit ? ' ✓' : ''}</i>${mlt > 1.05 ? `<em class="hm${elv > .75 ? ' el3' : elv > .38 ? ' el2' : ''}" id="h-mult">×${fmtM(mlt)}</em>` : ''}` : inCombat ? `<b>${fmtS(ptsOf(cb).chips)}</b><i>×${fmtM(liveMult(run, cb))}</i>` : `<svg class="ii" viewBox="0 0 100 100"><use href="#i-star"/></svg>${fmtS(run.score || 0)}`;
   if (hc.score !== scH) { hc.score = scH; const se = $('#h-score'); se.innerHTML = scH; se.classList.toggle('live', inCombat); }
   const wv = inCombat && cb.goal ? Math.round((cb.goalHit ? 1 : clamp(roundScoreLive(cb) / cb.goal, 0, 1)) * 1000) / 10 + '%' : G.mode === 'combat' ? '0%' : '100%';
   if (hc.wave !== wv) { hc.wave = wv; $('#h-wave').style.width = wv; }
   const wcls = inCombat && cb.goalHit ? 'hit' : '';
   if (hc.wcls !== wcls) { hc.wcls = wcls; $('#h-wave').parentElement.classList.toggle('hit', !!wcls); }
   setTxt('#b-speed', G.speed === 2 ? '×2' : '×1');
+  const dm = $('#dpsm'), dmOn = inCombat && !LAY.pc && !!cb.dps;
+  if (dm.hidden === dmOn) dm.hidden = !dmOn;
+  if (dmOn) { setTxt('#dpsm-v', fmtS(Math.round(cb.dps.win))); const bb = !$('#bossbar').hidden; if (hc.dpsmB !== bb) { hc.dpsmB = bb; dm.classList.toggle('boss', bb); } }
   updateAbilities(inCombat);
   updateBossbar(inCombat);
   updateDebuffs(inCombat);
@@ -6975,10 +7359,18 @@ function updateLP(run, cb, r, inCombat) {
     const up = hc.lpMult != null && mult > (hc.lpMultV || 1) + .001;
     hc.lpMult = ms; hc.lpMultV = mult; setTxt('#lp-mult', ms);
     const mb = $('#lp-multbox');
-    if (up) { bumpCls(mb, 'hit'); if (inCombat) Snd.multHit(Math.round((mult - 1) * 4)); }
-    mb.classList.toggle('fire', mult >= 2); mb.classList.toggle('inferno', mult >= 3.5);
+    if (up) { bumpCls(mb, 'hit'); if (inCombat) { Snd.multHit(Math.round((mult - 1) * 4)); elecKick(.5 + Math.min(.8, mult - (hc.lpMultPrev || 1))); } }
+    hc.lpMultPrev = mult;
+    const el = elecLevel(mult);
+    mb.classList.toggle('el1', inCombat && el > .02); mb.classList.toggle('el2', inCombat && el > .38); mb.classList.toggle('el3', inCombat && el > .75);
   }
   setTxt('#lp-total', fmtS(run.score || 0));
+  // dégâts par seconde (fenêtre de 4 s) et moyenne de la manche ; au survol, d'où viennent les dégâts
+  const D = inCombat ? cb.dps : null, dv0 = D ? Math.round(D.win) : null;
+  const dpsTxt = dv0 == null ? '—' : fmtS(dv0), avgTxt = D && D.act > 2 ? `moy. ${fmtS(dpsAvg(cb))} · pic ${fmtS(D.peak)}` : '';
+  if (hc.lpDps !== dpsTxt) { if (hc.lpDpsV != null && dv0 > hc.lpDpsV * 1.25 && dv0 > 20) bumpCls($('#lp-dpsbox'), 'up'); hc.lpDps = dpsTxt; hc.lpDpsV = dv0; setTxt('#lp-dps', dpsTxt); }
+  setTxt('#lp-dpsavg', avgTxt);
+  if (D && (!hc.lpDpsT || now() - hc.lpDpsT > 1000)) { hc.lpDpsT = now(); $('#lp-dpsbox').title = 'D\'où viennent tes dégâts (cette manche) :\n' + dpsSources(cb, 8).map(([k, f]) => `${k} : ${Math.round(f * 100)} %`).join('\n'); }
   // l'objectif de la manche
   const gl = $('#lp-goal');
   if (inCombat && cb.goal) {
@@ -7004,7 +7396,7 @@ function updateLP(run, cb, r, inCombat) {
   const fl = run.floors || [], fk = fl.map(h => Math.round(clamp(h / BAL.floorHp, 0, 1) * 10)).join(',');
   if (hc.lpfl !== fk) { hc.lpfl = fk; $('#lp-floors').innerHTML = fl.length ? fl.map(h => `<i class="${h <= 0 ? 'broken' : ''}" style="--f:${clamp(h / BAL.floorHp, 0, 1)}"></i>`).join('') : ''; }
   const left = inCombat ? cb.enemies.filter(e => !e.dead && e.ai !== 'decoy' && e.ai !== 'thief').length : 0;
-  setTxt('#lp-cards', inCombat ? (cb.goalHit ? `${left} restante${left > 1 ? 's' : ''}` : `${cb.killed} abattue${cb.killed > 1 ? 's' : ''}`) : '—');
+  setTxt('#lp-cards', inCombat ? (cb.escN && bossUp(cb) ? `sans fin · ${left} en jeu` : cb.goalHit ? `${left} restante${left > 1 ? 's' : ''}` : `${cb.killed} abattue${cb.killed > 1 ? 's' : ''}`) : '—');
   const wv = inCombat && cb.goalHit ? Math.round(clamp(1 - left / Math.max(1, left + 4), 0, 1) * 1000) / 10 + '%' : '0%';
   if (hc.lpwave !== wv) { hc.lpwave = wv; $('#lp-wave').style.width = wv; }
   const gold = String(Math.floor(run.gold));
@@ -7080,7 +7472,8 @@ function bossIntro(e) {
   setTimeout(() => { if (G.cb && G.mode === 'combat' && !e.dead) bossSay(e, 'hi'); }, 1500);
 }
 function bossDown(e) {
-  banner(`${e.d.name.toUpperCase()} ABATTU${e.d.rank === 'D' ? 'E' : ''}`, `+${Math.round(e.gold * G.cb.stats.goldMul * BAL.goldKill)} or · il revient en carte normale`, 'good', 2);
+  const last = G.cb.escN && !bossUp(G.cb);
+  banner(`${e.d.name.toUpperCase()} ABATTU${e.d.rank === 'D' ? 'E' : ''}`, `+${Math.round(e.gold * G.cb.stats.goldMul * BAL.goldKill)} or · ${last ? 'ses cartes arrêtent d\'arriver' : 'il revient en carte normale'}`, 'good', 2);
   G.cb.flash = .3; G.cb.flashCol = '255,120,170'; shake(8); Snd.jackpot(); celebrate(false);
   bossSay(e, 'bye');
 }
@@ -7111,7 +7504,16 @@ function renderRack() {
     if (i < run.slots && j) {
       const off = j.kind === 'faux' || (run.stolen || []).includes(j.uid);
       const kc = j.kind === 'faux' ? '#8d8d99' : JK[j.parts[0].t].col, key = jokerKey(j);
-      h += `<button class="slot${st.links.has(i) ? ' lr' : ''}${off ? ' isoff' : ''}" data-i="${i}" aria-label="${esc(jName(j))}, ${rarLabel(j)}">${chipHTML(j, 'span', '', off ? 'off' : '')}<span class="skey" style="--kc:${kc}">${key}</span><span class="sinfo"><b>${esc(jName(j))}</b><small><i style="--rc:var(--r-${j.kind})">${rarLabel(j)}</i>${key ? `<em style="--kc:${kc}">${key}</em> ${keyLabel(j)}` : ''}</small></span></button>`;
+      const mr = (st.mirrors || []).find(m => m.i === i && m.d < 0), mr2 = (st.mirrors || []).find(m => m.i === i && m.d > 0);
+      const isSrc = (st.mirrors || []).some(m => m.ok && m.src === i);
+      let mcls = '', mbits = '', minfo = '';
+      if (mr) {
+        const prevMir = (st.mirrors || []).some(m => m.i === i - 1 && m.d < 0);
+        mcls = (mr.ok ? ' mir mir-ok mlink' : ' mir mir-no') + (prevMir ? ' mup' : '');
+        mbits = `<span class="mbadge ${mr.ok ? 'ok' : 'no'}" aria-hidden="true">${mr.ok ? iconSVG(mr.types[0]) : '✕'}</span><span class="mtag ${mr.ok ? 'ok' : 'no'}" aria-hidden="true">${mr.ok ? 'COMPATIBLE' : 'INCOMPATIBLE'}</span>`;
+        minfo = mr.ok ? `<em class="mok">compatible</em> copie ${mr.types.map(t => JK[t].name).join(' + ')} à ${pct(mr.f)}${mr.hops ? ' (à travers ' + mr.hops + ' miroir' + (mr.hops > 1 ? 's' : '') + ')' : ''}${mr2 && mr2.ok ? ' + ' + mr2.types.map(t => JK[t].name).join(' + ') : ''}` : `<em class="mno">incompatible</em> ${mr.why}`;
+      }
+      h += `<button class="slot${st.links.has(i) ? ' lr' : ''}${off ? ' isoff' : ''}${mcls}${isSrc ? ' mirsrc' : ''}" data-i="${i}" aria-label="${esc(jName(j))}, ${rarLabel(j)}${mr ? ', ' + (mr.ok ? 'miroir compatible' : 'miroir incompatible') : ''}">${chipHTML(j, 'span', '', off ? 'off' : '')}${mbits}<span class="skey" style="--kc:${kc}">${key}</span><span class="sinfo"><b>${esc(jName(j))}</b><small>${minfo || `<i style="--rc:var(--r-${j.kind})">${rarLabel(j)}</i>${key ? `<em style="--kc:${kc}">${key}</em> ${keyLabel(j)}` : ''}`}</small></span></button>`;
     } else if (i < run.slots) h += `<span class="slot empty" data-i="${i}" aria-hidden="true"><span class="sinfo"><small>place libre</small></span></span>`;
     else {
       // les places encore à gagner : 3 trèfles, l'achat au marché noir, l'arnaque de l'Inspecteur
@@ -7138,8 +7540,15 @@ function rackDown(e) {
   drag = { i, x: e.clientX, y: e.clientY, el: btn, on: false, id: e.pointerId, ghost: null, over: null, mode: 'move' };
 }
 function slotAt(x, y) {
-  for (const s of $$('#rack-slots .slot[data-i]')) { const b = s.getBoundingClientRect(); if (x >= b.left - 3 && x <= b.right + 3 && y >= b.top - 14 && y <= b.bottom + 14) return s; }
-  return null;
+  // la place sous le pointeur (marges tolérées) ; si deux places se touchent, la plus proche gagne
+  let best = null, bd = 1e9;
+  for (const s of $$('#rack-slots .slot[data-i]')) {
+    const b = s.getBoundingClientRect();
+    if (x < b.left - 3 || x > b.right + 3 || y < b.top - 14 || y > b.bottom + 14) continue;
+    const d = Math.hypot(b.left + b.width / 2 - x, b.top + b.height / 2 - y);
+    if (d < bd) { bd = d; best = s; }
+  }
+  return best;
 }
 function rackMove(e) {
   if (!drag || e.pointerId !== drag.id) return;
@@ -7167,13 +7576,16 @@ function rackMove(e) {
     e.preventDefault();
   }
 }
+// la place visée : la plus proche du pointeur, en x ET en y (le rack est vertical sur PC, horizontal sur mobile ;
+// avant, seul x comptait : sur le rack vertical toutes les places étaient à égalité et le jeton filait tout en haut)
 function nearestSlot(x, y) {
-  const rr = $('#rack-slots').getBoundingClientRect();
-  if (y < rr.top - 60 || y > rr.bottom + 40) return null;
+  const rr = $('#rack-slots').getBoundingClientRect(), vert = rr.height > rr.width;
+  const mx = vert ? 140 : 60, top = vert ? 40 : 60, bot = 40;
+  if (x < rr.left - mx || x > rr.right + mx || y < rr.top - top || y > rr.bottom + bot) return null;
   let best = null, bd = 1e9;
   for (const s of $$('#rack-slots .slot[data-i]')) {
     if (+s.dataset.i >= G.run.jokers.length) continue;
-    const b = s.getBoundingClientRect(), d = Math.abs(b.left + b.width / 2 - x);
+    const b = s.getBoundingClientRect(), d = Math.hypot(b.left + b.width / 2 - x, b.top + b.height / 2 - y);
     if (d < bd) { bd = d; best = s; }
   }
   return best;
@@ -7221,7 +7633,7 @@ function openDetail(j, where) {
   const run = G.run;
   if (G.mode === 'combat' && !G.paused) { G.paused = true; detailPaused = true; }
   const J0 = j.kind === 'faux' ? null : JK[j.parts[0].t];
-  let h = `<div class="dhead">${chipHTML(j)}<div><h3>${esc(jName(j))}</h3><p class="rar" style="--rc:var(--r-${j.kind})">${rarLabel(j)}${j.p > 1.001 ? ` · puissance ${Math.round(j.p * 100)}${NB}%` : ''}</p>${J0 ? `<p class="fam">${j.kind === 'fou' ? 'Jeton fou · gagné au Baron' : 'Famille ' + j.parts.map(p => JK[p.t].fam).join(' · ')}${j.kind !== 'fou' && stackLevels(j) > 1 ? ` · pile de ${stackLevels(j)} jetons` : ''}</p>` : ''}</div></div>`;
+  let h = `<div class="dhead">${chipHTML(j)}<div><h3>${esc(jName(j))}</h3><p class="rar" style="--rc:var(--r-${j.kind})">${rarLabel(j)}${j.p > 1.001 ? ` · puissance ${Math.round(j.p * 100)}${NB}%` : ''}${j.stars ? ` <i class="over">${'★'.repeat(Math.min(10, j.stars))} doublons +${Math.round((j.over || 0) * 100)}${NB}%</i>` : ''}</p>${J0 ? `<p class="fam">${j.kind === 'fou' ? 'Jeton fou · gagné au Baron' : 'Famille ' + j.parts.map(p => JK[p.t].fam).join(' · ')}${j.kind !== 'fou' && stackLevels(j) > 1 ? ` · pile de ${stackLevels(j)} jetons` : ''}</p>` : ''}</div></div>`;
   if (j.kind === 'faux') h += `<p class="dnote">Une contrefaçon du ${JK[j.fakeOf].name}. Elle ne fait strictement rien. Revends-la pour 1 or.</p>`;
   if (j.curse) h += `<p class="dnote cur">Malédiction ${CURSES[j.curse].name} : ${CURSES[j.curse].txt}, tant que ce jeton est dans ton rack.</p>`;
   if (run && (run.stolen || []).includes(j.uid)) h += '<p class="dnote cur">Volé pendant cette manche ! Abats le voleur pour le récupérer.</p>';
@@ -7237,29 +7649,56 @@ function openDetail(j, where) {
     }
     h += '</ol></div>';
   }
+  const mi = run ? run.jokers.indexOf(j) : -1;
+  if (mi >= 0 && j.kind !== 'faux' && j.parts.some(p => p.t === 'miroir')) {
+    const stM = computeStats(run), recs = (stM.mirrors || []).filter(m => m.i === mi), U = k => (run.up || {})[k] || 0;
+    h += '<div class="dpart dmir"><h4>' + iconSVG('miroir', 'dic') + ' Ce qu\'il copie</h4>';
+    for (const m of recs) {
+      const where = m.d < 0 ? 'le jeton juste avant lui' : 'le jeton juste après lui';
+      if (!m.ok) { h += `<p class="mstat no"><b>INCOMPATIBLE</b> ${m.why}. Place-le juste après le jeton à copier.</p>`; continue; }
+      const src = run.jokers[m.src];
+      h += `<p class="mstat ok"><b>COMPATIBLE</b> il copie ${where}${m.hops ? ` (à travers ${m.hops} autre${m.hops > 1 ? 's' : ''} miroir${m.hops > 1 ? 's' : ''})` : ''} : <span class="msrc">${chipHTML(src)}${esc(jName(src))}</span> à ${pct(m.f)} de puissance.</p><ul class="mcaps">`;
+      for (const t of m.types) {
+        const q = src.parts.find(x => x.t === t), lv = Math.min(3, q.lv), Pw = m.f * src.p;
+        for (let k = 0; k < lv; k++) h += `<li><b>${JK[t].name} ${LV_NAME[k].toLowerCase()}</b> ${colorNums(JK[t].caps[k](Pw))}</li>`;
+      }
+      h += '</ul>';
+      if (m.types.includes('croupier') && stM.rakeMirror > 0) {
+        const base = BAL.rakeHalf * (1 + .18 * U('taille')), tot = stM.rakeHalf / base - 1, own = (stM.rakeHalf - stM.rakeMirror) / base - 1;
+        const mine = Math.min(tot - own, .3 * m.f * src.p), many = recs.length > 1 || stM.mirrors.filter(x => x.ok && x.types.includes('croupier')).length > 1;
+        h += `<p class="mstat flip">Flipper : ${many ? `les copies du Croupier l'élargissent encore de <b>+${Math.round((tot - own) * 100)}${NB}%</b>, dont +${Math.round(mine * 100)}${NB}% grâce à ce Miroir` : `la copie l'élargit encore de <b>+${Math.round((tot - own) * 100)}${NB}%</b>`} (le Croupier seul : +${Math.round(own * 100)}${NB}%, total +${Math.round(tot * 100)}${NB}%, plafond +100${NB}%). Les bouts ajoutés par les Miroirs brillent en argent sur ton flipper.</p>`;
+      }
+    }
+    h += '</div>';
+  }
   if (J0 && run && j.kind !== 'faux') {
     const st = computeStats(run), types = jokerTypes(j);
     const cs = COMBOS.filter(c => types.includes(c.a) || types.includes(c.b));
     if (cs.length) h += '<div class="dpart"><h4>Combos<span>avec un voisin dans le rack</span></h4><ul class="combo-list">' + cs.map(c => { const other = types.includes(c.a) ? c.b : c.a; return `<li class="${st.combos.has(c.id) ? 'on' : ''}">${protoChip(other, 'k-commun mini-chip')}<span><b>${c.name}</b> avec ${JK[other].name} : ${c.txt}</span></li>`; }).join('') + '</ul></div>';
   }
+  const benchable = J0 && run && j.kind !== 'faux' && (where === 'rack' || where === 'tray' || where === 'shop');
+  if (benchable) h += `<div class="dpart dbench"><h4>${iconSVG('foudre', 'dic')} Apport aux dégâts<span>banc d'essai · manche ${roundLabel(benchRound())} · sans sorts</span></h4><div class="cbx" id="dbench"><p class="cb-note">calcul en coulisses…</p></div></div>`;
   const idx = run ? run.jokers.indexOf(j) : -1;
   h += '<div class="dact">';
   if (where === 'rack' && idx >= 0 && canReorder()) {
     const partner = stackPartner(j, run.jokers.filter(x => x !== j));
-    if (partner) { const res = stackResult(partner, j); h += `<button class="btn blue small" data-dstack="${partner.uid}">Empiler sur ${esc(jName(partner))} → ${rarLabel(res).toLowerCase()}</button>`; }
-    h += `<button class="btn ghost small" data-dmove="-1" ${idx <= 0 ? 'disabled' : ''}>◀ Gauche</button><button class="btn ghost small" data-dmove="1" ${idx >= run.jokers.length - 1 ? 'disabled' : ''}>Droite ▶</button>`;
+    if (partner) { const res = stackResult(partner, j); h += `<button class="btn blue small" data-dstack="${partner.uid}">Empiler sur ${esc(jName(partner))} → ${stackLabel(res)}</button>`; }
+    // ranger : sur PC le rack est vertical (monter / descendre), sur téléphone horizontal (gauche / droite) ; les flèches du clavier marchent aussi
+    h += `<button class="btn ghost small" data-dmove="-1" ${idx <= 0 ? 'disabled' : ''} title="${esc(keyHint('moveUp'))}">${LAY.pc ? '▲ Monter' : '◀ Gauche'}</button><button class="btn ghost small" data-dmove="1" ${idx >= run.jokers.length - 1 ? 'disabled' : ''} title="${esc(keyHint('moveDown'))}">${LAY.pc ? '▼ Descendre' : 'Droite ▶'}</button>`;
     h += `<button class="btn red" data-dsell="${j.uid}">Vendre +${sellValue(j)} or</button>`;
   }
   if (where === 'tray') {
     const partner = stackPartner(j);
-    if (partner) h += `<button class="btn blue" data-dtstack="${j.uid}">Empiler → ${rarLabel(stackResult(partner, j)).toLowerCase()}</button>`;
+    if (partner) h += `<button class="btn blue" data-dtstack="${j.uid}">Empiler → ${stackLabel(stackResult(partner, j))}</button>`;
     h += `<button class="btn" data-dkeep="${j.uid}" ${freeSlots() > 0 ? '' : 'disabled'}>Garder</button><button class="btn ghost" data-dtsell="${j.uid}">Vendre +${sellValue(j)}</button>`;
   }
   h += '<button class="btn ghost" data-dclose="1">Fermer</button></div>';
   if (where === 'rack' && G.mode === 'combat') h += '<p class="small">Tu pourras vendre, empiler ou ranger tes jetons entre deux manches.</p>';
+  else if (where === 'rack' && idx >= 0 && canReorder() && run.jokers.length > 1) h += `<p class="small">Clavier : ${esc(keyHint('moveUp'))} pour le ${LAY.pc ? 'monter' : 'décaler à gauche'}, ${esc(keyHint('moveDown'))} pour le ${LAY.pc ? 'descendre' : 'décaler à droite'}.</p>`;
   $('#dcard').innerHTML = h;
   $('#dcard').dataset.uid = j.uid;
   show('#detail', true); Snd.pop(); detailAt = now();
+  if (benchable) setTimeout(() => { if ($('#detail').hidden || $('#dcard').dataset.uid !== String(j.uid)) return; const el = $('#dbench'); if (el) el.innerHTML = contribHTML(jetonContrib(j)); }, 80);
 }
 function closeDetail() { show('#detail', false); if (detailPaused) { G.paused = false; detailPaused = false; } }
 function sellJoker(uid) {
@@ -7329,8 +7768,9 @@ function rulesSections() {
       </div>
       <p>Après un tirage, garde des rouleaux (<b>HOLD</b>) et <b>RELANCE</b> les autres : +10${NB}% de puissance aux jetons gagnés, mais plus de crânes. Une relance gratuite par machine, les suivantes se paient.</p>`],
     ['Jetons', `<p>Chaque jeton a 3 capacités : commun en débloque 1, rare 2, ultime 3. La 4e, secrète, se débloque au <b>Punch-o-matic</b> avec des tickets.</p>
-      <p><b>Empile</b> deux jetons identiques pour monter de niveau : commun + commun = rare, rare + commun = ultime. Ta table a 5 places : une se gagne avec 3 trèfles à la machine, une s'achète au marché noir, et la dernière vient… quand l'Inspecteur t'arnaque avec une contrefaçon.</p>
-      <p><b>L'ordre compte.</b> Deux jetons voisins peuvent former un combo. L'Ampli booste ses voisins, le Miroir copie celui du dessus.</p>
+      <p><b>Les doublons.</b> Un jeton du même type qu'un des tiens est un doublon : pose-le dessus pour l'<b>empiler</b>. Les niveaux s'additionnent : commun + commun = rare, rare + commun = ultime. <b>Rien ne se perd</b> : chaque niveau qui dépasse ultime (rare + rare, ou un doublon posé sur un ultime) devient une <b>étoile ★</b> : +5${NB}% de puissance chacune, jusqu'à 10 étoiles (+50${NB}%). Deux types différents empilés donnent un <b>Mix</b> (deux pouvoirs sur une place). Deux doublons laissés côte à côte cumulent aussi leurs effets, mais prennent deux places.</p>
+      <p>Ta table a 5 places : une se gagne avec 3 trèfles à la machine, une s'achète au marché noir, et la dernière vient… quand l'Inspecteur t'arnaque avec une contrefaçon.</p>
+      <p><b>L'ordre compte.</b> Deux jetons voisins peuvent former un combo. L'Ampli booste ses voisins, le Miroir copie celui juste avant lui (à gauche, ou au-dessus sur PC) : sa copie affiche <b>compatible</b> ou <b>incompatible</b>. Un Miroir derrière un Miroir copie à travers lui, et les copies s'additionnent. Copier le Croupier élargit encore le flipper (plafond : deux fois plus large), et la partie copiée brille en argent.</p>
       <ul class="combo-rules">${COMBOS.map(c => `<li><b>${c.name}</b> (${JK[c.a].name} + ${JK[c.b].name}) : ${c.txt}</li>`).join('')}</ul>`],
     ['Bar et marché', `<p><b>Le bar de Zaza</b> : à chaque manche, une boisson pour le <b>canon</b>, une pour le <b>flipper</b> et une pour la <b>base</b>. Elles durent toute la partie. Les <b>shots</b> boostent une seule manche.</p>
       <p><b>Le marché noir</b> : au fond de la ruelle, l'Inspecteur vend des jetons « tombés du camion », la seule place de table à acheter, des objets et des <b>sorts</b>. Tu peux marchander… à tes risques.</p>
@@ -7684,6 +8124,7 @@ function onSpinResult() {
   let txt = describeEv(ev), cls = ev.nMal ? 'bad' : ev.kind === 'triple' || ev.kind === 'pair' || ev.kind === 'clover' ? 'win' : '';
   if (newRel) { txt = `RELANCE GRATUITE +${newRel} · ` + txt; cls = 'rel'; Snd.relance(); flashReels('rel'); }
   else if (ev.nMal) { Snd.malus(); flashReels('bad'); const cab = $('#cabinet'); cab.classList.remove('shake'); void cab.offsetWidth; cab.classList.add('shake'); haptic(60); }
+  else if (ev.kind === 'triple' && M.relDone > 0) { relTriple(ev.t); txt = `TRIPLE EN RELANCE ! ${JK[ev.t].name.toUpperCase()} ULTIME`; cls = 'gold'; }
   else if (ev.kind === 'triple' || ev.kind === 'clover') { Snd.jackpot(); Snd.coinShower(); flashReels('win'); celebrate(true); reelBurst(); party(2600); shake(6); haptic(120); setTimeout(() => talk('machine', ev.kind === 'clover' ? 'Trois trèfles !' : 'Jackpot !'), 380); }
   else if (ev.kind === 'pair') { Snd.pairWin(); flashReels('win'); reelBurst(); party(1200); }
   else if (ev.kind === 'diff' || ev.kind === 'pair2') Snd.lineSweep();
@@ -7708,6 +8149,23 @@ function describeEv(ev) {
   }
   if (ev.nMal) s += ` + MALUS ${TIERS[Math.min(3, ev.nMal)].up}`;
   return s;
+}
+// le triple décroché en RELANÇANT : sa propre petite scène (et son propre son, qu'on n'entend nulle part ailleurs)
+function relTriple(t) {
+  Snd.relTriple(); haptic(160); dbg('rel_triple');
+  const rl = $('#reels'), cab = $('#cabinet');
+  if (G.reduced) { flashReels('win'); setTimeout(() => talk('machine', 'Relance en or !'), 900); return; }
+  rl.classList.remove('gold'); void rl.offsetWidth; rl.classList.add('gold');
+  REEL.r.forEach((R, i) => { R.el.style.setProperty('--gd', (.42 + i * .16) + 's'); });
+  const J = JK[t], o = document.createElement('div');
+  o.className = 'rtrip';
+  o.innerHTML = `<i class="rt-rays"></i><span class="chip k-ultime rt-chip" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(t)}</span><b class="rt-l1">RELANCE EN OR !</b>`;
+  rl.appendChild(o);
+  setTimeout(() => { party(2800); shake(7); }, 1000);
+  setTimeout(() => { celebrate(true); reelBurst(); }, 1650);
+  setTimeout(() => talk('machine', 'Relance en or !'), 1150);
+  setTimeout(() => { o.remove(); rl.classList.remove('gold'); }, 2900);
+  if (cab) { cab.classList.remove('thunk'); void cab.offsetWidth; cab.classList.add('thunk'); }
 }
 // des pièces jaillissent de la ligne gagnante
 function reelBurst() {
@@ -7857,7 +8315,7 @@ function trayCardHTML(j, free) {
       ${chipHTML(j, 'button', `data-act="info" data-uid="${j.uid}" aria-label="Détails : ${esc(jName(j))}"`)}
       <div class="tname">${esc(jName(j))}</div>
       <div class="trar" style="--rc:var(--r-${j.kind})">${rarLabel(j)}${j.p > 1.001 ? ` · +${Math.round((j.p - 1) * 100)}${NB}%` : ''}</div>
-      <div class="tact">${res ? `<button class="mini blue" data-act="stack" data-uid="${j.uid}" title="Empiler sur ${esc(jName(partner))}">Empiler → ${rarLabel(res).toLowerCase()}</button>` : ''}<button class="mini" data-act="keep" data-uid="${j.uid}" ${free > 0 ? '' : 'disabled'}>Garder</button><button class="mini dark" data-act="sell" data-uid="${j.uid}">+${sellValue(j)} or</button></div>
+      <div class="tact">${res ? `<button class="mini blue" data-act="stack" data-uid="${j.uid}" title="Empiler sur ${esc(jName(partner))}">Empiler → ${stackLabel(res)}</button>` : ''}<button class="mini" data-act="keep" data-uid="${j.uid}" ${free > 0 ? '' : 'disabled'}>Garder</button><button class="mini dark" data-act="sell" data-uid="${j.uid}">+${sellValue(j)} or</button></div>
     </div>`;
 }
 function renderTray() {
@@ -7920,12 +8378,19 @@ function applyStack(A, B) {
   const res = stackResult(A, B); if (!res) return false;
   const before = rarLabel(A);
   A.parts = res.parts; A.kind = res.kind; A.p = res.p;
+  if (res.over) { A.over = Math.round(((A.over || 0) + res.over) * 100) / 100; A.stars = (A.stars || 0) + starsOf(res.over); }
   const run = G.run, bi = run.jokers.indexOf(B);
   if (bi >= 0) run.jokers.splice(bi, 1);
   run.stats.stacks++;
   if (G.cb && !G.cb.demo) refreshStats();
   renderRack(); updateHUD();
-  if (!G.headless) { Snd.stack(stackLevels(A)); haptic(25); toast(`Empilé ! ${jName(A)} : ${before.toLowerCase()} → ${rarLabel(A).toLowerCase()}`); if (A.kind === 'ultime' || (A.kind === 'mix' && A.parts[0].lv >= 3)) celebrate(false); }
+  if (!G.headless) {
+    Snd.stack(stackLevels(A) + (res.over ? 1 : 0)); haptic(25);
+    if (res.lvUp) toast(`Empilé ! ${jName(A)} : ${before.toLowerCase()} → ${rarLabel(A).toLowerCase()}${res.over ? ` · +${starsOf(res.over)}★ (+${Math.round(res.over * 100)}${NB}%)` : ''}`);
+    else toast(`Doublon absorbé ! ${jName(A)} gagne ${starsOf(res.over)}★ : +${Math.round(res.over * 100)}${NB}% de puissance (${Math.round(A.p * 100)}${NB}% au total${A.p >= BAL.stackPmax - .001 ? ', maximum' : ''})`);
+    if (A.kind === 'ultime' || (A.kind === 'mix' && A.parts[0].lv >= 3) || res.over >= .1) celebrate(false);
+    jokerPing(A.parts[0].t, res.over ? `+${Math.round(res.over * 100)}${NB}%` : rarLabel(A), 0, true);
+  }
   for (const p of A.parts) catSee('j', p.t);
   return true;
 }
@@ -8043,8 +8508,8 @@ function renderMarket() {
     if (o.type === 'item') { const I = ITEMS[o.id]; return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico item" aria-hidden="true">${iconSVG(I.icon)}</div><div class="otext"><b>${I.name}</b><span>${I.txt}</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`; }
     if (o.type === 'spell') {
       const P = PSPELLS[o.id], L = spellsOf(run), full = L.length >= SPELL_SLOTS && !o.sold;
-      const rep = full ? `<div class="orep"><em>Sorts pleins, remplace :</em>${L.filter(id => !PSPELLS[id].base).map(id => `<button class="mini dark" data-rep="${i}" data-sp="${id}" ${off || run.gold < o.price ? 'disabled' : ''}>${PSPELLS[id].name}</button>`).join('')}</div>` : '';
-      return `<div class="offer spell${o.sold ? ' sold' : ''}" style="--sc:${P.col}"><div class="slotico" aria-hidden="true">${iconSVG(P.icon)}</div><div class="otext"><b>${P.name}<i class="otag">SORT</i></b><span>${P.txt} Recharge ${P.cd}${NB}s.</span>${rep}</div><div class="obuy">${full ? `<span class="oprice">${o.price} or</span>${hag}` : buyB(o.price + ' or')}</div></div>`;
+      const note = full ? `<div class="orep"><em>Sorts pleins (${SPELL_SLOTS}/${SPELL_SLOTS}) : vends-en un ↓</em></div>` : '';
+      return `<div class="offer spell${o.sold ? ' sold' : ''}" style="--sc:${P.col}"><div class="slotico" aria-hidden="true">${iconSVG(P.icon)}</div><div class="otext"><b>${P.name}<i class="otag">SORT</i></b><span>${P.txt} Recharge ${spellCdTxt(o.id)}${NB}s.</span>${note}</div><div class="obuy">${buyB(o.price + ' or', full)}</div></div>`;
     }
     const j = o.joker, partner = stackPartner(j);
     return `<div class="offer${o.sold ? ' sold' : ''}">
@@ -8052,6 +8517,7 @@ function renderMarket() {
       <div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${j.kind})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${j.curse ? `<span class="cur">Malédiction ${CURSES[j.curse].name} : ${CURSES[j.curse].txt}</span>` : ''}${partner ? '<span class="stk-hint">s\'empile sur ton jeton</span>' : ''}</div>
       <div class="obuy">${buyB(free <= 0 && !partner ? 'Rack plein' : o.price + ' or', free <= 0 && !partner)}</div></div>`;
   }).join('');
+  setHTML('#k-spells', spellStripHTML());
 }
 function haggle(i) {
   const o = MK.offers[i]; if (!o || o.haggled || o.sold || MK.gone) return;
@@ -8062,14 +8528,13 @@ function haggle(i) {
   else { MK.gone = true; say(pick(LINES.vexed)); Snd.malus(); inspAct('angry'); $('#k-leave').textContent = 'Retour au bar'; }
   renderMarket();
 }
-function buy(i, replace) {
+function buy(i) {
   const o = MK.offers[i], run = G.run; if (!o || o.sold || MK.gone) return;
   if (run.gold < o.price) { say(pick(LINES.broke)); return; }
   if (o.type === 'spell') {
-    const L = spellsOf(run);
-    if (L.length >= SPELL_SLOTS && (!replace || !L.includes(replace) || PSPELLS[replace].base)) return;
+    if (spellsOf(run).length >= SPELL_SLOTS) { say(pick(LINES.spellFull)); Snd.deny(); return; }
     run.gold -= o.price; o.sold = true;
-    learnSpell(o.id, replace);
+    learnSpell(o.id);
     Snd.coin(); Snd.bouclier();
     if (!inspBought()) { say(pick(LINES.spell)); inspAct('spin'); }
     toast(`Nouveau sort : ${PSPELLS[o.id].name.toUpperCase()} · touche ${spellsOf(run).indexOf(o.id) + 1}`);
@@ -8267,6 +8732,14 @@ function gamblerDue(run) {
   return run.gRounds[d] === r && !run.gMet[d];
 }
 const baronPending = () => BAR.gambler && !BAR.gDone;
+// quelqu'un est en train d'entrer, de s'asseoir ou de jouer avec toi
+const barArriving = () => baronPending() || BAR.visState === 'wait' || BAR.visState === 'playing';
+// retour au bar (après le marché noir) : si un client attendait d'entrer, il entre maintenant
+function barResume() {
+  if (G.mode !== 'bar' || BAR.leaving) return;
+  if (baronPending() && $('#baron').hidden && G.mode === 'bar') setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving && baronPending() && $('#baron').hidden) baronArrive(); }, 600);
+  else if (BAR.visitor && BAR.visState === 'wait') setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); }, 600);
+}
 const barScale = r => 1.15 + .03 * (Math.min(r, 30) - 1);
 function genBar() {
   const run = G.run, r = Math.max(1, run.round + 1), sc = barScale(r), mid = computeStats(run).midas ? .75 : 1;
@@ -8364,7 +8837,11 @@ function renderBar() {
     sh += `<div class="shot ciment${c.sold ? ' drunk' : ''}"><span class="glass g-bucket"><i class="liq"></i></span><div class="stext"><b>${CIMENT.name}</b><span>${CIMENT.txt}</span></div>${c.sold ? '<em class="stamp">FAIT</em>' : `<button class="mini" data-buyc="1" ${can ? '' : 'disabled'}>${c.price} or</button>`}</div>`;
   }
   $('#b-shots').innerHTML = sh;
-  $('#b-market').hidden = !BAR.market;
+  // la porte du marché reste fermée tant qu'un client arrive ou joue (sinon il ne s'assoit jamais)
+  const mkb = $('#b-market'), arriving = barArriving();
+  mkb.hidden = !BAR.market;
+  mkb.disabled = arriving || BAR.busy;
+  mkb.textContent = arriving ? (baronPending() ? 'Le Baron d\'abord…' : 'Un client arrive…') : 'Marché noir →';
   const pend = baronPending();
   $('#b-go').disabled = !!pend || BAR.busy;
   $('#b-go').textContent = pend ? 'Le Baron t\'attend…' : `Au combat · manche ${roundLabel(run.round + 1)}`;
@@ -8467,7 +8944,7 @@ function leaveBar() {
   setTimeout(() => { el.hidden = true; el.getAnimations().forEach(a => a.cancel()); startNextRound(); }, G.reduced ? 10 : 430);
 }
 function openMarketPane() {
-  if (BAR.busy) return;
+  if (BAR.busy || barArriving()) return;
   G.mode = 'market';
   G.run.marketSeen = true;
   catSee('p', 'dealer');
@@ -8487,6 +8964,7 @@ function leaveMarketPane() {
   renderBar(); renderRack();
   slidePanes($('#market'), $('#bar'), -1);
   BG.setMode('bar'); Music.play('bar');
+  barResume();
 }
 // pilote automatique (outil de test)
 function autoBar() {
@@ -10020,6 +10498,14 @@ function jokerPing(id, txt, gap, anyMode) {
   clearTimeout(slot._tt); slot._tt = setTimeout(() => slot.classList.remove('trig'), 460);
   tableFx(slot, JK[id].col);
   Snd.jeton(i);
+  const ms = G.cb && G.cb.stats && G.cb.stats.mirrors;
+  if (ms) for (const m of ms) {
+    if (!m.ok || !m.types.includes(id)) continue;
+    const el = $(`#rack-slots .slot[data-i="${m.i}"]`); if (!el) continue;
+    el.classList.remove('mirping'); void el.offsetWidth; el.classList.add('mirping');
+    clearTimeout(el._mt); el._mt = setTimeout(() => el.classList.remove('mirping'), 520);
+    const mc = el.querySelector('.chip'); if (mc) { mc.classList.remove('ping'); void mc.offsetWidth; mc.classList.add('ping'); }
+  }
   if (txt) {
     const p = document.createElement('i'); p.className = 'jping'; p.textContent = txt; p.style.setProperty('--pc', JK[id].col); p.style.setProperty('--pd', JK[id].dark || '#231b35');
     slot.appendChild(p); setTimeout(() => p.remove(), 900);
@@ -10166,7 +10652,7 @@ function useOrage() {
   const list = cb.enemies.filter(e => !e.dead && e.ai !== 'decoy' && !e.fake && e.deal <= .15).sort((a, b) => b.hp - a.hp).slice(0, 6);
   if (!list.length) { if (!G.headless) toast('Aucune carte à frapper.'); return false; }
   cb.ab.orage = spellCd('orage');
-  for (const e of list) { dealDmg(e, s.dmg * 5, { src: 'orage' }); e.stunT = Math.max(e.stunT, .6); }
+  for (const e of list) { dealDmg(e, s.dmg * 5, { src: 'orageS' }); e.stunT = Math.max(e.stunT, .6); }
   dbg('sp_orage');
   if (!G.headless) {
     fxPush({ type: 'sky', pts: list.map(e => [e.x, e.y]), life: .45, max: .45 });
@@ -10245,23 +10731,65 @@ function botSpells(cb) {
 }
 // le marché noir vend un sort que tu n'as pas
 function spellOffer(run) {
-  const have = spellsOf(run), ids = Object.keys(PSPELLS).filter(id => !PSPELLS[id].base && !have.includes(id));
+  const have = spellsOf(run), ids = Object.keys(PSPELLS).filter(id => !have.includes(id));
   if (!ids.length) return null;
   const id = pick(ids), sc = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1);
   return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc), haggled: false, sold: false };
 }
-function learnSpell(id, replace) {
+function learnSpell(id) {
   const run = G.run, L = spellsOf(run);
-  if (L.includes(id)) return false;
-  if (L.length >= SPELL_SLOTS) { const k = L.indexOf(replace); if (k < 0 || PSPELLS[replace].base) return false; L[k] = id; }
-  else L.push(id);
+  // plus d'échange : un sort ne remplace jamais un autre (avant, acheter avec la barre pleine écrasait un sort)
+  if (L.includes(id) || L.length >= SPELL_SLOTS) return false;
+  L.push(id);
   catSee('q', id);
   renderSpellBar();
   return true;
 }
+// recharge affichée (Bombe et Gel dépendent de tes boissons et jetons)
+function spellCdTxt(id) {
+  if (!PSPELLS[id].base) return dec(PSPELLS[id].cd);
+  const st = G.cb && G.cb.stats && !G.cb.demo ? G.cb.stats : computeStats(G.run);
+  return dec(id === 'bomb' ? st.bombCd : st.gelCd);
+}
+// vendre un sort, entre deux manches : moitié de son prix, en deux touches (« Vendre » puis « Sûr ? »)
+function sellSpell(id) {
+  const run = G.run, L = spellsOf(run), k = L.indexOf(id);
+  if (k < 0 || !canReorder()) return false;
+  L.splice(k, 1);
+  const v = spellSellValue(id);
+  addGold(v);
+  toast(`Sort ${PSPELLS[id].name} vendu : +${v} or. Touches : ${L.map((x, i) => `${i + 1} ${PSPELLS[x].name}`).join(', ') || 'aucun sort'}.`);
+  Snd.coin();
+  renderSpellBar(); updateHUD();
+  if (G.mode === 'market') { renderMarket(); if (!inspBought()) say(pick(LINES.spellSold)); }
+  if (G.mode === 'bar') renderBar();
+  if (!$('#runinfo').hidden) renderRunInfo();
+  return true;
+}
+function spellSellClick(btn) {
+  const id = btn.dataset.spsell;
+  if (!id || !canReorder()) return;
+  if (btn.dataset.armed !== '1') {
+    btn.dataset.armed = '1'; btn.classList.add('armed');
+    const old = btn.innerHTML; btn.innerHTML = `Sûr ? +${spellSellValue(id)} or`;
+    clearTimeout(btn._t); btn._t = setTimeout(() => { if (btn.isConnected) { btn.dataset.armed = ''; btn.classList.remove('armed'); btn.innerHTML = old; } }, 2600);
+    Snd.click(); return;
+  }
+  sellSpell(id);
+}
+// la rangée « tes sorts » (marché noir et infos de la partie)
+function spellStripHTML() {
+  const L = spellsOf(G.run), can = canReorder();
+  return `<div class="mks-h"><b>TES SORTS</b><i>${L.length}/${SPELL_SLOTS}</i><small>${L.length >= SPELL_SLOTS ? 'plein : vends-en un pour en acheter un autre' : 'touches 1 à 4 en combat'}</small></div><div class="mks-l">` + Array.from({ length: SPELL_SLOTS }, (_, k) => {
+    const id = L[k];
+    if (!id) return '<span class="mks e"><i class="mks-k">' + (k + 1) + '</i><small>place libre</small></span>';
+    const P = PSPELLS[id];
+    return `<span class="mks" style="--sc:${P.col}"><i class="mks-k">${k + 1}</i><span class="mks-ic">${iconSVG(P.icon)}</span><b>${P.name}</b>${can ? `<button class="mini dark" data-spsell="${id}">Vendre +${spellSellValue(id)}</button>` : ''}</span>`;
+  }).join('') + '</div>';
+}
 
 /* ================= options façon Balatro, statistiques de profil, infos de la partie ================= */
-const OPT_DEF = { vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1 };
+const OPT_DEF = { vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1, keys: {} };
 function initOpts(m) {
   const first = !m.opts;
   m.opts = Object.assign({}, OPT_DEF, m.opts || {});
@@ -10304,7 +10832,7 @@ function openOptions(from) {
   renderOptions(); show('#opts', true);
   if (typeof Snd !== 'undefined') Snd.cataOpen();
 }
-function closeOptions() { show('#opts', false); saveMeta(); if (OPV.from === 'title') refreshTitle(); }
+function closeOptions() { OPV.bind = null; show('#opts', false); saveMeta(); if (OPV.from === 'title') refreshTitle(); }
 const oRow = (label, ctl, sub) => `<div class="orow"><div class="olab"><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</div><div class="octl">${ctl}</div></div>`;
 const oSlider = (k, v) => `<div class="oslide"><input type="range" min="0" max="100" step="5" value="${v}" data-opt="${k}" aria-label="${k}"><output>${v}${NB}%</output></div>`;
 const oSeg = (k, cur, list) => `<div class="oseg" role="radiogroup">${list.map(([v, l]) => `<button class="${String(cur) === String(v) ? 'on' : ''}" data-opt="${k}" data-v="${v}" role="radio" aria-checked="${String(cur) === String(v)}">${l}</button>`).join('')}</div>`;
@@ -10341,13 +10869,15 @@ function renderOptions() {
       h += oRow('Mouvement réduit', oTog('reduced', o.reduced), 'moins d\'animations');
       break;
     case 'ctrl':
-      h += '<div class="okeys">' + [
-        ['Souris', 'oriente le flipper'], ['Clic / Espace', 'coup de flipper (parade pile avant l\'impact)'], ['Clic sur une carte', 'la vise en priorité'],
-        ['1 · 2 · 3 · 4', 'tes sorts (Bombe : lâchée sous la souris)'], ['← → ou Q D', 'tourner le flipper au clavier'], ['F', 'vitesse ×1 / ×2'],
-        ['Tab', 'infos de la partie'], ['Échap · P', 'pause'],
-        ['Machine : Espace', 'tirer le levier / tout arrêter'], ['Machine : 1 · 2 · 3', 'arrêter un rouleau, puis le garder'], ['Machine : R · E', 'relancer · encaisser'],
-        ['Mobile', 'glisse pour tourner, tape pour parer, tape une carte pour la viser'],
-      ].map(([k, t]) => `<div class="okey"><kbd>${k}</kbd><span>${t}</span></div>`).join('') + '</div>';
+      h += `<p class="okhelp">Touche une case, puis appuie sur la nouvelle touche (<b>Échap</b> pour la vider). Chaque action a deux touches.${OPV.msg ? ` <em>${esc(OPV.msg)}</em>` : ''}</p>`;
+      for (const ctx of ['combat', 'machine', 'rack', 'global']) {
+        h += `<h4 class="okctx">${KEY_CTX[ctx]}</h4><div class="okeys">` + KEY_ACTS.filter(a => a[2] === ctx).map(([id, lab]) => {
+          const ks = keysOf(id);
+          return `<div class="okey bind"><span>${lab}</span>${[0, 1].map(sl => `<button class="kb${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? ' wait' : ''}" data-kbind="${id}" data-kslot="${sl}">${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? '…' : esc(keyName(ks[sl]))}</button>`).join('')}</div>`;
+        }).join('') + '</div>';
+      }
+      h += '<div class="okeys fixed">' + [['Souris', 'oriente le flipper · clic = coup de flipper'], ['Clic sur une carte', 'la vise en priorité'], ['Mobile', 'glisse pour tourner, tape pour parer, tape une carte pour la viser']].map(([k, t]) => `<div class="okey"><kbd>${k}</kbd><span>${t}</span></div>`).join('') + '</div>';
+      h += oRow('Touches par défaut', '<button class="btn small ghost" data-oact="keyreset">Rétablir</button>', 'AZERTY : Q / D pour le flipper, 1 à 4 avec ou sans Maj');
       break;
     case 'profil': {
       const L = m.life || {}, st = (a, b) => `<div class="ost"><dt>${a}</dt><dd>${b}</dd></div>`;
@@ -10372,18 +10902,22 @@ function renderOptions() {
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
         <p>Développé avec l'aide de Claude (IA).</p>
-        <p class="ov5">Prototype v6</p></div>`;
+        <p class="ov5">Prototype v7</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
 }
 function optClick(e) {
+  const kb = e.target.closest('[data-kbind]');
+  if (kb) { OPV.bind = { act: kb.dataset.kbind, slot: +kb.dataset.kslot }; OPV.msg = ''; Snd.click(); renderOptions(); return; }
   const t = e.target.closest('[data-otab],[data-opt],[data-oact]'); if (!t) return;
   const o = OPT();
+  OPV.bind = null;
   if (t.dataset.otab) { OPV.tab = t.dataset.otab; OPV.resetArm = OPV.loadArm = false; OPV.msg = ''; Snd.tab(); renderOptions(); return; }
   if (t.dataset.oact) {
     const a = t.dataset.oact;
     if (a === 'tips') { G.meta.seen = {}; saveMeta(); toastAny('Les astuces réapparaîtront.'); Snd.click(); }
+    if (a === 'keyreset') { o.keys = {}; OPT_DEF.keys = {}; saveMeta(); OPV.msg = 'Touches par défaut rétablies.'; Snd.click(); renderOptions(); return; }
     if (a === 'dev') { syncToggles(); $('#dev-msg').textContent = ''; show('#dev', true); Snd.click(); }
     if (a === 'fs') { toggleFullscreen(); Snd.click(); }
     if (a === 'savecopy') {
@@ -10451,7 +10985,7 @@ function toastAny(msg) {
 
 /* ---------- infos de la partie (Tab) ---------- */
 const RIV = { tab: 'jetons' };
-const RI_TABS = [['jetons', 'Tes jetons'], ['equip', 'Boissons et sorts'], ['partie', 'La partie'], ['suite', 'À venir']];
+const RI_TABS = [['jetons', 'Tes jetons'], ['degats', 'Dégâts'], ['equip', 'Boissons et sorts'], ['partie', 'La partie'], ['suite', 'À venir']];
 function openRunInfo() {
   if (!G.run || G.mode === 'title' || G.mode === 'over') return;
   if (G.mode === 'combat' && !G.paused) { G.paused = true; RIV.paused = true; }
@@ -10467,11 +11001,13 @@ function renderRunInfo() {
     h += '<div class="ri-jk">' + run.jokers.map(j => `<div class="ri-j">${chipHTML(j)}<div><b>${esc(jName(j))}</b><small style="color:var(--r-${j.kind})">${rarLabel(j)}${j.p > 1.001 ? ` · puissance ${Math.round(j.p * 100)}${NB}%` : ''}</small><ul>${capLines(j).map(t => `<li>${colorNums(t)}</li>`).join('')}</ul></div></div>`).join('') + '</div>';
     if ((run.boosters || []).length) h += '<h4>Jetons bonus (sans place)</h4><div class="ri-jk">' + run.boosters.map(id => `<div class="ri-j">${protoChip(id, 'k-fou')}<div><b>${JK[id].name}</b><small style="color:var(--gold)">Bonus</small><ul><li>${colorNums(JK[id].txt)}</li></ul></div></div>`).join('') + '</div>';
     if (st.combos.size) h += '<div class="ri-cb">' + [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span><small>${colorNums(C.txt)}</small>`; }).join('') + '</div>';
+  } else if (RIV.tab === 'degats') {
+    h += dmgTabHTML();
   } else if (RIV.tab === 'equip') {
     const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
     h += '<h4>Boissons (toute la partie)</h4>' + (ups.length ? '<div class="ri-list">' + ups.map(k => `<div class="ri-it" style="--cat:${UPG_CATS[UPG[k].cat].col}"><span class="ri-ic">${iconSVG(UPG[k].icon)}</span><div><b>${UPG[k].name} <i>niv. ${up[k]}</i></b><small>${colorNums(UPG[k].txt(up[k]))}</small></div></div>`).join('') + '</div>' : '<p class="ri-empty">Rien bu pour l\'instant.</p>');
     if (run.floors.length) h += `<p class="ri-note">Étages debout : <b>${run.floors.filter(x => x > 0).length} / ${run.floors.length}</b></p>`;
-    h += '<h4>Sorts</h4><div class="ri-list">' + spellsOf(run).map((id, i) => `<div class="ri-it" style="--cat:${PSPELLS[id].col}"><span class="ri-ic">${iconSVG(PSPELLS[id].icon)}</span><div><b>${i + 1} · ${PSPELLS[id].name}</b><small>${colorNums(PSPELLS[id].txt)}</small></div></div>`).join('') + '</div>';
+    h += `<h4>Sorts <i>${spellsOf(run).length}/${SPELL_SLOTS}</i></h4><div class="ri-list">` + spellsOf(run).map((id, i) => `<div class="ri-it${canReorder() ? ' sp' : ''}" style="--cat:${PSPELLS[id].col}"><span class="ri-ic">${iconSVG(PSPELLS[id].icon)}</span><div><b>${i + 1} · ${PSPELLS[id].name}</b><small>${colorNums(PSPELLS[id].txt)}</small></div>${canReorder() ? `<button class="mini dark ri-sell" data-spsell="${id}">Vendre +${spellSellValue(id)}</button>` : ''}</div>`).join('') + '</div>' + (canReorder() ? '' : '<p class="ri-note">Tu peux vendre un sort entre deux manches (moitié de son prix).</p>');
     const shots = G.mode === 'combat' ? Object.keys(run.boost || {}).filter(k => SHOTS[k]) : run.shots || [];
     if (shots.length) h += '<h4>Shots actifs</h4><div class="ri-list">' + shots.map(k => `<div class="ri-it" style="--cat:${SHOTS[k].liq}"><span class="ri-ic">${iconSVG(SHOTS[k].icon)}</span><div><b>${SHOTS[k].name}</b><small>${colorNums(SHOTS[k].txt)}</small></div></div>`).join('') + '</div>';
   } else if (RIV.tab === 'partie') {
@@ -10488,6 +11024,53 @@ function renderRunInfo() {
     if (run.pendingMalus.length) h += '<h4>Malus de la prochaine manche</h4><div class="ri-list">' + run.pendingMalus.map(m => `<div class="ri-it" style="--cat:${TIERS[MALUS[m].tier].col}"><span class="ri-ic">${iconSVG(MALUS[m].icon)}</span><div><b>${MALUS[m].name}</b><small>${MALUS[m].txt}</small></div></div>`).join('') + '</div>';
   }
   $('#ri-body').innerHTML = h;
+  if (RIV.tab === 'degats') benchFill();
+}
+/* ---------- onglet Dégâts : la dernière manche mesurée, puis l'apport de chaque jeton au banc d'essai ---------- */
+function dmgTabHTML() {
+  const run = G.run, cb = G.cb, live = G.mode === 'combat' && cb && !cb.demo && cb.dps;
+  const L = live ? { avg: dpsAvg(cb), peak: cb.dps.peak, tot: cb.dps.tot, src: dpsSources(cb, 9), r: run.round } : run.lastDps;
+  let h = `<h4>${live ? 'Cette manche (en cours)' : L ? `Ta dernière manche (${roundLabel(L.r)})` : 'Ta dernière manche'}</h4>`;
+  if (L && L.tot > 0) {
+    h += `<div class="dg-kpis"><div><b>${fmtS(L.avg)}</b><small>dégâts/s en moyenne</small></div><div><b>${fmtS(L.peak)}</b><small>meilleur moment (4 s)</small></div><div><b>${fmtS(L.tot)}</b><small>dégâts au total</small></div></div>`;
+    h += '<div class="dg-src">' + L.src.map(([k, f]) => `<div class="dgs"><span>${k}</span><i><em style="--w:${(f * 100).toFixed(1)}%"></em></i><b>${Math.round(f * 100)} %</b></div>`).join('') + '</div>';
+  } else h += '<p class="ri-empty">Joue une manche : ses dégâts s\'affichent ici, source par source.</p>';
+  const real = run.jokers.filter(j => j.kind !== 'faux');
+  h += `<h4>Ce que chaque jeton apporte <i>banc d'essai · manche ${roundLabel(benchRound())}</i></h4>`;
+  if (!real.length) return h + '<p class="ri-empty">Aucun jeton pour l\'instant.</p>';
+  h += `<p class="ri-note">Pour chaque jeton, le jeu rejoue ${Math.round(BENCH.seeds.length * BENCH.T / 60)} minutes de combat en coulisses <b>avec</b> lui puis <b>sans</b> lui, contre les cartes de cette manche. L'écart, c'est son apport réel (combos et voisins compris). Tes sorts n'entrent pas dans la mesure.</p>`;
+  h += '<div class="dg-tot" id="dg-tot">calcul en coulisses…</div><div class="dg-bench" id="ri-bench">' + real.map(j => `<div class="dgb" data-buid="${j.uid}">${chipHTML(j)}<b>${esc(jName(j))}</b><i class="dgb-bar"><em></em></i><span class="dgb-pc">…</span></div>`).join('') + '</div>';
+  return h;
+}
+let benchT = 0;
+function benchFill() {
+  clearTimeout(benchT);
+  const run = G.run, queue = run.jokers.filter(j => j.kind !== 'faux').slice(), res = new Map();
+  const alive = () => !$('#runinfo').hidden && RIV.tab === 'degats' && $('#ri-bench');
+  const paint = () => {
+    const vals = [...res.values()], mx = Math.max(.05, ...vals.map(c => Math.abs(c.delta)));
+    for (const [uid, c] of res) {
+      const row = $(`#ri-bench .dgb[data-buid="${uid}"]`); if (!row) continue;
+      const pc = Math.round(c.delta * 100), flat = Math.abs(c.delta) < .025;
+      row.querySelector('em').style.cssText = `--w:${(Math.abs(c.delta) / mx * 100).toFixed(1)}%`;
+      row.classList.toggle('neg', pc < 0 && !flat); row.classList.toggle('flat', flat);
+      row.querySelector('.dgb-pc').textContent = flat ? '≈ 0 %' : `${pc > 0 ? '+' : ''}${pc} %`;
+      row.title = flat ? 'Pas d\'effet sur les dégâts : son effet est ailleurs.' : `Sans lui : ${fmtS(c.without)}/s · avec lui : ${fmtS(c.with)}/s`;
+    }
+  };
+  const step = () => {
+    if (!alive()) return;
+    if (!res.size && !$('#dg-tot').dataset.done) {
+      const all = benchDps(run.jokers), none = benchDps([]);
+      $('#dg-tot').innerHTML = `Ton rack au banc d'essai : <b>${fmtS(all)} dégâts/s</b> · sans aucun jeton : <b>${fmtS(none)}/s</b> (canon et boissons seuls)`;
+      $('#dg-tot').dataset.done = '1';
+      benchT = setTimeout(step, 16); return;
+    }
+    const j = queue.shift(); if (!j) return;
+    res.set(j.uid, jetonContrib(j)); paint();
+    benchT = setTimeout(step, 16);
+  };
+  benchT = setTimeout(step, 60);
 }
 
 /* ---------- règles en onglets (rien à faire défiler sur PC) ---------- */
@@ -11197,6 +11780,11 @@ function bootShow() {
   const el = $('#boot'); if (!el) return;
   if (G.headless || BOOT.done) { el.hidden = true; return; }
   $('#bt-logo').innerHTML = [...'JACKPOT'].map((c, i) => `<span style="--i:${i}">${c}</span>`).join('');
+  // la phrase du bas : une lettre = un <i>, révélées une par une (les espaces restent du texte, la ligne peut se couper)
+  for (const sp of document.querySelectorAll('.bt-tag span')) {
+    const txt = sp.dataset.t || (sp.dataset.t = sp.textContent);
+    sp.innerHTML = [...txt].map((c, i) => c === ' ' ? ' ' : `<i style="--j:${i}">${c}</i>`).join('');
+  }
   el.hidden = false; el.className = 'boot wait'; BOOT.on = true; BOOT.step = 0;
   el.addEventListener('pointerdown', bootTap);
 }
@@ -11812,9 +12400,66 @@ function startNextRound() {
   renderRack(); renderSpellBar(); showStatus(); updateHUD(); tableWake();
   if (r === 1 && seenOnce('r1')) setTimeout(() => queueTip(TIPS.r1), 900);
   if (r === 3 && seenOnce('abil')) setTimeout(() => queueTip(TIPS.abil), 900);
-  if (run.roulette) setTimeout(() => { toast(run.roulette.win ? 'Roulette : gagné ! Dégâts en hausse.' : 'Roulette : perdu… dégâts en baisse.'); jokerPing('roulette', run.roulette.win ? 'gagné' : 'perdu'); }, 1200);
+  if (run.roulette) rouletteShow();
   if (hasMalus(run, 'pickpocket')) setTimeout(() => toast('Un pickpocket rôde : abats-le pour récupérer ton jeton.'), 1600);
   setTimeout(() => { if (G.mode === 'combat' && !newBusy) showNewNote(); }, 2200);
+}
+/* ---------- le jeton Roulette : la roue tourne en grand au début de la manche (le combat attend) ---------- */
+const RL = { on: false, t: [], el: null };
+function rouletteShow() {
+  const run = G.run, ro = run.roulette, cb = G.cb;
+  if (!ro || G.headless || !cb || cb.demo) return;
+  const T = cb.stats.T, lv2 = T.roulette[2] > 0, n = lv2 ? 9 : 6, P = T.roulette[1];
+  const winTxt = `+${Math.round((lv2 ? .8 : .5) * P * 100)}${NB}% de dégâts` + (T.roulette[3] > 0 ? ` · +${Math.round(.3 * T.roulette[3] * 100)}${NB}% de cadence` : '');
+  const loseTxt = `−${T.roulette[3] > 0 ? 15 : 35}${NB}% de dégâts`;
+  // la roue : n cases, une seule rouge (perdu)
+  const R = 92, c = 100, a0 = -Math.PI / 2, step = TAU / n, red = irand(0, n - 1);
+  let sv = '';
+  for (let k = 0; k < n; k++) {
+    const a1 = a0 + k * step, a2 = a1 + step, lose = k === red;
+    const p1 = [c + R * Math.cos(a1), c + R * Math.sin(a1)], p2 = [c + R * Math.cos(a2), c + R * Math.sin(a2)], am = (a1 + a2) / 2;
+    sv += `<path d="M${c} ${c}L${p1[0].toFixed(1)} ${p1[1].toFixed(1)}A${R} ${R} 0 0 1 ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}Z" fill="${lose ? '#e0365a' : k % 2 ? '#1f8a52' : '#2fbf71'}" stroke="#140d1f" stroke-width="2"/>`;
+    sv += `<text x="${(c + R * .66 * Math.cos(am)).toFixed(1)}" y="${(c + R * .66 * Math.sin(am)).toFixed(1)}" text-anchor="middle" dominant-baseline="central">${lose ? '−' : '+'}</text>`;
+  }
+  // case visée : la rouge si perdu, sinon une verte au hasard ; un petit décalage pour ne pas tomber pile au milieu
+  const tgt = ro.win ? pick(Array.from({ length: n }, (_, k) => k).filter(k => k !== red)) : red;
+  const end = 360 * 5 - (tgt + .5) * 360 / n + rand(-.3, .3) * 360 / n;
+  const el = document.createElement('div');
+  el.className = 'rlw'; el.setAttribute('role', 'status');
+  el.innerHTML = `<div class="rl-t">LA ROULETTE TOURNE…</div><div class="rl-wheel"><svg class="rl-disc" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="99" fill="#5e1220"/>${sv}<circle cx="100" cy="100" r="30" fill="#140d1f" stroke="#ffcc4d" stroke-width="3"/></svg><span class="rl-hub">${iconSVG('roulette')}</span><i class="rl-ptr"></i></div><div class="rl-res"></div>`;
+  $('#stage').appendChild(el); RL.el = el; RL.on = true;
+  const pausedBefore = G.paused; G.paused = true; RL.pause = !pausedBefore;
+  const disc = el.querySelector('.rl-disc'), dur = G.reduced ? 10 : 2400;
+  requestAnimationFrame(() => { disc.style.transition = `transform ${dur}ms cubic-bezier(.12,.75,.18,1)`; disc.style.transform = `rotate(${end}deg)`; });
+  Snd.lever();
+  if (!G.reduced) { let tk = 0; const tick = () => { if (!RL.on) return; tk++; Snd.tick(1.6 - tk * .05); const gap = 40 + tk * tk * 1.6; if (tk < 24) RL.t.push(setTimeout(tick, gap)); }; RL.t.push(setTimeout(tick, 60)); }
+  const show = () => {
+    if (!RL.on) return;
+    const res = el.querySelector('.rl-res');
+    el.classList.add(ro.win ? 'won' : 'lost');
+    el.querySelector('.rl-t').textContent = ro.win ? 'ROULETTE : GAGNÉ !' : 'ROULETTE : PERDU…';
+    res.innerHTML = `<b>${ro.win ? winTxt : loseTxt}</b><small>pour toute la manche</small>` + (run.zero ? '<em>ZÉRO ! Ton prochain tirage à la machine sera un TRIPLE.</em>' : '');
+    if (ro.win) { Snd.win(); haptic(40); } else { Snd.malus(); haptic(80); }
+    if (run.zero) setTimeout(() => Snd.jackpot(), 350);
+    jokerPing('roulette', ro.win ? 'gagné' : 'perdu', 0);
+    RL.t.push(setTimeout(rouletteEnd, run.zero ? 2300 : 1500));
+  };
+  RL.t.push(setTimeout(show, dur + 80));
+  el.addEventListener('pointerdown', () => { if (!el.classList.contains('won') && !el.classList.contains('lost')) { disc.style.transition = 'none'; disc.style.transform = `rotate(${end}deg)`; RL.t.forEach(clearTimeout); RL.t = []; show(); } else rouletteEnd(); });
+}
+function rouletteEnd() {
+  if (!RL.on) return;
+  RL.on = false; RL.t.forEach(clearTimeout); RL.t = [];
+  const el = RL.el; RL.el = null;
+  if (el) { el.classList.add('out'); setTimeout(() => el.remove(), 320); }
+  // la pause revient à qui l'avait : si une astuce ou une fiche s'est ouverte pendant la roue, c'est elle qui relancera le combat
+  if (RL.pause && G.mode === 'combat') {
+    if (tipOpen) tipPaused = true;
+    else if (!$('#detail').hidden) detailPaused = true;
+    else if (!$('#runinfo').hidden) RIV.paused = true;
+    else if ($('#pause').hidden) G.paused = false;
+  }
+  showStatus(); updateHUD();
 }
 function uiRoundCleared() {
   const run = G.run;
@@ -11907,7 +12552,7 @@ function openPause() {
   $('#pa-sub').textContent = run ? `Manche ${roundLabel(Math.max(1, run.round + (G.mode === 'combat' ? 0 : 1)))} · score ${fmtS(run.score || 0)} · ${Math.floor(run.gold)} or` : '';
   syncToggles(); show('#pause', true); duckMusic(true); Snd.pop();
 }
-function closePause() { show('#pause', false); if (!tipOpen && $('#detail').hidden && $('#runinfo').hidden) G.paused = false; duckMusic(false); }
+function closePause() { show('#pause', false); if (!tipOpen && $('#detail').hidden && $('#runinfo').hidden && !RL.on) G.paused = false; duckMusic(false); }
 function devAction(k) {
   const run = G.run, cb = G.cb, msg = t => { $('#dev-msg').textContent = t; };
   const inRun = run && G.mode !== 'title' && G.mode !== 'over';
@@ -12118,6 +12763,88 @@ function simMarket() {
   }
   autoArrange(run);
 }
+/* ================= banc d'essai : ce que chaque jeton ajoute aux dégâts (avec / sans) =================
+   12 s de combat simulé en coulisses, base invincible, contre un flot continu de cartes de la manche en cours
+   (il y a toujours de quoi tirer : un rack fort n'est pas plafonné par le manque de cibles).
+   Mêmes graines pour « avec » et « sans » : l'écart vient du jeton, pas du hasard. Pas de sorts (on mesure le moteur). */
+const BENCH = { warm: 4, T: 12, cap: 22, every: .45, seeds: Array.from({ length: 20 }, (_, i) => 1013 * (i + 1)), cache: new Map(), last: null };
+const BENCH_BOT = { react: .1, parry: .75, focus: true, abil: false, bar: 1 };
+const BENCH_TYPES = ['soldat', 'coureur', 'soldat', 'tireur', 'coureur', 'soldat'];
+const benchRound = () => Math.max(1, G.run.round + (G.mode === 'combat' || G.mode === 'cleared' || G.mode === 'dying' ? 0 : 1));
+function benchSig(jokers) {
+  const run = G.run;
+  return JSON.stringify([jokers.map(j => [j.kind, j.p, j.curse || '', j.parts.map(p => p.t + p.lv)]), run.up, benchRound(), run.rakeBonus || 0, Math.floor(run.gold / 10), run.boosters || [], G.meta.punched]);
+}
+function benchSim(jokers, seed, roulette, R) {
+  const base = G.run, run = JSON.parse(JSON.stringify(base));
+  run.jokers = JSON.parse(JSON.stringify(jokers));
+  Object.assign(run, { stolen: [], malus: [], pendingMalus: [], skulls: 0, boost: {}, shots: [], over: false, zero: false, round: R, roulette: roulette == null ? null : { win: roulette } });
+  G.run = run; srand(seed);
+  const cb = newCombat(); G.cb = cb;
+  cb.stats = computeStats(run);
+  applyMaxHp(); run.hp = run.maxHp;
+  cb.rake.max = cb.rake.dur = cb.stats.rakeDur;
+  if (cb.stats.rake2) { cb.rake2 = mkRake(cb.rake.ang + Math.PI); cb.rake2.max = cb.rake2.dur = cb.stats.rakeDur; }
+  buildPosts();
+  cb.sc = roundScale(run, run.round);
+  cb.spawn = []; cb.goal = 1e15; cb.goalHit = false; cb.reinfT = 1e9; cb.reinfTypes = ['soldat'];
+  initSpells(cb, run);
+  // les cartes de la vraie manche (même mélange de types), distribuées en groupes depuis le bord du tapis,
+  // sans fin : il y a toujours de quoi tirer, même pour un rack très fort
+  const types = buildWave(R, run, null).map(x => x.type).filter(ty => !ENEMIES[ty].boss && ty !== 'voleur' && ty !== 'sorcier');
+  if (!types.length) types.push(...BENCH_TYPES);
+  const dt = 1 / 30, end = BENCH.warm + BENCH.T;
+  let t = 0, next = 0, k = 0, d0 = 0;
+  while (t < end && !run.over) {
+    if (t >= next) {
+      let alive = 0; for (const e of cb.enemies) if (!e.dead && e.ai !== 'decoy') alive++;
+      if (alive < BENCH.cap) { const g = 2 + Math.floor(rnd() * 4), ang = rand(0, TAU); for (let i = 0; i < g; i++) spawnEnemy(types[k++ % types.length], ang + rand(-.35, .35), { hpMul: 1 }); }
+      next = t + BENCH.every * (1 + rnd());
+    }
+    botStep(dt, BENCH_BOT); updateCombat(dt); t += dt;
+    if (!d0 && t >= BENCH.warm) d0 = cb.dps ? cb.dps.tot : 0;
+  }
+  BENCH.last = cb.dps ? Object.assign({}, cb.dps.src) : null;
+  return cb.dps ? (cb.dps.tot - d0) / BENCH.T : 0;
+}
+// dégâts par seconde au banc d'essai pour une liste de jetons (moyenne des graines ; roulette pondérée gagné / perdu)
+function benchDps(jokers) {
+  if (!G.run) return 0;
+  const key = benchSig(jokers);
+  if (BENCH.cache.has(key)) return BENCH.cache.get(key);
+  const prev = { h: G.headless, run: G.run, cb: G.cb, mode: G.mode, seed: SEED, god: G.dev.god, hx: VIEW.hx, hy: VIEW.hy }, R = benchRound();
+  let v = 0;
+  try {
+    G.headless = true; G.mode = 'sim'; G.dev.god = true;
+    VIEW.hx = 84; VIEW.hy = 131;   // même table pour tout le monde (téléphone ou PC) : les mesures se comparent
+    const T0 = computeStats(Object.assign({}, prev.run, { jokers, stolen: [], roulette: null })).T;
+    const pw = T0.roulette[1] > 0 ? (T0.roulette[2] > 0 ? 8 / 9 : 5 / 6) : null;
+    for (const sd of BENCH.seeds) {
+      if (pw == null) v += benchSim(jokers, sd, null, R);
+      else { G.run = prev.run; const a = benchSim(jokers, sd, true, R); G.run = prev.run; const b = benchSim(jokers, sd, false, R); v += pw * a + (1 - pw) * b; }
+      G.run = prev.run;
+    }
+    v /= BENCH.seeds.length;
+  } catch (err) { console.error('banc d\'essai', err); v = 0; }
+  finally { Object.assign(G, { headless: prev.h, run: prev.run, cb: prev.cb, mode: prev.mode }); G.dev.god = prev.god; SEED = prev.seed; VIEW.hx = prev.hx; VIEW.hy = prev.hy; }
+  if (BENCH.cache.size > 400) BENCH.cache.clear();
+  BENCH.cache.set(key, v);
+  return v;
+}
+// l'apport d'un jeton : avec lui contre sans lui (s'il n'est pas dans le rack : « si tu le prends »)
+function jetonContrib(j) {
+  const L = G.run.jokers, inRack = L.includes(j);
+  const withJ = inRack ? L : L.concat([j]), without = inRack ? L.filter(x => x !== j) : L;
+  const a = benchDps(withJ), b = benchDps(without);
+  return { inRack, with: a, without: b, delta: b > 0 ? a / b - 1 : (a > 0 ? 1 : 0) };
+}
+function contribHTML(c) {
+  const pc = Math.round(c.delta * 100), flat = Math.abs(c.delta) < .025, mx = Math.max(c.with, c.without, 1);
+  const bar = (lab, v, cls) => `<div class="cb-row ${cls}"><span>${lab}</span><i style="--w:${(v / mx * 100).toFixed(1)}%"></i><b>${fmtS(Math.round(v))}<small>/s</small></b></div>`;
+  const head = flat ? '<b class="cb-pc flat">≈ 0 %</b>' : `<b class="cb-pc ${pc > 0 ? 'up' : 'down'}">${pc > 0 ? '+' : ''}${pc} %</b>`;
+  const note = flat ? 'Il n\'ajoute pas de dégâts : son effet est ailleurs (or, défense, machine, contrôle…).' : pc < 0 ? 'Il coûte des dégâts : son intérêt est ailleurs, ou c\'est le prix de sa malédiction.' : c.inRack ? 'Ce que ton rack perdrait sans lui.' : 'Ce que ton rack gagnerait en le prenant (placé au bout du rack).';
+  return `<div class="cb-top">${head}<span>${c.inRack ? 'de dégâts grâce à lui' : 'de dégâts si tu le prends'}</span></div>${bar(c.inRack ? 'Sans lui' : 'Ton rack', c.without, 'wo')}${bar(c.inRack ? 'Avec lui' : 'Avec lui', c.with, 'wi')}<p class="cb-note">${note}</p>`;
+}
 function simOne(o) {
   G.run = newRun(o.stake || 0);
   const sk = BOT[o.skill || 'moyen'], dt = 1 / 30, out = { round: 0, won: false, t: 0, parries: 0, blocks: 0, deathBy: null, perRound: [], gold: 0 };
@@ -12276,12 +13003,74 @@ function canvasUp(e) {
   }
 }
 const KEYS = {};
+/* ---------- touches modifiables : chaque action a deux touches (Options › Contrôles) ----------
+   Les contextes ne se gênent pas : une même touche peut servir au combat et à la machine. */
+const KEY_ACTS = [
+  ['flipL', 'Tourner le flipper à gauche', 'combat', ['ArrowLeft', 'q']],
+  ['flipR', 'Tourner le flipper à droite', 'combat', ['ArrowRight', 'd']],
+  ['parry', 'Coup de flipper (parade)', 'combat', [' ', 'Enter']],
+  ['sp1', 'Sort 1', 'combat', ['1', '&']],
+  ['sp2', 'Sort 2', 'combat', ['2', 'é']],
+  ['sp3', 'Sort 3', 'combat', ['3', '"']],
+  ['sp4', 'Sort 4', 'combat', ['4', "'"]],
+  ['bomb', 'Bombe (où qu\'elle soit)', 'combat', ['b', '']],
+  ['gel', 'Gel (où qu\'il soit)', 'combat', ['g', '']],
+  ['lever', 'Tirer le levier / tout arrêter', 'machine', [' ', 'Enter']],
+  ['reel1', 'Rouleau 1 : arrêter, puis garder', 'machine', ['1', '&']],
+  ['reel2', 'Rouleau 2 : arrêter, puis garder', 'machine', ['2', 'é']],
+  ['reel3', 'Rouleau 3 : arrêter, puis garder', 'machine', ['3', '"']],
+  ['respin', 'Relancer', 'machine', ['r', '']],
+  ['cash', 'Encaisser', 'machine', ['e', '']],
+  ['moveUp', 'Monter le jeton choisi (vers la gauche)', 'rack', ['ArrowUp', 'ArrowLeft']],
+  ['moveDown', 'Descendre le jeton choisi (vers la droite)', 'rack', ['ArrowDown', 'ArrowRight']],
+  ['speed', 'Vitesse ×1 / ×2', 'global', ['f', '']],
+  ['info', 'Infos de la partie', 'global', ['Tab', 'i']],
+  ['pause', 'Pause', 'global', ['Escape', 'p']],
+];
+const KEY_CTX = { combat: 'En combat', machine: 'À la machine', rack: 'Ranger tes jetons (entre deux manches)', global: 'Partout' };
+const KEY_DEF = Object.fromEntries(KEY_ACTS.map(a => [a[0], a[3]]));
+const normKey = k => k && k.length === 1 ? k.toLowerCase() : (k || '');
+function keysOf(act) { const o = G.meta && G.meta.opts, k = o && o.keys && o.keys[act]; return Array.isArray(k) ? k : KEY_DEF[act]; }
+const isKey = (act, key) => !!key && keysOf(act).some(x => x && normKey(x) === normKey(key));
+const heldAct = act => keysOf(act).some(x => x && KEYS[normKey(x)]);
+function keyName(k) {
+  if (!k) return '—';
+  const N = { ' ': 'Espace', Enter: 'Entrée', Escape: 'Échap', Tab: 'Tab', ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓', Backspace: 'Retour', Shift: 'Maj', Control: 'Ctrl', Alt: 'Alt' };
+  return N[k] || (k.length === 1 ? k.toUpperCase() : k);
+}
+const keyHint = act => keysOf(act).filter(Boolean).map(keyName).join(' / ');
+// changer une touche : elle quitte les autres actions du même contexte (et de « Partout »)
+function bindKey(act, slot, key) {
+  const o = OPT(); o.keys = Object.assign({}, o.keys || {});
+  const A = KEY_ACTS.find(a => a[0] === act); if (!A) return '';
+  let moved = '';
+  if (key) for (const B of KEY_ACTS) {
+    if (B[0] === act) continue;
+    if (!(B[2] === A[2] || B[2] === 'global' || A[2] === 'global')) continue;
+    const ks = keysOf(B[0]).slice(), i = ks.findIndex(x => x && normKey(x) === normKey(key));
+    if (i >= 0) { ks[i] = ''; o.keys[B[0]] = ks; moved = B[1]; }
+  }
+  const ks = keysOf(act).slice(); ks[slot] = key || ''; o.keys[act] = ks;
+  saveMeta();
+  return moved;
+}
 function keyDown(e) {
   if (BOOT.on) { e.preventDefault(); if (BOOT.step) bootEnd(); else bootGo(); return; }
   firstGesture();
-  KEYS[e.key] = true;
+  // Options › Contrôles : on attend la nouvelle touche (Échap efface)
+  if (OPV.bind) {
+    e.preventDefault();
+    const { act, slot } = OPV.bind; OPV.bind = null;
+    if (!['Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) {
+      const moved = bindKey(act, slot, e.key === 'Escape' ? '' : e.key);
+      OPV.msg = e.key === 'Escape' ? 'Touche effacée.' : moved ? `${keyName(e.key)} servait à « ${moved} » : elle y est retirée.` : `${keyName(e.key)} enregistrée.`;
+      Snd.toggle();
+    }
+    renderOptions(); return;
+  }
   const k = e.key;
-  if (k === 'Escape' || k === 'p' || k === 'P') {
+  KEYS[normKey(k)] = true;
+  if (k === 'Escape' || isKey('pause', k)) {
     if (!$('#dev').hidden) { show('#dev', false); return; }
     if (!$('#opts').hidden) { closeOptions(); return; }
     if (!$('#vest').hidden) { show('#vest', false); Snd.cataClose(); if (G.mode === 'title') refreshTitle(); return; }
@@ -12292,19 +13081,39 @@ function keyDown(e) {
     if (G.mode === 'title') return;
     if ($('#pause').hidden) openPause(); else closePause(); return;
   }
-  if (k === 'Tab') { e.preventDefault(); if (!$('#runinfo').hidden) closeRunInfo(); else if ($('#pause').hidden && $('#opts').hidden) openRunInfo(); return; }
-  if ((k === 'f' || k === 'F') && G.run && G.mode !== 'title' && $('#pause').hidden) { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); toast(`Vitesse ×${G.speed}`); return; }
-  if (G.mode === 'machine' && (k === ' ' || k === 'Enter') && !G.paused && document.activeElement === document.body) { e.preventDefault(); pullLever(); return; }
+  if (k === 'Tab' || isKey('info', k)) { if (k === 'Tab') e.preventDefault(); if (!$('#opts').hidden) return; if (!$('#runinfo').hidden) closeRunInfo(); else if ($('#pause').hidden && G.run && G.mode !== 'title') openRunInfo(); return; }
+  if (isKey('speed', k) && G.run && G.mode !== 'title' && $('#pause').hidden) { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); toast(`Vitesse ×${G.speed}`); return; }
+  if (!$('#opts').hidden || !$('#rules').hidden || !$('#cata').hidden) return;
+  // ranger ses jetons au clavier : la fiche ouverte, ou le dernier jeton touché du rack
+  if (canReorder() && (isKey('moveUp', k) || isKey('moveDown', k)) && !G.paused) {
+    const uid = !$('#detail').hidden && $('#dcard').dataset.uid ? +$('#dcard').dataset.uid : JT.uid;
+    const i = G.run.jokers.findIndex(j => j.uid === uid);
+    if (i >= 0) { e.preventDefault(); keyMove(i, isKey('moveUp', k) ? -1 : 1); return; }
+  }
+  if (G.mode === 'machine' && !G.paused && $('#detail').hidden && document.activeElement === document.body) {
+    if (isKey('lever', k)) { e.preventDefault(); pullLever(); return; }
+    for (const [n, act] of [[0, 'reel1'], [1, 'reel2'], [2, 'reel3']]) if (isKey(act, k)) { e.preventDefault(); reelTap(n); return; }
+    if (isKey('respin', k)) { e.preventDefault(); respin(); return; }
+    if (isKey('cash', k)) { e.preventDefault(); cashOutMachine(); return; }
+  }
   if (G.mode !== 'combat' || G.paused) return;
-  if (k === ' ' || k === 'Enter') { swing(); e.preventDefault(); }
-  const L = spellsOf(G.run), ki = '1234'.indexOf(k);
-  if (ki >= 0 && L[ki]) { castSpellP(L[ki]); e.preventDefault(); return; }
-  if (k === 'b' || k === 'B') castSpellP('bomb');
-  if (k === 'g' || k === 'G') castSpellP('gel');
+  if (isKey('parry', k)) { swing(); e.preventDefault(); }
+  const L = spellsOf(G.run);
+  for (let n = 0; n < 4; n++) if (isKey('sp' + (n + 1), k) && L[n]) { castSpellP(L[n]); e.preventDefault(); return; }
+  if (isKey('bomb', k)) castSpellP('bomb');
+  if (isKey('gel', k)) castSpellP('gel');
+}
+// déplacer un jeton d'une place, au clavier : la fiche (ou la bulle) le suit
+function keyMove(i, d) {
+  const run = G.run, j = run.jokers[i], to = i + d;
+  if (!j || to < 0 || to >= run.jokers.length) { Snd.deny(); return; }
+  moveJoker(i, to);
+  if (!$('#detail').hidden) openDetail(j, 'rack');
+  else { const sl = $(`#rack-slots .slot[data-i="${to}"]`); if (sl) showJTip(j, sl); }
 }
 function keyRake(dt) {
   const cb = G.cb; if (!cb) return;
-  const l = KEYS.ArrowLeft || KEYS.q || KEYS.a, r = KEYS.ArrowRight || KEYS.d;
+  const l = heldAct('flipL'), r = heldAct('flipR');
   if (l) cb.rake.input = cb.rake.ang - .9; else if (r) cb.rake.input = cb.rake.ang + .9;
 }
 function toggleBomb() {
@@ -12339,6 +13148,7 @@ function frame(t) {
   const pf1 = G.perf ? performance.now() : 0;
   if (cb) render(dt);
   updateHUD();
+  elecFrame(dt);
   // ambiances sonores selon l'écran
   const m = G.mode, inCb = m === 'combat' && cb && !cb.demo && !cb.ended && !G.paused;
   Amb.set('wind', inCb && cb.wind ? 1 : 0);
@@ -12369,7 +13179,7 @@ function bindUI() {
   cv.addEventListener('pointercancel', e => { if (G.pointer.id === e.pointerId) G.pointer.down = false; });
   cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') G.pointer.has = false; });
   addEventListener('keydown', keyDown);
-  addEventListener('keyup', e => { KEYS[e.key] = false; if (['ArrowLeft', 'ArrowRight', 'a', 'd', 'q'].includes(e.key) && G.cb) G.cb.rake.input = G.cb.rake.ang; });
+  addEventListener('keyup', e => { KEYS[normKey(e.key)] = false; if ((isKey('flipL', e.key) || isKey('flipR', e.key)) && G.cb) G.cb.rake.input = G.cb.rake.ang; });
   addEventListener('pointerdown', firstGesture, { capture: true });
   const on = (sel, fn) => { const el = $(sel); if (el) el.addEventListener('click', e => { firstGesture(); Snd.click(); fn(e); }); };
   on('#b-speed', () => { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); });
@@ -12395,13 +13205,14 @@ function bindUI() {
   });
   $('#dealer-fig').addEventListener('click', () => { if (G.mode === 'market') { say(pick(LINES.poke)); inspAct(pick(['spin', 'tip'])); } });
   $('#k-offers').addEventListener('click', e => {
-    const b = e.target.closest('[data-buy],[data-hag],[data-info],[data-rep]'); if (!b) return;
-    if (b.dataset.rep != null) { buy(+b.dataset.rep, b.dataset.sp); return; }
+    const b = e.target.closest('[data-buy],[data-hag],[data-info]'); if (!b) return;
     if (b.dataset.buy != null) buy(+b.dataset.buy);
     else if (b.dataset.hag != null) haggle(+b.dataset.hag);
     else { const o = MK.offers[+b.dataset.info]; if (o && o.joker) openDetail(o.joker, 'shop'); }
   });
   on('#k-leave', () => leaveMarketPane());
+  $('#k-spells').addEventListener('click', e => { const b = e.target.closest('[data-spsell]'); if (b) spellSellClick(b); });
+  $('#ri-body').addEventListener('click', e => { const b = e.target.closest('[data-spsell]'); if (b) spellSellClick(b); });
   $('#bar').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     firstGesture();
@@ -12540,7 +13351,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons };
+window.__dbg = { bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
