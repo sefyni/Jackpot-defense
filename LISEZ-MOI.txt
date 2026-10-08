@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v9.1-202610081206
+JACKPOT DEFENSE v9.2-202610081236
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v9.2
+- Écran d'accueil : fini la grille de 150 jetons. Sur la petite table, quelques cartes et quelques jetons éparpillés. Tout tient à l'écran, sans défiler (PC et téléphone).
+- Après un boss : 3 nouvelles machines au choix, et en dessous le bouton « Garder ma machine actuelle ».
+- Les 15 jetons de la machine sont sur les rouleaux à chaque tirage (plus de tirage de 5). Ceux que tu as déjà tombent 3 fois plus souvent, pour faire des doublons. L'Aimant : les jetons de ses voisins sont aussi sur les rouleaux (même d'une autre machine) et tombent 2 fois plus souvent (3 fois au niveau rare).
+- Poker du Baron : passe la souris sur ses jetons (PC) ou touche-les pour lire leurs capacités. Quand tu gagnes, la fiche s'ouvre avec un bouton « Je prends ».
+- Fièvre : ta base perd 1 PV par seconde, contre +33 % de cadence (+66 % sous 50 % de PV). Cette brûlure ne secoue plus l'écran et ne casse plus ta série de parades.
+- Les familles sont mélangées : chaque machine a un jeton de chacune des 12 familles, et 3 familles en double au maximum. Plus aucune machine n'est dominée par une famille (L'Atelier, Le Casino Maudit, Le Salon, Le Flipper, La Fortune, Le Stand de Tir).
 
 Nouveautés de la v9.1
 - Le flipper est plus court : il ne couvre plus tout le canon, des tirs passent à côté si tu le places mal.
