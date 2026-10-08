@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v9-202610081136
+JACKPOT DEFENSE v9.1-202610081206
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v9.1
+- Le flipper est plus court : il ne couvre plus tout le canon, des tirs passent à côté si tu le places mal.
+- Les dialogues avancent à ton rythme : au bar, touche la scène pour passer à la suite (« ▸ touche pour continuer »), avant que le visiteur ou le Baron entre, et avant de t'asseoir à la table du Baron. Les scènes du Baron final et le pile ou face de Zaza attendent aussi que tu touches « Continuer ».
+- PC : Infos, la vitesse (×1 / ×2) et Pause sont en haut à gauche, à la place du logo. La mise est affichée dans la case de la manche.
+- Poker du Baron : ses deux jetons sont séparés par « / » : tu n'en gagnes qu'un, au choix. « Relancer +1 jeton » devient « Doubler » : tu mises un 2e jeton et tu gagnes les deux (le « / » devient « + »). Nouveau : « Nouvelle main », pour changer tes 5 cartes d'un coup, 50 or, 2 fois maximum par partie de poker.
 
 Nouveautés de la v9
 - Tout le catalogue est neuf : 10 machines de 15 jetons (La Fournaise, Le Grand Bleu, Haute Tension, Le Jardin de Pierre, Le Salon, Le Stand de Tir, Le Flipper, Le Casino Maudit, La Fortune, L'Atelier) et 3 machines buggées de 10 fous (ERR_404, LAG_MAX, J4CKP0T.EXE) : 180 jetons. Les 6 machines de couleur et les anciens jetons disparaissent. Chaque jeton a la couleur de sa famille, 3 niveaux, une rareté secrète et un pouvoir de BILLE.

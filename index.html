@@ -2101,15 +2101,36 @@ body.lpc .vs-sub{font-size:13px}
 .cd-chips .chip{width:28px}
 .cpill.const{background:#2a1a5a;color:#d8c8ff;box-shadow:inset 0 0 0 1px #a98bff}
 .tl li.m.neg em{color:var(--red)}
+/* v9.1 */
+.lp-btns{margin-top:0}
+#lp::after{top:70px}
+.lp-rn .lp-stake{margin:0 0 0 auto;align-self:center;font-size:11px}
+.pk-or{align-self:center;flex:none;font:700 24px/1 var(--f-pix);font-style:normal;color:var(--gold);text-shadow:0 2px 0 #000;margin-top:-14px}
+.pk-or.plus{color:#7dff9a}
+.pk-cap{font-style:normal;font-size:11px;line-height:1.15;text-align:center;color:#ffe9a8}
+.pk-cap:empty{display:none}
+#pk-his-stake .pk-chip{flex:1 1 0;min-width:0;max-width:76px}
+.pk-chip span{font-size:11px;letter-spacing:-.01em;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+.bubble.more::after{content:attr(data-more);display:block;margin-top:5px;font:700 11px/1.1 var(--f-pix);letter-spacing:.03em;color:#9a5a10;animation:moreBlink 1.1s ease-in-out infinite}
+.bar-scene.wait{cursor:pointer}
+@keyframes moreBlink{50%{opacity:.35}}
+.fbc-skip{animation:moreBlink 1.4s ease-in-out 2s infinite}
+.pkz-go{margin-top:8px}
+.pk-act .btn{flex-direction:column;gap:3px;line-height:1.05}
+.pk-act .btn small{display:block;font-size:11px;opacity:.85}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
 <div id="app">
   <aside id="lp" aria-label="Infos de la partie">
-    <div class="lp-head"><span class="lp-logo">JACKPOT<i>DEFENSE</i></span><span class="lp-stake" id="lp-stake"></span></div>
+    <div class="lp-btns">
+      <button class="lpb" id="lp-run"><b>Infos</b><small>Tab</small></button>
+      <button class="lpb" id="lp-speed"><b id="lp-speed-v">×1</b><small>F</small></button>
+      <button class="lpb" id="lp-opts"><b>Pause</b><small>Échap</small></button>
+    </div>
     <div class="lp-round" id="lp-roundbox">
       <small>MANCHE</small>
-      <div class="lp-rn"><b id="lp-round">1</b><i id="lp-rmax">/30</i></div>
+      <div class="lp-rn"><b id="lp-round">1</b><i id="lp-rmax">/30</i><span class="lp-stake" id="lp-stake"></span></div>
       <p class="lp-rsub" id="lp-rsub"></p>
     </div>
     <div class="lp-tags" id="lp-tags"></div>
@@ -2127,11 +2148,6 @@ body.lpc .vs-sub{font-size:13px}
     </div>
     <div class="lp-money" id="lp-goldbox"><span class="coin" aria-hidden="true"></span><b id="lp-gold">0</b><small>or</small></div>
     <div class="lp-kit" id="lp-kit"></div>
-    <div class="lp-btns">
-      <button class="lpb" id="lp-run"><b>Infos</b><small>Tab</small></button>
-      <button class="lpb" id="lp-speed"><b id="lp-speed-v">×1</b><small>F</small></button>
-      <button class="lpb" id="lp-opts"><b>Pause</b><small>Échap</small></button>
-    </div>
   </aside>
   <header id="hud">
     <div class="hud-round" id="h-roundbox"><small>MANCHE</small><b id="h-round">1</b></div>
@@ -2154,7 +2170,7 @@ body.lpc .vs-sub{font-size:13px}
     <div id="fbcut" class="fbcut" hidden aria-live="polite">
       <div class="fbc-fig" id="fbc-fig"></div>
       <div class="fbc-txt"><div class="fbc-title" id="fbc-title"></div><p class="say fbc-say" id="fbc-say"></p></div>
-      <button class="btn small ghost fbc-skip" id="fbc-skip">Passer ›</button>
+      <button class="btn small gold fbc-skip" id="fbc-skip">Continuer ›</button>
     </div>
     <div id="banner" aria-live="polite"></div>
     <div id="toast" aria-live="polite"></div>
@@ -2536,7 +2552,7 @@ body.lpc .vs-sub{font-size:13px}
           <p class="say" id="pk-say">…</p>
         </div>
         <div class="pk-pot">
-          <div class="pk-side"><small>LE BARON MISE</small><div class="pk-chips" id="pk-his-stake"></div></div>
+          <div class="pk-side"><small>LE BARON MISE</small><div class="pk-chips" id="pk-his-stake"></div><em class="pk-cap" id="pk-his-cap"></em></div>
           <div class="pk-vs">VS</div>
           <div class="pk-side"><small>TA MISE</small><div class="pk-chips" id="pk-my-stake"></div></div>
         </div>
@@ -3270,7 +3286,7 @@ const II = {
 const BAL = {
   baseHp: 130, dmg0: 15, rate0: 2.2, range0: 64, bulletSpd: 250, baseR: 9,
   healBetween: .18,
-  rakeR: 16.5, rakeHalf: .64, rakeTurn: 22, rakeDur: 4, rakeRebuild: 3.6,
+  rakeR: 16.5, rakeHalf: .46, rakeTurn: 22, rakeDur: 4, rakeRebuild: 3.6,
   swingWin: .22, swingFatigue: .3, flickVel: 10,
   reflectSpd: 125, streakStep: .25, streakMax: 6,
   bombCd: 16, bombR: 22, bombMul: 7, gelCd: 20, gelR: 46, gelDur: 2.6, parryCdr: 3, killCdr: .12,
@@ -7820,7 +7836,8 @@ const BARON = {
   arrive: ['Tiens, tiens… un joueur. Assieds-toi.', 'On ne refuse pas une partie au Baron.', 'Bonsoir. Mes cartes s\'ennuyaient de toi.'],
   stake: ['Mets un jeton sur le tapis. C\'est la règle de la maison… de MA maison.', 'Un jeton, au minimum. Pas de jeton, pas de partie. Et tu joues.'],
   deal: ['Regarde bien tes cartes. Moi, je connais déjà les miennes.', 'Distribution !'],
-  raise: ['Tu relances ? J\'adore ça.', 'Hmm. Audacieux.'],
+  raise: ['Tu doubles ? J\'adore ça.', 'Hmm. Audacieux.'],
+  swap: ['Une main toute neuve ? Ça se paie.', 'Cinquante pièces pour oublier ces cartes. Marché conclu.', 'Hop, à la poubelle. Voilà du neuf.'],
   call: ['Prudent. Comme ta grand-mère.', 'On reste petit ? D\'accord.'],
   draw: ['À moi. Ne regarde pas mes manches.', 'Une carte… peut-être deux.'],
   cheat: ['Oups. Une carte de trop ? Jamais.', 'Rien dans les manches… presque.'],
@@ -10527,7 +10544,7 @@ function fbCutscene(kind, done) {
   if (!el || G.headless) { if (done) done(); return; }
   if (FB.cut) fbCutEnd(true);
   G.mode = 'cut';
-  const C = FB.cut = { kind, done, timers: [] }, T = (fn, ms) => C.timers.push(setTimeout(() => { if (FB.cut === C) fn(); }, G.reduced ? Math.min(ms, 200) : ms));
+  const C = FB.cut = { kind, done, timers: [], t0: now() }, T = (fn, ms) => C.timers.push(setTimeout(() => { if (FB.cut === C) fn(); }, G.reduced ? Math.min(ms, 200) : ms));
   const titles = {
     intro: ['MANCHE 30 · LE BARON', 'le patron du Tapis Rouge · 3 vies'],
     hat: ['2e VIE · SANS CHAPEAU', 'ses sorts (coupe-les à la BILLE) et ses As'],
@@ -10539,7 +10556,7 @@ function fbCutscene(kind, done) {
   el.className = 'fbcut k-' + kind + (fbTone() === 'serious' ? ' serious' : '');
   $('#fbc-title').innerHTML = `<b>${t1}</b><small>${t2}</small>`;
   $('#fbc-fig').innerHTML = kind === 'league' ? fbLeagueHTML() : fbFig(kind === 'intro' || kind === 'hat', kind !== 'intro');
-  $('#fbc-say').textContent = '';
+  $('#fbc-say').textContent = ''; $('#fbc-say')._full = null;
   el.hidden = false;
   const line = kind === 'league' ? pick(BARON_FB.league) : fbLine(kind === 'bye' ? 'bye' : kind);
   if (kind === 'intro') { Music.play('final'); Snd.baronSting(); }
@@ -10547,7 +10564,7 @@ function fbCutscene(kind, done) {
   else if (kind === 'play' || kind === 'league') Snd.gong();
   else if (kind === 'bye') { Music.play(null); Snd.over(); }
   T(() => typeInto('#fbc-say', line, 'baron'), kind === 'hat' ? 1100 : 650);
-  T(() => fbCutEnd(), Math.max(4200, 1500 + line.length * 48) + (kind === 'hat' ? 500 : 0) + (kind === 'league' ? 900 : 0));
+  if (G.dev.auto) T(() => fbCutEnd(), Math.max(4200, 1500 + line.length * 48) + (kind === 'hat' ? 500 : 0) + (kind === 'league' ? 900 : 0));
 }
 function fbCutEnd(silent) {
   const C = FB.cut; if (!C) return;
@@ -10556,6 +10573,13 @@ function fbCutEnd(silent) {
   if (silent) return;
   if (G.mode === 'cut') G.mode = 'combat';
   if (C.done) C.done();
+}
+// toucher la scène : finit la phrase, puis passe (un petit délai évite de la sauter avec un toucher du combat)
+function fbCutTap(e) {
+  const C = FB.cut; if (!C || now() - C.t0 < 600) return;
+  const el = $('#fbc-say');
+  if (typeBusy(el) && !(e && e.target && e.target.closest && e.target.closest('#fbc-skip'))) { typeFinish(el); return; }
+  Snd.click(); fbCutEnd();
 }
 function fbLeagueHTML() {
   const card = (id, face, who) => { const r = FB.res[id], cls = r ? 'ally' : 'foe'; return `<div class="fbl ${cls}"><div class="fbl-face">${face}</div><b>${who}</b><em>${r ? 'AVEC TOI' : 'CONTRE TOI'}</em><small>${id === 'nox' ? (r ? 'la roue penche vers le noir' : 'la roue penche vers le rouge') : id === 'dina' ? (r ? 'fléchettes sur ses cartes' : 'fléchettes sur ta base') : id === 'momo' ? (r ? 'boules sur ses cartes' : 'boules sur ta base') : (r ? 'cocktails sur ses cartes' : 'cocktails sur ta base')}</small></div>`; };
@@ -12872,7 +12896,7 @@ function rulesSections() {
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
     ['Malus', `<ul>${[1, 2, 3].map(t => `<li><b style="color:${TIERS[t].col}">${TIERS[t].name}s</b> : ${MALUS_BY_TIER(t).map(id => `${MALUS[id].name} (${MALUS[id].txt})`).join(' · ')}.</li>`).join('')}</ul>`],
     ['Le Baron', `<p><b>Le boss final.</b> À la manche 30, il descend lui-même à sa table. Trois vies : sa <b>grande donne</b> (toutes les cartes, et ses figures qui le protègent), <b>sans chapeau</b> (ses sorts, que ta BILLE peut couper, et ses As), puis <b>il joue</b> : un jeu de chaque mini-jeu du bar, obligatoire. Chaque jeu perdu retourne un ami contre toi. Toutes les 20${NB}s, la roue de Nox : rouge = +10${NB}% de dégâts pour eux, noir = +15${NB}% pour toi. Victoire : 2 jetons fous à choisir parmi 4.</p>
-      <p><b>Au poker</b>, une fois par dizaine : il mise deux jetons fous, introuvables ailleurs. Tu mises un jeton (obligatoire), et tu peux relancer d'un 2e pour rafler les deux.</p>
+      <p><b>Au poker</b>, une fois par dizaine : il mise deux jetons fous, introuvables ailleurs. Tu mises un jeton (obligatoire) et tu n'en gagnes qu'un des deux… sauf si tu <b>doubles</b> avec un 2e jeton : là, tu rafles les deux. Une main qui ne te plaît pas ? <b>Nouvelle main</b> : 50 or, 2 fois par partie.</p>
       <p>Poker à 5 cartes : tu changes jusqu'à 3 cartes une fois. La meilleure main gagne : <b>${POKER_HANDS.slice().reverse().join(' › ')}</b>. Même combinaison : la plus haute gagne (une Paire de Rois bat une Paire de 10). Les cartes dorées montrent ce qui compte dans ta main.</p>
       <p><b>Même main exactement</b> (même combinaison, mêmes hauteurs) ? Zaza s'en mêle et tranche à pile ou face. Et le Baron triche un peu…</p>`],
   ];
@@ -14233,12 +14257,13 @@ function openBar() {
   renderBar();
   BG.setMode('bar'); Music.play('bar');
   let line = BAR.firstVisit ? pick(ZAZA.first) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : pick(ZAZA.hello);
-  setTimeout(() => sayZ(line), 380);
+  barStop();
+  const nextUp = BAR.gambler ? () => { if (G.mode === 'bar' && !BAR.leaving && baronPending() && $('#baron').hidden) baronArrive(); }
+    : BAR.visitor ? () => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); } : null;
+  setTimeout(() => { if (G.mode !== 'bar' || BAR.leaving) return; sayZ(line); if (nextUp) barWait(nextUp); }, 380);
   zazaCocktail();
 
   if (seenOnce('bar')) setTimeout(() => queueTip(TIPS.bar), 1300);
-  if (BAR.gambler) setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving) baronArrive(); }, 1500);
-  else if (BAR.visitor) setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); }, 1500);
   if (G.dev.auto) setTimeout(autoBar, 1100);
 }
 function sayZ(t) { typeInto('#z-say', t, 'zaza'); }
@@ -14247,6 +14272,7 @@ function typeInto(el, text, who) {
   if (typeof el === 'string') el = $(el);
   if (!el) return;
   clearInterval(TYPERS.get(el));
+  el._full = text;
   if (el.id === 'z-say') el.classList.toggle('from-baron', who !== 'zaza');
   const chars = [...text];
   if (G.reduced || G.headless) el.textContent = text;
@@ -14258,6 +14284,27 @@ function typeInto(el, text, who) {
   talk(who, text);
   const fig = who === 'zaza' ? $('#zaza') : who === 'baron' ? (el.id === 'pk-say' ? $('.pk-face') : $('#baron')) : who === 'dealer' ? $('#dealer-fig') : VISITORS[who] ? (el.id === 'mg-say' ? $('#mg-face') : visFig(who)) : null;
   if (fig) { fig.classList.add('talking'); clearTimeout(fig._tt); fig._tt = setTimeout(() => fig.classList.remove('talking'), Math.min(4200, chars.length * 17 + 300)); }
+}
+const typeBusy = el => !!el && el._full != null && el.textContent !== el._full;
+function typeFinish(el) { if (!el) return; clearInterval(TYPERS.get(el)); if (el._full != null) el.textContent = el._full; }
+// au bar : une réplique qui attend le joueur (toucher la scène, ou n'importe quel bouton du bar, pour passer)
+function barWait(fn, cue) {
+  BAR.next = fn;
+  const z = $('#z-say'); if (z) { z.classList.add('more'); z.dataset.more = cue || '▸ touche pour continuer'; }
+  $('.bar-scene').classList.add('wait');
+  if (G.dev.auto || G.headless) setTimeout(barGo, 1100);
+}
+function barStop() {
+  BAR.next = null;
+  const z = $('#z-say'); if (z) z.classList.remove('more');
+  const sc = $('.bar-scene'); if (sc) sc.classList.remove('wait');
+}
+function barGo() { const f = BAR.next; if (!f) return; barStop(); f(); }
+function barTap(e) {
+  if (!BAR.next || G.mode !== 'bar' || e.target.closest('button')) return;
+  const z = $('#z-say');
+  if (typeBusy(z)) { typeFinish(z); return; }
+  Snd.click(); barGo();
 }
 function glassHTML(kind, liq) { return `<span class="glass g-${kind}" style="--liq:${liq}"><i class="liq"></i><i class="shine"></i></span>`; }
 function renderBar() {
@@ -14394,6 +14441,7 @@ function sparkle(card) {
 function leaveBar() {
   const run = G.run;
   if (BAR.busy || BAR.leaving) return;
+  if (BAR.next) { if (baronPending()) { barGo(); return; } barStop(); }
   if (baronPending()) return;
   BAR.leaving = true;
   if (BAR.visState === 'invite') visRefuse(true);
@@ -14405,6 +14453,7 @@ function leaveBar() {
   setTimeout(() => { el.hidden = true; el.getAnimations().forEach(a => a.cancel()); startNextRound(); }, G.reduced ? 10 : 430);
 }
 function openMarketPane() {
+  if (BAR.next) { barGo(); return; }
   if (BAR.busy || barArriving()) return;
   G.mode = 'market';
   G.run.marketSeen = true;
@@ -14446,7 +14495,23 @@ function autoBar() {
 const PK = { phase: 'off', deck: [], mine: [], his: [], sel: [], stake: [], offer: [], raise: false, gold: 0, res: null, won: [], replacing: null, cheat: false, hisChanged: 0 };
 const PK_RANK = r => r === 14 ? 'A' : r === 13 ? 'R' : r === 12 ? 'D' : r === 11 ? 'V' : String(r);
 const PK_SUITS = ['h', 'd', 's', 'c'];
-const PK_CHEAT = .42, PK_MAXDRAW = 3;
+const PK_CHEAT = .42, PK_MAXDRAW = 3, PK_SWAP_COST = 50, PK_SWAPS = 2;
+// changer toute sa main : 50 or, 2 fois par partie de poker
+function pkSwapBtn() {
+  const left = PK_SWAPS - (PK.swaps || 0); if (left <= 0) return '';
+  const ok = G.run.gold >= PK_SWAP_COST;
+  return `<button class="btn ghost" data-pk="swap"${ok ? '' : ' disabled'}>Nouvelle main<small>${PK_SWAP_COST} or · ${left === PK_SWAPS ? `${PK_SWAPS} fois max` : 'dernière fois'}</small></button>`;
+}
+function pkSwap() {
+  const run = G.run;
+  if ((PK.swaps || 0) >= PK_SWAPS || run.gold < PK_SWAP_COST || !(PK.phase === 'raise' || PK.phase === 'draw')) return;
+  run.gold -= PK_SWAP_COST; PK.swaps = (PK.swaps || 0) + 1;
+  PK.mine = PK.deck.splice(0, 5); PK.sel = [];
+  Snd.chips(); pkSay(pick(BARON.swap));
+  updateHUD(); renderPoker();
+  if (!G.reduced) $$('#pk-mine .pc').forEach((el, i) => { el.style.animationDelay = i * 70 + 'ms'; el.classList.add('deal'); });
+  for (let i = 0; i < 5; i++) setTimeout(() => Snd.card(), i * 80);
+}
 
 function newDeck() { const d = []; for (const s of PK_SUITS) for (let r = 2; r <= 14; r++) d.push({ r, s }); return shuffle(d); }
 function handScore(cards) {
@@ -14568,7 +14633,7 @@ function baronArrive() {
     if (G.mode !== 'bar') return;
     b.className = 'baron seated';
     typeInto('#z-say', pick(BARON.arrive), 'baron');
-    setTimeout(() => { if (G.mode === 'bar') openPoker(); }, 1200);
+    barWait(() => { if (G.mode === 'bar') openPoker(); }, '▸ touche pour jouer');
   }, G.reduced ? 50 : 1450);
 }
 function baronLeave() {
@@ -14582,20 +14647,19 @@ function realJokers() { return G.run.jokers.filter(j => j.kind !== 'faux'); }
 function openPoker(o) {
   const run = G.run;
   if (o && o.duel) {
-    Object.assign(PK, { phase: 'dealing', deck: newDeck(), mine: [], his: [], sel: [], stake: [], raise: false, gold: 0, res: null, won: [], replacing: null, cheat: false, hisChanged: 0, flipped: false, pending: null, cmp: null, lit: false, byZaza: false, stampDone: false, duel: true, offer: [] });
+    Object.assign(PK, { phase: 'duelwait', deck: newDeck(), mine: [], his: [], sel: [], stake: [], raise: false, gold: 0, res: null, won: [], replacing: null, cheat: false, hisChanged: 0, flipped: false, pending: null, cmp: null, lit: false, byZaza: false, stampDone: false, duel: true, offer: [], swaps: 0 });
     $('#pk-zaza').hidden = true;
     show('#poker', true); G.mode = 'poker';
     Music.play('baron');
     renderPoker();
     pkSay('Mon jeu à moi. Pas de mise : l\'enjeu, c\'est Zaza. Si je gagne, elle me sert… contre toi.');
-    setTimeout(() => { if (G.mode === 'poker' && PK.duel) dealPoker(); }, G.reduced ? 100 : 1500);
     if (G.dev.auto) setTimeout(autoPoker, 2600);
     return;
   }
   PK.duel = false;
   const owned = new Set(run.jokers.flatMap(j => j.parts.map(p => p.t)));
   const pool = fousPool(), avail = pool.filter(id => !owned.has(id));
-  Object.assign(PK, { phase: 'stake', deck: newDeck(), mine: [], his: [], sel: [], stake: [], raise: false, gold: 0, res: null, won: [], replacing: null, cheat: false, hisChanged: 0, flipped: false, pending: null, cmp: null, lit: false, byZaza: false, stampDone: false });
+  Object.assign(PK, { phase: 'stake', deck: newDeck(), mine: [], his: [], sel: [], stake: [], raise: false, gold: 0, res: null, won: [], replacing: null, cheat: false, hisChanged: 0, flipped: false, pending: null, cmp: null, lit: false, byZaza: false, stampDone: false, swaps: 0 });
   $('#pk-zaza').hidden = true;
   PK.offer = shuffle(avail.length ? avail : pool.slice()).slice(0, 2).map(mkFou);
   for (const j of PK.offer) catSee('f', j.parts[0].t);
@@ -14640,7 +14704,9 @@ function ladderHTML(meCat, himCat) {
 }
 function renderPoker() {
   const run = G.run, ph = PK.phase;
-  $('#pk-his-stake').innerHTML = PK.duel ? '<p class="pk-empty">Ta ligue : Zaza sert le gagnant</p>' : PK.offer.map((j, i) => `<button class="pk-chip${PK.won.includes(i) ? ' won' : ''}" data-offer="${i}">${chipHTML(j)}<span>${esc(jName(j))}</span></button>`).join('');
+  const both = PK.raise || PK.won.length > 1, canDbl = !PK.gold && (realJokers().length >= 2 || PK.stake.length > 1) && ['stake', 'dealing', 'raise', 'raise2'].includes(ph);
+  $('#pk-his-stake').innerHTML = PK.duel ? '<p class="pk-empty">Ta ligue : Zaza sert le gagnant</p>' : PK.offer.map((j, i) => `<button class="pk-chip${PK.won.includes(i) ? ' won' : ''}" data-offer="${i}">${chipHTML(j)}<span>${esc(jName(j))}</span></button>`).join(both ? '<i class="pk-or plus" aria-label="et">+</i>' : '<i class="pk-or" aria-label="ou">/</i>');
+  $('#pk-his-cap').textContent = PK.duel || PK.offer.length < 2 ? '' : both ? 'tu as doublé : les 2 sont en jeu' : canDbl ? 'tu en gagnes 1 au choix (les 2 si tu doubles)' : 'tu en gagnes 1 au choix';
   $('#pk-my-stake').innerHTML = PK.duel ? '<p class="pk-empty">Enjeu : les cocktails de Zaza</p>' : PK.gold ? `<div class="pk-gold"><span class="coin"></span><b>${PK.gold}</b> or</div>` : PK.stake.length ? PK.stake.map(j => `<div class="pk-chip mine">${chipHTML(j)}<span>${esc(jName(j))}</span></div>`).join('') : '<p class="pk-empty">Choisis un jeton ↓</p>';
   const showHis = ph === 'show' || ph === 'zaza' || ph === 'end' || ph === 'pickwin';
   const me = PK.mine.length === 5 ? handInfo(PK.mine) : null, him = showHis && PK.his.length === 5 ? handInfo(PK.his) : null;
@@ -14666,23 +14732,25 @@ function renderPoker() {
   pickEl.innerHTML = ''; act.innerHTML = '';
   if (ph === 'stake' || ph === 'raise2') {
     const list = realJokers().filter(j => !PK.stake.includes(j));
-    pickEl.innerHTML = `<p class="pk-hint">${ph === 'stake' ? 'Touche le jeton que tu mises (obligatoire) :' : 'Touche le 2e jeton que tu ajoutes :'}</p><div class="pk-list">${list.map(j => `<button class="pk-chip pickable${PK.pending === j.uid ? ' on' : ''}" data-stake="${j.uid}">${chipHTML(j)}<span>${esc(jName(j))}</span></button>`).join('')}</div>`;
-    act.innerHTML = `${ph === 'raise2' ? '<button class="btn ghost small" data-pk="unraise">Finalement non</button>' : ''}<button class="btn gold" data-pk="${ph === 'stake' ? 'bet' : 'raiseok'}" ${PK.pending ? '' : 'disabled'}>${ph === 'stake' ? 'Miser et jouer' : 'Relancer'}</button>`;
+    pickEl.innerHTML = `<p class="pk-hint">${ph === 'stake' ? 'Touche le jeton que tu mises (obligatoire) :' : 'Touche le 2e jeton que tu mises pour doubler :'}</p><div class="pk-list">${list.map(j => `<button class="pk-chip pickable${PK.pending === j.uid ? ' on' : ''}" data-stake="${j.uid}">${chipHTML(j)}<span>${esc(jName(j))}</span></button>`).join('')}</div>`;
+    act.innerHTML = `${ph === 'raise2' ? '<button class="btn ghost small" data-pk="unraise">Finalement non</button>' : ''}<button class="btn gold" data-pk="${ph === 'stake' ? 'bet' : 'raiseok'}" ${PK.pending ? '' : 'disabled'}>${ph === 'stake' ? 'Miser et jouer' : 'Doubler'}</button>`;
   } else if (ph === 'goldstake') {
     pickEl.innerHTML = `<p class="pk-hint">Pas de jeton : le Baron prend <b>${PK.gold} or</b> si tu perds.</p>`;
     act.innerHTML = '<button class="btn gold" data-pk="betgold">Jouer</button>';
   } else if (ph === 'raise') {
     const can = !PK.gold && realJokers().length >= 2;
-    act.innerHTML = `${can ? '<button class="btn purple" data-pk="raise">Relancer +1 jeton<small>gagne ses 2 jetons</small></button>' : ''}<button class="btn gold" data-pk="call">Suivre</button>`;
+    act.innerHTML = `${can ? '<button class="btn purple" data-pk="raise">Doubler<small>+1 jeton misé : gagne les 2</small></button>' : ''}${pkSwapBtn()}<button class="btn gold" data-pk="call">Suivre</button>`;
   } else if (ph === 'draw') {
     pickEl.innerHTML = `<p class="pk-hint">Touche jusqu'à ${PK_MAXDRAW} cartes à changer, puis valide.</p>`;
-    act.innerHTML = `<button class="btn gold" data-pk="draw">${PK.sel.length ? `Changer ${PK.sel.length} carte${PK.sel.length > 1 ? 's' : ''}` : 'Je suis servi'}</button>`;
+    act.innerHTML = `${pkSwapBtn()}<button class="btn gold" data-pk="draw">${PK.sel.length ? `Changer ${PK.sel.length} carte${PK.sel.length > 1 ? 's' : ''}` : 'Je suis servi'}</button>`;
+  } else if (ph === 'duelwait') {
+    act.innerHTML = '<button class="btn gold" data-pk="deal">Distribuer les cartes</button>';
   } else if (ph === 'pickwin') {
     pickEl.innerHTML = '<p class="pk-hint">Gagné ! Touche le jeton du Baron que tu prends.</p>';
   } else if (ph === 'end') {
     if (PK.replacing) pickEl.innerHTML = `<p class="pk-hint">Rack plein. Touche un jeton <b>de ton rack</b> pour le remplacer par ${esc(jName(PK.replacing))} (l'ancien est vendu), ou vends le nouveau.</p>`;
     else if (PK.res && PK.duel) pickEl.innerHTML = `<p class="pk-hint">${PK.res === 'win' ? 'Gagné : Zaza garde ses cocktails pour les cartes du Baron.' : 'Perdu : Zaza va devoir lancer ses cocktails sur toi.'}</p>`;
-    else if (PK.res) pickEl.innerHTML = `<p class="pk-hint">${PK.res === 'win' ? 'Bien joué : tu repars avec un jeton fou.' : PK.gold ? `Perdu : le Baron empoche ${PK.gold} or.` : `Perdu : le Baron empoche ${PK.stake.map(j => esc(jName(j))).join(' et ')}.`}</p>`;
+    else if (PK.res) pickEl.innerHTML = `<p class="pk-hint">${PK.res === 'win' ? (PK.won.length > 1 ? 'Bien joué : tu repars avec ses 2 jetons fous.' : 'Bien joué : tu repars avec un jeton fou.') : PK.gold ? `Perdu : le Baron empoche ${PK.gold} or.` : `Perdu : le Baron empoche ${PK.stake.map(j => esc(jName(j))).join(' et ')}.`}</p>`;
     act.innerHTML = PK.replacing ? `<button class="btn ghost" data-pk="sellnew">Vendre ${esc(jName(PK.replacing))} +${sellValue(PK.replacing)} or</button>` : '<button class="btn gold" data-pk="close">Continuer</button>';
   }
   $('#pk-res').hidden = true;
@@ -14709,6 +14777,9 @@ function pokerClick(e) {
   else if (a === 'unraise') { PK.phase = 'raise'; renderPoker(); }
   else if (a === 'call') { pkSay(pick(BARON.call)); PK.phase = 'draw'; renderPoker(); }
   else if (a === 'draw') playerDraw();
+  else if (a === 'swap') pkSwap();
+  else if (a === 'deal' && PK.phase === 'duelwait') dealPoker();
+  else if (a === 'zazaok' && PK.phase === 'zaza') { $('#pk-zaza').hidden = true; pokerResult(!!PK.zazaWin, true); }
   else if (a === 'sellnew') { const j = PK.replacing; PK.replacing = null; addGold(sellValue(j)); toast(`${jName(j)} vendu : +${sellValue(j)} or`); Snd.coin(); updateHUD(); nextReplace(); }
   else if (a === 'close') closePoker();
 }
@@ -14763,7 +14834,9 @@ function zazaTie() {
     setTimeout(() => {
       Snd.coinLand();
       typeInto('#pkz-say', win ? 'PILE ! C\'est pour toi, chéri.' : 'FACE… Désolée, chéri. Le Baron l\'emporte.', 'zaza');
-      setTimeout(() => { el.hidden = true; pokerResult(win, true); }, G.reduced ? 300 : 1700);
+      PK.zazaWin = win;
+      const col = el.querySelector('.pkz-col'); if (col) col.insertAdjacentHTML('beforeend', '<button class="btn gold small pkz-go" data-pk="zazaok">Continuer ›</button>');
+      if (G.dev.auto) setTimeout(() => { if (PK.phase === 'zaza') { el.hidden = true; pokerResult(win, true); } }, 1700);
     }, G.reduced ? 100 : 1500);
   }, G.reduced ? 100 : 1500);
 }
@@ -14849,7 +14922,7 @@ function autoPoker() {
   if (G.mode !== 'poker' || !G.dev.auto) return;
   const ph = PK.phase;
   if (ph === 'stake') { const j = realJokers().sort((a, b) => stakeValue(a) - stakeValue(b))[0]; PK.pending = j.uid; PK.stake.push(j); PK.pending = null; dealPoker(); }
-  else if (ph === 'goldstake') dealPoker();
+  else if (ph === 'goldstake' || ph === 'duelwait') dealPoker();
   else if (ph === 'raise') { PK.phase = 'draw'; renderPoker(); }
   else if (ph === 'draw') { const keep = fixKeep(PK.mine, aiKeep(PK.mine)); PK.sel = [0, 1, 2, 3, 4].filter(i => !keep.includes(i)); playerDraw(); }
   else if (ph === 'pickwin') awardWin([0]);
@@ -18472,7 +18545,7 @@ function keyDown(e) {
     if (isKey('respin', k)) { e.preventDefault(); respin(); return; }
     if (isKey('cash', k)) { e.preventDefault(); cashOutMachine(); return; }
   }
-  if (G.mode === 'cut' && !G.paused && (k === ' ' || k === 'Enter') && FB.cut) { e.preventDefault(); fbCutEnd(); return; }
+  if (G.mode === 'cut' && !G.paused && (k === ' ' || k === 'Enter') && FB.cut) { e.preventDefault(); fbCutTap(); return; }
   if (G.mode !== 'combat' || G.paused) return;
   if (isKey('bille', k)) { e.preventDefault(); if (!e.repeat) bilKeyDown(); return; }
   if (isKey('parry', k)) { swing(); e.preventDefault(); }
@@ -18593,6 +18666,7 @@ function bindUI() {
   on('#k-leave', () => leaveMarketPane());
   $('#k-spells').addEventListener('click', e => { const b = e.target.closest('[data-spsell]'); if (b) spellSellClick(b); });
   $('#ri-body').addEventListener('click', e => { const b = e.target.closest('[data-spsell]'); if (b) spellSellClick(b); });
+  $('.bar-scene').addEventListener('click', e => { firstGesture(); barTap(e); });
   $('#bar').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     firstGesture();
@@ -18605,7 +18679,7 @@ function bindUI() {
     else if (b.id === 'b-go') leaveBar();
   });
   $('#poker').addEventListener('click', e => { firstGesture(); pokerClick(e); });
-  $('#fbcut').addEventListener('click', e => { if (e.target.closest('#fbc-skip')) { Snd.click(); fbCutEnd(); } });
+  $('#fbcut').addEventListener('click', e => fbCutTap(e));
   $('#fbrew').addEventListener('click', fbrClick);
   $('#mini').addEventListener('click', miniClick);
   const mcv = $('#mg-cv');
@@ -18738,7 +18812,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
