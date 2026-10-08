@@ -2165,6 +2165,35 @@ body.lpc #title .mbtn{min-height:clamp(44px,8.2vh,64px)}
 .pool .pl{align-items:center}
 .pool .mall{margin-left:0}
 .pool .mp-t{font-size:11px;letter-spacing:.04em;color:#ffe3ec;white-space:nowrap}
+/* v9.4 : le catalogue. PC : titre, Monsieur Anatole, onglets, puis la grille et la fiche côte à côte.
+   Toutes les cases ont la même taille, quel que soit l'onglet (jetons, cartes, boissons, persos…) */
+body.lpc .ca{grid-template-rows:auto auto auto minmax(0,1fr)}
+body.lpc .ca-head,body.lpc .ca-anatole,body.lpc .ca-tabs{grid-column:1 / -1}
+body.lpc .ca-grid{grid-column:1;grid-row:4;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));grid-auto-rows:116px}
+body.lpc .ca-detail{grid-column:2;grid-row:4}
+body.lpc .ca-anatole{padding:6px 12px}
+.ca-grid{grid-auto-rows:104px}
+.ca-tile{height:100%;justify-content:center;padding:6px 4px;overflow:hidden}
+.ct-art{flex:none;width:56px;height:56px}
+.ct-art .chip{width:46px}
+.ct-art .chm-ico{width:46px;height:46px;margin:0}
+.ct-art .ct-ico{width:40px;height:40px}
+.ct-art .ct-face{width:48px;height:54px}
+.ct-art .glass{margin:0}
+.ct-art .cthumb{height:52px;max-width:48px}
+.ct-art .ct-duo .chip{width:30px}
+.ct-name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.15;min-height:2.3em}
+/* v9.5 : la jauge de la BILLE dans la barre des sorts */
+.ab.bil{background:radial-gradient(circle at 50% 40%,#2a2342,#171126)}
+.ab.bil .abi{color:#dfe6f2}
+.ab.bil.ready{box-shadow:inset 0 0 0 3px #dfe6f2,0 4px 0 #000,0 0 16px rgba(223,230,242,.55)}
+.ab.bil.out .abi{opacity:.45}
+.ab.bil.aiming{background:#3a1d2c;animation:none;box-shadow:inset 0 0 0 3px #3fe0e0,0 4px 0 #000}
+.ab.bil .abc{position:absolute;right:-4px;top:-6px;z-index:5;min-width:20px;height:18px;padding:0 4px;border-radius:6px;background:var(--ink);box-shadow:0 0 0 2px #dfe6f2;font:700 11px/18px var(--f-pix);font-style:normal;color:#dfe6f2}
+.ab.bil .abc[hidden]{display:none}
+body:not(.lpc) .ab.bil{width:54px;height:54px;align-self:flex-end}
+body:not(.lpc) .ab.bil .abi{width:24px;height:24px}
+body.lpc .ab.bil .abt{font-size:18px}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6902,7 +6931,7 @@ const BILLE_SKINS = [
   { id: 'cristal', name: 'Cristal secret', txt: 'Taillée au Punch-o-matic. Elle a vu des choses.', c: ['#ffffff', '#f2d6ff', '#c9a8ff', '#5a3d8a'], pat: 'facets', need: { k: 'punches', n: 3, txt: 'Passe 3 jetons en rareté secrète' } },
   { id: 'glitch', name: 'Bille glitchée', txt: 'Sortie d\'une machine buggée. Elle n\'est pas toujours là.', c: ['#ffffff', '#39ff88', '#4f8bff', '#17101f'], pat: 'glitch', need: { k: 'fous', n: 5, txt: 'Gagne 5 jetons fous' } },
   { id: 'lune', name: 'Lune', txt: 'Pleine, avec ses cratères. Elle tire les marées.', c: ['#ffffff', '#e8e4d8', '#a8a294', '#4a463e'], pat: 'craters', need: { k: 'wins', n: 1, txt: 'Bats le Baron' } },
-  { id: 'billard', name: 'Boule de Momo', txt: 'La vieille bille fêlée de Momo. Elle porte bonheur.', c: ['#fff6ea', '#ffd23f', '#c9932a', '#5a3d10'], pat: 'crack1', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard' } },
+  { id: 'billard', name: 'Boule de Momo', txt: 'La vieille bille fêlée de Momo. Elle porte bonheur.', c: ['#fff6ea', '#ffd23f', '#c9932a', '#5a3d10'], pat: 'crack1', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard dans une partie' } },
   { id: 'machine', name: 'Collectionneuse', txt: 'Une bille pour chaque machine que tu as essayée.', c: ['#ffffff', '#ffcc4d', '#ff5fa2', '#2a1a5a'], pat: 'rainbow', need: { k: 'machines', n: 5, txt: 'Joue avec 5 machines différentes' } },
   { id: 'secret', name: 'Bille secrète', txt: 'Tu l\'as trouvée…', c: ['#fff3e6', '#ffcc4d', '#c9932a', '#17101f'], pat: 'eight', need: { k: 'secret', n: 1, txt: '???' }, secret: true },
 ];
@@ -7578,7 +7607,7 @@ function anLine(id) {
       : 'Vide, hélas. Le Punch-o-matic du marché noir passe un jeton ULTIME en rareté secrète, pour 300 or. Ça ne dure que la partie, mais chaque secret découvert finira dans cette vitrine. Oui, il faut traiter avec l\'Inspecteur. Je sais. Je compatis.';
     case 'machines': return `Les plaques de toutes les machines du casino : dix ordinaires, trois… buggées. Vous en avez essayé ${n} sur ${tot}. Touchez une plaque : je vous montre ses quinze jetons, ou ses dix fous.`;
     case 'bonus': return `Les jetons bonus des habitués. Attention : ils ne s'acquièrent jamais pour de bon. À chaque partie, il faut refaire l'exploit. ${n ? `Vous en avez déjà mérité ${n} sur ${tot}, au moins une fois.` : 'Vous n\'en avez encore mérité aucun.'} Le revolver de l'Inspecteur en fait partie… je ne le range jamais à côté de mes porcelaines.`;
-    case 'trophees': return `Les cadeaux des habitués : battez-les trois fois, toutes parties confondues, et ils vous offrent leur jeton fou. ${n} sur ${tot} pour l'instant.`;
+    case 'trophees': return `Les cadeaux des habitués : battez-les trois fois dans la même partie, et ils vous offrent leur jeton fou. ${n} sur ${tot} pour l'instant.`;
     case 'fous': return `Le tiroir des fous : trente jetons sortis des trois machines buggées, ERR_404, LAG_MAX et J4CKP0T.EXE. Je l'ouvre avec des gants. ${n} sur ${tot} croisés.`;
     case 'billes': return `Ma boîte à billes ! ${n} sur ${tot}. Chacune se mérite en jouant, et se porte au vestiaire.`;
     case 'combos': return `Mon carnet : les combos de deux jetons côte à côte. ${n} sur ${tot} notés. Touchez-en un pour le relire.`;
@@ -7626,7 +7655,7 @@ function anPanel(id) {
     case 'bonus':
       return note + BOOSTERS.map(b => { const J = JK[b], ok = boostUnlocked(b); return `<div class="an-line${ok ? '' : ' off'}">${anChip(b, ok, 'k-fou')}<span><b>${ok ? esc(J.name) : '???'}</b><small>${esc(J.how)}. À refaire à chaque partie.</small>${ok ? `<em>${esc(J.txt)}</em>` : ''}</span></div>`; }).join('');
     case 'trophees':
-      return note + GIFT_FOUS.map(g => { const J = JK[g], ok = giftDone(J.gift), V = VISITORS[J.gift]; return `<div class="an-line${ok ? '' : ' off'}">${anChip(g, ok, 'k-fou')}<span><b>${ok ? esc(J.name) : '???'}</b><small>${V ? `Bats ${V.fem ? 'la' : 'le'} ${esc(V.short)} 3 fois (toutes parties confondues).` : ''}</small>${ok ? `<em>${esc(J.txt)}</em>` : ''}</span></div>`; }).join('');
+      return note + GIFT_FOUS.map(g => { const J = JK[g], ok = giftDone(J.gift), V = VISITORS[J.gift]; return `<div class="an-line${ok ? '' : ' off'}">${anChip(g, ok, 'k-fou')}<span><b>${ok ? esc(J.name) : '???'}</b><small>${V ? `Bats ${V.fem ? 'la' : 'le'} ${esc(V.short)} 3 fois dans la même partie.` : ''}</small>${ok ? `<em>${esc(J.txt)}</em>` : ''}</span></div>`; }).join('');
     case 'fous':
       return note + GLITCH9.map((M2, gi) => `<div class="an-row"><h4>${esc(M2.name)} <small>${M2.ids.filter(f => catHas('f', f)).length}/10</small></h4><div class="an-chips">${M2.ids.map(f => `<button class="an-c" data-anf="${f}">${anChip(f, catHas('f', f), 'k-fou')}</button>`).join('')}</div></div>`).join('');
     case 'billes':
@@ -7851,14 +7880,15 @@ const LINES = {
   punchPick: ['Montre-moi ton plus beau jeton. Un ULTIME, sinon la machine le recrache. Avec tes doigts.', 'Choisis bien. Elle a faim, et elle mord pas deux fois.', 'Un ultime. Pose-le là. Et ne regarde pas les traces de dents.'],
   punchSure: ['Bon choix. Enfin… choix. Tu confirmes ?', 'Celui-là ? La machine l\'aime déjà. Tu confirmes ?', 'Il va revenir différent. Meilleur. Probablement.'],
   punchNotUlt: ['Ça ? C\'est pas un ultime. La machine accepte pas la petite monnaie.', 'Reviens quand il sera ULTIME. Empile, souffre, puis paie-moi.', 'Trop petit. La dernière fois qu\'on a mis un commun là-dedans, il est ressorti en poussière.'],
-  punchMix: ['Un mix ? Deux symboles dans un seul trou ? Elle va s\'étouffer. Non.', 'Les jetons mixés, ça bourre la machine. J\'ai déjà un dossier là-dessus.'],
+  punchMix: ['Un mix, d\'accord, mais ULTIME des deux côtés. Là, il y a un jeton qui traîne. Non.', 'Les deux jetons de ton mix en ultime, sinon elle s\'étouffe. Empile et reviens.'],
+  punchBrokeMix: ['Un mix ultime, c\'est 500. Deux secrets, deux fois plus de vapeur.', 'Cinq cents. Deux jetons dans un seul trou, ça se paie.'],
   punchCursed: ['Un maudit ? Même moi j\'y touche pas. C\'est contagieux, ces trucs.', 'Pas de maudit dans ma machine. La dernière fois, elle a parlé toute la nuit.'],
   punchFou: ['Un jeton fou ? Il est déjà secret dans sa tête. Éloigne-le de ma machine.', 'Les fous, elle les refuse. Par principe. Et par peur.'],
   punchFake: ['C\'est un faux. Je le sais, c\'est moi qui te l\'ai vendu.', 'Une contrefaçon dans MA machine ? Tu veux me faire arrêter ?'],
   punchAlready: ['Il est déjà secret. Tu veux quoi, un secret au carré ?', 'Déjà passé à la machine. Deux fois, ça le rend juste… bizarre.'],
   punchStolen: ['Ce jeton est confisqué. Même par moi, c\'est dire.'],
   punchBroke: ['300 or. Pas 299. La machine a des principes, contrairement à moi.', 'Pas de 300 ? Pas de rareté secrète. La machine fait pas crédit, moi non plus.'],
-  punchNone: ['T\'as aucun jeton ultime. Elle va pas tourner pour tes communs.', 'Rien d\'ultime dans ton rack. Monte un jeton au niveau 3 et reviens.'],
+  punchNone: ['T\'as aucun jeton ultime, ni de mix ultime. Elle va pas tourner pour tes communs.', 'Rien d\'ultime dans ton rack. Monte un jeton au niveau 3 et reviens.'],
   punchCancel: ['Tu te dégonfles ? Elle, elle garde rancune.', 'Comme tu veux. Elle avait faim, pourtant.'],
   punchGo: ['Et hop, dans la bouche. Si ça fume, c\'est normal. Je crois.', 'On n\'ouvre pas pendant le cycle. Ni après, d\'ailleurs.', 'Recule. Elle crache, des fois.'],
   punchWork: ['Attends… elle fait toujours ce bruit ?', 'Oups. …Non, je rigole.', 'Si ça explose, on dira que c\'est toi.'],
@@ -7978,14 +8008,14 @@ function kindFromParts(parts) {
 function mkJoker(kind, parts, p = 1, extra) { return Object.assign({ uid: UID++, kind, parts, p: Math.round(p * 100) / 100 }, extra || {}); }
 function mkFou(id) { return mkJoker('fou', [{ t: id, lv: 3 }], 1); }
 function jName(j) { return j.kind === 'faux' ? 'Faux ' + JK[j.fakeOf].name : j.parts.map(pt => JK[pt.t].name).join(' + '); }
-function rarLabel(j) { return isSecret(j) ? 'Rareté secrète' : j.kind === 'fou' && j.corrupt ? 'Fou corrompu' : j.kind === 'mix' && j.parts[0].lv >= 3 ? 'Mix ultime' : RAR[j.kind].label; }
+function rarLabel(j) { return isSecret(j) ? (j.kind === 'mix' ? 'Mix secret' : 'Rareté secrète') : j.kind === 'fou' && j.corrupt ? 'Fou corrompu' : j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3) ? 'Mix ultime' : RAR[j.kind].label; }
 const rarVar = j => isSecret(j) ? 'secrete' : j.kind;
 // v8 : la rareté SECRÈTE se gagne au Punch-o-matic du marché noir (500 or, sur un jeton ULTIME). Elle réveille la 4e capacité
 // et donne +25 % de puissance. La collection garde la trace des secrets déjà découverts.
 const isSecret = j => !!(j && j.secret && j.kind !== 'faux' && j.kind !== 'fou');
 const secPow = j => isSecret(j) ? 1.25 : 1;
 const secretKnown = id => !!(G.meta.secrets && G.meta.secrets[id]);
-const punchable = j => !!j && j.kind === 'ultime' && !isSecret(j);
+const punchable = j => !!j && (j.kind === 'ultime' || (j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3))) && !isSecret(j);
 function isPunched(j) { return isSecret(j); }
 function chipVars(j) { const J = j.kind === 'faux' ? { col: '#8d8d99', dark: '#2a2238' } : JK[j.parts[0].t]; return `--jc:${J.col};--ic2:${J.dark}`; }
 const stackLevels = j => j.kind === 'faux' ? 1 : j.parts.reduce((a, p) => a + Math.min(3, p.lv), 0);
@@ -11894,11 +11924,12 @@ function drawBilleAim(cb, t) {
   const B = cb.bil; if (!B || cb.demo || cb.ended) return;
   const r0 = BAL.baseR + 1.6;
   if (B.st === 'ready') {
-    ctx.strokeStyle = `rgba(214,222,236,${.45 + .2 * Math.sin(t * 4)})`; ctx.lineWidth = .7;
+    ctx.strokeStyle = `rgba(232,238,248,${.6 + .25 * Math.sin(t * 4)})`; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(0, 0, r0, 0, TAU); ctx.stroke();
   } else if (B.st === 'cd') {
     const p = 1 - B.cd / (B.max || 1);
-    ctx.strokeStyle = 'rgba(141,152,173,.45)'; ctx.lineWidth = .7; ctx.beginPath(); ctx.arc(0, 0, r0, -Math.PI / 2, -Math.PI / 2 + p * TAU); ctx.stroke();
+    ctx.strokeStyle = 'rgba(20,14,32,.55)'; ctx.lineWidth = 1.1; ctx.beginPath(); ctx.arc(0, 0, r0, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = 'rgba(195,205,224,.85)'; ctx.lineWidth = 1.1; ctx.beginPath(); ctx.arc(0, 0, r0, -Math.PI / 2, -Math.PI / 2 + p * TAU); ctx.stroke();
   }
   if (B.st !== 'aim' || !B.aim) return;
   const A = B.aim; let ang, pow;
@@ -12441,6 +12472,7 @@ function updateHUD() {
   if (G.headless) return;
   const run = G.run, cb = G.cb;
   if (!run || G.mode === 'title') return;
+  { const bm = $('#bugm'); if (bm && !bm.hidden) bugButtons(); }
   const r = Math.max(1, run.round + (midRound() ? 0 : 1));
   setHTML('#h-round', r > 30 ? `∞+${r - 30}` : `${r}<em>/30</em>`);
   $('#h-roundbox').classList.toggle('inf', r > 30);
@@ -12688,7 +12720,7 @@ function renderRack() {
   }
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
-  setTxt('#r-hint', G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un jeton ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ordre, ou empile' : 'touche un jeton pour le détail');
+  setTxt('#r-hint', G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ordre, ou empile' : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
@@ -12953,7 +12985,7 @@ function rulesSections() {
       <ul class="combo-rules">${COMBOS.map(c => `<li><b>${c.name}</b> (${JK[c.a].name} + ${JK[c.b].name}) : ${c.txt}</li>`).join('')}${CONSTEL.map(c => `<li><b>${c.name}</b> (${c.signs.map(s => JK[s].name).join(', ')}) : +0,3 MULT par paire de signes voisins, +1 MULT avec les trois réunis.</li>`).join('')}</ul>`],
     ['Bar et marché', `<p><b>Le bar de Zaza</b> : à chaque manche, une boisson pour le <b>canon</b>, une pour le <b>flipper</b> et une pour la <b>base</b>. Elles durent toute la partie. Les <b>shots</b> boostent une seule manche.</p>
       <p><b>Le marché noir</b> : au fond de la ruelle, l'Inspecteur vend des jetons « tombés du camion », la seule place de table à acheter, des objets et des <b>sorts</b>. Tu peux marchander… à tes risques.</p>
-      <p><b>Les habitués</b> (Dina, Momo, Madame Nox) passent parfois au bar et te défient. Bats-les 3 fois pour gagner leur jeton fou.</p>
+      <p><b>Les habitués</b> (Dina, Momo, Madame Nox) passent parfois au bar et te défient. Chaque victoire te donne une étoile ★ : à 2 étoiles, leur jeton bonus ; à 3, leur cadeau (un jeton fou). Les étoiles repartent à zéro à chaque partie.</p>
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
     ['Malus', `<ul>${[1, 2, 3].map(t => `<li><b style="color:${TIERS[t].col}">${TIERS[t].name}s</b> : ${MALUS_BY_TIER(t).map(id => `${MALUS[id].name} (${MALUS[id].txt})`).join(' · ')}.</li>`).join('')}</ul>`],
     ['Le Baron', `<p><b>Le boss final.</b> À la manche 30, il descend lui-même à sa table. Trois vies : sa <b>grande donne</b> (toutes les cartes, et ses figures qui le protègent), <b>sans chapeau</b> (ses sorts, que ta BILLE peut couper, et ses As), puis <b>il joue</b> : un jeu de chaque mini-jeu du bar, obligatoire. Chaque jeu perdu retourne un ami contre toi. Toutes les 20${NB}s, la roue de Nox : rouge = +10${NB}% de dégâts pour eux, noir = +15${NB}% pour toi. Victoire : 2 jetons fous à choisir parmi 4.</p>
@@ -13895,7 +13927,10 @@ const ITEMS = {
   soin: { name: 'Trousse de secours', icon: 'heart', txt: `Soigne 40${NB}% des PV de ta base.`, price: 40 },
   rateau: { name: 'Flipper doré', icon: 'croupier', txt: '+1 de solidité au flipper pour toute la partie (max +2).', price: 55 },
 };
-const PUNCH_PRICE = 300;
+const PUNCH_PRICE = 300, PUNCH_MIX = 500;
+// un mix ultime : ses deux jetons au niveau ULTIME
+const mixUlt = j => !!j && j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3);
+const punchPrice = j => j && j.kind === 'mix' ? PUNCH_MIX : PUNCH_PRICE;
 function genMarket() {
   const r = Math.max(1, G.run.round), sc = 1 + .06 * (Math.min(r, 30) - 1), offers = [];
   const mine = MACH9[G.run.machine || 0].ids, others = NORMAL_JOKERS.filter(id => !mine.includes(id));
@@ -13964,9 +13999,9 @@ function renderMarket() {
       const sel = MK.pmSel != null ? run.jokers.find(x => x.uid === MK.pmSel) : null;
       let txt, btns;
       if (o.sold) { txt = 'La machine refroidit. Une fois par visite.'; btns = '<em>Fait</em>'; }
-      else if (sel) { txt = `<b class="pm-sel">${esc(jName(sel))}</b> : ULTIME → <b class="pm-s">RARETÉ SECRÈTE</b>. Capacité secrète éveillée, +25${NB}% de puissance, pour toute la partie.`; btns = `<button class="mini" data-punchm="go" ${off || run.gold < o.price ? 'disabled' : ''}>Punch ! ${o.price} or</button><button class="mini dark" data-punchm="no">Annuler</button>`; }
-      else if (MK.punching) { txt = 'Touche un jeton <b>ULTIME</b> de ton rack. Les autres, elle les recrache.'; btns = '<button class="mini dark" data-punchm="no">Annuler</button>'; }
-      else { txt = `Ton jeton <b>ULTIME</b> ressort en <b class="pm-s">RARETÉ SECRÈTE</b> : sa capacité secrète s'éveille, +25${NB}% de puissance, jusqu'à la fin de la partie. Une fois par visite.`; btns = `<button class="mini" data-punchm="start" ${off || run.gold < o.price ? 'disabled' : ''}>${o.price} or</button><button class="mini dark" disabled>Prix fixe</button>`; }
+      else if (sel) { const pr = punchPrice(sel); txt = sel.kind === 'mix' ? `<b class="pm-sel">${esc(jName(sel))}</b> : MIX ULTIME → <b class="pm-s">LES DEUX EN RARETÉ SECRÈTE</b>. Leurs deux capacités secrètes s'éveillent, +25${NB}% de puissance, pour toute la partie.` : `<b class="pm-sel">${esc(jName(sel))}</b> : ULTIME → <b class="pm-s">RARETÉ SECRÈTE</b>. Capacité secrète éveillée, +25${NB}% de puissance, pour toute la partie.`; btns = `<button class="mini" data-punchm="go" ${off || run.gold < pr ? 'disabled' : ''}>Punch ! ${pr} or</button><button class="mini dark" data-punchm="no">Annuler</button>`; }
+      else if (MK.punching) { txt = `Touche un jeton <b>ULTIME</b> (${PUNCH_PRICE} or) ou un <b>MIX ULTIME</b> (${PUNCH_MIX} or) de ton rack. Les autres, elle les recrache.`; btns = '<button class="mini dark" data-punchm="no">Annuler</button>'; }
+      else { txt = `Ton jeton <b>ULTIME</b> ressort en <b class="pm-s">RARETÉ SECRÈTE</b> (${PUNCH_PRICE} or) : sa capacité secrète s'éveille, +25${NB}% de puissance, jusqu'à la fin de la partie. Un <b>MIX ULTIME</b> (ses deux jetons en ultime) : ${PUNCH_MIX} or, et les deux passent en secret. Une fois par visite.`; btns = `<button class="mini" data-punchm="start" ${off || run.gold < o.price ? 'disabled' : ''}>Dès ${o.price} or</button><button class="mini dark" disabled>Prix fixe</button>`; }
       return `<div class="offer punch${o.sold ? ' sold' : ''}${MK.punching || sel ? ' picking' : ''}"><div class="slotico pm" aria-hidden="true">${iconSVG('punchm')}</div><div class="otext"><b>Punch-o-matic<i class="otag">SERVICE</i></b><span>${txt}</span></div><div class="obuy">${btns}</div></div>`;
     }
     const j = o.joker, partner = stackPartner(j);
@@ -14040,8 +14075,8 @@ function punchRefusal(j) {
   if (j.kind === 'faux') return 'punchFake';
   if (j.kind === 'fou') return 'punchFou';
   if (j.kind === 'maudit') return 'punchCursed';
-  if (j.kind === 'mix') return 'punchMix';
   if (isSecret(j)) return 'punchAlready';
+  if (j.kind === 'mix') return mixUlt(j) ? null : 'punchMix';
   if (j.kind !== 'ultime') return 'punchNotUlt';
   return null;
 }
@@ -14070,6 +14105,7 @@ function punchPickJoker(uid) {
   const j = G.run.jokers.find(x => x.uid === uid); if (!j || MK.busy) return;
   const why = punchRefusal(j);
   if (why) { say(pick(LINES[why])); Snd.deny(); inspAct('spin'); return; }
+  if (G.run.gold < punchPrice(j)) { say(pick(LINES[j.kind === 'mix' ? 'punchBrokeMix' : 'punchBroke'])); Snd.deny(); return; }
   MK.pmSel = uid; MK.punching = false;
   say(`${jName(j)} ? ${pick(LINES.punchSure)}`); inspAct('tip'); Snd.chipPick();
   renderMarket(); renderRack();
@@ -14077,20 +14113,22 @@ function punchPickJoker(uid) {
 function punchJoker(j) {
   const run = G.run, i = punchIdx(), o = MK.offers[i];
   if (!o || o.sold || MK.gone || MK.busy || punchRefusal(j)) return;
-  if (run.gold < o.price) { say(pick(LINES.punchBroke)); Snd.deny(); return; }
-  run.gold -= o.price; o.sold = true; MK.punching = false; MK.pmSel = null; MK.busy = true;
+  const price = punchPrice(j);
+  if (run.gold < price) { say(pick(LINES[j.kind === 'mix' ? 'punchBrokeMix' : 'punchBroke'])); Snd.deny(); return; }
+  run.gold -= price; o.sold = true; MK.punching = false; MK.pmSel = null; MK.busy = true;
   Snd.coin(); updateHUD(); renderMarket(); renderRack();
   say(pick(LINES.punchGo)); inspAct('spin');
   punchAnim(j, () => {
     MK.busy = false;
     if (!run.jokers.includes(j)) return;
     j.secret = true;
-    const t = j.parts[0].t, fresh = discoverSecret(t);
+    let fresh = false; for (const pt of j.parts) if (discoverSecret(pt.t)) fresh = true;
     const L = G.meta.life || (G.meta.life = {}); L.punches = (L.punches || 0) + 1; saveMeta();
     const named = inspBought();
     if (!named && G.mode === 'market') { say(pick(LINES.punchDone)); inspAct('tip', 900); }
     const n = NORMAL_JOKERS.filter(secretKnown).length;
-    toast(fresh ? `${jName(j)} passe en rareté secrète ! Nouveau secret pour Monsieur Anatole (${n}/${NORMAL_JOKERS.length}).` : `${jName(j)} passe en rareté secrète !`);
+    const what = j.kind === 'mix' ? `${jName(j)} : ses deux jetons passent en rareté secrète !` : `${jName(j)} passe en rareté secrète !`;
+    toast(fresh ? `${what} Nouveau secret pour Monsieur Anatole (${n}/${NORMAL_JOKERS.length}).` : what);
     if (G.cb && !G.cb.demo) refreshStats();
     renderRack(); renderMarket(); updateHUD(); offerFx(i);
   });
@@ -15093,7 +15131,7 @@ function catDesc(c, id) {
     case 'j': { const J = JK[id], bp = BP[J.bp]; return `<p class="cd-sub">Famille ${J.fam} · ${MACH9[J.m].name}</p><ol class="caps">${J.caps.slice(0, 3).map((f, k) => `<li class="on"><b>${LV_NAME[k]}</b><span>${f(1)}</span></li>`).join('')}<li class="secret${secretKnown(id) ? ' on' : ''}"><b>Rareté secrète</b><span>${secretKnown(id) ? J.caps[3](1.25) : '??? Découvre-la au Punch-o-matic du marché noir.'}</span></li></ol>${bp ? `<p class="cd-goal">Pouvoir de BILLE : <b>${bp.n}</b>, ${bp.txt(1)}.</p>` : ''}${J.note ? `<p class="cd-sub">${J.note}</p>` : ''}`; }
     case 'k': { const g = id[0] === 'g', M2 = (g ? GLITCH9 : MACH9)[+id.slice(1)]; return `<p class="cd-sub">${g ? 'Machine buggée · après chaque boss · 10 jetons fous' : 'Machine · 15 jetons'}</p><p><b>Bug · ${M2.bugName}</b> : ${M2.bug}</p>${g ? '' : `<p class="cd-goal">Builds : ${M2.builds.map(b => `<b>${b[0]}</b> (${b[1].join(', ')})`).join(' · ')}</p>`}<div class="cd-chips">${M2.ids.map(t => protoChip(t, g ? 'k-fou' : 'k-commun')).join('')}</div>`; }
     case 'f': if (JK[id].boost) { const B0 = JK[id].boost; return `<p class="cd-sub">Jeton bonus de ${B0 === 'zaza' ? 'Zaza' : B0 === 'baron' ? 'du Baron' : B0 === 'dealer' ? 'l\'Inspecteur' : VISITORS[B0] ? VISITORS[B0].short : ''} · ne prend pas de place sur ta table</p><p>${JK[id].txt}</p><p class="cd-goal">Pour l'avoir : ${JK[id].how}. Il ne dure qu'une partie : refais l'exploit à chaque partie.</p>`; }
-      return `<p class="cd-sub">${JK[id].gift ? `Jeton fou · cadeau de ${VISITORS[JK[id].gift].short} (3 victoires), puis chez le Baron` : `Jeton fou · machine buggée ${GLITCH9[JK[id].g].name}`}</p><p>${JK[id].txt}</p>${JK[id].xtxt ? `<p class="cd-goal">Corrompu (trois sur la ligne) : ${JK[id].xtxt}</p>` : ''}`;
+      return `<p class="cd-sub">${JK[id].gift ? `Jeton fou · cadeau de ${VISITORS[JK[id].gift].short} (3 victoires dans une partie), puis chez le Baron` : `Jeton fou · machine buggée ${GLITCH9[JK[id].g].name}`}</p><p>${JK[id].txt}</p>${JK[id].xtxt ? `<p class="cd-goal">Corrompu (trois sur la ligne) : ${JK[id].xtxt}</p>` : ''}`;
     case 'e': { const d = ENEMIES[id]; return `<p class="cd-sub">${d.name}${d.from ? ` · dès la manche ${d.from}` : ''}</p><p>${d.info || ''}</p><p class="cd-stats">PV ${d.hp} · vitesse ${d.spd} · coup ${d.dmg}</p>`; }
     case 'b': { const d = ENEMIES[id]; return `<p class="cd-sub">${id === 'b_baron' ? 'Boss final · manche 30 · 3 vies' : id === 'b_joker' ? 'Le bras droit du Baron : il revient pendant sa grande donne, et en manches infinies' : `Boss de la manche ${(BOSS_ORDER.indexOf(id) + 1) * 5}`}</p><p>${d.intro}</p><p class="cd-stats">PV ${d.hp} · coup ${d.dmg}</p>`; }
     case 'm': { const M2 = MALUS[id], T = TIERS[M2.tier]; return `<p class="cd-sub" style="color:${T.col}">Malus ${T.name.toLowerCase()} · ${M2.tier} crâne${M2.tier > 1 ? 's' : ''}</p><p>${M2.txt[0].toUpperCase() + M2.txt.slice(1)}.</p>`; }
@@ -15181,7 +15219,7 @@ const VISITORS = {
     name: 'Dina Triple-20', short: 'Dina', game: 'fléchettes', col: '#ff4fa0', gift: 'triple20', fem: true,
     face: '20 4 72 80',
     bio: 'Punk à crête rose, chewing-gum, championne autoproclamée du Tapis Rouge. Elle parle vite et vise encore plus vite.',
-    goal: 'Elle cherche quelqu\'un qui la batte pour de vrai. Bats-la 3 fois : elle t\'offre sa fléchette fétiche.',
+    goal: 'Elle cherche quelqu\'un qui la batte pour de vrai. Bats-la 3 fois dans la même partie : elle t\'offre sa fléchette fétiche.',
     rules: 'Une fléchette chacun. La plus proche du centre gagne. Tu mises de l\'or, elle double.',
     lore: [
       'Dina a appris les fléchettes dans un squat, sur une porte de frigo. Elle jure n\'avoir jamais perdu. Tu sais que c\'est faux.',
@@ -15206,7 +15244,7 @@ const VISITORS = {
     name: 'Momo la Craie', short: 'Momo', game: 'billard', col: '#5fb8ff', gift: 'carambole',
     face: '14 0 82 84',
     bio: 'Motard géant au cœur tendre. Il parle lentement, frotte sa craie sans arrêt et dit des choses très profondes. Ou pas.',
-    goal: 'Il joue pour rembourser son ardoise chez Zaza. Bats-le 3 fois : il t\'offre sa vieille bille fêlée.',
+    goal: 'Il joue pour rembourser son ardoise chez Zaza. Bats-le 3 fois dans la même partie : il t\'offre sa vieille bille fêlée.',
     rules: 'Chacun sa couleur, boules placées au hasard. La première boule de ta couleur qui tombe te fait gagner, même si c\'est lui qui la rentre ! Pile ou face pour commencer.',
     lore: [
       'Momo roulait avec un gang de motards, les Queues de Billard. Il a tout lâché le soir où il a gagné le Tapis Rouge… puis l\'a reperdu au poker contre le Baron.',
@@ -15232,7 +15270,7 @@ const VISITORS = {
     name: 'Madame Nox', short: 'Nox', game: 'roulette', col: '#a98bff', gift: 'oeilnox', fem: true,
     face: '18 2 74 82',
     bio: 'Voyante et croupière, voilée de violet. Elle parle par énigmes, lit l\'avenir dans une boule de cristal… et ment deux fois sur trois. Sauf devant un vrai porte-bonheur.',
-    goal: 'Elle collectionne les destins. Bats la roue 3 fois : elle t\'offre son œil de verre.',
+    goal: 'Elle collectionne les destins. Bats la roue 3 fois dans la même partie : elle t\'offre son œil de verre.',
     rules: 'Rouge ou noir : elle double ta mise. Le vert : elle la paie quatorze fois. Sa prophétie dit vrai… parfois. Un jeton Chance ULTIME l\'aide à mieux voir.',
     lore: [
       'Personne ne sait d\'où vient Madame Nox. Le Baron jure qu\'elle tenait déjà la roue quand le bar était une chapelle.',
@@ -15264,6 +15302,8 @@ const VIS_IDS = Object.keys(VISITORS);
 const GAMES = {};
 const rival = id => { const R = G.meta.rivals || (G.meta.rivals = {}); return R[id] || (R[id] = { w: 0, l: 0 }); };
 const giftDone = id => !!(G.meta.gifts && G.meta.gifts[id]);
+// les étoiles de la partie en cours : 2 = son jeton bonus, 3 = son cadeau (elles repartent à zéro à chaque partie)
+const runStars = id => { const run = G.run; if (!run) return 0; const K = run.K || (run.K = {}); return (K.visW && K.visW[id]) || 0; };
 
 /* ---------- qui passe ce soir ? ---------- */
 function visitorDue(run) {
@@ -15302,12 +15342,12 @@ function visitorLeave(id, quick) {
 }
 // la carte de défi posée sur le comptoir
 function visCardHTML() {
-  const id = BAR.visitor, V = VISITORS[id], R = rival(id), st = '★'.repeat(Math.min(3, R.w)) + '☆'.repeat(Math.max(0, 3 - R.w));
+  const id = BAR.visitor, V = VISITORS[id], rw = runStars(id), bb = VIS_BOOST[id], st = '★'.repeat(Math.min(3, rw)) + '☆'.repeat(Math.max(0, 3 - rw));
   return `<div class="vis-card" style="--vc:${V.col}">
     <div class="vc-ic">${iconSVG(id === 'dina' ? 'flechette' : id === 'momo' ? 'bille' : 'roue')}</div>
     <div class="vc-txt"><b>${V.name}</b> te défie ${id === 'nox' ? 'à la' : 'au' + (id === 'dina' ? 'x' : '')} <b>${V.game}</b>
       <p>${V.rules}</p>
-      <p class="vc-riv"><span>${st}</span> ${giftDone(id) ? (R.w >= 5 ? `Rivalité gagnée · son jeton bonus est à toi` : `Rivalité gagnée · ${R.w}/5 victoires pour son jeton bonus`) : `Rivalité : ${R.w}/3 victoires pour son cadeau`}</p></div>
+      <p class="vc-riv"><span>${st}</span> ${rw >= 3 ? 'Rivalité gagnée pour cette partie' : `Cette partie : ${rw}/3 · ${bb && rw < 2 ? '2 victoires = son jeton bonus, ' : ''}3 = son cadeau`}</p></div>
     <div class="vc-act"><button class="btn ghost small" data-vis="no">Refuser</button><button class="btn gold" data-vis="yes">Jouer</button></div>
   </div>`;
 }
@@ -15411,19 +15451,20 @@ function miniResult(win, o = {}) {
     R.w++;
     const pts = addPoints(o.pts || 150, 'jeu');
     setTimeout(() => popText($('#mg-stage'), `+${fmtS(pts)} points`, 'pts'), 700);
-    if (R.w >= 3 && !giftDone(id)) { G.meta.gifts[id] = true; gotGift = true; }
+    const VK0 = G.run.K || (G.run.K = {}), vw0 = VK0.visW || (VK0.visW = {}); vw0[id] = (vw0[id] || 0) + 1;
+    if (vw0[id] === 3) { G.meta.gifts = G.meta.gifts || {}; G.meta.gifts[id] = true; gotGift = true; }
     Snd.jackpot(); celebrate(true); haptic(100);
   } else { R.l++; Snd.over(); haptic(60); }
   saveMeta();
   catSee('p', id);
   MG.result = { win, gift: gotGift };
   updateHUD(); renderRack();
-  const line = win ? (gotGift ? V.lines.gift : R.w <= 2 && !giftDone(id) ? V.lines.riv[R.w - 1] : pick(V.lines.win)) : pick(V.lines.lose);
+  const rw = runStars(id), line = win ? (gotGift ? V.lines.gift : rw <= 2 ? V.lines.riv[rw - 1] : pick(V.lines.win)) : pick(V.lines.lose);
   setTimeout(() => { if (MG.open) mgSay(line); }, 650);
   if (gotGift) setTimeout(() => giveGift(id), 1500);
   else mgAct('<button class="btn gold" data-mg="close">Continuer</button>');
   const bb = VIS_BOOST[id];
-  const VK = G.run.K || (G.run.K = {}), vw = VK.visW || (VK.visW = {}); if (win) vw[id] = (vw[id] || 0) + 1;
+  const vw = (G.run.K && G.run.K.visW) || {};
   if (win && bb && vw[id] >= 2 && !hasBoost(bb)) { unlockBoost(bb); setTimeout(() => { if (MG.open && !gotGift) mgSay(V.lines.boost); giveBoost(bb, `${V.short}, pour cette partie : « ${V.lines.boost} »`); }, gotGift ? 4200 : 1900); }
 
 }
@@ -16382,18 +16423,21 @@ function renderSpellBar() {
   const el = $('#abs'), run = G.run;
   if (!run) { el.innerHTML = ''; return; }
   const list = spellsOf(run);
-  el.innerHTML = list.map((id, i) => {
+  const bil = `<button class="ab bil" id="ab-bil" style="--sc:#dfe6f2" aria-label="BILLE : appuie sur ta base et tire en arrière (ou maintiens ${esc(keyHint('bille'))})"><i class="abk">${esc((keysOf('bille')[0] || 'Z').toUpperCase())}</i><span class="abi">${iconSVG('bille')}</span><i class="cdv"></i><span class="abn">BILLE</span><em class="abt"></em><i class="abc" hidden></i></button>`;
+  el.innerHTML = (LAY.pc ? bil : '') + list.map((id, i) => {
     const P = PSPELLS[id];
     return `<button class="ab" data-sp="${id}" style="--sc:${P.col}" aria-label="${P.name} (touche ${i + 1}) : ${esc(P.txt)}"><i class="abk">${i + 1}</i><span class="abi">${iconSVG(P.icon)}</span><i class="cdv"></i><span class="abn">${P.name.toUpperCase()}</span><em class="abt"></em></button>`;
   }).join('') + '<div class="ab-fx" id="ab-fx"></div>';
+  if (!LAY.pc) { const first = el.querySelector('.ab[data-sp]'); if (first) first.insertAdjacentHTML('afterend', bil); else el.insertAdjacentHTML('afterbegin', bil); }
   el.dataset.n = list.length;
+  delete hc.bilp; delete hc.bilt; delete hc.bilr; delete hc.bilc;
   for (const k in hc) if (k.startsWith('sp')) delete hc[k];
 }
 function updateAbilities(on) {
   const el = $('#abs'), cb = G.cb;
   if (!on) { if (!el.hidden) el.hidden = true; return; }
   if (el.hidden) { el.hidden = false; if (!el.children.length) renderSpellBar(); }
-  for (const b of el.querySelectorAll('.ab')) {
+  for (const b of el.querySelectorAll('.ab[data-sp]')) {
     const id = b.dataset.sp, cd = spellCd(id), rem = Math.max(0, cb.ab[id] || 0);
     const p = String(Math.round(clamp(rem / cd, 0, 1) * 100) / 100);
     if (hc['spp' + id] !== p) { hc['spp' + id] = p; b.style.setProperty('--p', p); }
@@ -16403,6 +16447,23 @@ function updateAbilities(on) {
     if (hc['spr' + id] === false && ready && G.mode === 'combat') { Snd.ready(id === 'gel' ? 'gel' : 'bomb'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); }
     hc['spr' + id] = ready;
     b.classList.toggle('ready', ready && !aim); b.classList.toggle('silenced', sil); b.classList.toggle('aiming', aim);
+  }
+  const bb = $('#ab-bil');
+  if (bb && cb.bil) {
+    const B = cb.bil, max = bilMaxCharges(cb.stats), ch = Math.max(0, B.charges || 0), out = !ch && B.balls && B.balls.some(x => x.main) && !(B.cd > 0);
+    const rem = ch > 0 ? 0 : out ? 1 : clamp((B.cd || 0) / (B.max || 1), 0, 1);
+    const p = String(Math.round(rem * 100) / 100);
+    if (hc.bilp !== p) { hc.bilp = p; bb.style.setProperty('--p', p); }
+    const t = ch > 0 ? '' : out ? '•••' : B.cd > 0 ? String(Math.ceil(B.cd)) : '';
+    if (hc.bilt !== t) { hc.bilt = t; bb.querySelector('.abt').textContent = t; }
+    const ready = ch > 0 && B.st !== 'aim';
+    if (hc.bilr === false && ready && G.mode === 'combat') { bb.classList.remove('pop'); void bb.offsetWidth; bb.classList.add('pop'); }
+    hc.bilr = ready;
+    bb.classList.toggle('ready', ready); bb.classList.toggle('out', out); bb.classList.toggle('aiming', B.st === 'aim');
+    const c = max > 1 ? `×${ch}` : '';
+    if (hc.bilc !== c) { hc.bilc = c; const ci = bb.querySelector('.abc'); ci.textContent = c; ci.hidden = !c; }
+    const lab = out ? 'EN JEU' : 'BILLE';
+    if (hc.bill !== lab) { hc.bill = lab; bb.querySelector('.abn').textContent = lab; }
   }
   const fx = $('#ab-fx'); if (!fx) return;
   const st = (cb.overheat > 0 ? `<span class="abfx hot">${iconSVG('surchauffe')}Surchauffe ${Math.ceil(cb.overheat)}${NB}s</span>` : '') + (cb.invuln > 0 ? `<span class="abfx inv">${iconSVG('rempart')}Bouclier ${Math.ceil(cb.invuln)}${NB}s</span>` : '');
@@ -16815,7 +16876,7 @@ const SKINS = {
     { id: 'bonbon', name: 'Sucre d\'orge', txt: 'Rayé rouge et blanc. Ne pas lécher.', need: { k: 'drinks', n: 15, txt: 'Bois 15 verres au bar' } },
     { id: 'neon', name: 'Néon', txt: 'Il laisse une traînée rose fluo.', need: { k: 'parries', n: 250, txt: 'Réussis 250 parades' } },
     { id: 'chrome', name: 'Chrome', txt: 'Brillant comme un pare-chocs de cabriolet.', need: { k: 'blocks', n: 300, txt: 'Bloque 300 tirs' } },
-    { id: 'bois', name: 'Queue de billard', txt: 'Le cadeau caché de Momo.', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard' } },
+    { id: 'bois', name: 'Queue de billard', txt: 'Le cadeau caché de Momo.', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard dans une partie' } },
     { id: 'piano', name: 'Piano', txt: 'Touches noires et blanches : il pare en rythme.', need: { k: 'rounds', n: 60, txt: 'Joue 60 manches' } },
     { id: 'carte', name: 'As de pique', txt: 'Le Baron n\'aime pas trop.', need: { k: 'gWins', n: 3, txt: 'Bats le Baron 3 fois au poker' } },
     { id: 'arc', name: 'Arc-en-ciel', txt: 'Toutes les couleurs du jackpot.', need: { k: 'bestStreak', n: 15, txt: 'Enchaîne 15 parades d\'affilée' } },
@@ -16839,9 +16900,9 @@ const SKINS = {
     { id: 'horloge', name: 'Horloge', txt: 'Prêtée par l\'Horloger. Elle donne l\'heure exacte.', need: { k: 'triples', n: 30, txt: 'Aligne 30 triples à la machine' } },
     { id: 'noir', name: 'Jeton noir', txt: 'Le 100, liseré d\'or : la table des gros joueurs.', need: { k: 'best', n: 20, txt: 'Atteins la manche 20' } },
     { id: 'disco', name: 'Boule disco', txt: 'Mille facettes, mille reflets.', need: { k: 'parries', n: 500, txt: 'Réussis 500 parades' } },
-    { id: 'cible', name: 'Cible de Dina', txt: 'Triple 20 garanti… pour les autres.', need: { k: 'gift:dina', n: 1, txt: 'Bats Dina 3 fois aux fléchettes' } },
-    { id: 'boule8', name: 'Boule 8', txt: 'Momo l\'a sortie de sa poche.', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard' } },
-    { id: 'roulette', name: 'Roulette', txt: 'Madame Nox te l\'a laissée. Rien ne va plus.', need: { k: 'gift:nox', n: 1, txt: 'Bats Madame Nox 3 fois à la roulette' } },
+    { id: 'cible', name: 'Cible de Dina', txt: 'Triple 20 garanti… pour les autres.', need: { k: 'gift:dina', n: 1, txt: 'Bats Dina 3 fois aux fléchettes dans une partie' } },
+    { id: 'boule8', name: 'Boule 8', txt: 'Momo l\'a sortie de sa poche.', need: { k: 'gift:momo', n: 1, txt: 'Bats Momo 3 fois au billard dans une partie' } },
+    { id: 'roulette', name: 'Roulette', txt: 'Madame Nox te l\'a laissée. Rien ne va plus.', need: { k: 'gift:nox', n: 1, txt: 'Bats Madame Nox 3 fois à la roulette dans une partie' } },
     { id: 'or', name: 'Plaque d\'or', txt: 'La plaque du Joker Noir. Elle pèse lourd.', need: { k: 'wins', n: 1, txt: 'Bats le Joker Noir' } },
     { id: 'secret', name: 'Jeton secret', txt: 'Tu l\'as trouvé…', need: { k: 'secret', n: 1, txt: '???' }, secret: true },
   ],
@@ -18040,7 +18101,7 @@ function devAction(k) {
     case 'market': G.dev.market = true; msg('La porte du marché noir sera ouverte au prochain bar.'); break;
     case 'gambler': G.dev.gambler = true; msg('Le Baron viendra au prochain bar.'); break;
     case 'v_dina': case 'v_momo': case 'v_nox': G.dev.visitor = k.slice(2); msg(`${VISITORS[k.slice(2)].name} viendra au prochain bar.`); break;
-    case 'rivals': for (const id of VIS_IDS) { const R = rival(id); R.w = Math.max(R.w, 2); } saveMeta(); msg('Rivalités à 2 victoires : la prochaine donne le cadeau.'); break;
+    case 'rivals': { const K = G.run && (G.run.K || (G.run.K = {})); if (K) { const vw = K.visW || (K.visW = {}); for (const id of VIS_IDS) vw[id] = Math.max(vw[id] || 0, 2); } msg('Étoiles à 2 pour cette partie : la prochaine victoire donne le cadeau.'); break; }
     case 'choose': G.dev.choose = true; msg('Choix de machine après la prochaine manche.'); break;
     case 'bugm': if (!inRun) return msg('Lance une partie d\'abord.'); run.bugDue = true; msg('La machine buggée s\'allumera après la prochaine machine.'); break;
     case 'clear': if (G.mode !== 'combat') return msg('Utilisable pendant une manche.'); cb.spawnIdx = cb.spawn.length; for (const e of cb.enemies) { if (e.ai === 'thief') giveBack(e); e.dead = true; } msg('Manche terminée.'); break;
@@ -18715,7 +18776,7 @@ function bindUI() {
   on('#lp-opts', () => openPause());
   on('#lp-run', () => openRunInfo());
   on('#b-pause', () => openPause());
-  $('#abs').addEventListener('click', e => { const b = e.target.closest('.ab[data-sp]'); if (!b) return; firstGesture(); castSpellP(b.dataset.sp); });
+  $('#abs').addEventListener('click', e => { if (e.target.closest('#ab-bil')) { firstGesture(); toast(LAY.pc ? `BILLE : clic droit maintenu sur la table, ou maintiens ${keyHint('bille')}, puis lâche pour lancer.` : 'BILLE : appuie sur ta base, tire en arrière, lâche.'); return; } const b = e.target.closest('.ab[data-sp]'); if (!b) return; firstGesture(); castSpellP(b.dataset.sp); });
   on('#m-spin', () => pullLever());
   on('#m-lever', () => pullLever());
   on('#m-respin', () => respin());
@@ -18892,7 +18953,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

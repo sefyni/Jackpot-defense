@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v9.2-202610081236
+JACKPOT DEFENSE v9.5-202610081603
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,18 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v9.5
+- La jauge de la BILLE : une case BILLE dans la barre des sorts (au milieu sur téléphone, en premier sur PC). Elle brille quand tu peux lancer, affiche « EN JEU » quand la bille roule, puis se remplit pendant la recharge (avec les secondes sur PC). Si tu as plusieurs charges (Ressort secret), elle affiche « ×2 », « ×3 ». Toucher la case rappelle comment lancer. L'anneau autour de ta base est aussi plus visible.
+
+Nouveautés de la v9.4
+- Catalogue remis d'aplomb sur PC : le titre, Monsieur Anatole, puis les onglets sur une ligne, et la grille avec la fiche à droite. Toutes les cases ont la même taille, quel que soit l'onglet (jetons, cartes, boissons, habitués…).
+
+Nouveautés de la v9.3
+- Punch-o-matic : un jeton ULTIME coûte toujours 300 or. Nouveau : un MIX ULTIME (ses deux jetons au niveau ultime) passe aussi à la machine, pour 500 or, et ses deux jetons ressortent en rareté secrète (les deux capacités secrètes, +25 % de puissance). Un mix dont un seul jeton est ultime est refusé.
+- « Mix ultime » veut maintenant dire : les deux jetons du mix en ultime.
+- Les étoiles des habitués (Dina, Momo, Madame Nox) repartent à zéro à chaque partie. 2 victoires dans la partie : leur jeton bonus. 3 victoires : leur cadeau (un jeton fou), à regagner à chaque partie. Le catalogue garde tes victoires de toujours pour débloquer les chapitres de leur histoire.
+- Corrigé : à la machine buggée, vendre un jeton pour atteindre 100 or débloque bien le bouton « Tirer ».
 
 Nouveautés de la v9.2
 - Écran d'accueil : fini la grille de 150 jetons. Sur la petite table, quelques cartes et quelques jetons éparpillés. Tout tient à l'écran, sans défiler (PC et téléphone).
