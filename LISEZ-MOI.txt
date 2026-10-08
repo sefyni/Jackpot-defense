@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v8-202610072313
+JACKPOT DEFENSE v9-202610081136
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,24 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v9
+- Tout le catalogue est neuf : 10 machines de 15 jetons (La Fournaise, Le Grand Bleu, Haute Tension, Le Jardin de Pierre, Le Salon, Le Stand de Tir, Le Flipper, Le Casino Maudit, La Fortune, L'Atelier) et 3 machines buggées de 10 fous (ERR_404, LAG_MAX, J4CKP0T.EXE) : 180 jetons. Les 6 machines de couleur et les anciens jetons disparaissent. Chaque jeton a la couleur de sa famille, 3 niveaux, une rareté secrète et un pouvoir de BILLE.
+- Choisir sa machine : au début de la partie (3 au choix, gratuit), puis après chaque boss (garder la tienne, ou passer à l'une de 3 autres pour 20 or). Chaque machine a son propre bug, à lire avant de tirer. À chaque visite, elle charge 5 de ses 15 jetons, dont jusqu'à 2 que tu as déjà (pour les monter de niveau).
+- Le marché noir propose 1 jeton de ta machine et 2 jetons d'autres machines.
+- La machine buggée : après chaque boss, pour 100 or, un seul tirage, et tu gardes un fou sur les trois. Deux identiques sur la ligne : +25 % de puissance. Trois : sa version corrompue.
+- Les fous ont leur look à eux : glitch et électricité.
+- La BILLE : chaque jeton lui donne un pouvoir (Dédoublement, Ricochet, Bille de feu, de glace, électrique, Tête chercheuse, Satellite, Gravité…), indiqué dans sa fiche. Et 16 billes à collectionner au Vestiaire (onglet Billes).
+- Les jetons bonus des persos ne durent plus qu'une partie : il faut refaire l'exploit à chaque partie.
+  Zapotron : battre le Baron au poker 3 fois d'affilée dans la même partie.
+  Cocktail de Zaza : 12 boissons et shots dans la partie.
+  Bernard : 5 achats au marché noir dans la partie.
+  Volée, Coup de queue, Roue de Nox : battre 2 fois Dina, Momo ou Nox dans la partie.
+  Les cadeaux des habitués, eux, restent acquis après 3 victoires.
+- Punch-o-matic : 300 or au lieu de 500. Il donne au jeton sa « rareté secrète », pour la partie en cours.
+- À la machine, « HOLD » devient « MAINTENIR ».
+- Monsieur Anatole, le collectionneur (menu Catalogue) : costume, moustache, toujours prêt à aider (sauf quand on lui parle de Bernard). Dans son cabinet sombre, ses objets sont accrochés au mur : la vitrine des secrets, les plaques des machines, les jetons bonus, les trophées des habitués, le tiroir des fous, la boîte à billes, le carnet des combos. Touche un objet : il t'explique ce que c'est et te montre ce que tu as débloqué.
+- Équilibrage : la base démarre à 130 PV, les tirs font 15 de base, les cartes rapportent un peu plus d'or et grossissent moins vite au fil des manches, et le Roi de Trèfle est un peu moins solide.
 
 Nouveautés de la v8
 - Niveaux : 6 actes de 5 manches. Chaque acte a sa couleur de cartes (Carreaux, Cœurs, Piques, Trèfles, Figures, puis la Table du Baron), annonce son boss dès sa 1re manche, monte en tension, et finit sur son boss. La manche d'après, on souffle un peu.
