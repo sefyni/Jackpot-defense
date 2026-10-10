@@ -2824,6 +2824,23 @@ body:not(.lpc) #statusbar{bottom:114px}
 body:not(.lpc) #tip{bottom:116px}
 body.lpc #tip{bottom:146px}
 @media (prefers-reduced-motion:reduce){.pc-hand .hand-svg,.pc-face{animation:none!important}}
+/* v10.4 · accueil : la donne des cartes garde leur place et leur angle ; le menu ne rejoue plus son apparition */
+#title.enter .ttc{animation-name:tCardDeal}
+@keyframes tCardDeal{0%{opacity:0;transform:translate(calc(-50% - 30px),calc(-50% - 46px)) rotate(-90deg) scale(1.25)}70%{opacity:1;transform:translate(-50%,calc(-50% + 2px)) rotate(calc(var(--r) + 6deg)) scale(.96)}100%{opacity:1;transform:translate(-50%,-50%) rotate(var(--r))}}
+#title .tmenu.popin{animation:none}
+#title.enter .tmenu.popin{animation:tMenuIn .55s cubic-bezier(.2,1.3,.4,1) .12s both}
+/* v10.4 · marché noir : l'enseigne passe devant la porte, sur un fond sombre */
+.al-neon{z-index:2;padding:4px 7px 5px;border-radius:7px;background:rgba(10,6,16,.62)}
+body.lpc .al-door{height:72px}
+/* v10.4 · la mise : ses règles, en chiffres */
+.sbox .nr-r{position:relative;display:block;margin-top:3px;padding-left:12px;font-size:12px;line-height:1.25;color:var(--muted);text-align:left}
+.sbox .nr-r::before{content:"";position:absolute;left:0;top:.36em;width:7px;height:7px;border-radius:50%;background:var(--sc,#8d98ad);box-shadow:0 0 0 1px #000}
+.sbox .nr-r.on{color:var(--cream)}
+.sbox .nr-r b{display:inline;gap:0;font-size:inherit;color:#fff;font-weight:700}
+.sbox .nr-r.none,.sbox .nr-r.lock{padding-left:0;text-align:center}
+.sbox .nr-r.none::before,.sbox .nr-r.lock::before{display:none}
+.sbox .nr-r.lock{color:var(--gold)}
+body.lpc .nr .sbox .nr-r{font-size:13px}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -4134,7 +4151,7 @@ const BAL = {
   rakeR: 16.5, rakeHalf: .46, rakeTurn: 22, rakeDur: 4, rakeRebuild: 3.6,
   swingWin: .22, swingFatigue: .3, flickVel: 10,
   reflectSpd: 125, streakStep: .25, streakMax: 6,
-  bombCd: 16, bombR: 22, bombMul: 7, gelCd: 20, gelR: 46, gelDur: 2.6, parryCdr: 3, killCdr: .12,
+  bombCd: 11, bombR: 22, bombMul: 7, gelCd: 14, gelR: 46, gelDur: 2.6, parryCdr: 3, killCdr: .12,
   hpG: 1.07, dmgG: 1.05, spdG: .009, spdMax: 1.35, goldG: .012,
   tp0: 7, tp1: 3.6, tp2: .08, hpMul: 1.08, dmgMul: 1.1, spawnK: .8,
   eShotSpd: 54, eShotR: 2.4,
@@ -4320,7 +4337,7 @@ const FOU9 = [
   { id: "pixelmort", n: "Pixel mort", g: 0, l: "efface", p: "Un pixel mort flotte sur la table : une carte qui le touche est effacée (sauf les boss) et compte comme abattue. Il change de place à chaque manche.", x: "deux pixels, qui dérivent vers les cartes" },
   { id: "copiercoller", n: "Copier-coller", g: 0, l: "Ctrl+V", p: "Au début de chaque manche, il devient une copie à 100 % du dernier jeton que tu as vendu.", x: "copie les deux derniers vendus" },
   { id: "introuvable", n: "Introuvable", g: 0, l: "404", p: "Les cartes perdent ta trace : 30 % de leurs tirs partent au hasard, et chaque carte hésite 1 s en entrant sur la table.", x: "60 % des tirs" },
-  { id: "tampon", n: "Mémoire tampon", g: 0, l: "+1 place", p: "+1 place de jeton, même au-delà de 8.", x: "+2 places" },
+  { id: "tampon", n: "Mémoire tampon", g: 0, l: "+1 place", p: "+1 place de jeton, même au-delà de 8. Une fois pris, il devient un jeton bonus : il ne prend pas de place.", x: "+2 places" },
   { id: "disque", n: "Disque rayé", g: 0, l: "encore", p: "Chaque sort que tu lances se relance tout seul 2 s plus tard, gratuitement.", x: "il se relance deux fois" },
   { id: "avion", n: "Mode avion", g: 0, l: "hors ligne", p: "Déconnecté : les sorts ennemis (Inversion, Silence, Leurre…) ne t'atteignent plus.", x: "et chaque tirage à la machine a un crâne de moins" },
   { id: "instable", n: "Fichier instable", g: 0, l: "×2 ?", p: "Chaque manche, un jeton de ton rack au hasard fait ×2 ; celui de la manche d'avant ne fait plus que ×0,75.", x: "×3, et plus de baisse" },
@@ -4767,7 +4784,7 @@ const TK_STATS = {
 };
 // les places du rack : la Mémoire tampon en ajoute (même au-delà de 8), l'Hypothèque en prend une (sauf en secrète)
 function effSlots(run) {
-  let n = run.slots;
+  let n = run.slots + (run.tamponN || 0);
   for (const j of run.jokers) {
     if (j.kind === 'faux') continue;
     for (const p of j.parts) {
@@ -8520,7 +8537,7 @@ const PSPELLS = {
   bouclier: { name: 'Bouclier', icon: 'rempart', col: '#9fd8ff', cd: 26, price: 75, txt: `Ta base ne prend plus aucun dégât pendant 3${NB}s, et les tirs qui la touchent repartent.` },
   surchauffe: { name: 'Surchauffe', icon: 'surchauffe', col: '#ff9a3d', cd: 20, price: 80, txt: `Ton canon tire 3× plus vite pendant 4${NB}s.` },
 };
-const SPELL_SLOTS = 4;   // 4 sorts au maximum, Bombe et Gel compris. On ne les échange pas : on les vend.
+const SPELL_SLOTS = 5;   // v10.4 : 5 sorts au maximum (plus la BILLE), Bombe et Gel compris. On ne les échange pas : on les vend.
 const spellSellValue = id => Math.max(1, Math.round((PSPELLS[id].price || 45) * .5));
 /* ================= v10 · LES SORTS DE FAMILLE =================
    Un sort par famille de jetons, vendu au marché noir comme les autres (4 sorts maximum).
@@ -8530,16 +8547,18 @@ const FAM_SP = {
   deluge: { short: 'Déluge', fam: 'elem', name: 'Déluge de feu', icon: 'brasier', cd: 26, price: 90, txt: `Toutes les cartes brûlent : 60${NB}% des dégâts par seconde pendant 4${NB}s.` },
   salve: { fam: 'balle', name: 'Salve', icon: 'rafale', cd: 20, price: 85, txt: `12 balles partent en étoile et transpercent tout : 150${NB}% des dégâts.` },
   etoiles: { short: 'Étoiles', fam: 'astro', name: 'Pluie d\'étoiles', icon: 'star', cd: 24, price: 90, txt: `8 étoiles filantes tombent sur 8 cartes : 250${NB}% des dégâts chacune.` },
-  colere: { short: 'Colère', fam: 'myth', name: 'Colère divine', icon: 'mjolnir', cd: 28, price: 100, txt: `La foudre frappe la carte la plus costaude : 1000${NB}% des dégâts.` },
+  colere: { short: 'Colère', fam: 'myth', name: 'Colère divine', icon: 'mjolnir', cd: 28, price: 100, txt: `La foudre frappe la carte la plus costaude (1000${NB}% des dégâts), puis des éclairs jaillissent en tourbillonnant dans tous les sens depuis l'impact : 200${NB}% des dégâts et étourdit chaque carte touchée.` },
   bowling: { short: 'Strike', fam: 'jeux', name: 'Strike !', icon: 'strike', cd: 22, price: 85, txt: `Une boule de bowling traverse la table : 200${NB}% des dégâts, et les cartes touchées sont sonnées 1,5${NB}s.` },
   multibilles: { fam: 'flip', name: 'Multibille', icon: 'multibille', cd: 18, price: 80, txt: 'Trois BILLES partent en éventail, sans utiliser ta charge.' },
-  forteresse: { fam: 'base', name: 'Forteresse', icon: 'muraille', cd: 30, price: 85, txt: `Ta base se répare : +20${NB}% de ses PV max.` },
+  forteresse: { fam: 'base', name: 'Forteresse', icon: 'muraille', cd: 22, price: 85, txt: `Ta base se répare de 30${NB}% de ses PV max et se blinde : un rempart de 25${NB}% de ses PV max encaisse les coups à sa place.` },
   coupbol: { short: 'Coup de bol', fam: 'chance', name: 'Coup de bol', icon: 'trefle4', cd: 30, price: 80, txt: `Pendant 8${NB}s, chaque carte abattue rapporte 3× plus d'or.` },
   pacteS: { fam: 'malus', name: 'Pacte', icon: 'pacte', cd: 26, price: 90, txt: `Ta base perd 10${NB}% de ses PV, puis 400${NB}% des dégâts à toutes les cartes.` },
   jackpotS: { fam: 'mult', name: 'Jackpot', icon: 'ampli', cd: 25, price: 95, txt: '+0,4 MULT pour toute la manche (cumulable).' },
   echoS: { fam: 'vois', name: 'Écho', icon: 'echo', cd: 30, price: 85, txt: 'Relance aussitôt ton dernier sort, sans attendre sa recharge.' },
 };
 for (const id in FAM_SP) PSPELLS[id] = Object.assign({ col: CATS[FAM_SP[id].fam].col }, FAM_SP[id]);
+// v10.4 : toutes les recharges raccourcies (×0,7)
+for (const id in PSPELLS) if (PSPELLS[id].cd && !PSPELLS[id].cdK) { PSPELLS[id].cd = Math.round(PSPELLS[id].cd * .7); PSPELLS[id].cdK = 1; }
 // combien de jetons de la famille dans le rack (un mix compte pour ses deux familles)
 function famCount(run, fam) {
   if (!run) return 0;
@@ -8620,8 +8639,22 @@ function useFam(id) {
       if (!L.length) return famNone();
       go();
       const e = L.reduce((b, x) => (x.boss ? x.hp * 4 : x.hp) > (b.boss ? b.hp * 4 : b.hp) ? x : b, L[0]);
+      const x = e.x, y = e.y;
       dealDmg(e, D * 10 * P, { src: 'famS', big: true });
-      if (!hl) { fxPush({ type: 'sky', pts: [[e.x, e.y]], life: .55, max: .55 }); burst(e.x, e.y, '#ffe066', 24, 60, 1.6, .6); cb.flash = .3; cb.flashCol = '255,240,170'; shake(9); Snd.orage(); floater(e.x, e.y - e.r - 6, 'COLÈRE DIVINE', '#ffe066', 5.6); }
+      // puis la foudre s'éparpille : 9 éclairs qui tourbillonnent depuis l'impact
+      const forks = [], hit = new Set([e.id]);
+      for (let k = 0; k < 9; k++) {
+        const f = { a: k * TAU / 9 + rand(-.25, .25), curl: rand(-.16, .16), len: rand(58, 96) };
+        forks.push(f);
+        const path = swirlPath(x, y, f.a, f.len, 9, f.curl, 0);
+        for (const o of cb.enemies) {
+          if (o.dead || o.ai === 'decoy' || hit.has(o.id) || !nearPath(o, path, o.r + 5)) continue;
+          hit.add(o.id);
+          const zap = () => { if (o.dead) return; dealDmg(o, D * 2 * P, { src: 'famS' }); if (!o.dead) stunE(o, .7); if (!hl) burst(o.x, o.y, '#fff3a8', 7, 30, 1, .35); };
+          if (hl) zap(); else { cb.later = cb.later || []; cb.later.push({ t: cb.t + .08 + .25 * Math.hypot(o.x - x, o.y - y) / f.len, fn: zap }); }
+        }
+      }
+      if (!hl) { fxPush({ type: 'sky', pts: [[x, y]], life: .55, max: .55 }); fxPush({ type: 'colere', fam: 1, x, y, forks, life: .7, max: .7 }); fxPush({ type: 'ring', x, y, r0: 4, r1: 60, col: '255,240,170', life: .45, max: .45 }); burst(x, y, '#ffe066', 30, 70, 1.8, .7); cb.flash = .35; cb.flashCol = '255,240,170'; shake(10); haptic(90); Snd.orage(); Snd.zap(); floater(x, y - e.r - 6, 'COLÈRE DIVINE', '#ffe066', 5.6); }
       return true;
     }
     case 'bowling': {
@@ -8650,10 +8683,12 @@ function useFam(id) {
       return true;
     }
     case 'forteresse': {
-      if (run.hp >= run.maxHp - .5) { if (!hl) toast('Ta base est déjà en pleine forme.'); Snd.deny(); return false; }
       go();
-      const h0 = run.hp; heal(run.maxHp * .2 * P);
-      if (!hl) { fxPush({ type: 'ring', x: 0, y: 0, r0: 4, r1: BAL.baseR + 16, col: '95,214,138', life: .55, max: .55 }); floater(0, -BAL.baseR - 8, `+${Math.round(run.hp - h0)} PV`, '#5fd68a', 5.2); Snd.heal(); }
+      const h0 = run.hp; heal(run.maxHp * .3 * P);
+      // le rempart : des PV de blindage qui encaissent avant ta base
+      cb.armor = Math.min((cb.armor || 0) + run.maxHp * .25 * P, run.maxHp * .6 * P);
+      for (const o of cb.enemies) { if (o.dead || o.ai === 'decoy' || o.boss) continue; const d = Math.hypot(o.x, o.y) || 1; if (d < BAL.baseR + 26) { o.kbx += o.x / d * 120; o.kby += o.y / d * 120; } }
+      if (!hl) { fxPush({ type: 'ring', x: 0, y: 0, r0: 4, r1: BAL.baseR + 22, col: '95,214,138', life: .6, max: .6 }); fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: BAL.baseR + 8, col: '195,205,224', life: .8, max: .8 }); floater(0, -BAL.baseR - 8, `+${Math.round(run.hp - h0)} PV · REMPART`, '#5fd68a', 5.2); Snd.heal(); Snd.thud(); shake(3); haptic(40); }
       return true;
     }
     case 'coupbol': {
@@ -8701,10 +8736,26 @@ function botFamSpells(cb) {
     else if (id === 'echoS' && cb.lastSp && cb.lastSp !== 'bomb' && n >= 4) useFam(id);
   }
 }
-// ce que l'on voit : l'astéroïde, les étoiles filantes, la boule de bowling
+// ce que l'on voit : l'astéroïde, les étoiles filantes, la boule de bowling, les éclairs de la Colère
 function drawFxFam(fx, a, t) {
   const p = 1 - a;
   switch (fx.type) {
+    case 'colere': {
+      const grow = Math.min(1, p * 3.2), fl = .55 + .45 * Math.random();
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      for (const f of fx.forks) {
+        const main = swirlPath(fx.x, fx.y, f.a, f.len * grow, 9, f.curl, 2.6), m = main[Math.floor(main.length * .55)];
+        const sub = swirlPath(m[0], m[1], f.a + (f.curl > 0 ? .8 : -.8), f.len * .45 * grow, 5, -f.curl, 2);
+        for (const pts of [main, sub]) {
+          ctx.strokeStyle = `rgba(255,214,90,${.42 * a * fl})`; ctx.lineWidth = pts === main ? 3.4 : 2.2;
+          ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const q of pts) ctx.lineTo(q[0], q[1]); ctx.stroke();
+          ctx.strokeStyle = `rgba(255,253,235,${a * fl})`; ctx.lineWidth = pts === main ? 1.1 : .7;
+          ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const q of pts) ctx.lineTo(q[0], q[1]); ctx.stroke();
+        }
+      }
+      ctx.fillStyle = `rgba(255,250,220,${.8 * a})`; ctx.beginPath(); ctx.arc(fx.x, fx.y, 4 + 6 * a, 0, TAU); ctx.fill();
+      return true;
+    }
     case 'meteor': {
       const sx = fx.x + 110, sy = fx.y - 190, x = sx + (fx.x - sx) * p, y = sy + (fx.y - sy) * p;
       ctx.strokeStyle = `rgba(255,120,60,${.25 + .5 * p})`; ctx.lineWidth = .8; ctx.setLineDash([2, 2]);
@@ -13786,6 +13837,7 @@ function showStatus() {
 const canReorder = () => G.run && ['machine', 'market', 'cleared', 'bar', 'chooser'].includes(G.mode);
 function renderRack() {
   if (G.headless || !G.run) return;
+  if (tamponToBonus(G.run)) setTimeout(() => boostNote('tampon', 'Elle ne prend plus de place : +' + (G.run.tamponN || 1) + ' place' + ((G.run.tamponN || 1) > 1 ? 's' : '') + ' de jeton pour toute la partie.'), 300);
   if (JT.uid != null && !G.run.jokers.some(j => j.uid === JT.uid)) hideJTip();
   const run = G.run, st = G.mode === 'combat' && G.cb && G.cb.stats && !G.cb.demo ? G.cb.stats : computeStats(run);
   let h = '';
@@ -14202,7 +14254,8 @@ function renderNewRun(dir) {
   const st = stakeInfo(m.stake);
   setTxt('#nr-stake', st.name);
   $('#nr-schip').style.background = st.col;
-  setTxt('#nr-stxt', st.txt + (m.stake >= 2 ? ' Et les règles des mises d\'avant.' : '') + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? ' Gagne une partie pour débloquer la suivante.' : ''));
+  // v10.4 : ce que la mise change vraiment, en chiffres (avec les règles des mises d'avant)
+  setHTML('#nr-stxt', stakeRulesHTML(m.stake) + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? '<span class="nr-r lock">Gagne une partie pour débloquer la mise suivante.</span>' : ''));
   $('#nr-sprev').disabled = m.stake <= 0;
   $('#nr-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
 }
@@ -14586,7 +14639,7 @@ function bookPages(n) {
     if (fam.length) P.push({ k: 'grid', sec: 'Le marché noir', toc: 'Les sorts de famille', title: 'Les sorts de famille', col: '#c9a8ff', note: 'Plus vous avez de jetons de leur famille, plus ils frappent fort.', blocks: [blk(null, 'icons', fam.map(id => ['q', id]), 3)] });
     for (let k = 0; k < COMBOS.length; k += 14) P.push({ k: 'grid', sec: 'Les combos', toc: k === 0 ? 'Les combos' : null, title: k === 0 ? 'Les combos' : 'Les combos (suite)', col: '#ff5fa2', note: k === 0 ? 'Deux jetons côte à côte. Rien de plus, rien de moins.' : null, blocks: [blk(null, 'duo', COMBOS.slice(k, k + 14).map(c => ['c', c.id]), 7)] });
     P.push({ k: 'grid', sec: 'Les habitués', toc: 'Les habitués', title: 'Les habitués', col: '#ffb07a', note: 'Ils viennent tous les soirs. Moi aussi, en cachette.', blocks: [blk(null, 'faces', PEOPLE.map(id => ['p', id]), 2)] });
-    P.push({ k: 'grid', sec: 'Les habitués', title: 'Les animaux', col: '#9be15d', note: "Ils parlent, ils jurent, et ils restent toute la partie. Zaza en a trois. L'Inspecteur, un seul : il le regrette.", blocks: [blk(null, 'faces', PET_IDS.map(id => ['a', id]), 2)] });
+    P.push({ k: 'grid', sec: 'Les animaux', toc: 'Les animaux', title: 'Les animaux', col: '#9be15d', note: "Ils parlent, ils jurent, et ils restent toute la partie. Zaza en a trois. L'Inspecteur, un seul : il le regrette.", blocks: [blk(null, 'faces', PET_IDS.map(id => ['a', id]), 2)] });
   } else {
     P.push({ k: 'title' });
     CAT_ORDER.forEach((f, i) => P.push({ k: 'grid', sec: 'Les secrets', toc: i === 0 ? 'Les secrets, famille par famille' : null, title: CATS[f].n, col: CATS[f].col, note: i === 0 ? 'Un jeton ULTIME passé au Punch-o-matic livre son secret. Je note tout.' : null, secrets: true, blocks: [blk(null, 'chips', NORMAL_JOKERS.filter(id => JK[id].cat === f).map(id => ['S', id]), 4)] }));
@@ -16371,6 +16424,61 @@ function countTo(el, a, b, ms, onStep) {
   requestAnimationFrame(step);
 }
 function bumpEl(el) { if (!el) return; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+
+/* ================= v10.4 · corrections ================= */
+// la Mémoire tampon ne prend plus de place : une fois prise, elle devient un jeton bonus (+1 place, +2 corrompue)
+function tamponToBonus(run) {
+  if (!run || !run.jokers) return false;
+  let did = false;
+  for (let i = run.jokers.length - 1; i >= 0; i--) {
+    const j = run.jokers[i];
+    if (j.kind === 'faux' || j.parts.length !== 1 || j.parts[0].t !== 'tampon') continue;
+    run.jokers.splice(i, 1);
+    run.tamponN = (run.tamponN || 0) + (j.corrupt ? 2 : 1);
+    if (!(run.boosters || (run.boosters = [])).includes('tampon')) run.boosters.push('tampon');
+    did = true;
+  }
+  return did;
+}
+// les mises : ce qu'elles changent vraiment, en chiffres (cumulées)
+function stakeRules(s) {
+  const out = [], b0 = Math.round(BAL.roundBonus0 + BAL.roundBonusR * 10), sol = ENEMIES.soldat, heal = Math.round(BAL.baseHp * BAL.healBetween);
+  const pv = UPG.pv.price[0];
+  out.push([1, `Or ×0,7 : prime de la manche 10 = <b>${Math.round(b0 * .7)}</b> or (au lieu de ${b0}) · prix ×1,25 : ${pv} or → <b>${Math.round(pv * 1.25)}</b>`]);
+  out.push([2, `Un événement à <b>chaque manche</b> dès la 3e (au lieu de ${EVENT_ROUNDS.length} par partie)`]);
+  out.push([3, `Un <b>malus</b> à chaque manche (parfois 2 crânes dès la manche 10)`]);
+  out.push([4, `Machine : <b>0</b> relance gratuite (au lieu de 1), et plus de crânes`]);
+  out.push([5, `Élites dès la manche 1 : jusqu'à <b>45${NB}%</b> des cartes (au lieu de 30${NB}%)`]);
+  out.push([6, `Soin entre les manches : <b>0${NB}PV</b> (au lieu de ${heal})`]);
+  out.push([7, `Cartes ×1,5 : un Soldat a <b>${Math.round(sol.hp * 1.5)}</b>${NB}PV (au lieu de ${sol.hp}) et frappe <b>${Math.round(sol.dmg * 1.5)}</b> (au lieu de ${sol.dmg}) · boss +50${NB}% de PV`]);
+  return out.filter(r => r[0] <= s);
+}
+function stakeRulesHTML(s) {
+  const L = stakeRules(s);
+  if (!L.length) return '<span class="nr-r none">Aucune règle en plus : les valeurs de base du jeu.</span>';
+  return L.map(([k, t]) => `<span class="nr-r${k === s ? ' on' : ''}" style="--sc:${STAKES[k].col}">${t}</span>`).join('');
+}
+// la Colère divine : des éclairs qui partent en tourbillonnant depuis l'impact
+function swirlPath(x, y, a, len, seg, curl, amp) {
+  const pts = [[x, y]];
+  let px = x, py = y, ang = a;
+  for (let i = 1; i <= seg; i++) {
+    ang += curl + (Math.random() - .5) * .5;
+    const st = len / seg;
+    px += Math.cos(ang) * st; py += Math.sin(ang) * st;
+    const off = i < seg ? (Math.random() - .5) * 2 * amp : 0;
+    pts.push([px - Math.sin(ang) * off, py + Math.cos(ang) * off]);
+  }
+  return pts;
+}
+function nearPath(e, pts, r) {
+  for (let i = 1; i < pts.length; i++) {
+    const [x1, y1] = pts[i - 1], [x2, y2] = pts[i], dx = x2 - x1, dy = y2 - y1, L2 = dx * dx + dy * dy || 1;
+    const t = clamp(((e.x - x1) * dx + (e.y - y1) * dy) / L2, 0, 1), qx = x1 + dx * t - e.x, qy = y1 + dy * t - e.y;
+    if (qx * qx + qy * qy < r * r) return true;
+  }
+  return false;
+}
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
@@ -18852,7 +18960,7 @@ function spellCd(id) {
   return PSPELLS[id].cd * (G.run.boost && G.run.boost.recharge ? .5 : 1);
 }
 function initSpells(cb, run) {
-  for (const id of spellsOf(run)) cb.ab[id] = id === 'bomb' && run.boost.poudre ? 0 : id === 'gel' && run.boost.givre ? 0 : spellCd(id) * .5;
+  for (const id of spellsOf(run)) cb.ab[id] = id === 'bomb' && run.boost.poudre ? 0 : id === 'gel' && run.boost.givre ? 0 : spellCd(id) * .25;
 }
 function tickSpells(cb, dt) {
   for (const id in PSPELLS) if (cb.ab[id] > 0) cb.ab[id] -= dt;
@@ -19033,8 +19141,11 @@ const PCG = {
 };
 const PCS = { cards: [], pile: [], q: [], qT: 0, freeAt: 0, lay: null, hands: {}, pc: null, gen: 0 };
 const pcGeo = () => LAY.pc ? PCG.pc : PCG.tel;
-function pcLayout(n) {
-  const g = pcGeo(), rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w, L = -totW / 2;
+// les cartes rapetissent s'il le faut, pour que les 6 (BILLE + 5 sorts) et la pile tiennent dans la largeur
+function pcLayout(n, availW) {
+  const g0 = pcGeo(), maxW = availW ? (availW - 16 - (n - 1) * g0.gap - g0.pile) / (n + 1) : g0.w;
+  const k = Math.min(1, maxW / g0.w), g = k < 1 ? Object.assign({}, g0, { w: Math.floor(g0.w * k), h: Math.floor(g0.h * k), rest: Math.round(g0.rest * (.5 + .5 * k)) }) : g0;
+  const rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w, L = -totW / 2;
   const slot = k => L + k * (g.w + g.gap);
   const rc = L + rowW / 2, hs = Math.max(g.hw * .62, rowW * .27);
   return { g, n, rowW, L, slot, pile: L + rowW + g.pile, hand: { l: rc - hs, r: rc + hs }, mid: rc };
@@ -19069,7 +19180,7 @@ function renderSpellBar() {
   const el = $('#abs'), run = G.run;
   PCS.gen++; clearTimeout(PCS.qT); PCS.qT = 0; PCS.q = []; PCS.pile = []; PCS.freeAt = 0;
   if (!run) { el.innerHTML = ''; PCS.cards = []; return; }
-  const list = spellsOf(run), ids = ['bil', ...list], L = pcLayout(ids.length), g = L.g, cb = G.cb;
+  const list = spellsOf(run), ids = ['bil', ...list], aw = el.clientWidth || ($('#stage') && $('#stage').clientWidth) || 0, L = pcLayout(ids.length, aw), g = L.g, cb = G.cb;
   PCS.lay = L; PCS.pc = !!LAY.pc;
   el.classList.add('cards');
   el.innerHTML = `<div class="pc-row" style="--cw:${g.w}px;--ch:${g.h}px;--hw:${g.hw}px;--hh:${g.hh}px;--rh:${g.top + g.h + g.rest}px">${ids.map((id, k) => pcCardHTML(id, k, L)).join('')}
@@ -21028,7 +21139,8 @@ function autoMachine() {
     closeMachine();
   }
 }
-function addJokerSim(j) {
+function addJokerSim(j) { addJokerSim0(j); tamponToBonus(G.run); }
+function addJokerSim0(j) {
   const run = G.run;
   const partner = stackPartner(j);
   if (partner) { applyStack(partner, j); return; }
@@ -21394,6 +21506,7 @@ const KEY_ACTS = [
   ['sp2', 'Sort 2', 'combat', ['2', 'é']],
   ['sp3', 'Sort 3', 'combat', ['3', '"']],
   ['sp4', 'Sort 4', 'combat', ['4', "'"]],
+  ['sp5', 'Sort 5', 'combat', ['5', '(']],
   ['bomb', 'Bombe (où qu\'elle soit)', 'combat', ['b', '']],
   ['gel', 'Gel (où qu\'il soit)', 'combat', ['g', '']],
   ['bille', 'BILLE : maintenir pour viser (axe du flipper), lâcher pour lancer', 'combat', ['z', 'Shift']],
@@ -21489,7 +21602,7 @@ function keyDown(e) {
   if (isKey('bille', k)) { e.preventDefault(); if (!e.repeat) bilKeyDown(); return; }
   if (isKey('parry', k)) { swing(); e.preventDefault(); }
   const L = spellsOf(G.run);
-  for (let n = 0; n < 4; n++) if (isKey('sp' + (n + 1), k) && L[n]) { castSpellP(L[n]); e.preventDefault(); return; }
+  for (let n = 0; n < SPELL_SLOTS; n++) if (isKey('sp' + (n + 1), k) && L[n]) { castSpellP(L[n]); e.preventDefault(); return; }
   if (isKey('bomb', k)) castSpellP('bomb');
   if (isKey('gel', k)) castSpellP('gel');
 }
@@ -21789,7 +21902,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.3-202610110136
+JACKPOT DEFENSE v10.4-202610110157
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.4
+- 5 sorts au lieu de 4 : avec la BILLE, ça fait 6 cartes devant toi (touche 5 pour le 5e sort). Les cartes rapetissent un peu sur téléphone pour tenir.
+- Recharges plus courtes : Bombe 11 s (au lieu de 16), Gel 14 s (au lieu de 20), et tous les autres sorts ×0,7. En début de manche, les sorts reviennent beaucoup plus vite.
+- Forteresse, plus forte : ta base se répare de 30 % de ses PV max et gagne un rempart (25 % de ses PV max) qui encaisse les coups à sa place ; elle repousse les cartes collées à elle. Recharge 15 s (au lieu de 30).
+- Colère divine : la foudre frappe la plus grosse carte, puis 9 éclairs jaillissent en tourbillonnant dans tous les sens depuis l'impact (200 % des dégâts et étourdit chaque carte touchée).
+- Mémoire tampon (jeton fou) : une fois prise, elle devient un jeton bonus. Elle ne prend plus de place : +1 place de jeton (+2 corrompue).
+- Nouvelle partie : la mise affiche ce qu'elle change vraiment, en chiffres (or, prix, soins, PV des cartes…), règles des mises d'avant comprises.
+- Écran d'accueil : les cartes de la petite table ne sautent plus quand l'accueil apparaît, et le menu ne rejoue plus son animation.
+- Marché noir : l'enseigne passe devant la porte, sur un fond sombre, et se lit en entier.
+- Carnet d'Anatole : « Les animaux » ont leur entrée dans le sommaire.
 
 Nouveautés de la v10.3
 - Les pouvoirs deviennent des cartes, comme au poker : la BILLE et tes sorts (jusqu'à 5 cartes) sont alignés devant toi, en bas de la table. Touche une carte (ou sa touche 1 à 4) pour lancer le sort.
