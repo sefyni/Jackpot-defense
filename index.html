@@ -2277,6 +2277,169 @@ body:not(.lpc) .jpm-lever{display:none}
 #m-bug{cursor:pointer}
 #m-bug i{display:inline-grid;place-items:center;width:16px;height:16px;margin-left:5px;border-radius:50%;background:rgba(255,255,255,.85);color:#120a1c;font-style:normal;font-size:11px;line-height:1}
 
+/* ================= v10 · Nouvelle partie : ton jeu et ta mise ================= */
+#newrun{background:radial-gradient(ellipse at 50% 40%,rgba(20,13,31,.3),rgba(20,13,31,.88) 78%)}
+.nr{gap:12px}
+.nr-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nr-head h2{font:700 clamp(24px,7.2vw,32px)/1 var(--f-pix);letter-spacing:.05em;color:var(--gold);text-shadow:0 3px 0 #b8323f,0 5px 0 #000}
+.nr-deck{display:flex;align-items:center;justify-content:center;gap:14px;width:100%}
+.nr-arr{width:46px;height:68px;font-size:20px}
+.nr-cardbox{position:relative;flex:none;width:min(46vw,190px);aspect-ratio:5/7;touch-action:pan-y}
+.nr-card{position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#fff3e6;
+  box-shadow:0 8px 0 rgba(0,0,0,.45),0 0 34px color-mix(in srgb,var(--dc) 45%,transparent);animation:nrIn .3s cubic-bezier(.2,1.3,.4,1) both}
+.nr-card.in-r{animation-name:nrInR}.nr-card.in-l{animation-name:nrInL}
+@keyframes nrIn{from{transform:scale(.92);opacity:0}}
+@keyframes nrInR{from{transform:translateX(42%) rotate(9deg);opacity:0}}
+@keyframes nrInL{from{transform:translateX(-42%) rotate(-9deg);opacity:0}}
+.nr-pat{position:absolute;inset:8px;border-radius:10px;background:
+  radial-gradient(circle at 50% 50%,rgba(255,255,255,.26),transparent 58%),
+  repeating-linear-gradient(45deg,transparent 0 9px,rgba(255,255,255,.16) 9px 11px),
+  repeating-linear-gradient(-45deg,transparent 0 9px,rgba(0,0,0,.17) 9px 11px),
+  linear-gradient(160deg,color-mix(in srgb,var(--dc) 82%,#fff),color-mix(in srgb,var(--dc) 52%,#1a0f2a));
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),inset 0 0 0 6px color-mix(in srgb,var(--dc) 25%,#fff3e6),inset 0 0 0 8px rgba(0,0,0,.25)}
+.nr-cn{position:absolute;width:15px;height:15px;color:#1a0f2a;opacity:.6}
+.nr-cn.tl{left:16px;top:16px}.nr-cn.tr{right:16px;top:16px;color:#9b1e3e}.nr-cn.bl{left:16px;bottom:16px;color:#9b1e3e}.nr-cn.br{right:16px;bottom:16px}
+.nr-med{position:absolute;left:50%;top:50%;width:48%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 40% 35%,#fffaf2,#eadfcb);color:color-mix(in srgb,var(--dc) 62%,#1a0f2a);
+  box-shadow:0 0 0 4px #1a0f2a,0 0 0 8px color-mix(in srgb,var(--dc) 75%,#fff),0 0 0 11px #1a0f2a,0 8px 0 10px rgba(0,0,0,.25)}
+.nr-med .ico{width:60%;height:60%}
+.nr-stk{position:absolute;left:50%;top:13px;width:26px;height:26px;margin-left:-13px;border-radius:50%;display:grid;place-items:center;background:var(--sc);color:#120a1c;box-shadow:0 0 0 3px #120a1c,0 0 10px var(--sc)}
+.nr-stk svg{width:70%;height:70%}
+.nr-info{width:100%;display:flex;flex-direction:column;align-items:center;gap:9px}
+.nr-name{font:700 clamp(23px,6.8vw,30px)/1.05 var(--f-pix);color:#fff;text-shadow:0 0 16px color-mix(in srgb,var(--dc) 75%,transparent),0 3px 0 #000}
+.nr-txt{min-height:2.6em;max-width:340px;font-size:16px;line-height:1.3;color:var(--cream)}
+.nr-dots{display:flex;gap:7px;padding:2px 0 4px}
+.nr-dots i{position:relative;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);transition:transform .15s}
+.nr-dots i.won{background:color-mix(in srgb,var(--dc) 45%,#2c2142)}
+.nr-dots i.on{background:var(--dc);box-shadow:0 0 8px var(--dc);transform:scale(1.35)}
+.nr .stake{width:100%;text-align:center}
+.nr-go{width:100%}
+body.lpc #newrun .nr{width:940px;max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 48px;align-items:center}
+body.lpc .nr-head{grid-column:1 / -1}
+body.lpc .nr-cardbox{width:250px}
+body.lpc .nr-arr{width:50px;height:80px}
+body.lpc .nr-info{align-items:stretch;text-align:left;gap:14px}
+body.lpc .nr-name{font-size:40px}
+body.lpc .nr-txt{font-size:19px;max-width:none}
+body.lpc .nr .sbox b{font-size:20px}
+body.lpc .nr .sbox span{font-size:15px}
+body.lpc .nr-go{min-height:76px;font-size:36px}
+@media (max-height:700px){body:not(.lpc) .nr-cardbox{width:min(38vw,150px)}body:not(.lpc) .nr-txt{min-height:0}}
+
+/* ---------- le Sorcier choisit ses 2 sorts ---------- */
+#spick{background:radial-gradient(ellipse at 50% 40%,rgba(42,22,70,.6),rgba(10,6,18,.92) 75%)}
+#spick .fi{gap:12px}
+.spk-sub{color:var(--muted);font-size:16px}
+.spk-grid{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.spk{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px 11px;border:0;border-radius:14px;background:linear-gradient(var(--panel-2),var(--panel));box-shadow:inset 0 0 0 3px var(--edge),0 5px 0 rgba(0,0,0,.4);text-align:center;transition:transform .1s,box-shadow .1s}
+.spk-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--sc) 20%,#120a1c);color:var(--sc);box-shadow:inset 0 0 0 2px var(--sc)}
+.spk-ic .ico{width:62%;height:62%}
+.spk b{font:700 17px/1 var(--f-pix);color:#fff}
+.spk small{font-size:12.5px;line-height:1.2;color:var(--muted)}
+.spk.on{box-shadow:inset 0 0 0 3px var(--sc),0 0 18px color-mix(in srgb,var(--sc) 55%,transparent),0 5px 0 rgba(0,0,0,.4);transform:translateY(-2px)}
+.spk-n{position:absolute;top:-8px;right:-6px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--sc);color:#120a1c;font:700 15px/1 var(--f-pix);font-style:normal;box-shadow:0 0 0 3px #120a1c}
+#spk-go{width:100%}
+body.lpc #spick .fi{width:760px}
+body.lpc .spk-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+body.lpc .spk{padding:16px 10px 14px}
+body.lpc .spk small{font-size:14px}
+
+/* ---------- les cadeaux du départ : le pack fou, la pièce du collectionneur ---------- */
+#gift{background:radial-gradient(ellipse at 50% 45%,rgba(30,18,48,.55),rgba(10,6,18,.93) 75%)}
+#gift .fi{gap:12px}
+.gf-t{font:700 clamp(32px,10vw,46px)/1 var(--f-pix);letter-spacing:.05em}
+.gf-t.fou{color:#effff0;text-shadow:0 0 3px #fff,0 0 10px #39ff88,0 0 24px #39ff88,3px 0 0 rgba(255,61,240,.8),-3px 0 0 rgba(79,139,255,.8)}
+.gf-t.or{color:var(--gold);text-shadow:0 3px 0 #b8323f,0 6px 0 #000,0 0 22px rgba(255,204,77,.6)}
+.gf-s{min-height:1.3em;color:var(--muted);font-size:16px}
+.gf-stage{position:relative;width:100%;min-height:300px;display:grid;place-items:center}
+.gf-pack{position:relative;width:176px;height:252px;border:0;padding:0;background:none;filter:drop-shadow(0 10px 0 rgba(0,0,0,.45));animation:gfWob 2.6s ease-in-out infinite}
+@keyframes gfWob{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-6px)}}
+.gfp-top,.gfp-body{position:absolute;left:0;right:0}
+.gfp-top{top:0;height:30px;border-radius:12px 12px 2px 2px;background:repeating-linear-gradient(90deg,var(--pb) 0 3px,color-mix(in srgb,var(--pb) 50%,#000) 3px 6px);box-shadow:inset 0 -4px 0 rgba(0,0,0,.35)}
+.gfp-body{top:28px;bottom:0;border-radius:2px 2px 14px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 6px),linear-gradient(165deg,var(--pa),var(--pm) 55%,var(--pa));
+  box-shadow:inset 0 0 0 3px var(--pb),inset 0 0 0 6px var(--pa),inset 0 0 34px color-mix(in srgb,var(--pb) 35%,transparent)}
+.gfp-logo{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:var(--pa);color:var(--pb);box-shadow:0 0 0 3px var(--pb),0 0 22px color-mix(in srgb,var(--pb) 60%,transparent)}
+.gfp-logo .ico{width:58%;height:58%}
+.gfp-body b{font:700 19px/1.05 var(--f-pix);letter-spacing:.06em;color:#fff;text-shadow:0 2px 0 #000,0 0 10px var(--pb)}
+.gfp-body i{font:700 16px/1 var(--f-pix);font-style:normal;color:var(--pb)}
+.p-fou{--pa:#120a1c;--pm:#3a1650;--pb:#39ff88}
+.p-or{--pa:#3a2408;--pm:#8a5a12;--pb:#ffcc4d}
+.p-fou .gfp-body{animation:gfGlitch 2.4s steps(1) infinite}
+@keyframes gfGlitch{0%,100%{filter:none;transform:none}90%{filter:hue-rotate(90deg) saturate(1.6)}92%{filter:none;transform:translateX(4px)}94%{transform:none}}
+.gf-pack.open{animation:none}
+.gf-pack.open .gfp-top{animation:gfTear .45s ease-in forwards}
+.gf-pack.open .gfp-body{animation:gfDrop .5s .16s ease-in forwards}
+@keyframes gfTear{to{transform:translate(80px,-120px) rotate(42deg);opacity:0}}
+@keyframes gfDrop{to{transform:translateY(150px) scale(.85);opacity:0}}
+.gf-cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;perspective:800px}
+.gf-card{width:158px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px 12px;border:0;border-radius:14px;background:linear-gradient(var(--panel-2),var(--panel));box-shadow:inset 0 0 0 3px var(--edge),0 6px 0 rgba(0,0,0,.4);text-align:center;animation:gfFlip .6s calc(var(--i) * .18s) cubic-bezier(.2,1.25,.4,1) both}
+.gf-card.fou{box-shadow:inset 0 0 0 3px #39ff88,0 0 22px rgba(57,255,136,.3),0 6px 0 rgba(0,0,0,.4)}
+.gf-card:not(.fou){box-shadow:inset 0 0 0 3px var(--gold),0 0 22px rgba(255,204,77,.3),0 6px 0 rgba(0,0,0,.4)}
+.gf-card .chip{width:64px}
+.gf-card b{font:700 17px/1.05 var(--f-pix);color:#fff}
+.gf-card em{font:600 12px/1 var(--f-pix);font-style:normal;letter-spacing:.06em;text-transform:uppercase}
+.gf-card small{font-size:12.5px;line-height:1.25;color:var(--muted);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+@keyframes gfFlip{from{transform:translateY(70px) rotateY(180deg) scale(.5);opacity:0}}
+#gf-ok{width:100%}
+body.lpc .gf-card{width:200px;padding:18px 14px 16px}
+body.lpc .gf-card .chip{width:80px}
+body.lpc .gf-card small{font-size:14px}
+
+/* ---------- le jeu de la partie, sous la mise (panneau de gauche, PC) ---------- */
+.lp-rn .lp-stake{flex-direction:column;align-items:flex-end;gap:4px;padding:0;background:none;border-radius:0}
+.lp-stake .lps{display:flex;align-items:center;gap:6px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.35)}
+.lp-deck{display:flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.35);color:var(--cream)}
+.lp-deck .ico{width:12px;height:12px;color:var(--dc)}
+/* ---------- marché noir : les articles offerts ---------- */
+.mini.gift{background:#5fd68a;box-shadow:0 3px 0 #2f8a55;color:#0f2a1a}
+
+/* ================= v10 · les profils (3 emplacements) ================= */
+#prof{background:radial-gradient(ellipse at 50% 40%,rgba(20,13,31,.35),rgba(20,13,31,.88) 78%)}
+#prof .pr{padding:16px;gap:14px;align-items:stretch}
+.pr-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pr-tab{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 6px 8px;border:0;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),0 4px 0 rgba(0,0,0,.4);color:var(--muted)}
+.pr-tab b{font:700 26px/1 var(--f-pix);color:var(--cream)}
+.pr-tab span{max-width:100%;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-tab.on{background:var(--panel-2);box-shadow:inset 0 0 0 3px var(--gold),0 4px 0 rgba(0,0,0,.4);color:var(--cream)}
+.pr-tab.cur::after{content:"";position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.pr-tab.empty b{color:var(--dim)}
+.pr-body{display:flex;flex-direction:column;gap:12px;text-align:left}
+.pr-name{display:flex;align-items:center;gap:10px}
+.pr-name span{font:600 14px/1 var(--f-pix);color:var(--muted)}
+.pr-name input{flex:1;min-width:0;height:44px;padding:0 12px;border:0;border-radius:10px;background:#0d0818;box-shadow:inset 0 0 0 2px var(--edge);color:var(--cream);font:600 19px/1 var(--f-pix)}
+.pr-name input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--gold)}
+input,textarea{-webkit-user-select:text;user-select:text}
+.pr-prog{display:flex;flex-direction:column;gap:9px;padding:12px;border-radius:12px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 2px var(--edge)}
+.pr-big{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
+.pr-big b{font:700 14px/1 var(--f-pix);letter-spacing:.1em;color:var(--gold)}
+.pr-big strong{font:700 22px/1 var(--f-pix);color:var(--gold)}
+.pr-bar{position:relative;display:block;height:16px;border-radius:999px;background:#0d0818;box-shadow:inset 0 0 0 2px var(--edge);overflow:hidden}
+.pr-bar em{position:absolute;left:2px;top:2px;bottom:2px;max-width:calc(100% - 4px);border-radius:999px;background:linear-gradient(90deg,#ffcc4d,#ff9a3d)}
+.pr-bar.s{height:10px}
+.pr-bar.s em{background:linear-gradient(90deg,#5fd4c4,#4aa8ff)}
+.pr-sub{display:grid;grid-template-columns:18px minmax(0,1fr) 34% 42px;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.pr-sub b{text-align:right;color:var(--cream);font-size:13px}
+.pr-ic{width:18px;height:18px;color:var(--muted)}
+.pr-n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pr-stats div{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;border-radius:10px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge)}
+.pr-stats b{font:700 24px/1 var(--f-pix);color:var(--cream)}
+.pr-stats small{font-size:12px;color:var(--muted)}
+.pr-run{font-size:14px;color:#bfead6;text-align:center}
+.pr-acts{display:flex;flex-direction:column;gap:10px}
+.pr-acts .btn.big{width:100%;font-size:22px}
+.pr-curb{display:flex;align-items:center;justify-content:center;min-height:54px;border-radius:12px;background:rgba(95,214,138,.14);box-shadow:inset 0 0 0 2px var(--green);color:#bff5d2;font:700 20px/1 var(--f-pix);letter-spacing:.04em}
+.pr-row{display:flex;gap:8px;flex-wrap:wrap}
+.pr-row .btn{flex:1 1 0;min-width:0;font-size:14px}
+.pr-del{color:#ffb3bd}
+.pr-empty{display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 8px;text-align:center}
+.pr-empty p{font-size:18px}
+.pr-empty .pr-dim{color:var(--muted);font-size:14px}
+body.lpc #prof .pr{width:620px;padding:22px}
+body.lpc .pr-sub{font-size:15px}
+body.lpc .pr-sub b{font-size:15px}
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -2781,22 +2944,65 @@ body:not(.lpc) .jpm-lever{display:none}
     <div class="panel tmenu popin">
       <button class="btn big red" id="t-play">JOUER</button>
       <button class="btn green" id="t-cont" hidden>CONTINUER<small id="t-cont-r"></small></button>
-      <div class="stake">
-        <button class="sarrow" id="t-sprev" aria-label="Mise précédente">◀</button>
-        <div class="sbox"><b><i id="t-schip"></i><span id="t-stake">Mise blanche</span></b><span id="t-stxt"></span></div>
-        <button class="sarrow" id="t-snext" aria-label="Mise suivante">▶</button>
-      </div>
       <div class="mgrid">
         <button class="mbtn" id="t-cata" style="--b:var(--green);--bd:var(--green-d)"><svg class="ico"><use href="#i-livre"/></svg><span>CATALOGUE<small id="t-cata-n">0/0</small></span></button>
         <button class="mbtn" id="t-punch" style="--b:var(--purple);--bd:var(--purple-d)"><svg class="ico"><use href="#i-star"/></svg><span>COLLECTION<small id="t-sec-n">0/150</small></span></button>
         <button class="mbtn" id="t-vest" style="--b:#e0365a;--bd:#8a1a33"><svg class="ico"><use href="#i-canon"/></svg><span>VESTIAIRE<small id="t-vest-n">2/16</small></span></button>
         <button class="mbtn" id="t-opts" style="--b:var(--orange);--bd:var(--orange-d)"><svg class="ico"><use href="#i-enraye"/></svg><span>OPTIONS<small>son, écran</small></span></button>
-        <button class="mbtn" id="t-stats" style="--b:#2aa59a;--bd:#17675f"><svg class="ico"><use href="#i-trophee"/></svg><span>PROFIL<small>tes records</small></span></button>
+        <button class="mbtn" id="t-stats" style="--b:#2aa59a;--bd:#17675f"><svg class="ico"><use href="#i-trophee"/></svg><span>PROFIL<small id="t-prof-n">Profil 1</small></span></button>
       </div>
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
   <p class="proto">Sefy Industries · v10</p>
+</section>
+
+<section id="prof" class="full" hidden aria-label="Profils">
+  <div class="fi panel pr">
+    <div class="opt-head"><h2>PROFILS</h2><button class="btn ghost small" data-pr="back">Retour</button></div>
+    <div class="pr-tabs" id="pr-tabs"></div>
+    <div class="pr-body" id="pr-body"></div>
+  </div>
+</section>
+
+<section id="newrun" class="full" hidden aria-label="Nouvelle partie">
+  <div class="fi nr">
+    <div class="nr-head"><h2>NOUVELLE PARTIE</h2><button class="btn ghost small" data-nr="back">Retour</button></div>
+    <div class="nr-deck">
+      <button class="sarrow nr-arr" data-nr="dprev" aria-label="Jeu précédent">◀</button>
+      <div class="nr-cardbox" id="nr-cardbox"></div>
+      <button class="sarrow nr-arr" data-nr="dnext" aria-label="Jeu suivant">▶</button>
+    </div>
+    <div class="nr-info">
+      <h3 class="nr-name" id="nr-name"></h3>
+      <p class="nr-txt" id="nr-txt"></p>
+      <div class="nr-dots" id="nr-dots" aria-hidden="true"></div>
+      <div class="stake">
+        <button class="sarrow" id="nr-sprev" data-nr="sprev" aria-label="Mise plus facile">◀</button>
+        <div class="sbox"><b><i id="nr-schip"></i><span id="nr-stake">Mise blanche</span></b><span id="nr-stxt"></span></div>
+        <button class="sarrow" id="nr-snext" data-nr="snext" aria-label="Mise plus dure">▶</button>
+      </div>
+      <button class="btn big red nr-go" data-nr="go">LANCER</button>
+    </div>
+  </div>
+</section>
+
+<section id="spick" class="full" hidden aria-label="Tes sorts de départ">
+  <div class="fi">
+    <h2 class="neon violet">SORCIER</h2>
+    <p class="spk-sub" id="spk-sub"></p>
+    <div class="spk-grid" id="spk-grid"></div>
+    <button class="btn big gold" id="spk-go" data-spk="go" disabled>C'est parti</button>
+  </div>
+</section>
+
+<section id="gift" class="full" hidden aria-label="Ton cadeau de départ">
+  <div class="fi">
+    <h2 class="gf-t" id="gf-t"></h2>
+    <p class="gf-s" id="gf-s"></p>
+    <div class="gf-stage" id="gf-stage"></div>
+    <button class="btn big gold" id="gf-ok" data-gf="ok" hidden>Dans mon rack !</button>
+  </div>
 </section>
 
 <section id="over" class="full" hidden>
@@ -3997,6 +4203,7 @@ function computeStats(run) {
   if (hasMalus(run, 'saboteur')) dur -= 2;
   s.rakeRebuild = BAL.rakeRebuild * (1 - .3 * U('huile')) * (hasMalus(run, 'saboteur') ? 2 : 1);
   s.tmrSpeed = 1; s.spellCdMul = 1; s.bilCdMul = 1; s.bilDmgMul = 1; s.spellsLocked = false; s.mult0 = 0;
+  if (run.deck === 'bille') { s.bilDmgMul = 1.5; s.bilDeck = 1; }
   s.horloger = 0; s.ghost = false; s.alea = 0; s.crevard = false; s.necro = false; s.midas = false; s.hole = false; s.ace = false; s.depipe = false;
   s.dart = T.triple20[1] > 0; s.caram = T.carambole[1] > 0; s.oeil = T.oeilnox[1] > 0;
   if (s.oeil) s.horloger = 4;
@@ -6612,6 +6819,7 @@ function tkDown() {
     const K = G.run.K, max = T.savescum[4] > 0 ? 2 : 1;
     if ((K.saves || 0) < max) { K.saves = (K.saves || 0) + 1; saveScum(); return true; }
   }
+  if (deckSecond()) return true;
   return false;
 }
 function saveScum() {
@@ -6774,7 +6982,7 @@ function bpOf(s) {
   return (s.bp = out);
 }
 const bpk = (s, k) => bpOf(s)[k] || 0;
-function bilMaxCharges(s) { return s.T.ressort[3] > 0 ? 3 : 1; }
+function bilMaxCharges(s) { return (s.T.ressort[3] > 0 ? 3 : 1) + (s.bilDeck || 0); }
 const bilReady = cb => !!(cb && cb.bil && cb.bil.st === 'ready' && !cb.ended && !cb.demo);
 function bilState(cb) {
   const B = cb.bil; if (!B) return;
@@ -7539,7 +7747,7 @@ function openBugMachine(then) {
   $('#bm-bug').innerHTML = `<b>BUG · ${esc(M2.bugName)}</b> ${esc(M2.bug)}`;
   $('#bm-reels').innerHTML = [0, 1, 2].map(i => `<div class="bm-reel" data-r="${i}"><div class="bm-sym">${bugSymHTML(pick(M2.ids))}</div></div>`).join('');
   $('#bm-pick').innerHTML = `<div class="bm-pool">${M2.ids.map(id => `<span title="${esc(JK[id].name)}">${protoChip(id, 'k-fou')}</span>`).join('')}</div>`;
-  bugLED(`${BUG_PRICE} OR · UN SEUL TIRAGE · TU GARDES UN FOU`, '');
+  bugLED(`${bugPrice()} OR · UN SEUL TIRAGE · TU GARDES UN FOU`, '');
   bugButtons();
   el.hidden = false; el.classList.remove('out'); void el.offsetWidth; el.classList.add('in');
   Snd.alarm(); haptic(40);
@@ -7549,8 +7757,8 @@ function bugLED(t, cls) { const l = $('#bm-led'); if (!l) return; l.textContent 
 function bugButtons() {
   const run = G.run, p = $('#bm-pull'), sk = $('#bm-skip');
   if (!p) return;
-  p.disabled = BUGM.busy || BUGM.done || run.gold < BUG_PRICE;
-  p.textContent = run.gold < BUG_PRICE && !BUGM.done ? `Il faut ${BUG_PRICE} or` : `Tirer · ${BUG_PRICE} or`;
+  p.disabled = BUGM.busy || BUGM.done || run.gold < bugPrice();
+  p.textContent = run.gold < bugPrice() && !BUGM.done ? `Il faut ${bugPrice()} or` : `Tirer · ${bugPrice()} or`;
   p.hidden = BUGM.done;
   sk.disabled = BUGM.busy;
   sk.textContent = BUGM.done ? (BUGM.ch.length ? 'Ne rien garder' : 'Continuer') : 'Passer';
@@ -7558,9 +7766,9 @@ function bugButtons() {
 }
 function bugPull() {
   const run = G.run;
-  if (BUGM.busy || BUGM.done || run.gold < BUG_PRICE) return;
+  if (BUGM.busy || BUGM.done || run.gold < bugPrice()) return;
   audioInit();
-  run.gold -= BUG_PRICE; updateHUD();
+  run.gold -= bugPrice(); updateHUD();
   BUGM.busy = true;
   const g = BUGM.g, M2 = GLITCH9[g];
   let line = bugRoll(g), fake = null;
@@ -7643,8 +7851,8 @@ function bugClick(e) {
 function simBug() {
   const run = G.run, then = BUGM.then; BUGM.then = null;
   const reserve = run.K && run.K.bugReserve != null ? run.K.bugReserve : 40;
-  if (run.gold >= BUG_PRICE + reserve && freeSlots() > 0) {
-    run.gold -= BUG_PRICE;
+  if (run.gold >= bugPrice() + reserve && freeSlots() > 0) {
+    run.gold -= bugPrice();
     let line = bugRoll(BUGM.g);
     if (BUGM.g === 2 && rnd() < .25) line = bugShift(line, BUGM.g, rnd() < .5);
     const ch = bugChoices(line);
@@ -7914,13 +8122,22 @@ const EVENTS = {
 };
 const EVENT_ROUNDS = [8, 13, 18, 23, 28];
 
+// v10 : chaque mise ajoute sa règle à celles d'avant
 const STAKES = [
-  { id: 'blanche', name: 'Mise blanche', col: '#f3eee6', txt: 'La partie normale.', tok: 1 },
-  { id: 'rouge', name: 'Mise rouge', col: '#ff5c6c', txt: `Cartes +25${NB}% de PV.`, tok: 1.5 },
-  { id: 'verte', name: 'Mise verte', col: '#5fd68a', txt: 'En plus : élites dès la manche 3 et sorts plus fréquents.', tok: 2 },
-  { id: 'noire', name: 'Mise noire', col: '#3a2c50', txt: 'En plus : plus de relance gratuite à la machine.', tok: 2.5 },
-  { id: 'or', name: "Mise d'or", col: '#ffcc4d', txt: `En plus : les cartes frappent 25${NB}% plus fort.`, tok: 3 },
+  { id: 'blanche', name: 'Mise blanche', col: '#f3eee6', short: 'Normale', txt: 'La partie normale.', tok: 1 },
+  { id: 'rouge', name: 'Mise rouge', col: '#ff5c6c', short: 'Fauché', txt: `Fauché : 30${NB}% d'or en moins, et tout coûte 25${NB}% plus cher.`, tok: 1.5 },
+  { id: 'verte', name: 'Mise verte', col: '#5fd68a', short: 'Chaos', txt: 'Chaos : chaque manche a son événement surprise.', tok: 2 },
+  { id: 'noire', name: 'Mise noire', col: '#3a2c50', short: 'Triche', txt: 'La maison triche : un malus à chaque manche.', tok: 2.5 },
+  { id: 'bleue', name: 'Mise bleue', col: '#4f8bff', short: 'Truquée', txt: 'Machine truquée : plus de relance gratuite, et plus de crânes.', tok: 3 },
+  { id: 'violette', name: 'Mise violette', col: '#a98bff', short: 'Élites', txt: 'Élites partout : dès la 1re manche, deux fois plus.', tok: 3.5 },
+  { id: 'orange', name: 'Mise orange', col: '#ff9a3d', short: 'Sans soin', txt: 'Sans soin : ta base ne se répare plus entre les manches.', tok: 4 },
+  { id: 'or', name: "Mise d'or", col: '#ffcc4d', short: 'Puissance', txt: `Cartes 50${NB}% plus puissantes : plus de PV, et elles frappent plus fort.`, tok: 5 },
 ];
+const ST = { GOLD: 1, CHAOS: 2, MALUS: 3, MACH: 4, ELITE: 5, HEAL: 6, POWER: 7 };
+const stakeHas = (run, k) => ((run ? run.stake : 0) || 0) >= k;
+const priceMul = run => stakeHas(run || G.run, ST.GOLD) ? 1.25 : 1;
+const bugPrice = () => Math.round(100 * priceMul());
+const jpmReload = () => Math.round(100 * priceMul());
 
 /* ---------- le bar de Zaza : boissons (pour toute la partie) et shots (une manche) ---------- */
 const UPG = {
@@ -8046,8 +8263,13 @@ const TIPS = {
 };
 
 /* ================= state ================= */
-const META_KEY = 'jackpot-defense-v2', RUN_KEY = 'jackpot-defense-v3-run', OLD_KEY = 'jackpot-defense-v1';
-const defMeta = () => ({ jetons: 0, punched: {}, secrets: {}, best: 0, runs: 0, wins: 0, sound: true, music: true, stakeMax: 0, stake: 0, seen: {}, cat: {}, migrated: false, ctrl: 'viser', bestScore: {}, rivals: {}, gifts: {} });
+const PROF_KEY = 'jackpot-defense-prof', OLD_KEY = 'jackpot-defense-v1', PROF_N = 3;
+const metaKeyOf = i => 'jackpot-defense-v2' + (i ? '-p' + (i + 1) : '');
+const runKeyOf = i => 'jackpot-defense-v3-run' + (i ? '-p' + (i + 1) : '');
+const PROF = (() => { let o = null; try { o = JSON.parse(localStorage.getItem(PROF_KEY) || 'null'); } catch (e) { o = null; } const q = Object.assign({ cur: 0 }, o || {}); q.cur = Math.min(PROF_N - 1, Math.max(0, +q.cur || 0)); return q; })();
+function saveProf() { try { localStorage.setItem(PROF_KEY, JSON.stringify(PROF)); } catch (e) { /* stockage indisponible */ } }
+let META_KEY = metaKeyOf(PROF.cur), RUN_KEY = runKeyOf(PROF.cur);
+const defMeta = () => ({ jetons: 0, punched: {}, secrets: {}, best: 0, runs: 0, wins: 0, sound: true, music: true, stakeMax: 0, stake: 0, deck: 'coffre', dw: {}, seen: {}, cat: {}, migrated: false, ctrl: 'viser', bestScore: {}, rivals: {}, gifts: {} });
 function loadMeta() {
   let m = defMeta();
   try {
@@ -8056,7 +8278,7 @@ function loadMeta() {
       const o = JSON.parse(raw);
       m = Object.assign(m, o, { punched: Object.assign({}, o.punched || {}), secrets: Object.assign({}, o.secrets || {}), seen: Object.assign({}, o.seen || {}), cat: Object.assign({}, o.cat || {}), bestScore: Object.assign({}, o.bestScore || {}), rivals: Object.assign({}, o.rivals || {}), gifts: Object.assign({}, o.gifts || {}) });
     } else {
-      const old = localStorage.getItem(OLD_KEY);
+      const old = PROF.cur === 0 ? localStorage.getItem(OLD_KEY) : null;
       if (old) { const o = JSON.parse(old); m.jetons = o.jetons || 0; m.punched = Object.assign({}, o.punched || {}); m.sound = o.sound !== false; m.migrated = true; }
     }
   } catch (e) { /* stockage indisponible */ }
@@ -8176,6 +8398,7 @@ function stackPartner(j, list) { return (list || G.run.jokers).find(x => stackRe
 function newRun(stake) {
   const events = {};
   for (const r of EVENT_ROUNDS) events[r] = pick(Object.keys(EVENTS).filter(id => EVENTS[id].from <= r));
+  if ((stake || 0) >= ST.CHAOS) for (let r = 3; r < 30; r++) if (!isBossRound(r) && !events[r]) events[r] = pick(Object.keys(EVENTS).filter(id => EVENTS[id].from <= Math.max(r, 8)));
   return {
     stake: stake || 0, round: 0, inf: false, hp: BAL.baseHp, maxHp: BAL.baseHp, overheal: 0, gold: 0, jokers: [], slots: 5, slotsBought: 0, cloverSlots: 0, pool: [], machine: 0, K: {}, sold: [], bugDue: false,
     malus: [], skulls: 0, pendingMalus: [], pendingSkulls: 0, stolen: [], spins: 0, kills: 0, bossKills: 0, defeated: [], events,
@@ -9555,8 +9778,7 @@ function newCombat() {
 function roundScale(run, r) {
   const rr = Math.min(r, 30), inf = Math.max(0, r - 30);
   let hp = BAL.hpMul * Math.pow(BAL.hpG, rr - 1) * Math.pow(BAL.infHp, inf), dmg = BAL.dmgMul * Math.pow(BAL.dmgG, rr - 1) * Math.pow(BAL.infDmg, inf);
-  if (stakeLv(run) >= 1) hp *= 1.25;
-  if (stakeLv(run) >= 4) dmg *= 1.25;
+  if (stakeHas(run, ST.POWER)) { hp *= 1.5; dmg *= 1.5; }
   return { hp, dmg, spd: Math.min(BAL.spdMax, 1 + BAL.spdG * (r - 1)), gold: 1 + BAL.goldG * (rr - 1), inf };
 }
 function threat(r) { const rr = Math.min(r, 30); let tp = BAL.tp0 + BAL.tp1 * rr + BAL.tp2 * rr * rr; if (r > 30) tp *= Math.pow(BAL.infTp, r - 30); return tp; }
@@ -9589,7 +9811,7 @@ function buildWave(r, run, ev) {
     if (ev === 'piques' && id === 'tireur') ww *= 9;
     if (r === 2 && id === 'tireur') ww = 0;
     if (ev === 'sabbat' && id === 'sorcier') ww *= 7;
-    if (id === 'sorcier' && st >= 2) ww *= 1.3;
+    if (id === 'sorcier' && st >= ST.ELITE) ww *= 1.3;
     if (A && A.suit === d.suit) ww *= BAL.actSuit;
     if (A && A.suit === 'all' && (id === 'sorcier' || id === 'tricheur')) ww *= 1.4;
     ids.push(id); w.push(ww);
@@ -9600,8 +9822,8 @@ function buildWave(r, run, ev) {
   let guard = 0;
   while (budget > .3 && guard++ < 400) { const t = wpick(ids, w); types.push(t); budget -= ENEMIES[t].tp; }
   shuffle(types);
-  const eliteFrom = st >= 2 ? 3 : BAL.eliteFrom;
-  const eChance = ev === 'holdup' ? .5 : r >= eliteFrom ? Math.min(.3, .03 + .012 * (r - eliteFrom)) : 0;
+  const eliteFrom = st >= ST.ELITE ? 1 : BAL.eliteFrom;
+  const eChance = ev === 'holdup' ? .5 : r >= eliteFrom ? Math.min(st >= ST.ELITE ? .45 : .3, (.03 + .012 * (r - eliteFrom)) * (st >= ST.ELITE ? 2 : 1)) : 0;
   const D = Math.min(9 + r * .8, 30) * BAL.spawnK, list = [];
   const hpMul = ev === 'maree' ? .5 : 1;
   const mkSp = (t, type, ang) => {
@@ -9632,6 +9854,7 @@ function beginRound() {
   const run = G.run;
   run.round++;
   run.malus = run.pendingMalus; run.pendingMalus = [];
+  if (stakeHas(run, ST.MALUS) && !run.malus.length && !(run.round === 30 && !run.inf)) run.malus = [pick(MALUS_BY_TIER(run.round >= 10 && rnd() < .3 ? 2 : 1))];
   run.skulls = run.pendingSkulls; run.pendingSkulls = 0;
   run.stolen = [];
   run.boost = {}; for (const id of run.shots || []) run.boost[id] = 1; run.shots = [];
@@ -9652,6 +9875,7 @@ function beginRound() {
   if (run.round === 30 && !run.inf) fbStart(cb); else FB.on = false;
   if (s.noxroue) noxSpin();
   initSpells(cb, run);
+  if (s.bilDeck && cb.bil) cb.bil.charges = bilMaxCharges(s);
   if (run.boost.fer) cb.armor = 40;
   const dv = devastOf(run);
   cb.fog = dv === 'brouillard' || cb.event === 'nuit';
@@ -9714,8 +9938,8 @@ function checkGoal(cb) {
 }
 function spawnReinf(cb) {
   const g = Math.min(5, 2 + Math.floor(rnd() * 3) + Math.floor(cb.reinfN / 6)), ang = rand(0, TAU);
-  const r = G.run.round, st = stakeLv(G.run), eliteFrom = st >= 2 ? 3 : BAL.eliteFrom;
-  const eChance = r >= eliteFrom ? Math.min(.3, .03 + .012 * (r - eliteFrom)) : 0;
+  const r = G.run.round, st = stakeLv(G.run), eliteFrom = st >= ST.ELITE ? 1 : BAL.eliteFrom;
+  const eChance = r >= eliteFrom ? Math.min(st >= ST.ELITE ? .45 : .3, (.03 + .012 * (r - eliteFrom)) * (st >= ST.ELITE ? 2 : 1)) : 0;
   for (let k = 0; k < g; k++) {
     const type = pick(cb.reinfTypes), o = { hpMul: 1, reinf: true };
     if (eChance && rnd() < eChance && ENEMIES[type].tp > 0) o.elite = pick(Object.keys(ELITES));
@@ -9781,10 +10005,10 @@ function finishRound() {
   const run = G.run, cb = G.cb, s = cb.stats, r = run.round;
   if (!G.headless && cb.dps) run.lastDps = { r, avg: dpsAvg(cb), peak: cb.dps.peak, tot: cb.dps.tot, src: dpsSources(cb, 9) };
   const score = scoreRound(run, cb);
-  const bonus = Math.round(BAL.roundBonus0 + BAL.roundBonusR * Math.min(r, 30));
+  const bonus = Math.round((BAL.roundBonus0 + BAL.roundBonusR * Math.min(r, 30)) * (stakeHas(run, ST.GOLD) ? .7 : 1));
   run.gold += bonus; run.stats.gold += bonus; if (G.headless) dbg('g_bonus', bonus);
   run.gold = Math.floor(run.gold);
-  const healAmt = Math.round(run.maxHp * s.healBetween * (s.healMul || 1));
+  const healAmt = stakeHas(run, ST.HEAL) ? 0 : Math.round(run.maxHp * s.healBetween * (s.healMul || 1));
   run.hp = Math.min(run.maxHp, run.hp + healAmt);
   let reward = null;
   if (run.skulls >= 3) reward = mkJoker('ultime', [{ t: pick(run.pool), lv: 3 }], 1);
@@ -9813,7 +10037,7 @@ function spawnEnemy(type, ang, o = {}) {
   let hp = d.hp * sc.hp * (o.hpMul || 1);
   if (d.boss && !o.fake) {
     const native = type === 'b_baron' ? 30 : (BOSS_ORDER.indexOf(type) + 1) * 5, r = Math.max(1, run.round);
-    hp = d.hp * BAL.bossHp * (BAL.bossK[type] || 1) * (stakeLv(run) >= 1 ? 1.25 : 1) * (r > native ? sc.hp / roundScale(run, native).hp * (stakeLv(run) >= 1 ? .8 : 1) : 1);
+    hp = d.hp * BAL.bossHp * (BAL.bossK[type] || 1) * (stakeHas(run, ST.POWER) ? 1.5 : 1) * (r > native ? sc.hp / roundScale(run, native).hp : 1);
   }
   if (hasMalus(run, 'blindes')) hp *= 1.45;
   let spd = d.spd * sc.spd * (hasMalus(run, 'adrenaline') ? 1.22 : 1) * (cb.stats ? cb.stats.enemySpeedMul : 1);
@@ -10234,7 +10458,7 @@ function aiCaster(e, dt, sp, held, contactD) {
   if (d > e.stop + .5) { moveToward(e, dt, sp, e.stop); return; }
   if (st.cast) {
     st.cast.t -= dt;
-    if (st.cast.t <= 0) { castSpell(e, st.cast.id); st.cast = null; st.cd = (e.d.mob ? 8 : 6) * (stakeLv(G.run) >= 2 ? .8 : 1); }
+    if (st.cast.t <= 0) { castSpell(e, st.cast.id); st.cast = null; st.cd = (e.d.mob ? 8 : 6) * (stakeLv(G.run) >= ST.ELITE ? .8 : 1); }
     return;
   }
   st.cd -= dt;
@@ -11150,7 +11374,7 @@ function heal(h) {
   if (!(h > 0) || run.over) return;
   run.hp = Math.min(run.maxHp, run.hp + h * (s.healMul || 1));
 }
-function addGold(g, src) { if (g <= 0) return; G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
+function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
 
 /* ---------- tir de la base ---------- */
 function inRange(e, R2) { return !e.dead && e.deal <= .15 && e.x * e.x + e.y * e.y <= R2; }
@@ -12743,7 +12967,7 @@ function updateLP(run, cb, r, inCombat) {
     + `<div class="lpk lpk-d"><small>BOISSONS${ups.length ? ` <i>${ups.reduce((a, k) => a + up[k], 0)}</i>` : ''}</small><div>${ups.length ? Object.keys(UPG_CATS).map(c => { const ks = ups.filter(k => UPG[k].cat === c); if (!ks.length) return ''; const n = ks.reduce((a, k) => a + up[k], 0); return `<span class="upill cat" style="--cat:${UPG_CATS[c].col}" title="${esc(ks.map(k => `${UPG[k].name} (${up[k]}) : ${UPG[k].txt(up[k])}`).join(' · '))}">${UPG_CATS[c].name}<b>${n}</b></span>`; }).join('') : '<em>rien encore</em>'}</div></div>`;
   setHTML('#lp-kit', kit);
   const st = STAKES[run.stake || 0];
-  setHTML('#lp-stake', `<i style="background:${st.col}"></i>${st.name}`);
+  setHTML('#lp-stake', `<span class="lps"><i style="background:${st.col}"></i>${st.name}</span>${run.deck ? `<span class="lp-deck" style="--dc:${deckById(run.deck).col}">${iconSVG(deckById(run.deck).icon)}${esc(deckLine(run))}</span>` : ''}`);
 }
 function updateBossbar(on) {
   const cb = G.cb, b = on && cb.bosses.find(x => !x.dead);
@@ -13075,18 +13299,13 @@ function refreshTitle() {
   setTxt('#t-sec-n', `${NORMAL_JOKERS.filter(secretKnown).length}/${NORMAL_JOKERS.length}`);
   const { n, tot } = catCount();
   setTxt('#t-cata-n', `${n}/${tot}`);
-  const st = stakeInfo(m.stake);
-  setTxt('#t-stake', st.name);
-  $('#t-schip').style.background = st.col;
-  setTxt('#t-stxt', st.txt + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? ' Bats le Joker Noir pour débloquer la mise suivante.' : ''));
-  $('#t-sprev').disabled = m.stake <= 0;
-  $('#t-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
   const best = $('#t-best');
   const bs = bestScoreOf(m.stake);
   if (m.best > 0) { best.hidden = false; best.textContent = `Record : manche ${roundLabel(m.best)}${bs ? ` · ${fmtS(bs)} pts` : ''}${m.wins ? ` · ${m.wins} victoire${m.wins > 1 ? 's' : ''}` : ''}`; } else best.hidden = true;
   const cp = loadCheckpoint(), cont = $('#t-cont');
-  if (cp) { cont.hidden = false; $('#t-cont-r').textContent = `manche ${roundLabel(cp.run.round + 1)}`; } else cont.hidden = true;
+  if (cp) { cont.hidden = false; $('#t-cont-r').textContent = `manche ${roundLabel(cp.run.round + 1)}${cp.run.deck ? ' · ' + deckById(cp.run.deck).name : ''}`; } else cont.hidden = true;
   const vc = vestCount(); setTxt('#t-vest-n', `${vc.n}/${vc.tot}`);
+  setTxt('#t-prof-n', profName(G.meta, PROF.cur));
   $('#t-secret').classList.toggle('found', !!m.secret);
   renderTicker();
 }
@@ -13111,6 +13330,380 @@ function newRunAsk() {
   if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', () => { clearCheckpoint(); startRun(null); });
   else startRun(null);
 }
+/* ================= v10 · LES JEUX DE DÉPART + l'écran « Nouvelle partie » =================
+   Comme les jeux de Balatro : chaque jeu change ta base de départ. On choisit son jeu et sa mise, puis on lance. */
+const DECKS = [
+  { id: 'coffre', name: 'Coffre-fort', icon: 'banquier', col: '#ffcc4d', txt: '200 pièces dès le départ.' },
+  { id: 'pack', name: 'Pack fou', icon: 'cartes', col: '#39ff88', txt: 'Tu ouvres un pack surprise : 2 jetons fous.' },
+  { id: 'inspecteur', name: "L'ami de l'Inspecteur", icon: 'chapeau', col: '#d9a35b', txt: 'Ton 1er marché noir : 3 articles offerts.' },
+  { id: 'seconde', name: 'Seconde chance', icon: 'heart', col: '#ff5c7c', txt: 'Ta base tombe ? Tu rejoues la manche. Une seule fois.' },
+  { id: 'sorts', name: 'Sorcier', icon: 'occulte', col: '#a98bff', txt: 'Tu choisis tes 2 sorts de départ.' },
+  { id: 'barman', name: 'Barman', icon: 'bar', col: '#ff9a3d', txt: `Boissons et shots 30${NB}% moins chers.` },
+  { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +50${NB}% de dégâts.` },
+  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: 'Un jeton ULTIME de ta machine dès le départ.' },
+  { id: 'xxl', name: 'Rack XXL', icon: 'etage', col: '#5fd68a', txt: '7 places de jetons, mais 30 PV de moins.' },
+  { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage.' },
+];
+const deckById = id => DECKS.find(d => d.id === id) || DECKS[0];
+const hasDeck = (run, id) => !!run && run.deck === id;
+// ce que le jeu change dès la création de la partie
+function applyDeck(run, id) {
+  const D = deckById(id); run.deck = D.id;
+  if (D.id === 'coffre') run.gold += 200;
+  if (D.id === 'xxl') { run.slots += 2; run.hpPerm = (run.hpPerm || 0) - 30; run.maxHp = Math.max(10, run.maxHp - 30); run.hp = run.maxHp; }
+  return run;
+}
+// avant la Jackpot Machine (le Sorcier choisit ses sorts) / après (les cadeaux)
+function deckStart(next) { if (hasDeck(G.run, 'sorts')) openSpellPick(next); else next(); }
+function deckAfterMachine(next) {
+  const run = G.run;
+  if (hasDeck(run, 'pack')) openGift('pack', next);
+  else if (hasDeck(run, 'collec')) openGift('collec', next);
+  else next();
+}
+function deckGiftList(kind, run) {
+  if (kind === 'pack') {
+    const owned = new Set(run.jokers.flatMap(j => j.parts.map(p => p.t)));
+    return shuffle(fousPool().filter(id => !owned.has(id))).slice(0, 2).map(id => mkFou(id));
+  }
+  return [mkJoker('ultime', [{ t: pick(MACH9[run.machine || 0].ids), lv: 3 }], 1)];
+}
+function giveDeckJokers(list) {
+  const run = G.run;
+  for (const j of list) { run.jokers.push(j); for (const p of j.parts) catSee(j.kind === 'fou' ? 'f' : 'j', p.t); }
+}
+// l'ami de l'Inspecteur : au 1er marché noir, 3 articles au hasard sont offerts (jamais la place de jeton)
+function deckMarketGifts(offers, run) {
+  if (!hasDeck(run, 'inspecteur') || run.inspGift) return 0;
+  run.inspGift = true;
+  const can = offers.filter(o => o.type === 'joker' || o.type === 'item' || o.type === 'spell');
+  for (const o of shuffle(can).slice(0, 3)) Object.assign(o, { price: 0, gift: true, haggled: true });
+  return Math.min(3, can.length);
+}
+// seconde chance : la manche recommence, avec les PV du début de la manche
+function deckSecond() {
+  const run = G.run, cb = G.cb;
+  if (!hasDeck(run, 'seconde') || run.secondUsed) return false;
+  run.secondUsed = true;
+  run.hp = Math.max(1, cb.saveHp || run.maxHp * .5);
+  run.pendingMalus = (cb.saveMalus || []).slice(); run.pendingSkulls = cb.saveSkulls || 0;
+  run.round--;
+  cb.ended = true;
+  if (G.headless) { cb.saveRestart = true; return true; }
+  cb.flash = .45; cb.flashCol = '255,92,124'; shake(8); haptic(120);
+  burst(0, 0, '#ff5c7c', 30, 50, 1.6, .8); burst(0, 0, '#fff3e6', 16, 36, 1.2, .7);
+  banner('SECONDE CHANCE', 'ta base se relève : la manche recommence', 'good', 2);
+  Snd.revive(); setTimeout(() => Snd.round(), 600);
+  setTimeout(() => { if (G.mode === 'combat' || G.mode === 'dying') startNextRound(); }, 1700);
+  return true;
+}
+// une ligne pour le panneau et les infos de la partie
+function deckLine(run) {
+  if (!run || !run.deck) return '';
+  const D = deckById(run.deck);
+  return D.name + (D.id === 'seconde' ? (run.secondUsed ? ' (utilisée)' : ' (prête)') : '');
+}
+
+/* ---------- l'écran « Nouvelle partie » : ton jeu, ta mise, LANCER ---------- */
+const NR = { i: 0, x0: null, y0: null };
+function openNewRun() {
+  const m = G.meta;
+  NR.i = Math.max(0, DECKS.findIndex(d => d.id === m.deck));
+  m.stake = clamp(m.stake || 0, 0, Math.min(STAKES.length - 1, m.stakeMax || 0));
+  show('#title', false);
+  show('#newrun', true);
+  renderNewRun(0);
+  Snd.pop();
+}
+function closeNewRun() {
+  show('#newrun', false);
+  if (G.mode === 'title') { show('#title', true); refreshTitle(); }
+  Snd.click();
+}
+function deckCardHTML(D, won, cls) {
+  const st = won > 0 ? STAKES[Math.min(STAKES.length, won) - 1] : null;
+  return `<div class="nr-card${cls ? ' ' + cls : ''}" style="--dc:${D.col}">
+    <span class="nr-pat" aria-hidden="true"></span>
+    <i class="nr-cn tl">${iconSVG('su_s')}</i><i class="nr-cn tr">${iconSVG('su_h')}</i><i class="nr-cn bl">${iconSVG('su_d')}</i><i class="nr-cn br">${iconSVG('su_c')}</i>
+    <span class="nr-med">${iconSVG(D.icon)}</span>
+    ${st ? `<span class="nr-stk" style="--sc:${st.col}" title="Gagné avec ce jeu jusqu'à la ${esc(st.name)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : ''}
+  </div>`;
+}
+function renderNewRun(dir) {
+  const m = G.meta, D = DECKS[NR.i], won = (m.dw || {})[D.id] || 0;
+  $('#nr-cardbox').innerHTML = deckCardHTML(D, won, dir > 0 ? 'in-r' : dir < 0 ? 'in-l' : '');
+  setTxt('#nr-name', D.name);
+  setTxt('#nr-txt', D.txt);
+  $('#nr-name').style.setProperty('--dc', D.col);
+  setHTML('#nr-dots', DECKS.map((d, i) => `<i class="${i === NR.i ? 'on' : ''}${(m.dw || {})[d.id] ? ' won' : ''}" style="--dc:${d.col}"></i>`).join(''));
+  const st = stakeInfo(m.stake);
+  setTxt('#nr-stake', st.name);
+  $('#nr-schip').style.background = st.col;
+  setTxt('#nr-stxt', st.txt + (m.stake >= 2 ? ' Et les règles des mises d\'avant.' : '') + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? ' Gagne une partie pour débloquer la suivante.' : ''));
+  $('#nr-sprev').disabled = m.stake <= 0;
+  $('#nr-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
+}
+function nrDeck(d) {
+  NR.i = (NR.i + d + DECKS.length) % DECKS.length;
+  G.meta.deck = DECKS[NR.i].id; saveMeta();
+  renderNewRun(d); Snd.click(); haptic(8);
+}
+function nrStake(d) {
+  const m = G.meta, v = clamp(m.stake + d, 0, Math.min(STAKES.length - 1, m.stakeMax));
+  if (v === m.stake) { Snd.deny(); return; }
+  m.stake = v; saveMeta(); renderNewRun(0); Snd.click();
+}
+function nrGo() {
+  const cp = loadCheckpoint();
+  const go = () => { clearCheckpoint(); show('#newrun', false); startRun(null); };
+  if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', go);
+  else { Snd.click(); go(); }
+}
+function nrClick(e) {
+  const b = e.target.closest('[data-nr]'); if (!b || b.disabled) return;
+  firstGesture();
+  const a = b.dataset.nr;
+  if (a === 'back') closeNewRun();
+  else if (a === 'dprev') nrDeck(-1);
+  else if (a === 'dnext') nrDeck(1);
+  else if (a === 'sprev') nrStake(-1);
+  else if (a === 'snext') nrStake(1);
+  else if (a === 'go') nrGo();
+}
+// glisser la carte du jeu (téléphone) : à gauche = suivant
+function nrDown(e) { if (!e.target.closest('#nr-cardbox')) return; NR.x0 = e.clientX; NR.y0 = e.clientY; }
+function nrUp(e) {
+  if (NR.x0 == null) return;
+  const dx = e.clientX - NR.x0, dy = e.clientY - NR.y0; NR.x0 = null;
+  if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.3) nrDeck(dx < 0 ? 1 : -1);
+}
+function nrKey(e) {
+  const cf = $('#confirm');
+  if ($('#newrun').hidden || (cf && !cf.hidden)) return;
+  const k = e.key;
+  if (k === 'ArrowLeft') { e.preventDefault(); nrDeck(-1); }
+  else if (k === 'ArrowRight') { e.preventDefault(); nrDeck(1); }
+  else if (k === 'ArrowUp') { e.preventDefault(); nrStake(1); }
+  else if (k === 'ArrowDown') { e.preventDefault(); nrStake(-1); }
+  else if (k === 'Enter') { const ae = document.activeElement; if (ae && ae.closest && ae.closest('#newrun button')) return; e.preventDefault(); nrGo(); }
+}
+
+/* ---------- le Sorcier : choisir ses 2 sorts ---------- */
+const SPK = { sel: [], then: null };
+const SPELL_SHORT = { bomb: 'Explosion là où tu vises.', gel: 'Gèle les cartes autour de ta base.', tornade: 'Repousse les cartes proches.', orage: 'La foudre frappe les 6 plus costaudes.', bouclier: `3${NB}s sans dégâts, les tirs repartent.`, surchauffe: `Ton canon tire 3× plus vite, 4${NB}s.` };
+const spkIds = () => Object.keys(PSPELLS).filter(id => !PSPELLS[id].fam);
+function openSpellPick(then) {
+  SPK.sel = []; SPK.then = then;
+  G.mode = 'chooser';
+  renderSpellPick(); show('#spick', true); Snd.pop();
+  if (G.dev.auto) setTimeout(() => { SPK.sel = ['bomb', 'gel']; spkGo(); }, 400);
+}
+function renderSpellPick() {
+  $('#spk-grid').innerHTML = spkIds().map(id => {
+    const P = PSPELLS[id], k = SPK.sel.indexOf(id);
+    return `<button class="spk${k >= 0 ? ' on' : ''}" data-spk="${id}" style="--sc:${P.col}"><span class="spk-ic">${iconSVG(P.icon)}</span><b>${P.name}</b><small>${SPELL_SHORT[id] || P.txt}</small>${k >= 0 ? `<i class="spk-n">${k + 1}</i>` : ''}</button>`;
+  }).join('');
+  $('#spk-go').disabled = SPK.sel.length < 2;
+  setTxt('#spk-sub', SPK.sel.length < 2 ? `Choisis tes 2 sorts de départ · ${SPK.sel.length}/2` : 'Parfait : touches 1 et 2 en combat.');
+}
+function spkTap(id) {
+  const k = SPK.sel.indexOf(id);
+  if (k >= 0) SPK.sel.splice(k, 1);
+  else { if (SPK.sel.length >= 2) SPK.sel.shift(); SPK.sel.push(id); }
+  Snd.click(); haptic(8); renderSpellPick();
+}
+function spkGo() {
+  if (SPK.sel.length < 2) return;
+  G.run.spells = SPK.sel.slice();
+  for (const id of G.run.spells) catSee('q', id);
+  show('#spick', false); Snd.bouclier();
+  renderSpellBar(); updateHUD();
+  const fn = SPK.then; SPK.then = null; if (fn) fn();
+}
+function spkClick(e) {
+  const b = e.target.closest('[data-spk]'); if (!b) return;
+  firstGesture();
+  if (b.id === 'spk-go') spkGo(); else spkTap(b.dataset.spk);
+}
+
+/* ---------- les cadeaux du départ : le pack fou (2 jetons fous) ou la pièce du collectionneur ---------- */
+const GF = { list: [], then: null, st: 'off', kind: null };
+function giftCap(j) {
+  const t = j.parts[0].t, J = JK[t];
+  if (j.kind === 'fou') return esc(J.txt || '');
+  try { return J.caps[0](j.p * secPow(j)); } catch (e) { return esc(J.txt || ''); }
+}
+function openGift(kind, then) {
+  const run = G.run, pack = kind === 'pack';
+  Object.assign(GF, { kind, then, list: deckGiftList(kind, run), st: 'closed' });
+  G.mode = 'chooser';
+  setTxt('#gf-t', pack ? 'PACK FOU' : 'LE COLLECTIONNEUR');
+  setTxt('#gf-s', pack ? 'Touche le pack pour l\'ouvrir.' : 'Une pièce de la collection d\'Anatole. Touche pour ouvrir.');
+  $('#gf-t').className = 'gf-t ' + (pack ? 'fou' : 'or');
+  $('#gf-stage').innerHTML = `<button class="gf-pack ${pack ? 'p-fou' : 'p-or'}" data-gf="open" aria-label="Ouvrir">
+      <span class="gfp-top"></span>
+      <span class="gfp-body"><span class="gfp-logo">${iconSVG(pack ? 'cartes' : 'star')}</span><b>${pack ? 'JETONS<br>FOUS' : 'PIÈCE DE<br>COLLECTION'}</b><i>×${GF.list.length}</i></span>
+    </button><div class="gf-cards"></div>`;
+  $('#gf-ok').hidden = true;
+  show('#gift', true); Snd.pop();
+  if (G.dev.auto) setTimeout(() => { gfOpen(); setTimeout(gfOk, 1300); }, 400);
+}
+function gfOpen() {
+  if (GF.st !== 'closed') return;
+  GF.st = 'opening';
+  const pk = $('#gf-stage .gf-pack'); if (pk) pk.classList.add('open');
+  Snd.lever(); haptic(30);
+  setTimeout(() => {
+    if (GF.st !== 'opening') return;
+    if (pk) pk.hidden = true;
+    $('#gf-stage .gf-cards').innerHTML = GF.list.map((j, i) => `<button class="gf-card${j.kind === 'fou' ? ' fou' : ''}" data-gfi="${i}" style="--i:${i}">${chipHTML(j)}<b>${esc(jName(j))}</b><em style="color:var(--r-${rarVar(j)})">${rarLabel(j)}</em><small>${giftCap(j)}</small></button>`).join('');
+    GF.st = 'open';
+    setTxt('#gf-s', GF.list.length > 1 ? 'Touche un jeton pour tout lire.' : 'Touche-le pour tout lire.');
+    $('#gf-ok').hidden = false;
+    if (GF.kind === 'pack') Snd.glitch(); else Snd.chime();
+    GF.list.forEach((_, i) => setTimeout(() => Snd.card(), 120 + i * 180));
+  }, 560);
+}
+function gfOk() {
+  if (GF.st !== 'open') return;
+  GF.st = 'off';
+  giveDeckJokers(GF.list);
+  show('#gift', false); renderRack(); updateHUD(); Snd.coin(); haptic(20);
+  const fn = GF.then; GF.then = null; if (fn) fn();
+}
+function gfClick(e) {
+  const b = e.target.closest('[data-gf],[data-gfi]'); if (!b) return;
+  firstGesture();
+  if (b.dataset.gfi != null) { const j = GF.list[+b.dataset.gfi]; if (j) openDetail(j, 'gift'); return; }
+  if (b.dataset.gf === 'open') gfOpen();
+  else if (b.dataset.gf === 'ok') gfOk();
+}
+
+/* ================= v10 · LES PROFILS : 3 emplacements, comme dans Balatro =================
+   Chaque profil a sa progression (secrets, livres, mises, vestiaire, records) et sa partie en cours.
+   Les réglages (son, écran, contrôles) restent ceux de l'appareil. */
+const PRV = { sel: 0 };
+function profMetaRaw(i) {
+  if (i === PROF.cur) return G.meta;
+  try { const raw = localStorage.getItem(metaKeyOf(i)); return raw ? JSON.parse(raw) : null; } catch (e) { return null; }
+}
+function profRun(i) {
+  try { const raw = localStorage.getItem(runKeyOf(i)); if (!raw) return null; const o = JSON.parse(raw); return o && o.v === 3 && o.run && !o.run.over ? o : null; } catch (e) { return null; }
+}
+const profName = (m, i) => (m && m.pname) || `Profil ${i + 1}`;
+// la progression d'un profil, sur 4 axes (comme le « Progress » de Balatro)
+function profProgress(m) {
+  const keep = G.meta;
+  try {
+    G.meta = m === keep ? keep : initOpts(Object.assign(defMeta(), m, { secrets: Object.assign({}, m.secrets || {}), cat: Object.assign({}, m.cat || {}), dw: Object.assign({}, m.dw || {}), skins: m.skins ? JSON.parse(JSON.stringify(m.skins)) : undefined }));
+    const c = catCount(), v = vestCount(), sec = NORMAL_JOKERS.filter(secretKnown).length, dw = G.meta.dw || {};
+    let ds = 0; for (const d of DECKS) ds += Math.min(STAKES.length, dw[d.id] || 0);
+    const parts = [
+      ['Livres d\'Anatole', c.n / Math.max(1, c.tot), 'livre'],
+      ['Secrets', sec / NORMAL_JOKERS.length, 'star'],
+      ['Jeux et mises', ds / (DECKS.length * STAKES.length), 'trophee'],
+      ['Vestiaire', v.n / Math.max(1, v.tot), 'canon'],
+    ];
+    return { parts, tot: parts.reduce((a, p) => a + p[1], 0) / parts.length, wins: G.meta.wins || 0, runs: G.meta.runs || 0, best: G.meta.best || 0 };
+  } catch (e) { return { parts: [], tot: 0, wins: 0, runs: 0, best: 0 }; }
+  finally { G.meta = keep; }
+}
+const pctTxt = f => `${Math.floor(clamp(f, 0, 1) * 100)}${NB}%`;
+function openProfiles() {
+  PRV.sel = PROF.cur;
+  show('#title', false); show('#prof', true);
+  renderProfiles(); Snd.pop();
+}
+function closeProfiles() {
+  const inp = $('#pr-name'); if (inp) profRename(inp.value);
+  show('#prof', false);
+  if (G.mode === 'title') { show('#title', true); refreshTitle(); }
+  Snd.click();
+}
+function renderProfiles() {
+  const i = PRV.sel, cur = i === PROF.cur, m = profMetaRaw(i);
+  $('#pr-tabs').innerHTML = Array.from({ length: PROF_N }, (_, k) => {
+    const mk = profMetaRaw(k);
+    return `<button class="pr-tab${k === i ? ' on' : ''}${k === PROF.cur ? ' cur' : ''}${mk ? '' : ' empty'}" data-pr="tab" data-k="${k}"><b>${k + 1}</b><span>${mk ? esc(profName(mk, k)) : 'libre'}</span></button>`;
+  }).join('');
+  let h = '';
+  if (!m) {
+    h = `<div class="pr-empty"><p>Emplacement libre.</p><p class="pr-dim">Un nouveau profil, avec sa propre progression.</p><button class="btn big gold" data-pr="use">Créer ce profil</button></div>`;
+  } else {
+    const P = profProgress(m), cp = profRun(i);
+    h += `<label class="pr-name"><span>Nom</span><input id="pr-name" maxlength="14" autocomplete="off" spellcheck="false" value="${esc(profName(m, i))}"></label>`;
+    h += `<div class="pr-prog"><div class="pr-big"><b>PROGRESSION</b><i class="pr-bar"><em style="width:${(P.tot * 100).toFixed(1)}%"></em></i><strong>${pctTxt(P.tot)}</strong></div>`
+      + P.parts.map(([n, f, ic]) => `<div class="pr-sub"><span class="pr-ic">${iconSVG(ic)}</span><span class="pr-n">${n}</span><i class="pr-bar s"><em style="width:${(f * 100).toFixed(1)}%"></em></i><b>${pctTxt(f)}</b></div>`).join('') + '</div>';
+    h += `<div class="pr-stats"><div><b>${fmtS(P.wins)}</b><small>victoire${P.wins > 1 ? 's' : ''}</small></div><div><b>${fmtS(P.runs)}</b><small>partie${P.runs > 1 ? 's' : ''}</small></div><div><b>${P.best ? roundLabel(P.best) : '—'}</b><small>record</small></div></div>`;
+    if (cp) h += `<p class="pr-run">Partie en cours : manche ${roundLabel(cp.run.round + 1)}${cp.run.deck ? ' · ' + esc(deckById(cp.run.deck).name) : ''}</p>`;
+    h += `<div class="pr-acts">${cur ? '<p class="pr-curb">✓ PROFIL ACTUEL</p>' : '<button class="btn big gold" data-pr="use">JOUER SUR CE PROFIL</button>'}
+      <div class="pr-row">${cur ? '<button class="btn ghost small" data-pr="records">Records et sauvegarde</button><button class="btn ghost small" data-pr="unlock">Tout débloquer</button>' : ''}<button class="btn ghost small pr-del" data-pr="del">Effacer</button></div></div>`;
+  }
+  $('#pr-body').innerHTML = h;
+}
+// on garde les réglages de l'appareil d'un profil à l'autre
+function profLoadCurrent() {
+  const keep = { opts: G.meta.opts, ctrl: G.meta.ctrl };
+  META_KEY = metaKeyOf(PROF.cur); RUN_KEY = runKeyOf(PROF.cur);
+  G.meta = loadMeta(); G.meta.opts = keep.opts; G.meta.ctrl = keep.ctrl;
+  for (const k in SPR) if (k.startsWith('_chip')) delete SPR[k];
+  saveMeta(); applyOpts(true);
+  TTV.k++;
+}
+function profUse(i) {
+  const inp = $('#pr-name'); if (inp) profRename(inp.value);
+  saveMeta();
+  PROF.cur = i; saveProf();
+  profLoadCurrent();
+  if (!G.meta.pname) { G.meta.pname = `Profil ${i + 1}`; saveMeta(); }
+  PRV.sel = i;
+  renderProfiles(); refreshTitle();
+  Snd.record(); toastAny(`Profil « ${profName(G.meta, i)} » chargé.`);
+}
+function profRename(v) {
+  const i = PRV.sel, m = profMetaRaw(i); if (!m) return;
+  v = String(v || '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  if (!v || v === m.pname) return;
+  m.pname = v;
+  if (i === PROF.cur) saveMeta();
+  else try { localStorage.setItem(metaKeyOf(i), JSON.stringify(m)); } catch (e) { /* rien */ }
+  const t = $(`#pr-tabs [data-k="${i}"] span`); if (t) t.textContent = v;
+}
+function profDelete(i) {
+  const m = profMetaRaw(i), name = profName(m, i);
+  askConfirm(`Effacer le profil <b>« ${esc(name)} »</b> ?<br>Toute sa progression et sa partie en cours seront perdues.`, 'Effacer', () => {
+    try { localStorage.removeItem(metaKeyOf(i)); localStorage.removeItem(runKeyOf(i)); if (i === 0) localStorage.removeItem(OLD_KEY); } catch (e) { /* rien */ }
+    if (i === PROF.cur) { profLoadCurrent(); G.meta.pname = `Profil ${i + 1}`; saveMeta(); }
+    renderProfiles(); refreshTitle(); Snd.malus();
+  });
+}
+function profUnlockAll() {
+  askConfirm('Tout débloquer sur ce profil ?<br>Toutes les mises, toutes les pages des livres d\'Anatole et tout le vestiaire.', 'Tout débloquer', () => {
+    const m = G.meta;
+    m.stakeMax = STAKES.length - 1;
+    for (const T of CAT_TABS) for (const [c, id] of T.items()) { const o = m.cat[c] || (m.cat[c] = {}); o[id] = 1; }
+    const sk = skinMeta(); for (const kind in SKINS) for (const S2 of SKINS[kind]) if (S2.need) sk.got[kind + ':' + S2.id] = 1;
+    m.unlockAll = 1;
+    saveMeta(); renderProfiles(); refreshTitle(); Snd.record(); celebrate(false);
+  });
+}
+function prClick(e) {
+  const b = e.target.closest('[data-pr]'); if (!b || b.disabled) return;
+  firstGesture();
+  const a = b.dataset.pr;
+  if (a === 'back') closeProfiles();
+  else if (a === 'tab') { const inp = $('#pr-name'); if (inp) profRename(inp.value); PRV.sel = +b.dataset.k; renderProfiles(); Snd.tab(); }
+  else if (a === 'use') profUse(PRV.sel);
+  else if (a === 'del') profDelete(PRV.sel);
+  else if (a === 'unlock') profUnlockAll();
+  else if (a === 'records') { const inp = $('#pr-name'); if (inp) profRename(inp.value); show('#prof', false); OPV.tab = 'profil'; openOptions('prof'); }
+}
+function prKey(e) {
+  if ($('#prof').hidden) return;
+  const cf = $('#confirm'); if (cf && !cf.hidden) return;
+  if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'pr-name') { e.preventDefault(); document.activeElement.blur(); }
+}
+
 function rulesSections() {
   const ex = (id, cls) => `<span class="sym chip ${cls || 'k-commun'}" style="--jc:${JK[id].col};--ic2:${JK[id].dark}">${iconSVG(id)}</span>`;
   const rel = `<span class="sym rel">${iconSVG('relance')}</span>`, mal = `<span class="sym mal">${iconSVG('malus')}</span>`, clo = `<span class="sym clo">${iconSVG('trefle')}</span>`;
@@ -13234,7 +13827,7 @@ function reelWeights(ri) {
   const tw = run.pool.map(id => (own.has(id) ? BAL.ownW : 1) * (mag && mag.has(id) ? (T.aimant[2] > 0 ? 3 : 2) : 1));
   const kW = tw.reduce((a, b) => a + b, 0) / 5;   // les relances et les crânes gardent leur part d'avant (5 jetons chargés)
   let wRel = .5;
-  let wMal = (.45 + (stakeLv(run) >= 3 ? .08 : 0)) * (1 + .6 * M.relDone);
+  let wMal = (.45 + (stakeHas(run, ST.MACH) ? .15 : 0)) * (1 + .6 * M.relDone);
   if (mi === 0) wMal += .45 * (M.heat || 0);
   if (mi === 7) wMal *= 2;
   if (T.trefle4[1] > 0) wMal *= T.trefle4[2] > 0 ? .6 : .75;
@@ -13365,7 +13958,7 @@ function resetMachine(first) {
   const run = G.run, st = computeStats(run), mi = run.machine || 0;
   Object.assign(M, { first: !!first, stacks: 0, relDone: 0, paid: 0, state: 'ready', tray: [], note: null, malusCard: null, line: [run.pool[0], run.pool[1], run.pool[2]], held: [false, false, false], stuck: [false, false, false], spun: [], landed: 0, stopQ: [],
     heat: 0, drown: -1, target: null, targetHit: false, elbowUsed: false, elbowArm: false, refunded: false, zeroHit: false, flipBack: false, sandUsed: false, seedLine: null, ballFx: false, mi });
-  M.rel = (first ? 1 : stakeLv(run) >= 3 ? 0 : 1) + (run.relBonus || 0) + (st.oeil ? 1 : 0);
+  M.rel = (first ? 1 : stakeHas(run, ST.MACH) ? 0 : 1) + (run.relBonus || 0) + (st.oeil ? 1 : 0) + (hasDeck(run, 'veinard') ? 1 : 0);
   run.relBonus = 0;
   M.horl = st.horloger;
   M.sablier = st.T.sablier[1] > 0 ? (st.T.sablier[3] > 0 ? 3 : st.T.sablier[2] > 0 ? 2 : 1) : 0;
@@ -13376,7 +13969,7 @@ function resetMachine(first) {
 }
 // Graine fixe : on voit les 3 symboles avant de tirer
 function previewLine() { const save = M.line.slice(), r = machineRoll([0, 1, 2]); M.line = save; return r; }
-const relCost = () => Math.round((BAL.relBase + BAL.relR * Math.min(30, G.run.round) + BAL.relPaid * M.paid) * (computeStats(G.run).T.tapisvert[3] > 0 ? .8 : 1));
+const relCost = () => Math.round((BAL.relBase + BAL.relR * Math.min(30, G.run.round) + BAL.relPaid * M.paid) * (computeStats(G.run).T.tapisvert[3] > 0 ? .8 : 1) * priceMul());
 const spinnable = () => [0, 1, 2].filter(i => !M.held[i] && !M.stuck[i]);
 function canRespin() { return M.state === 'result' && spinnable().length > 0 && (M.rel > 0 || G.run.gold >= relCost()); }
 function payRespin() {
@@ -13914,7 +14507,7 @@ const CH = { opts: [], then: null, start: false };
    Une seule grande colonne qui fait défiler les machines. On tire, on arrête quand on veut, on tombe sur une machine.
    Au départ : le premier tirage est offert. Après chaque boss : on peut aussi garder sa machine. Relancer : 100 or. */
 const JPM = { st: 'off', then: null, start: false, items: [], pos: 0, v: 0, raf: 0, last: 0, stop: null, landed: null, autoAt: 0, lastCell: null, pulls: 0 };
-const JPM_RELOAD = 100;
+
 const jpmCur = () => (G.run && G.run.machine) || 0;
 function jpmPlate(mi, cls) {
   const M2 = MACH9[mi], C = MACH_PAL[mi];
@@ -13946,7 +14539,7 @@ function jpmPlace() {
   if (c !== JPM.lastCell) { JPM.lastCell = c; if (JPM.st === 'spin' || JPM.st === 'stopping') Snd.jpmTick(Math.abs(JPM.v) / 7); }
 }
 function jpmRender() {
-  const run = G.run, a = $('#jpm-act'), r = $('#jpm-res'), cur = jpmCur(), can = run.gold >= JPM_RELOAD;
+  const run = G.run, a = $('#jpm-act'), r = $('#jpm-res'), cur = jpmCur(), can = run.gold >= jpmReload();
   setTxt('#jpm-gold', String(Math.floor(run.gold)));
   $('#jpm').classList.toggle('spinning', JPM.st === 'spin' || JPM.st === 'stopping');
   $('#jpm').classList.toggle('won', JPM.st === 'result');
@@ -13960,12 +14553,12 @@ function jpmRender() {
   } else if (JPM.st === 'result') {
     const mi = JPM.landed, M2 = MACH9[mi];
     r.innerHTML = `<p class="jpm-name" style="--cc:${MACH_PAL[mi].c}">${esc(M2.name)}</p><button class="jpm-bug" data-jp="bug">BUG · ${esc(M2.bugName)} <i>?</i></button>`;
-    a.innerHTML = `<button class="btn big gold jpm-go" data-jp="ok">Jouer dessus</button><div class="jpm-row"><button class="btn blue" data-jp="reload" ${can ? '' : 'disabled'}>Relancer<small>${JPM_RELOAD} or</small></button>${keep}</div>`;
+    a.innerHTML = `<button class="btn big gold jpm-go" data-jp="ok">Jouer dessus</button><div class="jpm-row"><button class="btn blue" data-jp="reload" ${can ? '' : 'disabled'}>Relancer<small>${jpmReload()} or</small></button>${keep}</div>`;
   }
 }
 function jpmPull() {
   if (JPM.st !== 'ready' && JPM.st !== 'result') return;
-  if (JPM.st === 'result') { if (G.run.gold < JPM_RELOAD) { Snd.deny(); return; } G.run.gold -= JPM_RELOAD; Snd.coin(); updateHUD(); }
+  if (JPM.st === 'result') { if (G.run.gold < jpmReload()) { Snd.deny(); return; } G.run.gold -= jpmReload(); Snd.coin(); updateHUD(); }
   JPM.st = 'spin'; JPM.pulls++; JPM.stop = null; JPM.landed = null; JPM.v = 0;
   JPM.autoAt = now() + 9000;
   const lv = $('#jpm-lever'); if (lv) { lv.classList.remove('pull'); void lv.offsetWidth; lv.classList.add('pull'); }
@@ -14233,9 +14826,9 @@ const ITEMS = {
 const PUNCH_PRICE = 300, PUNCH_MIX = 500;
 // un mix ultime : ses deux jetons au niveau ULTIME
 const mixUlt = j => !!j && j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3);
-const punchPrice = j => j && j.kind === 'mix' ? PUNCH_MIX : PUNCH_PRICE;
+const punchPrice = j => Math.round((j && j.kind === 'mix' ? PUNCH_MIX : PUNCH_PRICE) * priceMul());
 function genMarket() {
-  const r = Math.max(1, G.run.round), sc = 1 + .06 * (Math.min(r, 30) - 1), offers = [];
+  const r = Math.max(1, G.run.round), sc = (1 + .06 * (Math.min(r, 30) - 1)) * priceMul(), offers = [];
   const mine = MACH9[G.run.machine || 0].ids, others = NORMAL_JOKERS.filter(id => !mine.includes(id));
   for (const id of [pick(mine), ...shuffle(others.slice()).slice(0, 2)]) {
     const roll = rnd(); let kind, lv, price, curse = null;
@@ -14250,7 +14843,7 @@ function genMarket() {
   const it = pick(its);
   offers.push({ type: 'item', id: it, price: Math.round(ITEMS[it].price * sc), haggled: false, sold: false });
   const sp = spellOffer(G.run); if (sp) offers.push(sp);
-  offers.push({ type: 'punch', price: PUNCH_PRICE, haggled: true, sold: false });
+  offers.push({ type: 'punch', price: punchPrice({ kind: 'ultime' }), haggled: true, sold: false });
   return offers;
 }
 function say(t) { typeInto('#k-say', t, 'dealer'); }
@@ -14290,7 +14883,7 @@ function renderMarket() {
   $('#k-offers').innerHTML = MK.offers.map((o, i) => {
     const off = MK.gone || o.sold;
     const hag = `<button class="mini dark" data-hag="${i}" ${off || o.haggled ? 'disabled' : ''}>${o.haggled ? 'Déjà tenté' : 'Marchander'}</button>`;
-    const buyB = (label, block) => o.sold ? '<em>Vendu</em>' : `<button class="mini" data-buy="${i}" ${off || run.gold < o.price || block ? 'disabled' : ''}>${label}</button>${hag}`;
+    const buyB = (label, block) => o.sold ? `<em>${o.gift ? 'Offert' : 'Vendu'}</em>` : `<button class="mini${o.gift ? ' gift' : ''}" data-buy="${i}" ${off || run.gold < o.price || block ? 'disabled' : ''}>${o.gift ? label.replace(/^\d+ or/, 'OFFERT') : label}</button>${o.gift ? '' : hag}`;
     if (o.type === 'slot') return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico" aria-hidden="true">+1</div><div class="otext"><b>Emplacement de jeton</b><span>Ton rack passe de ${run.slots} à ${run.slots + 1} places. C'est la seule place que vend le marché.</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`;
     if (o.type === 'item') { const I = ITEMS[o.id]; return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico item" aria-hidden="true">${iconSVG(I.icon)}</div><div class="otext"><b>${I.name}</b><span>${I.txt}</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`; }
     if (o.type === 'spell') {
@@ -14303,8 +14896,8 @@ function renderMarket() {
       let txt, btns;
       if (o.sold) { txt = 'La machine refroidit. Une fois par visite.'; btns = '<em>Fait</em>'; }
       else if (sel) { const pr = punchPrice(sel); txt = sel.kind === 'mix' ? `<b class="pm-sel">${esc(jName(sel))}</b> : MIX ULTIME → <b class="pm-s">LES DEUX EN RARETÉ SECRÈTE</b>. Leurs deux capacités secrètes s'éveillent, +25${NB}% de puissance, pour toute la partie.` : `<b class="pm-sel">${esc(jName(sel))}</b> : ULTIME → <b class="pm-s">RARETÉ SECRÈTE</b>. Capacité secrète éveillée, +25${NB}% de puissance, pour toute la partie.`; btns = `<button class="mini" data-punchm="go" ${off || run.gold < pr ? 'disabled' : ''}>Punch ! ${pr} or</button><button class="mini dark" data-punchm="no">Annuler</button>`; }
-      else if (MK.punching) { txt = `Touche un jeton <b>ULTIME</b> (${PUNCH_PRICE} or) ou un <b>MIX ULTIME</b> (${PUNCH_MIX} or) de ton rack. Les autres, elle les recrache.`; btns = '<button class="mini dark" data-punchm="no">Annuler</button>'; }
-      else { txt = `Ton jeton <b>ULTIME</b> ressort en <b class="pm-s">RARETÉ SECRÈTE</b> (${PUNCH_PRICE} or) : sa capacité secrète s'éveille, +25${NB}% de puissance, jusqu'à la fin de la partie. Un <b>MIX ULTIME</b> (ses deux jetons en ultime) : ${PUNCH_MIX} or, et les deux passent en secret. Une fois par visite.`; btns = `<button class="mini" data-punchm="start" ${off || run.gold < o.price ? 'disabled' : ''}>Dès ${o.price} or</button><button class="mini dark" disabled>Prix fixe</button>`; }
+      else if (MK.punching) { txt = `Touche un jeton <b>ULTIME</b> (${punchPrice({ kind: 'ultime' })} or) ou un <b>MIX ULTIME</b> (${punchPrice({ kind: 'mix' })} or) de ton rack. Les autres, elle les recrache.`; btns = '<button class="mini dark" data-punchm="no">Annuler</button>'; }
+      else { txt = `Ton jeton <b>ULTIME</b> ressort en <b class="pm-s">RARETÉ SECRÈTE</b> (${punchPrice({ kind: 'ultime' })} or) : sa capacité secrète s'éveille, +25${NB}% de puissance, jusqu'à la fin de la partie. Un <b>MIX ULTIME</b> (ses deux jetons en ultime) : ${punchPrice({ kind: 'mix' })} or, et les deux passent en secret. Une fois par visite.`; btns = `<button class="mini" data-punchm="start" ${off || run.gold < o.price ? 'disabled' : ''}>Dès ${o.price} or</button><button class="mini dark" disabled>Prix fixe</button>`; }
       return `<div class="offer punch${o.sold ? ' sold' : ''}${MK.punching || sel ? ' picking' : ''}"><div class="slotico pm" aria-hidden="true">${iconSVG('punchm')}</div><div class="otext"><b>Punch-o-matic<i class="otag">SERVICE</i></b><span>${txt}</span></div><div class="obuy">${btns}</div></div>`;
     }
     const j = o.joker, partner = stackPartner(j);
@@ -14350,7 +14943,7 @@ function buy(i) {
     if (freeSlots() <= 0 && !partner) { toast('Rack plein : vends un jeton d\'abord.'); return; }
     run.gold -= o.price; o.sold = true;
     named = inspBought();
-    if (rnd() < .12) {
+    if (!o.gift && rnd() < .12) {
       j = mkJoker('faux', [], 1, { fakeOf: j.parts[0].t }); say(pick(LINES.scam)); Snd.malus();
       // la contrefaçon arrive avec sa propre place (une fois par partie)
       if (!run.scamSlot && run.slots < 8) { run.scamSlot = true; run.slots++; toast('Contrefaçon ! Mais elle vient avec sa propre place : +1 place de jeton.'); setTimeout(() => { if (G.mode === 'market') say(LINES.scamSlot[0]); }, 1600); }
@@ -14636,7 +15229,7 @@ function barResume() {
 }
 const barScale = r => 1.15 + .03 * (Math.min(r, 30) - 1);
 function genBar() {
-  const run = G.run, r = Math.max(1, run.round + 1), sc = barScale(r), mid = computeStats(run).midas ? .75 : 1;
+  const run = G.run, r = Math.max(1, run.round + 1), sc = barScale(r) * priceMul(run), mid = (computeStats(run).midas ? .75 : 1) * (hasDeck(run, 'barman') ? .7 : 1);
   const drinks = [];
   for (const cat of ['canon', 'rateau', 'base']) {
     const ids = Object.keys(UPG).filter(id => UPG[id].cat === cat && upLv(run, id) < UPG[id].max);
@@ -14673,7 +15266,7 @@ function openBar() {
   $('#baron').hidden = true; $('#baron').className = 'baron'; $('.bar-scene').classList.remove('baron-on');
   renderBar();
   BG.setMode('bar'); Music.play('bar');
-  let line = BAR.firstVisit ? pick(ZAZA.first) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : pick(ZAZA.hello);
+  let line = BAR.firstVisit ? (hasDeck(run, 'barman') ? 'Un collègue barman ! Pour toi, prix d\'ami sur tout. Et la première, je l\'offre.' : pick(ZAZA.first)) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : pick(ZAZA.hello);
   barStop();
   const nextUp = BAR.gambler ? () => { if (G.mode === 'bar' && !BAR.leaving && baronPending() && $('#baron').hidden) baronArrive(); }
     : BAR.visitor ? () => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); } : null;
@@ -14876,10 +15469,11 @@ function openMarketPane() {
   G.run.marketSeen = true;
   catSee('p', 'dealer');
   MK.offers = genMarket(); MK.gone = false; MK.punching = false; MK.pmSel = null; MK.busy = false;
+  const gifts = deckMarketGifts(MK.offers, G.run);
   $('#k-leave').textContent = 'Retour au bar';
   renderMarket(); renderRack(); inspNameTag();
   const f = $('#dealer-fig'); if (f) f.classList.remove('spin', 'tip', 'angry');
-  slidePanes($('#bar'), $('#market'), 1, () => { say(pick(G.meta.inspName && rnd() < .35 ? LINES.named : LINES.hello)); inspAct('tip', 700); });
+  slidePanes($('#bar'), $('#market'), 1, () => { say(gifts ? 'Un ami de mon vieux pote ! Ce soir, trois articles sont pour moi. Sers-toi, et pas un mot.' : pick(G.meta.inspName && rnd() < .35 ? LINES.named : LINES.hello)); inspAct('tip', 700); });
 
 
   // l'Inspecteur glisse un mot sur sa machine, une fois par partie, si on a de quoi la nourrir
@@ -16885,7 +17479,7 @@ function openOptions(from) {
   renderOptions(); show('#opts', true);
   if (typeof Snd !== 'undefined') Snd.cataOpen();
 }
-function closeOptions() { OPV.bind = null; show('#opts', false); saveMeta(); if (OPV.from === 'title') refreshTitle(); }
+function closeOptions() { OPV.bind = null; show('#opts', false); saveMeta(); if (OPV.from === 'prof') { show('#prof', true); renderProfiles(); } else if (OPV.from === 'title') refreshTitle(); }
 const oRow = (label, ctl, sub) => `<div class="orow"><div class="olab"><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</div><div class="octl">${ctl}</div></div>`;
 const oSlider = (k, v) => `<div class="oslide"><input type="range" min="0" max="100" step="5" value="${v}" data-opt="${k}" aria-label="${k}"><output>${v}${NB}%</output></div>`;
 const oSeg = (k, cur, list) => `<div class="oseg" role="radiogroup">${list.map(([v, l]) => `<button class="${String(cur) === String(v) ? 'on' : ''}" data-opt="${k}" data-v="${v}" role="radio" aria-checked="${String(cur) === String(v)}">${l}</button>`).join('')}</div>`;
@@ -17064,14 +17658,14 @@ function renderRunInfo() {
     if (shots.length) h += '<h4>Shots actifs</h4><div class="ri-list">' + shots.map(k => `<div class="ri-it" style="--cat:${SHOTS[k].liq}"><span class="ri-ic">${iconSVG(SHOTS[k].icon)}</span><div><b>${SHOTS[k].name}</b><small>${colorNums(SHOTS[k].txt)}</small></div></div>`).join('') + '</div>';
   } else if (RIV.tab === 'partie') {
     const S2 = run.stats, c = (a, b) => `<div class="ost"><dt>${a}</dt><dd>${b}</dd></div>`;
-    h += `<p class="ri-note">${STAKES[run.stake || 0].name} · machine <b>${MACH9[run.machine || 0].name}</b> (bug : ${MACH9[run.machine || 0].bugName}) · ses 15 jetons sont sur les rouleaux</p>`;
+    h += `<p class="ri-note">${STAKES[run.stake || 0].name}${run.deck ? ` · jeu <b>${esc(deckLine(run))}</b> : ${esc(deckById(run.deck).txt)}` : ''}<br>Machine <b>${MACH9[run.machine || 0].name}</b> (bug : ${MACH9[run.machine || 0].bugName}) · ses 15 jetons sont sur les rouleaux</p>`;
     h += '<dl class="ostats2">' + [c('Manche', roundLabel(Math.max(1, run.round))), c('Score', fmtS(run.score || 0)), c('Meilleure manche', fmtS(S2.bestRound || 0)), c('Or gagné', fmtS(S2.gold)), c('Cartes abattues', fmtS(run.kills)), c('Boss battus', String(run.bossKills)), c('Parades', fmtS(S2.parries)), c('Meilleure série', fmtS(S2.bestStreak)), c('Triples', String(S2.triples)), c('Jetons empilés', String(S2.stacks)), c('Jeux du bar', `${S2.gamesWon || 0} / ${S2.games || 0}`), c('Baron', `${S2.gWins} – ${S2.gLosses}`)].join('') + '</dl>';
   } else {
     const r0 = run.round + (G.mode === 'combat' ? 1 : 1);
     h += '<div class="ri-next">' + Array.from({ length: 6 }, (_, k) => r0 + k).map(r => {
       const boss = isBossRound(r), ev = r <= 30 ? run.events[r] : null;
       const what = boss ? `<b class="b">BOSS</b> ${r <= 30 ? ENEMIES[BOSS_ORDER[(r / 5 - 1) % 6]].name : 'deux boss'}` : ev ? `<b class="e">ÉVÉNEMENT</b> ${EVENTS[ev].name}` : r === 30 ? '<b class="b">FINALE</b>' : '<span>manche normale</span>';
-      return `<div class="ri-r${boss ? ' boss' : ''}"><i>${roundLabel(r)}</i>${what}${r % 10 === 0 && r > 0 ? '<em>nouvelle machine</em>' : ''}</div>`;
+      return `<div class="ri-r${boss ? ' boss' : ''}"><i>${roundLabel(r)}</i>${what}${r % 5 === 0 && r > 0 && r !== 30 ? '<em>puis la Jackpot Machine</em>' : ''}</div>`;
     }).join('') + '</div>';
     if (run.pendingMalus.length) h += '<h4>Malus de la prochaine manche</h4><div class="ri-list">' + run.pendingMalus.map(m => `<div class="ri-it" style="--cat:${TIERS[MALUS[m].tier].col}"><span class="ri-ic">${iconSVG(MALUS[m].icon)}</span><div><b>${MALUS[m].name}</b><small>${MALUS[m].txt}</small></div></div>`).join('') + '</div>';
   }
@@ -18229,7 +18823,7 @@ function startDemo() {
 const PANES = ['#machine', '#bar', '#market', '#poker', '#chooser', '#jpm', '#mini'];
 // (la machine buggée vit dans le panneau de la machine)
 function hidePanes() { bugClear(); const bm = $('#bugm'); if (bm) bm.hidden = true; for (const id of PANES) { const el = $(id); if (el) { el.hidden = true; el.getAnimations && el.getAnimations().forEach(a => a.cancel()); } } }
-function hideScreens() { for (const id of ['#title', '#over', '#win', '#fbrew', '#punch', '#rules', '#opts', '#pause', '#dev', '#detail', '#cata', '#anatole', '#vest', '#runinfo']) show(id, false); if (FB.cut) fbCutEnd(true); FB.on = false; const fw = $('#fbwheel'); if (fw) fw.hidden = true; hidePanes(); $('#tip').hidden = true; TIPQ.length = 0; tipOpen = false; tipPaused = false; }
+function hideScreens() { for (const id of ['#title', '#prof', '#newrun', '#spick', '#gift', '#over', '#win', '#fbrew', '#punch', '#rules', '#opts', '#pause', '#dev', '#detail', '#cata', '#anatole', '#vest', '#runinfo']) show(id, false); if (FB.cut) fbCutEnd(true); FB.on = false; const fw = $('#fbwheel'); if (fw) fw.hidden = true; hidePanes(); $('#tip').hidden = true; TIPQ.length = 0; tipOpen = false; tipPaused = false; }
 function toTitle() {
   hideScreens();
   document.body.classList.remove('dvround');
@@ -18256,12 +18850,12 @@ function startRun(cp) {
     startNextRound();
     return;
   }
-  G.run = newRun(G.meta.stake); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
+  G.run = applyDeck(newRun(G.meta.stake), G.meta.deck); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
   const cb = newCombat(); cb.stats = computeStats(G.run); cb.sc = roundScale(G.run, 1); cb.ended = true; G.cb = cb;
-  catSee('q', 'bomb'); catSee('q', 'gel');
-  renderRack(); updateHUD();
-  // la partie commence par le choix de la machine (3 au hasard, gratuit)
-  openChooser(() => openMachine({ first: true }), true);
+  if (!hasDeck(G.run, 'sorts')) { catSee('q', 'bomb'); catSee('q', 'gel'); }
+  renderRack(); renderSpellBar(); updateHUD();
+  // la partie commence par la Jackpot Machine (le 1er tirage est offert) ; le jeu choisi s'en mêle avant ou après
+  deckStart(() => openChooser(() => deckAfterMachine(() => openMachine({ first: true })), true));
 }
 function startNextRound() {
   const run = G.run;
@@ -18283,7 +18877,7 @@ function startNextRound() {
   renderRack(); renderSpellBar(); showStatus(); updateHUD(); tableWake();
   if (r === 1 && seenOnce('r1')) setTimeout(() => queueTip(TIPS.r1), 900);
   if (seenOnce('bille')) setTimeout(() => queueTip(TIPS.bille), r === 1 ? 1500 : 900);
-  if (r === 3 && seenOnce('abil')) setTimeout(() => queueTip(TIPS.abil), 900);
+  if (r === 3 && spellsOf(run).includes('bomb') && spellsOf(run).includes('gel') && seenOnce('abil')) setTimeout(() => queueTip(TIPS.abil), 900);
   if (hasMalus(run, 'pickpocket')) setTimeout(() => toast('Un pickpocket rôde : abats-le pour récupérer ton jeton.'), 1600);
   setTimeout(() => { if (G.mode === 'combat' && !newBusy) showNewNote(); }, 2200);
   if (cb.final) fbIntro();
@@ -18353,7 +18947,7 @@ function endRun(cashed) {
   m.jetons += jet; m.life.tickets = (m.life.tickets || 0) + jet;
   bankLife(run);
   m.best = Math.max(m.best, run.round);
-  if (won) { m.wins++; if (run.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1) { m.stakeMax = run.stake + 1; } }
+  if (won) { m.wins++; if (run.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1) { m.stakeMax = run.stake + 1; } if (run.deck) { m.dw = m.dw || {}; m.dw[run.deck] = Math.max(m.dw[run.deck] || 0, (run.stake || 0) + 1); } }
   const sk = run.stake || 0, prevBest = bestScoreOf(sk), newBest = (run.score || 0) > prevBest;
   if (newBest) { m.bestScore = m.bestScore || {}; m.bestScore[sk] = run.score; }
   saveMeta(); clearCheckpoint(); checkUnlocks();
@@ -18619,11 +19213,12 @@ function simGambler() {
 }
 function simMarket() {
   const run = G.run, offers = genMarket();
+  deckMarketGifts(offers, run);
   for (const o of offers.sort((a, b) => (b.type === 'joker' ? RAR[b.joker.kind].rank : 0) - (a.type === 'joker' ? RAR[a.joker.kind].rank : 0))) {
     if (o.type === 'slot' && run.gold >= o.price + 50) { run.gold -= o.price; run.slots++; run.slotsBought++; }
-    else if (o.type === 'joker' && o.joker.kind !== 'maudit' && run.gold >= o.price + 40) {
+    else if (o.type === 'joker' && o.joker.kind !== 'maudit' && (o.gift || run.gold >= o.price + 40)) {
       run.gold -= o.price;
-      const scam = rnd() < .12;
+      const scam = !o.gift && rnd() < .12;
       if (scam && !run.scamSlot && run.slots < 8) { run.scamSlot = true; run.slots++; }
       addJokerSim(scam ? mkJoker('faux', [], 1, { fakeOf: o.joker.parts[0].t }) : o.joker);
     } else if (o.type === 'item' && o.id === 'soin' && run.hp < run.maxHp * .6 && run.gold >= o.price) { run.gold -= o.price; run.hp = Math.min(run.maxHp, run.hp + run.maxHp * .4); }
@@ -18713,9 +19308,11 @@ function contribHTML(c) {
 }
 function simOne(o) {
   G.run = newRun(o.stake || 0);
+  if (o.deck) applyDeck(G.run, o.deck);
   const sk = BOT[o.skill || 'moyen'], dt = 1 / 30, out = { round: 0, won: false, t: 0, parries: 0, blocks: 0, deathBy: null, perRound: [], gold: 0 };
   G.cb = newCombat(); G.cb.stats = computeStats(G.run); G.cb.sc = roundScale(G.run, 1);
   G.run.machine = o.machine != null ? o.machine : irand(0, MACH9.length - 1);
+  if (o.deck === 'pack' || o.deck === 'collec') for (const j of deckGiftList(o.deck, G.run)) addJokerSim(j);
   simMachine(true);
   simBar(sk);
   while (!G.run.over && G.run.round < (o.maxRound || 45)) {
@@ -18962,6 +19559,8 @@ function keyDown(e) {
   if (k === 'Escape' || isKey('pause', k)) {
     if (!$('#dev').hidden) { show('#dev', false); return; }
     if (!$('#opts').hidden) { closeOptions(); return; }
+    if (!$('#prof').hidden) { const cf = $('#confirm'); if (!cf || cf.hidden) closeProfiles(); return; }
+    if (!$('#newrun').hidden) { const cf = $('#confirm'); if (!cf || cf.hidden) closeNewRun(); return; }
     if (!$('#anatole').hidden) { closeCollector(); return; }
     if (!$('#vest').hidden) { show('#vest', false); Snd.cataClose(); if (G.mode === 'title') refreshTitle(); return; }
     if (!$('#rules').hidden) { show('#rules', false); return; }
@@ -19177,18 +19776,26 @@ function bindUI() {
     else if (b.dataset.dstack) { closeDetail(); const run = G.run, A = run.jokers.find(x => x.uid === +b.dataset.dstack), B = run.jokers.find(x => x.uid === uid); if (A && B) { applyStack(A, B); if (G.mode === 'machine') { renderTray(); setMachineInfo(); } if (G.mode === 'bar') renderBar(); if (G.mode === 'market') renderMarket(); } }
     else if (b.dataset.dmove) { const i = G.run.jokers.findIndex(j => j.uid === uid); moveJoker(i, i + +b.dataset.dmove); const j = G.run.jokers.find(x => x.uid === uid); if (j) openDetail(j, 'rack'); }
   });
-  on('#t-play', () => newRunAsk());
+  on('#t-play', () => openNewRun());
+  $('#newrun').addEventListener('click', nrClick);
+  $('#newrun').addEventListener('pointerdown', nrDown);
+  $('#newrun').addEventListener('pointerup', nrUp);
+  $('#newrun').addEventListener('pointercancel', () => { NR.x0 = null; });
+  window.addEventListener('keydown', nrKey);
+  $('#spick').addEventListener('click', spkClick);
+  $('#gift').addEventListener('click', gfClick);
   on('#t-cont', () => { const cp = loadCheckpoint(); if (cp) startRun(cp); });
-  on('#t-sprev', () => { G.meta.stake = Math.max(0, G.meta.stake - 1); saveMeta(); refreshTitle(); });
-  on('#t-snext', () => { G.meta.stake = Math.min(G.meta.stakeMax, G.meta.stake + 1); saveMeta(); refreshTitle(); });
   on('#t-punch', () => openPunch('title'));
   on('#t-cata', () => openCatalog('title'));
   on('#t-opts', () => openOptions('title'));
   on('#t-vest', () => openVestiaire());
-  on('#t-stats', () => { OPV.tab = 'profil'; openOptions('title'); });
+  on('#t-stats', () => openProfiles());
+  $('#prof').addEventListener('click', prClick);
+  $('#prof').addEventListener('change', e => { if (e.target.id === 'pr-name') profRename(e.target.value); });
+  window.addEventListener('keydown', prKey);
   $('#t-secret').addEventListener('click', secretTap);
   $('#vest').addEventListener('click', vestClick);
-  on('#o-again', () => startRun(null));
+  on('#o-again', () => { toTitle(); openNewRun(); });
   on('#o-punch', () => openPunch('over'));
   on('#o-cata', () => openCatalog('over'));
   on('#o-menu', () => toTitle());
@@ -19275,7 +19882,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { JPM, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { JPM, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

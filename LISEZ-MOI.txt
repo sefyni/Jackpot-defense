@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10 (étape 1)-202610101934
+JACKPOT DEFENSE v10 (étape 2 sur 3)-202610102013
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -10,7 +10,34 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 3. Après la 1re ouverture, le jeu marche aussi sans internet.
 
 Ta progression reste sur chaque appareil. Pour la transférer :
-Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10 (étape 2 sur 3)
+- JOUER ouvre l'écran « Nouvelle partie » : choisis ton JEU de départ (flèches, ou fais glisser la carte), ta MISE, puis LANCER. La mise n'encombre plus l'accueil.
+- 10 jeux de départ, comme les decks de Balatro :
+  Coffre-fort : 200 pièces dès le départ.
+  Pack fou : tu ouvres un pack surprise, 2 jetons fous.
+  L'ami de l'Inspecteur : ton 1er marché noir, 3 articles offerts (jamais la place de jeton).
+  Seconde chance : ta base tombe ? Tu rejoues la manche (une fois par partie).
+  Sorcier : tu choisis tes 2 sorts de départ.
+  Barman : boissons et shots 30 % moins chers.
+  Bille double : 2 charges de BILLE, et +50 % de dégâts de BILLE.
+  Collectionneur : un jeton ULTIME de ta machine dès le départ.
+  Rack XXL : 7 places de jetons, mais 30 PV de moins.
+  Veinard : +1 relance gratuite à chaque tirage.
+  Gagne une partie avec un jeu : une pastille de la couleur de la mise apparaît sur sa carte.
+- Les 8 mises sont bien plus méchantes, et chacune garde les règles de celles d'avant :
+  Blanche : la partie normale.
+  Rouge, Fauché : 30 % d'or en moins, et tout coûte 25 % plus cher.
+  Verte, Chaos : un événement surprise à chaque manche.
+  Noire, La maison triche : un malus à chaque manche.
+  Bleue, Machine truquée : plus de relance gratuite, et plus de crânes.
+  Violette, Élites partout : des élites dès la 1re manche, deux fois plus.
+  Orange, Sans soin : ta base ne se répare plus entre les manches.
+  Or : cartes 50 % plus puissantes (PV et dégâts).
+- PROFILS, comme dans Balatro (bouton PROFIL de l'accueil) : 3 emplacements. Chacun a son nom, sa progression (livres, secrets, jeux et mises gagnés, vestiaire), ses victoires, son record et sa partie en cours. « Tout débloquer » ouvre les mises, les livres et le vestiaire du profil. Ta progression actuelle est dans le profil 1.
+- Infos de la partie : ton jeu et ta mise. La liste des prochaines manches indique la Jackpot Machine après chaque boss.
+- Prochaine étape : les livres d'Anatole (catalogue et collection à feuilleter) et les sorts de famille.
 
 Nouveautés de la v10 (étape 1 sur 3)
 - La JACKPOT MACHINE : une grande machine à une seule colonne remplace le choix entre 3 machines, au début de la partie et après chaque boss. Tire, puis arrête la colonne quand tu veux : tu tombes sur ta machine. Après un boss, tu peux aussi garder la tienne. Relancer : 100 or. Elle gronde quand elle tourne et bipe quand elle s'arrête.
