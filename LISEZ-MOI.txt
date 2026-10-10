@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.1-202610110025
+JACKPOT DEFENSE v10.2-202610110121
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,16 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.2
+- Les animaux compagnons ! Ils restent avec toi toute la partie, en haut à droite de la table, et ils te parlent au début et à la fin de chaque manche (plus ou moins poliment). Quand tu en as plusieurs, il leur arrive de se chamailler.
+- Coco, le perroquet de Zaza (au bar) : +15 % d'or gagné (sauf les ventes).
+- Marcel, le poisson du mur (au bar) : toutes les 15 s, il chante et les cartes dansent sur place 2,5 s (les boss, moins longtemps).
+- Boris, l'ours en tapis (au bar) : +20 % de PV max pour ta base.
+- Gaston, le rat de l'Inspecteur, habillé comme lui (au marché noir) : −20 % sur le marché noir (sauf le Punch-o-matic), et le marché ouvre plus souvent.
+- Au bar, Zaza propose parfois une de ses bêtes (dès la manche 2). Au marché noir, Gaston est en tête de liste tant que tu ne l'as pas adopté.
+- Au bar, les boutons « Marché noir » et « Au combat » restent toujours visibles en bas.
+- Infos de la partie : l'onglet « Équipement » montre tes compagnons. Le carnet d'Anatole a une page « Les animaux ».
 
 Nouveautés de la v10.1
 - Le bar de Zaza : fini le souffle. Des verres qui trinquent (parfois avec des glaçons) et des gens qui discutent entre eux, de-ci de-là.

@@ -2690,6 +2690,80 @@ body.lpc .bk-top h2{font-size:30px}
 #k-offers.closed{position:relative}
 #k-offers.closed::before{content:"FERMÉ";position:absolute;z-index:5;left:50%;top:70px;transform:translateX(-50%) rotate(-10deg);padding:6px 22px;border:5px solid #e0365a;border-radius:10px;color:#ff5c6c;background:rgba(20,13,31,.82);font:700 40px/1 var(--f-pix);letter-spacing:.14em;pointer-events:none;box-shadow:0 6px 0 rgba(0,0,0,.4)}
 #k-offers.closed .offer{opacity:.55}
+/* v10.2 · les animaux compagnons */
+.pets{position:absolute;z-index:23;top:42px;right:8px;display:flex;flex-direction:row-reverse;gap:5px;pointer-events:none}
+.pets.boss{top:110px}
+.pt-pet{position:relative;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,rgba(52,38,74,.9),rgba(14,9,24,.88) 70%);box-shadow:inset 0 0 0 2px var(--pc),0 3px 0 rgba(0,0,0,.45);animation:petIn .5s cubic-bezier(.3,1.6,.5,1) both}
+.pt-pet .pet-svg{width:39px;height:39px;overflow:visible}
+.pt-pet.pt-talk{box-shadow:inset 0 0 0 2px var(--pc),0 0 0 3px rgba(255,243,230,.3),0 3px 0 rgba(0,0,0,.45)}
+.pt-pet.pt-sing::after{content:'♪';position:absolute;right:-5px;top:-9px;font:700 17px/1 sans-serif;color:#9be15d;text-shadow:0 2px 0 #000;animation:petNote .7s ease-out infinite}
+.pt-pet.pt-sing::before{content:'♫';position:absolute;left:-6px;top:-4px;font:700 14px/1 sans-serif;color:#ffcc4d;text-shadow:0 2px 0 #000;animation:petNote .7s ease-out .35s infinite}
+@keyframes petNote{from{transform:translateY(6px);opacity:0}30%{opacity:1}to{transform:translateY(-15px) rotate(18deg);opacity:0}}
+@keyframes petIn{from{opacity:0;transform:scale(.3) rotate(-25deg)}to{opacity:1;transform:none}}
+.pet-say{position:absolute;top:calc(100% + 10px);right:0;width:max-content;min-width:130px;max-width:min(262px,calc(100vw - 24px));margin:0;padding:6px 10px 8px;border-radius:12px;background:var(--cream);color:var(--ink);font-weight:600;font-size:14px;line-height:1.22;text-align:left;box-shadow:0 4px 0 rgba(0,0,0,.35),inset 0 0 0 2px var(--pc,transparent);pointer-events:none;transform-origin:calc(100% - var(--tx,14px) - 8px) 0}
+.pet-say::before{content:"";position:absolute;top:-8px;right:var(--tx,14px);border:8px solid transparent;border-top:0;border-bottom-color:var(--cream)}
+.pet-say .ps-n{display:block;margin-bottom:2px;font:700 11px/1 var(--f-pix);letter-spacing:.1em;text-transform:uppercase;color:var(--pcd,#7a1430)}
+.pet-say.in{animation:psIn .22s ease-out both}
+.pet-say.out{animation:psOut .25s ease-in both}
+@keyframes psIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes psOut{to{opacity:0;transform:scale(.85)}}
+body.lpc .pets{top:12px;right:12px;flex-direction:column;gap:8px}
+body.lpc .pt-pet{width:58px;height:58px}
+body.lpc .pt-pet .pet-svg{width:51px;height:51px}
+body.lpc .pet-say{top:var(--ty,0);right:calc(100% + 14px);max-width:300px;font-size:15px;transform-origin:100% 18px}
+body.lpc .pet-say::before{top:15px;right:-8px;border:8px solid transparent;border-right:0;border-left-color:var(--cream)}
+/* les petits gestes : la tête du perroquet, la queue du poisson, les moustaches du rat */
+.pet-svg *{transform-box:fill-box}
+.pet-coco .pc-head{transform-origin:62% 92%;animation:pcBob 2.8s ease-in-out infinite}
+@keyframes pcBob{0%,100%{transform:rotate(0)}38%{transform:rotate(-8deg)}55%{transform:rotate(3deg)}70%{transform:rotate(0)}}
+.pt-talk .pc-jaw{transform-origin:88% 12%;animation:pcJaw .16s steps(2,jump-none) infinite alternate}
+@keyframes pcJaw{from{transform:rotate(0)}to{transform:rotate(24deg)}}
+.pet-marcel .mb-tail{transform-origin:100% 50%;animation:mbTail 1.9s ease-in-out infinite}
+@keyframes mbTail{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+.pt-talk .mb-jaw,.pt-sing .mb-jaw{transform-origin:0% 15%;animation:mbJaw .15s steps(2,jump-none) infinite alternate}
+@keyframes mbJaw{from{transform:rotate(0)}to{transform:rotate(26deg)}}
+.pt-sing .mb-fish{transform-origin:15% 55%;animation:mbTurn .45s ease-in-out infinite alternate}
+@keyframes mbTurn{from{transform:rotate(-3deg)}to{transform:rotate(-11deg) scale(1.05)}}
+.pt-sing .mb-tail{animation-duration:.32s}
+.pt-talk .br-jaw{animation:brJaw .17s steps(2,jump-none) infinite alternate}
+@keyframes brJaw{from{transform:translateY(0)}to{transform:translateY(2.4px)}}
+.pet-gaston .gs-wh{transform-origin:50% 50%;animation:gsWh 3.4s ease-in-out infinite}
+@keyframes gsWh{0%,84%,100%{transform:none}89%{transform:translateY(-.7px) rotate(4deg)}94%{transform:translateY(.4px) rotate(-3deg)}}
+.pet-gaston .gs-earL,.pet-gaston .gs-earR{transform-origin:50% 90%;animation:gsEar 5s ease-in-out infinite}
+.pet-gaston .gs-earR{animation-delay:-2.3s}
+@keyframes gsEar{0%,88%,100%{transform:none}93%{transform:rotate(-14deg)}}
+.pt-talk .gs-mouth{animation:gsM .14s steps(2,jump-none) infinite alternate}
+@keyframes gsM{from{transform:translateY(0)}to{transform:translateY(1.3px)}}
+@media (prefers-reduced-motion:reduce){.pt-pet,.pet-svg *,.pet-say{animation:none!important}}
+/* au bar : la fiche de l'animal que Zaza propose */
+.bar-foot{position:sticky;bottom:0;z-index:6;margin:0 -10px;padding:16px 12px 14px;background:linear-gradient(180deg,rgba(20,11,30,0),rgba(20,11,30,.97) 16px)}
+#b-pet{margin-bottom:8px}
+.petrow{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:9px;align-items:center;padding:7px 9px;border-radius:12px;background:linear-gradient(90deg,rgba(0,0,0,.36),rgba(0,0,0,.16));box-shadow:inset 0 0 0 2px var(--pc)}
+.petrow.sold{background:rgba(0,0,0,.22)}
+.petrow.adopted .po-art{animation:poJump .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes poJump{0%{transform:scale(1)}35%{transform:scale(1.25) rotate(-8deg) translateY(-6px)}100%{transform:none}}
+.po-art{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 50% 38%,rgba(52,38,74,.95),rgba(14,9,24,.92) 70%);box-shadow:inset 0 0 0 2px var(--pc)}
+.po-art .pet-svg{width:51px;height:51px;overflow:visible}
+.petrow .stext b{font-size:15px}
+body:not(.lpc) .petrow .stext span{font-size:12px}
+body:not(.lpc) .petrow{grid-template-columns:52px minmax(0,1fr) auto;padding:6px 8px}
+body:not(.lpc) .petrow .po-art{width:52px;height:52px}
+body:not(.lpc) .petrow .po-art .pet-svg{width:46px;height:46px}
+.ptag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:5px;background:var(--pc);color:#140d1f;font:700 10px/1.4 var(--f-pix);font-style:normal;letter-spacing:.06em;vertical-align:2px}
+.pq{display:block;margin-top:3px;font-size:12.5px;font-style:italic;line-height:1.2;color:#ffe2b8}
+.petrow .mini{min-width:92px}
+.petrow .mini small{display:block;font-size:12px;opacity:.85}
+.petrow b.n,.offer.mkpet b.n{display:inline;font:inherit;font-weight:700;color:#ffcc4d}
+/* au marché noir : Gaston */
+.offer.mkpet .slotico.petico{border:0;padding:0;width:54px}
+.offer.mkpet .po-art{width:54px;height:54px}
+.offer.mkpet .po-art .pet-svg{width:48px;height:48px}
+.offer.mkpet .pq{color:#e8d2a8}
+/* le panneau PC, les infos, le catalogue */
+.lp-kit .spill.spet{padding:0;background:rgba(14,9,24,.7);border-radius:50%;overflow:visible}
+.lp-kit .spill.spet .pet-svg{width:24px;height:24px}
+.ri-ic.ri-pet{padding:0;border-radius:50%;background:rgba(14,9,24,.7);overflow:visible}
+.ri-ic.ri-pet .pet-svg{width:100%;height:100%}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -2737,6 +2811,7 @@ body.lpc .bk-top h2{font-size:30px}
     <div id="bossbar" hidden><b id="bb-name">BOSS</b><div class="bb"><i id="bb-fill"></i></div><small id="bb-sub"></small></div>
     <div id="debuffs"></div>
     <div id="dpsm" class="dpsm" hidden aria-label="Dégâts par seconde"><b id="dpsm-v">0</b><small>dégâts/s</small></div>
+    <div id="pets" class="pets" hidden aria-hidden="true"></div>
     <div id="statusbar" hidden></div>
     <div id="fbwheel" class="fbwheel" hidden aria-hidden="true"><b></b></div>
     <div id="fbcut" class="fbcut" hidden aria-live="polite">
@@ -2992,6 +3067,7 @@ body.lpc .bk-top h2{font-size:30px}
         </div>
         <div class="counter">
           <div id="b-vis" hidden></div>
+          <div id="b-pet" hidden></div>
           <div class="drinks" id="b-drinks"></div>
           <div class="shots" id="b-shots"></div>
           <div class="mine-ups"><small>TES BOISSONS</small><div id="b-mine"></div></div>
@@ -4516,6 +4592,8 @@ function computeStats(run) {
   s.multishot = 0; s.double = U('double') > 0; s.pierce = U('calibre') >= 3 ? 1 : 0;
   s.bulletSpdMul = 1 + .3 * U('vitesse'); s.bulletSize = 1 + .22 * U('calibre');
   s.hpMul = curses.fragile ? Math.pow(.7, curses.fragile) : 1; s.hpAdd = 20 * U('pv') + (run.overheal || 0) + (run.hpPerm || 0);
+  if (hasPet(run, 'boris')) s.hpMul *= PET_BORIS;
+  s.marcel = hasPet(run, 'marcel');
   s.armor = 0; s.regen = 0;
   s.goldMul = (curses.radin ? Math.pow(.6, curses.radin) : 1) * (bo.dore ? 1.6 : 1);
   s.enemySpeedMul = curses.appat ? Math.pow(1.2, curses.appat) : 1; s.eShotMul = 1;
@@ -8946,7 +9024,7 @@ function newRun(stake) {
     stake: stake || 0, round: 0, inf: false, hp: BAL.baseHp, maxHp: BAL.baseHp, overheal: 0, gold: 0, jokers: [], slots: 5, slotsBought: 0, cloverSlots: 0, pool: [], machine: 0, K: {}, sold: [], bugDue: false,
     malus: [], skulls: 0, pendingMalus: [], pendingSkulls: 0, stolen: [], spins: 0, kills: 0, bossKills: 0, defeated: [], events,
     foudreK: 0, nukeK: 0, phoenixUsed: false, over: false, rakeBonus: 0, relBonus: 0, zero: false, roulette: null, won: false,
-    up: {}, floors: [], shots: [], boost: {}, boosters: [], spells: ['bomb', 'gel'], firstDrink: true, gRounds: {}, gMet: {}, score: 0, vis: { last: 0, seen: {}, refused: {} },
+    up: {}, floors: [], shots: [], boost: {}, boosters: [], spells: ['bomb', 'gel'], pets: [], firstDrink: true, gRounds: {}, gMet: {}, score: 0, vis: { last: 0, seen: {}, refused: {} },
     stats: { dmg: 0, gold: 0, triples: 0, parries: 0, blocks: 0, bestStreak: 0, drinks: 0, stacks: 0, gWins: 0, gLosses: 0, bestRound: 0, games: 0, gamesWon: 0, shotsN: 0, billes: 0, rebonds: 0, fous: 0, bugPulls: 0 },
   };
 }
@@ -9193,6 +9271,8 @@ const Snd = (() => {
     postBreak() { noise(.3, .16, 2400, 'highpass', 0, 6000); [1500, 1200, 900].forEach((f, i) => tone(f, .1, 'triangle', .06, f * .6, i * .05)); for (let i = 0; i < 5; i++) clack(.06 + i * .04, .06, arnd(2400, 4000)); },
     floorBreak() { tone(70, .35, 'sine', .28, 40); noise(.55, .24, 900, 'lowpass', 0, 160); for (let i = 0; i < 9; i++) clack(.04 + i * .045 + arnd(0, .02), .08, arnd(2200, 4200)); tone(196, .3, 'sawtooth', .04, 98, .05); },
     armor() { if (th('armor', 90)) { tone(820, .25, 'triangle', .06, 790); tone(1290, .2, 'triangle', .04, 1250); noise(.05, .08, 5000, 'highpass'); } },
+    petAdopt() { [523, 659, 784, 1046].forEach((f, i) => tone(f, .18, 'p25', .06, null, i * .07, true)); tone(1568, .3, 'sine', .04, null, .3, true); noise(.06, .05, 3000, 'bandpass', .3); },
+    marcelSong() { [72, 76, 79, 76, 77, 74, 71, 72].forEach((m, i) => tone(mtof(m), .13, 'p12', .05, null, i * .15)); [48, 55, 50, 55].forEach((m, i) => tone(mtof(m), .22, 'square', .028, null, i * .3)); tone(mtof(84), .32, 'p25', .04, mtof(86), 1.22); },
     revive() { [392, 523, 659, 784, 1046, 1568].forEach((f, i) => tone(f, .3, 'sine', .07, null, i * .06, true)); noise(.8, .1, 400, 'bandpass', 0, 6000, 1); tone(110, .7, 'sawtooth', .05, 220); },
     ready(k) { if (!th('rdy' + k, 400)) return; if (k === 'gel') { tone(1568, .16, 'sine', .05, null, 0, true); tone(2093, .22, 'sine', .04, null, .06, true); } else { tone(660, .07, 'square', .04, 880); tone(1320, .1, 'square', .035, null, .06); } },
     ghostShot() { if (th('ghost', 100)) { tone(1200, .07, 'sine', .022, 480); noise(.04, .02, 3200, 'bandpass'); } },
@@ -9275,6 +9355,10 @@ const VOICES = {
   momo: { f: 78, wave: 'triangle', rate: 98, form: .78, v: .44, curve: 'flat', breath: .12 },
   nox: { f: 208, wave: 'sine', rate: 78, form: 1.06, v: .21, curve: 'pomp', vib: 7.5, breath: .2 },
   anatole: { f: 132, wave: 'triangle', rate: 74, form: .92, v: .24, curve: 'pomp', vib: 4.4, breath: .1 },
+  coco: { f: 430, wave: 'p12', rate: 42, form: 1.3, v: .2, curve: 'mad', breath: .2 },
+  marcel: { f: 150, wave: 'p25', rate: 60, form: .96, v: .22, curve: 'play', vib: 6.5, breath: .03 },
+  boris: { f: 68, wave: 'sawtooth', rate: 95, form: .72, v: .3, curve: 'flat', breath: .28 },
+  gaston: { f: 240, wave: 'p25', rate: 38, form: 1.14, v: .22, curve: 'mad', breath: .32 },
 };
 // formants F1/F2 approximatifs du français
 const VF = { a: [760, 1350], e: [470, 1450], é: [380, 2100], è: [560, 1800], i: [290, 2250], o: [450, 880], u: [290, 1800], ou: [320, 780], eu: [420, 1450], an: [650, 1050], on: [430, 780], in: [580, 1550], oi: [720, 1250] };
@@ -10586,7 +10670,7 @@ function finishRound() {
   const run = G.run, cb = G.cb, s = cb.stats, r = run.round;
   if (!G.headless && cb.dps) run.lastDps = { r, avg: dpsAvg(cb), peak: cb.dps.peak, tot: cb.dps.tot, src: dpsSources(cb, 9) };
   const score = scoreRound(run, cb);
-  const bonus = Math.round((BAL.roundBonus0 + BAL.roundBonusR * Math.min(r, 30)) * (stakeHas(run, ST.GOLD) ? .7 : 1));
+  const bonus = Math.round((BAL.roundBonus0 + BAL.roundBonusR * Math.min(r, 30)) * (stakeHas(run, ST.GOLD) ? .7 : 1) * (hasPet(run, 'coco') ? PET_COCO : 1));
   run.gold += bonus; run.stats.gold += bonus; if (G.headless) dbg('g_bonus', bonus);
   run.gold = Math.floor(run.gold);
   const healAmt = stakeHas(run, ST.HEAL) ? 0 : Math.round(run.maxHp * s.healBetween * (s.healMul || 1));
@@ -11955,7 +12039,7 @@ function heal(h) {
   if (!(h > 0) || run.over) return;
   run.hp = Math.min(run.maxHp, run.hp + h * (s.healMul || 1));
 }
-function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
+function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; if (src && src !== 'sell' && src !== 'dette' && hasPet(G.run, 'coco')) g *= PET_COCO; G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
 
 /* ---------- tir de la base ---------- */
 function inRange(e, R2) { return !e.dead && e.deal <= .15 && e.x * e.x + e.y * e.y <= R2; }
@@ -12220,6 +12304,7 @@ function updateTimers(dt) {
   if (s.bernard && (tm.bern = (tm.bern || 0) + dt) >= 6) { tm.bern = bernard() ? 0 : 5.5; }
   if (s.volee && (tm.vol = (tm.vol || 0) + dt) >= 9) { tm.vol = dinaVolley() ? 0 : 8.5; }
   if (s.queue && (tm.queue = (tm.queue || 0) + dt) >= 10) { tm.queue = momoShot() ? 0 : 9.5; }
+  if (s.marcel && !cb.demo && (tm.marcel = (tm.marcel || 0) + dt) >= (tm.mar1 ? PET_SONG : PET_SONG1)) { tm.mar1 = 1; tm.marcel = marcelSing() ? 0 : PET_SONG - 1; }
   updatePBalls(dt);
 }
 /* ---------- malus dévastateurs ---------- */
@@ -12961,6 +13046,7 @@ function render(dtReal) {
     let bx = e.x;
     if (e.lunge > 0) { const d = edist(e) || 1, l = Math.sin(e.lunge / .18 * Math.PI) * 2.2; bx -= e.x / d * l; by -= e.y / d * l; }
     let rot = e.tilt + (still ? 0 : Math.sin(t * 4 + e.wob) * .05), scl = sc, alpha = 1;
+    if (cb.danceT > cb.t && e.stunT > 0) { const k = Math.sin(t * 14 + e.wob); rot += k * .32; by -= Math.abs(k) * 1.6; }
     if (e.deal > 0) { const p = e.deal / .4; rot += p * 2.4; scl *= 1 + p * .5; alpha = 1 - p * .7; }
     if (e.ai === 'decoy') alpha *= .55 + .25 * Math.sin(t * 10);
     ctx.save(); ctx.translate(bx, by); ctx.rotate(rot); ctx.scale(scl, scl); ctx.globalAlpha = alpha;
@@ -13544,7 +13630,7 @@ function updateLP(run, cb, r, inCombat) {
   // ton équipement : boissons du bar et sorts
   const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
   const kit = `<div class="lpk"><small>SORTS</small><div>${spellsOf(run).map((id, i) => `<span class="spill" style="--sc:${PSPELLS[id].col}" title="${esc(PSPELLS[id].name + ' : ' + PSPELLS[id].txt)}">${iconSVG(PSPELLS[id].icon)}<i>${i + 1}</i></span>`).join('')}</div></div>`
-    + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '')
+    + petKitHTML(run) + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '')
     + `<div class="lpk lpk-d"><small>BOISSONS${ups.length ? ` <i>${ups.reduce((a, k) => a + up[k], 0)}</i>` : ''}</small><div>${ups.length ? Object.keys(UPG_CATS).map(c => { const ks = ups.filter(k => UPG[k].cat === c); if (!ks.length) return ''; const n = ks.reduce((a, k) => a + up[k], 0); return `<span class="upill cat" style="--cat:${UPG_CATS[c].col}" title="${esc(ks.map(k => `${UPG[k].name} (${up[k]}) : ${UPG[k].txt(up[k])}`).join(' · '))}">${UPG_CATS[c].name}<b>${n}</b></span>`; }).join('') : '<em>rien encore</em>'}</div></div>`;
   setHTML('#lp-kit', kit);
   const st = STAKES[run.stake || 0];
@@ -14435,6 +14521,7 @@ function bookPages(n) {
     if (fam.length) P.push({ k: 'grid', sec: 'Le marché noir', toc: 'Les sorts de famille', title: 'Les sorts de famille', col: '#c9a8ff', note: 'Plus vous avez de jetons de leur famille, plus ils frappent fort.', blocks: [blk(null, 'icons', fam.map(id => ['q', id]), 3)] });
     for (let k = 0; k < COMBOS.length; k += 14) P.push({ k: 'grid', sec: 'Les combos', toc: k === 0 ? 'Les combos' : null, title: k === 0 ? 'Les combos' : 'Les combos (suite)', col: '#ff5fa2', note: k === 0 ? 'Deux jetons côte à côte. Rien de plus, rien de moins.' : null, blocks: [blk(null, 'duo', COMBOS.slice(k, k + 14).map(c => ['c', c.id]), 7)] });
     P.push({ k: 'grid', sec: 'Les habitués', toc: 'Les habitués', title: 'Les habitués', col: '#ffb07a', note: 'Ils viennent tous les soirs. Moi aussi, en cachette.', blocks: [blk(null, 'faces', PEOPLE.map(id => ['p', id]), 2)] });
+    P.push({ k: 'grid', sec: 'Les habitués', title: 'Les animaux', col: '#9be15d', note: "Ils parlent, ils jurent, et ils restent toute la partie. Zaza en a trois. L'Inspecteur, un seul : il le regrette.", blocks: [blk(null, 'faces', PET_IDS.map(id => ['a', id]), 2)] });
   } else {
     P.push({ k: 'title' });
     CAT_ORDER.forEach((f, i) => P.push({ k: 'grid', sec: 'Les secrets', toc: i === 0 ? 'Les secrets, famille par famille' : null, title: CATS[f].n, col: CATS[f].col, note: i === 0 ? 'Un jeton ULTIME passé au Punch-o-matic livre son secret. Je note tout.' : null, secrets: true, blocks: [blk(null, 'chips', NORMAL_JOKERS.filter(id => JK[id].cat === f).map(id => ['S', id]), 4)] }));
@@ -14464,6 +14551,7 @@ function bkItem(c, id) {
     case 'D': { const D = deckById(id), w = (G.meta.dw || {})[id] || 0; return { ok: true, art: `<span class="bk-deck" style="--dc:${D.col}"><span class="nr-med">${iconSVG(D.icon)}</span></span>`, name: D.name, sub: `<span class="bk-stk">${STAKES.map((S2, k) => `<i class="${k < w ? 'on' : ''}" style="--sc:${S2.col}"></i>`).join('')}</span>` }; }
     case 'k': { const ok = catHas('k', id), g = id[0] === 'g', i = +id.slice(1), M2 = (g ? GLITCH9 : MACH9)[i], C = (g ? GLITCH_PAL : MACH_PAL)[i]; return { ok, art: `<span class="bk-plate${g ? ' glitch' : ''}" style="--ca:${C.a};--cb:${C.b};--cc:${C.c}"><span class="chm-ico">${iconSVG(g ? 'faux' : MACH_ICON[i])}</span></span>`, name: ok ? M2.name : '???', sub: ok ? `<small class="bk-bug">bug : ${esc(M2.bugName)}</small>` : '' }; }
     case 'p': { const ok = catHas('p', id); return { ok, art: `<span class="bk-photo">${catTile('p', id)}<i class="bk-tape"></i></span>`, name: ok ? catTitle('p', id) : '???' }; }
+    case 'a': { const ok = catHas('a', id); return { ok, art: `<span class="bk-photo">${catTile('a', id)}<i class="bk-tape"></i></span>`, name: ok ? PETS[id].name : '???' }; }
   }
   const ok = catHas(c, id);
   return { ok, art: catTile(c, id), name: ok ? catTitle(c, id) : '???' };
@@ -15849,7 +15937,7 @@ const PUNCH_PRICE = 200, PUNCH_MIX = 300;
 const mixUlt = j => !!j && j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3);
 const punchPrice = j => Math.round((j && j.kind === 'mix' ? PUNCH_MIX : PUNCH_PRICE) * priceMul());
 function genMarket() {
-  const r = Math.max(1, G.run.round), sc = (1 + .06 * (Math.min(r, 30) - 1)) * priceMul(), offers = [];
+  const r = Math.max(1, G.run.round), sc = (1 + .06 * (Math.min(r, 30) - 1)) * priceMul() * petMk(G.run), offers = [];
   const mine = MACH9[G.run.machine || 0].ids, others = NORMAL_JOKERS.filter(id => !mine.includes(id));
   for (const id of [pick(mine), ...shuffle(others.slice()).slice(0, 2)]) {
     const roll = rnd(); let kind, lv, price, curse = null;
@@ -15859,10 +15947,11 @@ function genMarket() {
     else { kind = 'maudit'; lv = 3; price = 100; curse = pick(Object.keys(CURSES)); }
     offers.push({ type: 'joker', joker: mkJoker(kind, [{ t: id, lv }], 1, curse ? { curse } : null), price: Math.round(price * sc), haggled: false, sold: false });
   }
-  if (G.run.slotsBought < 1 && G.run.slots < 8) offers.push({ type: 'slot', price: 120, haggled: false, sold: false });
+  if (G.run.slotsBought < 1 && G.run.slots < 8) offers.push({ type: 'slot', price: Math.round(120 * petMk(G.run)), haggled: false, sold: false });
   const its = Object.keys(ITEMS).filter(k => k !== 'rateau' || (G.run.rakeBonus || 0) < 2);
   const it = pick(its);
   offers.push({ type: 'item', id: it, price: Math.round(ITEMS[it].price * sc), haggled: false, sold: false });
+  const po = petOfferMarket(G.run); if (po) offers.unshift(po);
   const sp = spellOffer(G.run); if (sp) offers.push(sp);
   offers.push({ type: 'punch', price: punchPrice({ kind: 'ultime' }), haggled: true, sold: false });
   return offers;
@@ -15906,6 +15995,7 @@ function renderMarket() {
     const off = MK.gone || o.sold;
     const hag = `<button class="mini dark" data-hag="${i}" ${off || o.haggled ? 'disabled' : ''}>${o.haggled ? 'Déjà tenté' : 'Marchander'}</button>`;
     const buyB = (label, block) => o.sold ? `<em>${o.gift ? 'Offert' : 'Vendu'}</em>` : `<button class="mini${o.gift ? ' gift' : ''}" data-buy="${i}" ${off || run.gold < o.price || block ? 'disabled' : ''}>${MK.gone ? 'Fermé' : o.gift ? label.replace(/^\d+ or/, 'OFFERT') : label}</button>${o.gift ? '' : hag}`;
+    if (o.type === 'pet') return petMarketRow(o, buyB(o.price + ' or'));
     if (o.type === 'slot') return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico" aria-hidden="true">+1</div><div class="otext"><b>Emplacement de jeton</b><span>Ton rack passe de ${run.slots} à ${run.slots + 1} places. C'est la seule place que vend le marché.</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`;
     if (o.type === 'item') { const I = ITEMS[o.id]; return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico item" aria-hidden="true">${iconSVG(I.icon)}</div><div class="otext"><b>${I.name}</b><span>${I.txt}</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`; }
     if (o.type === 'spell') {
@@ -15953,6 +16043,7 @@ function buy(i) {
     renderRack(); renderMarket(); updateHUD(); offerFx(i);
     return;
   }
+  if (o.type === 'pet') { buyMarketPet(i); return; }
   let named = false;
   if (o.type === 'slot') { run.gold -= o.price; run.slots++; run.slotsBought++; o.sold = true; named = inspBought(); if (!named) say(LINES.slot[0]); Snd.coin(); }
   else if (o.type === 'item') {
@@ -16218,6 +16309,450 @@ function bumpEl(el) { if (!el) return; el.classList.remove('bump'); void el.offs
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
+/* ---------- les portraits des animaux (SVG 64×64, dans le style du jeu : aplats, ombres douces) ---------- */
+const PET_PELT = 'M24 24Q15 21 7 16Q3 17 4 21Q8 26 16 31Q13 39 15 45Q9 50 5 56Q5 61 10 60Q17 56 23 52Q28 56 32 61Q36 56 41 52Q47 56 54 60Q59 61 59 56Q55 50 49 45Q51 39 48 31Q56 26 60 21Q61 17 57 16Q49 21 40 24Z';
+const PET_ART = {
+  // Coco, le perroquet de Zaza : un ara rouge, le bec crochu, l'air mauvais
+  coco: `<rect x="4" y="53" width="56" height="5" rx="2.5" fill="#8a5a2a"/><rect x="4" y="56" width="56" height="2" rx="1" fill="#5e3a18"/>
+    <g class="pc-tail"><path d="M37 46L52 63H45L33 50Z" fill="#2a6fd0"/><path d="M35 47L44 63H39L32 50Z" fill="#e0365a"/></g>
+    <path d="M20 52C16 40 20 28 30 26C42 24 48 34 46 46C45 52 40 55 32 55C26 55 22 54 20 52Z" fill="#e0365a"/>
+    <path d="M22 50C20 42 23 34 29 31C26 38 26 46 30 54C26 54 23 53 22 50Z" fill="#ff6b7d" opacity=".55"/>
+    <g class="pc-wing"><path d="M33 30C43 29 49 38 47 48C46 53 42 56 38 57C37 50 35 42 33 30Z" fill="#ffcc4d"/>
+    <path d="M34 38C42 38 47 44 46 50C45 54 42 56 38 57C37 52 36 45 34 38Z" fill="#4aa8ff"/>
+    <path d="M36 47C41 48 45 50 45 52C44 55 41 57 38 57C37 54 37 50 36 47Z" fill="#2a6fd0"/>
+    <path d="M37 42Q41 43 44 46M37 47Q40 49 42 52" stroke="#2a6fd0" stroke-width=".9" fill="none"/></g>
+    <ellipse cx="27" cy="54.6" rx="3.2" ry="1.9" fill="#6b6578"/><ellipse cx="35" cy="54.6" rx="3.2" ry="1.9" fill="#6b6578"/>
+    <g class="pc-head">
+      <path d="M23 10C24 4 29 2 31 5C29 6 28 8 28 10Z" fill="#ff6b7d"/><path d="M28 10C30 5 35 4 36.5 6.5C34.5 7 32.5 8 31 10.5Z" fill="#c42848"/>
+      <circle cx="28" cy="20" r="12" fill="#e0365a"/>
+      <path d="M33 11C38 13 41 18 39.5 24C38 20 36 16 33 11Z" fill="#a8243c" opacity=".45"/>
+      <path d="M16.5 16C16.5 11 21.5 9 25.5 11C29.5 13 29.8 21 27 25C24 28.5 18.5 27.5 16.8 23Z" fill="#fff3e6"/>
+      <path d="M18.5 20.5h4M18.8 23.4h3.6M19.5 17.6h3" stroke="#f0aab4" stroke-width=".8" stroke-linecap="round"/>
+      <circle cx="23" cy="17" r="3.3" fill="#ffe066"/><circle cx="22.3" cy="17.4" r="1.75" fill="#1a0f2e"/><circle cx="23.3" cy="16.2" r=".7" fill="#fff"/>
+      <path d="M18 12.2L27.5 14.6" stroke="#6a0f28" stroke-width="2.1" stroke-linecap="round"/>
+      <g class="pc-jaw"><path d="M13.6 27.4C16 26.4 19.6 27 21.4 28.6C20.9 32 18.1 34.4 15.4 33.9C13.7 33.6 13.2 30.4 13.6 27.4Z" fill="#2e2638" stroke="#1a0f2e" stroke-width=".8" stroke-linejoin="round"/><path d="M15.4 29.5C16.9 29 18.9 29.5 19.9 30.5" stroke="#ff7eb6" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <path d="M19 18.2C12.6 17 8 21.4 8.6 27.8C9 31.2 10.6 33.6 12.4 33.6C11.8 30.4 12.9 27.6 16 27.1C18 26.8 20.2 27.4 21.4 28.6C22.6 25 21.8 20.4 19 18.2Z" fill="#efe3c4" stroke="#1a0f2e" stroke-width=".9" stroke-linejoin="round"/>
+      <path d="M8.9 27.4C9.2 30.6 10.7 33.4 12.4 33.6C11.9 31.4 12 29.8 12.6 28.3Z" fill="#2e2638"/>
+      <path d="M17.6 20.8C15 20.4 12.8 21.6 11.6 23.6" stroke="#c9b48c" stroke-width="1" fill="none" stroke-linecap="round"/>
+    </g>`,
+  // Marcel, le poisson du mur : un black-bass en plastique sur sa plaque de bois, avec son bouton rouge
+  marcel: `<path d="M5 15C5 9 9 6 15 6H49C55 6 59 9 59 15V49C59 55 55 58 49 58H15C9 58 5 55 5 49Z" fill="#5e3818"/>
+    <path d="M8 16C8 11.5 11 9 16 9H48C53 9 56 11.5 56 16V48C56 52.5 53 55 48 55H16C11 55 8 52.5 8 48Z" fill="#8a5428"/>
+    <path d="M11 19C24 16 40 22 53 18M10 29C20 27 30 31 40 28M12 41C24 38 37 44 54 39M15 51C27 49 38 53 50 50" stroke="#6a3f1c" stroke-width="1" fill="none" opacity=".75"/>
+    <rect x="23" y="48.2" width="18" height="5" rx="1.2" fill="#ffcc4d"/><path d="M26 50.7H38" stroke="#b8862a" stroke-width="1.1" stroke-linecap="round"/>
+    <circle cx="13.2" cy="50.6" r="2.7" fill="#e0365a"/><circle cx="12.4" cy="49.8" r=".9" fill="#ff9aa8"/>
+    <g class="mb-fish">
+      <g class="mb-tail"><path d="M17.5 31.5L8 22C9.4 27 9.4 30 10.4 32C9.4 35 9.4 38 8 42.5Z" fill="#5a7a2a"/><path d="M10 25L16.4 31.2M10 39.4L16.4 32.6" stroke="#3e5a1a" stroke-width=".8"/></g>
+      <path d="M15 32C19 23 30 19 41 21C49 22 55.5 27 55.5 33C55.5 39 49 43 41 44C30 45 19 41 15 32Z" fill="#6f8f34"/>
+      <path d="M17 34C22 40 32 43 41 43C48 42 53 39 54.6 35C47 37 38 38 30 37C24 36.5 20 35.5 17 34Z" fill="#e2d48a"/>
+      <path d="M20 30.6C24 29.6 27 31.6 31 30.6C35 29.6 38 31.6 42 30.6" stroke="#3b5a1c" stroke-width="2.3" fill="none" stroke-linecap="round" stroke-dasharray="3.2 1.7"/>
+      <path d="M24 23.2L25.5 15.5L28 21L30.5 14L33 20.2L35.5 14.5L37.6 20.6L40.2 16.2L41.2 21.8Z" fill="#4f6e22"/>
+      <path d="M33 36C35 39 38 40.4 40.4 39.2C38.4 37.6 36 36.6 33 36Z" fill="#c8b860"/>
+      <path d="M44.2 24C41.4 29 41.4 36 44.2 41" stroke="#3b5a1c" stroke-width="1.1" fill="none"/>
+      <path d="M46 33.6L55.8 32.4L55.4 36.4L47 36.6Z" fill="#7a1426"/>
+      <g class="mb-jaw"><path d="M46 34.2L55.8 33.2C55.8 37.4 53 40.2 49.2 40.2C47.2 39.6 46 37.4 46 34.2Z" fill="#e2d48a"/><path d="M47 35.4L55 34.6" stroke="#b8a860" stroke-width=".7"/></g>
+      <path d="M46.6 33.4L55.9 32.1" stroke="#33240e" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="48.2" cy="26.8" r="3.5" fill="#fff8e0" stroke="#3b5a1c" stroke-width=".8"/><circle cx="48.9" cy="27" r="1.9" fill="#1a0f2e"/><circle cx="49.5" cy="26.2" r=".7" fill="#fff"/>
+    </g>`,
+  // Boris, l'ours en tapis : une peau à plat, bordée de feutre rouge festonné, la gueule grande ouverte
+  boris: `<path d="${PET_PELT}" fill="#c8262e" stroke="#c8262e" stroke-width="4.6" stroke-linejoin="round"/>
+    <path d="${PET_PELT}" fill="none" stroke="#c8262e" stroke-width="6.6" stroke-dasharray="0 4.3" stroke-linecap="round"/>
+    <path d="${PET_PELT}" fill="none" stroke="#8a1820" stroke-width="1" opacity=".55" stroke-dasharray="1.4 1.4"/>
+    <path d="${PET_PELT}" fill="#3b2416"/>
+    <path d="M32 26C25 32 24.5 45 32 56C39.5 45 39 32 32 26Z" fill="#4e3020" opacity=".85"/>
+    <path d="M18 34Q22 38 20 44M46 34Q42 38 44 44M14 22Q18 24 22 25M50 22Q46 24 42 25" stroke="#2a180e" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".7"/>
+    <g stroke="#f2e6c8" stroke-width="1.15" stroke-linecap="round"><path d="M5.5 16.4L2.8 15.2M4.2 18.8L1.6 18.8M4.6 21.4L2.2 22.6"/><path d="M58.5 16.4L61.2 15.2M59.8 18.8L62.4 18.8M59.4 21.4L61.8 22.6"/><path d="M5 57.6L2.6 59.6M7 59.6L5.4 62.2M9.6 60.6L9 63"/><path d="M59 57.6L61.4 59.6M57 59.6L58.6 62.2M54.4 60.6L55 63"/></g>
+    <circle cx="22.5" cy="8.4" r="4.3" fill="#3b2416"/><circle cx="22.5" cy="8.4" r="2.2" fill="#7a4a2e"/>
+    <circle cx="41.5" cy="8.4" r="4.3" fill="#3b2416"/><circle cx="41.5" cy="8.4" r="2.2" fill="#7a4a2e"/>
+    <ellipse cx="32" cy="16.2" rx="11.6" ry="10.6" fill="#4a2c1a"/>
+    <path d="M22 13C24 8 29 6 32 6C29 8 25 10 22 13Z" fill="#5e3a24" opacity=".7"/>
+    <ellipse cx="32" cy="21.2" rx="7.6" ry="6.7" fill="#8a6142"/>
+    <path d="M25.4 20.8C26 27 29 30 32 30C35 30 38 27 38.6 20.8C35.6 22.4 28.4 22.4 25.4 20.8Z" fill="#5a0f20"/>
+    <path d="M26.6 21.5L27.8 24.6L29 22.1ZM35 22.1L36.2 24.6L37.4 21.5Z" fill="#fff3e6"/>
+    <path d="M29.2 22.3L29.8 23.6L30.5 22.4ZM33.5 22.4L34.2 23.6L34.8 22.3Z" fill="#e8dcc8"/>
+    <g class="br-jaw"><path d="M27.2 26.6C28.8 24.6 35.2 24.6 36.8 26.6C35.6 29.4 28.4 29.4 27.2 26.6Z" fill="#e0607a"/><path d="M27.6 28.4L28.7 25.8L29.8 28.8ZM34.2 28.8L35.3 25.8L36.4 28.4Z" fill="#fff3e6"/><path d="M26 27.4C27 30.6 29.6 31.6 32 31.6C34.4 31.6 37 30.6 38 27.4C37.6 31 35 32.4 32 32.4C29 32.4 26.4 31 26 27.4Z" fill="#7a5236"/></g>
+    <ellipse cx="32" cy="17.4" rx="3.3" ry="2.15" fill="#120a06"/><ellipse cx="31.1" cy="16.8" rx="1.05" ry=".55" fill="#6a5a50"/>
+    <circle cx="27" cy="12.4" r="2.4" fill="#ffb000"/><circle cx="27.8" cy="12.8" r="1.25" fill="#120a06"/><circle cx="26.4" cy="11.6" r=".65" fill="#fff"/>
+    <circle cx="37" cy="12.4" r="2.4" fill="#ffb000"/><circle cx="36.2" cy="12.8" r="1.25" fill="#120a06"/><circle cx="36.4" cy="11.6" r=".65" fill="#fff"/>
+    <path d="M23.8 9.4L29.6 10.9M40.2 9.4L34.4 10.9" stroke="#1e120a" stroke-width="1.5" stroke-linecap="round"/>`,
+  // Gaston, le rat de l'Inspecteur : même imper, même feutre, même cicatrice, même œil plissé
+  gaston: `<path class="gs-tail" d="M46 60C56 60 60 54 57 48C55.6 45 58 42 61 43" stroke="#e98aa8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M8 64C8 51 15 45 25 43L32 51L39 43C49 45 56 51 56 64Z" fill="#b08a52"/>
+    <path d="M39 43C49 45 56 51 56 64H46L42 52Z" fill="#8f6c3c"/>
+    <path d="M25 43L32 51L39 43L38 64H26Z" fill="#2a2238"/>
+    <path d="M30 45H34L33.4 47.5H30.6Z" fill="#a8243c"/><path d="M30.5 47.2H33.5L34.5 57.4L32 60L29.5 57.4Z" fill="#e0365a"/>
+    <path d="M25 43L30 54L26.5 55L21 46Z" fill="#c9a066"/><path d="M39 43L34 54L37.5 55L43 46Z" fill="#b8925a"/>
+    <path d="M25.6 43.6L21.6 37.6L29.4 40.8Z" fill="#c9a066"/><path d="M38.4 43.6L42.4 37.6L34.6 40.8Z" fill="#a8844e"/>
+    <path d="M45 53.4L47.4 51.8L49.8 53.4L49.4 56.4L47.4 57.8L45.4 56.4Z" fill="#ffcc4d" stroke="#8a5a10" stroke-width=".6"/>
+    <g fill="#5a4020"><circle cx="14" cy="57" r="1.2"/><circle cx="14" cy="62" r="1.2"/><circle cx="50" cy="61.5" r="1.2"/></g>
+    <g class="gs-earL"><circle cx="18.6" cy="22.4" r="7" fill="#8a8aa2"/><circle cx="18.6" cy="22.4" r="4.3" fill="#f4a6bd"/></g>
+    <g class="gs-earR"><circle cx="45.4" cy="22.4" r="7" fill="#8a8aa2"/><circle cx="45.4" cy="22.4" r="4.3" fill="#f4a6bd"/></g>
+    <path d="M20 27C20 19 26 15 32 15C38 15 44 19 44 27C44 33 38 37 35 41C34 42.6 30 42.6 29 41C26 37 20 33 20 27Z" fill="#9a9ab0"/>
+    <path d="M23.4 30.6C25.6 36 29 39.4 32 39.4C35 39.4 38.4 36 40.6 30.6C37.4 33.8 26.6 33.8 23.4 30.6Z" fill="#c4c4d6"/>
+    <path d="M23.4 31.2L26 33.8M23.4 33.8L26 31.2" stroke="#f2e6c8" stroke-width="1.05" stroke-linecap="round"/>
+    <path d="M25.4 27.6Q28 26 30.6 27.6" stroke="#1a0f2e" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <circle cx="36.6" cy="27" r="2.7" fill="#1a0f2e"/><circle cx="37.5" cy="26.1" r=".95" fill="#fff"/>
+    <path d="M24.6 24.6L30.6 25.8" stroke="#4a4a62" stroke-width="1.35" stroke-linecap="round"/><path d="M33.8 23.4Q37 21.8 40.2 23.6" stroke="#4a4a62" stroke-width="1.35" fill="none" stroke-linecap="round"/>
+    <g class="gs-wh" stroke="#eeeef8" stroke-width=".6" opacity=".9"><path d="M27.4 38.8L18.6 37.2M27.4 40L19 41.6M36.6 38.8L45.4 37.2M36.6 40L45 41.6"/></g>
+    <g class="gs-mouth"><path d="M29.4 41.9Q32 43.2 34.6 41.9" stroke="#3a2a3a" stroke-width=".8" fill="none"/><rect x="30.55" y="42.1" width="1.35" height="2.5" rx=".35" fill="#fff8e8"/><rect x="32.1" y="42.1" width="1.35" height="2.5" rx=".35" fill="#fff8e8"/></g>
+    <ellipse cx="32" cy="40.5" rx="2.25" ry="1.65" fill="#ff7eb6"/><ellipse cx="31.4" cy="40" rx=".7" ry=".4" fill="#ffc8de"/>
+    <path d="M34.6 42.6L41.2 45.2" stroke="#e8c890" stroke-width="1.05" stroke-linecap="round"/>
+    <g transform="rotate(-7 32 16)">
+      <path d="M11.6 21.6Q32 14.6 52.4 21.6Q48 24.8 32 22.6Q16 24.8 11.6 21.6Z" fill="#2c2540" stroke="#5c5278" stroke-width=".8"/>
+      <path d="M21 21.2C21 11 26 6 32 6C38.5 6 43 11 43 21.2Z" fill="#3d3456"/>
+      <path d="M23.6 19.6C23.6 13 26.4 9 30.6 7.4" stroke="#62587e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <path d="M26 9.6Q32 13.2 38 9.6" stroke="#221c32" stroke-width="1.25" fill="none"/>
+      <path d="M21 17.2H43V21H21Z" fill="#e0365a"/>
+      <g transform="rotate(14 40 15.5)"><rect x="37.4" y="11.8" width="5.2" height="6.6" rx=".8" fill="#fff3e6" stroke="#231b35" stroke-width=".5"/><path d="M40 13.4C39 14.4 38.6 15.1 39.3 15.6C39.7 15.9 40 15.6 40 15.6C40 15.6 40.3 15.9 40.7 15.6C41.4 15.1 41 14.4 40 13.4ZM39.7 15.5L39.5 16.6H40.5L40.3 15.5Z" fill="#231b35"/></g>
+      <path d="M14.5 21.6Q32 16.4 49.5 21.6" stroke="#3a3048" stroke-width=".8" fill="none"/>
+    </g>`,
+};
+function petSVG(id, cls) { return `<svg class="pet-svg ${cls || ''}" viewBox="0 0 64 64" aria-hidden="true">${PET_ART[id] || ''}</svg>`; }
+
+/* ================= v10.2 · les animaux compagnons =================
+   Coco (le perroquet de Zaza), Marcel (le poisson du mur), Boris (l'ours en tapis) : au bar.
+   Gaston (le rat de l'Inspecteur) : au marché noir. Ils restent toute la partie, en haut à droite de la table,
+   et ils parlent (plus ou moins poliment) au début et à la fin de chaque manche. */
+const PET_IDS = ['coco', 'marcel', 'boris', 'gaston'];
+const PET_COCO = 1.15, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 15, PET_SONG1 = 6, PET_DANCE = 2.5;
+const PETS = {
+  coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'bar', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+15${NB}% d'or gagné (sauf les ventes).`, quote: '« Crétin ! Crétin ! »' },
+  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'bar', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il chante : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
+  boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'bar', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max pour ta base.`, quote: '« Grmbl. Essuie-toi les pieds. »' },
+  gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `−20${NB}% au marché noir (sauf le Punch-o-matic), qui ouvre plus souvent.`, quote: '« J\'ai rien vu. J\'ai tout noté. »' },
+};
+const PET_LINES = {
+  coco: {
+    adopt: ['Coco veut un biscuit ! …Non. Coco veut TON OR. Crétin !', 'Libre ! Coco est libre ! Adieu Zaza ! …Coco va regretter les cocktails.'],
+    start: ['Vise bien, crétin ! Crétin ! CRÉTIN !', 'Coco a parié contre toi. Coco a hâte.', 'Bouge tes plumes, andouille !', 'Coco répète : TIRE SUR LES CARTES. Pas sur Coco.', 'Au boulot, tête de pioche ! Au boulot !', 'Des cartes ! Plein de cartes ! Coco s\'en fiche, Coco regarde.', 'Coco a faim. Coco mangera tes pièces.'],
+    boss: ['Un gros ! Un gros ! Coco se cache !', 'Le boss va te plumer. Coco connaît le sujet.', 'Coco parie dix graines sur le boss. Désolé, patate.'],
+    low: ['Ta base fuit de partout, patate !', 'Coco commande déjà les fleurs. Taille S.', 'Coco te l\'avait dit ! …Coco a rien dit. Mais Coco le pensait !'],
+    end: ['Pas mal… pour un bulot !', 'Coco a compté les pièces. Coco en a gardé une.', 'Bravo ! …Coco rigole. Bravo quand même.', 'Encore ! Encore ! Coco s\'ennuie !', 'C\'est tout ? Coco a vu des pigeons faire mieux.'],
+    perfect: ['Pas une égratignure ?! Coco est jaloux.', 'Propre ! Coco est presque fier. Presque, cornichon.'],
+    close: ['T\'as failli y passer, tête de pioche !', 'Ouf ! Coco avait déjà revendu ta place.'],
+    bossKO: ['Le gros est tombé ! Coco veut sa couronne !', 'Bien fait pour le boss ! Coco lui crache dessus ! Ptou !'],
+    over: ['Coco l\'avait dit ! Coco l\'avait DIT !', 'Perdu ! Perdu ! Coco retourne chez Zaza.'],
+  },
+  marcel: {
+    adopt: ['♪ Enfin libre, libre de ce mur ! ♪ …Tu m\'accroches où ?', '♪ Je pars en voyage, sans mes nageoires ♪ Porte-moi doucement.'],
+    start: ['♪ Plouf plouf, c\'est toi qui tombes ♪', '♪ Les cartes arrivent, tra-la-la, et toi tu dors ♪', '♪ J\'ai la bouche qui bouge et le cœur en plastique ♪', 'Appuie sur mon bouton rouge. …Non, pas maintenant !', '♪ Tire, tire, petit pêcheur ♪ Je chante faux ? C\'est voulu.', 'Échauffement vocal. Mi-mi-mi… Glou.'],
+    boss: ['♪ Gros poisson, gros problème ♪', 'Celui-là est plus gros que moi. Et je suis un trophée.'],
+    low: ['♪ Ta base coule, glou glou glou ♪', '♪ Ça sent la friture ♪ …C\'est pas bon signe, ça.'],
+    end: ['♪ Fin de la chanson ! ♪ Applaudis, je suis cloué.', 'Pas mal. J\'aurais fait mieux, mais j\'ai pas de bras.', '♪ La la la, t\'as survécu, la la ♪', 'Rappel ! Rappel ! …Personne ? Bon.'],
+    perfect: ['♪ Sans une écaille arrachée ! ♪', '♪ Parfait, parfait, comme ma voix ♪'],
+    close: ['♪ Il s\'en est fallu d\'une arête ♪', 'J\'ai eu si peur que mes piles ont failli lâcher.'],
+    bossKO: ['♪ Le gros est tombé, on va l\'empailler ! ♪', '♪ Au mur, au mur, à côté de moi ! ♪'],
+    over: ['♪ C\'est la fin, la fin, la fin ♪ Rebranche-moi un jour.', 'Bon. Je retourne sur mon mur.'],
+    song: ['♪ Dansez, les cartes ! ♪', '♪ Tout le monde se trémousse ! ♪', '♪ Une, deux, et on se fige ! ♪', '♪ Plus personne ne bouge ! ♪', '♪ Bougez vos as ! ♪'],
+  },
+  boris: {
+    adopt: ['Enfin quelqu\'un qui ne s\'essuie pas les pieds sur moi. Ou presque.', 'Porte-moi. Délicatement. J\'ai des mites.'],
+    start: ['Grmbl. Réveille-moi quand c\'est fini.', 'On m\'a marché dessus vingt ans. À toi de marcher sur les cartes.', 'J\'étais un ours terrible, autrefois. Maintenant je suis une moquette.', 'Si une carte touche ta base, je mords. Enfin, j\'essaie.', 'Ne me regarde pas comme ça. Joue.'],
+    boss: ['Celui-là, j\'en aurais fait mon déjeuner. Avant.', 'Gros gibier. Vise la tête.'],
+    low: ['Grrr. Ta base a moins de PV que moi de poils.', 'Si ça continue, on finit tous les deux devant une cheminée.'],
+    end: ['Grmbl. Correct.', 'Pas mal. Pour un humain.', 'J\'ai fait une sieste. Il s\'est passé quoi ?', 'Ça mérite un pot de miel. Que je ne peux plus manger.'],
+    perfect: ['Pas une éraflure. Comme mon poil… avant le chat.', 'Propre. Je n\'ai rien à redire. Si. Mais je me tais.'],
+    close: ['Grr… c\'était moins une. J\'ai failli redevenir orphelin.', 'Moins une. J\'ai vu ma vie défiler. Elle était plate.'],
+    bossKO: ['Ça, c\'est une descente de lit digne de ce nom.', 'Il fera un joli tapis. Je le formerai.'],
+    over: ['Grmbl. Je retourne devant la cheminée.', 'Bon. Quelqu\'un peut me rouler et me ranger ?'],
+  },
+  gaston: {
+    adopt: ['L\'Inspecteur ? Il me cherchera pas. Je lui ai piqué son portefeuille.', 'Je viens avec toi. Les affaires vont mieux quand le chef regarde ailleurs.'],
+    start: ['J\'ai piqué deux pièces dans ta poche. Chut.', 'Tu tires, je surveille tes arrières. Et ton porte-monnaie.', 'Si on te demande, tu m\'as jamais vu.', 'Les cartes, c\'est comme les flics. Ça arrive toujours en bande.', 'Moi, je dis rien. Je note.'],
+    boss: ['Celui-là, il a une tête de mise à prix.', 'Grosse affaire. Je prends dix pour cent.'],
+    low: ['Ta base fuit. Je connais un plombier. Pas cher. Enfin, pour moi.', 'Ça sent le roussi. Je prépare une sortie de secours.'],
+    end: ['Affaire conclue. Je prends ma commission.', 'Joli travail. Propre. Presque pas de témoins.', 'Bien joué. J\'ai rien vu, rien entendu.', 'Pas mal. L\'Inspecteur en aurait raté la moitié.'],
+    perfect: ['Zéro trace. T\'es un pro.', 'Pas une égratignure. Même la police scientifique trouverait rien.'],
+    close: ['On a eu chaud. J\'avais déjà fait les valises.', 'Moins une. J\'ai failli te revendre au marché noir.'],
+    bossKO: ['Le gros est tombé. Je fouille ses poches.', 'Un boss en moins. Sa couronne vaut combien, d\'après toi ?'],
+    over: ['Bon. Je retourne chez l\'Inspecteur. Il paie mieux.', 'J\'ai rien vu. Je suis jamais venu. Salut.'],
+  },
+};
+// quand deux animaux se chamaillent, en fin de manche
+const PET_BANTER = [
+  ['coco', 'marcel', 'Marcel chante faux ! Faux ! FAUX !', '♪ Et toi tu parles trop, trop, trop ♪'],
+  ['marcel', 'boris', '♪ Boris, Boris, t\'as perdu tes os ♪', 'Grmbl. Un mot de plus et je te croque, poisson pané.'],
+  ['gaston', 'coco', 'Le piaf. Tu me dois trois graines.', 'Coco paie jamais ! Jamais ! Voleur !'],
+  ['boris', 'gaston', 'Le rat. Sors de sous moi.', 'Désolé, c\'est le seul endroit au chaud.'],
+  ['coco', 'boris', 'Le tapis parle ! Le tapis PARLE !', 'Le perroquet. Le perroquet va se taire.'],
+  ['gaston', 'marcel', 'Le poisson. T\'as pas vu l\'Inspecteur ?', '♪ J\'ai rien vu, j\'suis empaillé ♪'],
+  ['marcel', 'coco', '♪ Coco, Coco, ton bec est trop gros ♪', 'Coco va te manger, sushi !'],
+];
+// Zaza présente ses bêtes, leur dit au revoir, et les salue quand elles reviennent avec toi
+const ZAZA_PET = {
+  coco: 'Tu vois Coco ? Il insulte mes clients. Emmène-le : il ramasse tout ce qui brille, tu gagneras plus d\'or.',
+  marcel: 'Marcel, le poisson du mur. Il chante faux depuis des années… et ses chansons font danser les cartes. Emmène-le, pitié.',
+  boris: 'Le tapis, c\'est Boris. Il grogne quand on lui marche dessus. Pose-le sur ta base : elle tiendra mieux le choc.',
+};
+const ZAZA_PET_BYE = {
+  coco: 'Adieu, Coco. Tu ne me manqueras pas. …Un peu. Ne lui donne pas de rhum.',
+  marcel: 'Enfin le silence ! Si tu le perds, je ne le reprends pas.',
+  boris: 'Il mord un peu. Mais il tient chaud.',
+};
+const ZAZA_PET_HI = {
+  coco: ['Coco ! Tu ne m\'as pas manqué. …Si, un peu.', 'Tiens, mon perroquet. Il t\'a appris de nouveaux gros mots ?'],
+  marcel: ['Tu traînes encore ce poisson ? Courageux.', 'Pas de chanson ici, Marcel. On a des clients.'],
+  boris: ['Boris ! Essuie-toi les pattes avant d\'entrer.', 'Tiens, mon vieux tapis. Il a l\'air content. Enfin, pour lui.'],
+};
+const INSP_PET = {
+  pitch: 'Tu vois le rat ? C\'est Gaston. Il connaît tous mes prix. Je te le vends… mais il te fera des remises sur MA marchandise. Traître.',
+  bye: ['Traître de rat. Bon. Moins vingt pour cent. Mais je compte.', 'Va, Gaston. Et rends-moi mon portefeuille.'],
+  hi: ['Tiens, Gaston. Toujours vivant ? Tu me dois un portefeuille.', 'Avec Gaston dans la boutique, je vends à perte. Dépêche-toi.'],
+};
+
+const PETV = { on: false, key: '', boss: false, lastId: null, hide: 0, talkT: 0 };
+const PET_LAST = {};
+const hasPet = (run, id) => !!(run && run.pets && run.pets.includes(id));
+const petMk = run => hasPet(run, 'gaston') ? PET_GASTON : 1;
+const petMkChance = run => hasPet(run, 'gaston') ? .55 : .35;
+function petPrice(run, id) {
+  const P = PETS[id];
+  if (P.at === 'market') { const r = Math.max(1, run.round); return Math.round(P.price * (1 + .06 * (Math.min(r, 30) - 1)) * priceMul(run)); }
+  return Math.round(P.price * barScale(Math.max(1, run.round + 1)) * priceMul(run) * (hasDeck(run, 'barman') ? .7 : 1));
+}
+function petLine(id, kind) {
+  const L = PET_LINES[id], arr = (L && (L[kind] || L.start)) || [];
+  if (!arr.length) return '';
+  const key = id + '.' + kind;
+  let k = Math.floor(Math.random() * arr.length);
+  if (arr.length > 1 && k === PET_LAST[key]) k = (k + 1) % arr.length;
+  PET_LAST[key] = k;
+  return arr[k];
+}
+function petPick(run, not) {
+  const all = (run && run.pets) || [], ids = all.filter(x => x !== not);
+  if (!ids.length) return all[0];
+  const pool = ids.length > 1 ? ids.filter(x => x !== PETV.lastId) : ids;
+  const id = pool[Math.floor(Math.random() * pool.length)];
+  PETV.lastId = id;
+  return id;
+}
+// adopter : l'animal reste jusqu'à la fin de la partie
+function adoptPet(id) {
+  const run = G.run;
+  if (!run || !PETS[id] || hasPet(run, id)) return false;
+  (run.pets || (run.pets = [])).push(id);
+  run.stats.pets = (run.stats.pets || 0) + 1;
+  // Boris : la base gagne tout de suite ses PV en plus
+  if (id === 'boris') { const nm = computeStats(run).maxHp; if (nm > run.maxHp) { run.hp += nm - run.maxHp; run.maxHp = nm; } }
+  if (G.headless) return true;
+  catSee('a', id);
+  PETV.key = '';
+  return true;
+}
+
+/* ---------- le bar : Zaza propose une de ses bêtes ---------- */
+function petOfferBar(run) {
+  const free = PET_IDS.filter(id => PETS[id].at === 'bar' && !hasPet(run, id));
+  if (G.dev.pet) { const id = G.dev.pet; G.dev.pet = null; if (free.includes(id)) return { id, price: petPrice(run, id), sold: false }; }
+  if (!free.length || run.round + 1 < 2 || rnd() > .55) return null;
+  const id = pick(free);
+  return { id, price: petPrice(run, id), sold: false };
+}
+function petRowArt(id, extra) { return `<span class="po-art pet-${id}${extra || ''}" style="--pc:${PETS[id].col}">${petSVG(id)}</span>`; }
+function renderBarPet() {
+  const el = $('#b-pet'); if (!el) return;
+  const o = BAR.pet, run = G.run;
+  if (!o) { el.hidden = true; el.innerHTML = ''; return; }
+  const P = PETS[o.id], can = !o.sold && run.gold >= o.price && !BAR.busy;
+  el.hidden = false;
+  el.innerHTML = `<div class="petrow${o.sold ? ' sold' : ''}" style="--pc:${P.col}">${petRowArt(o.id)}
+    <div class="stext"><b>${P.full}<i class="ptag">COMPAGNON</i></b><span>${colorNums(P.txt)} Pour toute la partie.</span><span class="pq">${esc(o.said ? '« ' + o.said + ' »' : P.quote)}</span></div>
+    ${o.sold ? '<em class="stamp">ADOPTÉ !</em>' : `<button class="mini" data-buyp="1" ${can ? '' : 'disabled'}>Adopter<small>${o.price} or</small></button>`}</div>`;
+}
+function buyBarPet() {
+  const run = G.run, o = BAR.pet;
+  if (!o || o.sold || BAR.busy) return;
+  if (run.gold < o.price) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
+  run.gold -= o.price; o.sold = true;
+  adoptPet(o.id);
+  o.said = petLine(o.id, 'adopt');
+  Snd.coin(); Snd.petAdopt();
+  updateHUD(); renderBar(); renderRack();
+  const row = $('#b-pet .petrow');
+  if (row && !G.reduced) { row.classList.remove('adopted'); void row.offsetWidth; row.classList.add('adopted'); }
+  petCardSpeak($('#b-pet'), o.id, o.said);
+  const id = o.id;
+  setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving && !BAR.next) sayZ(ZAZA_PET_BYE[id]); }, 2600);
+}
+// l'animal parle depuis sa carte (au bar, au marché noir)
+function petCardSpeak(box, id, text) {
+  if (!box || G.headless) return;
+  const q = box.querySelector('.pq'), art = box.querySelector('.po-art');
+  if (q) { typeInto(q, '« ' + text + ' »', id); }
+  if (art) { art.classList.add('pt-talk'); clearTimeout(art._pt); art._pt = setTimeout(() => art.classList.remove('pt-talk'), Math.min(4200, [...text].length * 48 + 400)); }
+}
+// à l'ouverture du bar : la fiche de l'animal, et Zaza le présente (une fois par partie et par animal)
+function petBarOpen() {
+  const run = G.run, o = BAR.pet;
+  if (!o || G.headless) return;
+  catSee('a', o.id);
+  const seen = run.petPitch || (run.petPitch = {});
+  if (seen[o.id] || BAR.gambler || BAR.visitor || BAR.firstVisit) return;
+  seen[o.id] = 1;
+  setTimeout(() => { if (G.mode === 'bar' && !BAR.leaving && !BAR.next && !BAR.busy && BAR.pet === o && !o.sold) sayZ(ZAZA_PET[o.id]); }, 3000);
+}
+function petZazaHello(run) {
+  const mine = (run.pets || []).filter(id => ZAZA_PET_HI[id]);
+  if (!mine.length || Math.random() > .35) return null;
+  return pick(ZAZA_PET_HI[pick(mine)]);
+}
+
+/* ---------- le marché noir : Gaston ---------- */
+function petOfferMarket(run) {
+  if (hasPet(run, 'gaston')) return null;
+  return { type: 'pet', id: 'gaston', price: petPrice(run, 'gaston'), haggled: false, sold: false };
+}
+function petMarketRow(o, btns) {
+  const P = PETS[o.id];
+  return `<div class="offer mkpet${o.sold ? ' sold' : ''}" style="--sc:${P.col};--pc:${P.col}"><div class="slotico petico">${petRowArt(o.id)}</div><div class="otext"><b>${P.name}<i class="otag">COMPAGNON</i></b><span>${P.full.replace(P.name + ', ', '')[0].toUpperCase() + P.full.replace(P.name + ', ', '').slice(1)} : ${colorNums(P.txt)} Pour toute la partie.</span><span class="pq">${esc(o.said ? '« ' + o.said + ' »' : P.quote)}</span></div><div class="obuy">${btns}</div></div>`;
+}
+function buyMarketPet(i) {
+  const o = MK.offers[i], run = G.run;
+  run.gold -= o.price; o.sold = true;
+  adoptPet(o.id);
+  o.said = petLine(o.id, 'adopt');
+  // Gaston négocie aussitôt le reste de la boutique
+  for (const x of MK.offers) if (x !== o && !x.sold && !x.gift && x.type !== 'punch') x.price = Math.max(1, Math.round(x.price * PET_GASTON));
+  const named = inspBought();
+  Snd.coin(); Snd.petAdopt();
+  renderRack(); renderMarket(); updateHUD(); offerFx(i);
+  petCardSpeak($$('#k-offers .offer')[i], o.id, o.said);
+  toast(`Gaston te suit : −20${NB}% sur tout le marché noir.`);
+  if (!named) setTimeout(() => { if (G.mode === 'market' && !MK.gone) { say(pick(INSP_PET.bye)); inspAct('angry'); setTimeout(() => { const f = $('#dealer-fig'); if (f) f.classList.remove('angry'); }, 1400); } }, 2600);
+}
+function petMarketOpen() {
+  const run = G.run;
+  if (G.headless || !MK.offers.some(o => o.type === 'pet')) return;
+  catSee('a', 'gaston');
+  const seen = run.petPitch || (run.petPitch = {});
+  if (seen.gaston) return;
+  seen.gaston = 1;
+  setTimeout(() => { if (G.mode === 'market' && !MK.gone && !MK.busy && !MK.punching && MK.offers.some(o => o.type === 'pet' && !o.sold)) say(INSP_PET.pitch); }, 2700);
+}
+function petInspHello() {
+  if (!hasPet(G.run, 'gaston') || Math.random() > .4) return null;
+  return pick(INSP_PET.hi);
+}
+
+/* ---------- en haut à droite de la table : les animaux, et leurs bulles ---------- */
+function renderPets() {
+  const box = $('#pets'), run = G.run; if (!box || !run) return;
+  PETV.key = (run.pets || []).join(',') + (LAY.pc ? '|pc' : '|tel');
+  box.innerHTML = (run.pets || []).map(id => `<div class="pt-pet pet-${id}" data-pet="${id}" style="--pc:${PETS[id].col}">${petSVG(id)}</div>`).join('') + '<p class="pet-say" id="pet-say" hidden></p>';
+}
+function petsFrame() {
+  const run = G.run, m = G.mode, cb = G.cb;
+  const on = !!(run && run.pets && run.pets.length && cb && !cb.demo && (m === 'combat' || m === 'cleared' || m === 'dying'));
+  const box = $('#pets'); if (!box) return;
+  if (PETV.on !== on) { PETV.on = on; box.hidden = !on; if (!on) petHush(true); }
+  if (!on) return;
+  const key = run.pets.join(',') + (LAY.pc ? '|pc' : '|tel');
+  if (PETV.key !== key) renderPets();
+  const b = !LAY.pc && !$('#bossbar').hidden;
+  if (PETV.boss !== b) { PETV.boss = b; box.classList.toggle('boss', b); }
+}
+function petHush(now) {
+  const el = $('#pet-say'); clearTimeout(PETV.hide);
+  for (const p of $$('#pets .pt-pet.pt-talk')) p.classList.remove('pt-talk');
+  if (!el || el.hidden) return;
+  if (now || G.reduced) { el.hidden = true; el.classList.remove('in', 'out'); return; }
+  el.classList.remove('in'); el.classList.add('out');
+  setTimeout(() => { if (el.classList.contains('out')) { el.hidden = true; el.classList.remove('out'); } }, 260);
+}
+// un animal parle : sa bulle sous (téléphone) ou à gauche (PC) de son portrait, et sa voix
+function petSay(id, text, delay, o) {
+  if (G.headless || !text || !PETS[id]) return;
+  o = o || {};
+  const go = () => {
+    const box = $('#pets');
+    if (!box || box.hidden || !hasPet(G.run, id)) return;
+    const pe = box.querySelector(`.pt-pet[data-pet="${id}"]`), el = $('#pet-say');
+    if (!pe || !el) return;
+    clearTimeout(PETV.hide); clearTimeout(PETV.talkT);
+    if (LAY.pc) el.style.setProperty('--ty', pe.offsetTop + 'px');
+    else el.style.setProperty('--tx', Math.max(8, box.offsetWidth - (pe.offsetLeft + pe.offsetWidth / 2) - 8) + 'px');
+    el.style.setProperty('--pc', PETS[id].col); el.style.setProperty('--pcd', PETS[id].dk);
+    el.innerHTML = `<b class="ps-n">${PETS[id].name}</b><span class="ps-t"></span>`;
+    el.hidden = false; el.classList.remove('out', 'in'); void el.offsetWidth; el.classList.add('in');
+    const t = el.querySelector('.ps-t');
+    if (o.mute) t.textContent = text; else typeInto(t, text, id);
+    for (const p of box.querySelectorAll('.pt-pet')) p.classList.toggle('pt-talk', p === pe);
+    const n = [...text].length;
+    PETV.talkT = setTimeout(() => pe.classList.remove('pt-talk'), o.mute ? 300 : Math.min(4200, n * 48 + 400));
+    PETV.hide = setTimeout(() => petHush(), o.ms || Math.min(5600, Math.max(2600, 1400 + n * 52)));
+  };
+  if (delay) setTimeout(go, delay); else go();
+}
+// début de manche : l'un d'eux te lance une pique
+function petsRoundStart() {
+  const run = G.run, cb = G.cb;
+  if (G.headless || !run || !(run.pets || []).length || !cb || cb.final) return;
+  const boss = isBossRound(run.round), low = run.hp < run.maxHp * .4;
+  const id = petPick(run), kind = boss && Math.random() < .75 ? 'boss' : low && Math.random() < .75 ? 'low' : 'start';
+  const r = run.round;
+  setTimeout(() => { if (G.mode === 'combat' && G.run === run && run.round === r) petSay(id, petLine(id, kind)); }, 1150);
+}
+// fin de manche : le bilan, à leur façon (et parfois, ils se chamaillent)
+function petsRoundEnd() {
+  const run = G.run, cb = G.cb;
+  if (G.headless || !run || !(run.pets || []).length || !cb) return;
+  const P = ptsOf(cb), ids = run.pets;
+  if (ids.length >= 2 && Math.random() < .3) {
+    const bt = PET_BANTER.filter(b => ids.includes(b[0]) && ids.includes(b[1]));
+    if (bt.length) {
+      const b = bt[Math.floor(Math.random() * bt.length)];
+      petSay(b[0], b[2], 450);
+      setTimeout(() => { if (G.mode === 'cleared') petSay(b[1], b[3]); }, 450 + Math.min(3400, 1300 + [...b[2]].length * 40));
+      return;
+    }
+  }
+  const kind = P.bossKO ? 'bossKO' : !P.hurt ? 'perfect' : run.hp < run.maxHp * .25 ? 'close' : 'end';
+  const id = petPick(run);
+  petSay(id, petLine(id, kind), 450);
+}
+function petsOver() {
+  const run = G.run;
+  if (G.headless || !run || !(run.pets || []).length) return;
+  const id = petPick(run);
+  petSay(id, petLine(id, 'over'), 150, { ms: 1500 });
+}
+
+/* ---------- Marcel chante : les cartes dansent sur place ---------- */
+function marcelSing() {
+  const cb = G.cb; if (!cb || cb.demo || cb.ended) return false;
+  let n = 0;
+  for (const e of cb.enemies) { if (e.dead || e.ai === 'decoy') continue; stunE(e, PET_DANCE); n++; }
+  if (!n) return false;
+  cb.danceT = cb.t + PET_DANCE;
+  dbg('marcel');
+  if (G.headless) return true;
+  Snd.marcelSong();
+  floater(0, -BAL.baseR - 12, '♪ MARCEL CHANTE ♪', '#9be15d', 4);
+  let k = 0;
+  for (const e of cb.enemies) { if (e.dead || e.ai === 'decoy') continue; if (k++ > 14) break; floater(e.x, e.y - e.r - 3, k % 2 ? '♪' : '♫', ['#9be15d', '#ffcc4d', '#7fd8ff', '#ff7eb6'][k % 4], 3.4); }
+  const pe = $('#pets .pt-pet[data-pet="marcel"]');
+  if (pe) { pe.classList.add('pt-sing'); clearTimeout(pe._st); pe._st = setTimeout(() => pe.classList.remove('pt-sing'), PET_DANCE * 1000 + 300); }
+  if (Math.random() < .5) petSay('marcel', petLine('marcel', 'song'), 0, { mute: true, ms: 1900 });
+  return true;
+}
+
+/* ---------- ailleurs : le panneau PC, les infos de la partie, le catalogue ---------- */
+function petKitHTML(run) {
+  const L = (run && run.pets) || [];
+  if (!L.length) return '';
+  return `<div class="lpk lpk-p"><small>COMPAGNONS</small><div>${L.map(id => `<span class="spill spet pet-${id}" style="--sc:${PETS[id].col}" title="${esc(PETS[id].full + ' : ' + PETS[id].txt)}">${petSVG(id)}</span>`).join('')}</div></div>`;
+}
+function petRiHTML(run) {
+  const L = (run && run.pets) || [];
+  if (!L.length) return '';
+  return '<h4>Compagnons (toute la partie)</h4><div class="ri-list">' + L.map(id => `<div class="ri-it" style="--cat:${PETS[id].col}"><span class="ri-ic ri-pet pet-${id}">${petSVG(id)}</span><div><b>${PETS[id].full}</b><small>${colorNums(PETS[id].txt)}</small></div></div>`).join('') + '</div>';
+}
+function petCatDesc(id) {
+  const P = PETS[id];
+  return `<p class="cd-sub">Compagnon · ${P.at === 'bar' ? 'au bar de Zaza' : 'au marché noir de l\'Inspecteur'} · toute la partie</p><p>${colorNums(P.txt)}</p><p class="cd-goal">${esc(P.quote)} Il parle au début et à la fin de chaque manche. Poliment, parfois.</p>`;
+}
+
 
 function slidePanes(outEl, inEl, dir, done) {
   // dir = 1 : l'écran sortant part à gauche, le nouveau arrive de la droite
@@ -16265,7 +16800,7 @@ function genBar() {
   if (gentil && rnd() < .65) sids = ['antidote', ...sids];
   const shots = sids.slice(0, 2).map(id => ({ id, price: Math.round(SHOTS[id].price * sc * mid), sold: false }));
   const ciment = run.floors.some(h => h < BAL.floorHp) ? { price: Math.round(CIMENT.price * sc * mid), sold: false } : null;
-  return { drinks, shots, ciment };
+  return { drinks, shots, ciment, pet: petOfferBar(run) };
 }
 function openBar() {
   const run = G.run;
@@ -16273,7 +16808,7 @@ function openBar() {
   const o = genBar();
   Object.assign(BAR, o, { busy: false, leaving: false, gDone: false });
   const r = run.round + 1;
-  BAR.market = !!G.dev.market || (r >= 3 && (isBossRound(run.round) || rnd() < .35 || (r >= 4 && !run.marketSeen)));
+  BAR.market = !!G.dev.market || (r >= 3 && (isBossRound(run.round) || rnd() < petMkChance(run) || (r >= 4 && !run.marketSeen)));
   G.dev.market = false;
   BAR.firstVisit = run.firstDrink;
   BAR.gambler = gamblerDue(run);
@@ -16289,12 +16824,13 @@ function openBar() {
   $('#baron').hidden = true; $('#baron').className = 'baron'; $('.bar-scene').classList.remove('baron-on');
   renderBar();
   BG.setMode('bar'); Music.play('bar');
-  let line = BAR.firstVisit ? (hasDeck(run, 'barman') ? 'Un collègue barman ! Pour toi, prix d\'ami sur tout. Et la première, je l\'offre.' : pick(ZAZA.first)) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : pick(ZAZA.hello);
+  let line = BAR.firstVisit ? (hasDeck(run, 'barman') ? 'Un collègue barman ! Pour toi, prix d\'ami sur tout. Et la première, je l\'offre.' : pick(ZAZA.first)) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : (petZazaHello(run) || pick(ZAZA.hello));
   barStop();
   const nextUp = BAR.gambler ? () => { if (G.mode === 'bar' && !BAR.leaving && baronPending() && $('#baron').hidden) baronArrive(); }
     : BAR.visitor ? () => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); } : null;
   setTimeout(() => { if (G.mode !== 'bar' || BAR.leaving) return; sayZ(line); if (nextUp) barWait(nextUp); }, 380);
   zazaCocktail();
+  petBarOpen();
 
   if (seenOnce('bar')) setTimeout(() => queueTip(TIPS.bar), 1300);
   if (G.dev.auto) setTimeout(autoBar, 1100);
@@ -16370,6 +16906,7 @@ function renderBar() {
     sh += `<div class="shot ciment${c.sold ? ' drunk' : ''}"><span class="glass g-bucket"><i class="liq"></i></span><div class="stext"><b>${CIMENT.name}</b><span>${CIMENT.txt}</span></div>${c.sold ? '<em class="stamp">FAIT</em>' : `<button class="mini" data-buyc="1" ${can ? '' : 'disabled'}>${c.price} or</button>`}</div>`;
   }
   $('#b-shots').innerHTML = sh;
+  renderBarPet();
   // la porte du marché reste fermée tant qu'un client arrive ou joue (sinon il ne s'assoit jamais)
   const mkb = $('#b-market'), arriving = barArriving();
   mkb.hidden = !BAR.market;
@@ -16496,12 +17033,13 @@ function openMarketPane() {
   $('#k-leave').textContent = 'Retour au bar';
   renderMarket(); renderRack(); inspNameTag();
   const f = $('#dealer-fig'); if (f) f.classList.remove('spin', 'tip', 'angry');
-  slidePanes($('#bar'), $('#market'), 1, () => { say(gifts ? 'Un ami de mon vieux pote ! Ce soir, trois articles sont pour moi. Sers-toi, et pas un mot.' : pick(G.meta.inspName && rnd() < .35 ? LINES.named : LINES.hello)); inspAct('tip', 700); });
+  slidePanes($('#bar'), $('#market'), 1, () => { say(gifts ? 'Un ami de mon vieux pote ! Ce soir, trois articles sont pour moi. Sers-toi, et pas un mot.' : (petInspHello() || pick(G.meta.inspName && rnd() < .35 ? LINES.named : LINES.hello))); inspAct('tip', 700); });
 
 
   // l'Inspecteur glisse un mot sur sa machine, une fois par partie, si on a de quoi la nourrir
   if (!G.run.pmHint && G.run.jokers.some(j => !punchRefusal(j))) { G.run.pmHint = 1; setTimeout(() => { if (G.mode === 'market' && !MK.busy && !MK.punching) say(pick(LINES.punchOffer)); }, 4400); }
   Snd.bell(); Music.play('market'); BG.setMode('market');
+  petMarketOpen();
   if (G.dev.auto) setTimeout(leaveMarketPane, 900);
 }
 function leaveMarketPane() {
@@ -16991,6 +17529,7 @@ const CAT_TABS = [
   { id: 'sorts', name: 'Sorts ennemis', items: () => Object.keys(SPELLS).map(id => ['s', id]) },
   { id: 'events', name: 'Événements', items: () => Object.keys(EVENTS).map(id => ['v', id]) },
   { id: 'habitues', name: 'Habitués', items: () => PEOPLE.map(id => ['p', id]) },
+  { id: 'animaux', name: 'Animaux', items: () => PET_IDS.map(id => ['a', id]) },
   { id: 'elites', name: 'Élites', items: () => Object.keys(ELITES).map(id => ['l', id]) },
 ];
 const CATV = { tab: 'jokers', sel: null, from: 'title' };
@@ -17027,6 +17566,7 @@ function catTile(c, id) {
     case 'h': return glassHTML('shot', SHOTS[id].liq);
     case 'c': { const C = COMBOS.find(x => x.id === id); return `<span class="ct-duo">${protoChip(C.a, 'k-commun')}${protoChip(C.b, 'k-commun')}</span>`; }
     case 'p': return `<span class="ct-face">${personFace(id)}</span>`;
+    case 'a': return `<span class="ct-face">${petSVG(id)}</span>`;
   }
   return '';
 }
@@ -17044,6 +17584,7 @@ function catTitle(c, id) {
     case 'd': return UPG[id].name;
     case 'h': return SHOTS[id].name;
     case 'c': return COMBOS.find(x => x.id === id).name;
+    case 'a': return PETS[id].full;
     case 'p': return VISITORS[id] ? VISITORS[id].short === 'Nox' ? 'Madame Nox' : VISITORS[id].short : PEOPLE_INFO[id].name;
   }
   return id;
@@ -17064,6 +17605,7 @@ function catDesc(c, id) {
     case 'd': { const U = UPG[id]; return `<p class="cd-sub">Boisson ${UPG_CATS[U.cat].name.toLowerCase()} · ${U.max} niveau${U.max > 1 ? 'x' : ''}</p><ul>${Array.from({ length: U.max }, (_, k) => `<li>Niveau ${k + 1} : ${U.txt(k + 1)}</li>`).join('')}</ul>`; }
     case 'h': return `<p class="cd-sub">Shot · une manche</p><p>${SHOTS[id].txt}.</p>`;
     case 'c': { const C = COMBOS.find(x => x.id === id); return `<p class="cd-sub">${JK[C.a].name} + ${JK[C.b].name}, côte à côte</p><p>${C.txt}</p>`; }
+    case 'a': return petCatDesc(id);
     case 'p': {
       if (!VISITORS[id]) return `<p class="cd-sub">${PEOPLE_INFO[id].role}</p><p>${PEOPLE_INFO[id].bio}</p>`;
       const V = VISITORS[id], R = rival(id), gift = JK[V.gift];
@@ -18412,7 +18954,7 @@ function spellOffer(run) {
   if (!ids.length) return null;
   const pref = ids.filter(x => PSPELLS[x].fam && famCount(run, PSPELLS[x].fam) > 0);
   const id = pref.length && rnd() < .6 ? pick(pref) : pick(ids), sc = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1);
-  return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc), haggled: false, sold: false };
+  return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc * petMk(run)), haggled: false, sold: false };
 }
 function learnSpell(id) {
   const run = G.run, L = spellsOf(run);
@@ -18663,7 +19205,7 @@ function toastAny(msg) {
 
 /* ---------- infos de la partie (Tab) ---------- */
 const RIV = { tab: 'jetons' };
-const RI_TABS = [['jetons', 'Tes jetons'], ['degats', 'Dégâts'], ['equip', 'Boissons et sorts'], ['partie', 'La partie'], ['suite', 'À venir']];
+const RI_TABS = [['jetons', 'Tes jetons'], ['degats', 'Dégâts'], ['equip', 'Équipement'], ['partie', 'La partie'], ['suite', 'À venir']];
 function openRunInfo() {
   if (!G.run || G.mode === 'title' || G.mode === 'over') return;
   if (G.mode === 'combat' && !G.paused) { G.paused = true; RIV.paused = true; }
@@ -18683,6 +19225,7 @@ function renderRunInfo() {
     h += dmgTabHTML();
   } else if (RIV.tab === 'equip') {
     const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
+    h += petRiHTML(run);
     h += '<h4>Boissons (toute la partie)</h4>' + (ups.length ? '<div class="ri-list">' + ups.map(k => `<div class="ri-it" style="--cat:${UPG_CATS[UPG[k].cat].col}"><span class="ri-ic">${iconSVG(UPG[k].icon)}</span><div><b>${UPG[k].name} <i>niv. ${up[k]}</i></b><small>${colorNums(UPG[k].txt(up[k]))}</small></div></div>`).join('') + '</div>' : '<p class="ri-empty">Rien bu pour l\'instant.</p>');
     if (run.floors.length) h += `<p class="ri-note">Étages debout : <b>${run.floors.filter(x => x > 0).length} / ${run.floors.length}</b></p>`;
     h += `<h4>Sorts <i>${spellsOf(run).length}/${SPELL_SLOTS}</i></h4><div class="ri-list">` + spellsOf(run).map((id, i) => `<div class="ri-it${canReorder() ? ' sp' : ''}" style="--cat:${PSPELLS[id].col}"><span class="ri-ic">${iconSVG(PSPELLS[id].icon)}</span><div><b>${i + 1} · ${PSPELLS[id].name}</b><small>${colorNums(PSPELLS[id].txt)}${PSPELLS[id].fam ? ' ' + famPowTxt(run, id) : ''}</small></div>${canReorder() ? `<button class="mini dark ri-sell" data-spsell="${id}">Vendre +${spellSellValue(id)}</button>` : ''}</div>`).join('') + '</div>' + (canReorder() ? '' : '<p class="ri-note">Tu peux vendre un sort entre deux manches (moitié de son prix).</p>');
@@ -19913,6 +20456,7 @@ function startNextRound() {
   if (hasMalus(run, 'pickpocket')) setTimeout(() => toast('Un pickpocket rôde : abats-le pour récupérer ton jeton.'), 1600);
   setTimeout(() => { if (G.mode === 'combat' && !newBusy) showNewNote(); }, 2200);
   if (cb.final) fbIntro();
+  petsRoundStart();
 }
 /* ---------- le jeton Roulette : la roue tourne en grand au début de la manche (le combat attend) ---------- */
 const RL = { on: false, t: [], el: null };
@@ -19943,6 +20487,7 @@ function uiRoundCleared() {
   if (res.interest) sub += ` · intérêts +${res.interest}`;
   if (res.flip) sub += res.flip > 0 ? ' · quitte ou double : ×2 !' : ` · quitte ou double : ${res.flip} or`;
   banner('MANCHE GAGNÉE', sub, 'good', 1.5);
+  petsRoundEnd();
   if (res.notes && res.notes.length) setTimeout(() => toast(res.notes.slice(0, 3).join(' · ')), 1600);
   Snd.win(); haptic(30);
   if (run.round > G.meta.best) { G.meta.best = run.round; saveMeta(); checkUnlocks(); }
@@ -19963,6 +20508,7 @@ function uiGameOver() {
   cb.flash = .5; cb.flashCol = '255,80,100'; shake(12); burst(0, 0, '#e0365a', 40, 60, 2, .8); burst(0, 0, '#fff3e6', 20, 40, 1.4, .8);
   Snd.over(); haptic(200);
   Music.play(null); BG.setMode('over');
+  petsOver();
   setTimeout(() => endRun(false), 1700);
 }
 function calcJetons(run, won) {
@@ -20028,6 +20574,7 @@ function devAction(k) {
   const run = G.run, cb = G.cb, msg = t => { $('#dev-msg').textContent = t; };
   const inRun = run && G.mode !== 'title' && G.mode !== 'over';
   switch (k) {
+    case 'pets': if (!inRun) return msg('Lance une partie d\'abord.'); for (const id of PET_IDS) adoptPet(id); updateHUD(); msg('Les quatre animaux sont avec toi.'); break;
     case 'gold': if (!inRun) return msg('Lance une partie d\'abord.'); addGold(250); updateHUD(); if (G.mode === 'market') renderMarket(); if (G.mode === 'machine') updateMachineButtons(); if (G.mode === 'bar') renderBar(); msg('+250 or.'); break;
     case 'market': G.dev.market = true; msg('La porte du marché noir sera ouverte au prochain bar.'); break;
     case 'gambler': G.dev.gambler = true; msg('Le Baron viendra au prochain bar.'); break;
@@ -20220,6 +20767,7 @@ function simBar(sk) {
   if (BAR.ciment && run.gold >= BAR.ciment.price + 10) buyCiment();
   const order = BAR.drinks.map((d, i) => [BAR_PRIO[d.id] || 3, i]).sort((a, b) => b[0] - a[0]);
   for (const [, i] of order) { const d = BAR.drinks[i]; if (run.firstDrink || run.gold - d.price >= reserve * .5) buyDrink(i); }
+  if (BAR.pet && !BAR.pet.sold && !G.simNoPets && run.gold - BAR.pet.price >= reserve + 25) { run.gold -= BAR.pet.price; BAR.pet.sold = true; adoptPet(BAR.pet.id); }
   const next = run.round + 1;
   for (let i = 0; i < BAR.shots.length; i++) {
     const s = BAR.shots[i];
@@ -20254,6 +20802,7 @@ function simMarket() {
       if (scam && !run.scamSlot && run.slots < 8) { run.scamSlot = true; run.slots++; }
       addJokerSim(scam ? mkJoker('faux', [], 1, { fakeOf: o.joker.parts[0].t }) : o.joker);
     } else if (o.type === 'item' && o.id === 'soin' && run.hp < run.maxHp * .6 && run.gold >= o.price) { run.gold -= o.price; run.hp = Math.min(run.maxHp, run.hp + run.maxHp * .4); }
+    else if (o.type === 'pet' && !G.simNoPets && run.gold >= o.price + 50) { run.gold -= o.price; adoptPet(o.id); }
   }
   autoArrange(run);
 }
@@ -20342,6 +20891,8 @@ function simOne(o) {
   G.run = newRun(o.stake || 0);
   if (o.deck) applyDeck(G.run, o.deck);
   if (o.spells) G.run.spells = o.spells.slice();
+  if (o.pets) G.run.pets = o.pets.slice();
+  G.simNoPets = !!o.noPets;
   const sk = BOT[o.skill || 'moyen'], dt = 1 / 30, out = { round: 0, won: false, t: 0, parries: 0, blocks: 0, deathBy: null, perRound: [], gold: 0 };
   G.cb = newCombat(); G.cb.stats = computeStats(G.run); G.cb.sc = roundScale(G.run, 1);
   G.run.machine = o.machine != null ? o.machine : irand(0, MACH9.length - 1);
@@ -20373,7 +20924,7 @@ function simOne(o) {
     simBar(sk);
     BAR.freeDrink = false;
     const r = G.run.round;
-    if (r >= 3 && (isBossRound(r) || rnd() < .35)) simMarket();
+    if (r >= 3 && (isBossRound(r) || rnd() < petMkChance(G.run))) simMarket();
   }
   out.round = G.run.round;
   out.parries = G.run.stats.parries; out.blocks = G.run.stats.blocks; out.gold = G.run.stats.gold;
@@ -20676,6 +21227,7 @@ function frame(t) {
   const pf1 = G.perf ? performance.now() : 0;
   if (cb) render(dt);
   updateHUD();
+  petsFrame();
   elecFrame(dt);
   // ambiances sonores selon l'écran
   const m = G.mode, inCb = m === 'combat' && cb && !cb.demo && !cb.ended && !G.paused;
@@ -20760,6 +21312,7 @@ function bindUI() {
     if (b.dataset.buyd != null) buyDrink(+b.dataset.buyd);
     else if (b.dataset.buys != null) buyShot(+b.dataset.buys);
     else if (b.dataset.buyc != null) buyCiment();
+    else if (b.dataset.buyp != null) buyBarPet();
     else if (b.dataset.vis === 'yes') { Snd.click(); visAccept(); }
     else if (b.dataset.vis === 'no') visRefuse();
     else if (b.id === 'b-market') { Snd.door(); openMarketPane(); }
@@ -20925,7 +21478,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
