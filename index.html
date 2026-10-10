@@ -2194,6 +2194,19 @@ body.lpc .ca-anatole{padding:6px 12px}
 body:not(.lpc) .ab.bil{width:54px;height:54px;align-self:flex-end}
 body:not(.lpc) .ab.bil .abi{width:24px;height:24px}
 body.lpc .ab.bil .abt{font-size:18px}
+/* v9.6 : le panneau de gauche ne déborde plus : la case du bas prend la place qui reste, et défile si besoin */
+.lp-kit{flex:1 1 auto;min-height:0;overflow-y:auto;scrollbar-width:thin;gap:4px;padding:6px 10px}
+.lp-kit .lpk small{margin-bottom:3px}
+.lp-kit .spill{width:26px;height:26px;border-radius:8px}
+.lp-kit .spill .ico{width:16px;height:16px}
+.lpk-d small i{font-style:normal;color:var(--cream);margin-left:4px}
+.lpk-d>div{gap:4px;flex-wrap:nowrap}
+.lpk-d .upill.cat{gap:4px;padding:2px 7px;font-size:11px;cursor:help}
+body.lpc .abs{gap:8px;padding-left:10px;padding-right:10px}
+body.lpc .abs .ab{flex:0 1 164px;min-width:0;width:auto;grid-template-columns:30px minmax(0,1fr) auto;gap:6px;padding:0 10px}
+body.lpc .abs .ab .abi{width:28px;height:28px}
+body.lpc .abs .ab .abt{min-width:22px;text-align:right;font-size:18px}
+body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -12594,9 +12607,9 @@ function updateLP(run, cb, r, inCombat) {
   setTxt('#lp-speed-v', G.speed === 2 ? '×2' : '×1');
   // ton équipement : boissons du bar et sorts
   const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
-  const kit = `<div class="lpk"><small>BOISSONS</small><div>${ups.length ? ups.map(k => `<span class="upill" style="--cat:${UPG_CATS[UPG[k].cat].col}" title="${esc(UPG[k].name + ' : ' + UPG[k].txt(up[k]))}">${iconSVG(UPG[k].icon)}<b>${up[k]}</b></span>`).join('') : '<em>rien encore</em>'}</div></div>`
-    + `<div class="lpk"><small>SORTS</small><div>${spellsOf(run).map((id, i) => `<span class="spill" style="--sc:${PSPELLS[id].col}" title="${esc(PSPELLS[id].name + ' : ' + PSPELLS[id].txt)}">${iconSVG(PSPELLS[id].icon)}<i>${i + 1}</i></span>`).join('')}</div></div>`
-    + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '');
+  const kit = `<div class="lpk"><small>SORTS</small><div>${spellsOf(run).map((id, i) => `<span class="spill" style="--sc:${PSPELLS[id].col}" title="${esc(PSPELLS[id].name + ' : ' + PSPELLS[id].txt)}">${iconSVG(PSPELLS[id].icon)}<i>${i + 1}</i></span>`).join('')}</div></div>`
+    + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '')
+    + `<div class="lpk lpk-d"><small>BOISSONS${ups.length ? ` <i>${ups.reduce((a, k) => a + up[k], 0)}</i>` : ''}</small><div>${ups.length ? Object.keys(UPG_CATS).map(c => { const ks = ups.filter(k => UPG[k].cat === c); if (!ks.length) return ''; const n = ks.reduce((a, k) => a + up[k], 0); return `<span class="upill cat" style="--cat:${UPG_CATS[c].col}" title="${esc(ks.map(k => `${UPG[k].name} (${up[k]}) : ${UPG[k].txt(up[k])}`).join(' · '))}">${UPG_CATS[c].name}<b>${n}</b></span>`; }).join('') : '<em>rien encore</em>'}</div></div>`;
   setHTML('#lp-kit', kit);
   const st = STAKES[run.stake || 0];
   setHTML('#lp-stake', `<i style="background:${st.col}"></i>${st.name}`);
@@ -14818,6 +14831,7 @@ function ladderHTML(meCat, himCat) {
 }
 function renderPoker() {
   const run = G.run, ph = PK.phase;
+  if (JT.uid != null && PK.offer.some(x => x.uid === JT.uid)) hideJTip();
   const both = PK.raise || PK.won.length > 1, canDbl = !PK.gold && (realJokers().length >= 2 || PK.stake.length > 1) && ['stake', 'dealing', 'raise', 'raise2'].includes(ph);
   $('#pk-his-stake').innerHTML = PK.duel ? '<p class="pk-empty">Ta ligue : Zaza sert le gagnant</p>' : PK.offer.map((j, i) => `<button class="pk-chip${PK.won.includes(i) ? ' won' : ''}" data-offer="${i}">${chipHTML(j)}<span>${esc(jName(j))}</span></button>`).join(both ? '<i class="pk-or plus" aria-label="et">+</i>' : '<i class="pk-or" aria-label="ou">/</i>');
   $('#pk-his-cap').textContent = PK.duel || PK.offer.length < 2 ? '' : (both ? 'tu as doublé : les 2 sont en jeu' : canDbl ? 'tu en gagnes 1 au choix (les 2 si tu doubles)' : 'tu en gagnes 1 au choix') + (ph === 'stake' ? ' · touche-les pour lire leurs capacités' : '');
@@ -15017,6 +15031,7 @@ function pokerReplace(uid) {
   return true;
 }
 function closePoker() {
+  hideJTip();
   show('#poker', false);
   if (PK.duel) { PK.duel = false; G.mode = 'cut'; Music.play('final'); fbDuelDone('zaza', PK.res === 'win'); return; }
   resolveGambler(PK.res);

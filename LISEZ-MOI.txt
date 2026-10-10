@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v9.5-202610081603
+JACKPOT DEFENSE v9.6-202610101909
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,10 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v9.6
+- PC, panneau de gauche : les sorts et les jetons bonus passent en premier, les boissons en dernier, résumées par famille (Canon, Flipper, Base, avec le total de niveaux ; passe la souris dessus pour le détail). Avec beaucoup de boissons, plus rien ne disparaît en bas de l'écran.
+- PC, barre des sorts : avec la BILLE et 4 sorts, les cases se resserrent et les noms ne mordent plus sur les secondes.
 
 Nouveautés de la v9.5
 - La jauge de la BILLE : une case BILLE dans la barre des sorts (au milieu sur téléphone, en premier sur PC). Elle brille quand tu peux lancer, affiche « EN JEU » quand la bille roule, puis se remplit pendant la recharge (avec les secondes sur PC). Si tu as plusieurs charges (Ressort secret), elle affiche « ×2 », « ×3 ». Toucher la case rappelle comment lancer. L'anneau autour de ta base est aussi plus visible.
