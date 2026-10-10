@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10 (étape 2 sur 3)-202610102013
+JACKPOT DEFENSE v10-202610110006
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,27 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10 (étape 3 sur 3)
+- LES CARNETS D'ANATOLE remplacent le Catalogue et la Collection : un seul bouton à l'accueil, avec la tête de Monsieur Anatole (le frère du Baron !). Il te présente ses deux carnets :
+  Carnet n°1, le Catalogue : tout ce qui passe au Tapis Rouge. Les jetons rangés famille par famille, les fous, les machines, les cartes et les boss, les malus, le bar, les sorts, les combos, les habitués.
+  Carnet n°2, la Collection : tes secrets (famille par famille), tes jeux et mises gagnés, tes trophées, ta boîte à billes et tes records.
+  Les pages se tournent (flèches, coin de la page, ou fais glisser), avec un sommaire. Sur PC, le carnet s'ouvre en double page. Écrit à la main, avec des petits dessins dans les marges et des taches de café. Ce que tu n'as pas encore croisé est grisé et gribouillé. Touche une case : sa fiche s'épingle sur la page, et même pour ce qui est gribouillé, Anatole te dit où le trouver.
+  Les carnets s'ouvrent aussi depuis la pause et l'écran de fin de partie.
+- 12 SORTS DE FAMILLE au marché noir, un par famille de jetons. Plus tu as de jetons de sa famille dans ton rack, plus il frappe fort : +25 % par jeton, jusqu'à ×3 (la pastille ×1,5, ×2… s'affiche sur le sort). L'Inspecteur propose plus souvent ceux de tes familles.
+  Big Bang (Galactiques) : un astéroïde s'écrase, 300 % des dégâts à toutes les cartes.
+  Déluge de feu (Élémentaires) : toutes les cartes brûlent.
+  Salve (Balle du canon) : 12 balles perçantes en étoile.
+  Pluie d'étoiles (Signes astro) : 8 étoiles filantes sur 8 cartes.
+  Colère divine (Mythologiques) : 1000 % des dégâts sur la carte la plus costaude.
+  Strike ! (Billard et jeux de bar) : une boule de bowling traverse la table et sonne les cartes.
+  Multibille (Flipper) : 3 BILLES d'un coup.
+  Forteresse (Base) : ta base se répare.
+  Coup de bol (Chance) : chaque carte abattue rapporte 3× plus d'or pendant 8 s.
+  Pacte (Malus) : 10 % de tes PV contre 400 % des dégâts à toutes les cartes.
+  Jackpot (Multiplicateurs) : +0,4 MULT pour la manche.
+  Écho (Voisins) : relance ton dernier sort.
+- La bulle d'un jeton ne cache plus le jeton survolé : s'il n'y a pas la place au-dessus, elle s'ouvre en dessous.
 
 Nouveautés de la v10 (étape 2 sur 3)
 - JOUER ouvre l'écran « Nouvelle partie » : choisis ton JEU de départ (flèches, ou fais glisser la carte), ta MISE, puis LANCER. La mise n'encombre plus l'accueil.
