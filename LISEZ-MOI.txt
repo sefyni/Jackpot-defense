@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v9.6-202610101909
+JACKPOT DEFENSE v10 (étape 1)-202610101934
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 Options > Profil > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10 (étape 1 sur 3)
+- La JACKPOT MACHINE : une grande machine à une seule colonne remplace le choix entre 3 machines, au début de la partie et après chaque boss. Tire, puis arrête la colonne quand tu veux : tu tombes sur ta machine. Après un boss, tu peux aussi garder la tienne. Relancer : 100 or. Elle gronde quand elle tourne et bipe quand elle s'arrête.
+- À l'arrivée sur une machine, presque plus de texte : son nom et son bug. Touche le bug pour le lire (aussi sur l'écran de la machine).
+- Ambiances : la machine ne souffle plus (un léger bourdonnement, des jingles et des pièces) ; le bar a ses pièces qui tintent ; le marché noir, une foule qui chuchote ; chez le Baron, des rats ; chez Nox, la bille de la roulette.
+- Le menu Règles est supprimé. Les astuces en partie tiennent en une phrase. Le « ? » de la machine montre juste ce que donne la ligne.
+- Téléphone : l'arène ne se tasse plus quand la barre des jetons change de hauteur.
+- La zone de portée de ta base est bien plus visible.
+- Marché noir : le prix reste affiché même quand ton rack est plein.
+- Accueil : les jetons de la petite table ne changent plus sous tes yeux. Lancer une partie alors qu'une autre est sauvegardée demande confirmation.
+- Crédits : « Produit par Sefy Industries ».
 
 Nouveautés de la v9.6
 - PC, panneau de gauche : les sorts et les jetons bonus passent en premier, les boissons en dernier, résumées par famille (Canon, Flipper, Base, avec le total de niveaux ; passe la souris dessus pour le détail). Avec beaucoup de boissons, plus rien ne disparaît en bas de l'écran.

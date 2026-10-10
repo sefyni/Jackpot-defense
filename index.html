@@ -2207,6 +2207,76 @@ body.lpc .abs .ab{flex:0 1 164px;min-width:0;width:auto;grid-template-columns:30
 body.lpc .abs .ab .abi{width:28px;height:28px}
 body.lpc .abs .ab .abt{min-width:22px;text-align:right;font-size:18px}
 body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* v10 */
+.mini small{display:block;font-size:10px;font-weight:600;opacity:.8;letter-spacing:.02em}
+#confirm{z-index:80;background:rgba(10,6,18,.78)}
+.cfm{width:min(100%,420px);padding:20px;display:flex;flex-direction:column;gap:16px;font-size:17px;line-height:1.35}
+.cfm b{color:var(--red)}
+.cfm-b{display:flex;gap:10px}
+.cfm-b .btn{flex:1}
+/* v10 · B */
+#title .mgrid .mbtn:last-child:nth-child(odd){grid-column:1 / -1}
+body:not(.lpc) .ab.bil .abk{display:none}
+#infopop{z-index:80;background:rgba(10,6,18,.7)}
+.ipop{width:min(100%,400px);padding:18px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.ipop h3{font:700 18px var(--f-pix);letter-spacing:.08em;color:var(--gold)}
+.ipop p{font-size:16px;line-height:1.35}
+.pay{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0;margin:0}
+.pay li{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.3);text-align:left;font-size:15px}
+.pay b{display:flex;align-items:center;gap:4px;color:var(--cream);font-size:15px}
+.pay b .ico{width:22px;height:22px}
+/* ================= v10 · la Jackpot Machine ================= */
+#jpm{--jh:64px}
+body.lpc #jpm{--jh:72px}
+.jpm{position:relative;width:min(100%,430px);margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 12px}
+.jpm-cab{position:relative;width:100%;display:flex;flex-direction:column;gap:10px;padding:12px 14px 14px;border-radius:34px 34px 16px 16px;
+  background:linear-gradient(90deg,#6b4708,#e6a72a 16%,#ffe08a 50%,#e6a72a 84%,#6b4708);
+  box-shadow:inset 0 0 0 4px #fff3c4,inset 0 0 0 9px rgba(0,0,0,.35),inset 0 -18px 30px rgba(0,0,0,.3),0 10px 0 #000,0 0 46px rgba(255,204,77,.35)}
+.jpm-top{position:relative;padding:8px 10px 7px;border-radius:24px 24px 10px 10px;text-align:center;background:radial-gradient(ellipse at 50% 130%,#7a1630,#1a0f2a 72%);box-shadow:inset 0 0 0 3px #000,inset 0 0 26px rgba(255,92,124,.35)}
+.jpm-top h2{margin:2px 0 0;font:700 clamp(36px,11vw,54px)/1 var(--f-pix);letter-spacing:.04em;color:var(--gold);text-shadow:0 3px 0 #b8323f,0 6px 0 #000,0 0 22px rgba(255,204,77,.6)}
+.jpm-top p{margin:2px 0 4px;font:700 13px/1 var(--f-pix);letter-spacing:.5em;color:#ffb3d6;text-shadow:0 0 8px #ff5c9c}
+#jpm.spinning .jpm-top .bulbs i{animation-duration:.25s}
+#jpm.won .jpm-top .bulbs i{animation-duration:.4s;background:#fff;box-shadow:0 0 10px #fff,0 0 4px #ffcc4d}
+.jpm-win{position:relative;height:calc(var(--jh) * 3);overflow:hidden;border-radius:14px;background:#120a1c;box-shadow:inset 0 0 0 4px #000;cursor:pointer}
+.jpm-win::before,.jpm-win::after{content:"";position:absolute;left:0;right:0;height:var(--jh);z-index:2;pointer-events:none}
+.jpm-win::before{top:0;background:linear-gradient(#120a1c,rgba(18,10,28,.45))}
+.jpm-win::after{bottom:0;background:linear-gradient(rgba(18,10,28,.45),#120a1c)}
+.jpm-strip{position:absolute;left:0;right:0;top:0;will-change:transform}
+.jpm-it{box-sizing:border-box;height:var(--jh);display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:3px solid #120a1c;background:linear-gradient(90deg,var(--ca),var(--cb) 30%,var(--cc) 50%,var(--cb) 70%,var(--ca));box-shadow:inset 0 0 0 2px var(--chi)}
+.jpm-it b{font:700 clamp(17px,5vw,22px)/1 var(--f-pix);letter-spacing:.04em;color:#fff;text-shadow:0 2px 0 #000,0 0 8px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jpm-ic{flex:none;width:calc(var(--jh) - 22px);height:calc(var(--jh) - 22px);border-radius:50%;display:grid;place-items:center;background:#120a1c;color:var(--cc);box-shadow:inset 0 0 0 2px var(--cc),0 2px 0 rgba(0,0,0,.5)}
+.jpm-ic .ico{width:60%;height:60%}
+.jpm-it.win{animation:jpmWin .45s steps(2) 4;box-shadow:inset 0 0 0 3px #fff,0 0 26px var(--cc)}
+@keyframes jpmWin{50%{filter:brightness(1.6) saturate(1.3)}}
+.jpm-line{position:absolute;left:4px;right:4px;top:var(--jh);height:var(--jh);z-index:3;border-radius:10px;pointer-events:none;box-shadow:0 0 0 3px #ff5c7c,0 0 18px rgba(255,92,124,.7)}
+.jpm-line::before,.jpm-line::after{content:"";position:absolute;top:50%;width:0;height:0;border:11px solid transparent;transform:translateY(-50%)}
+.jpm-line::before{left:-6px;border-left-color:#ff5c7c}
+.jpm-line::after{right:-6px;border-right-color:#ff5c7c}
+#jpm.spinning .jpm-line{animation:jpmLine .5s steps(2) infinite}
+@keyframes jpmLine{50%{box-shadow:0 0 0 3px #ffcc4d,0 0 18px rgba(255,204,77,.7)}}
+.jpm-res{min-height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:4px 8px;border-radius:12px;background:rgba(18,10,28,.82);box-shadow:inset 0 0 0 2px rgba(0,0,0,.6)}
+.jpm-hint{font:600 15px/1.2 var(--f-pix);color:#ffe9a8;text-align:center}
+.jpm-name{font:700 clamp(22px,7vw,28px)/1 var(--f-pix);letter-spacing:.04em;color:#fff;text-shadow:0 0 14px var(--cc),0 3px 0 #000}
+.jpm-bug{border:0;border-radius:999px;padding:5px 8px 5px 12px;background:rgba(0,0,0,.6);color:#ffe9a8;font:600 13px/1 var(--f-pix);letter-spacing:.04em;box-shadow:inset 0 0 0 2px rgba(255,233,168,.5);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.jpm-bug i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#ffe9a8;color:#231b35;font-style:normal;font-size:12px}
+.jpm-act{display:flex;flex-direction:column;gap:8px;width:100%}
+.jpm-row{display:flex;gap:8px}
+.jpm-row .btn{flex:1 1 0;min-width:0}
+.jpm-act .btn{flex-direction:column;gap:2px}
+.jpm-act .btn small{display:block;font-size:11px;opacity:.85}
+.jpm-go{width:100%}
+.jpm .mk-gold{margin:0}
+.jpm-lever{position:absolute;right:-26px;top:120px;width:30px;height:130px;border:0;padding:0;background:none;cursor:pointer}
+.jpm-lever .lbase{position:absolute;left:0;bottom:6px;width:16px;height:40px;border-radius:0 9px 9px 0;background:linear-gradient(90deg,#6c6880,#f3eefc 45%,#7a7690)}
+.jpm-lever .arm{position:absolute;left:6px;bottom:24px;width:7px;height:96px;border-radius:4px;background:linear-gradient(90deg,#8f8aa0,#fff 45%,#8f8aa0);transform-origin:50% 100%}
+.jpm-lever .ball{position:absolute;left:-8px;top:-18px;width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe08a,#e6a72a 50%,#6b4708);box-shadow:0 2px 4px rgba(0,0,0,.5)}
+.jpm-lever.pull .arm{animation:jpmPull .5s cubic-bezier(.3,.7,.4,1.4)}
+@keyframes jpmPull{40%{transform:rotateX(-150deg) scaleY(.4)}}
+body:not(.lpc) .jpm-lever{display:none}
+/* le bug d'une machine : on touche la pastille pour le lire */
+#m-bug{cursor:pointer}
+#m-bug i{display:inline-grid;place-items:center;width:16px;height:16px;margin-left:5px;border-radius:50%;background:rgba(255,255,255,.85);color:#120a1c;font-style:normal;font-size:11px;line-height:1}
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -2662,6 +2732,23 @@ body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:
       </div>
     </section>
 
+    <section id="jpm" class="ov" hidden aria-label="La Jackpot Machine">
+      <div class="jpm">
+        <div class="jpm-cab">
+          <div class="jpm-top">
+            <div class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h2>JACKPOT</h2><p>MACHINE</p>
+            <div class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="jpm-win" id="jpm-win"><div class="jpm-strip" id="jpm-strip"></div><i class="jpm-line" aria-hidden="true"></i></div>
+          <div class="jpm-res" id="jpm-res" aria-live="polite"></div>
+          <div class="jpm-act" id="jpm-act"></div>
+          <button class="jpm-lever" id="jpm-lever" aria-label="Tirer"><span class="lbase"></span><span class="arm"><span class="ball"></span></span></button>
+        </div>
+        <p class="mk-gold"><span class="coin" aria-hidden="true"></span>Ton or <b id="jpm-gold">0</b></p>
+      </div>
+    </section>
+
     <section id="chooser" class="ov" hidden aria-label="Choix de la machine">
       <div class="chs">
         <h2 class="neon violet">NOUVELLE MACHINE ?</h2>
@@ -2703,14 +2790,13 @@ body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:
         <button class="mbtn" id="t-cata" style="--b:var(--green);--bd:var(--green-d)"><svg class="ico"><use href="#i-livre"/></svg><span>CATALOGUE<small id="t-cata-n">0/0</small></span></button>
         <button class="mbtn" id="t-punch" style="--b:var(--purple);--bd:var(--purple-d)"><svg class="ico"><use href="#i-star"/></svg><span>COLLECTION<small id="t-sec-n">0/150</small></span></button>
         <button class="mbtn" id="t-vest" style="--b:#e0365a;--bd:#8a1a33"><svg class="ico"><use href="#i-canon"/></svg><span>VESTIAIRE<small id="t-vest-n">2/16</small></span></button>
-        <button class="mbtn" id="t-rules" style="--b:var(--blue);--bd:var(--blue-d)"><svg class="ico"><use href="#i-cartes"/></svg><span>RÈGLES<small>comment jouer</small></span></button>
         <button class="mbtn" id="t-opts" style="--b:var(--orange);--bd:var(--orange-d)"><svg class="ico"><use href="#i-enraye"/></svg><span>OPTIONS<small>son, écran</small></span></button>
         <button class="mbtn" id="t-stats" style="--b:#2aa59a;--bd:#17675f"><svg class="ico"><use href="#i-trophee"/></svg><span>PROFIL<small>tes records</small></span></button>
       </div>
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Prototype v9</p>
+  <p class="proto">Sefy Industries · v10</p>
 </section>
 
 <section id="over" class="full" hidden>
@@ -2853,7 +2939,6 @@ body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:
       <button class="btn blue" id="pa-info">Infos de la partie</button>
       <button class="btn orange" id="pa-opts">Options</button>
       <button class="btn green" id="pa-cata">Catalogue</button>
-      <button class="btn purple" id="pa-rules">Règles</button>
       <button class="btn ghost" id="pa-quit">Abandonner la partie</button>
     </div>
   </div>
@@ -2934,7 +3019,7 @@ body.lpc .abs .ab .abn{min-width:0;font-size:13px;overflow:hidden;text-overflow:
     <p class="bt-tag" aria-hidden="true"><span>LA MAISON GAGNE TOUJOURS.</span><span>SAUF CE SOIR.</span></p>
   </div>
   <button class="bt-press" id="bt-press"><b>▶ INSÉRER UN JETON</b><small>clique n'importe où pour lancer la machine</small></button>
-  <p class="bt-proto">Prototype v9 · son conseillé</p>
+  <p class="bt-proto">Sefy Industries · son conseillé</p>
 </section>
 <canvas id="fxc" aria-hidden="true"></canvas>
 <canvas id="elc" aria-hidden="true"></canvas>
@@ -7941,22 +8026,23 @@ const BARON = {
 };
 
 const TIPS = {
-  r1: 'Ta base tire toute seule sur la carte la plus proche. Atteins l\'<b>objectif de points</b> pour que les cartes arrêtent d\'arriver.',
-  bille: 'Ta <b>BILLE</b> : appuie sur ta base, <b>tire en arrière et lâche</b> (plus tu tires, plus elle part fort). Elle cogne, repousse, coupe les sorts, casse les boucliers et <b>marque</b> sa cible : ta base la vise en priorité. Quand elle revient, un <b>coup de flipper</b> pile au bon moment la relance plus fort : <b>REBOND</b> ! Sur PC : clic droit maintenu, ou <b>Z</b>.',
-  rake: 'Un <b>Tireur</b> ! Glisse le doigt pour tourner ton flipper doré et bloquer ses tirs. <b>Tape pile avant l\'impact</b> : PARADE, le flipper ne s\'use pas. Avec <b>Le Renvoi</b> (au bar), la parade renvoie le tir. (Autre contrôle dans les options : « Flipper : glisser ».)',
-  abil: '<b>BOMBE</b> : touche-la, puis vise un endroit. <b>GEL</b> : gèle les cartes autour de ta base. Les parades parfaites les rechargent plus vite.',
-  machine: 'Touche un rouleau pour le <b>STOPPER</b>, ou STOP pour tout arrêter. Ensuite, <b>MAINTIENS</b> des rouleaux (touche-les) et relance les autres. Moins il reste de rouleaux, plus ils tournent vite. Chaque machine a <b>son bug</b> (en bas de l\'écran) : apprends à t\'en servir. Le bouton <b>15</b> montre ses 15 jetons.',
-  bugm: 'Une <b>machine buggée</b> ! Après chaque boss : 100 or, un seul tirage, et tu gardes <b>un fou</b> sur trois. Deux identiques : +25 % de puissance. Trois : sa version <b>corrompue</b>. Chaque machine buggée a son bug, lis-le avant de tirer.',
-  bonus: 'Les <b>jetons bonus</b> des persos ne durent qu\'une partie : refais l\'exploit à chaque partie pour les récupérer. Monsieur Anatole (au Catalogue) garde la trace de ceux que tu as déjà mérités.',
-  bar: 'Le bar de Zaza : à chaque manche, <b>3 boissons</b> (canon, flipper, base) qui durent toute la partie, et <b>2 shots</b> qui durent une manche.',
-  stack: 'Un <b>doublon</b> ! Pose-le sur le jeton du même type pour les <b>empiler</b> : commun + commun = rare, rare + commun = ultime. Rien ne se perd : chaque niveau au-delà d\'ultime devient une <b>étoile ★</b> (+5 % de puissance). Et ça libère une place.',
-  tapis: 'Plus que 3 cartes : elles font <b>TAPIS</b> et foncent sur toi !',
-  elite: 'Une carte <b>élite</b> ! Son badge te dit son bonus. Elle rapporte plus d\'or.',
-  dv_vent: '<b>Vent du large</b> : quand « RAFALE ! » s\'affiche, tourne ton flipper <b>face au vent</b> (du côté des flèches) : il arrête les débris sans s\'abîmer. Les cartes poussées par le vent foncent sur toi.',
-  dv_feu: '<b>Zones de feu</b> : les flammes rampent vers ta base et crachent des boules de feu (bloque-les au flipper). <b>Gel</b>, <b>Bombe</b> et <b>Tornade</b> éteignent les flammes.',
-  dv_seisme: '<b>Séisme</b> : à chaque secousse, un étage casse, les cartes bondissent vers toi et ton canon s\'enraye une seconde. Garde ton <b>Gel</b> pour après la secousse.',
-  dv_brouillard: '<b>Brouillard</b> : tu vois de fausses cartes et ton canon voit moins loin. Les vraies cartes surgissent près de ta base : vise-les dès qu\'elles sortent de la brume.',
-  clover: 'Un <b>trèfle</b> ! Aligne-en <b>3</b> sur la ligne pour gagner une place de jeton (une seule comme ça). Une autre s\'achète au marché noir, et la dernière… arrive quand l\'Inspecteur t\'arnaque.',
+  r1: 'Ta base tire toute seule. Remplis l\'<b>objectif</b> pour finir la manche.',
+  bille: 'La <b>BILLE</b> : appuie sur ta base, tire en arrière, lâche.',
+  rake: 'Un <b>Tireur</b> ! Tourne ton <b>flipper</b> pour bloquer ses tirs. Tape juste avant l\'impact : <b>PARADE</b>.',
+  abil: '<b>BOMBE</b> : touche, puis vise. <b>GEL</b> : gèle autour de ta base.',
+  machine: 'Touche un rouleau pour l\'<b>arrêter</b>. Garde ceux qui te plaisent (<b>MAINTENIR</b>) et relance les autres.',
+  bugm: '<b>Machine buggée</b> : 100 or, un tirage, tu gardes <b>un fou</b>.',
+  bonus: '<b>Jeton bonus</b> : il dure jusqu\'à la fin de la partie.',
+  bar: 'Le bar : des <b>boissons</b> pour toute la partie, des <b>shots</b> pour une manche.',
+  stack: 'Un <b>doublon</b> ! Pose-le sur son jumeau pour le monter de niveau.',
+  tapis: 'Plus que 3 cartes : <b>TAPIS</b> ! Elles foncent sur toi.',
+  elite: 'Une <b>élite</b> : plus forte, plus d\'or.',
+  dv_vent: '<b>Vent</b> : flipper face au vent pendant les rafales.',
+  dv_feu: '<b>Feu</b> : bloque les boules de feu. Gel et Bombe éteignent les flammes.',
+  dv_seisme: '<b>Séisme</b> : garde ton Gel pour après la secousse.',
+  dv_brouillard: '<b>Brouillard</b> : de fausses cartes. Vise celles qui sortent près de toi.',
+  clover: '3 <b>trèfles</b> sur la ligne : +1 place de jeton.',
+
 };
 
 /* ================= state ================= */
@@ -8202,7 +8288,28 @@ const Snd = (() => {
   // petit claquement de jeton en céramique
   const clack = (delay, v, fq) => { noise(.03, v, fq || 3400, 'bandpass', delay, null, 4); tone((fq || 3400) * .18, .025, 'triangle', v * .4, null, delay); };
   const chord = (ms, d, type, v, delay, verb) => ms.forEach((m, i) => tone(mtof(m), d, type, v, null, (delay || 0) + i * .004, verb));
+  // la Jackpot Machine : un roulement continu (grondement mécanique + frottement), coupé à l'arrêt
+  let roll = null;
+  function rollLoop(on) {
+    if (on) {
+      if (roll || !ok()) return;
+      const ac = AU.ac, t = ac.currentTime, s = ac.createBufferSource(), bp = ac.createBiquadFilter(), g = ac.createGain(), o = ac.createOscillator(), og = ac.createGain(), lf = ac.createOscillator(), lg = ac.createGain();
+      s.buffer = AU.nbuf; s.loop = true; bp.type = 'bandpass'; bp.frequency.value = 330; bp.Q.value = 1.3;
+      o.type = 'triangle'; o.frequency.value = 52; og.gain.value = .45;
+      lf.type = 'square'; lf.frequency.value = 12; lg.gain.value = .025;
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.075, t + .25);
+      s.connect(bp); bp.connect(g); o.connect(og); og.connect(g); lf.connect(lg); lg.connect(g.gain);
+      g.connect(AU.sfx); s.start(t, Math.random() * .5); o.start(t); lf.start(t);
+      roll = { s, o, lf, g };
+    } else if (roll) {
+      const r = roll; roll = null;
+      try { const t = AU.ac.currentTime; r.g.gain.cancelScheduledValues(t); r.g.gain.setTargetAtTime(.0001, t, .06); r.s.stop(t + .4); r.o.stop(t + .4); r.lf.stop(t + .4); } catch (e) { /* rien */ }
+    }
+  }
   return {
+    jpmTick(sp) { if (th('jpmt', 40)) { const k = clamp(sp || 1, .4, 1.4); clack(0, .06, 1400 + 600 * k); tone(140 + 60 * k, .035, 'triangle', .07, 90); } },
+    jpmRoll(on) { rollLoop(on); },
+    jpmStop() { tone(98, .16, 'sine', .22, 55); noise(.05, .09, 5200, 'bandpass', .01, null, 3); [1568, 2093, 2637].forEach((f, i) => tone(f, .07, 'square', .045, null, .05 + i * .065)); tone(3136, .3, 'sine', .05, null, .26, true); tone(1046, .12, 'square', .03, null, .26); },
     tone, noise,
     shoot() { if (th('shoot', 80)) tone(1050, .024, 'square', .018); },
     chime() { if (th('chime', 200)) { tone(1568, .25, 'sine', .05); tone(2093, .3, 'sine', .04, null, .06); tone(2637, .45, 'sine', .03, null, .12); } },
@@ -8522,8 +8629,8 @@ const haptic = ms => { if (G.headless) return; try { if (navigator.vibrate) navi
 /* ---------- ambiances : vent, feu, brouillard, foule du bar, casino, gouttes ---------- */
 const Amb = (() => {
   const L = {}, want = {};
-  const BASE = { wind: .5, fire: .45, fog: .4, crowd: .26, casino: 1, drip: .5, elec: .32 };
-  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0, crackE = 0;
+  const BASE = { wind: .5, fire: .45, fog: .4, crowd: .26, casino: 1, drip: .5, elec: .32, hum: .1 };
+  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0, crackE = 0, nextCoin = 0, nextMur = 0, nextRat = 0, nextBall = 0;
   function noiseSrc(ac) { const s = ac.createBufferSource(); s.buffer = AU.nbuf; s.loop = true; s.start(ac.currentTime, Math.random() * .9); return s; }
   function lfo(ac, f, depth, param, nodes) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = f; g.gain.value = depth; o.connect(g); g.connect(param); o.start(); nodes.push(o); return o; }
   function make(name) {
@@ -8569,6 +8676,10 @@ const Amb = (() => {
       s.connect(hp); hp.connect(trem); trem.connect(sz); sz.connect(out);
       lfo(ac, 13, .4, trem.gain, o.nodes); lfo(ac, 31, .2, trem.gain, o.nodes);
       o.nodes.push(h1, h2, s); Object.assign(o, { bp, hg, sz });
+    } else if (name === 'hum') {
+      const g = ac.createGain(); g.gain.value = .6; g.connect(out);
+      for (const [f, v, ty] of [[60, .5, 'sine'], [120, .22, 'sine'], [180, .06, 'sine'], [240, .025, 'triangle']]) { const o1 = ac.createOscillator(), g1 = ac.createGain(); o1.type = ty; o1.frequency.value = f; g1.gain.value = v; o1.connect(g1); g1.connect(g); o1.start(); o.nodes.push(o1); }
+      lfo(ac, .13, .18, g.gain, o.nodes);
     } else if (name === 'drip') {
       const s = noiseSrc(ac), lp = ac.createBiquadFilter(), g = ac.createGain();
       lp.type = 'lowpass'; lp.frequency.value = 160; g.gain.value = .6; s.connect(lp); lp.connect(g); g.connect(out);
@@ -8587,6 +8698,18 @@ const Amb = (() => {
   const jingle = () => ev((ac, out) => { const t = ac.currentTime, pan = ac.createStereoPanner ? ac.createStereoPanner() : null, lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; if (pan) { pan.pan.value = apick([-.85, .85, -.6, .6]); lp.connect(pan); pan.connect(out); pan.connect(AU.verbS); } else lp.connect(out); const root = apick([72, 74, 77, 79]), seq = apick([[0, 4, 7, 12, 16], [0, 7, 12, 7, 12, 19], [12, 7, 4, 0]]); seq.forEach((iv, i) => { const o = mkOsc(ac, 'p25', mtof(root + iv)), g = ac.createGain(), tt = t + i * .075; g.gain.setValueAtTime(.022, tt); g.gain.exponentialRampToValueAtTime(.0005, tt + .14); o.connect(g); g.connect(lp); o.start(tt); o.stop(tt + .16); }); for (let i = 0; i < 6; i++) { const s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(), tt = t + .4 + i * .06; s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.value = 3600; f.Q.value = 4; g.gain.setValueAtTime(.03, tt); g.gain.exponentialRampToValueAtTime(.0005, tt + .03); s.connect(f); f.connect(g); g.connect(lp); s.start(tt, Math.random() * .5); s.stop(tt + .05); } });
   const drip = () => ev((ac, out) => { const t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain(), f = arnd(900, 1500), pan = ac.createStereoPanner ? ac.createStereoPanner() : null; o.type = 'sine'; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 1.9, t + .05); g.gain.setValueAtTime(.06, t); g.gain.exponentialRampToValueAtTime(.0005, t + .12); if (pan) { pan.pan.value = arnd(-.7, .7); o.connect(g); g.connect(pan); pan.connect(out); pan.connect(AU.verbS); } else { o.connect(g); g.connect(out); } o.start(t); o.stop(t + .14); });
   const crackle = (lv) => ev((ac, out) => { const t = ac.currentTime + arnd(0, .03), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'highpass'; f.frequency.value = arnd(1800, 5200); g.gain.setValueAtTime(arnd(.04, .14) * lv, t); g.gain.exponentialRampToValueAtTime(.0005, t + arnd(.008, .03)); s.connect(f); f.connect(g); g.connect(out); s.start(t, Math.random() * .5); s.stop(t + .05); });
+  const panOut = (ac, out, x) => { if (!ac.createStereoPanner) return out; const p2 = ac.createStereoPanner(); p2.pan.value = x; p2.connect(out); return p2; };
+  // des pièces qui tintent et tombent sur un comptoir
+  const coins = (lv) => ev((ac, out) => { const t = ac.currentTime, d = panOut(ac, out, arnd(-.8, .8)), n = Math.floor(arnd(2, 6)); for (let i = 0; i < n; i++) { const tt = t + i * arnd(.05, .13) + i * i * .006, f = arnd(3000, 4400); for (const k of [1, 2.76]) { const o2 = ac.createOscillator(), g = ac.createGain(); o2.type = 'sine'; o2.frequency.value = f * k; g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.022 * lv / k, tt + .004); g.gain.exponentialRampToValueAtTime(.0001, tt + .22 / k); o2.connect(g); g.connect(d); o2.start(tt); o2.stop(tt + .25); } } });
+  // la foule du marché noir qui chuchote (des voix étouffées, de-ci de-là)
+  const MUR = ['psst, par ici', 'combien pour celui-là ?', 'chut, pas si fort', 'tombé du camion, je te dis', 'il est pas net, lui', 'deux pour le prix d\'un', 'on se connaît ?', 'la police, la police !', 'hé hé, bonne affaire', 'pas de reçu, pas de question'];
+  const murmur = (lv) => ev((ac, out) => { const lp = ac.createBiquadFilter(), g = ac.createGain(), d = panOut(ac, out, arnd(-.9, .9)); lp.type = 'lowpass'; lp.frequency.value = arnd(700, 1100); g.gain.value = .26 * lv; lp.connect(g); g.connect(d); if (AU.verbS) g.connect(AU.verbS); speak(ac, lp, AU.nbuf, apick(['dealer', 'valet', 'roi', 'dame', 'zaza']), apick(MUR), ac.currentTime + .02); setTimeout(() => { try { g.disconnect(); } catch (e) { /* rien */ } }, 4500); });
+  // chez le Baron : des rats (petits cris, puis une galopade)
+  const squeak = (lv) => ev((ac, out) => { const t = ac.currentTime, d = panOut(ac, out, arnd(-.95, .95)), n = Math.floor(arnd(2, 5)); for (let i = 0; i < n; i++) { const tt = t + i * arnd(.08, .15), f = arnd(2600, 4300), o2 = ac.createOscillator(), g = ac.createGain(); o2.type = 'sine'; o2.frequency.setValueAtTime(f, tt); o2.frequency.linearRampToValueAtTime(f * arnd(1.15, 1.45), tt + .035); o2.frequency.linearRampToValueAtTime(f * .85, tt + .08); g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.03 * lv, tt + .01); g.gain.exponentialRampToValueAtTime(.0001, tt + .09); o2.connect(g); g.connect(d); o2.start(tt); o2.stop(tt + .1); } });
+  const scurry = (lv) => ev((ac, out) => { const t = ac.currentTime, x0 = arnd(-.9, .9), d = panOut(ac, out, x0); if (d.pan) d.pan.linearRampToValueAtTime(-x0, t + .7); const n = Math.floor(arnd(10, 18)); for (let i = 0; i < n; i++) { const tt = t + i * arnd(.035, .055), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.value = arnd(2500, 5200); f.Q.value = 4; g.gain.setValueAtTime(.05 * lv, tt); g.gain.exponentialRampToValueAtTime(.0001, tt + .012); s.connect(f); f.connect(g); g.connect(d); s.start(tt, Math.random() * .5); s.stop(tt + .02); } });
+  // chez Nox : la bille de la roulette (elle roule, ralentit, puis saute de case en case)
+  const rball = (lv) => ev((ac, out) => { const t = ac.currentTime, d = panOut(ac, out, arnd(-.5, .5)), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.setValueAtTime(2400, t); f.frequency.exponentialRampToValueAtTime(800, t + 1.6); f.Q.value = 3.5; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.035 * lv, t + .15); g.gain.exponentialRampToValueAtTime(.0001, t + 1.7); s.connect(f); f.connect(g); g.connect(d); s.start(t, Math.random() * .5); s.stop(t + 1.75);
+    let tt = t + 1.35, gap = .06; for (let i = 0; i < 7; i++) { const o2 = ac.createOscillator(), g2 = ac.createGain(); o2.type = 'triangle'; o2.frequency.value = arnd(1500, 2100); g2.gain.setValueAtTime(.0001, tt); g2.gain.exponentialRampToValueAtTime(.05 * lv * (1 - i / 9), tt + .003); g2.gain.exponentialRampToValueAtTime(.0001, tt + .03); o2.connect(g2); g2.connect(d); o2.start(tt); o2.stop(tt + .04); tt += gap; gap *= 1.33; } });
   function update(dt) {
     const ac = AU.ac;
     if (!ac || AU.offline || G.headless) return;
@@ -8634,6 +8757,10 @@ const Amb = (() => {
     }
     if (on && want.casino > 0) { if (now > nextJingle) { if (nextJingle) jingle(); nextJingle = now + arnd(5000, 11000); } }
     if (on && want.drip > 0) { if (now > nextDrip) { if (nextDrip) drip(); nextDrip = now + arnd(900, 3800); } }
+    if (on && want.coins > 0) { if (now > nextCoin) { if (nextCoin) coins(want.coins); nextCoin = now + arnd(2600, 7000); } } else nextCoin = 0;
+    if (on && want.murmur > 0) { if (now > nextMur) { if (nextMur) murmur(want.murmur); nextMur = now + arnd(2800, 6500); } } else nextMur = 0;
+    if (on && want.rats > 0) { if (now > nextRat) { if (nextRat) { if (Math.random() < .6) squeak(want.rats); else scurry(want.rats); } nextRat = now + arnd(2500, 7000); } } else nextRat = 0;
+    if (on && want.ball > 0) { if (now > nextBall) { if (nextBall) rball(want.ball); nextBall = now + arnd(4500, 9000); } } else nextBall = 0;
   }
   return { set, update };
 })();
@@ -11992,8 +12119,12 @@ function render(dtReal) {
   const sx = cb.shake ? (rnd() - .5) * cb.shake * DPR : 0, sy = cb.shake ? (rnd() - .5) * cb.shake * DPR : 0;
   const k = S * DPR, s = cb.stats, t = cb.t;
   ctx.setTransform(k, 0, 0, k, CX * DPR + sx, CY * DPR + sy);
-  ctx.setLineDash([2, 2.4]); ctx.lineWidth = .35; ctx.strokeStyle = 'rgba(255,243,230,.14)';
-  ctx.beginPath(); ctx.arc(0, 0, s.range, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+  if (!cb.demo) {
+    ctx.fillStyle = 'rgba(255,243,230,.045)'; ctx.beginPath(); ctx.arc(0, 0, s.range, 0, TAU); ctx.fill();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = 'rgba(255,243,230,.07)'; ctx.beginPath(); ctx.arc(0, 0, s.range, 0, TAU); ctx.stroke();
+    ctx.setLineDash([3, 2.6]); ctx.lineDashOffset = -t * 2.2; ctx.lineWidth = .6; ctx.strokeStyle = 'rgba(255,236,190,.42)';
+    ctx.beginPath(); ctx.arc(0, 0, s.range, 0, TAU); ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset = 0;
+  }
   for (const fx of cb.fx) if (fx.type === 'crack') drawCrack(fx);
   if (cb.fires) drawFires(cb, t);
   if (cb.puddles && cb.puddles.length) drawPuddles(cb, t);
@@ -12926,8 +13057,11 @@ function stakeInfo(i) { return STAKES[clamp(i, 0, STAKES.length - 1)]; }
 // l'accueil : sur la petite table, quelques cartes et quelques jetons éparpillés (ceux dont tu connais le secret brillent)
 const TT_CHIPS = [[10, 26, -14], [27, 70, 10], [45, 24, 16], [62, 72, -8], [79, 30, 7], [93, 68, -16], [53, 50, 22]];
 const TT_CARDS = [[18, 46, -18, 13, 's'], [37, 34, 12, 1, 'h'], [72, 50, -7, 12, 'd'], [88, 26, 20, 7, 'c']];
+const TTV = { k: 0, done: -1 };
 function titleTable() {
   const box = $('#t-chips'); if (!box) return;
+  if (TTV.done === TTV.k && box.children.length) return;
+  TTV.done = TTV.k;
   const known = shuffle(NORMAL_JOKERS.filter(secretKnown)).slice(0, 2), rest = shuffle(NORMAL_JOKERS.filter(id => !known.includes(id)));
   const ids = shuffle(known.concat(rest.slice(0, TT_CHIPS.length - known.length)));
   const rk = r => r === 1 ? 'A' : r === 13 ? 'R' : r === 12 ? 'D' : r === 11 ? 'V' : String(r);
@@ -12955,6 +13089,27 @@ function refreshTitle() {
   const vc = vestCount(); setTxt('#t-vest-n', `${vc.n}/${vc.tot}`);
   $('#t-secret').classList.toggle('found', !!m.secret);
   renderTicker();
+}
+// une petite fenêtre « tu es sûr ? »
+function askConfirm(txt, okLabel, ok, cancelLabel) {
+  let el = $('#confirm');
+  if (!el) { el = document.createElement('section'); el.id = 'confirm'; el.className = 'full'; el.hidden = true; (ROOT || document.body).appendChild(el); }
+  el.innerHTML = `<div class="fi"><div class="panel cfm"><p>${txt}</p><div class="cfm-b"><button class="btn ghost" data-cf="no">${cancelLabel || 'Annuler'}</button><button class="btn red" data-cf="ok">${okLabel}</button></div></div></div>`;
+  el.hidden = false; Snd.pop();
+  el.onclick = e => { const b = e.target.closest('[data-cf]'); if (!b) return; el.hidden = true; Snd.click(); if (b.dataset.cf === 'ok') ok(); };
+}
+// une bulle d'info, fermée d'un toucher
+function infoPop(html) {
+  let el = $('#infopop');
+  if (!el) { el = document.createElement('section'); el.id = 'infopop'; el.className = 'full'; el.hidden = true; (ROOT || document.body).appendChild(el); }
+  el.innerHTML = `<div class="fi"><div class="panel ipop">${html}<button class="btn gold" data-ip="1">Compris</button></div></div>`;
+  el.hidden = false; Snd.pop();
+  el.onclick = e => { if (e.target.closest('[data-ip]') || e.target === el || e.target.classList.contains('fi')) { el.hidden = true; Snd.click(); } };
+}
+function newRunAsk() {
+  const cp = loadCheckpoint();
+  if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', () => { clearCheckpoint(); startRun(null); });
+  else startRun(null);
 }
 function rulesSections() {
   const ex = (id, cls) => `<span class="sym chip ${cls || 'k-commun'}" style="--jc:${JK[id].col};--ic2:${JK[id].dark}">${iconSVG(id)}</span>`;
@@ -13577,7 +13732,7 @@ function setMachineInfo() {
   else if (ev && r <= 30) nx += ` · ${EVENTS[ev].name}`;
   $('#m-next').textContent = nx;
   $('#m-next').classList.toggle('boss', isBossRound(r));
-  const bg = $('#m-bug'); if (bg) bg.innerHTML = `<b>BUG</b> ${esc(M2.bugName)}`;
+  const bg = $('#m-bug'); if (bg) bg.innerHTML = `<b>BUG</b> ${esc(M2.bugName)} <i>?</i>`;
   const sd = $('#m-seed'); if (sd) { sd.hidden = !M.seedLine || M.state !== 'ready'; if (M.seedLine) sd.innerHTML = `<small>GRAINE FIXE</small>${M.seedLine.map(s => symHTML(s)).join('')}`; }
 }
 function updateMachineButtons() {
@@ -13755,7 +13910,142 @@ function closeMachine() {
 
 /* ================= le choix de la machine : au départ (gratuit), puis toutes les 5 manches après le boss (20 or) ================= */
 const CH = { opts: [], then: null, start: false };
-function openChooser(then, start) {
+/* ================= v10 · LA JACKPOT MACHINE =================
+   Une seule grande colonne qui fait défiler les machines. On tire, on arrête quand on veut, on tombe sur une machine.
+   Au départ : le premier tirage est offert. Après chaque boss : on peut aussi garder sa machine. Relancer : 100 or. */
+const JPM = { st: 'off', then: null, start: false, items: [], pos: 0, v: 0, raf: 0, last: 0, stop: null, landed: null, autoAt: 0, lastCell: null, pulls: 0 };
+const JPM_RELOAD = 100;
+const jpmCur = () => (G.run && G.run.machine) || 0;
+function jpmPlate(mi, cls) {
+  const M2 = MACH9[mi], C = MACH_PAL[mi];
+  return `<div class="jpm-it${cls ? ' ' + cls : ''}" style="--ca:${C.a};--cb:${C.b};--cc:${C.c};--chi:${C.hi}"><span class="jpm-ic">${iconSVG(MACH_ICON[mi])}</span><b>${esc(M2.name.toUpperCase())}</b></div>`;
+}
+function jpmH() { const it = $('#jpm-strip .jpm-it'); return it ? it.offsetHeight : 64; }
+function openJPM(then, start) {
+  CH.then = then; CH.start = !!start;
+  Object.assign(JPM, { then, start: !!start, st: 'ready', landed: null, stop: null, pulls: 0, v: 0 });
+  const cur = jpmCur();
+  JPM.items = shuffle(MACH9.map((m, i) => i).filter(i => start || i !== cur));
+  const N = JPM.items.length;
+  // la colonne : la liste répétée, pour tourner sans fin
+  $('#jpm-strip').innerHTML = Array.from({ length: N * 2 + 3 }, (_, k) => jpmPlate(JPM.items[k % N])).join('');
+  JPM.pos = N + irand(0, N - 1);
+  G.mode = 'chooser';
+  show('#jpm', true);
+  document.body.classList.remove('combat');
+  Music.play('lounge'); BG.setMode('machine');
+  jpmPlace(); jpmRender();
+  Snd.chooserOpen();
+  if (G.dev.auto) setTimeout(() => { if (JPM.st === 'ready') jpmPull(); setTimeout(() => { jpmStop(); setTimeout(() => { if (JPM.st === 'result') jpmAccept(); }, 900); }, 700); }, 500);
+}
+function jpmPlace() {
+  const N = JPM.items.length, h = jpmH(), st = $('#jpm-strip'); if (!st) return;
+  JPM.pos = ((JPM.pos - N) % N + N) % N + N;
+  st.style.transform = `translateY(${-(JPM.pos - 1) * h}px)`;
+  const c = Math.round(JPM.pos);
+  if (c !== JPM.lastCell) { JPM.lastCell = c; if (JPM.st === 'spin' || JPM.st === 'stopping') Snd.jpmTick(Math.abs(JPM.v) / 7); }
+}
+function jpmRender() {
+  const run = G.run, a = $('#jpm-act'), r = $('#jpm-res'), cur = jpmCur(), can = run.gold >= JPM_RELOAD;
+  setTxt('#jpm-gold', String(Math.floor(run.gold)));
+  $('#jpm').classList.toggle('spinning', JPM.st === 'spin' || JPM.st === 'stopping');
+  $('#jpm').classList.toggle('won', JPM.st === 'result');
+  const keep = JPM.start ? '' : `<button class="btn ghost jpm-keep" data-jp="keep">Garder ma machine<small>${esc(MACH9[cur].name)}</small></button>`;
+  if (JPM.st === 'ready') {
+    r.innerHTML = `<p class="jpm-hint">Tire, puis arrête la colonne quand tu veux.</p>`;
+    a.innerHTML = `<button class="btn big gold jpm-go" data-jp="pull">TIRER</button>${keep}`;
+  } else if (JPM.st === 'spin' || JPM.st === 'stopping') {
+    r.innerHTML = `<p class="jpm-hint">${JPM.st === 'spin' ? 'STOP quand tu veux !' : '…'}</p>`;
+    a.innerHTML = `<button class="btn big red jpm-go" data-jp="stop" ${JPM.st === 'stopping' ? 'disabled' : ''}>STOP</button>`;
+  } else if (JPM.st === 'result') {
+    const mi = JPM.landed, M2 = MACH9[mi];
+    r.innerHTML = `<p class="jpm-name" style="--cc:${MACH_PAL[mi].c}">${esc(M2.name)}</p><button class="jpm-bug" data-jp="bug">BUG · ${esc(M2.bugName)} <i>?</i></button>`;
+    a.innerHTML = `<button class="btn big gold jpm-go" data-jp="ok">Jouer dessus</button><div class="jpm-row"><button class="btn blue" data-jp="reload" ${can ? '' : 'disabled'}>Relancer<small>${JPM_RELOAD} or</small></button>${keep}</div>`;
+  }
+}
+function jpmPull() {
+  if (JPM.st !== 'ready' && JPM.st !== 'result') return;
+  if (JPM.st === 'result') { if (G.run.gold < JPM_RELOAD) { Snd.deny(); return; } G.run.gold -= JPM_RELOAD; Snd.coin(); updateHUD(); }
+  JPM.st = 'spin'; JPM.pulls++; JPM.stop = null; JPM.landed = null; JPM.v = 0;
+  JPM.autoAt = now() + 9000;
+  const lv = $('#jpm-lever'); if (lv) { lv.classList.remove('pull'); void lv.offsetWidth; lv.classList.add('pull'); }
+  $$('#jpm-strip .jpm-it.win').forEach(x => x.classList.remove('win'));
+  Snd.lever(); Snd.jpmRoll(true); haptic(15);
+  jpmRender();
+  JPM.last = now(); cancelAnimationFrame(JPM.raf); JPM.raf = requestAnimationFrame(jpmTick);
+}
+function jpmStop() {
+  if (JPM.st !== 'spin') return;
+  // on s'arrête sur la prochaine machine qui passe sous la ligne (jamais d'arrêt sec)
+  let target = Math.floor(JPM.pos);
+  if (JPM.pos - target < .35) target -= 1;
+  const dist = JPM.pos - target, v = Math.max(3, JPM.v);
+  JPM.stop = { from: JPM.pos, to: target, t0: now(), dur: clamp(2 * dist / v * 1000, 260, 900) };
+  JPM.st = 'stopping';
+  Snd.btn(); jpmRender();
+}
+function jpmTick(t) {
+  const dt = Math.min(.05, (t - JPM.last) / 1000); JPM.last = t;
+  if (JPM.st === 'spin') {
+    JPM.v += (7.2 - JPM.v) * Math.min(1, dt * 3.5);
+    JPM.pos -= JPM.v * dt;
+    jpmPlace();
+    if (t >= JPM.autoAt) jpmStop();
+  } else if (JPM.st === 'stopping' && JPM.stop) {
+    const S2 = JPM.stop, k = clamp((t - S2.t0) / S2.dur, 0, 1), e = 1 - Math.pow(1 - k, 3);
+    JPM.pos = S2.from + (S2.to - S2.from) * e; JPM.v = (1 - k) * 7;
+    const N = JPM.items.length, before = JPM.pos;
+    jpmPlace();
+    if (JPM.pos !== before) { const d = JPM.pos - before; S2.from += d; S2.to += d; }
+    if (k >= 1) { jpmLand(); return; }
+  } else return;
+  JPM.raf = requestAnimationFrame(jpmTick);
+}
+function jpmLand() {
+  const N = JPM.items.length, idx = Math.round(JPM.pos);
+  JPM.pos = idx; jpmPlace();
+  JPM.landed = JPM.items[((idx % N) + N) % N];
+  JPM.st = 'result';
+  Snd.jpmRoll(false); Snd.jpmStop(); haptic(40);
+  const el = $$('#jpm-strip .jpm-it')[idx]; if (el) el.classList.add('win');
+  catSee('k', 'm' + JPM.landed);
+  jpmRender();
+}
+function jpmAccept() {
+  if (JPM.st !== 'result') return;
+  const run = G.run, mi = JPM.landed, changed = mi !== run.machine || JPM.start;
+  run.machine = mi;
+  jpmClose();
+  if (changed && !JPM.start) toast(`Nouvelle machine : ${MACH9[mi].name} !`);
+}
+function jpmKeep() { if (JPM.start || JPM.st === 'spin' || JPM.st === 'stopping') return; jpmClose(); }
+function jpmClose() {
+  cancelAnimationFrame(JPM.raf); Snd.jpmRoll(false);
+  JPM.st = 'off';
+  show('#jpm', false);
+  updateHUD();
+  const fn = JPM.then; JPM.then = null; CH.then = null;
+  if (fn) fn();
+}
+function jpmBug() {
+  const mi = JPM.st === 'result' ? JPM.landed : jpmCur(), M2 = MACH9[mi];
+  infoPop(`<h3>BUG · ${esc(M2.bugName)}</h3><p>${esc(M2.bug[0].toUpperCase() + M2.bug.slice(1))}</p>`);
+}
+function jpmClick(e) {
+  const b = e.target.closest('[data-jp]');
+  if (!b) { if (e.target.closest('#jpm-win') && JPM.st === 'spin') { firstGesture(); jpmStop(); } else if (e.target.closest('#jpm-lever') && (JPM.st === 'ready')) { firstGesture(); jpmPull(); } return; }
+  firstGesture();
+  const a = b.dataset.jp;
+  if (a === 'pull') jpmPull();
+  else if (a === 'stop') jpmStop();
+  else if (a === 'reload') jpmPull();
+  else if (a === 'ok') { Snd.click(); jpmAccept(); }
+  else if (a === 'keep') { Snd.click(); jpmKeep(); }
+  else if (a === 'bug') jpmBug();
+}
+
+function openChooser(then, start) { openJPM(then, start); }
+function openChooserOld(then, start) {
   const run = G.run;
   CH.then = then; CH.start = !!start;
   const cur = run.machine || 0, used = start ? [] : [cur];
@@ -14021,7 +14311,7 @@ function renderMarket() {
     return `<div class="offer${o.sold ? ' sold' : ''}">
       ${chipHTML(j, 'button', `data-info="${i}" aria-label="Détails : ${esc(jName(j))}"`, 'oicon')}
       <div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${j.kind})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${j.curse ? `<span class="cur">Malédiction ${CURSES[j.curse].name} : ${CURSES[j.curse].txt}</span>` : ''}${partner ? '<span class="stk-hint">s\'empile sur ton jeton</span>' : ''}</div>
-      <div class="obuy">${buyB(free <= 0 && !partner ? 'Rack plein' : o.price + ' or', free <= 0 && !partner)}</div></div>`;
+      <div class="obuy">${buyB(free <= 0 && !partner ? `${o.price} or<small>rack plein</small>` : o.price + ' or', free <= 0 && !partner)}</div></div>`;
   }).join('');
   setHTML('#k-spells', spellStripHTML());
 }
@@ -16660,12 +16950,11 @@ function renderOptions() {
     }
     case 'credits':
       h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>
-        <p>Un jeu de <b>Sefy</b>.</p>
+        <p>Produit par <b>Sefy Industries</b>.</p>
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p>Développé avec l'aide de Claude (IA).</p>
-        <p class="ov5">Prototype v9</p></div>`;
+        <p class="ov5">v10</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -17937,7 +18226,7 @@ function startDemo() {
   const cb = newCombat(); cb.demo = true; G.cb = cb;
   cb.stats = computeStats(run); cb.sc = roundScale(run, 1);
 }
-const PANES = ['#machine', '#bar', '#market', '#poker', '#chooser', '#mini'];
+const PANES = ['#machine', '#bar', '#market', '#poker', '#chooser', '#jpm', '#mini'];
 // (la machine buggée vit dans le panneau de la machine)
 function hidePanes() { bugClear(); const bm = $('#bugm'); if (bm) bm.hidden = true; for (const id of PANES) { const el = $(id); if (el) { el.hidden = true; el.getAnimations && el.getAnimations().forEach(a => a.cancel()); } } }
 function hideScreens() { for (const id of ['#title', '#over', '#win', '#fbrew', '#punch', '#rules', '#opts', '#pause', '#dev', '#detail', '#cata', '#anatole', '#vest', '#runinfo']) show(id, false); if (FB.cut) fbCutEnd(true); FB.on = false; const fw = $('#fbwheel'); if (fw) fw.hidden = true; hidePanes(); $('#tip').hidden = true; TIPQ.length = 0; tipOpen = false; tipPaused = false; }
@@ -17951,6 +18240,7 @@ function toTitle() {
   startDemo();
   for (const k in hc) delete hc[k];
   show('#title', true);
+  TTV.k++;
   refreshTitle();
   Music.play('lounge'); BG.setMode('menu'); duckMusic(false);
 }
@@ -18757,9 +19047,15 @@ function frame(t) {
   Amb.set('wind', inCb && cb.wind ? 1 : 0);
   Amb.set('fire', inCb && cb.fires ? 1 : 0);
   Amb.set('fog', inCb && cb.fog ? 1 : 0);
-  Amb.set('crowd', m === 'bar' || m === 'poker' ? 1 : m === 'mini' ? .6 : m === 'machine' || m === 'chooser' ? .45 : 0);
-  Amb.set('casino', m === 'machine' ? 1 : 0);
+  const atMach = m === 'machine' || m === 'chooser';
+  Amb.set('crowd', m === 'bar' ? 1 : m === 'poker' ? .35 : m === 'mini' ? .55 : 0);
+  Amb.set('casino', atMach ? 1 : 0);
+  Amb.set('hum', atMach ? 1 : 0);
+  Amb.set('coins', m === 'bar' ? 1 : atMach ? .55 : 0);
   Amb.set('drip', m === 'market' ? 1 : 0);
+  Amb.set('murmur', m === 'market' ? 1 : 0);
+  Amb.set('rats', m === 'poker' ? 1 : 0);
+  Amb.set('ball', m === 'mini' && MG.id === 'nox' ? 1 : 0);
   Amb.update(dt);
   if (G.perf) { const pf2 = performance.now(); G.perf.n++; G.perf.upd += pf1 - pf0; G.perf.rnd += pf2 - pf1; G.perf.maxF = Math.max(G.perf.maxF, pf2 - pf0); G.perf.dts.push(dt); }
   if (G.mode === 'combat' && cb && !cb.demo) {
@@ -18797,7 +19093,9 @@ function bindUI() {
   on('#m-respin', () => respin());
   on('#m-cash', () => cashOutMachine());
   on('#m-go', () => closeMachine());
-  on('#m-help', () => openRules());
+  on('#m-help', () => infoPop(`<h3>CE QUE DONNE LA LIGNE</h3><ul class="pay">
+    <li><b>3 pareils</b><span>1 jeton ULTIME</span></li><li><b>2 pareils</b><span>1 jeton MIX</span></li><li><b>3 différents</b><span>3 jetons</span></li>
+    <li><b>${iconSVG('relance')}</b><span>relance gratuite</span></li><li><b>${iconSVG('malus')}</b><span>un malus pour la manche</span></li><li><b>3 ${iconSVG('trefle')}</b><span>+1 place de jeton</span></li></ul>`));
   REEL.r.forEach((R, i) => R.el.addEventListener('pointerdown', e => { firstGesture(); e.preventDefault(); reelTap(i); }));
   $('#m-tray').addEventListener('click', e => {
     const b = e.target.closest('[data-act]'); if (!b) return;
@@ -18842,6 +19140,8 @@ function bindUI() {
   mcv.addEventListener('pointermove', e => { if (MG.open && MG.game && MG.game.move) MG.game.move(mgPoint(e), e); });
   mcv.addEventListener('pointerup', e => { if (MG.open && MG.game && MG.game.up) MG.game.up(mgPoint(e), e); });
   mcv.addEventListener('pointercancel', e => { if (MG.open && MG.game && MG.game.up) MG.game.up(mgPoint(e), e); });
+  $('#jpm').addEventListener('click', jpmClick);
+  $('#m-bug').addEventListener('click', () => { firstGesture(); const M2 = MACH9[(G.run && G.run.machine) || 0]; infoPop(`<h3>BUG · ${esc(M2.bugName)}</h3><p>${esc(M2.bug[0].toUpperCase() + M2.bug.slice(1))}</p>`); });
   $('#chooser').addEventListener('click', e => { const i = e.target.closest('[data-chinfo]'); if (i) { firstGesture(); Snd.click(); machineSheet(+i.dataset.chinfo, false); return; } const b = e.target.closest('[data-pick]'); if (b) { firstGesture(); Snd.click(); pickMachine(+b.dataset.pick); } });
   $('#bugm').addEventListener('click', e => { firstGesture(); bugClick(e); });
   $('#anatole').addEventListener('click', e => { firstGesture(); anClick(e); });
@@ -18877,13 +19177,12 @@ function bindUI() {
     else if (b.dataset.dstack) { closeDetail(); const run = G.run, A = run.jokers.find(x => x.uid === +b.dataset.dstack), B = run.jokers.find(x => x.uid === uid); if (A && B) { applyStack(A, B); if (G.mode === 'machine') { renderTray(); setMachineInfo(); } if (G.mode === 'bar') renderBar(); if (G.mode === 'market') renderMarket(); } }
     else if (b.dataset.dmove) { const i = G.run.jokers.findIndex(j => j.uid === uid); moveJoker(i, i + +b.dataset.dmove); const j = G.run.jokers.find(x => x.uid === uid); if (j) openDetail(j, 'rack'); }
   });
-  on('#t-play', () => startRun(null));
+  on('#t-play', () => newRunAsk());
   on('#t-cont', () => { const cp = loadCheckpoint(); if (cp) startRun(cp); });
   on('#t-sprev', () => { G.meta.stake = Math.max(0, G.meta.stake - 1); saveMeta(); refreshTitle(); });
   on('#t-snext', () => { G.meta.stake = Math.min(G.meta.stakeMax, G.meta.stake + 1); saveMeta(); refreshTitle(); });
   on('#t-punch', () => openPunch('title'));
   on('#t-cata', () => openCatalog('title'));
-  on('#t-rules', () => openRules());
   on('#t-opts', () => openOptions('title'));
   on('#t-vest', () => openVestiaire());
   on('#t-stats', () => { OPV.tab = 'profil'; openOptions('title'); });
@@ -18902,7 +19201,6 @@ function bindUI() {
   on('#ri-back', () => closeRunInfo());
   $('#runinfo').addEventListener('click', e => { const b = e.target.closest('[data-ritab]'); if (b) { RIV.tab = b.dataset.ritab; Snd.tab(); renderRunInfo(); } });
   on('#pa-resume', () => closePause());
-  on('#pa-rules', () => openRules());
   on('#pa-cata', () => openCatalog('pause'));
   on('#pa-opts', () => openOptions('pause'));
   on('#pa-info', () => openRunInfo());
@@ -18923,6 +19221,15 @@ function bindUI() {
     if (G.mode === 'machine') REEL.r.forEach(R => { if (R.phase === 'idle') { R.h = Math.max(30, R.el.clientHeight / 3 || R.h); placeReel(R); } });
     if (MG.open) mgSize();
   });
+  if (window.ResizeObserver) {
+    let rq = 0, lw = 0, lh = 0;
+    new ResizeObserver(ents => {
+      const r = ents[0] && ents[0].contentRect; if (!r) return;
+      if (Math.round(r.width) === lw && Math.round(r.height) === lh) return;
+      lw = Math.round(r.width); lh = Math.round(r.height);
+      cancelAnimationFrame(rq); rq = requestAnimationFrame(() => resize());
+    }).observe($('#stage'));
+  }
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { if (G.mode === 'combat' && !G.paused && OPT().autopause) openPause(); if (AU.ac) AU.ac.suspend(); }
     else if (AU.ac) AU.ac.resume();
@@ -18968,7 +19275,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { JPM, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
