@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10-202610110006
+JACKPOT DEFENSE v10.1-202610110025
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.1
+- Le bar de Zaza : fini le souffle. Des verres qui trinquent (parfois avec des glaçons) et des gens qui discutent entre eux, de-ci de-là.
+- Chez le Baron : des cartes qu'on bat et qu'on distribue, des jetons et des pièces qui tintent. Les rats ont déménagé au marché noir.
+- Marché noir : la première fois que tu marchandes, le jeu te prévient du risque. Quand l'Inspecteur se vexe, il le dit clairement, un tampon « FERMÉ » apparaît sur ses articles et les boutons affichent « Fermé ».
+- Punch-o-matic : 200 or pour un jeton ULTIME, 300 or pour un MIX ULTIME.
+- Seconde chance : une fois par partie, ta base renaît au lieu de tomber (la moitié de ses PV), et elle repousse les cartes autour d'elle.
+- Collectionneur : un jeton ULTIME de ta machine au départ, puis un autre après chaque boss (il arrive sur le plateau de la machine).
+- Veinard : +1 relance gratuite à chaque tirage, et des rouleaux plus lents.
+- Vendre un jeton : glisse-le hors du rack, vers la table (vers la gauche sur PC, vers le haut sur téléphone). Une zone rouge « VENDRE » montre le prix ; lâche-le dedans.
+- Profils : le bouton « Tout débloquer » est retiré.
 
 Nouveautés de la v10 (étape 3 sur 3)
 - LES CARNETS D'ANATOLE remplacent le Catalogue et la Collection : un seul bouton à l'accueil, avec la tête de Monsieur Anatole (le frère du Baron !). Il te présente ses deux carnets :

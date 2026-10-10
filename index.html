@@ -2678,6 +2678,18 @@ body.lpc .bk-top h2{font-size:30px}
 .ab .abn{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .offer .famp{display:block;margin-top:3px;font-style:normal;color:#c9a8ff}
 .offer .famp b{color:#fff}
+/* v10.1 · vendre en glissant, marché fermé */
+#sellzone{position:fixed;z-index:85;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:16px;background:rgba(224,54,90,.2);border:3px dashed rgba(255,120,140,.85);color:#ffd7dc;font:700 18px/1 var(--f-pix);pointer-events:none;animation:szIn .16s ease-out;transition:background .1s,transform .1s}
+#sellzone.v{flex-direction:column}
+#sellzone b{letter-spacing:.12em}
+#sellzone em{font-style:normal;color:var(--gold)}
+#sellzone .sz-ar{font-size:24px}
+#sellzone.hot{background:rgba(224,54,90,.6);border-style:solid;color:#fff;transform:scale(1.03)}
+@keyframes szIn{from{opacity:0;transform:scale(.96)}}
+.chip.ghost.selling{box-shadow:0 0 0 3px #ff5c7c,0 0 20px #ff5c7c!important}
+#k-offers.closed{position:relative}
+#k-offers.closed::before{content:"FERMÉ";position:absolute;z-index:5;left:50%;top:70px;transform:translateX(-50%) rotate(-10deg);padding:6px 22px;border:5px solid #e0365a;border-radius:10px;color:#ff5c6c;background:rgba(20,13,31,.82);font:700 40px/1 var(--f-pix);letter-spacing:.14em;pointer-events:none;box-shadow:0 6px 0 rgba(0,0,0,.4)}
+#k-offers.closed .offer{opacity:.55}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3300,7 +3312,7 @@ body.lpc .bk-top h2{font-size:30px}
 <section id="punch" class="full" hidden>
   <div class="fi">
     <h2 class="neon violet">RARETÉ SECRÈTE</h2>
-    <p class="pdesc">Chaque jeton cache une 4e capacité. Apporte un jeton <b>ULTIME</b> au <b>Punch-o-matic</b> du marché noir : 300 or, et l'Inspecteur te le rend en <b>rareté secrète</b> pour la partie (+25 % de puissance). Monsieur Anatole garde la trace de chaque secret découvert.</p>
+    <p class="pdesc">Chaque jeton cache une 4e capacité. Apporte un jeton <b>ULTIME</b> au <b>Punch-o-matic</b> du marché noir : 200 or, et l'Inspecteur te le rend en <b>rareté secrète</b> pour la partie (+25 % de puissance). Monsieur Anatole garde la trace de chaque secret découvert.</p>
     <p class="pbal"><b id="p-jet">0</b> / <span id="p-tot">20</span> secrets découverts</p>
     <div class="pgrid" id="p-grid"></div>
     <button class="btn" id="p-back">Retour</button>
@@ -8708,7 +8720,7 @@ const LINES = {
   hello: ["Police ! …Je rigole. Enfin, à moitié. Approche.", "Inspecteur, brigade des jeux. Ce soir je fais des heures sup'. Au noir.", 'Ces jetons ? Pièces à conviction. Saisies ce matin, en vente ce soir.', 'Avance doucement. Les mains bien en vue… sur ton or.', "J'ai arrêté de fumer trois fois aujourd'hui. Record battu.", "Bonsoir. T'as rien vu, t'as rien entendu, mais t'achètes quand même.", 'Mon prénom ? Classé secret défense. Mes prix, eux, sont affichés.'],
   accept: ["D'accord, d'accord. Mais je note ta tête dans mon carnet.", "Prix d'ami. On est amis ? Bah maintenant oui.", 'Tu marchandes comme un avocat. Ça m\'énerve. Vas-y, prends.'],
   refuse: ['Outrage à agent ! Le prix monte de 20 %.', "Marchander avec un flic ? C'est +20 %. C'est la loi. Ma loi.", 'Non. Et je te colle une amende, pour la forme.'],
-  vexed: ['Contrôle terminé. Circulez, y a plus rien à vendre.', "Tu m'as vexé. Le marché est fermé. Pour enquête."],
+  vexed: ['Contrôle terminé. Je ferme boutique. Circulez, y a plus rien à vendre.', "Tu m'as vexé. Le marché est FERMÉ. Pour enquête.", 'Radin ! Je baisse le rideau. Plus rien pour toi ce soir.'],
   buy: ["Excellent choix. Jamais servi. Enfin, pas légalement.", 'Pas de reçu, pas de témoin, pas de problème.', 'Je l\'ai trouvé par terre. Dans un coffre. Fermé à clé.', "Si on te demande, tu l'as gagné à la kermesse."],
   scam: ['Contrefaçon ? J\'ouvre une enquête. Elle sera classée.', 'Hé hé… scellé cassé, pas remboursé.'],
   scamSlot: ['Bon… pour me faire pardonner, je t\'ajoute une place sur ta table. On est quittes.'],
@@ -8722,7 +8734,7 @@ const LINES = {
   hint: ['Mon prénom ? Achète encore un peu, et peut-être…', 'Tu veux mon prénom ? Ça se mérite. Ça s\'achète, surtout.'],
   name: ['Bon. Entre nous… je m\'appelle Gontran. Tu le répètes, je t\'embarque.'],
   named: ['Chut. Personne ne doit savoir pour Gontran.', 'Gontran ? Connais pas. Achète.'],
-  punchOffer: ["Tu vois la machine au fond ? Le Punch-o-matic. Saisie chez un horloger fou. 300 or, et ton ultime ressort en rareté secrète. Pour la partie, hein. Rien n'est éternel.", "Psst. Ton jeton ultime s'ennuie. Ma machine peut le réveiller : rareté secrète, 300 or. Pas de facture, pas de garantie après la partie."],
+  punchOffer: ["Tu vois la machine au fond ? Le Punch-o-matic. Saisie chez un horloger fou. 200 or, et ton ultime ressort en rareté secrète. Pour la partie, hein. Rien n'est éternel.", "Psst. Ton jeton ultime s'ennuie. Ma machine peut le réveiller : rareté secrète, 200 or. Pas de facture, pas de garantie après la partie."],
   punchPick: ['Montre-moi ton plus beau jeton. Un ULTIME, sinon la machine le recrache. Avec tes doigts.', 'Choisis bien. Elle a faim, et elle mord pas deux fois.', 'Un ultime. Pose-le là. Et ne regarde pas les traces de dents.'],
   punchSure: ['Bon choix. Enfin… choix. Tu confirmes ?', 'Celui-là ? La machine l\'aime déjà. Tu confirmes ?', 'Il va revenir différent. Meilleur. Probablement.'],
   punchNotUlt: ['Ça ? C\'est pas un ultime. La machine accepte pas la petite monnaie.', 'Reviens quand il sera ULTIME. Empile, souffre, puis paie-moi.', 'Trop petit. La dernière fois qu\'on a mis un commun là-dedans, il est ressorti en poussière.'],
@@ -8733,7 +8745,7 @@ const LINES = {
   punchFake: ['C\'est un faux. Je le sais, c\'est moi qui te l\'ai vendu.', 'Une contrefaçon dans MA machine ? Tu veux me faire arrêter ?'],
   punchAlready: ['Il est déjà secret. Tu veux quoi, un secret au carré ?', 'Déjà passé à la machine. Deux fois, ça le rend juste… bizarre.'],
   punchStolen: ['Ce jeton est confisqué. Même par moi, c\'est dire.'],
-  punchBroke: ['300 or. Pas 299. La machine a des principes, contrairement à moi.', 'Pas de 300 ? Pas de rareté secrète. La machine fait pas crédit, moi non plus.'],
+  punchBroke: ['200 or. Pas 199. La machine a des principes, contrairement à moi.', 'Pas de 200 ? Pas de rareté secrète. La machine fait pas crédit, moi non plus.'],
   punchNone: ['T\'as aucun jeton ultime, ni de mix ultime. Elle va pas tourner pour tes communs.', 'Rien d\'ultime dans ton rack. Monte un jeton au niveau 3 et reviens.'],
   punchCancel: ['Tu te dégonfles ? Elle, elle garde rancune.', 'Comme tu veux. Elle avait faim, pourtant.'],
   punchGo: ['Et hop, dans la bouche. Si ça fume, c\'est normal. Je crois.', 'On n\'ouvre pas pendant le cycle. Ni après, d\'ailleurs.', 'Recule. Elle crache, des fois.'],
@@ -9385,7 +9397,7 @@ const haptic = ms => { if (G.headless) return; try { if (navigator.vibrate) navi
 const Amb = (() => {
   const L = {}, want = {};
   const BASE = { wind: .5, fire: .45, fog: .4, crowd: .26, casino: 1, drip: .5, elec: .32, hum: .1 };
-  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0, crackE = 0, nextCoin = 0, nextMur = 0, nextRat = 0, nextBall = 0;
+  let nextClink = 0, nextLaugh = 0, nextJingle = 0, nextDrip = 0, crackT = 0, crackE = 0, nextCoin = 0, nextMur = 0, nextRat = 0, nextBall = 0, nextChat = 0, nextCard = 0;
   function noiseSrc(ac) { const s = ac.createBufferSource(); s.buffer = AU.nbuf; s.loop = true; s.start(ac.currentTime, Math.random() * .9); return s; }
   function lfo(ac, f, depth, param, nodes) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = f; g.gain.value = depth; o.connect(g); g.connect(param); o.start(); nodes.push(o); return o; }
   function make(name) {
@@ -9465,6 +9477,41 @@ const Amb = (() => {
   // chez Nox : la bille de la roulette (elle roule, ralentit, puis saute de case en case)
   const rball = (lv) => ev((ac, out) => { const t = ac.currentTime, d = panOut(ac, out, arnd(-.5, .5)), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.setValueAtTime(2400, t); f.frequency.exponentialRampToValueAtTime(800, t + 1.6); f.Q.value = 3.5; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.035 * lv, t + .15); g.gain.exponentialRampToValueAtTime(.0001, t + 1.7); s.connect(f); f.connect(g); g.connect(d); s.start(t, Math.random() * .5); s.stop(t + 1.75);
     let tt = t + 1.35, gap = .06; for (let i = 0; i < 7; i++) { const o2 = ac.createOscillator(), g2 = ac.createGain(); o2.type = 'triangle'; o2.frequency.value = arnd(1500, 2100); g2.gain.setValueAtTime(.0001, tt); g2.gain.exponentialRampToValueAtTime(.05 * lv * (1 - i / 9), tt + .003); g2.gain.exponentialRampToValueAtTime(.0001, tt + .03); o2.connect(g2); g2.connect(d); o2.start(tt); o2.stop(tt + .04); tt += gap; gap *= 1.33; } });
+  const roomy = (ac, d, out) => { if (AU.verbS && d !== out) d.connect(AU.verbS); return d; };
+  // deux verres qui trinquent (tchin !), parfois deux fois, parfois avec des glaçons
+  const cheers = (lv) => ev((ac, out) => {
+    const t = ac.currentTime, d = roomy(ac, panOut(ac, out, arnd(-.85, .85)), out), n = Math.random() < .35 ? 2 : 1, f0 = arnd(1900, 3300);
+    for (let k = 0; k < n; k++) {
+      const tt = t + k * arnd(.09, .16), f = f0 * arnd(.97, 1.03);
+      for (const [m, a, dc] of [[1, 1, .9], [2.32, .5, .55], [4.25, .25, .35], [6.1, .12, .2]]) { const o2 = ac.createOscillator(), g = ac.createGain(); o2.type = 'sine'; o2.frequency.value = f * m; g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.026 * lv * a, tt + .003); g.gain.exponentialRampToValueAtTime(.0001, tt + dc); o2.connect(g); g.connect(d); o2.start(tt); o2.stop(tt + dc + .05); }
+      const s = ac.createBufferSource(), hp = ac.createBiquadFilter(), g2 = ac.createGain(); s.buffer = AU.nbuf; hp.type = 'highpass'; hp.frequency.value = 3500; g2.gain.setValueAtTime(.025 * lv, tt); g2.gain.exponentialRampToValueAtTime(.0001, tt + .015); s.connect(hp); hp.connect(g2); g2.connect(d); s.start(tt, Math.random() * .5); s.stop(tt + .02);
+    }
+    if (Math.random() < .4) for (let i = 0; i < 4; i++) { const tt = t + .25 + i * arnd(.05, .11), o3 = ac.createOscillator(), g3 = ac.createGain(); o3.type = 'triangle'; o3.frequency.value = arnd(4200, 6200); g3.gain.setValueAtTime(.0001, tt); g3.gain.exponentialRampToValueAtTime(.007 * lv, tt + .002); g3.gain.exponentialRampToValueAtTime(.0001, tt + .05); o3.connect(g3); g3.connect(d); o3.start(tt); o3.stop(tt + .06); }
+  });
+  // des gens qui discutent entre eux (des voix étouffées, et parfois une réponse)
+  const TALK = ['et là, il me dit…', 'non mais attends', 'tu rigoles ?', 'santé !', 'encore une ?', 'il a tout misé, tout !', 'c\'est ma tournée', 't\'as vu le Baron ?', 'pas croyable', 'je te jure', 'allez, une dernière', 'qui c\'est, celui-là ?', 'trois cerises, trois !', 'elle est bonne, celle-là', 'tu me dois dix balles', 'à la tienne !', 'mais non, mais non', 'raconte, raconte'];
+  const TALKV = ['zaza', 'dealer', 'valet', 'roi', 'dame', 'dina', 'momo', 'anatole'];
+  const chat = (lv) => ev((ac, out) => {
+    const lp = ac.createBiquadFilter(), g = ac.createGain(), d = roomy(ac, panOut(ac, out, arnd(-.9, .9)), out);
+    lp.type = 'lowpass'; lp.frequency.value = arnd(1300, 1900); g.gain.value = arnd(.15, .24) * lv; lp.connect(g); g.connect(d);
+    const v1 = apick(TALKV); speak(ac, lp, AU.nbuf, v1, apick(TALK), ac.currentTime + .02);
+    if (Math.random() < .55) speak(ac, lp, AU.nbuf, apick(TALKV.filter(v => v !== v1)), apick(TALK), ac.currentTime + arnd(1.1, 1.8));
+    setTimeout(() => { try { g.disconnect(); } catch (e) { /* rien */ } }, 6000);
+  });
+  // chez le Baron : on bat les cartes, on les distribue, on empile des jetons
+  const riffle = (lv) => ev((ac, out) => {
+    const t = ac.currentTime, d = panOut(ac, out, arnd(-.5, .5)), n = Math.floor(arnd(24, 34));
+    for (let i = 0; i < n; i++) { const q = i / n, tt = t + .5 * Math.pow(q, .85) + arnd(0, .006), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.value = arnd(2600, 4800); f.Q.value = 1.8; g.gain.setValueAtTime(.05 * lv * (.5 + .5 * Math.sin(q * Math.PI)), tt); g.gain.exponentialRampToValueAtTime(.0001, tt + .012); s.connect(f); f.connect(g); g.connect(d); s.start(tt, Math.random() * .5); s.stop(tt + .016); }
+    const tt = t + .62, s2 = ac.createBufferSource(), f2 = ac.createBiquadFilter(), g2 = ac.createGain(); s2.buffer = AU.nbuf; f2.type = 'lowpass'; f2.frequency.value = 900; g2.gain.setValueAtTime(.08 * lv, tt); g2.gain.exponentialRampToValueAtTime(.0001, tt + .05); s2.connect(f2); f2.connect(g2); g2.connect(d); s2.start(tt, Math.random() * .5); s2.stop(tt + .06);
+  });
+  const dealCards = (lv) => ev((ac, out) => {
+    const t = ac.currentTime, d = panOut(ac, out, arnd(-.7, .7)), n = Math.floor(arnd(2, 6));
+    for (let i = 0; i < n; i++) { const tt = t + i * arnd(.13, .2), s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = AU.nbuf; f.type = 'bandpass'; f.frequency.setValueAtTime(5200, tt); f.frequency.exponentialRampToValueAtTime(1800, tt + .07); f.Q.value = 1.2; g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.06 * lv, tt + .012); g.gain.exponentialRampToValueAtTime(.0001, tt + .08); s.connect(f); f.connect(g); g.connect(d); s.start(tt, Math.random() * .5); s.stop(tt + .09); }
+  });
+  const chipStack = (lv) => ev((ac, out) => {
+    const t = ac.currentTime, d = panOut(ac, out, arnd(-.8, .8)), n = Math.floor(arnd(2, 6));
+    for (let i = 0; i < n; i++) { const tt = t + i * arnd(.06, .11), f = arnd(1700, 2600); for (const [m, a] of [[1, 1], [1.62, .45]]) { const o2 = ac.createOscillator(), g = ac.createGain(); o2.type = 'triangle'; o2.frequency.value = f * m; g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.03 * lv * a, tt + .002); g.gain.exponentialRampToValueAtTime(.0001, tt + .045); o2.connect(g); g.connect(d); o2.start(tt); o2.stop(tt + .05); } }
+  });
   function update(dt) {
     const ac = AU.ac;
     if (!ac || AU.offline || G.headless) return;
@@ -9506,10 +9553,12 @@ const Amb = (() => {
       while (crackE < 0) { crackE += arnd(.04, .35); crackle(.35 + lv * 1.1); }
     }
     const now = performance.now();
-    if (on && want.crowd > 0) {
-      if (now > nextClink) { if (nextClink) glass(want.crowd); nextClink = now + arnd(1800, 5200); }
-      if (now > nextLaugh) { if (nextLaugh && want.crowd >= 1) laugh(want.crowd); nextLaugh = now + arnd(7000, 16000); }
-    }
+    if (on && want.pub > 0) {
+      if (now > nextClink) { if (nextClink) cheers(want.pub); nextClink = now + arnd(1400, 4200); }
+      if (now > nextChat) { if (nextChat) chat(want.pub); nextChat = now + arnd(1700, 3800); }
+      if (now > nextLaugh) { if (nextLaugh) laugh(want.pub * .8); nextLaugh = now + arnd(8000, 17000); }
+    } else { nextChat = 0; }
+    if (on && want.cards > 0) { if (now > nextCard) { if (nextCard) { const r = Math.random(); if (r < .35) riffle(want.cards); else if (r < .7) dealCards(want.cards); else chipStack(want.cards); } nextCard = now + arnd(1800, 4500); } } else nextCard = 0;
     if (on && want.casino > 0) { if (now > nextJingle) { if (nextJingle) jingle(); nextJingle = now + arnd(5000, 11000); } }
     if (on && want.drip > 0) { if (now > nextDrip) { if (nextDrip) drip(); nextDrip = now + arnd(900, 3800); } }
     if (on && want.coins > 0) { if (now > nextCoin) { if (nextCoin) coins(want.coins); nextCoin = now + arnd(2600, 7000); } } else nextCoin = 0;
@@ -13620,11 +13669,25 @@ function renderRack() {
   }
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
-  setTxt('#r-hint', G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ordre, ou empile' : 'touche un jeton pour le détail');
+  setTxt('#r-hint', G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ranger, empiler, vendre' : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
 let drag = null;
+// la zone de vente : à gauche du rack sur PC, au-dessus sur téléphone (toujours « hors du rack », vers la table)
+function showSellZone(j) {
+  if (!j || !canReorder() || (G.mode === 'market' && (MK.punching || MK.pmSel != null))) return;
+  let z = $('#sellzone');
+  if (!z) { z = document.createElement('div'); z.id = 'sellzone'; z.hidden = true; document.body.appendChild(z); }
+  const rr = $('#rack-slots').getBoundingClientRect(), vert = rr.height > rr.width;
+  if (vert) Object.assign(z.style, { left: Math.max(6, rr.left - 196) + 'px', top: rr.top + 'px', width: '176px', height: rr.height + 'px' });
+  else Object.assign(z.style, { left: rr.left + 'px', top: Math.max(6, rr.top - 132) + 'px', width: rr.width + 'px', height: '96px' });
+  z.className = vert ? 'v' : 'h';
+  z.innerHTML = `<span class="sz-ar">${vert ? '←' : '↑'}</span><b>VENDRE</b><em>+${sellValue(j)} or</em>`;
+  z.hidden = false;
+}
+function sellZoneHit(x, y) { const z = $('#sellzone'); if (!z || z.hidden) return false; const r = z.getBoundingClientRect(); return x >= r.left - 8 && x <= r.right + 8 && y >= r.top - 8 && y <= r.bottom + 8; }
+function hideSellZone() { const z = $('#sellzone'); if (z) { z.hidden = true; z.classList.remove('hot'); } }
 function rackDown(e) {
   const btn = e.target.closest('.slot[data-i]');
   if (!btn || !G.run) return;
@@ -13653,6 +13716,7 @@ function rackMove(e) {
     Object.assign(g.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
     document.body.appendChild(g); drag.ghost = g; drag.w = r.width;
     drag.el.classList.add('dragging'); Snd.chipPick(); hideJTip();
+    showSellZone(G.run.jokers[drag.i]);
     const B = G.run.jokers[drag.i];
     G.run.jokers.forEach((A, k) => { if (k !== drag.i && stackResult(A, B)) { const s = $(`#rack-slots .slot[data-i="${k}"]`); if (s) s.classList.add('canstack'); } });
   }
@@ -13662,6 +13726,9 @@ function rackMove(e) {
     let mode = 'move', target = null;
     if (s && +s.dataset.i !== drag.i && run.jokers[+s.dataset.i] && stackResult(run.jokers[+s.dataset.i], run.jokers[drag.i])) { mode = 'stack'; target = s; }
     else target = nearestSlot(e.clientX, e.clientY);
+    if (sellZoneHit(e.clientX, e.clientY)) { mode = 'sell'; target = null; }
+    const sz = $('#sellzone'); if (sz) sz.classList.toggle('hot', mode === 'sell');
+    drag.ghost.classList.toggle('selling', mode === 'sell');
     if (drag.over && (drag.over !== target || drag.mode !== mode)) drag.over.classList.remove('drop', 'stackto');
     drag.over = target; drag.mode = mode;
     if (target) target.classList.add(mode === 'stack' ? 'stackto' : 'drop');
@@ -13690,7 +13757,9 @@ function rackUp(e) {
   d.el.classList.remove('dragging');
   $$('#rack-slots .canstack').forEach(s => s.classList.remove('canstack'));
   if (d.over) d.over.classList.remove('drop', 'stackto');
+  hideSellZone();
   const run = G.run;
+  if (d.on && d.mode === 'sell') { const j = run.jokers[d.i]; if (j && canReorder()) sellJoker(j.uid); return; }
   if (!d.on) {
     const j = run.jokers[d.i]; if (!j) return;
     if (G.mode === 'poker' && PK.replacing) { hideJTip(); pokerReplace(j.uid); return; }
@@ -13739,7 +13808,7 @@ function openDetail(j, where) {
     h += `<div class="dpart"><h4>${iconSVG(pt.t, 'dic')} ${def.name}<span>niveau ${sec ? 'secret' : LV_NAME[Math.min(3, pt.lv) - 1].toLowerCase()}</span>${sec ? `<em>Rareté secrète +25${NB}%</em>` : ''}</h4><ol class="caps">`;
     for (let k = 0; k < 4; k++) {
       if (k < 3) h += `<li class="${pt.lv > k ? 'on' : 'off'}"><b>${LV_NAME[k]}</b><span>${def.caps[k](T)}</span></li>`;
-      else h += `<li class="secret${sec ? ' on' : known ? '' : ' off'}"><b>Rareté secrète</b><span>${sec ? def.caps[3](T) : known ? def.caps[3](T * 1.25) + ' <i class="sechow">(passe-le ULTIME au Punch-o-matic du marché noir : rareté secrète pour la partie)</i>' : '??? Passe ce jeton ULTIME au <b>Punch-o-matic</b> du marché noir (300 or) pour découvrir sa rareté secrète.'}</span></li>`;
+      else h += `<li class="secret${sec ? ' on' : known ? '' : ' off'}"><b>Rareté secrète</b><span>${sec ? def.caps[3](T) : known ? def.caps[3](T * 1.25) + ' <i class="sechow">(passe-le ULTIME au Punch-o-matic du marché noir : rareté secrète pour la partie)</i>' : '??? Passe ce jeton ULTIME au <b>Punch-o-matic</b> du marché noir (' + punchPrice({ kind: 'ultime' }) + ' or) pour découvrir sa rareté secrète.'}</span></li>`;
     }
     h += '</ol>';
     const bp = BP[def.bp];
@@ -13868,13 +13937,13 @@ const DECKS = [
   { id: 'coffre', name: 'Coffre-fort', icon: 'banquier', col: '#ffcc4d', txt: '200 pièces dès le départ.' },
   { id: 'pack', name: 'Pack fou', icon: 'cartes', col: '#39ff88', txt: 'Tu ouvres un pack surprise : 2 jetons fous.' },
   { id: 'inspecteur', name: "L'ami de l'Inspecteur", icon: 'chapeau', col: '#d9a35b', txt: 'Ton 1er marché noir : 3 articles offerts.' },
-  { id: 'seconde', name: 'Seconde chance', icon: 'heart', col: '#ff5c7c', txt: 'Ta base tombe ? Tu rejoues la manche. Une seule fois.' },
+  { id: 'seconde', name: 'Seconde chance', icon: 'heart', col: '#ff5c7c', txt: `Une fois par partie, ta base renaît au lieu de tomber (50${NB}% de ses PV).` },
   { id: 'sorts', name: 'Sorcier', icon: 'occulte', col: '#a98bff', txt: 'Tu choisis tes 2 sorts de départ.' },
   { id: 'barman', name: 'Barman', icon: 'bar', col: '#ff9a3d', txt: `Boissons et shots 30${NB}% moins chers.` },
   { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +50${NB}% de dégâts.` },
-  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: 'Un jeton ULTIME de ta machine dès le départ.' },
+  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: 'Un jeton ULTIME de ta machine dès le départ, puis un autre après chaque boss.' },
   { id: 'xxl', name: 'Rack XXL', icon: 'etage', col: '#5fd68a', txt: '7 places de jetons, mais 30 PV de moins.' },
-  { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage.' },
+  { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage, et des rouleaux plus lents.' },
 ];
 const deckById = id => DECKS.find(d => d.id === id) || DECKS[0];
 const hasDeck = (run, id) => !!run && run.deck === id;
@@ -13892,6 +13961,10 @@ function deckAfterMachine(next) {
   if (hasDeck(run, 'pack')) openGift('pack', next);
   else if (hasDeck(run, 'collec')) openGift('collec', next);
   else next();
+}
+function deckAfterJPM(o) {
+  if (hasDeck(G.run, 'collec')) openGift('collec', list => openMachine(Object.assign({}, o, { gift: list })), true);
+  else openMachine(o);
 }
 function deckGiftList(kind, run) {
   if (kind === 'pack') {
@@ -13912,21 +13985,28 @@ function deckMarketGifts(offers, run) {
   for (const o of shuffle(can).slice(0, 3)) Object.assign(o, { price: 0, gift: true, haggled: true });
   return Math.min(3, can.length);
 }
-// seconde chance : la manche recommence, avec les PV du début de la manche
+// seconde chance : une fois par partie, la base renaît (la moitié de ses PV) et repousse les cartes
 function deckSecond() {
   const run = G.run, cb = G.cb;
   if (!hasDeck(run, 'seconde') || run.secondUsed) return false;
   run.secondUsed = true;
-  run.hp = Math.max(1, cb.saveHp || run.maxHp * .5);
-  run.pendingMalus = (cb.saveMalus || []).slice(); run.pendingSkulls = cb.saveSkulls || 0;
-  run.round--;
-  cb.ended = true;
-  if (G.headless) { cb.saveRestart = true; return true; }
-  cb.flash = .45; cb.flashCol = '255,92,124'; shake(8); haptic(120);
-  burst(0, 0, '#ff5c7c', 30, 50, 1.6, .8); burst(0, 0, '#fff3e6', 16, 36, 1.2, .7);
-  banner('SECONDE CHANCE', 'ta base se relève : la manche recommence', 'good', 2);
-  Snd.revive(); setTimeout(() => Snd.round(), 600);
-  setTimeout(() => { if (G.mode === 'combat' || G.mode === 'dying') startNextRound(); }, 1700);
+  run.hp = Math.max(1, Math.round(run.maxHp * .5));
+  cb.invuln = Math.max(cb.invuln || 0, 2);
+  for (const e of cb.enemies) {
+    if (e.dead || e.ai === 'decoy') continue;
+    const d = Math.hypot(e.x, e.y) || 1; if (d > 80) continue;
+    if (!e.boss) { e.kbx += e.x / d * 220; e.kby += e.y / d * 220; }
+    e.stunT = Math.max(e.stunT, e.boss ? .6 : 1.6);
+  }
+  for (const p of cb.eshots) if (!p.friendly) p.life = 0;
+  if (G.headless) return true;
+  cb.flash = .5; cb.flashCol = '255,92,124'; shake(8); haptic(120);
+  fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: 90, col: '255,92,124', life: .7, max: .7 });
+  fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: 60, col: '255,243,230', life: .5, max: .5 });
+  burst(0, 0, '#ff5c7c', 34, 60, 1.6, .8); burst(0, 0, '#fff3e6', 18, 40, 1.2, .7);
+  banner('SECONDE CHANCE', 'ta base renaît !', 'good', 1.8);
+  Snd.revive();
+  renderRack(); updateHUD();
   return true;
 }
 // une ligne pour le panneau et les infos de la partie
@@ -14065,12 +14145,13 @@ function giftCap(j) {
   if (j.kind === 'fou') return esc(J.txt || '');
   try { return J.caps[0](j.p * secPow(j)); } catch (e) { return esc(J.txt || ''); }
 }
-function openGift(kind, then) {
+function openGift(kind, then, toTray) {
   const run = G.run, pack = kind === 'pack';
-  Object.assign(GF, { kind, then, list: deckGiftList(kind, run), st: 'closed' });
+  Object.assign(GF, { kind, then, toTray: !!toTray, list: deckGiftList(kind, run), st: 'closed' });
   G.mode = 'chooser';
   setTxt('#gf-t', pack ? 'PACK FOU' : 'LE COLLECTIONNEUR');
   setTxt('#gf-s', pack ? 'Touche le pack pour l\'ouvrir.' : 'Une pièce de la collection d\'Anatole. Touche pour ouvrir.');
+  setTxt('#gf-ok', toTray ? 'Sur le plateau de la machine' : 'Dans mon rack !');
   $('#gf-t').className = 'gf-t ' + (pack ? 'fou' : 'or');
   $('#gf-stage').innerHTML = `<button class="gf-pack ${pack ? 'p-fou' : 'p-or'}" data-gf="open" aria-label="Ouvrir">
       <span class="gfp-top"></span>
@@ -14099,9 +14180,10 @@ function gfOpen() {
 function gfOk() {
   if (GF.st !== 'open') return;
   GF.st = 'off';
-  giveDeckJokers(GF.list);
+  const list = GF.list;
+  if (!GF.toTray) giveDeckJokers(list);
   show('#gift', false); renderRack(); updateHUD(); Snd.coin(); haptic(20);
-  const fn = GF.then; GF.then = null; if (fn) fn();
+  const fn = GF.then; GF.then = null; if (fn) fn(list);
 }
 function gfClick(e) {
   const b = e.target.closest('[data-gf],[data-gfi]'); if (!b) return;
@@ -14169,7 +14251,7 @@ function renderProfiles() {
     h += `<div class="pr-stats"><div><b>${fmtS(P.wins)}</b><small>victoire${P.wins > 1 ? 's' : ''}</small></div><div><b>${fmtS(P.runs)}</b><small>partie${P.runs > 1 ? 's' : ''}</small></div><div><b>${P.best ? roundLabel(P.best) : '—'}</b><small>record</small></div></div>`;
     if (cp) h += `<p class="pr-run">Partie en cours : manche ${roundLabel(cp.run.round + 1)}${cp.run.deck ? ' · ' + esc(deckById(cp.run.deck).name) : ''}</p>`;
     h += `<div class="pr-acts">${cur ? '<p class="pr-curb">✓ PROFIL ACTUEL</p>' : '<button class="btn big gold" data-pr="use">JOUER SUR CE PROFIL</button>'}
-      <div class="pr-row">${cur ? '<button class="btn ghost small" data-pr="records">Records et sauvegarde</button><button class="btn ghost small" data-pr="unlock">Tout débloquer</button>' : ''}<button class="btn ghost small pr-del" data-pr="del">Effacer</button></div></div>`;
+      <div class="pr-row">${cur ? '<button class="btn ghost small" data-pr="records">Records et sauvegarde</button>' : ''}<button class="btn ghost small pr-del" data-pr="del">Effacer</button></div></div>`;
   }
   $('#pr-body').innerHTML = h;
 }
@@ -14549,7 +14631,7 @@ function bkPinHTML(c, id) {
   if (c === 'S') {
     const J = JK[id];
     if (!I.ok && !catHas('j', id)) return `<div class="bkn-h"><span class="bk-art lk">${I.art}${scribbleSVG(5)}</span><h3>???</h3></div><p>Trouvez d'abord ce jeton à la machine.</p>`;
-    return `<div class="bkn-h"><span class="bk-art">${I.art}</span><h3>${esc(J.name)}</h3></div><p class="cd-sub">Rareté secrète</p>` + (I.ok ? `<p>${J.caps[3](1.25)}</p><p class="bkn-small">Au Punch-o-matic, ce secret dure jusqu'à la fin de la partie.</p>` : `<p>??? Passez <b>${esc(J.name)}</b> ULTIME au Punch-o-matic du marché noir (300 or) pour découvrir son secret.</p>`);
+    return `<div class="bkn-h"><span class="bk-art">${I.art}</span><h3>${esc(J.name)}</h3></div><p class="cd-sub">Rareté secrète</p>` + (I.ok ? `<p>${J.caps[3](1.25)}</p><p class="bkn-small">Au Punch-o-matic, ce secret dure jusqu'à la fin de la partie.</p>` : `<p>??? Passez <b>${esc(J.name)}</b> ULTIME au Punch-o-matic du marché noir (${punchPrice({ kind: 'ultime' })} or) pour découvrir son secret.</p>`);
   }
   if (c === 'T' || c === 'F') {
     const J = JK[id];
@@ -15029,7 +15111,7 @@ function reelSpeedFor(nSpin, R) {
   const h = M.horl || 0, sab = M.sablier || 0, mi = (G.run && G.run.machine) || 0;
   let acc = REEL_ACC[h][3 - clamp(nSpin, 1, 3)];
   if (mi === 3 || (sab >= 3 && nSpin === 1)) acc = 1;
-  let v = BAL.spinV * [1, .92, .85, .78, .45][h] * acc * [1, .8, .7, .6][sab];
+  let v = BAL.spinV * [1, .92, .85, .78, .45][h] * acc * [1, .8, .7, .6][sab] * (hasDeck(G.run, 'veinard') ? .78 : 1);
   if (R && mi === 1 && REEL.r.indexOf(R) === M.drown) v *= .5;
   return v;
 }
@@ -15317,6 +15399,7 @@ function openMachine(o) {
   document.body.classList.remove('combat');
   setTimeout(() => el.classList.remove('rising'), 1150);
   if (o.reward) setTimeout(() => addToTray([o.reward], o.reward.kind === 'ultime' ? 'Dévastateur survécu : jeton ULTIME offert !' : 'Malus méchant survécu : jeton RARE offert !'), 1000);
+  if (o.gift && o.gift.length) setTimeout(() => addToTray(o.gift, 'Le cadeau du collectionneur : un jeton ULTIME !'), o.reward ? 1600 : 1000);
   if (seenOnce('machine9')) setTimeout(() => queueTip(TIPS.machine), 1250);
   if (G.dev.auto) setTimeout(autoMachine, 1300);
 }
@@ -15761,7 +15844,7 @@ const ITEMS = {
   soin: { name: 'Trousse de secours', icon: 'heart', txt: `Soigne 40${NB}% des PV de ta base.`, price: 40 },
   rateau: { name: 'Flipper doré', icon: 'croupier', txt: '+1 de solidité au flipper pour toute la partie (max +2).', price: 55 },
 };
-const PUNCH_PRICE = 300, PUNCH_MIX = 500;
+const PUNCH_PRICE = 200, PUNCH_MIX = 300;
 // un mix ultime : ses deux jetons au niveau ULTIME
 const mixUlt = j => !!j && j.kind === 'mix' && j.parts.length > 1 && j.parts.every(p => p.lv >= 3);
 const punchPrice = j => Math.round((j && j.kind === 'mix' ? PUNCH_MIX : PUNCH_PRICE) * priceMul());
@@ -15784,7 +15867,7 @@ function genMarket() {
   offers.push({ type: 'punch', price: punchPrice({ kind: 'ultime' }), haggled: true, sold: false });
   return offers;
 }
-function say(t) { typeInto('#k-say', t, 'dealer'); }
+function say(t, force) { if (MK.gone && !force && G.mode === 'market') return; typeInto('#k-say', t, 'dealer'); }
 // l'Inspecteur réagit : il fait tourner son revolver, soulève son chapeau, ou s'énerve
 function inspAct(cls, ms) {
   const f = $('#dealer-fig'); if (!f || G.reduced) return;
@@ -15818,10 +15901,11 @@ function topCap(j) { const pt = j.parts[0], n = Math.min(3, pt.lv) - 1; return J
 function renderMarket() {
   const run = G.run, free = freeSlots();
   $('#k-gold').textContent = Math.floor(run.gold);
+  $('#k-offers').classList.toggle('closed', !!MK.gone);
   $('#k-offers').innerHTML = MK.offers.map((o, i) => {
     const off = MK.gone || o.sold;
     const hag = `<button class="mini dark" data-hag="${i}" ${off || o.haggled ? 'disabled' : ''}>${o.haggled ? 'Déjà tenté' : 'Marchander'}</button>`;
-    const buyB = (label, block) => o.sold ? `<em>${o.gift ? 'Offert' : 'Vendu'}</em>` : `<button class="mini${o.gift ? ' gift' : ''}" data-buy="${i}" ${off || run.gold < o.price || block ? 'disabled' : ''}>${o.gift ? label.replace(/^\d+ or/, 'OFFERT') : label}</button>${o.gift ? '' : hag}`;
+    const buyB = (label, block) => o.sold ? `<em>${o.gift ? 'Offert' : 'Vendu'}</em>` : `<button class="mini${o.gift ? ' gift' : ''}" data-buy="${i}" ${off || run.gold < o.price || block ? 'disabled' : ''}>${MK.gone ? 'Fermé' : o.gift ? label.replace(/^\d+ or/, 'OFFERT') : label}</button>${o.gift ? '' : hag}`;
     if (o.type === 'slot') return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico" aria-hidden="true">+1</div><div class="otext"><b>Emplacement de jeton</b><span>Ton rack passe de ${run.slots} à ${run.slots + 1} places. C'est la seule place que vend le marché.</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`;
     if (o.type === 'item') { const I = ITEMS[o.id]; return `<div class="offer${o.sold ? ' sold' : ''}"><div class="slotico item" aria-hidden="true">${iconSVG(I.icon)}</div><div class="otext"><b>${I.name}</b><span>${I.txt}</span></div><div class="obuy">${buyB(o.price + ' or')}</div></div>`; }
     if (o.type === 'spell') {
@@ -15848,11 +15932,12 @@ function renderMarket() {
 }
 function haggle(i) {
   const o = MK.offers[i]; if (!o || o.haggled || o.sold || MK.gone) return;
+  if (!(G.meta.seen && G.meta.seen.haggle)) { askConfirm(`Marchander ? L'Inspecteur peut baisser le prix (−25${NB}%), le monter (+20${NB}%)… ou se vexer et <b>fermer boutique</b> pour ce soir.`, 'Marchander', () => { (G.meta.seen || (G.meta.seen = {})).haggle = 1; saveMeta(); haggle(i); }); return; }
   o.haggled = true;
   const r = rnd();
   if (r < .35) { o.price = Math.max(1, Math.round(o.price * .75)); say(pick(LINES.accept)); Snd.coin(); inspAct('tip'); }
   else if (r < .7) { o.price = Math.round(o.price * 1.2); say(pick(LINES.refuse)); Snd.click(); inspAct('spin'); }
-  else { MK.gone = true; say(pick(LINES.vexed)); Snd.malus(); inspAct('angry'); $('#k-leave').textContent = 'Retour au bar'; }
+  else { MK.gone = true; say(pick(LINES.vexed), true); Snd.malus(); inspAct('angry'); $('#k-leave').textContent = 'Retour au bar'; toast('L\'Inspecteur a fermé boutique : plus rien à acheter ce soir.'); }
   renderMarket();
 }
 function buy(i) {
@@ -19868,7 +19953,7 @@ function uiRoundCleared() {
 function chooserDue(run) { return (run.round % 5 === 0 && run.round > 0 && !(run.won && !run.inf)) || G.dev.choose; }
 function openSalon(o) {
   const run = G.run;
-  if (chooserDue(run)) { G.dev.choose = false; openChooser(() => openMachine(o)); }
+  if (chooserDue(run)) { G.dev.choose = false; openChooser(() => deckAfterJPM(o)); }
   else openMachine(o);
 }
 function uiGameOver() {
@@ -20279,6 +20364,7 @@ function simOne(o) {
     if (G.run.won) G.run.inf = true;
     if (res.reward) addJokerSim(res.reward);
     if (chooserDue(G.run) && o.machine == null && rnd() < .4) G.run.machine = irand(0, MACH9.length - 1);
+    if (o.deck === 'collec' && chooserDue(G.run)) addJokerSim(mkJoker('ultime', [{ t: pick(MACH9[G.run.machine || 0].ids), lv: 3 }], 1));
     simMachine(false);
     if (G.run.bugDue) { G.run.bugDue = false; BUGM.g = bugmNext(G.run); BUGM.then = null; simBug(); autoArrange(G.run); }
     const gNight = gamblerDue(G.run);
@@ -20597,13 +20683,15 @@ function frame(t) {
   Amb.set('fire', inCb && cb.fires ? 1 : 0);
   Amb.set('fog', inCb && cb.fog ? 1 : 0);
   const atMach = m === 'machine' || m === 'chooser';
-  Amb.set('crowd', m === 'bar' ? 1 : m === 'poker' ? .35 : m === 'mini' ? .55 : 0);
+  Amb.set('crowd', 0);
+  Amb.set('pub', m === 'bar' ? 1 : m === 'mini' ? .5 : 0);
+  Amb.set('cards', m === 'poker' ? 1 : 0);
   Amb.set('casino', atMach ? 1 : 0);
   Amb.set('hum', atMach ? 1 : 0);
-  Amb.set('coins', m === 'bar' ? 1 : atMach ? .55 : 0);
+  Amb.set('coins', m === 'poker' ? .8 : atMach ? .55 : 0);
   Amb.set('drip', m === 'market' ? 1 : 0);
-  Amb.set('murmur', m === 'market' ? 1 : 0);
-  Amb.set('rats', m === 'poker' ? 1 : 0);
+  Amb.set('murmur', m === 'market' ? .7 : 0);
+  Amb.set('rats', m === 'market' ? 1 : 0);
   Amb.set('ball', m === 'mini' && MG.id === 'nox' ? 1 : 0);
   Amb.update(dt);
   if (G.perf) { const pf2 = performance.now(); G.perf.n++; G.perf.upd += pf1 - pf0; G.perf.rnd += pf2 - pf1; G.perf.maxF = Math.max(G.perf.maxF, pf2 - pf0); G.perf.dts.push(dt); }
