@@ -2764,6 +2764,66 @@ body:not(.lpc) .petrow .po-art .pet-svg{width:46px;height:46px}
 .lp-kit .spill.spet .pet-svg{width:24px;height:24px}
 .ri-ic.ri-pet{padding:0;border-radius:50%;background:rgba(14,9,24,.7);overflow:visible}
 .ri-ic.ri-pet .pet-svg{width:100%;height:100%}
+/* v10.3 · les pouvoirs en cartes, et tes deux mains */
+#abs.cards{left:0;right:0;bottom:0;top:auto;height:auto;padding:0;display:block;background:none;pointer-events:none}
+body.lpc #abs.cards{height:auto;padding:0;background:linear-gradient(180deg,rgba(12,8,20,0),rgba(12,8,20,.5) 70%)}
+.pc-row{position:relative;height:var(--rh);pointer-events:none}
+.pcard,.pc-slot{position:absolute;width:var(--cw);height:var(--ch)}
+.pcard{z-index:2;margin:0;padding:0;border:0;background:none;font:inherit;pointer-events:auto;cursor:pointer;transform-origin:50% 75%;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.pcard.away{pointer-events:none}
+.pc-face{position:absolute;inset:0;display:block;border-radius:calc(var(--cw) * .14);background:linear-gradient(165deg,#fffbf2 0%,#f6ead4 100%);box-shadow:inset 0 0 0 2px var(--sc),inset 0 0 0 4px #fffbf2,inset 0 0 0 5px color-mix(in srgb,var(--sc) 45%,transparent),0 3px 0 rgba(0,0,0,.5),0 7px 14px rgba(0,0,0,.35);transition:transform .14s ease-out,filter .25s,box-shadow .2s}
+.pc-face::before{content:"";position:absolute;inset:6px 6px auto;height:38%;border-radius:calc(var(--cw) * .1) calc(var(--cw) * .1) 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
+.pc-ico{position:absolute;left:50%;top:45%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;color:var(--sc);background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--sc) 22%,#fff),color-mix(in srgb,var(--sc) 38%,#2a1d33));box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--sc) 70%,#120a1c)}
+.pcard .pc-ico{color:#fff;filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))}
+.pc-ico .ico{width:66%;height:66%}
+.pc-k,.pc-k2{position:absolute;z-index:2;font:700 11px/1 var(--f-pix);font-style:normal;color:#3a2440}
+.pc-k{left:5px;top:4px}
+.pc-k2{right:5px;bottom:14px;transform:rotate(180deg);opacity:.55}
+.pc-n{position:absolute;left:4px;right:4px;bottom:4px;padding:2px 1px 1px;border-radius:4px;background:var(--sc);color:#160c20;font:700 8.5px/1.1 var(--f-pix);text-align:center;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .abt{display:none}
+.pcard .abp{position:absolute;top:-7px;right:-6px;z-index:3;padding:1px 5px;border-radius:7px;background:var(--sc);color:#120a1c;font:700 11px/1.25 var(--f-pix);font-style:normal;box-shadow:0 0 0 2px #120a1c}
+.pcard .abc{position:absolute;top:-7px;right:-6px;z-index:3;min-width:20px;height:18px;padding:0 4px;border-radius:6px;background:var(--ink);box-shadow:0 0 0 2px #dfe6f2;font:700 11px/18px var(--f-pix);font-style:normal;color:#dfe6f2;text-align:center}
+.pcard .abc[hidden]{display:none}
+.pcard.bil .pc-ico{background:radial-gradient(circle at 45% 35%,#4a4064,#1d1630);box-shadow:inset 0 0 0 2px #8d98ad}
+.pcard.bil .pc-n{background:#c3cde0}
+.pcard.bil.out .pc-ico{opacity:.5}
+.pcard.ready .pc-face{box-shadow:inset 0 0 0 2px var(--sc),inset 0 0 0 4px #fffbf2,inset 0 0 0 5px color-mix(in srgb,var(--sc) 45%,transparent),0 3px 0 rgba(0,0,0,.5),0 0 14px color-mix(in srgb,var(--sc) 45%,transparent),0 7px 14px rgba(0,0,0,.35)}
+.pcard.away .pc-face{filter:brightness(.55) saturate(.55);box-shadow:inset 0 0 0 2px var(--sc),inset 0 0 0 4px #fffbf2,0 2px 0 rgba(0,0,0,.5),0 4px 8px rgba(0,0,0,.4)}
+.pcard.aim .pc-face{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px var(--red),0 3px 0 rgba(0,0,0,.5),0 0 18px rgba(255,80,100,.75);animation:pcAimGlow .5s ease-in-out infinite alternate}
+.pcard.bil.aim .pc-face{box-shadow:inset 0 0 0 3px #3fe0e0,inset 0 0 0 5px #fffbf2,0 3px 0 rgba(0,0,0,.5),0 0 18px rgba(63,224,224,.7);animation:none}
+@keyframes pcAimGlow{to{filter:brightness(1.12)}}
+.pcard.sil .pc-face{filter:grayscale(1) brightness(.62)}
+.pcard:active:not(.away) .pc-face{transform:scale(.94)}
+body.lpc .pcard:hover:not(.away):not(.aim) .pc-face{transform:translateY(-6px)}
+.pc-face.press{animation:pcPress .26s ease-out}
+.pc-face.pop{animation:pcPop .45s cubic-bezier(.3,1.6,.5,1)}
+.pc-face.cast{animation:pcPress .3s ease-out}
+@keyframes pcPress{30%{transform:scale(.9,.86)}100%{transform:none}}
+@keyframes pcPop{0%{transform:scale(1)}40%{transform:scale(1.12);filter:brightness(1.25)}100%{transform:none}}
+.pc-slot{z-index:1;border-radius:calc(var(--cw) * .14);border:2px dashed color-mix(in srgb,var(--sc) 50%,transparent);background:rgba(10,6,18,.42);overflow:hidden;pointer-events:none}
+.pc-slot .pc-ico{opacity:.3;background:none;box-shadow:none}
+.pc-slot .pc-fill{position:absolute;left:0;right:0;bottom:0;height:calc((1 - var(--p, 1)) * 100%);background:linear-gradient(0deg,color-mix(in srgb,var(--sc) 42%,transparent),color-mix(in srgb,var(--sc) 18%,transparent))}
+.pc-slot .pc-cd{position:absolute;inset:0;display:grid;place-items:center;font:700 19px/1 var(--f-pix);color:#fff;text-shadow:0 2px 0 #000}
+.pc-pilespot{position:absolute;z-index:0;width:var(--cw);height:var(--ch);border-radius:calc(var(--cw) * .14);border:2px dashed rgba(255,243,230,.14);transform:rotate(8deg) scale(.9);pointer-events:none}
+.pc-hand{position:absolute;z-index:9;width:var(--hw);height:var(--hh);pointer-events:none;transform-origin:50% 30%;will-change:transform}
+.pc-hand .hand-svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));animation:hdIdle 3.4s ease-in-out infinite}
+.pc-hand.r .hand-svg{animation-delay:-1.7s}
+@keyframes hdIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+#abs.cards .ab-fx{display:flex;position:absolute;left:10px;bottom:calc(var(--rh, 100px) + 8px);flex-direction:column;align-items:flex-start;gap:4px;pointer-events:none}
+body.lpc #abs.cards .ab-fx{left:16px;bottom:22px}
+body.lpc .pc-k,body.lpc .pc-k2{font-size:13px}
+body.lpc .pc-k{left:7px;top:6px}
+body.lpc .pc-k2{right:7px;bottom:19px}
+body.lpc .pc-n{left:6px;right:6px;bottom:6px;font-size:10.5px;padding:2px 2px 1px}
+body.lpc .pc-slot .pc-cd{font-size:24px}
+.pcard.bil .pc-k,.pcard.bil .pc-k2{width:7px;height:7px;border-radius:50%;background:#5c5278;font-size:0;opacity:1}
+.pcard.bil .pc-k2{bottom:17px;opacity:.55}
+body.lpc .pcard.bil .pc-k2{bottom:22px}
+/* ce qui se plaçait au ras du bas de la table remonte au-dessus des cartes */
+body:not(.lpc) #statusbar{bottom:114px}
+body:not(.lpc) #tip{bottom:116px}
+body.lpc #tip{bottom:146px}
+@media (prefers-reduced-motion:reduce){.pc-hand .hand-svg,.pc-face{animation:none!important}}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -9271,6 +9331,11 @@ const Snd = (() => {
     postBreak() { noise(.3, .16, 2400, 'highpass', 0, 6000); [1500, 1200, 900].forEach((f, i) => tone(f, .1, 'triangle', .06, f * .6, i * .05)); for (let i = 0; i < 5; i++) clack(.06 + i * .04, .06, arnd(2400, 4000)); },
     floorBreak() { tone(70, .35, 'sine', .28, 40); noise(.55, .24, 900, 'lowpass', 0, 160); for (let i = 0; i < 9; i++) clack(.04 + i * .045 + arnd(0, .02), .08, arnd(2200, 4200)); tone(196, .3, 'sawtooth', .04, 98, .05); },
     armor() { if (th('armor', 90)) { tone(820, .25, 'triangle', .06, 790); tone(1290, .2, 'triangle', .04, 1250); noise(.05, .08, 5000, 'highpass'); } },
+    cardPick(k) { if (!th('cpick', 40)) return; const f = 520 * Math.pow(2, (k || 0) / 6); tone(f, .05, 'sine', .045, f * 1.25); noise(.03, .06, 3800, 'highpass'); },
+    cardSwish() { if (!th('cswish', 60)) return; noise(.18, .085, 2600, 'bandpass', 0, 700, 1.1); noise(.05, .04, 5200, 'highpass', .02); },
+    cardTap() { if (!th('ctap', 60)) return; noise(.035, .07, 1500, 'bandpass', 0, null, 2); tone(170, .06, 'triangle', .05, 120); },
+    cardSweep(n) { for (let i = 0; i < Math.min(5, n); i++) noise(.06, .06, 3000 - i * 300, 'bandpass', i * .055, 1200, 1.4); noise(.22, .07, 2200, 'bandpass', .05, 600, .9); },
+    cardBack(k) { if (!th('cback', 50)) return; noise(.12, .06, 1200, 'bandpass', 0, 3200, 1.2); const f = 660 * Math.pow(2, (k || 0) / 6); tone(f, .07, 'sine', .04, f * 1.5, .1); tone(f * 2, .05, 'sine', .02, null, .14); clack(.12, .06, 2600); },
     petAdopt() { [523, 659, 784, 1046].forEach((f, i) => tone(f, .18, 'p25', .06, null, i * .07, true)); tone(1568, .3, 'sine', .04, null, .3, true); noise(.06, .05, 3000, 'bandpass', .3); },
     marcelSong() { [72, 76, 79, 76, 77, 74, 71, 72].forEach((m, i) => tone(mtof(m), .13, 'p12', .05, null, i * .15)); [48, 55, 50, 55].forEach((m, i) => tone(mtof(m), .22, 'square', .028, null, i * .3)); tone(mtof(84), .32, 'p25', .04, mtof(86), 1.22); },
     revive() { [392, 523, 659, 784, 1046, 1568].forEach((f, i) => tone(f, .3, 'sine', .07, null, i * .06, true)); noise(.8, .1, 400, 'bandpass', 0, 6000, 1); tone(110, .7, 'sawtooth', .05, 220); },
@@ -18812,7 +18877,7 @@ function castSpellP(id) {
   if (ok) { spellFx(id); G.run.stats.spells = (G.run.stats.spells || 0) + 1; disqueRecast(id); if (id !== 'echoS' && G.cb) G.cb.lastSp = id; }
   return ok;
 }
-function spellFx(id) {
+function spellFx0(id) {
   if (G.headless) return;
   const b = $(`#abs .ab[data-sp="${id}"]`); if (!b) return;
   b.classList.remove('cast'); void b.offsetWidth; b.classList.add('cast');
@@ -18887,7 +18952,7 @@ function bounceShot(p) {
   if (!G.headless) { burst(p.x, p.y, '#9fd8ff', 6, 30, .9, .3); Snd.shield(); }
 }
 /* ---------- la barre des sorts ---------- */
-function renderSpellBar() {
+function renderSpellBar0() {
   if (G.headless) return;
   const el = $('#abs'), run = G.run;
   if (!run) { el.innerHTML = ''; return; }
@@ -18903,7 +18968,7 @@ function renderSpellBar() {
   delete hc.bilp; delete hc.bilt; delete hc.bilr; delete hc.bilc;
   for (const k in hc) if (k.startsWith('sp')) delete hc[k];
 }
-function updateAbilities(on) {
+function updateAbilities0(on) {
   const el = $('#abs'), cb = G.cb;
   if (!on) { if (!el.hidden) el.hidden = true; return; }
   if (el.hidden) { el.hidden = false; if (!el.children.length) renderSpellBar(); }
@@ -18939,6 +19004,252 @@ function updateAbilities(on) {
   const st = (cb.luckT > cb.t ? `<span class="abfx luck">${iconSVG('trefle4')}Coup de bol ${Math.ceil(cb.luckT - cb.t)}${NB}s</span>` : '') + (cb.overheat > 0 ? `<span class="abfx hot">${iconSVG('surchauffe')}Surchauffe ${Math.ceil(cb.overheat)}${NB}s</span>` : '') + (cb.invuln > 0 ? `<span class="abfx inv">${iconSVG('rempart')}Bouclier ${Math.ceil(cb.invuln)}${NB}s</span>` : '');
   if (hc.spfx !== st) { hc.spfx = st; fx.innerHTML = st; }
 }
+/* ---------- tes deux mains (vues de dessus, paume à plat), pour pousser les cartes de pouvoir ---------- */
+const HAND_ART = `<g class="hd-sleeve"><path d="M13 82C13 75 18 71 25 71H59C66 71 71 75 71 82L75 130H9Z" fill="#2a2238"/><path d="M59 71C66 71 71 75 71 82L75 130H61Z" fill="#1d1729"/><path d="M22 92H62M18 112H66" stroke="#3a3150" stroke-width="1.4" opacity=".7"/></g>
+  <rect x="17" y="64" width="50" height="12" rx="4" fill="#f4ede4" stroke="#2a1d2a" stroke-width="1.3"/><path d="M19 72H65" stroke="#d8cfc2" stroke-width="1.2"/><circle cx="59" cy="70" r="2.4" fill="#ffcc4d" stroke="#8a5a10" stroke-width=".7"/>
+  <g class="hd-hand" stroke="#3a2030" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M27 58C19 55 11 47 8 38C6.4 33 10 29.6 14.6 32.2C19 34.8 23 41 29 47Z" fill="#f2c39c"/>
+    <rect x="24.6" y="9" width="10.6" height="34" rx="5.3" fill="#f2c39c" transform="rotate(-7 30 26)"/>
+    <rect x="36.2" y="4" width="10.8" height="38" rx="5.4" fill="#f2c39c" transform="rotate(-1.5 41.6 23)"/>
+    <rect x="47.6" y="8" width="10.4" height="34" rx="5.2" fill="#f2c39c" transform="rotate(5 52.8 25)"/>
+    <rect x="58" y="17" width="9" height="27" rx="4.5" fill="#f2c39c" transform="rotate(12 62.5 30)"/>
+    <path d="M22 66C19 57 19 46 22 38C24 33.6 28 32 32 32H59C64 32 67 35 67.4 40C68 49 66.6 58 63.4 66Z" fill="#f2c39c"/>
+  </g>
+  <path d="M27 36Q30 38.6 33.4 36.6M38.4 35.6Q41.8 37.8 45 35.8M49.4 36.4Q52.6 38.4 55.6 36.8M58.8 39Q61.4 40.6 63.6 39.6" stroke="#d99f78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M60 36C64 40 65 52 62.6 62C61 58 60.4 48 60 36Z" fill="#e3ad86" opacity=".55"/>
+  <g fill="#fbe1cc" opacity=".9"><rect x="27.6" y="11" width="5.2" height="5.6" rx="2.2" transform="rotate(-7 30 26)"/><rect x="39" y="6.2" width="5.4" height="5.8" rx="2.3" transform="rotate(-1.5 41.6 23)"/><rect x="50.4" y="10" width="5" height="5.4" rx="2.2" transform="rotate(5 52.8 25)"/><rect x="60.2" y="19" width="4.4" height="4.8" rx="2" transform="rotate(12 62.5 30)"/></g>
+  <path d="M30 44Q31.4 45.6 33 44.4M41 43.4Q42.4 45 44 43.8M51.4 44Q52.8 45.6 54.4 44.4" stroke="#dba27c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".7"/>`;
+function handSVG(side) {
+  return `<svg class="hand-svg" viewBox="0 0 84 130" aria-hidden="true">${side === 'l' ? `<g transform="translate(84 0) scale(-1 1)">${HAND_ART}</g>` : HAND_ART}</svg>`;
+}
+
+/* ================= v10.3 · les pouvoirs en cartes de poker, et tes deux mains =================
+   La BILLE et tes sorts (jusqu'à 5 cartes) sont alignés devant toi. Tes mains reposent devant les cartes.
+   Une carte utilisée : une main se pose à plat dessus et la glisse à droite, sur la pile ; deux cartes en même
+   temps : les deux mains ; trois ou plus : un balayage rapide. Rechargée, la carte revient seule à sa place. */
+const PCG = {
+  tel: { w: 52, h: 73, gap: 6, pile: 14, hw: 58, hh: 90, top: 6, rest: 24, ovl: 11 },
+  pc: { w: 66, h: 93, gap: 10, pile: 20, hw: 80, hh: 124, top: 8, rest: 34, ovl: 14 },
+};
+const PCS = { cards: [], pile: [], q: [], qT: 0, freeAt: 0, lay: null, hands: {}, pc: null, gen: 0 };
+const pcGeo = () => LAY.pc ? PCG.pc : PCG.tel;
+function pcLayout(n) {
+  const g = pcGeo(), rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w, L = -totW / 2;
+  const slot = k => L + k * (g.w + g.gap);
+  const rc = L + rowW / 2, hs = Math.max(g.hw * .62, rowW * .27);
+  return { g, n, rowW, L, slot, pile: L + rowW + g.pile, hand: { l: rc - hs, r: rc + hs }, mid: rc };
+}
+const pcCX = c => PCS.lay.slot(c.k) + PCS.lay.g.w / 2;
+const pcDY = g => -(g.h / 2 - g.ovl + .38 * g.hh);
+function pcPileTf(c, k) { const L = PCS.lay; return `translate(${(L.pile - L.slot(c.k) + 2.5 * k).toFixed(1)}px, ${(4 - 3.5 * k).toFixed(1)}px) rotate(${(8 - 3.2 * k).toFixed(1)}deg) scale(.9)`; }
+const PC_HOME = 'translate(0px, 0px) rotate(0deg) scale(1)';
+// une animation qui part de là où l'élément se trouve vraiment (même au milieu d'une autre)
+function pcAnim(el, frames, o) {
+  if (!el || !el.animate) return null;
+  if (el._pa) { try { el._pa.commitStyles(); } catch (e) { /* pas affiché */ } el._pa.cancel(); el._pa = null; }
+  if (!frames[0].transform) frames[0].transform = el.style.transform || PC_HOME;
+  const a = el.animate(frames, Object.assign({ fill: 'forwards' }, o));
+  el._pa = a;
+  a.addEventListener('finish', () => { try { a.commitStyles(); } catch (e) { el.style.transform = frames[frames.length - 1].transform; } a.cancel(); if (el._pa === a) el._pa = null; });
+  return a;
+}
+function pcCardHTML(id, k, L) {
+  const g = L.g, pos = `left:calc(50% + ${L.slot(k).toFixed(1)}px);top:${g.top}px`;
+  if (id === 'bil') {
+    const key = esc((keysOf('bille')[0] || 'Z').toUpperCase());
+    return `<div class="pc-slot" style="--sc:#dfe6f2;${pos}"><span class="pc-ico">${iconSVG('bille')}</span><i class="pc-fill"></i><b class="pc-cd"></b></div>
+      <button class="pcard bil" id="ab-bil" style="--sc:#dfe6f2;${pos}" aria-label="BILLE : appuie sur ta base et tire en arrière (ou maintiens ${esc(keyHint('bille'))})"><span class="pc-face"><i class="pc-k">${key}</i><i class="abc" hidden></i><span class="pc-ico">${iconSVG('bille')}</span><span class="pc-n abn">BILLE</span><i class="pc-k2">${key}</i><em class="abt"></em></span></button>`;
+  }
+  const P = PSPELLS[id], fp = P.fam ? famPow(G.run, id) : 1;
+  return `<div class="pc-slot" style="--sc:${P.col};${pos}"><span class="pc-ico">${iconSVG(P.icon)}</span><i class="pc-fill"></i><b class="pc-cd"></b></div>
+    <button class="pcard${P.fam ? ' fam' : ''}" data-sp="${id}" style="--sc:${P.col};${pos}" aria-label="${esc(P.name)} (touche ${k}) : ${esc(P.txt)}" title="${esc(P.name)} · ${esc(P.txt)}"><span class="pc-face"><i class="pc-k">${k}</i>${fp > 1 ? `<i class="abp">×${dec(fp)}</i>` : ''}<span class="pc-ico">${iconSVG(P.icon)}</span><span class="pc-n">${esc((P.short || P.name).toUpperCase())}</span><i class="pc-k2">${k}</i></span></button>`;
+}
+function renderSpellBar() {
+  if (G.headless) return;
+  const el = $('#abs'), run = G.run;
+  PCS.gen++; clearTimeout(PCS.qT); PCS.qT = 0; PCS.q = []; PCS.pile = []; PCS.freeAt = 0;
+  if (!run) { el.innerHTML = ''; PCS.cards = []; return; }
+  const list = spellsOf(run), ids = ['bil', ...list], L = pcLayout(ids.length), g = L.g, cb = G.cb;
+  PCS.lay = L; PCS.pc = !!LAY.pc;
+  el.classList.add('cards');
+  el.innerHTML = `<div class="pc-row" style="--cw:${g.w}px;--ch:${g.h}px;--hw:${g.hw}px;--hh:${g.hh}px;--rh:${g.top + g.h + g.rest}px">${ids.map((id, k) => pcCardHTML(id, k, L)).join('')}
+    <div class="pc-pilespot" style="left:calc(50% + ${L.pile.toFixed(1)}px);top:${g.top + 4}px"></div>
+    <div class="pc-hand l" style="left:calc(50% + ${(L.hand.l - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px">${handSVG('l')}</div>
+    <div class="pc-hand r" style="left:calc(50% + ${(L.hand.r - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px">${handSVG('r')}</div></div><div class="ab-fx" id="ab-fx"></div>`;
+  el.dataset.n = list.length;
+  el.style.setProperty('--rh', (g.top + g.h + g.rest) + 'px');
+  PCS.hands = { l: el.querySelector('.pc-hand.l'), r: el.querySelector('.pc-hand.r') };
+  const btns = el.querySelectorAll('.pcard'), slots = el.querySelectorAll('.pc-slot');
+  PCS.cards = ids.map((id, k) => ({ id, k, el: btns[k], slot: slots[k], st: 'in', p: null, t: null, aim: false, sil: false, ch: null }));
+  // ce qui recharge déjà (début de manche : les sorts démarrent à mi-recharge) attend sur la pile
+  if (cb && !cb.demo) for (const c of PCS.cards) if (pcAway(c, cb)) { c.st = 'out'; PCS.pile.push(c); c.el.classList.add('away'); c.el.style.transform = pcPileTf(c, PCS.pile.length - 1); c.el.style.zIndex = 2 + PCS.pile.length; }
+  delete hc.spfx;
+}
+function pcAway(c, cb) {
+  if (c.id === 'bil') { const B = cb.bil; return !!B && Math.max(0, B.charges || 0) <= 0; }
+  return (cb.ab[c.id] || 0) > .05;
+}
+function spellFx(id) {
+  if (G.headless) return;
+  const c = PCS.cards.find(x => x.id === id); if (!c || !c.el) return;
+  const f = c.el.querySelector('.pc-face'); if (!f) return;
+  f.classList.remove('cast'); void f.offsetWidth; f.classList.add('cast');
+}
+function updateAbilities(on) {
+  const el = $('#abs'), cb = G.cb;
+  if (!on) { if (!el.hidden) el.hidden = true; return; }
+  if (el.hidden) { el.hidden = false; if (!el.querySelector('.pc-row')) renderSpellBar(); }
+  if (PCS.pc !== !!LAY.pc) renderSpellBar();
+  const sil = cb.hex.silence > 0;
+  for (const c of PCS.cards) {
+    if (!c.el || !c.el.isConnected) continue;
+    let rem = 0, txt = '', aim = false;
+    if (c.id === 'bil') {
+      const B = cb.bil; if (!B) continue;
+      const max = bilMaxCharges(cb.stats), ch = Math.max(0, B.charges || 0), out = !ch && B.balls && B.balls.some(x => x.main) && !(B.cd > 0);
+      rem = ch > 0 ? 0 : out ? 1 : clamp((B.cd || 0) / (B.max || 1), 0, 1);
+      txt = ch > 0 ? '' : out ? '•••' : B.cd > 0 ? String(Math.ceil(B.cd)) : '';
+      aim = B.st === 'aim';
+      // compatibilité : la BILLE garde ses repères (--p, compte à rebours, charges, « EN JEU »)
+      const pp = String(Math.round(rem * 100) / 100);
+      if (c.pp !== pp) { c.pp = pp; c.el.style.setProperty('--p', pp); }
+      const ab = c.el.querySelector('.abt'); if (ab && ab.textContent !== txt) ab.textContent = txt;
+      const cc = max > 1 ? `×${ch}` : '', ci = c.el.querySelector('.abc');
+      if (ci && c.cc !== cc) { c.cc = cc; ci.textContent = cc; ci.hidden = !cc; }
+      const lab = out ? 'EN JEU' : 'BILLE', ln = c.el.querySelector('.abn');
+      if (ln && c.lab !== lab) { c.lab = lab; ln.textContent = lab; }
+      c.el.classList.toggle('ready', ch > 0 && !aim); c.el.classList.toggle('out', out);
+      if (c.ch != null && ch < c.ch && ch > 0) pcTap(c);
+      c.ch = ch;
+    } else {
+      const cd = spellCd(c.id), r = Math.max(0, cb.ab[c.id] || 0);
+      rem = clamp(r / cd, 0, 1); txt = r > 0 ? String(Math.ceil(r)) : '';
+      aim = c.id === 'bomb' && !!cb.ab.aiming;
+      c.el.classList.toggle('ready', r <= 0 && !sil && !aim);
+    }
+    const p = String(Math.round(rem * 100) / 100);
+    if (c.p !== p) { c.p = p; c.slot.style.setProperty('--p', p); }
+    if (c.t !== txt) { c.t = txt; c.slot.querySelector('.pc-cd').textContent = txt; }
+    if (c.sil !== sil) { c.sil = sil; c.el.classList.toggle('sil', sil); }
+    const away = pcAway(c, cb);
+    if (away && c.st === 'in') pcOut(c);
+    else if (!away && c.st === 'out') pcBack(c);
+    if (aim !== c.aim) { c.aim = aim; pcAim(c, aim); }
+  }
+  const fx = $('#ab-fx'); if (!fx) return;
+  const st = (cb.luckT > cb.t ? `<span class="abfx luck">${iconSVG('trefle4')}Coup de bol ${Math.ceil(cb.luckT - cb.t)}${NB}s</span>` : '') + (cb.overheat > 0 ? `<span class="abfx hot">${iconSVG('surchauffe')}Surchauffe ${Math.ceil(cb.overheat)}${NB}s</span>` : '') + (cb.invuln > 0 ? `<span class="abfx inv">${iconSVG('rempart')}Bouclier ${Math.ceil(cb.invuln)}${NB}s</span>` : '');
+  if (hc.spfx !== st) { hc.spfx = st; fx.innerHTML = st; }
+}
+// la Bombe qu'on vise : la carte se lève
+function pcAim(c, on) {
+  c.el.classList.toggle('aim', on);
+  if (c.st !== 'in') return;
+  pcAnim(c.el, [{}, { transform: on ? 'translate(0px, -14px) rotate(-3deg) scale(1.05)' : PC_HOME }], { duration: 180, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+  if (on) Snd.cardPick(c.k);
+}
+// une carte vient d'être jouée : on attend un court instant, pour savoir si d'autres partent avec elle
+function pcOut(c) {
+  c.st = 'out';
+  PCS.q.push(c);
+  if (!PCS.qT) PCS.qT = setTimeout(pcFlush, 110);
+}
+function pcFlush() {
+  PCS.qT = 0;
+  const gen = PCS.gen, list = PCS.q.filter(c => c.st === 'out' && c.el && c.el.isConnected).sort((a, b) => a.k - b.k);
+  PCS.q = [];
+  if (!list.length) return;
+  const wait = Math.max(0, PCS.freeAt - performance.now());
+  if (G.reduced || wait > 650) { for (const c of list) pcToPile(c, 0, 260); Snd.cardSwish(); return; }
+  setTimeout(() => { if (PCS.gen === gen) pcHands(list); }, wait);
+}
+function pcHands(list) {
+  list = list.filter(c => c.st === 'out' && c.el.isConnected);
+  if (!list.length) return;
+  const L = PCS.lay, now = performance.now();
+  if (list.length === 1) { pcPush(pcCX(list[0]) < L.mid ? 'l' : 'r', list[0]); PCS.freeAt = now + 800; }
+  else if (list.length === 2) { pcPush('l', list[0]); pcPush('r', list[1], 40); PCS.freeAt = now + 840; }
+  else { pcSweep(list); PCS.freeAt = now + 900; }
+}
+// une main se pose à plat sur la carte et la glisse à droite, sur la pile
+function pcPush(side, c, d0) {
+  const H = PCS.hands[side], L = PCS.lay, g = L.g, gen = PCS.gen, d = d0 || 0;
+  if (!H) { pcToPile(c, 0, 280); return; }
+  const h0 = L.hand[side], cx = pcCX(c), px = L.pile + g.w / 2 + 2.5 * PCS.pile.length, dy = pcDY(g);
+  const at = (x, y, s) => `translate(${(x - h0).toFixed(1)}px, ${y.toFixed(1)}px) rotate(0deg) scale(${s})`;
+  setTimeout(() => {
+    if (PCS.gen !== gen) return;
+    pcAnim(H, [{}, { transform: at(cx, dy - 10, 1.06), offset: .7 }, { transform: at(cx, dy, 1) }], { duration: 230, easing: 'cubic-bezier(.3,.7,.4,1)' });
+    Snd.cardPick(c.k);
+  }, d);
+  setTimeout(() => {
+    if (PCS.gen !== gen) return;
+    if (c.st === 'out') { pcPress(c); pcToPile(c, 0, 300); }
+    pcAnim(H, [{}, { transform: at(px, dy + 2, 1) }], { duration: 300, easing: 'cubic-bezier(.45,0,.25,1)' });
+    Snd.cardSwish();
+  }, d + 250);
+  setTimeout(() => {
+    if (PCS.gen !== gen) return;
+    pcAnim(H, [{}, { transform: at(px, dy - 16, 1.04), offset: .3 }, { transform: PC_HOME }], { duration: 320, easing: 'ease-in-out' });
+    Snd.cardTap();
+  }, d + 560);
+}
+// trois cartes ou plus : la main droite balaie tout d'un coup
+function pcSweep(list) {
+  const H = PCS.hands.r, Hl = PCS.hands.l, L = PCS.lay, g = L.g, gen = PCS.gen, h0 = L.hand.r, dy = pcDY(g);
+  const x0 = pcCX(list[0]) - g.w * .3, px = L.pile + g.w / 2, span = Math.max(1, px - x0), T = 340;
+  const at = (x, y, s) => `translate(${(x - h0).toFixed(1)}px, ${y.toFixed(1)}px) rotate(${(-8 * (1 - s)).toFixed(1)}deg) scale(1)`;
+  pcAnim(H, [{}, { transform: at(x0, dy + 4, .4) }], { duration: 170, easing: 'cubic-bezier(.3,.7,.4,1)' });
+  if (Hl) pcAnim(Hl, [{}, { transform: `translate(${((x0 - L.hand.l) * .35).toFixed(1)}px, ${(dy * .3).toFixed(1)}px) rotate(6deg) scale(1)`, offset: .45 }, { transform: PC_HOME }], { duration: 700, easing: 'ease-in-out' });
+  Snd.cardPick(list[0].k);
+  setTimeout(() => {
+    if (PCS.gen !== gen) return;
+    pcAnim(H, [{}, { transform: at(px, dy + 2, 1) }], { duration: T, easing: 'cubic-bezier(.4,0,.3,1)' });
+    for (const c of list) {
+      if (c.st !== 'out') continue;
+      const f = clamp((pcCX(c) - x0) / span, 0, 1);
+      setTimeout(() => { if (PCS.gen === gen && c.st === 'out') { pcPress(c); pcToPile(c, 0, Math.max(120, Math.round(T * (1 - f * .85)))); } }, Math.round(T * f * .85));
+    }
+    Snd.cardSweep(list.length);
+  }, 180);
+  setTimeout(() => {
+    if (PCS.gen !== gen) return;
+    pcAnim(H, [{}, { transform: at(px, dy - 18, 1), offset: .3 }, { transform: PC_HOME }], { duration: 320, easing: 'ease-in-out' });
+    Snd.cardTap();
+  }, 180 + T + 30);
+}
+// la BILLE perd une charge mais il en reste : une petite tape sur la carte
+function pcTap(c) {
+  if (G.reduced || performance.now() < PCS.freeAt || c.st !== 'in') return;
+  const L = PCS.lay, side = pcCX(c) < L.mid ? 'l' : 'r', H = PCS.hands[side]; if (!H) return;
+  const g = L.g, x = (pcCX(c) - L.hand[side]).toFixed(1), dy = pcDY(g);
+  pcAnim(H, [{}, { transform: `translate(${x}px, ${(dy - 8).toFixed(1)}px) rotate(0deg) scale(1.05)`, offset: .45 }, { transform: `translate(${x}px, ${dy.toFixed(1)}px) rotate(0deg) scale(1)`, offset: .62 }, { transform: PC_HOME }], { duration: 440, easing: 'ease-in-out' });
+  setTimeout(() => pcPress(c), 260);
+  PCS.freeAt = performance.now() + 450;
+}
+function pcPress(c) { const f = c.el && c.el.querySelector('.pc-face'); if (!f) return; f.classList.remove('press'); void f.offsetWidth; f.classList.add('press'); }
+function pcToPile(c, delay, dur) {
+  if (!c.el || !c.el.isConnected) return;
+  if (!PCS.pile.includes(c)) PCS.pile.push(c);
+  const k = PCS.pile.indexOf(c);
+  c.el.style.zIndex = 8;
+  c.el.classList.add('away');
+  const a = pcAnim(c.el, [{}, { transform: pcPileTf(c, k) }], { duration: dur, delay, easing: 'cubic-bezier(.45,0,.25,1)' });
+  if (a) a.addEventListener('finish', () => { if (c.st === 'out') c.el.style.zIndex = 3 + PCS.pile.indexOf(c); });
+}
+// rechargée : la carte revient toute seule à sa place, et les autres se resserrent sur la pile
+function pcBack(c) {
+  c.st = 'in';
+  const i = PCS.pile.indexOf(c); if (i >= 0) PCS.pile.splice(i, 1);
+  c.el.classList.remove('away');
+  c.el.style.zIndex = 8;
+  const a = pcAnim(c.el, [{}, { transform: 'translate(0px, -12px) rotate(-3deg) scale(1.06)', offset: .72 }, { transform: c.aim ? 'translate(0px, -14px) rotate(-3deg) scale(1.05)' : PC_HOME }], { duration: 430, easing: 'cubic-bezier(.3,.85,.4,1)' });
+  if (a) a.addEventListener('finish', () => { if (c.st === 'in') c.el.style.zIndex = 2; });
+  PCS.pile.forEach((o, k) => { pcAnim(o.el, [{}, { transform: pcPileTf(o, k) }], { duration: 220, easing: 'ease-out' }); o.el.style.zIndex = 3 + k; });
+  const f = c.el.querySelector('.pc-face');
+  if (f) setTimeout(() => { f.classList.remove('pop'); void f.offsetWidth; f.classList.add('pop'); }, 300);
+  if (G.mode === 'combat') Snd.cardBack(c.k);
+}
+
 // pilote auto / simulation : quand lancer les nouveaux sorts
 function botSpells(cb) {
   const run = G.run;
@@ -21276,7 +21587,7 @@ function bindUI() {
   on('#lp-opts', () => openPause());
   on('#lp-run', () => openRunInfo());
   on('#b-pause', () => openPause());
-  $('#abs').addEventListener('click', e => { if (e.target.closest('#ab-bil')) { firstGesture(); toast(LAY.pc ? `BILLE : clic droit maintenu sur la table, ou maintiens ${keyHint('bille')}, puis lâche pour lancer.` : 'BILLE : appuie sur ta base, tire en arrière, lâche.'); return; } const b = e.target.closest('.ab[data-sp]'); if (!b) return; firstGesture(); castSpellP(b.dataset.sp); });
+  $('#abs').addEventListener('click', e => { if (e.target.closest('#ab-bil')) { firstGesture(); toast(LAY.pc ? `BILLE : clic droit maintenu sur la table, ou maintiens ${keyHint('bille')}, puis lâche pour lancer.` : 'BILLE : appuie sur ta base, tire en arrière, lâche.'); return; } const b = e.target.closest('[data-sp]'); if (!b) return; firstGesture(); castSpellP(b.dataset.sp); });
   on('#m-spin', () => pullLever());
   on('#m-lever', () => pullLever());
   on('#m-respin', () => respin());
@@ -21478,7 +21789,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

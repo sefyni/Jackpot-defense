@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.2-202610110121
+JACKPOT DEFENSE v10.3-202610110136
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.3
+- Les pouvoirs deviennent des cartes, comme au poker : la BILLE et tes sorts (jusqu'à 5 cartes) sont alignés devant toi, en bas de la table. Touche une carte (ou sa touche 1 à 4) pour lancer le sort.
+- Tes deux mains reposent devant les cartes. Quand tu joues une carte, une main se pose à plat dessus et la glisse à droite, sur la pile. Deux cartes en même temps : les deux mains glissent chacune la leur. Trois, quatre ou cinq : un balayage rapide les emporte toutes d'un coup.
+- Pendant la recharge, la place vide de la carte affiche le compte à rebours. Rechargée, la carte revient toute seule à sa place, en glissant.
+- La BOMBE qu'on vise : sa carte se lève et brille jusqu'au lancer.
+- Des bruits de cartes façon Balatro : petit claquement quand on prend une carte, glissé, balayage, et retour sur la table.
 
 Nouveautés de la v10.2
 - Les animaux compagnons ! Ils restent avec toi toute la partie, en haut à droite de la table, et ils te parlent au début et à la fin de chaque manche (plus ou moins poliment). Quand tu en as plusieurs, il leur arrive de se chamailler.
