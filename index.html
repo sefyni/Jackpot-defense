@@ -3198,8 +3198,55 @@ body.lpc #abs .pcard:hover:not(.away):not(.aim) .pc-bob{translate:0 -8px}
 body.lpc #abs .pc-face .pc-n{left:-3px;right:-3px;bottom:8px;padding:3px 8px 2px;font-size:10.5px}
 body.lpc #abs .pc-face .pc-k{left:7px;top:7px}
 body.lpc #abs .pc-face .pc-ico::before{inset:-12%}
-@media (prefers-reduced-motion:reduce){#abs .pc-bob,#abs .pc-bob::before,#abs .pc-gloss::before,#abs .hand-svg,#abs .hd-f{animation:none!important}}
-body.reduced #abs .pc-bob,body.reduced #abs .pc-bob::before,body.reduced #abs .pc-gloss::before,body.reduced #abs .hand-svg,body.reduced #abs .hd-f{animation:none!important}
+/* v12.0 · le jeton qui roule sur les doigts de la main gauche */
+#abs .pc-chipw{position:absolute;inset:0;pointer-events:none;animation:hdIdle2 4.4s ease-in-out infinite}
+#abs .pc-chip,#abs .pc-tchip{display:block;border-radius:50%;background:radial-gradient(circle closest-side,#d42a50 0 48%,#fff3e0 49% 55%,#d42a50 56% 68%,rgba(0,0,0,0) 69%),repeating-conic-gradient(from 10deg,#fff3e0 0 20deg,#c21f45 20deg 45deg);box-shadow:0 0 0 1px #5a0a1e,0 2px 2px rgba(0,0,0,.45)}
+#abs .pc-chip{position:absolute;left:0;top:23%;width:21%;aspect-ratio:1;margin:-10.5% 0 0 -10.5%;animation:chipRoll 3.8s ease-in-out infinite}
+#abs .pc-hand.drop .pc-chip{visibility:hidden;animation-play-state:paused}
+#abs .pc-tchip{position:absolute;z-index:8;pointer-events:none}
+#abs .pc-tchip[hidden]{display:none}
+@keyframes chipRoll{
+  0%,100%{transform:translate(calc(var(--hw) * .27),0) scaleX(1)}
+  6%{transform:translate(calc(var(--hw) * .33),-2px) scaleX(.12)}
+  12%{transform:translate(calc(var(--hw) * .385),0) scaleX(1)}
+  18%{transform:translate(calc(var(--hw) * .455),-2px) scaleX(.12)}
+  24%{transform:translate(calc(var(--hw) * .53),0) scaleX(1)}
+  30%{transform:translate(calc(var(--hw) * .6),-2px) scaleX(.12)}
+  36%{transform:translate(calc(var(--hw) * .677),0) scaleX(1)}
+  39%{transform:translate(calc(var(--hw) * .677),-3px) scaleX(.1)}
+  42%{transform:translate(calc(var(--hw) * .677),-3px) scaleX(1)}
+  45%{transform:translate(calc(var(--hw) * .677),-3px) scaleX(.1)}
+  48%{transform:translate(calc(var(--hw) * .677),0) scaleX(1)}
+  54%{transform:translate(calc(var(--hw) * .6),-2px) scaleX(.12)}
+  60%{transform:translate(calc(var(--hw) * .53),0) scaleX(1)}
+  66%{transform:translate(calc(var(--hw) * .455),-2px) scaleX(.12)}
+  72%{transform:translate(calc(var(--hw) * .385),0) scaleX(1)}
+  78%{transform:translate(calc(var(--hw) * .33),-2px) scaleX(.12)}
+  84%{transform:translate(calc(var(--hw) * .27),0) scaleX(1)}
+}
+@media (prefers-reduced-motion:reduce){#abs .pc-bob,#abs .pc-bob::before,#abs .pc-gloss::before,#abs .hand-svg,#abs .hd-f,#abs .pc-chipw,#abs .pc-chip{animation:none!important}}
+body.reduced #abs .pc-bob,body.reduced #abs .pc-bob::before,body.reduced #abs .pc-gloss::before,body.reduced #abs .hand-svg,body.reduced #abs .hd-f,body.reduced #abs .pc-chipw,body.reduced #abs .pc-chip{animation:none!important}
+body.reduced #abs .pc-chip{transform:translate(calc(var(--hw) * .53),0)}
+
+/* ---------- v12.1 · le Mix de Zaza ---------- */
+.shot.zmix{background:linear-gradient(90deg,rgba(255,126,182,.14),rgba(0,0,0,.26) 70%);box-shadow:inset 0 0 0 2px rgba(255,126,182,.42)}
+.shot.zmix.on{box-shadow:inset 0 0 0 2px #ff7eb6,0 0 16px rgba(255,126,182,.45);animation:zmGlow 1.2s ease-in-out infinite alternate}
+@keyframes zmGlow{to{box-shadow:inset 0 0 0 2px #ffb3d4,0 0 22px rgba(255,126,182,.6)}}
+.shot.zmix .zm-mood{display:block;margin-top:2px;font-style:normal;font-weight:700;color:#ffcc4d}
+.shot.zmix .mini.cancel{background:#5a3a4e;box-shadow:inset 0 0 0 2px #ff7eb6;color:#fff}
+.glass.zm-shake{animation:zmShake .85s ease-in-out}
+@keyframes zmShake{0%,100%{transform:none}10%{transform:translateY(-5px) rotate(-16deg)}22%{transform:translateY(-8px) rotate(14deg)}34%{transform:translateY(-6px) rotate(-14deg)}46%{transform:translateY(-8px) rotate(12deg)}58%{transform:translateY(-5px) rotate(-10deg)}72%{transform:translateY(-3px) rotate(6deg)}86%{transform:translateY(-1px) rotate(-3deg)}}
+.zm-fly{position:fixed;z-index:80;pointer-events:none;will-change:transform}
+.zm-fly .chip{display:block;width:100%;height:100%}
+#rack-slots .slot.zmgo .chip{opacity:.18;transition:opacity .2s}
+#rack-slots .slot.zmixin .chip{animation:zmIn .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes zmIn{0%{transform:scale(.6)}55%{transform:scale(1.2)}100%{transform:none}}
+/* le classement n'a plus de bouton dans le menu (le tableau en direct suffit) : PROFIL prend toute la largeur */
+#title .mgrid #t-stats{grid-column:1 / -1}
+
+/* ---------- v12.2 · le « +0,1× » des jetons MULT ---------- */
+.mfly{position:fixed;z-index:70;pointer-events:none;padding:2px 7px 1px;border-radius:999px;background:linear-gradient(180deg,#3a1030,#22081c);box-shadow:inset 0 0 0 1.5px var(--mc),0 0 12px color-mix(in srgb,var(--mc) 55%,transparent),0 3px 6px rgba(0,0,0,.5);color:#fff;font:700 13px/1.1 var(--f-pix);letter-spacing:.02em;text-shadow:0 0 6px var(--mc);white-space:nowrap;will-change:transform,opacity}
+body.lpc .mfly{font-size:15px;padding:3px 9px 2px}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3729,12 +3776,11 @@ body.reduced #abs .pc-bob,body.reduced #abs .pc-bob::before,body.reduced #abs .p
         <button class="mbtn" id="t-vest" style="--b:#e0365a;--bd:#8a1a33"><svg class="ico"><use href="#i-canon"/></svg><span>VESTIAIRE<small id="t-vest-n">2/16</small></span></button>
         <button class="mbtn" id="t-opts" style="--b:var(--orange);--bd:var(--orange-d)"><svg class="ico"><use href="#i-enraye"/></svg><span>OPTIONS<small>son, écran</small></span></button>
         <button class="mbtn" id="t-stats" style="--b:#2aa59a;--bd:#17675f"><svg class="ico"><use href="#i-trophee"/></svg><span>PROFIL<small id="t-prof-n">Profil 1</small></span></button>
-        <button class="mbtn" id="t-lb" style="--b:#c9932a;--bd:#7a5510"><svg class="ico"><use href="#i-couronne"/></svg><span>CLASSEMENT<small>en ligne</small></span></button>
       </div>
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v11.9</p>
+  <p class="proto">Sefy Industries · v12.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -5425,7 +5471,7 @@ function tmrFire(k, pw, noEcho) {
 function addMk(id, v, max) {
   const cb = G.cb; if (!cb || cb.demo || !v) return;
   const M2 = cb.mk || (cb.mk = {}), cur = M2[id] || 0, nv = max != null ? Math.min(max, cur + v) : cur + v;
-  if (nv > cur + 1e-6) { M2[id] = nv; if (!G.headless) jokerPing(id, `+${fmtM(nv - cur).replace(/^0,/, ',')} MULT`, 500); }
+  if (nv > cur + 1e-6) { M2[id] = nv; if (!G.headless) { jokerPing(id, `+${fmtM(nv - cur).replace(/^0,/, ',')} MULT`, 500); multFly(id, nv - cur); } }
 }
 function setMk(id, v) { const cb = G.cb; if (!cb || cb.demo) return; (cb.mk || (cb.mk = {}))[id] = v; }
 // MULT pour la manche suivante (Balance, Vierge, Cochonnet, Anubis, Rappel…)
@@ -9788,6 +9834,7 @@ const Snd = (() => {
     elite() { if (th('elite', 500)) { tone(1318, .1, 'triangle', .035); tone(1760, .16, 'triangle', .035, null, .07, true); } },
     // ---- score façon Balatro : les jetons montent dans la gamme, le mult claque ----
     scoreTick(k) { if (!th('stk', 28)) return; const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21, 24, 26, 28], m = 72 + sc[Math.min(sc.length - 1, Math.max(0, k | 0))]; tone(mtof(m), .07, 'p25', .045); tone(mtof(m + 12), .05, 'sine', .022, null, .006); clack(0, .045, 3900); },
+    multIn() { if (!th('min', 90)) return; tone(1320, .05, 'sine', .03, 1760); noise(.04, .025, 6000, 'highpass'); },
     multHit(k) { const m = 64 + Math.min(12, k | 0) * 2; tone(mtof(m), .2, 'sawtooth', .045, mtof(m) * 1.5); tone(mtof(m + 7), .24, 'square', .028, null, .03, true); noise(.12, .06, 5200, 'highpass', 0, 9000); clack(.01, .07, 3000); },
     scoreRes(n) { const big = (n || 0) >= 3000; chord(big ? [60, 64, 67, 72, 76] : [60, 64, 67, 72], .5, 'square', .028, 0, true); for (let i = 0; i < (big ? 10 : 6); i++) clack(.05 + i * .04, .06, arnd(2800, 4600)); tone(mtof(84), .45, 'sine', .05, null, .12, true); },
     record() { [72, 76, 79, 84, 88, 91, 96].forEach((m, i) => tone(mtof(m), .22, 'square', .04, null, i * .07, true)); noise(1, .08, 6000, 'highpass', .45, 10000, null, true); },
@@ -11188,7 +11235,9 @@ function finishRound() {
   let reward = null;
   if (run.skulls >= 3) reward = mkJoker('ultime', [{ t: pick(run.pool), lv: 3 }], 1);
   else if (run.skulls === 2) reward = mkJoker('rare', [{ t: pick(run.pool), lv: 2 }], 1);
-  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] }; ckChampagne(run, cb, s, res); if (hasDeck(run, 'collec') && CL_ROUNDS.includes(r + 1)) { run.clPunch = (run.clPunch || 0) + 1; run.clNew = r + 1; if (G.headless) clAuto(run); }
+  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] };
+  const mg = multGold(run, cb, score, bonus); if (mg.g > 0) { run.gold += mg.g; run.stats.gold += mg.g; res.multGold = mg.g; res.multJ = mg.mj; if (G.headless) dbg('g_mult', mg.g); }
+   ckChampagne(run, cb, s, res); if (hasDeck(run, 'collec') && CL_ROUNDS.includes(r + 1)) { run.clPunch = (run.clPunch || 0) + 1; run.clNew = r + 1; if (G.headless) clAuto(run); }
   tkEnd(run, res);
   run.gold = Math.floor(run.gold);
   run.malus = []; run.skulls = 0; run.stolen = []; run.boost = {};
@@ -12564,7 +12613,7 @@ function cardRealLine(d) {
   const sc = roundScale(run, Math.max(1, run.round));   // la mise d'or (×1,5) est déjà dedans
   return `<p class="cd-stats real">Dans ta partie (manche ${roundLabel(run.round)}) : PV ${Math.round(d.hp * sc.hp)} · coup ${Math.round(d.dmg * sc.dmg)}</p>`;
 }
-function addGold(g, src) { if (!(g > 0)) return 0; g *= goldK(src); if (src === 'kill' && !G.headless && hasPet(G.run, 'coco')) petCoin(); G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); return g; }
+function addGold(g, src) { if (!(g > 0)) return 0; g *= goldK(src); if (src === 'kill' && !G.headless && hasPet(G.run, 'coco')) petCoin(); G.run.gold += g; G.run.stats.gold += g; if (G.cb && G.mode === 'combat') G.cb.goldIn = (G.cb.goldIn || 0) + g; if (G.headless) dbg('g_' + (src || 'autre'), g); return g; }
 
 /* ---------- tir de la base ---------- */
 function inRange(e, R2) { return !e.dead && e.deal <= .15 && e.x * e.x + e.y * e.y <= R2; }
@@ -14273,7 +14322,7 @@ function renderRack() {
       const kc = j.kind === 'faux' ? '#8d8d99' : JK[j.parts[0].t].col, key = jokerKey(j);
       const mr = (st.mirrors || []).find(m => m.i === i && m.d < 0), mr2 = (st.mirrors || []).find(m => m.i === i && m.d > 0);
       const isSrc = (st.mirrors || []).some(m => m.ok && m.src === i);
-      const pmc = CL.on || CL.sel != null ? (j.uid === CL.sel ? ' pmsel' : clOk(j) ? ' pmok' : ' pmno') : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
+      const pmc = G.mode === 'bar' && BAR.mixing ? (j.uid === BAR.mixSel ? ' pmsel' : zmixOk(j) && !(BAR.mixSel != null && (run.jokers.find(x => x.uid === BAR.mixSel) || { parts: [{}] }).parts[0].t === j.parts[0].t) ? ' pmok' : ' pmno') : CL.on || CL.sel != null ? (j.uid === CL.sel ? ' pmsel' : clOk(j) ? ' pmok' : ' pmno') : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
       let mcls = '', mbits = '', minfo = '';
       if (mr) {
         const prevMir = (st.mirrors || []).some(m => m.i === i - 1 && m.d < 0);
@@ -14296,7 +14345,7 @@ function renderRack() {
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
   clRefresh();
-  setTxt('#r-hint', CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse : ranger, empiler, vendre' : 'touche un jeton pour le détail');
+  setTxt('#r-hint', G.mode === 'bar' && BAR.mixing ? (BAR.mixSel == null ? 'touche 2 jetons à mixer' : 'et le 2e jeton (un autre type)') : CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse : ranger, empiler, vendre' : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
@@ -14391,6 +14440,7 @@ function rackUp(e) {
     const j = run.jokers[d.i]; if (!j) return;
     if (G.mode === 'poker' && PK.replacing) { hideJTip(); pokerReplace(j.uid); return; }
     if (G.mode === 'mini' && MG.replacing) { hideJTip(); miniReplace(j.uid); return; }
+    if (G.mode === 'bar' && BAR.mixing) { hideJTip(); zmixPick(j.uid); return; }
     if (CL.on || CL.sel != null) { hideJTip(); clPick(j.uid); return; }
     if (G.mode === 'market' && (MK.punching || MK.pmSel != null)) { hideJTip(); punchPickJoker(j.uid); return; }
     if (JT.uid === j.uid && !$('#jtip').hidden && (e.pointerType !== 'mouse' || now() - JT.t > 250)) { hideJTip(); openDetail(j, 'rack'); return; }
@@ -15368,6 +15418,7 @@ function rulesSections() {
     ['Le but', `<p>Tiens <b>30 manches</b>, en <b>6 actes</b> de 5 manches. Chaque acte a sa couleur de cartes, monte en tension, et finit sur son boss : une figure du jeu de cartes, puis à la manche 30 <b>le Baron</b> en personne (3 vies : ses figures, ses sorts et ses As, puis tous les jeux du bar). Après lui : manches infinies, de plus en plus dures.</p>
       <p>Entre deux manches : <b>la machine</b> te donne des jetons, puis tu passes au <b>bar de Zaza</b> pour améliorer ton canon, ton flipper et ta base. Parfois, la porte du <b>marché noir</b> est ouverte au fond de la ruelle. Une fois par dizaine de manches (entre la 6e et la 9e), <b>le Baron</b> s'assoit à ta table pour un poker obligatoire. Toutes les 10 manches, tu peux changer de machine.</p>
       <p>Chaque manche a un <b>objectif de points</b> : tes <b>points</b> (cartes abattues, parades) multipliés par ton <b>MULT</b> (sans une égratignure, combos, boss, malus…). Atteins-le et les cartes arrêtent d'arriver : il ne reste qu'à finir celles sur la table (et les renforts annulés te rendent un peu d'or). Si tu n'y arrives pas, des <b>renforts</b> débarquent jusqu'à ce que tu l'atteignes.</p>
+      <p>Le <b>MULT de tes jetons</b> rapporte aussi de l'or en fin de manche : +25 % de l'or de la manche (cartes abattues et prime), par +1 MULT.</p>
       <p>Au marché noir, le <b>Punch-o-matic</b> de l'Inspecteur fait passer un jeton ULTIME en <b>rareté secrète</b> (300 or) : sa 4e capacité s'éveille, pour toute la partie. Monsieur Anatole, le collectionneur (au Catalogue), garde la trace de chaque secret découvert.</p>
       <p>Au <b>vestiaire</b>, équipe les canons, les flippers et les bases que tu débloques en jouant (parades, boss, jeux du bar, records…). En partie, ton canon change aussi de look avec les boissons du bar : double canon, lunette, ailerons… Et un jeton secret se cache quelque part sur l'écran d'accueil.</p>`],
     ['Combat', `<ul>
@@ -15401,6 +15452,7 @@ function rulesSections() {
       <p><b>L'ordre compte.</b> Deux jetons voisins peuvent former un combo, et les signes astro d'un même élément forment des <b>Constellations</b> (+MULT). Les jetons <b>Voisins</b> (Reflet, Haut-parleur, Pont, Pivot…) agissent selon leur place : à gauche, ou au-dessus sur PC.</p>
       <ul class="combo-rules">${COMBOS.map(c => `<li><b>${c.name}</b> (${JK[c.a].name} + ${JK[c.b].name}) : ${c.txt}</li>`).join('')}${CONSTEL.map(c => `<li><b>${c.name}</b> (${c.signs.map(s => JK[s].name).join(', ')}) : +0,3 MULT par paire de signes voisins, +1 MULT avec les trois réunis.</li>`).join('')}</ul>`],
     ['Bar et marché', `<p><b>Le bar de Zaza</b> : à chaque manche, une boisson pour le <b>canon</b>, une pour le <b>flipper</b> et une pour la <b>base</b>. Elles durent toute la partie. Les <b>shots</b> boostent une seule manche.</p>
+      <p><b>Le Mix de Zaza</b> : une fois par passage (deux si elle est d'humeur), elle verse deux de tes jetons simples, de types différents, dans un verre. Il en sort un mix : les deux pouvoirs, une seule place.</p>
       <p><b>Le marché noir</b> : au fond de la ruelle, l'Inspecteur vend des jetons « tombés du camion », la seule place de table à acheter, des objets et des <b>sorts</b>. Tu peux marchander… à tes risques.</p>
       <p><b>Les habitués</b> (Dina, Momo, Madame Nox) passent parfois au bar et te défient. Chaque victoire te donne une étoile ★ : à 2 étoiles, leur jeton bonus ; à 3, leur cadeau (un jeton fou). Les étoiles repartent à zéro à chaque partie.</p>
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
@@ -17598,6 +17650,7 @@ function barQuick() {
     if (b) b.disabled = run.gold < s2.price;
   });
   const c = BAR.ciment, cb2 = $('#b-shots [data-buyc]'); if (c && cb2 && !c.sold) cb2.disabled = run.gold < c.price;
+  const zb = $('#b-shots [data-zmix]'); if (zb && !BAR.mixing) zb.disabled = BAR.busy || run.gold < zmixPrice(run) || !zmixAny(run);
 }
 
 /* ================= v10.8 · les jeux à débloquer, le poinçon du Collectionneur, la défaite au ralenti ================= */
@@ -18492,7 +18545,26 @@ function handArt2(id) {
   <path d="M71 50C75 56 75.4 70 72 82C70.6 74 70.6 61 71 50Z" fill="#d6996f" opacity=".35"/>`;
 }
 function handSVG(side) {
-  return `<svg class="hand-svg" viewBox="0 0 96 140" aria-hidden="true">${side === 'l' ? `<g transform="translate(96 0) scale(-1 1)">${handArt2('L')}</g>` : handArt2('R')}</svg>`;
+  return `<svg class="hand-svg" viewBox="0 0 96 140" aria-hidden="true">${side === 'l' ? `<g transform="translate(96 0) scale(-1 1)">${handArt2('L')}</g>` : handArt2('R')}</svg>${side === 'l' ? '<i class="pc-chipw" aria-hidden="true"><i class="pc-chip"></i></i>' : ''}`;
+}
+/* v12.0 · le jeton de la main gauche : il roule sur ses doigts. Elle le pose sur la table quand elle doit pousser une carte,
+   et le reprend en revenant. */
+function chipDrop() {
+  const H = PCS.hands.l, ch = H && H.querySelector('.pc-chip'), row = H && H.parentElement;
+  if (!ch || !row || PCS.chipDown) return;
+  const r = ch.getBoundingClientRect(), rr = row.getBoundingClientRect(), w = ch.offsetWidth;
+  let sx = 1; try { sx = new DOMMatrixReadOnly(getComputedStyle(ch).transform).a || 1; } catch (e) { sx = 1; }
+  let t = row.querySelector('.pc-tchip');
+  if (!t) { t = document.createElement('i'); t.className = 'pc-tchip'; t.setAttribute('aria-hidden', 'true'); row.appendChild(t); }
+  Object.assign(t.style, { width: w + 'px', height: w + 'px', left: (r.left + r.width / 2 - rr.left - w / 2).toFixed(1) + 'px', top: (r.top + r.height / 2 - rr.top - w / 2).toFixed(1) + 'px' });
+  t.hidden = false; H.classList.add('drop'); PCS.chipDown = true;
+  if (t.animate && !G.reduced) t.animate([{ transform: `scaleX(${sx.toFixed(3)})` }, { transform: 'translateY(1px) scale(.92)', offset: .65 }, { transform: 'none' }], { duration: 280, easing: 'ease-out' });
+  Snd.chipPick && Snd.chipPick();
+}
+function chipPick() {
+  const H = PCS.hands.l; if (!H || !PCS.chipDown) return;
+  PCS.chipDown = false; H.classList.remove('drop');
+  const t = H.parentElement && H.parentElement.querySelector('.pc-tchip'); if (t) t.hidden = true;
 }
 
 /* ---- les cartes : une face, et un dos de casino ---- */
@@ -18579,6 +18651,7 @@ function flipTo(c, back, dur, delay) {
 function handTo(side, t, o) {
   const H = PCS.hands[side], Sh = PCS.shadows && PCS.shadows[side]; if (!H) return;
   const lift = t.lift || 0, sc = (t.s == null ? 1 : t.s) * (1 + .07 * lift);
+  if (side === 'l' && !t.x && !t.y) { const d0 = o.done; o = Object.assign({}, o, { done: () => { chipPick(); if (d0) d0(); } }); }
   glide(H, { x: t.x, y: t.y, r: t.r || 0, s: sc }, o);
   if (Sh && Sh.animate) {
     const dx = (side === 'l' ? -1 : 1) * 4 * lift, dy = 12 * lift + 2;
@@ -18598,19 +18671,39 @@ function pcPush(side, c, d0) {
   if (!H || G.reduced) { pcToPile(c, 0, 300); return; }
   const h0 = L.hand[side], cx = pcCX(c), px = L.pile + g.w / 2 + 2.5 * PCS.pile.length, dy = pcDY(g), sgn = side === 'l' ? 1 : -1;
   const later = (fn, ms) => setTimeout(() => { if (PCS.gen === gen) fn(); }, d + ms);
-  later(() => { handUp(H, true); handTo(side, { x: cx - h0, y: dy - 5, r: 5 * sgn, lift: 1 }, { dur: 250, ease: HE.out, arc: 18 }); Snd.cardPick(c.k); }, 0);
+  later(() => { if (side === 'l') chipDrop(); handUp(H, true); handTo(side, { x: cx - h0, y: dy - 5, r: 5 * sgn, lift: 1 }, { dur: 250, ease: HE.out, arc: 18 }); Snd.cardPick(c.k); }, 0);
   later(() => { H.classList.add('grab'); handTo(side, { x: cx - h0, y: dy + 2, r: 0, s: .97, lift: 0 }, { dur: 95, ease: HE.in }); if (c.st === 'out') pcPress(c); }, 250);
   later(() => { if (c.st === 'out') pcToPile(c, 0, 360, true); handTo(side, { x: px - h0, y: dy + 4, r: -3 * sgn, s: .97, lift: .12 }, { dur: 360, ease: HE.inOut }); Snd.cardSwish(); }, 345);
   later(() => { H.classList.remove('grab'); handTo(side, { x: 0, y: 0, r: 0, lift: 0 }, { dur: 620, ease: HE.calm, arc: 22, done: () => handUp(H, false) }); Snd.cardTap(); }, 715);
 }
-// deux cartes : la droite part la première, la gauche suit
+// v12.0 : une carte, la main la plus proche ; deux cartes, la main droite les range l'une après l'autre ; trois ou plus, le balayage
 function pcHands(list) {
   list = list.filter(c => c.st === 'out' && c.el.isConnected);
   if (!list.length) return;
   const L = PCS.lay, now = performance.now();
-  if (list.length === 1) { pcPush(pcCX(list[0]) < L.mid ? 'l' : 'r', list[0]); PCS.freeAt = now + 830; }
-  else if (list.length === 2) { pcPush('r', list[1]); pcPush('l', list[0], 170); PCS.freeAt = now + 1000; }
+  if (list.length === 1) { const side = pcCX(list[0]) < L.mid ? 'l' : 'r'; pcPush(side, list[0]); PCS.freeAt = now + (side === 'l' ? 880 : 830); }
+  else if (list.length === 2) { pcPushTwo(list[1], list[0]); PCS.freeAt = now + 1480; }
   else { pcSweep(list); PCS.freeAt = now + 960; }
+}
+// la main droite : la carte de droite d'abord, puis elle revient en arc chercher l'autre
+function pcPushTwo(c1, c0) {
+  const H = PCS.hands.r, L = PCS.lay, g = L.g, gen = PCS.gen;
+  if (!H || G.reduced) { pcToPile(c1, 0, 300); pcToPile(c0, 60, 300); return; }
+  const h0 = L.hand.r, dy = pcDY(g), px1 = L.pile + g.w / 2 + 2.5 * PCS.pile.length;
+  let skip = false;
+  const later = (fn, ms) => setTimeout(() => { if (PCS.gen === gen && !skip) fn(); }, ms);
+  const home = () => { skip = true; H.classList.remove('grab'); handTo('r', { x: 0, y: 0, r: 0, lift: 0 }, { dur: 620, ease: HE.calm, arc: 22, done: () => handUp(H, false) }); Snd.cardTap(); };
+  later(() => { handUp(H, true); handTo('r', { x: pcCX(c1) - h0, y: dy - 5, r: -5, lift: 1 }, { dur: 240, ease: HE.out, arc: 18 }); Snd.cardPick(c1.k); }, 0);
+  later(() => { H.classList.add('grab'); handTo('r', { x: pcCX(c1) - h0, y: dy + 2, r: 0, s: .97, lift: 0 }, { dur: 90, ease: HE.in }); if (c1.st === 'out') pcPress(c1); }, 240);
+  later(() => { if (c1.st === 'out') pcToPile(c1, 0, 330, true); handTo('r', { x: px1 - h0, y: dy + 4, r: 3, s: .97, lift: .12 }, { dur: 330, ease: HE.inOut }); Snd.cardSwish(); }, 330);
+  later(() => {
+    H.classList.remove('grab');
+    if (c0.st !== 'out' || !c0.el.isConnected) { home(); return; }   // déjà revenue : rien à ranger
+    handTo('r', { x: pcCX(c0) - h0, y: dy - 5, r: -6, lift: 1 }, { dur: 330, ease: HE.inOut, arc: 24 }); Snd.cardPick(c0.k);
+  }, 670);
+  later(() => { H.classList.add('grab'); handTo('r', { x: pcCX(c0) - h0, y: dy + 2, r: 0, s: .97, lift: 0 }, { dur: 90, ease: HE.in }); if (c0.st === 'out') pcPress(c0); }, 1000);
+  later(() => { const px2 = L.pile + g.w / 2 + 2.5 * PCS.pile.length; if (c0.st === 'out') pcToPile(c0, 0, 360, true); handTo('r', { x: px2 - h0, y: dy + 4, r: 3, s: .97, lift: .12 }, { dur: 360, ease: HE.inOut }); Snd.cardSwish(); }, 1090);
+  later(home, 1460);
 }
 // trois cartes ou plus : la main droite balaie tout d'un coup (chaque carte part quand la main la touche), la gauche accompagne
 function pcSweep(list) {
@@ -18700,11 +18793,185 @@ function pcAim(c, on) {
 /* ---- au repos : de temps en temps, une main pianote sur la table ---- */
 setInterval(() => {
   if (G.headless || G.mode !== 'combat' || G.paused || G.reduced || document.visibilityState === 'hidden') return;
-  if (!PCS.hands || performance.now() < PCS.freeAt + 1500 || Math.random() < .45) return;
-  const side = Math.random() < .5 ? 'l' : 'r', H = PCS.hands[side]; if (!H || handBusy(side) || H.classList.contains('grab')) return;
+  if (!PCS.hands || performance.now() < PCS.freeAt + 1500) return;
+  if (Math.random() < .45 && !PCS.chipDown) return;
+  if (PCS.chipDown && !handBusy('l')) chipPick();   // au cas où un geste a été coupé : elle reprend son jeton
+  const side = 'r', H = PCS.hands[side]; if (!H || handBusy(side) || H.classList.contains('grab')) return;
   H.classList.remove('drum'); void H.offsetWidth; H.classList.add('drum');
   setTimeout(() => H.classList.remove('drum'), 900);
 }, 3200);
+
+/* ================= v12.1 · le Mix de Zaza =================
+   Au bar, Zaza verse deux de tes jetons (simples, de types différents) dans un verre, secoue, et en sort un MIX :
+   les deux pouvoirs dans une seule place. Une fois par passage au bar (deux si elle est d'humeur). 50 or, plus cher
+   avec la Mise d'or (comme les autres prix). */
+const ZMIX = { price: 50, mood: .25 };
+const zmixPrice = run => Math.round(ZMIX.price * priceMul(run));
+const ZMIX_LINES = {
+  start: ['Deux jetons dans mon verre ? Choisis-les dans ton rack. Différents, hein.', 'Un mix maison ? Montre-moi les deux jetons à marier.'],
+  first: ['Et avec quoi je le marie, celui-là ?', 'Bon choix. Le deuxième ?'],
+  same: ['Deux pareils ? C\'est un doublon, ça : empile-les toi-même, c\'est gratuit.'],
+  bad: ['Celui-là, je ne le mets pas dans mon verre. Un jeton simple, sinon rien.', 'Pas celui-là. Je ne mélange que des jetons simples.'],
+  none: ['Il me faut deux jetons simples, de types différents. Là, je n\'ai rien à secouer.'],
+  done: ['Et voilà. Deux jetons, un seul verre. À la tienne.', 'Secoué, pas remué. Ton mix est prêt.', 'Goûte-moi ça. Deux pouvoirs, une seule place.'],
+  out: ['Un mix par soir, mon chou. Reviens à la prochaine manche.'],
+  mood: ['Ce soir je suis d\'humeur : deux mix, si tu veux.'],
+};
+// un jeton qui peut aller dans le verre : simple (un seul type), ni faux, ni maudit, ni fou, ni secret, ni volé
+function zmixOk(j) {
+  const run = G.run;
+  return !!j && !!j.parts && j.parts.length === 1 && !['faux', 'maudit', 'fou'].includes(j.kind) && !isSecret(j) && !(run && (run.stolen || []).includes(j.uid));
+}
+const zmixAny = run => new Set(run.jokers.filter(zmixOk).map(j => j.parts[0].t)).size >= 2;
+// la ligne du comptoir (avec les shots)
+function zmixRowHTML() {
+  const run = G.run; if (!run || BAR.mixLeft == null) return '';
+  const pr = zmixPrice(run), left = BAR.mixLeft || 0, used = left <= 0 && !BAR.zmAnim;
+  if (BAR.zmAnim) return `<div class="shot zmix on serving">${glassHTML('martini', BAR.zmLiq || '#ff7eb6', 'cherry')}<div class="stext"><b>Mix de Zaza</b><span>Zaza secoue…</span></div><button class="mini" disabled>…</button></div>`;
+  const can = !used && !BAR.busy && (BAR.mixing || (run.gold >= pr && zmixAny(run)));
+  const sub = BAR.mixing ? 'Touche deux jetons de ton rack, de types différents.' : used ? 'Fini pour ce soir. Reviens à la prochaine manche.' : `Je verse deux de tes jetons dans un verre : il en sort un mix. Les deux pouvoirs, une seule place.${BAR.mixMood && left > 1 ? ' <em class="zm-mood">Zaza est d\'humeur : 2 mix ce soir !</em>' : ''}`;
+  return `<div class="shot zmix${used ? ' drunk' : ''}${BAR.mixing ? ' on' : ''}">${glassHTML('martini', '#ff7eb6', 'cherry')}<div class="stext"><b>Mix de Zaza</b><span>${sub}</span></div>${used ? '<em class="stamp">FAIT</em>' : `<button class="mini${BAR.mixing ? ' cancel' : ''}" data-zmix="1" ${can ? '' : 'disabled'}>${BAR.mixing ? 'Annuler' : pr + ' or'}</button>`}</div>`;
+}
+function zmixClick() {
+  const run = G.run; if (!run || BAR.busy || G.mode !== 'bar') return;
+  if (BAR.mixing) { BAR.mixing = false; BAR.mixSel = null; Snd.click(); renderRack(); renderBar(); return; }
+  if ((BAR.mixLeft || 0) <= 0) { sayZ(pick(ZMIX_LINES.out)); Snd.deny(); return; }
+  if (run.gold < zmixPrice(run)) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
+  if (!zmixAny(run)) { sayZ(pick(ZMIX_LINES.none)); Snd.deny(); return; }
+  BAR.mixing = true; BAR.mixSel = null; Snd.click();
+  sayZ(pick(ZMIX_LINES.start));
+  renderRack(); renderBar();
+}
+// un jeton touché dans le rack pendant que Zaza attend
+function zmixPick(uid) {
+  const run = G.run, j = run.jokers.find(x => x.uid === uid); if (!j || BAR.busy) return;
+  if (!zmixOk(j)) { sayZ(pick(ZMIX_LINES.bad)); Snd.deny(); return; }
+  if (BAR.mixSel == null) { BAR.mixSel = uid; Snd.chipPick(); sayZ(pick(ZMIX_LINES.first)); renderRack(); return; }
+  if (BAR.mixSel === uid) { BAR.mixSel = null; Snd.click(); renderRack(); return; }
+  const A = run.jokers.find(x => x.uid === BAR.mixSel);
+  if (!A) { BAR.mixSel = uid; renderRack(); return; }
+  if (A.parts[0].t === j.parts[0].t) { sayZ(pick(ZMIX_LINES.same)); Snd.deny(); return; }
+  zmixDo(A, j);
+}
+const hexMix = (a, b) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); try { const x = p(a), y = p(b); return '#' + x.map((v, i) => Math.round((v + y[i]) / 2).toString(16).padStart(2, '0')).join(''); } catch (e) { return '#ff7eb6'; } };
+// Zaza fait le mix : les deux jetons tombent dans le verre, elle secoue, le mix ressort et file dans ton rack
+function zmixDo(A, B) {
+  const run = G.run, pr = zmixPrice(run);
+  if (run.gold < pr) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
+  run.gold -= pr; BAR.mixLeft = Math.max(0, (BAR.mixLeft || 1) - 1); BAR.mixing = false; BAR.mixSel = null; BAR.busy = true; BAR.zmAnim = true; BAR.zmLiq = null;
+  const ia = run.jokers.indexOf(A), ib = run.jokers.indexOf(B);
+  const chipEl = i => $(`#rack-slots .slot[data-i="${i}"] .chip`);
+  const ra = chipEl(ia) && chipEl(ia).getBoundingClientRect(), rb = chipEl(ib) && chipEl(ib).getBoundingClientRect();
+  const gl = $('#b-shots .zmix .glass'), rg = gl && gl.getBoundingClientRect();
+  const colA = JK[A.parts[0].t].col, colB = JK[B.parts[0].t].col;
+  const finish = () => {
+    // le mix : les deux types, le plus haut niveau d'abord ; la puissance (étoiles) du meilleur des deux
+    const parts = [{ t: A.parts[0].t, lv: Math.min(3, A.parts[0].lv) }, { t: B.parts[0].t, lv: Math.min(3, B.parts[0].lv) }].sort((a, b) => b.lv - a.lv);
+    A.parts = parts; A.kind = kindFromParts(parts); A.p = Math.max(A.p || 1, B.p || 1);
+    A.stars = Math.max(A.stars || 0, B.stars || 0); A.over = Math.max(A.over || 0, B.over || 0);
+    const k = run.jokers.indexOf(B); if (k >= 0) run.jokers.splice(k, 1);
+    run.stats.zmix = (run.stats.zmix || 0) + 1;
+    BAR.busy = false; BAR.zmAnim = false;
+    if (G.headless) return;
+    renderRack(); updateHUD(); renderBar();
+    Snd.stack(4); haptic(30);
+    toast(`Mix de Zaza ! ${jName(A)} : ${rarLabel(A).toLowerCase()}. Une place de libérée.`);
+    sayZ(pick(ZMIX_LINES.done));
+    const s = $(`#rack-slots .slot[data-i="${run.jokers.indexOf(A)}"]`); if (s) { s.classList.remove('zmixin'); void s.offsetWidth; s.classList.add('zmixin'); }
+  };
+  if (G.headless || G.reduced || !ra || !rb || !rg || !document.body.animate) { renderBar(); finish(); return; }
+  renderBar(); updateHUD();
+  const gl2 = $('#b-shots .zmix .glass'), rg2 = gl2 ? gl2.getBoundingClientRect() : rg;
+  const gx = rg2.left + rg2.width / 2, gy = rg2.top + rg2.height * .3;
+  // les deux jetons s'envolent vers le verre
+  const fly = (j, r, delay) => {
+    const f = document.createElement('div'); f.className = 'zm-fly'; f.innerHTML = chipHTML(j);
+    Object.assign(f.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+    document.body.appendChild(f);
+    const dx = gx - (r.left + r.width / 2), dy = gy - (r.top + r.height / 2), up = -Math.max(60, Math.abs(dx) * .25);
+    const a = f.animate([
+      { transform: 'translate(0,0) scale(1) rotate(0deg)' },
+      { transform: `translate(${dx * .5}px, ${dy * .5 + up}px) scale(1.1) rotate(200deg)`, offset: .55 },
+      { transform: `translate(${dx}px, ${dy}px) scale(.35) rotate(380deg)`, opacity: .9 },
+    ], { duration: 620, delay, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' });
+    a.addEventListener('finish', () => { f.remove(); Snd.chipPick(); });
+  };
+  for (const i of [ia, ib]) { const sl = $(`#rack-slots .slot[data-i="${i}"]`); if (sl) sl.classList.add('zmgo'); }
+  fly(A, ra, 0); fly(B, rb, 140);
+  sayZ('Hop, dans le verre…');
+  // elle secoue, le verre prend la couleur des deux
+  setTimeout(() => {
+    const g3 = $('#b-shots .zmix .glass'); if (!g3) return;
+    BAR.zmLiq = hexMix(colA, colB);
+    g3.outerHTML = glassHTML('martini', BAR.zmLiq, 'cherry');
+    const g4 = $('#b-shots .zmix .glass'); if (g4) g4.classList.add('zm-shake');
+    Snd.cardSwish && Snd.cardSwish();
+  }, 780);
+  // le mix ressort du verre et file à la place du premier jeton
+  setTimeout(() => {
+    const g5 = $('#b-shots .zmix .glass'); if (g5) g5.classList.remove('zm-shake');
+    const tgt = chipEl(run.jokers.indexOf(A)), rt = tgt ? tgt.getBoundingClientRect() : ra;
+    const tmp = { parts: [{ t: A.parts[0].t, lv: A.parts[0].lv }, { t: B.parts[0].t, lv: B.parts[0].lv }], kind: 'mix', p: Math.max(A.p || 1, B.p || 1), uid: -1 };
+    const f = document.createElement('div'); f.className = 'zm-fly out'; f.innerHTML = chipHTML(tmp);
+    const w = rt.width;
+    Object.assign(f.style, { left: (gx - w / 2) + 'px', top: (gy - w / 2) + 'px', width: w + 'px', height: w + 'px' });
+    document.body.appendChild(f);
+    const dx = rt.left + rt.width / 2 - gx, dy = rt.top + rt.height / 2 - gy;
+    const a = f.animate([
+      { transform: 'translate(0,0) scale(.2)', opacity: 0 },
+      { transform: 'translate(0,-34px) scale(1.35)', opacity: 1, offset: .32 },
+      { transform: `translate(${dx * .5}px, ${dy * .5 - 50}px) scale(1.15) rotate(-180deg)`, offset: .62 },
+      { transform: `translate(${dx}px, ${dy}px) scale(1) rotate(-360deg)` },
+    ], { duration: 900, easing: 'cubic-bezier(.3,0,.4,1)', fill: 'forwards' });
+    celebrate(false, gx, gy - 30);
+    a.addEventListener('finish', () => { f.remove(); finish(); });
+  }, 1650);
+}
+
+/* ================= v12.2 · les jetons MULT rapportent de l'or, et on les voit travailler =================
+   À la fin de la manche, le MULT venu de tes jetons rapporte de l'or : +25 % de l'or de la manche (cartes abattues
+   et prime) par +1 MULT de jetons. Et chaque fois qu'un jeton MULT gagne du MULT, un « +0,1× » s'envole de lui vers ton score. */
+const MULTG = { k: .25 };
+// le MULT qui vient des jetons : le MULT final, moins ce qu'il serait sans eux
+function multFromJetons(run, cb, score) {
+  if (!cb || cb.demo || !cb.stats || !cb.stats.hk || !score) return 0;
+  const hk = cb.stats.hk; let base = 1;
+  cb.stats.hk = null;
+  try { base = 1 + multParts(run, cb, true).reduce((a, p) => a + p[1], 0); } finally { cb.stats.hk = hk; }
+  return Math.max(0, score.mult - base);
+}
+function multGold(run, cb, score, bonus) {
+  const mj = multFromJetons(run, cb, score);
+  if (mj < .05) return { mj, g: 0 };
+  return { mj, g: Math.round(((cb.goldIn || 0) + (bonus || 0)) * MULTG.k * mj) };
+}
+// « +0,1× » : du jeton qui l'a gagné jusqu'au compteur de MULT
+const MFLY = {};
+function multFly(id, v) {
+  if (G.headless || G.reduced || G.mode !== 'combat' || !G.run || !(v > 0)) return;
+  const t = now(), M = MFLY[id] || (MFLY[id] = { t: 0, v: 0 });
+  M.v += v;
+  if (t - M.t < 320) return;   // plusieurs gains rapprochés : un seul envol, qui les additionne
+  const amt = M.v; M.v = 0; M.t = t;
+  const i = G.run.jokers.findIndex(j => j.parts && j.parts.some(p => p.t === id)), slot = i >= 0 && $(`#rack-slots .slot[data-i="${i}"] .chip`);
+  const to = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
+  if (!slot || !to) return;
+  const a = slot.getBoundingClientRect(), b = to.getBoundingClientRect();
+  if (!a.width || !b.width) return;
+  const f = document.createElement('div'); f.className = 'mfly'; f.style.setProperty('--mc', (JK[id] && JK[id].col) || '#ffcc4d');
+  f.textContent = `+${fmtM(amt)}×`;
+  document.body.appendChild(f);
+  const x0 = a.left + a.width / 2, y0 = a.top + a.height * .3, x1 = b.left + b.width / 2, y1 = b.top + b.height / 2;
+  f.style.left = x0 + 'px'; f.style.top = y0 + 'px';
+  const dx = x1 - x0, dy = y1 - y0, lift = -Math.min(90, 30 + Math.abs(dx) * .15);
+  const an = f.animate([
+    { transform: 'translate(-50%,-50%) scale(.6)', opacity: 0 },
+    { transform: `translate(-50%,-50%) translate(0px, ${lift * .5}px) scale(1.15)`, opacity: 1, offset: .22 },
+    { transform: `translate(-50%,-50%) translate(${dx * .55}px, ${dy * .55 + lift}px) scale(1)`, opacity: 1, offset: .62 },
+    { transform: `translate(-50%,-50%) translate(${dx}px, ${dy}px) scale(.55)`, opacity: .2 },
+  ], { duration: 820, easing: 'cubic-bezier(.35,0,.35,1)' });
+  an.addEventListener('finish', () => { f.remove(); bumpCls(to, 'hit'); Snd.multIn && Snd.multIn(); });
+}
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
@@ -19329,6 +19596,7 @@ function openBar() {
   G.mode = 'bar';
   const o = genBar();
   Object.assign(BAR, o, { busy: false, leaving: false, gDone: false });
+  BAR.mixing = false; BAR.mixSel = null; BAR.mixMood = rnd() < ZMIX.mood; BAR.mixLeft = BAR.mixMood ? 2 : 1;
   const r = run.round + 1;
   BAR.market = !!G.dev.market || (r >= 3 && (isBossRound(run.round) || rnd() < petMkChance(run) || (r >= 4 && !run.marketSeen)));
   G.dev.market = false;
@@ -19428,7 +19696,7 @@ function renderBar() {
     const c = BAR.ciment, can = !c.sold && run.gold >= c.price && !BAR.busy;
     sh += `<div class="shot ciment${c.sold ? ' drunk' : ''}"><span class="glass g-bucket"><i class="liq"></i></span><div class="stext"><b>${CIMENT.name}</b><span>${CIMENT.txt}</span></div>${c.sold ? '<em class="stamp">FAIT</em>' : `<button class="mini" data-buyc="1" ${can ? '' : 'disabled'}>${c.price} or</button>`}</div>`;
   }
-  $('#b-shots').innerHTML = sh;
+  $('#b-shots').innerHTML = sh + zmixRowHTML();
   renderBarPet();
   // la porte du marché reste fermée tant qu'un client arrive ou joue (sinon il ne s'assoit jamais)
   const mkb = $('#b-market'), arriving = barArriving();
@@ -21548,6 +21816,7 @@ function renderSpellBar() {
   el.style.setProperty('--rh', (g.top + g.h + g.rest) + 'px');
   PCS.hands = { l: el.querySelector('.pc-hand.l'), r: el.querySelector('.pc-hand.r') };
   PCS.shadows = { l: el.querySelector('.pc-hsh.l'), r: el.querySelector('.pc-hsh.r') };
+  PCS.chipDown = false;
   const btns = el.querySelectorAll('.pcard'), slots = el.querySelectorAll('.pc-slot');
   PCS.cards = ids.map((id, k) => ({ id, k, el: btns[k], slot: slots[k], st: 'in', p: null, t: null, aim: false, sil: false, ch: null }));
   // ce qui recharge déjà (début de manche : les sorts démarrent à mi-recharge) attend sur la pile
@@ -23269,6 +23538,7 @@ function uiRoundCleared() {
   renderRack(); updateHUD(); showStatus();
   let sub = `+${res.bonus} or`;
   if (res.interest) sub += ` · intérêts +${res.interest}`;
+  if (res.multGold) sub += ` · MULT +${res.multGold}`;
   if (res.flip) sub += res.flip > 0 ? ' · quitte ou double : ×2 !' : ` · quitte ou double : ${res.flip} or`;
   banner('MANCHE GAGNÉE', sub, 'good', 1.5);
   petsRoundEnd();
@@ -24103,6 +24373,7 @@ function bindUI() {
     if (b.dataset.buyd != null) buyDrink(+b.dataset.buyd);
     else if (b.dataset.buys != null) buyShot(+b.dataset.buys);
     else if (b.dataset.buyc != null) buyCiment();
+    else if (b.dataset.zmix != null) zmixClick();
     else if (b.dataset.buyp != null) buyBarPet();
     else if (b.dataset.vis === 'yes') { Snd.click(); visAccept(); }
     else if (b.dataset.vis === 'no') visRefuse();
@@ -24269,7 +24540,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

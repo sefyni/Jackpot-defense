@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v11.9-202610111909
+JACKPOT DEFENSE v12.2-202610111953
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,27 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v12.2 — les jetons MULT servent enfin
+- Le MULT de tes jetons rapporte de l'or en fin de manche : +25 % de l'or de la manche (cartes abattues et prime) par +1 MULT venu de tes jetons. Exemple : ×1,5 de jetons → +37 % d'or.
+- Le bandeau « MANCHE GAGNÉE » l'affiche : « +13 or · MULT +10 ».
+- Chaque fois qu'un jeton MULT gagne du MULT, un « +0,1× » s'envole de lui vers ton compteur de score, avec un petit son.
+- L'aide (le score) l'explique en une phrase.
+
+Nouveautés de la v12.1 — le Mix de Zaza
+- Au bar, nouvelle ligne « Mix de Zaza » : touche-la, puis deux jetons de ton rack. Zaza les verse dans un verre, secoue, et il en sort un MIX : les deux pouvoirs, une seule place.
+- Deux jetons simples, de types différents (pas de Faux, Maudit, Fou ni jeton secret). Deux jetons pareils, c'est un doublon : on les empile soi-même, gratuitement.
+- Prix : 50 or (plus cher avec la Mise d'or, comme les autres prix du bar).
+- Une fois par passage au bar. Deux si Zaza est d'humeur (une fois sur quatre environ).
+- Le mix garde la meilleure puissance des deux jetons, et peut ensuite monter avec des doublons.
+- Le bouton CLASSEMENT du menu titre est retiré : le tableau en direct sur la table suffit (on le touche pour la page complète). PROFIL prend toute la largeur.
+
+Nouveautés de la v12.0 — les mains
+- 2 cartes jouées ensemble : la main droite les range l'une après l'autre (plus aucun croisement de mains).
+- 1 carte : la main la plus proche la pousse, comme avant. 3 cartes ou plus : le balayage, comme avant.
+- La main gauche fait rouler un jeton sur ses doigts au repos (avec un petit tour sur lui-même).
+- Quand elle doit pousser une carte, elle pose son jeton sur la table, puis le reprend en revenant.
+- Seule la main droite pianote maintenant (la gauche est occupée avec son jeton).
 
 Nouveautés de la v11.9 — les mains et les cartes
 - Les mains sont redessinées : des mains de croupier, avec ongles, jointures, une bague dorée et une manchette blanche à bouton doré.
