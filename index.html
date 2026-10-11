@@ -3042,6 +3042,164 @@ body.lmob .nn-txt em{font-size:11.5px}
 @media (max-width:384px){#b-go{font-size:15px;padding:6px 10px;white-space:nowrap}}
 /* l'écran « Nouvelle partie » : la table du fond ne passe plus derrière les textes */
 #newrun{background:radial-gradient(ellipse at 50% 40%,rgba(20,13,31,.74),rgba(20,13,31,.93) 78%)}
+
+/* ---------- v11.5 ---------- */
+/* un verre bu reste vide (même quand le comptoir se redessine) */
+.drink.drunk:not(.serving) .liq,.shot.drunk:not(.serving) .liq{height:0!important}
+.drink.drunk:not(.serving) .gsvg .liq{transform:scaleY(0);transition:none}
+.drink.drunk:not(.serving) .gsvg .ck-bub{opacity:0;animation:none}
+/* le rack au-delà de 8 places : une seule rangée, des jetons un peu plus petits */
+#rack-slots.more{grid-template-columns:repeat(var(--n,9),minmax(0,1fr));gap:3px;padding-left:6px;padding-right:6px}
+
+/* ---------- v11.6 · les jetons de mise sur les cartes de jeu ---------- */
+.nr-chips{position:absolute;left:50%;top:7px;transform:translateX(-50%);z-index:3;display:flex;align-items:center;padding:2px 5px 2px 3px;border-radius:999px;background:rgba(18,10,28,.82);box-shadow:0 0 0 2px rgba(255,255,255,.14),0 3px 0 rgba(0,0,0,.35)}
+.nr-chips i{display:block;width:22px;height:22px;filter:drop-shadow(1px 1px 0 rgba(0,0,0,.45))}
+.nr-chips i+i{margin-left:-10px}
+.nr-chips i:last-child{width:28px;height:28px}
+.nr-chips svg{display:block;width:100%;height:100%}
+.nr-card.in-r .nr-chips,.nr-card.in-l .nr-chips{animation:none}
+/* ---------- v11.6 · la prochaine machine à débloquer ---------- */
+.jpm-next{display:flex;align-items:center;justify-content:center;gap:6px;margin:6px auto 0;max-width:100%;font-size:12.5px;line-height:1.25;color:#cfc3e6;text-align:left}
+.jpm-next svg{flex:none;width:13px;height:13px;color:#ffcc4d}
+.jpm-next b{color:#fff}
+
+/* ---------- v11.7 · le classement en direct sur le tapis de l'écran titre ---------- */
+#title .chiprow{display:none}
+#title .tchipzone::after{content:"EN DIRECT · TOUCHE POUR TOUT VOIR"}
+.tboard{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:2px 2px 0;border-radius:12px;cursor:pointer;color:#fff;text-align:left;transition:background .15s}
+.tboard:hover{background:rgba(0,0,0,.1)}
+.tboard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.tb-head{display:flex;align-items:center;justify-content:space-between;gap:6px;font:700 12px/1 var(--f-pix);letter-spacing:.1em;color:#ffe9a8;text-shadow:0 1px 0 rgba(0,0,0,.55)}
+.tb-head em{display:inline-flex;align-items:center;gap:5px;padding:3px 8px 3px 5px;border-radius:999px;background:rgba(0,0,0,.38);font-style:normal;font-size:11px;letter-spacing:.02em;color:#fff}
+.tb-head em i{width:9px;height:9px;border-radius:50%;background:var(--sc);box-shadow:0 0 0 1.5px #000}
+.tb-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px}
+.tb-row{display:grid;grid-template-columns:20px minmax(0,1fr) auto 32px;align-items:center;gap:6px;min-height:21px;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.26);font-size:13px;line-height:1.2}
+.tb-pl{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;font:700 11px/1 var(--f-pix);color:#ffe9a8}
+.tb-row.p1 .tb-pl{background:radial-gradient(circle at 35% 30%,#fff3c4,#ffcc4d 45%,#c9932a);color:#2a1a08}
+.tb-row.p2 .tb-pl{background:radial-gradient(circle at 35% 30%,#fff,#d6dce8 45%,#8d98ad);color:#2a1a08}
+.tb-row.p3 .tb-pl{background:radial-gradient(circle at 35% 30%,#ffe2c4,#e0965a 45%,#9a5a2a);color:#2a1a08}
+.tb-ps{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;color:#fff}
+.tb-sc{font:700 12px/1 var(--f-pix);color:var(--gold);text-align:right}
+.tb-rd{font:700 11px/1 var(--f-pix);color:#9fd8ff;text-align:right}
+.tb-row.me{background:rgba(255,204,77,.28);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.tb-row.empty{background:rgba(0,0,0,.14)}
+.tb-row.empty .tb-ps{font-weight:600;color:rgba(255,255,255,.5)}
+.tb-row.empty .tb-pl{opacity:.6}
+.tb-me{margin:1px 0 0;font-size:11.5px;color:#d9ffe6;text-align:center;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.tb-me b{color:#fff}
+.tb-msg{margin:auto;padding:18px 0;font-size:13px;color:#d9ffe6;text-align:center}
+body:not(.lpc) #title .tchipzone{padding:12px 12px 25px}
+body:not(.lpc) #title .tleft{gap:14px}
+body:not(.lpc) #title .tmenu{margin-top:10px}
+body.lpc #title .tchipzone{width:100%;max-width:620px;padding:20px 24px 36px}
+body.lpc .tboard{gap:6px}
+body.lpc .tb-head{font-size:16px}
+body.lpc .tb-head em{font-size:13px;padding:4px 10px 4px 6px}
+body.lpc .tb-row{grid-template-columns:28px minmax(0,1fr) auto 44px;gap:10px;min-height:32px;padding:4px 12px;border-radius:9px;font-size:17px}
+body.lpc .tb-pl{width:24px;height:24px;font-size:14px}
+body.lpc .tb-sc{font-size:16px}
+body.lpc .tb-rd{font-size:14px}
+body.lpc .tb-me{font-size:14px}
+/* ---------- v11.7 · la page du classement remplit l'écran ---------- */
+.lb-row.empty{background:rgba(255,255,255,.025);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.lb-row.empty .lb-ps b{color:rgba(255,255,255,.4);font-weight:600}
+.lb-row.empty .lb-sc,.lb-row.empty .lb-rd{color:rgba(255,255,255,.25)}
+.lb-row.empty .lb-med{opacity:.45}
+.lbs .lb-fi{min-height:100%}
+.lbs .lb-box{flex:1;display:flex;flex-direction:column}
+.lbs .lb-list{flex:1;justify-content:space-around}
+body.lpc .lbs .lb-fi{width:min(100%,1100px);height:100%;min-height:0;display:grid;grid-template-columns:250px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:14px 26px;align-content:stretch}
+body.lpc .lbs .lb-head{grid-column:1 / -1}
+body.lpc .lbs .lb-tabs{grid-column:1;grid-row:2;align-self:start;flex-direction:column;gap:8px;overflow:visible;padding:0}
+body.lpc .lbs .lb-tab{justify-content:flex-start;gap:10px;padding:11px 16px;border-radius:12px;font-size:16px}
+body.lpc .lbs .lb-tab i{width:15px;height:15px}
+body.lpc .lbs .lb-foot{grid-column:1;grid-row:2;align-self:end;text-align:left;font-size:13px;line-height:1.35}
+body.lpc .lbs .lb-box{grid-column:2;grid-row:2;min-height:0;padding:12px 14px 10px}
+body.lpc .lbs .lb-list{gap:5px}
+body.lpc .lbs .lb-row{padding:5px 12px;min-height:40px}
+body.lpc .lbs .lb-ps b{font-size:18px}
+body.lpc .lbs .lb-sc{font-size:19px}
+body.lpc .lbs .lb-rd{font-size:17px}
+body:not(.lpc) #title .tchipzone{width:100%}
+
+/* ---------- v11.9 · de belles cartes, de belles mains, et tout en douceur ---------- */
+#abs .pcard{box-shadow:none;border-radius:0;transform-origin:50% 70%;will-change:transform}
+#abs .pc-bob{position:absolute;inset:0;display:block;transition:translate .26s cubic-bezier(.3,1.45,.5,1),scale .16s ease-out}
+#abs .pcard:not(.away) .pc-bob{animation:pcBob 3.8s ease-in-out infinite;animation-delay:calc(var(--i,0) * -.7s)}
+@keyframes pcBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.7px)}}
+body.lpc #abs .pcard:hover:not(.away):not(.aim) .pc-bob{translate:0 -8px}
+#abs .pcard:active:not(.away) .pc-bob{scale:.94}
+/* le halo des cartes prêtes (une couche floue qui respire : rien à repeindre) */
+#abs .pc-bob::before{content:"";position:absolute;inset:-3px;border-radius:calc(var(--cw) * .2);background:var(--sc);filter:blur(7px);opacity:0;transition:opacity .45s ease-out;pointer-events:none;will-change:opacity,transform;animation:pcGlow 2.6s ease-in-out infinite alternate;animation-delay:calc(var(--i,0) * -.45s)}
+#abs .pcard.ready:not(.away) .pc-bob::before{opacity:.4}
+#abs .pcard.aim .pc-bob::before{background:var(--red);opacity:.62;animation-duration:.5s}
+#abs .pcard.bil.aim .pc-bob::before{background:#3fe0e0}
+@keyframes pcGlow{from{transform:scale(.94)}to{transform:scale(1.08)}}
+/* la carte a deux côtés */
+#abs .pc-inner{position:absolute;inset:0;display:block;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+#abs .pc-face,#abs .pc-back{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+/* la face : papier crème, double filet, reflet */
+#abs .pc-face{transform:none;border-radius:calc(var(--cw) * .13);background:radial-gradient(130% 70% at 50% -6%,rgba(255,255,255,.85),rgba(255,255,255,0) 62%),linear-gradient(168deg,#fffdf7 0%,#f8eedb 55%,#eedcbb 100%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--sc) 62%,#1a1022),inset 0 0 0 3px #fffaf0,inset 0 0 0 4px color-mix(in srgb,var(--sc) 80%,transparent),inset 0 -8px 10px -8px rgba(120,80,30,.3),0 2px 0 #160d1e,0 6px 12px rgba(0,0,0,.4);transition:filter .25s}
+#abs .pc-face::before{content:none}
+#abs .pc-ico{top:44%}
+#abs .pc-face .pc-ico{width:58%}
+/* le médaillon serti comme un jeton de casino */
+#abs .pc-face .pc-ico::before{content:"";position:absolute;inset:-13%;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,#241830 calc(100% - 4.5px),rgba(0,0,0,0) calc(100% - 4px)),repeating-conic-gradient(from -9deg,#fff8ea 0 18deg,color-mix(in srgb,var(--sc) 82%,#000) 18deg 45deg);box-shadow:0 0 0 1px color-mix(in srgb,var(--sc) 45%,#1a1022),0 2px 3px rgba(0,0,0,.3)}
+#abs .pcard.bil .pc-face .pc-ico::before{background:radial-gradient(closest-side,#241830 calc(100% - 4.5px),rgba(0,0,0,0) calc(100% - 4px)),repeating-conic-gradient(from -9deg,#eef2fa 0 18deg,#5c5278 18deg 45deg);box-shadow:0 0 0 1px #3a3150,0 2px 3px rgba(0,0,0,.3)}
+/* le nom sur un ruban qui déborde de la carte */
+#abs .pc-face .pc-n{left:-2px;right:-2px;bottom:6px;padding:2px 6px 2px;border-radius:0;background:linear-gradient(180deg,color-mix(in srgb,var(--sc) 62%,#fff) 0%,var(--sc) 40%,color-mix(in srgb,var(--sc) 76%,#000) 100%);-webkit-clip-path:polygon(0 0,100% 0,calc(100% - 4px) 50%,100% 100%,0 100%,4px 50%);clip-path:polygon(0 0,100% 0,calc(100% - 4px) 50%,100% 100%,0 100%,4px 50%);color:#160c20;text-shadow:0 1px 0 rgba(255,255,255,.3)}
+#abs .pcard.bil .pc-face .pc-n{background:linear-gradient(180deg,#eef2fa 0%,#c3cde0 45%,#8d98ad 100%)}
+#abs .pc-face .pc-k{left:5px;top:5px;color:color-mix(in srgb,var(--sc) 45%,#2a1530)}
+#abs .pc-face .pc-k2{display:none}
+#abs .pcard.bil .pc-face .pc-k{left:6px;top:6px}
+/* le reflet : un éclat qui passe de temps en temps, et un grand quand la carte revient */
+#abs .pc-gloss{position:absolute;inset:0;z-index:4;display:block;border-radius:inherit;overflow:hidden;pointer-events:none}
+#abs .pc-gloss::before{content:"";position:absolute;top:-25%;bottom:-25%;left:-55%;width:38%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.75) 50%,rgba(255,255,255,0));transform:translateX(0) skewX(-18deg);opacity:0}
+#abs .pcard.ready .pc-gloss::before{animation:pcGlint 8s ease-in-out infinite;animation-delay:calc(2.4s + var(--i,0) * .3s)}
+#abs .pcard.shine .pc-gloss::before{animation:pcShine .75s cubic-bezier(.3,.1,.3,1) 1}
+@keyframes pcGlint{0%,86%{transform:translateX(0) skewX(-18deg);opacity:0}87%{opacity:.5}100%{transform:translateX(480%) skewX(-18deg);opacity:.5}}
+@keyframes pcShine{0%{transform:translateX(0) skewX(-18deg);opacity:1}100%{transform:translateX(480%) skewX(-18deg);opacity:1}}
+/* le dos : bordeaux, treillis doré, losange au pique */
+#abs .pc-back{position:absolute;inset:0;display:block;border-radius:calc(var(--cw) * .13);transform:rotateY(180deg);background:radial-gradient(ellipse 62% 46% at 50% 50%,rgba(255,200,110,.24),rgba(255,200,110,0) 70%),repeating-linear-gradient(45deg,rgba(255,226,170,.16) 0 1px,rgba(0,0,0,0) 1px 6px),repeating-linear-gradient(-45deg,rgba(255,226,170,.16) 0 1px,rgba(0,0,0,0) 1px 6px),linear-gradient(160deg,#a02644 0%,#6c1331 55%,#460a20 100%);box-shadow:inset 0 0 0 1px #2a0612,inset 0 0 0 3px #f4e6c8,inset 0 0 0 4px #c9973a,inset 0 0 14px rgba(0,0,0,.4),0 2px 0 #160d1e,0 5px 10px rgba(0,0,0,.4)}
+#abs .pc-emb{position:absolute;left:50%;top:50%;width:42%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(45deg);display:grid;place-items:center;border-radius:22%;background:radial-gradient(circle at 35% 30%,#fff3c9,#e9b94e 55%,#a8741c);box-shadow:0 0 0 1.5px #460a20,0 0 0 3px #e2b04a,0 3px 6px rgba(0,0,0,.45)}
+#abs .pc-emb .ico{width:62%;height:62%;transform:rotate(-45deg);color:#5a0f26}
+/* les états */
+#abs .pcard.away .pc-face{filter:none}
+#abs .pcard.aim .pc-face{box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 4px var(--red),0 2px 0 #160d1e,0 6px 14px rgba(0,0,0,.45)}
+#abs .pcard.bil.aim .pc-face{box-shadow:inset 0 0 0 2px #3fe0e0,inset 0 0 0 4px #fffbf2,0 2px 0 #160d1e,0 6px 14px rgba(0,0,0,.45)}
+#abs .pcard.fou .pc-face{background:radial-gradient(130% 70% at 50% -6%,rgba(255,255,255,.8),rgba(255,255,255,0) 62%),linear-gradient(168deg,#f2fff6 0%,#d8f5e2 100%);box-shadow:inset 0 0 0 1px #0b0e14,inset 0 0 0 3px #f2fff6,inset 0 0 0 4px #3dff7a,0 2px 0 #160d1e,0 6px 12px rgba(0,0,0,.4)}
+#abs .pcard.fou .pc-face .pc-n{background:#0b0e14;color:#3dff7a;text-shadow:none}
+#abs .pc-face.pop{animation:pcPop2 .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pcPop2{0%{transform:scale(1)}35%{transform:scale(1.1);filter:brightness(1.18)}100%{transform:none;filter:none}}
+/* la place vide : un anneau qui se remplit, le compte à rebours au milieu */
+#abs .pc-slot{border:1.5px dashed color-mix(in srgb,var(--sc) 42%,transparent);border-radius:calc(var(--cw) * .13);background:radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--sc) 14%,rgba(10,6,18,.5)),rgba(10,6,18,.5) 72%)}
+#abs .pc-slot .pc-fill{display:none}
+#abs .pc-slot .pc-ico{width:50%;opacity:.28}
+#abs .pc-ring{position:absolute;left:50%;top:44%;width:76%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(var(--sc) calc((1 - var(--p,1)) * 360deg),rgba(255,255,255,.1) 0);-webkit-mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 3.5px),#000 calc(100% - 3px));mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 3.5px),#000 calc(100% - 3px))}
+#abs .pc-slot .pc-cd{inset:auto 0 auto 0;top:44%;transform:translateY(-50%);text-shadow:0 2px 0 #000,0 0 6px rgba(0,0,0,.6)}
+#abs .pc-pilespot{border:1.5px dashed rgba(255,243,230,.16);background:rgba(10,6,18,.22)}
+/* les mains : plus de contour flou, un souffle, des doigts qui bougent */
+#abs .pc-hand{transform-origin:50% 55%}
+#abs .pc-hand .hand-svg{filter:none;animation:hdIdle2 4.4s ease-in-out infinite}
+#abs .pc-hand.r .hand-svg{animation-delay:-2.2s}
+@keyframes hdIdle2{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(0,1.6px) rotate(-.8deg)}}
+#abs .hand-svg .hd-f,#abs .hand-svg .hd-th{transform-box:fill-box;transition:transform .12s ease-out}
+#abs .hand-svg .hd-f{transform-origin:50% 100%}
+#abs .hand-svg .hd-th{transform-origin:100% 100%}
+#abs .pc-hand.grab .hd-f{transform:scaleY(.9)}
+#abs .pc-hand.grab .hd-th{transform:rotate(7deg)}
+#abs .pc-hand.drum .hd-f{animation:hdTap .3s ease-in-out}
+#abs .pc-hand.drum .hd-f3{animation-delay:.07s}
+#abs .pc-hand.drum .hd-f2{animation-delay:.14s}
+#abs .pc-hand.drum .hd-f1{animation-delay:.21s}
+@keyframes hdTap{0%,100%{transform:none}45%{transform:scaleY(.82)}}
+/* l'ombre des mains, qui suit leur hauteur */
+#abs .pc-hsh{position:absolute;z-index:8;width:var(--hw);height:var(--hh);pointer-events:none;opacity:.55;background:radial-gradient(ellipse 46% 36% at 50% 46%,rgba(8,3,14,.6),rgba(8,3,14,.28) 55%,rgba(8,3,14,0) 100%);will-change:transform,opacity}
+body.lpc #abs .pc-face .pc-n{left:-3px;right:-3px;bottom:8px;padding:3px 8px 2px;font-size:10.5px}
+body.lpc #abs .pc-face .pc-k{left:7px;top:7px}
+body.lpc #abs .pc-face .pc-ico::before{inset:-12%}
+@media (prefers-reduced-motion:reduce){#abs .pc-bob,#abs .pc-bob::before,#abs .pc-gloss::before,#abs .hand-svg,#abs .hd-f{animation:none!important}}
+body.reduced #abs .pc-bob,body.reduced #abs .pc-bob::before,body.reduced #abs .pc-gloss::before,body.reduced #abs .hand-svg,body.reduced #abs .hd-f{animation:none!important}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3542,6 +3700,7 @@ body.lmob .nn-txt em{font-size:11.5px}
       <div class="tchipzone">
         <button class="tsecret" id="t-secret" aria-label="Un jeton qui brille bizarrement"><i class="ts-c"></i></button>
         <div class="chiprow" id="t-chips" aria-hidden="true"></div>
+        <div class="tboard" id="t-board" role="button" tabindex="0" aria-label="Classement en ligne : touche pour tout voir"></div>
       </div>
       <p class="tmeta" id="t-best" hidden></p>
     </div>
@@ -3575,7 +3734,7 @@ body.lmob .nn-txt em{font-size:11.5px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v11.4</p>
+  <p class="proto">Sefy Industries · v11.9</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -4570,7 +4729,7 @@ const MACH9 = [
   { name: "Le Grand Bleu", bugName: "Fuite d'eau", bug: "un rouleau noyé tourne 2 fois moins vite (facile à viser), mais il ne donne jamais de relance.", builds: [["marée", ["Houle", "Poissons", "Lune", "Neptune", "Écho"]], ["venin", ["Venin", "Scorpion", "Méduse", "Balle collante"]]] },
   { name: "Haute Tension", bugName: "Court-circuit", bug: "quand tu arrêtes un rouleau, 1 fois sur 4 un arc saute au rouleau voisin et le copie.", builds: [["vitesse", ["Vent", "Hermès", "Gémeaux", "Balle chercheuse", "Balle traçante"]], ["flipper électrique", ["Bumper", "Tilt", "Pulsar"]], ["rack plein", ["Serre-livres", "Ascenseur", "Bric-à-brac"]]] },
   { name: "Le Jardin de Pierre", bugName: "Grippée", bug: "les rouleaux n'accélèrent jamais, mais un crâne reste collé deux tirages.", builds: [["forteresse", ["Muraille", "Casemate", "Taureau", "Saturne", "Capricorne"]], ["désert", ["Sable", "Mercure"]]] },
-  { name: "Le Salon", bugName: "Coup de coude", bug: "une fois par tirage, tu peux bousculer la machine pour décaler un rouleau d'une case ; 1 fois sur 3, elle se bloque et ta relance gratuite saute.", builds: [["chaînes", ["Métal", "Verseau", "Jupiter", "Mjölnir"]], ["billard", ["Bleu de billard", "Bande", "Ricochet"]], ["spectacle", ["Rappel", "Pont", "Pivot"]]] },
+  { name: "Le Salon", bugName: "Coup de coude", bug: "une fois par tirage, tu peux bousculer la machine : le rouleau que tu touches glisse d'une case, vers le haut ou vers le bas (au hasard).", builds: [["chaînes", ["Métal", "Verseau", "Jupiter", "Mjölnir"]], ["billard", ["Bleu de billard", "Bande", "Ricochet"]], ["spectacle", ["Rappel", "Pont", "Pivot"]]] },
   { name: "Le Stand de Tir", bugName: "Cible mobile", bug: "une cible défile sur un rouleau ; arrête-le pile dessus et le jeton gagné prend +20 % de puissance.", builds: [["mitraille", ["Chevrotine", "Spirale", "Tourelle"]], ["tir lointain", ["Comète", "Phare", "Cible tombante"]], ["brume", ["Vapeur", "Hydre"]], ["score", ["Projecteur", "Grand final"]]] },
   { name: "Le Flipper", bugName: "Boule perdue", bug: "après chaque tirage, 1 fois sur 3, une boule rebondit sur la ligne et change un symbole au hasard.", builds: [["mêlée", ["Kicker", "Baby-foot", "Cloche", "Cerbère"]], ["grand froid", ["Blizzard", "Cancer"]], ["parades", ["Spinner", "Compte-tours"]], ["arcade", ["Pachinko", "Fronton"]]] },
   { name: "Le Casino Maudit", bugName: "Possédée", bug: "2 fois plus de crânes, mais chaque crâne sur la ligne rapporte 15 or.", builds: [["superstition", ["Miroir brisé", "Chat noir", "Zéro", "Pandore"]], ["épines", ["Ronces", "Herse"]], ["quilles", ["Cochonnet", "Jenga"]], ["tout ou rien", ["Kamikaze", "Double ou rien"]]] },
@@ -7693,7 +7852,7 @@ function bilLaunch(ang, pow) {
   const v = (BAL.bilV0 + (BAL.bilV1 - BAL.bilV0) * pow) * (1 + vk), r0 = BAL.baseR + BAL.bilR + .6;
   const big = 1 + Math.min(1, .2 * bpk(s, 'grosse'));
   const b = newBall(Math.cos(ang) * r0, Math.sin(ang) * r0, Math.cos(ang) * v, Math.sin(ang) * v, { main: true, r: BAL.bilR * big, full: pow >= .97 });
-  b.ric = Math.round(bpk(s, 'ricochet')) + (bpk(s, 'ricochet') > 0 ? 1 : 0); if (b.ric > 0) b.ric += s.ricoAmp || 0;
+  b.ric = Math.round(bpk(s, 'ricochet')) + (bpk(s, 'ricochet') > 0 ? 1 : 0); b.ric += s.bilRic || 0;
   b.perce = bpk(s, 'perce') > 0 ? 1 + Math.round(bpk(s, 'perce')) : 0;
   if (T.ressort[4] > 0 && b.full) { b.perce = 99; b.plein = true; }
   if (T.ressort[2] > 0) b.life += 2;
@@ -7756,6 +7915,7 @@ function bilSplit(b, n) {
 }
 // la bille percute une carte
 function bilHit(e, b, sp, nx, ny) {
+  if (rcBilleHit(e)) return;
   const cb = G.cb, s = cb.stats, T = s.T, f = .45 + .55 * Math.min(1, sp / 220);
   let dmg = s.dmg * (cb.dynD || 1) * BAL.bilDmg * f * b.combo * b.dm * s.bilDmgMul * (1 + .25 * bpk(s, 'acier')) * (1 + .15 * bpk(s, 'grosse'));
   if (b.x3) dmg *= 3;
@@ -9027,7 +9187,7 @@ const ENEMIES = {
   b_dame: { name: 'Dame de Cœur', suit: 'h', rank: 'D', hp: 950, spd: 4.5, dmg: 16, sd: 9, atk: 1.2, gold: 60, r: 13, ai: 'b_dame', boss: true, stop: 52, intro: "Elle boit la vie des cartes autour d'elle. Pare ses cœurs ou gèle-la pour casser son soin." },
   b_roiP: { name: 'Roi de Pique', suit: 's', rank: 'R', hp: 1500, spd: 4, dmg: 18, sd: 8, atk: 1.2, gold: 80, r: 13, ai: 'b_roiP', boss: true, stop: 80, intro: 'Il tire en rafales. Chaque tir renvoyé lui fait très mal.' },
   b_roiT: { name: 'Roi de Trèfle', suit: 'c', rank: 'R', hp: 2200, spd: 3.2, dmg: 20, atk: 1.3, gold: 100, r: 14, ai: 'b_roiT', boss: true, intro: 'Invincible tant que ses 3 gardes vivent. Tue-les, puis frappe-le.' },
-  b_roiC: { name: 'Roi de Cœur', suit: 'h', rank: 'R', hp: 3600, spd: 4, dmg: 18, atk: 1.2, gold: 120, r: 14, ai: 'b_roiC', boss: true, intro: 'À la moitié de ses PV, il se dédouble. Seul le vrai saigne : trouve-le avec ta BILLE !' },
+  b_roiC: { name: 'Roi de Cœur', suit: 'h', rank: 'R', hp: 3600, spd: 4, dmg: 18, atk: 1.2, gold: 120, r: 14, ai: 'b_roiC', boss: true, intro: 'À mi-vie, il se multiplie. Seul le vrai saigne : ta BILLE sur lui les réunit tous !' },
   b_joker: { name: 'Joker Noir', suit: 'j', rank: 'J', hp: 6200, spd: 3, dmg: 22, sd: 8, atk: 1.2, gold: 200, r: 15, ai: 'b_joker', boss: true, stop: 58, intro: 'Il vole tes jetons et lance tous les sorts. Abats-le pour tout récupérer.' },
   // le boss final : le patron du Tapis Rouge, trois vies (PV par vie)
   b_baron: { name: 'Le Baron', suit: 'j', rank: 'B', hp: 11400, spd: 5, dmg: 22, sd: 9, atk: 1.2, gold: 300, r: 15, ai: 'b_baron', boss: true, stop: 60, rim: '#ffcc4d', intro: 'Trois vies. 1 : ses figures le protègent. 2 : ses sorts et ses As. 3 : il te défie à tous les jeux du bar.' },
@@ -11078,7 +11238,7 @@ function spawnEnemy(type, ang, o = {}) {
   cb.enemies.push(e);
   aiInit(e, o);
   if (!cb.demo) tkSpawn(e, o);
-  if (e.boss) { cb.bosses.push(e); bossIntro(e); }
+  if (e.boss) { cb.bosses.push(e); bossArrive(e); bossIntro(e); }
   if (!cb.demo && !G.headless) {
     if (!o.fake) catSee(d.boss ? 'b' : 'e', type);
     if (type === 'tireur' && seenOnce('e_tireur')) queueTip(TIPS.rake);
@@ -11185,6 +11345,7 @@ function updateCombat(dt) {
   if (cb.muzzle > 0) cb.muzzle -= dt;
   if (cb.muzzle2 > 0) cb.muzzle2 -= dt;
   if (cb.ghostMuzzle > 0) cb.ghostMuzzle -= dt;
+  ratUpdate(cb, dt);
   if (cb.bubbles.length) { for (const b of cb.bubbles) { b.t += dt; if (b.e && !b.e.dead) { b.x = b.e.x; b.y = b.e.y; } } cb.bubbles = cb.bubbles.filter(b => b.t < b.life); }
   if (cb.baseFlash > 0) cb.baseFlash -= dt;
   cb.aimV += angDiff(cb.aim, cb.aimV) * Math.min(1, dt * 22);
@@ -11350,7 +11511,8 @@ function updateEnemy(e, dt) {
     if (Math.abs(e.kbx) + Math.abs(e.kby) < 2) { e.kbx = 0; e.kby = 0; }
     e.contact = false;
   }
-  if (e.boss && !e.fake && !e.rage && e.hp < e.maxHp * .5 && !G.cb.demo && e.type !== 'b_baron') bossRage(e);
+  if (e.boss && !e.fake && !e.rage && e.hp < e.maxHp * .5 && !G.cb.demo && e.type !== 'b_baron') bossHalf(e);
+  if ((e.boss || e.ratHide) && bossHold(e, dt)) return;
   const held = e.frzT > 0 || e.stunT > 0;
   if (held && e.st.cast) interruptCast(e);
   if (e.deal > .15) return;
@@ -11606,7 +11768,7 @@ function aiRoiT(e, dt, sp, held, contactD) {
   } else bossSub(e, `Carapace : tue ses gardes (${st.guards.length} restant${st.guards.length > 1 ? 's' : ''})`);
   meleeStep(e, dt, sp * (e.inv ? 1 : .6), held, contactD);
 }
-function aiRoiC(e, dt, sp, held, contactD) {
+function aiRoiC0(e, dt, sp, held, contactD) {
   const st = e.st;
   if (e.fake) { meleeStep(e, dt, sp, held, contactD); return; }
   if (st.splits === 0 && e.hp < e.maxHp * .5) { st.splits = 1; makeFakes(e, 1, .25); }
@@ -12547,7 +12709,8 @@ function dealDmg(e, amt, o) {
   if (e.dead || amt <= 0) return;
   const cb = G.cb, s = cb.stats, run = G.run;
   o = o || {};
-  if (e.inv) { if (!G.headless && rnd() < .2) { floater(e.x, e.y - e.r - 2, 'BLOQUÉ', '#9fb4d8', 3.4); Snd.shield(); } return; }
+  if (e.inv || e.introT > 0 || e.halfT > 0 || e.talkInv || e.ratHide) { if (!G.headless && rnd() < .2) { floater(e.x, e.y - e.r - 2, e.inv ? 'BLOQUÉ' : 'INVINCIBLE', '#9fb4d8', 3.4); Snd.shield(); } return; }
+  if (e.fake && e.real && e.real.type === 'b_roiC') { if (!G.headless && rnd() < .2) floater(e.x, e.y - e.r - 2, 'BLUFF', '#ff7eb6', 3.4); return; }
   let d = amt * e.armor;
   if (s.thornK > 1 && (o.src === 'ronces' || o.src === 'herse')) d *= s.thornK;
   if (cb.final) { if (FB.black) d *= 1 + .15 * FB.black; if (e.st.prot) d *= .5; }
@@ -12952,6 +13115,7 @@ function makeCard(type, mode, kOver) {
   }
   if (d.suit === 'x') drawIcon(g, type === 'voleur' ? 'banquier' : type === 'leurre' ? 'faux' : 'star', 0, r * .05, r * 1.15, ink);
   else if (d.suit === 'j') { drawIcon(g, type === 'b_baron' ? 'banquier' : 'pacte', 0, r * .12, r * 1.2, type === 'b_baron' ? '#ffcc4d' : '#ff4d6d'); }
+  else if (face && BOSS_LOOK && BOSS_LOOK[type] && bossPortrait(g, type, d, r, w, h, ink)) { /* le portrait du boss */ }
   else if (face) {
     g.fillStyle = ink; g.font = `700 ${r * .95}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle';
     g.fillText(d.rank, 0, -r * .3);
@@ -13400,7 +13564,7 @@ function render(dtReal) {
   const fog = cb.fog;
   const E = cb.enemies.slice().sort((a, b) => a.y - b.y);
   for (const e of E) {
-    if (e.dead || (fog && fogHides(e.x, e.y))) continue;
+    if (e.dead || e.ratHide || (fog && fogHides(e.x, e.y))) continue;
     if (e.st.beams && e.st.beams.length) { ctx.strokeStyle = `rgba(255,60,110,${.5 + .3 * Math.sin(t * 20)})`; ctx.lineWidth = .8; ctx.beginPath(); for (const o of e.st.beams) if (!o.dead) { ctx.moveTo(o.x, o.y); ctx.lineTo(e.x, e.y); } ctx.stroke(); }
     if (e.st.wind && !e.tapis) {
       const d = edist(e) || 1, al = .35 + .35 * Math.sin(t * 30);
@@ -13409,7 +13573,7 @@ function render(dtReal) {
     }
   }
   for (const e of E) {
-    if (e.dead || (fog && fogHides(e.x, e.y))) continue;
+    if (e.dead || e.ratHide || (fog && fogHides(e.x, e.y))) continue;
     const sp = spr(e.type), card = sp.n, sc = e.r / e.d.r;
     const still = e.contact || e.frzT > 0 || e.stunT > 0 || e.deal > 0;
     let by = e.y + (still ? 0 : Math.sin(t * 9 + e.wob) * .35);
@@ -13420,11 +13584,13 @@ function render(dtReal) {
     if (cb.lagT > cb.t) { bx = Math.round(bx / 3) * 3; by = Math.round(by / 3) * 3; }
     if (e.deal > 0) { const p = e.deal / .4; rot += p * 2.4; scl *= 1 + p * .5; alpha = 1 - p * .7; }
     if (e.ai === 'decoy') alpha *= .55 + .25 * Math.sin(t * 10);
+    if (e.halfT > 0) { rot += Math.sin(t * 26) * .1; scl *= 1 + .1 * Math.abs(Math.sin(t * 7)); }
     ctx.save(); ctx.translate(bx, by); ctx.rotate(rot); ctx.scale(scl, scl); ctx.globalAlpha = alpha;
     if (e.elite) { ctx.shadowColor = ELITES[e.elite].col; ctx.shadowBlur = 12; }
     if (e.tapis) { ctx.shadowColor = '#ff3d5a'; ctx.shadowBlur = 10; }
     if (e.rage) { ctx.shadowColor = '#ff3d5a'; ctx.shadowBlur = 12 + 5 * Math.sin(t * 9); }
     if (e.inv) { ctx.shadowColor = '#5fd68a'; ctx.shadowBlur = 12; }
+    if (e.introT > 0 || e.halfT > 0 || e.talkInv) { ctx.shadowColor = '#ffcc4d'; ctx.shadowBlur = 13 + 6 * Math.sin(t * 12); }
     const dw = card.c.width / card.k, dh = card.c.height / card.k;
     ctx.drawImage(card.c, -card.ox, -card.oy, dw, dh);
     ctx.shadowBlur = 0;
@@ -13612,6 +13778,7 @@ function render(dtReal) {
     else ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
   }
   ctx.globalAlpha = 1;
+  drawRatFx(cb);
   if (cb.ab.aiming && G.pointer.has) {
     const x = G.pointer.wx, y = G.pointer.wy;
     ctx.strokeStyle = 'rgba(255,92,108,.9)'; ctx.lineWidth = .8; ctx.setLineDash([2, 1.5]);
@@ -14062,7 +14229,7 @@ function closeTip() {
   if (TIPQ.length) setTimeout(showNextTip, 220);
 }
 function seenOnce(key) { if (G.meta.seen[key]) return false; G.meta.seen[key] = 1; saveMeta(); return true; }
-function bossIntro(e) {
+function bossIntro0(e) {
   if (G.headless || G.cb.demo) return;
   banner(e.d.name.toUpperCase(), e.d.intro, 'boss', 2.8);
   shake(6); Snd.gong(); haptic(60);
@@ -14097,8 +14264,8 @@ function renderRack() {
   if (JT.uid != null && !G.run.jokers.some(j => j.uid === JT.uid)) hideJTip();
   const run = G.run, st = G.mode === 'combat' && G.cb && G.cb.stats && !G.cb.demo ? G.cb.stats : computeStats(run);
   let h = '';
-  const eff = effSlots(run), NS = Math.max(8, eff, run.jokers.length);
-  $('#rack-slots').classList.toggle('more', NS > 8);
+  const eff = effSlots(run), lockN = (run.cloverSlots < 1) + (run.slotsBought < 1) + (!run.scamSlot), NS = Math.max(8, eff + lockN, run.jokers.length);
+  $('#rack-slots').classList.toggle('more', NS > 8); $('#rack-slots').style.setProperty('--n', NS);
   for (let i = 0; i < NS; i++) {
     const j = run.jokers[i];
     if ((i < eff || i < run.jokers.length) && j) {
@@ -14369,7 +14536,7 @@ function refreshTitle() {
   const vc = vestCount(); setTxt('#t-vest-n', `${vc.n}/${vc.tot}`);
   setTxt('#t-prof-n', profName(G.meta, PROF.cur));
   $('#t-secret').classList.toggle('found', !!m.secret);
-  renderTicker();
+  renderTicker(); tlbRender();
 }
 // une petite fenêtre « tu es sûr ? »
 function askConfirm(txt, okLabel, ok, cancelLabel) {
@@ -14496,7 +14663,7 @@ function deckCardHTML(D, won, cls) {
     <span class="nr-pat" aria-hidden="true"></span>
     <i class="nr-cn tl">${iconSVG('su_s')}</i><i class="nr-cn tr">${iconSVG('su_h')}</i><i class="nr-cn bl">${iconSVG('su_d')}</i><i class="nr-cn br">${iconSVG('su_c')}</i>
     <span class="nr-med">${iconSVG(D.icon)}</span>${/\blk\b/.test(cls || '') ? `<span class="nr-lock">${LOCK_SVG}</span>` : ''}
-    ${st ? `<span class="nr-stk" style="--sc:${st.col}" title="Gagné avec ce jeu jusqu'à la ${esc(st.name)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : ''}
+    ${/\blk\b/.test(cls || '') ? '' : deckChipsHTML(won)}
   </div>`;
 }
 function renderNewRun(dir) {
@@ -14507,14 +14674,14 @@ function renderNewRun(dir) {
   const go = $('#newrun .nr-go'); if (go) { go.disabled = !open; go.textContent = open ? 'LANCER' : 'VERROUILLÉ'; }
   $('#nr-name').style.setProperty('--dc', D.col);
   setHTML('#nr-dots', DECKS.map((d, i) => `<i class="${i === NR.i ? 'on' : ''}${(m.dw || {})[d.id] ? ' won' : ''}${deckOpen(d) ? '' : ' lk'}" style="--dc:${d.col}"></i>`).join(''));
-  const st = stakeInfo(m.stake);
+  const sk = nrStakeOf(D), smax = deckStakeMax(D.id), st = stakeInfo(sk);
   setTxt('#nr-stake', st.name);
   $('#nr-schip').style.background = st.col;
   // v10.4 : ce que la mise change vraiment, en chiffres (avec les règles des mises d'avant)
-  setTxt('#nr-stxt', st.txt + (m.stake >= 2 ? ' Et les règles des mises d\'avant.' : '') + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? ' Gagne une partie pour débloquer la suivante.' : ''));
+  setTxt('#nr-stxt', st.txt + (sk >= 2 ? ' Et les règles des mises d\'avant.' : '') + (sk >= smax && smax < STAKES.length - 1 ? ' Bats le Baron avec ce jeu pour débloquer la suivante.' : ''));
   setHTML('#nr-pets', petPickHTML(m.pet));
-  $('#nr-sprev').disabled = m.stake <= 0;
-  $('#nr-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
+  $('#nr-sprev').disabled = sk <= 0;
+  $('#nr-snext').disabled = sk >= smax;
 }
 function nrDeck(d) {
   NR.i = (NR.i + d + DECKS.length) % DECKS.length;
@@ -14522,15 +14689,15 @@ function nrDeck(d) {
   renderNewRun(d); Snd.click(); haptic(8);
 }
 function nrStake(d) {
-  const m = G.meta, v = clamp(m.stake + d, 0, Math.min(STAKES.length - 1, m.stakeMax));
-  if (v === m.stake) { Snd.deny(); return; }
-  m.stake = v; saveMeta(); renderNewRun(0); Snd.click();
+  const m = G.meta, D = DECKS[NR.i], cur = nrStakeOf(D), v = clamp(cur + d, 0, deckStakeMax(D.id));
+  if (v === cur) { Snd.deny(); return; }
+  (m.dsel || (m.dsel = {}))[D.id] = v; m.stake = v; saveMeta(); renderNewRun(0); Snd.click();
 }
 function nrGo() {
   if (!deckOpen(DECKS[NR.i])) { Snd.deny(); return; }
   if (lbNeedPseudo()) { lbAsk(nrGo); return; }
   const cp = loadCheckpoint();
-  const go = () => { clearCheckpoint(); show('#newrun', false); startRun(null); };
+  const go = () => { clearCheckpoint(); show('#newrun', false); G.meta.stake = nrStakeOf(DECKS[NR.i]); startRun(null); };
   if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', go);
   else { Snd.click(); go(); }
 }
@@ -15905,7 +16072,7 @@ function elbowClick() {
   setLED(M.elbowArm ? 'TOUCHE LE ROULEAU À BOUSCULER' : 'TIRE OU ENCAISSE', '');
   updateMachineButtons();
 }
-function elbowReel(i) {
+function elbowReel0(i) {
   M.elbowArm = false; M.elbowUsed = true;
   const cab = $('#cabinet'); cab.classList.remove('shake'); void cab.offsetWidth; cab.classList.add('shake'); Snd.thud ? Snd.thud() : Snd.ballHit(1); haptic(40);
   if (rnd() < 1 / 3) { const lost = M.rel > 0; M.rel = Math.max(0, M.rel - 1); setLED(lost ? 'ELLE SE BLOQUE : TA RELANCE GRATUITE SAUTE' : 'ELLE SE BLOQUE !', 'bad'); updateMachineButtons(); return; }
@@ -16009,7 +16176,8 @@ function openJPM(then, start) {
   CH.then = then; CH.start = !!start;
   Object.assign(JPM, { then, start: !!start, st: 'ready', landed: null, stop: null, pulls: 0, v: 0 });
   const cur = jpmCur();
-  JPM.items = shuffle(MACH9.map((m, i) => i).filter(i => start || i !== cur));
+  JPM.items = shuffle(MACH9.map((m, i) => i).filter(i => machOpen(i) && (start || i !== cur)));
+  if (!JPM.items.length) JPM.items = [cur];
   const N = JPM.items.length;
   // la colonne : la liste répétée, pour tourner sans fin
   $('#jpm-strip').innerHTML = Array.from({ length: N * 2 + 3 }, (_, k) => jpmPlate(JPM.items[k % N])).join('');
@@ -16036,7 +16204,7 @@ function jpmRender() {
   $('#jpm').classList.toggle('won', JPM.st === 'result');
   const keep = JPM.start ? '' : `<button class="btn ghost jpm-keep" data-jp="keep">Garder ma machine<small>${esc(MACH9[cur].name)}</small></button>`;
   if (JPM.st === 'ready') {
-    r.innerHTML = `<p class="jpm-hint">Tire, puis arrête la colonne quand tu veux.</p>`;
+    r.innerHTML = `<p class="jpm-hint">Tire, puis arrête la colonne quand tu veux.</p>` + machNextHTML();
     a.innerHTML = `<button class="btn big gold jpm-go" data-jp="pull">TIRER</button>${keep}`;
   } else if (JPM.st === 'spin' || JPM.st === 'stopping') {
     r.innerHTML = `<p class="jpm-hint">${JPM.st === 'spin' ? 'STOP quand tu veux !' : '…'}</p>`;
@@ -17043,6 +17211,7 @@ Object.assign(ICONS, {
   dk_bumper: [{ d: 'M10 50A40 40 0 1 0 90 50A40 40 0 1 0 10 50', s: 7 }, { d: 'M24 50A26 26 0 1 0 76 50A26 26 0 1 0 24 50', s: 5 }, { d: ckStarD(50, 50, 16, 7, 5), f: 1 }],
   dk_disco: [{ d: ckDisco, f: 1, e: 1 }, { d: 'M50 4V28', s: 4 }, { d: ckStarD(84, 20, 10, 3, 4, 0) + ckStarD(15, 30, 7, 2.2, 4, 0), f: 1 }],
   dk_ressort: [{ d: 'M28 90H72L32 78L68 66L32 54L68 42L28 32H72', s: 6 }, { d: ckCirc(50, 16, 10), f: 1 }],
+  dk_mojito: [{ d: 'M8 88L30 46L52 78L66 44', s: 7 }, { d: ckCirc(76, 26, 14), f: 1 }, { d: 'M30 46L19 42M30 46L27 33M52 78L60 89M52 78L65 80', s: 4 }],
   dk_triplesec: [{ d: ckCirc(32, 66, 16) + ckCirc(27, 61, 4.5) + ckCirc(68, 66, 16) + ckCirc(63, 61, 4.5) + ckCirc(50, 36, 16) + ckCirc(45, 31, 4.5), f: 1, e: 1 }],
   dk_kir: [{ d: 'M12 40L30 58L42 26L50 52L58 26L70 58L88 40L78 84H22ZM46 70A4 4 0 1 0 54 70A4 4 0 1 0 46 70ZM30 71A3 3 0 1 0 36 71A3 3 0 1 0 30 71ZM64 71A3 3 0 1 0 70 71A3 3 0 1 0 64 71Z', f: 1, e: 1 }],
   dk_mystere: [{ d: 'M32 34C32 16 68 14 68 34C68 47 52 47 52 62', s: 11 }, { d: ckCirc(52, 80, 7.5) + ckStarD(84, 22, 9, 2.6, 4, 0) + ckStarD(16, 64, 7, 2.2, 4, 0), f: 1 }],
@@ -17054,7 +17223,7 @@ Object.assign(ICONS, {
 // ---- les nouvelles boissons ----
 const CK_NEW = {
   // le canon
-  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [40, 66], icon: 'dk_ricochet', amp: 1, txt: lv => `Tout ce qui rebondit rebondit ${lv} fois de plus (Carambole, tirs renvoyés, BILLE)`, quip: ['Au shaker, pas à la cuillère. Et ça rebondit.', 'Elle rebondit, et elle rebondit encore.'] },
+  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [40, 66], icon: 'dk_ricochet', amp: 1, txt: lv => `Les balles de la Carambole et les tirs renvoyés rebondissent ${lv} fois de plus`, quip: ['Au shaker, pas à la cuillère. Et ça rebondit.', 'Elle rebondit, et elle rebondit encore.'] },
   pyro: { cat: 'canon', name: 'Piña Pyro', glass: 'tiki', liq: '#ffb33a', gar: 'fire', max: 3, price: [30, 48, 72], icon: 'dk_pyro', amp: 1, txt: lv => `Tes brûlures font +${30 * lv}${NB}% de dégâts`, quip: ['Ananas flambé. Tes flammes vont adorer.', 'Attention, le verre aussi est chaud.'] },
   critik: { cat: 'canon', name: 'Tequila Boum', glass: 'shooter', liq: '#ffe08a', gar: 'lime', max: 3, price: [28, 46, 70], icon: 'dk_critik', amp: 1, txt: lv => `Tes coups critiques font +${50 * lv}${NB}% de dégâts`, quip: ['Sel, citron, BOUM.', 'Un coup sec. Comme un critique.'] },
   lagon: { cat: 'canon', name: 'Blue Lagoon', glass: 'hurricane', liq: '#3fb8ff', gar: 'orange', max: 2, price: [26, 44], icon: 'dk_lagon', amp: 1, txt: lv => `Tout ce qui gèle les cartes les gèle ${40 * lv}${NB}% plus longtemps`, quip: ['Bleu comme un lagon. Froid comme mon ex.', 'Ça glace les dents. Et les cartes.'] },
@@ -17069,10 +17238,11 @@ const CK_NEW = {
   // la BILLE
   disco: { cat: 'bille', name: 'Disco Punch', glass: 'punch', liq: '#c9a8ff', gar: 'disco', max: 3, price: [30, 50, 76], icon: 'dk_disco', txt: lv => `La BILLE fait +${25 * lv}${NB}% de dégâts`, quip: ['Ça tourne, ça brille, ça frappe.', 'Mets tes pattes d\'eph.'] },
   ressort: { cat: 'bille', name: 'Ressort Sour', glass: 'coupe', liq: '#d6f56b', gar: 'lime', max: 2, price: [30, 52], icon: 'dk_ressort', txt: lv => `La BILLE se recharge ${[0, 20, 35][lv]}${NB}% plus vite`, quip: ['Acide. Ça te met un coup de ressort.', 'Boing.'] },
+  mojito: { cat: 'bille', name: 'Mojito Rebond', glass: 'highball', liq: '#7dffb0', gar: 'mint', max: 2, price: [40, 66], icon: 'dk_mojito', txt: lv => `Ta BILLE ricoche vers ${lv} carte${lv > 1 ? 's' : ''} de plus`, quip: ['Menthe, citron vert… et ça rebondit partout.', 'Un mojito qui ricoche. Tu suis ?'] },
   triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [70], icon: 'dk_triplesec', amp: 1, txt: () => 'Quand ta BILLE se divise, une bille de plus part avec elle', quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
   // les spécialités de Zaza (une de temps en temps, sur le comptoir)
   kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or sur les cartes abattues`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
-  mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [70], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
+  mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [200], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
   rhum: { cat: 'zaza', name: 'Rhum Arrangé', glass: 'tumbler', liq: '#c98a3a', gar: 'ice', max: 3, price: [40, 62, 90], icon: 'dk_rhum', txt: lv => `Tes sorts se rechargent ${10 * lv}${NB}% plus vite`, quip: ['Vanille, cannelle, et un peu de magie.', 'Il a macéré dix ans. Toi, tu attendras moins.'] },
   absinthe: { cat: 'zaza', name: 'La Fée Verte', glass: 'wine', liq: '#7dff6b', gar: 'star', max: 1, price: [85], icon: 'dk_absinthe', txt: () => 'Tous tes sorts sont prêts au début de chaque manche', quip: ['Si tu vois une fée, c\'est normal.', 'Elle murmure des sorts. Écoute-la.'] },
   champagne: { cat: 'zaza', name: 'Champagne !', glass: 'flute', liq: '#ffe8a8', gar: 'bubbles', max: 1, price: [60], icon: 'dk_champagne', txt: () => `Une manche finie sans perdre un seul PV rapporte +25${NB}or`, quip: ['On fête quoi ? On verra bien.', 'Sans une égratignure, et ça mousse.'] },
@@ -17110,7 +17280,7 @@ function ckStats(s, U, bo, run) {
   s.lagon = 1 + .4 * U('lagon');
   s.critAdd = .5 * U('critik');
   s.spritzN = U('spritz'); s.spritzK = 1 + .25 * U('spritz');
-  s.ricoAmp = U('ricochet');
+  s.ricoAmp = U('ricochet'); s.bilRic = U('mojito');
   s.bilExtra = U('triplesec') ? 1 : 0;
   s.healMul *= (1 + .25 * U('bmary')) * (bo.vampire ? 2 : 1);
   s.thornK = 1 + .6 * U('cactus');
@@ -17702,7 +17872,7 @@ function lbOpen() {
   lbRender(); Snd.pop();
 }
 function lbClose() { const ov = $('#lb'); if (ov) ov.hidden = true; Snd.click(); }
-async function lbRender() {
+async function lbRender0() {
   const ov = $('#lb'); if (!ov || ov.hidden) return;
   const m = G.meta, top = Math.min(STAKES.length - 1, m.stakeMax || 0), k = LB.stake, S = STAKES[k], me = lbMe();
   ov.innerHTML = `<div class="fi lb-fi">
@@ -17761,6 +17931,7 @@ function mgoReveal(go) {
 // l'Hypothèque (sauf secrète ULTIME) prend 2 places : la sienne, et celle qu'elle retire au rack
 function needSlots(j) {
   if (!j || !j.parts || j.kind === 'faux') return 1;
+  if (j.parts.length === 1 && j.parts[0].t === 'tampon') return 0;
   let n = 1; for (const pt of j.parts) if (pt.t === 'hypotheque' && !(isSecret(j) && pt.lv >= 3)) n += 1;
   return n;
 }
@@ -17768,6 +17939,772 @@ const fitsRack = j => freeSlots() >= needSlots(j);
 // remplacer un jeton du rack par celui-ci (l'ancien est vendu) garde-t-il le rack dans ses places ?
 const replaceOk = j => freeSlots() + 1 >= needSlots(j);
 const HYPO_TXT = "L'Hypothèque prend 2 places : vends un jeton d'abord.";
+
+/* ================= v11.5 · le coup de coude du Salon ================= */
+// le rouleau touché glisse d'une case, vers le haut ou vers le bas (au hasard), avec un petit rebond
+function elbowReel(i) {
+  const R = REEL.r[i];
+  if (!R || R.elbowing) return;
+  if (M.stuck[i]) { M.elbowArm = false; setLED('CE ROULEAU EST COLLÉ', 'bad'); Snd.deny(); updateMachineButtons(); return; }
+  M.elbowArm = false; M.elbowUsed = true;
+  const cab = $('#cabinet'); cab.classList.remove('shake'); void cab.offsetWidth; cab.classList.add('shake');
+  Snd.thud(); haptic(40);
+  // −1 : le symbole du dessus descend sur la ligne (le rouleau glisse vers le bas) ; +1 : celui du dessous monte
+  const dir = rnd() < .5 ? -1 : 1, from = R.pos, to = Math.round(R.pos) + dir, t0 = now(), dur = 460;
+  M.line[i] = R.syms[modN(to + 1, RN)];
+  setLED(dir < 0 ? 'COUP DE COUDE : LE ROULEAU GLISSE VERS LE BAS' : 'COUP DE COUDE : LE ROULEAU GLISSE VERS LE HAUT', '');
+  updateMachineButtons();
+  R.elbowing = true; R.el.classList.add('nudging');
+  const ease = k => { const c1 = 1.7, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+  const step = () => {
+    const k = clamp((now() - t0) / dur, 0, 1);
+    R.pos = from + (to - from) * (G.reduced ? k : ease(k)); placeReel(R);
+    if (k < 1) { requestAnimationFrame(step); return; }
+    R.pos = modN(to, RN); placeReel(R); R.elbowing = false; R.el.classList.remove('nudging');
+    R.sw.classList.remove('bump'); void R.sw.offsetWidth; R.sw.classList.add('bump'); Snd.stop();
+    const ev = evalLine(M.line);
+    setLED('COUP DE COUDE · ' + describeEv(ev), ev.kind === 'triple' || ev.kind === 'pair' ? 'win' : '');
+    renderTray(); updateMachineButtons(); setMachineInfo();
+  };
+  requestAnimationFrame(step);
+}
+
+/* ================= v11.6 · la progression : les mises jeu par jeu, les machines à débloquer, des défis plus durs ================= */
+
+/* ---- les mises, jeu par jeu : battre le Baron avec la mise N débloque la mise N+1, pour CE jeu seulement ---- */
+const deckStakeMax = id => G.meta.stakeAll ? STAKES.length - 1 : Math.min(STAKES.length - 1, (G.meta.dw || {})[id] || 0);
+// la mise choisie pour ce jeu (par défaut : la plus haute débloquée avec lui)
+function nrStakeOf(D) {
+  const sel = (G.meta.dsel || {})[D.id], mx = deckStakeMax(D.id);
+  return clamp(sel == null ? mx : sel, 0, mx);
+}
+// un petit jeton de casino à la couleur d'une mise
+function stakeChipSVG(col) {
+  const light = col === '#f3eee6' || col === '#ffcc4d', dash = light ? 'rgba(18,10,28,.55)' : 'rgba(255,255,255,.9)';
+  return `<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="${col}" stroke="#120a1c" stroke-width="1.6"/><circle cx="10" cy="10" r="6.1" fill="none" stroke="${dash}" stroke-width="2.3" stroke-dasharray="3.1 2.3"/><circle cx="10" cy="10" r="3.3" fill="${col}" stroke="${dash}" stroke-width=".9"/></svg>`;
+}
+// les jetons de mise gagnés avec ce jeu : une pile, de la blanche à la plus haute battue
+function deckChipsHTML(won) {
+  if (!(won > 0)) return '';
+  const L = STAKES.slice(0, Math.min(STAKES.length, won));
+  return `<span class="nr-chips" title="Baron battu avec ce jeu : ${esc(L.map(s => s.name.replace('Mise ', '')).join(', '))}">${L.map(s => `<i>${stakeChipSVG(s.col)}</i>`).join('')}</span>`;
+}
+
+/* ---- les machines se débloquent petit à petit (les 3 premières sont ouvertes) ---- */
+const MACH_NEED = [null, null, null,
+  { k: 'best', n: 10, txt: 'Atteins la manche 10' },
+  { k: 'bossKills', n: 4, txt: 'Bats 4 boss' },
+  { k: 'kills', n: 2500, txt: 'Abats 2 500 cartes' },
+  { k: 'billes', n: 400, txt: 'Lance 400 BILLES' },
+  { k: 'best', n: 20, txt: 'Atteins la manche 20' },
+  { k: 'gold', n: 8000, txt: 'Gagne 8 000 or au total' },
+  { k: 'wins', n: 1, txt: 'Bats le Baron' }];
+function machOpen(i) {
+  const N = MACH_NEED[i]; if (!N || G.headless || G.meta.machAll) return true;
+  return !!(G.meta.machGot || {})[i] || skinProgress(N) >= N.n;
+}
+// la prochaine machine à débloquer (sous la Jackpot Machine)
+function machNextHTML() {
+  const i = MACH_NEED.findIndex((N, k) => N && !machOpen(k)); if (i < 0) return '';
+  const N = MACH_NEED[i], v = Math.min(N.n, skinProgress(N));
+  return `<p class="jpm-next">${LOCK_SVG}<span>Prochaine machine : <b>${esc(MACH9[i].name)}</b> · ${esc(N.txt)} (${fmtN(v)}/${fmtN(N.n)})</span></p>`;
+}
+function machUnlocks() {
+  if (G.headless) return;
+  const m = G.meta, got = m.machGot || (m.machGot = {}), fresh = [];
+  for (let i = 0; i < MACH_NEED.length; i++) { const N = MACH_NEED[i]; if (!N || got[i]) continue; if (skinProgress(N) >= N.n) { got[i] = 1; fresh.push(i); } }
+  // la 1re fois (mise à jour du jeu) : on note sans tout annoncer d'un coup
+  if (!m.machInit) { m.machInit = 1; saveMeta(); return; }
+  if (!fresh.length) return;
+  saveMeta();
+  fresh.forEach((i, k) => setTimeout(() => machNote(i), 2200 + k * 2800));
+}
+function machNote(i) {
+  const el = $('#unote'); if (!el) return;
+  el.innerHTML = `<span class="un-deck" style="--dc:${MACH_PAL[i].c}">${iconSVG(MACH_ICON[i])}</span><div><small>NOUVELLE MACHINE DÉBLOQUÉE</small><b>${esc(MACH9[i].name)}</b><span>Elle peut tomber à la Jackpot Machine.</span></div>`;
+  el.hidden = false; el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  Snd.record(); haptic(80);
+  clearTimeout(el._t); el._t = setTimeout(() => { el.classList.remove('show'); setTimeout(() => { el.hidden = true; }, 400); }, 3800);
+}
+
+/* ---- des défis plus durs : le vestiaire et les jeux à débloquer (2 à 3 fois plus) ---- */
+const HARD = {
+  'cannon:chrome': [1000, 'Abats 1 000 cartes'], 'cannon:pistolo': [20, 'Joue 20 jeux au bar'], 'cannon:gatling': [3000, 'Abats 3 000 cartes'],
+  'cannon:neon': [20, 'Atteins la manche 20'], 'cannon:tromblon': [25, 'Gagne 25 jeux au bar'], 'cannon:sabot': [60, 'Empile 60 jetons'],
+  'cannon:confetti': [40, 'Aligne 40 triples à la machine'], 'cannon:champagne': [100, 'Bois 100 verres au bar'], 'cannon:royal': [25, 'Bats 25 boss'],
+  'cannon:laser': [200, 'Lance 200 sorts'], 'cannon:bazooka': [300, 'Joue 300 manches'], 'cannon:bandit': [150, 'Aligne 150 triples à la machine'],
+  'cannon:dragon': [2, 'Bats le Baron 2 fois'], 'cannon:cristal': [5, 'Bats le Baron 5 fois'],
+  'flipper:bonbon': [40, 'Bois 40 verres au bar'], 'flipper:neon': [700, 'Réussis 700 parades'], 'flipper:chrome': [800, 'Bloque 800 tirs'],
+  'flipper:piano': [150, 'Joue 150 manches'], 'flipper:carte': [6, 'Bats le Baron 6 fois au poker'], 'flipper:arc': [25, 'Enchaîne 25 parades d\'affilée'],
+  'flipper:glace': [6000, 'Abats 6 000 cartes'], 'flipper:jade': [12000, 'Gagne 12 000 or au total'], 'flipper:os': [12, 'Survis à 12 manches dévastatrices'],
+  'flipper:pixel': [45, 'Enchaîne 45 parades d\'affilée'], 'flipper:galaxie': [50, 'Bats 50 boss'], 'flipper:toxique': [30, 'Survis à 30 manches dévastatrices'],
+  'flipper:lave': [30, 'Atteins la manche 30'], 'flipper:or': [2500, 'Réussis 2 500 parades'],
+  'base:bleu': [40, 'Joue 40 manches'], 'base:vert': [1500, 'Abats 1 500 cartes'], 'base:violet': [8, 'Bats 8 boss'], 'base:vinyle': [25, 'Bois 25 verres au bar'],
+  'base:donut': [30, 'Empile 30 jetons'], 'base:horloge': [80, 'Aligne 80 triples à la machine'], 'base:noir': [25, 'Atteins la manche 25'],
+  'base:disco': [1200, 'Réussis 1 200 parades'], 'base:or': [3, 'Bats le Baron 3 fois'],
+  'bille:agate': [200, 'Lance 200 BILLES'], 'bille:huit': [120, 'Réussis 120 REBONDS de BILLE'], 'bille:oeil': [2000, 'Abats 2 000 cartes'],
+  'bille:planete': [15, 'Bats 15 boss'], 'bille:disco': [800, 'Réussis 800 parades'], 'bille:lave': [8, 'Survis à 8 manches dévastatrices'],
+  'bille:glace': [150, 'Joue 150 manches'], 'bille:or': [9000, 'Gagne 9 000 or au total'], 'bille:jeton': [50, 'Empile 50 jetons'],
+  'bille:cristal': [6, 'Passe 6 jetons en rareté secrète'], 'bille:glitch': [12, 'Gagne 12 jetons fous'], 'bille:lune': [2, 'Bats le Baron 2 fois'],
+  'bille:machine': [8, 'Joue avec 8 machines différentes'],
+};
+// (appelée juste après la liste des skins, plus bas dans le jeu)
+function hardenSkins() { for (const kind in SKINS) for (const S2 of SKINS[kind]) { const h = HARD[kind + ':' + S2.id]; if (h && S2.need) { S2.need.n = h[0]; S2.need.txt = h[1]; } } }
+Object.assign(DECK_NEED.barman, { n: 120, txt: 'Bois 120 boissons chez Zaza' });
+Object.assign(DECK_NEED.bille, { n: 600, txt: 'Lance 600 BILLES' });
+Object.assign(DECK_NEED.sorts, { n: 700, txt: 'Lance 700 sorts' });
+Object.assign(DECK_NEED.pack, { n: 12, txt: 'Gagne 12 jetons fous' });
+Object.assign(DECK_NEED.inspecteur, { n: 60, txt: 'Achète 60 articles au marché noir' });
+Object.assign(DECK_NEED.seconde, { n: 15, txt: 'Bats 15 boss' });
+Object.assign(DECK_NEED.xxl, { n: 100, txt: 'Empile 100 jetons' });
+Object.assign(DECK_NEED.veinard, { n: 25, txt: 'Atteins la manche 25' });
+Object.assign(DECK_NEED.collec, { n: 6, txt: 'Passe 6 jetons en rareté secrète au Punch-o-matic' });
+
+/* ================= v11.7 · le classement en direct sur l'écran titre, et sa page en plein écran ================= */
+const TLB = { busy: false };
+const lbStakeNow = () => clamp(G.meta.stake || 0, 0, STAKES.length - 1);
+const lbOrd = p => `${p}<sup>${+p === 1 ? 'er' : 'e'}</sup>`;
+// les 10 places du classement : les vides restent affichées (« place à prendre »)
+function lbRowsHTML(rows, me) {
+  let h = '';
+  for (let i = 0; i < 10; i++) {
+    const r = rows[i], p = r ? +r.place : i + 1, med = p <= 3 ? `<i class="lb-med">${p}</i>` : p;
+    if (r) {
+      const mine = me && r.pseudo === me.pseudo, D = (typeof deckById === 'function' && r.deck) ? deckById(r.deck) : null;
+      h += `<li class="lb-row${p <= 3 ? ' p' + p : ''}${mine ? ' me' : ''}"><span class="lb-pl">${med}</span><span class="lb-ps"><b>${esc(r.pseudo)}</b>${D ? `<small>${esc(D.name)}</small>` : ''}</span><span class="lb-sc">${fmtS(r.score)}</span><span class="lb-rd">${r.round}</span></li>`;
+    } else h += `<li class="lb-row empty${p <= 3 ? ' p' + p : ''}"><span class="lb-pl">${med}</span><span class="lb-ps"><b>${i === rows.length ? 'Place à prendre !' : '· · ·'}</b></span><span class="lb-sc">—</span><span class="lb-rd">—</span></li>`;
+  }
+  return h;
+}
+// la page du classement : toujours 10 places, et elle prend tout l'écran
+async function lbRender() {
+  const ov = $('#lb'); if (!ov || ov.hidden) return;
+  const m = G.meta, top = Math.min(STAKES.length - 1, m.stakeMax || 0), k = LB.stake, S = STAKES[k], me = lbMe();
+  ov.innerHTML = `<div class="fi lb-fi">
+    <div class="lb-head"><h2 class="lb-t"><svg class="ico"><use href="#i-couronne"/></svg>CLASSEMENT</h2><button class="btn ghost small" id="lb-x">Retour</button></div>
+    <div class="lb-tabs">${STAKES.slice(0, top + 1).map((s, i) => `<button class="lb-tab${i === k ? ' on' : ''}" data-lbs="${i}" style="--sc:${s.col}"><i></i>${esc(s.name.replace('Mise ', ''))}</button>`).join('')}</div>
+    <div class="panel lb-box" style="--sc:${S.col}">
+      <div class="lb-cap"><span>#</span><span>Joueur</span><span>Score</span><span>Manche</span></div>
+      <ol class="lb-list" id="lb-list"><li class="lb-msg">Chargement…</li></ol>
+      <div class="lb-me" id="lb-me">${me ? '' : 'Choisis un pseudo pour apparaître ici.'}</div>
+    </div>
+    <p class="lb-foot">${me ? `Ton pseudo : <b>${esc(me.pseudo)}</b> · ` : ''}une ligne par joueur : sa meilleure partie dans cette mise.</p>
+  </div>`;
+  $('#lb-x').onclick = lbClose;
+  ov.querySelectorAll('[data-lbs]').forEach(b => { b.onclick = () => { LB.stake = +b.dataset.lbs; Snd.click(); lbRender(); }; });
+  const c = LB.cache[k], fresh = c && Date.now() - c.t < 30000;
+  const [t, mine] = fresh ? [c.top, c.mine] : await Promise.all([lbRpc('lb_top', { p_stake: k }), me ? lbRpc('lb_me', { p_id: me.id, p_stake: k }) : Promise.resolve({ data: [] })]);
+  if (LB.stake !== k || ov.hidden) return;
+  const list = $('#lb-list'), meEl = $('#lb-me'); if (!list) return;
+  if (t.error) { list.innerHTML = `<li class="lb-msg">${esc(lbErrTxt(t.error))}</li>`; return; }
+  if (!fresh) LB.cache[k] = { t: Date.now(), top: t, mine };
+  list.innerHTML = lbRowsHTML(t.data || [], me);
+  const row = mine && !mine.error && Array.isArray(mine.data) ? mine.data[0] : null;
+  if (meEl && me) meEl.innerHTML = row ? `<span class="lb-pl">${row.place}</span><span class="lb-ps"><b>Toi</b> · ${esc(me.pseudo)}</span><span class="lb-sc">${fmtS(row.best)}</span><span class="lb-rd">${row.best_round}</span>` : 'Pas encore de partie dans cette mise.';
+}
+// l'écran titre : le top 5 sur le tapis, mis à jour tout seul ; on le touche pour la page complète
+async function tlbRender() {
+  const el = $('#t-board'); if (!el || G.headless) return;
+  const k = lbStakeNow(), S = STAKES[k], me = lbMe();
+  const head = `<div class="tb-head"><span>CLASSEMENT</span><em style="--sc:${S.col}"><i></i>${esc(S.name.replace('Mise ', ''))}</em></div>`;
+  const c = LB.cache[k], fresh = c && Date.now() - c.t < 30000;
+  let t = c ? c.top : null, mine = c ? c.mine : null;
+  if (!fresh) {
+    if (!c && !el.querySelector('.tb-list')) el.innerHTML = head + '<p class="tb-msg">Chargement…</p>';
+    if (TLB.busy) return;
+    TLB.busy = true;
+    try { [t, mine] = await Promise.all([lbRpc('lb_top', { p_stake: k }), me ? lbRpc('lb_me', { p_id: me.id, p_stake: k }) : Promise.resolve({ data: [] })]); }
+    finally { TLB.busy = false; }
+    if (!t.error) LB.cache[k] = { t: Date.now(), top: t, mine };
+  }
+  if (lbStakeNow() !== k) return;
+  if (!t || t.error) { el.innerHTML = head + `<p class="tb-msg">${t && t.error === 'reseau' ? 'Classement hors ligne' : 'Classement indisponible'}</p>`; return; }
+  const rows = t.data || [];
+  let h = '<ol class="tb-list">';
+  for (let i = 0; i < 5; i++) {
+    const r = rows[i], p = r ? +r.place : i + 1;
+    if (r) h += `<li class="tb-row p${p}${me && r.pseudo === me.pseudo ? ' me' : ''}"><span class="tb-pl">${p}</span><b class="tb-ps">${esc(r.pseudo)}</b><span class="tb-sc">${fmtS(r.score)}</span><span class="tb-rd">m${r.round}</span></li>`;
+    else h += `<li class="tb-row empty p${p}"><span class="tb-pl">${p}</span><b class="tb-ps">${i === rows.length ? 'Place à prendre !' : '· · ·'}</b><span class="tb-sc"></span><span class="tb-rd"></span></li>`;
+  }
+  h += '</ol>';
+  const row = mine && !mine.error && Array.isArray(mine.data) ? mine.data[0] : null;
+  h += `<p class="tb-me">${!me ? 'Choisis ton pseudo pour y entrer' : row ? `Toi : <b>${lbOrd(row.place)}</b> · ${fmtS(row.best)} pts` : 'Pas encore de partie dans cette mise'}</p>`;
+  el.innerHTML = head + h;
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#t-board')) { e.preventDefault(); lbOpen(); } });
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && document.activeElement && document.activeElement.id === 't-board') { e.preventDefault(); lbOpen(); } });
+// en direct : toutes les 30 s tant que l'écran titre est affiché
+setInterval(() => { try { const ti = $('#title'); if (!G.headless && ti && !ti.hidden && document.visibilityState !== 'hidden') tlbRender(); } catch (e) { /* rien */ } }, 30500);
+
+/* ================= v11.8 · les boss : Fripouille (le rat du Baron) les amène, un skin pour chacun,
+   une pause à mi-vie (invincible, la table se vide), de nouveaux pouvoirs, et le Roi de Cœur qui se multiplie ================= */
+
+/* ---- Fripouille, le rat du Baron : haut-de-forme, monocle, nœud pap', et un bâton pour tes roues ---- */
+const FRIP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<path d="M44 58C54 58 59 52 56 46C54.4 42.6 57 40 60 41" stroke="#e98aa8" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+<ellipse cx="26" cy="61.6" rx="4.2" ry="1.9" fill="#e98aa8"/><ellipse cx="38" cy="61.6" rx="4.2" ry="1.9" fill="#e98aa8"/>
+<path d="M18 61C17 50 21 44 26 42L32 50L38 42C43 44 47 50 46 61L40 58L38 61H26L24 58Z" fill="#1d1428"/>
+<path d="M26 42L32 50L38 42L37 60H27Z" fill="#fff6ea"/>
+<g fill="#ffcc4d"><circle cx="32" cy="54" r=".95"/><circle cx="32" cy="57.6" r=".95"/></g>
+<path d="M27.4 43.4L32 45.7L36.6 43.4V48.3L32 46L27.4 48.3Z" fill="#e0365a"/><circle cx="32" cy="45.9" r="1.25" fill="#a8243c"/>
+<path d="M47 53L58.6 29.4" stroke="#8a5a2a" stroke-width="2.6" stroke-linecap="round"/><path d="M57.4 31.6L60.4 33" stroke="#5a3a18" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M45 47.4L52 42" stroke="#1d1428" stroke-width="4.2" stroke-linecap="round"/><circle cx="52.6" cy="41.6" r="2.2" fill="#8c8ca0"/>
+<path d="M19 47.4L14 52.6" stroke="#1d1428" stroke-width="4.2" stroke-linecap="round"/><circle cx="13.4" cy="53.2" r="2.2" fill="#8c8ca0"/>
+<circle cx="19" cy="22.4" r="7" fill="#5e5e74"/><circle cx="19" cy="22.4" r="4.2" fill="#f4a6bd"/>
+<circle cx="45" cy="22.4" r="7" fill="#5e5e74"/><circle cx="45" cy="22.4" r="4.2" fill="#f4a6bd"/>
+<path d="M20 27C20 19 26 15 32 15C38 15 44 19 44 27C44 33 38 37 35 41C34 42.6 30 42.6 29 41C26 37 20 33 20 27Z" fill="#6e6e86"/>
+<path d="M23.4 30.6C25.6 36 29 39.4 32 39.4C35 39.4 38.4 36 40.6 30.6C37.4 33.8 26.6 33.8 23.4 30.6Z" fill="#a2a2b8"/>
+<path d="M24.8 27.6Q27.6 25.6 30.4 27.6" stroke="#1a0f2e" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+<circle cx="37" cy="27" r="2.7" fill="#1a0f2e"/><circle cx="37.9" cy="26.1" r=".95" fill="#fff"/>
+<circle cx="37" cy="27" r="4.3" fill="none" stroke="#ffcc4d" stroke-width="1.2"/><path d="M41.2 29.4Q43.2 34 41.8 38.4" stroke="#ffcc4d" stroke-width=".8" fill="none"/>
+<path d="M23.8 23.8L30.2 25.2" stroke="#2e2e40" stroke-width="1.4" stroke-linecap="round"/><path d="M33.4 22.6Q37 20.6 40.8 22.8" stroke="#2e2e40" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+<g stroke="#eeeef8" stroke-width=".65" opacity=".9"><path d="M27.4 38.8L18.4 37M27.4 40L18.8 41.8M36.6 38.8L45.6 37M36.6 40L45.2 41.8"/></g>
+<path d="M28.4 41.4Q32.4 44.4 36.6 40.6" stroke="#3a2a3a" stroke-width=".9" fill="none"/><rect x="30.55" y="42.2" width="1.4" height="2.5" rx=".35" fill="#fff8e8"/><rect x="32.1" y="42.2" width="1.4" height="2.5" rx=".35" fill="#fff8e8"/>
+<ellipse cx="32" cy="40.5" rx="2.3" ry="1.7" fill="#ff7eb6"/><ellipse cx="31.4" cy="40" rx=".7" ry=".4" fill="#ffc8de"/>
+<g transform="rotate(9 32 14)"><path d="M13.4 18.8Q32 14 50.6 18.8Q46.4 21.8 32 20.3Q17.6 21.8 13.4 18.8Z" fill="#120a1c"/><rect x="22" y="1.6" width="20" height="17" rx="1.6" fill="#2a1840"/><rect x="22" y="13" width="20" height="3.6" fill="#ffcc4d"/><path d="M24.2 4V11.6" stroke="#4a3466" stroke-width="1.5" stroke-linecap="round"/></g>
+</svg>`;
+const FRIP = { img: null };
+function fripImg() {
+  if (FRIP.img || G.headless) return FRIP.img;
+  const im = new Image(); im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(FRIP_SVG); FRIP.img = im; return im;
+}
+VOICES.fripouille = { f: 300, wave: 'p12', rate: 36, form: 1.22, v: .22, curve: 'mad', breath: .25 };
+const FRIP_LINES = ['Livraison spéciale du Baron !', 'Le patron t\'envoie ses amitiés. Hé hé.', 'Un petit cadeau du Baron…', 'Tu croyais que c\'était fini ? Hi hi !', 'Le Baron t\'a gardé une surprise.', 'Attention aux roues… hé hé.'];
+const RAT_T = { carry: .9, say: 1.05, throw: 1.7, hit: 2.15, leave: 2.45, end: 3.2 };
+const BOSS_INTRO = 3.1, BOSS_HALF = 2.6;
+
+// un boss arrive : Fripouille l'amène (sauf le Baron, qui s'installe tout seul en parlant)
+function bossArrive(e) {
+  const cb = G.cb; if (!cb || cb.demo || e.fake) return;
+  if (e.type === 'b_baron') { e.talkInv = true; e.st.talkAge = 0; return; }
+  e.introT = BOSS_INTRO;
+  const d = edist(e) || 1, ux = e.x / d, uy = e.y / d, dropR = Math.min(d, 70), side = rnd() < .5 ? -1 : 1;
+  const drop = { x: ux * dropR, y: uy * dropR };
+  const R = { e, t: 0, ux, uy, px: -uy * side, py: ux * side, drop, from: { x: ux * 140 - uy * side * 30, y: uy * 140 + ux * side * 30 }, ent: { x: ux * 140, y: uy * 140, r: 8, dead: false }, flip: side };
+  // le boss (et ses gardes) restent cachés tant que Fripouille le porte
+  e.ratHide = true; for (const g of e.st.guards || []) g.ratHide = true;
+  (cb.rats || (cb.rats = [])).push(R);
+}
+function ratPos(R) {
+  const t = R.t, st = { x: R.drop.x + R.px * 12 - R.ux * 12, y: R.drop.y + R.py * 12 - R.uy * 12 };
+  if (t < RAT_T.carry) { const k = 1 - Math.pow(1 - t / RAT_T.carry, 2); return { x: R.from.x + (st.x - R.from.x) * k, y: R.from.y + (st.y - R.from.y) * k, run: true }; }
+  if (t < RAT_T.leave) return { x: st.x, y: st.y, run: false };
+  const k = Math.min(1, (t - RAT_T.leave) / (RAT_T.end - RAT_T.leave)), out = { x: R.ux * 150 + R.px * 40, y: R.uy * 150 + R.py * 40 };
+  return { x: st.x + (out.x - st.x) * k * k, y: st.y + (out.y - st.y) * k * k, run: true };
+}
+function ratUpdate(cb, dt) {
+  if (!cb.rats || !cb.rats.length) return;
+  for (const R of cb.rats) {
+    R.t += dt;
+    const p = ratPos(R); R.ent.x = p.x; R.ent.y = p.y - 10;
+    const e = R.e;
+    if (!R.shown && R.t >= RAT_T.carry) {
+      R.shown = true;
+      if (!e.dead) {
+        const ox = e.x, oy = e.y; e.x = R.drop.x; e.y = R.drop.y; e.ratHide = false; e.deal = .4;
+        for (const g of e.st.guards || []) if (!g.dead) { g.x += e.x - ox; g.y += e.y - oy; g.ratHide = false; g.deal = .4; }
+        if (!G.headless) { burst(e.x, e.y, '#fff3e6', 18, 36, 1.2, .5); fxPush({ type: 'ring', x: e.x, y: e.y, r0: 4, r1: 26, col: '255,204,77', life: .45, max: .45 }); Snd.deal(); bossIntro0(e); }
+      }
+    }
+    if (!R.said && R.t >= RAT_T.say) {
+      R.said = true;
+      if (!G.headless) { const txt = pick(FRIP_LINES); cb.bubbles.push({ e: R.ent, x: R.ent.x, y: R.ent.y, r: 8, text: txt, t: 0, life: 2.3 }); talk('fripouille', txt); }
+    }
+    if (!R.thrown && R.t >= RAT_T.throw) { R.thrown = true; if (!G.headless) Snd.throwB ? Snd.throwB() : Snd.click(); }
+    if (!R.hit && R.t >= RAT_T.hit) { R.hit = true; ratJam(cb); }
+    if (R.t >= RAT_T.end) { R.ent.dead = true; R.done = true; if (!e.dead && e.ratHide) { e.ratHide = false; e.deal = .4; } }
+  }
+  cb.rats = cb.rats.filter(R => !R.done);
+}
+// le bâton dans les roues : un de tes sorts prend +6 s de recharge (le plus prêt)
+function ratJam(cb) {
+  const ids = spellsOf(G.run).filter(id => PSPELLS[id]);
+  if (!ids.length) return;
+  let id = ids[0]; for (const k of ids) if ((cb.ab[k] || 0) < (cb.ab[id] || 0)) id = k;
+  cb.ab[id] = Math.max(0, cb.ab[id] || 0) + 6;
+  if (G.headless) return;
+  floater(0, -BAL.baseR - 14, `BÂTON DANS LES ROUES : ${PSPELLS[id].name.toUpperCase()} +6 s`, '#ffb36b', 4.4);
+  shake(3); Snd.block ? Snd.block() : Snd.deny(); haptic(30);
+  if (typeof renderSpellBar === 'function') renderSpellBar();
+}
+// le dessin : Fripouille qui court (en portant la carte du boss), puis lance son bâton
+function drawRatFx(cb) {
+  if (cb.rats && cb.rats.length) {
+    const im = fripImg(), T = cb.t;
+    for (const R of cb.rats) {
+      const p = ratPos(R), hop = p.run ? Math.abs(Math.sin(R.t * 16)) * 2.2 : Math.abs(Math.sin(R.t * 5)) * .5;
+      const goingOut = R.t >= RAT_T.leave, dirX = goingOut ? (R.ux * 150 - p.x) : (R.drop.x - R.from.x), face = dirX < 0 ? -1 : 1;
+      // la carte du boss sur le dos (face cachée), tant qu'il la porte
+      if (R.t < RAT_T.carry && !R.e.dead) {
+        const sp = spr(R.e.type), c = sp.n, k = .6;
+        ctx.save(); ctx.translate(p.x, p.y - 20 - hop); ctx.rotate(Math.sin(R.t * 16) * .08); ctx.scale(k, k);
+        ctx.drawImage(c.c, -c.ox, -c.oy, c.c.width / c.k, c.c.height / c.k); ctx.restore();
+      }
+      if (im && im.complete && im.naturalWidth) {
+        ctx.save(); ctx.translate(p.x, p.y - hop); ctx.scale(face, 1);
+        ctx.fillStyle = 'rgba(8,4,16,.35)'; ctx.beginPath(); ctx.ellipse(0, 1 + hop, 9, 2.8, 0, 0, TAU); ctx.fill();
+        ctx.drawImage(im, -13, -25, 26, 26); ctx.restore();
+      }
+      // le bâton qui tournoie vers ta base
+      if (R.thrown && !R.hit) {
+        const k = (R.t - RAT_T.throw) / (RAT_T.hit - RAT_T.throw), sx = p.x, sy = p.y - 10, x = sx * (1 - k), y = sy * (1 - k) - Math.sin(k * Math.PI) * 14;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(T * 16); ctx.strokeStyle = '#8a5a2a'; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(-4, 0); ctx.lineTo(4, 0); ctx.stroke(); ctx.restore();
+      }
+    }
+  }
+  // un boss à mi-vie : des anneaux d'or autour de lui
+  for (const e of cb.bosses || []) {
+    if (e.dead || !(e.halfT > 0)) continue;
+    const k = 1 - e.halfT / BOSS_HALF;
+    for (let i = 0; i < 3; i++) { const q = (k * 3 + i / 3) % 1; ctx.strokeStyle = `rgba(255,204,77,${(1 - q) * .7})`; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(e.x, e.y, e.r * (1.1 + q * 1.8), 0, TAU); ctx.stroke(); }
+  }
+}
+
+/* ---- la mi-vie : invincible, une petite animation, la table se vide, puis le combat repart (plus fort) ---- */
+const P2_TXT = {
+  b_valet: 'Il lance ses carreaux en éventail : pare-les !',
+  b_dame: 'Elle lance ses cœurs par trois.',
+  b_roiP: 'Ses rafales finissent en éventail.',
+  b_roiT: 'Ses gardes reviennent, à quatre et plus solides.',
+  b_roiC: 'Il se dédouble : envoie ta BILLE sur le vrai !',
+  b_joker: 'Il accélère et frappe plus fort.',
+};
+function bossHalf(e) {
+  const cb = G.cb;
+  e.rage = true; e.halfT = BOSS_HALF;
+  dbg('boss_half');
+  // les cartes de la table disparaissent (sans or ni points), les tirs aussi
+  for (const o of cb.enemies) {
+    if (o === e || o.dead || o.boss) continue;
+    if (o.ai === 'thief') giveBack(o);
+    o.dead = true; if (!cb.demo) cb.killed++;
+    if (!G.headless) { burst(o.x, o.y, '#e8e1f2', 7, 24, .9, .4); fxPush({ type: 'ring', x: o.x, y: o.y, r0: 2, r1: 9, col: '255,243,230', life: .35, max: .35 }); }
+  }
+  for (let i = cb.eshots.length - 1; i >= 0; i--) if (!cb.eshots[i].friendly) cb.eshots.splice(i, 1);
+  // pendant l'animation, plus rien n'arrive sur la table
+  for (let i = cb.spawnIdx; i < cb.spawn.length; i++) cb.spawn[i].t = Math.max(cb.spawn[i].t, cb.t + BOSS_HALF);
+  if (cb.escT != null) cb.escT = Math.max(cb.escT, cb.t + BOSS_HALF + 1);
+  if (G.headless) return;
+  banner(`${e.d.name.toUpperCase()} · MI-VIE`, 'il devient invincible et vide la table…', 'boss', BOSS_HALF - .3);
+  cb.flash = .45; cb.flashCol = '255,204,77'; shake(9); haptic(120); Snd.alarm(); Snd.gong();
+  burst(e.x, e.y, '#ffcc4d', 30, 60, 1.6, .7);
+}
+function bossPhase2(e) {
+  const cb = G.cb;
+  e.spd *= BAL.rageSpd; e.atkI *= BAL.rageAtk; e.dmg *= BAL.rageDmg;
+  cb.escGap = Math.max(BAL.escGapMin, (cb.escGap || BAL.escGap0) * BAL.rageEsc);
+  if (e.type === 'b_roiT') {
+    summonGuards(e); e.st.guards.push(spawnGuard(e, Math.PI / 3, 21));
+    for (const g of e.st.guards) { g.hp *= 1.5; g.maxHp = g.hp; }
+  }
+  if (e.type === 'b_roiC') e.st.splitT = 1.2;
+  if (G.headless) return;
+  banner('LE COMBAT REPART !', P2_TXT[e.type] || 'il enrage', 'bad', 1.8);
+  shake(5); Snd.charge(); burst(e.x, e.y, '#ff3d5a', 18, 40, 1.4, .5);
+}
+// un éventail de tirs vers ta base
+function fanAt(e, kind, n, step, spdMul) {
+  const cb = G.cb;
+  for (let k = 0; k < n; k++) {
+    const len = cb.eshots.length; fireAt(e, kind, spdMul); if (cb.eshots.length === len) continue;
+    const p = cb.eshots[cb.eshots.length - 1], a = (k - (n - 1) / 2) * step, c = Math.cos(a), s = Math.sin(a);
+    [p.vx, p.vy] = [p.vx * c - p.vy * s, p.vx * s + p.vy * c];
+  }
+}
+// les nouveaux pouvoirs, une fois la mi-vie passée
+function bossP2Tick(e, dt) {
+  const st = e.st; if (e.stunT > 0 || e.frzT > 0 || e.deal > .15) return;
+  if (e.type === 'b_valet') { st.p2T = (st.p2T == null ? 2 : st.p2T) - dt; if (st.p2T <= 0 && st.phase !== 'open') { st.p2T = 4; fanAt(e, 'diamond', 3, .22); if (!G.headless) floater(e.x, e.y - e.r - 4, 'CARREAUX !', '#ff9a3d', 4.6); } }
+  else if (e.type === 'b_dame') { st.p2T = (st.p2T == null ? 2.5 : st.p2T) - dt; if (st.p2T <= 0 && st.phase !== 'drink') { st.p2T = 5; fanAt(e, 'heart', 3, .26); } }
+  else if (e.type === 'b_roiP') { st.p2T = (st.p2T == null ? 3 : st.p2T) - dt; if (st.p2T <= 0 && !(st.burstLeft > 0)) { st.p2T = 6; fanAt(e, 'chip', 5, .2); if (!G.headless) floater(e.x, e.y - e.r - 4, 'ÉVENTAIL !', '#4aa8ff', 4.6); } }
+}
+// chaque image : l'arrivée, la mi-vie, le Baron qui s'installe en parlant ; renvoie true si le boss ne joue pas encore
+function bossHold(e, dt) {
+  if (e.ratHide) { e.deal = .4; return true; }
+  if (e.type === 'b_baron') {
+    if (e.talkInv) { e.st.talkAge = (e.st.talkAge || 0) + dt; if (e.st.seated && e.st.talkAge > 5) { e.talkInv = false; if (!G.headless) { floater(e.x, e.y - e.r - 6, 'EN GARDE !', '#ffcc4d', 5); Snd.charge(); } } }
+    return false;
+  }
+  if (e.introT > 0) { e.introT -= dt; return true; }
+  if (e.halfT > 0) { e.halfT -= dt; if (e.halfT <= 0) bossPhase2(e); return true; }
+  if (e.rage && !e.fake && e.boss) bossP2Tick(e, dt);
+  return false;
+}
+
+/* ---- le Roi de Cœur : il se dédouble plein de fois ; ta BILLE sur le vrai les réunit tous ---- */
+function rcSplit(e, n) {
+  const cb = G.cb, d = Math.max(30, edist(e)), a0 = Math.atan2(e.y, e.x), bodies = [];
+  dbg('roiC_split_' + n);
+  for (let k = 1; k < n; k++) {
+    const a = a0 + (k % 2 ? 1 : -1) * Math.ceil(k / 2) * .55, x = Math.cos(a) * d, y = Math.sin(a) * d;
+    const f = spawnEnemy(e.type, 0, { x, y, fake: true, real: e, noDeal: true });
+    f.hp = f.maxHp = e.maxHp; f.gold = 0; f.dmg = e.dmg * .4; f.st.splits = 9; f.st.chargeT = 99; f.rage = true;
+    if (!cb.demo) cb.total++;
+    bodies.push(f);
+  }
+  // le vrai prend la place d'un des faux, au hasard
+  const f = pick(bodies); if (f) { const tx = f.x, ty = f.y; f.x = e.x; f.y = e.y; e.x = tx; e.y = ty; }
+  if (G.headless) return;
+  banner(`IL SE MULTIPLIE · ${n}`, 'seul le vrai saigne : envoie ta BILLE sur lui !', 'boss', 1.5);
+  Snd.blink(); shake(4);
+  for (const o of [e, ...bodies]) { fxPush({ type: 'ring', x: o.x, y: o.y, r0: 4, r1: 22, col: '255,92,108', life: .4, max: .4 }); burst(o.x, o.y, '#ff7eb6', 8, 26, 1, .4); }
+}
+// la BILLE touche un Roi de Cœur : un faux éclate ; le vrai… tout le monde se réunit, et il est sonné
+function rcBilleHit(e) {
+  if (e.type !== 'b_roiC' || e.dead) return false;
+  const cb = G.cb;
+  if (e.fake) {
+    if (!e.real) return;
+    e.dead = true; if (!cb.demo) cb.killed++;
+    if (!G.headless) { floater(e.x, e.y - e.r - 2, 'BLUFF !', '#ff7eb6', 5); burst(e.x, e.y, '#ff7eb6', 16, 40, 1.2, .5); Snd.blink(); }
+    return true;
+  }
+  const fakes = cb.enemies.filter(o => o.fake && o.real === e && !o.dead);
+  if (!fakes.length) return false;
+  for (const f of fakes) {
+    f.dead = true; if (!cb.demo) cb.killed++;
+    if (!G.headless) { for (let i = 0; i < 6; i++) addPart({ x: f.x, y: f.y, vx: (e.x - f.x) * rand(1.6, 2.4), vy: (e.y - f.y) * rand(1.6, 2.4), life: .45, max: .45, size: rand(1, 1.8), col: '#ff7eb6', drag: .5, g: 0 }); fxPush({ type: 'ring', x: f.x, y: f.y, r0: 10, r1: 2, col: '255,126,182', life: .35, max: .35 }); }
+  }
+  e.stunT = Math.max(e.stunT, 1.6); e.vuln = Math.max(e.vuln || 0, 3);
+  e.st.splitT = 8;
+  dbg('roiC_found');
+  if (G.headless) return false;
+  banner('TROUVÉ !', 'ils se réunissent : le Roi est sonné, et prend +50 % de dégâts', 'good', 1.4);
+  floater(e.x, e.y - e.r - 4, 'TROUVÉ !', '#ffcc4d', 6); shake(5); Snd.jackpot(); haptic(60);
+  return false;
+}
+// l'annonce d'un boss : pour ceux que Fripouille amène, elle attend qu'il le pose sur la table
+function bossIntro(e) { if (G.headless || G.cb.demo || e.ratHide) return; bossIntro0(e); }
+function aiRoiC(e, dt, sp, held, contactD) {
+  const st = e.st, cb = G.cb;
+  if (e.fake) { meleeStep(e, dt, sp, held, contactD); return; }
+  const fakes = cb.enemies.filter(o => o.fake && o.real === e && !o.dead);
+  if (e.rage) {
+    if (!fakes.length) {
+      if (st.splitT == null) st.splitT = 8;
+      st.splitT -= dt;
+      bossSub(e, `Il va se multiplier… ${Math.max(0, Math.ceil(st.splitT))}${NB}s`);
+      if (st.splitT <= 0 && !held) { st.splitN = (st.splitN || 0) + 1; st.splitT = null; rcSplit(e, Math.min(7, 3 + st.splitN)); }
+    } else bossSub(e, 'Lequel est le vrai ? Ta BILLE sur lui les réunit !');
+  } else bossSub(e, 'À mi-vie, il se multiplie. Ta BILLE sur le vrai les réunit.');
+  st.bleedT -= dt;
+  if (fakes.length && st.bleedT <= 0 && !G.headless) { st.bleedT = .45; addPart({ x: e.x + rand(-3, 3), y: e.y + e.r * .5, vx: rand(-2, 2), vy: rand(8, 14), life: .8, max: .8, size: 1.3, col: '#d81e3b', drag: 0, g: 30, shape: 'c' }); }
+  st.chargeT -= dt;
+  if (st.chargeT <= 0 && !held) {
+    st.chargeT = 7;
+    const d = edist(e);
+    if (d > contactD + 10) { const j = Math.min(24, d - contactD - 2); e.kbx = -e.x / d * j * 6; e.kby = -e.y / d * j * 6; if (!G.headless) { floater(e.x, e.y - e.r - 4, 'CHARGE !', '#ff5c6c', 4.6); Snd.boom(); } }
+  }
+  meleeStep(e, dt, sp, held, contactD);
+}
+
+/* ---- les skins des boss : un vrai portrait de figure sur leur carte ---- */
+var BOSS_LOOK = {
+  b_valet: { robe: '#e8743a', trim: '#ffcc4d', hair: '#5a3018', beard: null, hat: 'beret', hatCol: '#d1324f', item: 'diamond' },
+  b_dame: { robe: '#d8304e', trim: '#ffd36b', hair: '#4a2210', beard: null, hat: 'crown', item: 'heart', long: true },
+  b_roiP: { robe: '#2b3a6b', trim: '#c3cde0', hair: '#3a2a1a', beard: '#3a2a1a', hat: 'crown', item: 'sword' },
+  b_roiT: { robe: '#2a7a4a', trim: '#ffcc4d', hair: '#c9c9d4', beard: '#e2e2ea', hat: 'crown', item: 'scepter' },
+  b_roiC: { robe: '#b8243f', trim: '#ffcc4d', hair: '#b5531c', beard: '#b5531c', hat: 'crown', item: 'swordBack' },
+};
+function bossPortrait(g, type, d, r, w, h, ink) {
+  const L = BOSS_LOOK[type]; if (!L) return false;
+  const iw = w - r * .5, ih = h - r * .5, hy = -ih * .12, hr = r * .3;
+  g.save();
+  rrPath(g, -iw / 2, -ih / 2, iw, ih, r * .14); g.clip();
+  g.fillStyle = 'rgba(255,214,140,.22)'; g.fillRect(-iw / 2, -ih / 2, iw, ih);
+  const blade = (x1, y1, x2, y2) => {
+    g.lineCap = 'round'; g.strokeStyle = '#5a5a6e'; g.lineWidth = r * .16; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+    g.strokeStyle = '#e8eef8'; g.lineWidth = r * .09; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+  };
+  if (L.item === 'swordBack') { blade(-iw * .46, ih * .08, iw * .46, -ih * .5); g.fillStyle = '#ffcc4d'; g.save(); g.translate(-iw * .3, -ih * .02); g.rotate(-.75); g.fillRect(-r * .28, -r * .06, r * .56, r * .12); g.restore(); }
+  if (L.long) { g.fillStyle = L.hair; g.beginPath(); g.ellipse(0, hy + hr * .8, hr * 1.35, hr * 1.9, 0, 0, TAU); g.fill(); }
+  // la robe et les épaules
+  g.fillStyle = L.robe; g.beginPath(); g.moveTo(-iw / 2 - 1, ih / 2 + 1); g.lineTo(-iw / 2 - 1, hy + hr * 2.1); g.quadraticCurveTo(-iw * .2, hy + hr * 1.15, 0, hy + hr * 1.2); g.quadraticCurveTo(iw * .2, hy + hr * 1.15, iw / 2 + 1, hy + hr * 2.1); g.lineTo(iw / 2 + 1, ih / 2 + 1); g.closePath(); g.fill();
+  g.strokeStyle = L.trim; g.lineWidth = r * .09; g.beginPath(); g.moveTo(-hr * 1.1, hy + hr * 1.3); g.lineTo(0, hy + hr * 2.5); g.lineTo(hr * 1.1, hy + hr * 1.3); g.stroke();
+  g.beginPath(); g.moveTo(0, hy + hr * 2.5); g.lineTo(0, ih / 2); g.stroke();
+  g.save(); g.translate(-iw * .24, ih * .3); suitPath(g, d.suit, r * .16); g.fillStyle = L.trim; g.fill(); g.restore();
+  g.save(); g.translate(iw * .24, ih * .3); suitPath(g, d.suit, r * .16); g.fillStyle = L.trim; g.fill(); g.restore();
+  // le cou, la tête
+  g.fillStyle = '#f2c49c'; g.fillRect(-hr * .35, hy + hr * .7, hr * .7, hr * .6);
+  g.fillStyle = '#ffd9b8'; g.beginPath(); g.arc(0, hy, hr, 0, TAU); g.fill();
+  if (L.hair && !L.long) { g.fillStyle = L.hair; g.beginPath(); g.arc(0, hy - hr * .1, hr * 1.02, Math.PI * 1.05, Math.PI * 1.95); g.closePath(); g.fill(); }
+  if (L.long) { g.fillStyle = L.hair; g.beginPath(); g.arc(0, hy - hr * .15, hr * 1.04, Math.PI * 1.02, Math.PI * 1.98); g.closePath(); g.fill(); }
+  if (L.beard) {
+    g.fillStyle = L.beard; g.beginPath(); g.moveTo(-hr * .98, hy - hr * .05); g.quadraticCurveTo(-hr * 1.05, hy + hr * 1.6, 0, hy + hr * 1.95); g.quadraticCurveTo(hr * 1.05, hy + hr * 1.6, hr * .98, hy - hr * .05);
+    g.quadraticCurveTo(hr * .55, hy + hr * .55, 0, hy + hr * .5); g.quadraticCurveTo(-hr * .55, hy + hr * .55, -hr * .98, hy - hr * .05); g.fill();
+    g.strokeStyle = 'rgba(0,0,0,.25)'; g.lineWidth = r * .04; g.beginPath(); g.moveTo(-hr * .45, hy + hr * .42); g.quadraticCurveTo(0, hy + hr * .2, hr * .45, hy + hr * .42); g.stroke();
+  } else { g.strokeStyle = '#a8243c'; g.lineWidth = r * .05; g.beginPath(); g.arc(0, hy + hr * .35, hr * .28, .25, Math.PI - .25); g.stroke(); }
+  g.fillStyle = '#231b35'; g.beginPath(); g.arc(-hr * .36, hy - hr * .08, hr * .12, 0, TAU); g.arc(hr * .36, hy - hr * .08, hr * .12, 0, TAU); g.fill();
+  if (type === 'b_dame') { g.fillStyle = 'rgba(255,120,150,.45)'; g.beginPath(); g.arc(-hr * .55, hy + hr * .22, hr * .16, 0, TAU); g.arc(hr * .55, hy + hr * .22, hr * .16, 0, TAU); g.fill(); }
+  // la couronne ou le béret
+  if (L.hat === 'crown') {
+    const cy = hy - hr * .82, cw = hr * 1.05;
+    g.fillStyle = '#ffcc4d'; g.strokeStyle = '#8a5a10'; g.lineWidth = r * .04;
+    g.beginPath(); g.moveTo(-cw, cy + hr * .15); g.lineTo(-cw, cy - hr * .55); g.lineTo(-cw * .5, cy - hr * .15); g.lineTo(0, cy - hr * .75); g.lineTo(cw * .5, cy - hr * .15); g.lineTo(cw, cy - hr * .55); g.lineTo(cw, cy + hr * .15); g.closePath(); g.fill(); g.stroke();
+    g.fillStyle = '#e0365a'; g.beginPath(); g.arc(0, cy - hr * .05, hr * .12, 0, TAU); g.fill();
+    g.fillStyle = '#4aa8ff'; g.beginPath(); g.arc(-cw * .6, cy, hr * .09, 0, TAU); g.arc(cw * .6, cy, hr * .09, 0, TAU); g.fill();
+  } else if (L.hat === 'beret') {
+    g.fillStyle = L.hatCol; g.beginPath(); g.ellipse(-hr * .15, hy - hr * .82, hr * 1.25, hr * .45, -.25, 0, TAU); g.fill();
+    g.strokeStyle = '#ffcc4d'; g.lineWidth = r * .07; g.lineCap = 'round'; g.beginPath(); g.moveTo(hr * .6, hy - hr * 1.05); g.quadraticCurveTo(hr * 1.6, hy - hr * 2, hr * 2.1, hy - hr * 1.4); g.stroke();
+  }
+  // ce qu'il tient
+  if (L.item === 'sword') { blade(iw * .36, -ih * .44, iw * .36, ih * .26); g.fillStyle = '#ffcc4d'; g.fillRect(iw * .36 - r * .26, -ih * .1 - r * .05, r * .52, r * .1); }
+  else if (L.item === 'scepter') { g.strokeStyle = '#c9932a'; g.lineWidth = r * .1; g.lineCap = 'round'; g.beginPath(); g.moveTo(-iw * .36, ih * .3); g.lineTo(-iw * .36, -ih * .28); g.stroke(); g.save(); g.translate(-iw * .36, -ih * .32); suitPath(g, 'c', r * .2); g.fillStyle = '#2a7a4a'; g.fill(); g.restore(); }
+  else if (L.item === 'heart') { g.save(); g.translate(iw * .26, hy + hr * 1.75); suitPath(g, 'h', r * .2); g.fillStyle = '#e0365a'; g.fill(); g.restore(); }
+  else if (L.item === 'diamond') { g.save(); g.translate(-iw * .3, hy + hr * 1.7); suitPath(g, 'd', r * .2); g.fillStyle = '#e2384d'; g.fill(); g.restore(); }
+  g.restore();
+  // les index dans les coins, comme une vraie carte
+  for (const s of [1, -1]) {
+    g.save(); if (s < 0) g.rotate(Math.PI);
+    g.fillStyle = ink; g.font = `700 ${r * .4}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(d.rank, -w / 2 + r * .34, -h / 2 + r * .4);
+    g.translate(-w / 2 + r * .34, -h / 2 + r * .78); suitPath(g, d.suit, r * .14); g.fill();
+    g.restore();
+  }
+  return true;
+}
+
+/* ================= v11.9 · de belles mains, de belles cartes, et tout en douceur =================
+   Les cartes ont une vraie face (médaillon façon jeton, ruban, reflet) et un dos de casino : elles se retournent
+   en partant sur la pile et se remettent face visible en revenant. Les mains (de croupier) se lèvent, viennent
+   en arc, se posent, glissent la carte, puis rentrent avec un petit ressort. Leur ombre suit leur hauteur. */
+
+/* ---- les mains : dos de la main, ongles, jointures, poignet de chemise et bouton de manchette ---- */
+function handArt2(id) {
+  return `<defs><linearGradient id="hdSk${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbd9ba"/><stop offset=".62" stop-color="#f0bd96"/><stop offset="1" stop-color="#dc9d76"/></linearGradient>
+    <linearGradient id="hdSl${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d2c57"/><stop offset="1" stop-color="#22182f"/></linearGradient>
+    <radialGradient id="hdSh${id}" cx=".42" cy=".28" r=".78"><stop offset=".3" stop-color="#fff" stop-opacity=".22"/><stop offset=".72" stop-color="#b8734e" stop-opacity="0"/><stop offset="1" stop-color="#a5603e" stop-opacity=".4"/></radialGradient></defs>
+  <g class="hd-sleeve"><path d="M14 104C14 99 18 96 23 96H73C78 96 82 99 82 104L88 140H8Z" fill="url(#hdSl${id})"/><path d="M24 100H32L30.5 140H20.5Z" fill="#fff" opacity=".07"/><path d="M48 98V140" stroke="#18101f" stroke-width="1.2" opacity=".5"/></g>
+  <rect x="17" y="84" width="62" height="17" rx="6" fill="#f7f1e7" stroke="#2c1d2c" stroke-width="1.6"/><path d="M20.5 93.4H75.5" stroke="#d9cfbf" stroke-width="1.3"/><circle cx="68" cy="92.6" r="3.5" fill="#ffcc4d" stroke="#8a5a10" stroke-width=".9"/><circle cx="66.9" cy="91.5" r="1.05" fill="#fff6c8"/>
+  <g stroke="#5a3426" stroke-width="1.6" stroke-linejoin="round">
+    <g class="hd-th"><path d="M28 70C18.5 66 10 57.4 7.6 48.8C6.4 44.3 10 40.8 14.4 43C19.4 45.5 25 52.2 30.4 57.2Z" fill="url(#hdSk${id})"/><path d="M10.2 46.4C11 44.6 13 44.2 14.6 45.4" fill="none" stroke="#fde6d4" stroke-width="2.2" stroke-linecap="round"/></g>
+    <g class="hd-f hd-f1"><rect x="25" y="11" width="12.6" height="40" rx="6.3" fill="url(#hdSk${id})" transform="rotate(-7 31.3 31)"/><rect x="27.6" y="13.2" width="7.4" height="7.6" rx="3.3" fill="#fde6d4" stroke="none" transform="rotate(-7 31.3 31)"/></g>
+    <g class="hd-f hd-f2"><rect x="38.4" y="5.5" width="13.2" height="44" rx="6.6" fill="url(#hdSk${id})" transform="rotate(-1.5 45 27.5)"/><rect x="41.2" y="7.8" width="7.6" height="7.8" rx="3.4" fill="#fde6d4" stroke="none" transform="rotate(-1.5 45 27.5)"/></g>
+    <g class="hd-f hd-f3"><rect x="52.6" y="9.5" width="12.6" height="40" rx="6.3" fill="url(#hdSk${id})" transform="rotate(5 58.9 29.5)"/><rect x="55.2" y="11.8" width="7.4" height="7.5" rx="3.3" fill="#fde6d4" stroke="none" transform="rotate(5 58.9 29.5)"/><rect x="52" y="33.2" width="13.8" height="4.6" rx="1.8" fill="#ffcc4d" stroke="#8a5a10" stroke-width=".9" transform="rotate(5 58.9 29.5)"/><rect x="54.2" y="34.1" width="5" height="1.3" rx=".6" fill="#fff6c8" stroke="none" transform="rotate(5 58.9 29.5)"/></g>
+    <g class="hd-f hd-f4"><rect x="65.2" y="19.5" width="10.6" height="31" rx="5.3" fill="url(#hdSk${id})" transform="rotate(12 70.5 35)"/><rect x="67.4" y="21.6" width="6.2" height="6.4" rx="2.8" fill="#fde6d4" stroke="none" transform="rotate(12 70.5 35)"/></g>
+    <path d="M27 88C23 78 21 64 22.5 54C23.6 46 29 41.5 37 41.5H66C73.5 41.5 78.5 46 78.8 53.5C79.4 65 77 78 72.5 88Z" fill="url(#hdSk${id})"/>
+  </g>
+  <path d="M27 88C23 78 21 64 22.5 54C23.6 46 29 41.5 37 41.5H66C73.5 41.5 78.5 46 78.8 53.5C79.4 65 77 78 72.5 88Z" fill="url(#hdSh${id})"/>
+  <path d="M33.5 53Q36.5 67 40 81M45.5 52Q46.5 67 47.5 81M57.5 53Q55.5 67 54 81" stroke="#fff" stroke-opacity=".13" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <g fill="#fff" opacity=".32"><ellipse cx="31.6" cy="47.6" rx="3.6" ry="1.7"/><ellipse cx="45" cy="46.4" rx="3.8" ry="1.8"/><ellipse cx="58.4" cy="47.4" rx="3.6" ry="1.7"/><ellipse cx="69.6" cy="50.2" rx="3" ry="1.5"/></g>
+  <path d="M28.6 37Q31.6 39.2 34.8 37.4M41.6 35.4Q45 37.6 48.4 35.6M55.4 36.6Q58.6 38.8 61.8 37.2M66.6 41.6Q69.2 43.2 71.6 42.2" stroke="#d6996f" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+  <path d="M71 50C75 56 75.4 70 72 82C70.6 74 70.6 61 71 50Z" fill="#d6996f" opacity=".35"/>`;
+}
+function handSVG(side) {
+  return `<svg class="hand-svg" viewBox="0 0 96 140" aria-hidden="true">${side === 'l' ? `<g transform="translate(96 0) scale(-1 1)">${handArt2('L')}</g>` : handArt2('R')}</svg>`;
+}
+
+/* ---- les cartes : une face, et un dos de casino ---- */
+function pcCardHTML(id, k, L) {
+  const g = L.g, pos = `left:calc(50% + ${L.slot(k).toFixed(1)}px);top:${g.top}px;--i:${k}`;
+  const back = `<span class="pc-back"><i class="pc-emb">${iconSVG('su_s')}</i></span>`;
+  if (id === 'bil') {
+    const key = esc((keysOf('bille')[0] || 'Z').toUpperCase());
+    return `<div class="pc-slot" style="--sc:#dfe6f2;${pos}"><i class="pc-ring"></i><span class="pc-ico">${iconSVG('bille')}</span><i class="pc-fill"></i><b class="pc-cd"></b></div>
+      <button class="pcard bil" id="ab-bil" style="--sc:#dfe6f2;${pos}" aria-label="BILLE : appuie sur ta base et tire en arrière (ou maintiens ${esc(keyHint('bille'))})"><span class="pc-bob"><span class="pc-inner"><span class="pc-face"><i class="pc-k">${key}</i><i class="abc" hidden></i><span class="pc-ico">${iconSVG('bille')}</span><span class="pc-n abn">BILLE</span><i class="pc-k2">${key}</i><em class="abt"></em><i class="pc-gloss"></i></span>${back}</span></span></button>`;
+  }
+  const P = PSPELLS[id], fp = P.fam ? famPow(G.run, id) : 1;
+  return `<div class="pc-slot" style="--sc:${P.col};${pos}"><i class="pc-ring"></i><span class="pc-ico">${iconSVG(P.icon)}</span><i class="pc-fill"></i><b class="pc-cd"></b></div>
+    <button class="pcard${P.fam ? ' fam' : ''}${P.fou ? ' fou' : ''}" data-sp="${id}" style="--sc:${P.col};${pos}" aria-label="${esc(P.name)} (touche ${k}) : ${esc(P.txt)}" title="${esc(P.name)} · ${esc(P.txt)}"><span class="pc-bob"><span class="pc-inner"><span class="pc-face"><i class="pc-k">${k}</i>${fp > 1 ? `<i class="abp">×${dec(fp)}</i>` : ''}<span class="pc-ico">${iconSVG(P.icon)}</span>${pcLabel(P.short || P.name)}<i class="pc-k2">${k}</i><i class="pc-gloss"></i></span>${back}</span></span></button>`;
+}
+
+/* ---- le moteur : des trajectoires calculées (arc, ressort), jouées en douceur ---- */
+// un ressort amorti (z : l'amortissement, w : la vitesse) : il dépasse un peu, puis se pose pile à la fin
+const heSpring = (z, w) => { const wd = w * Math.sqrt(1 - z * z); return k => k <= 0 ? 0 : k >= 1 ? 1 : 1 - Math.exp(-z * w * k) * (Math.cos(wd * k) + z * w / wd * Math.sin(wd * k)) * (1 - Math.pow(k, 4)); };
+const HE = {
+  out: k => 1 - Math.pow(1 - k, 3),
+  inOut: k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2,
+  in: k => k * k,
+  spring: heSpring(.5, 10), // vif : la carte qu'on vise
+  soft: heSpring(.72, 8.5), // une carte qui revient à sa place
+  calm: heSpring(.8, 9), // une main qui rentre
+  back: k => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); },
+};
+// l'instant où une courbe atteint f (pour savoir quand la main touche une carte)
+function heInv(e, f) { let a = 0, b = 1; for (let i = 0; i < 20; i++) { const m = (a + b) / 2; if (e(m) < f) a = m; else b = m; } return (a + b) / 2; }
+const tfStr = t => `translate(${t.x.toFixed(2)}px, ${t.y.toFixed(2)}px) rotate(${(t.r || 0).toFixed(2)}deg) scale(${(t.s == null ? 1 : t.s).toFixed(4)})`;
+function tfGet(el) {
+  let m = null;
+  try { m = new DOMMatrixReadOnly(el.style.transform || getComputedStyle(el).transform || 'none'); } catch (e) { m = null; }
+  if (!m) return { x: 0, y: 0, r: 0, s: 1 };
+  return { x: m.e, y: m.f, r: Math.atan2(m.b, m.a) * 180 / Math.PI, s: Math.hypot(m.a, m.b) || 1 };
+}
+function stopAnim(el) {
+  if (el && el._pa) { try { el._pa.commitStyles(); } catch (e) { /* pas affiché */ } el._pa.cancel(); el._pa = null; }
+}
+// déplace un élément vers « to » ; o : { dur, delay, ease, arc (px vers le haut au milieu), done }
+function glide(el, to, o) {
+  if (!el || !el.animate) return null;
+  stopAnim(el);
+  const dur = G.reduced ? 1 : Math.max(16, o.dur || 300), from = tfGet(el), ease = o.ease || HE.out, n = G.reduced ? 1 : Math.max(8, Math.round(dur / 16)), fr = [];
+  for (let i = 0; i <= n; i++) {
+    const k = i / n, p = ease(k), a = (o.arc || 0) * Math.sin(Math.PI * clamp(HE.inOut(k), 0, 1));
+    fr.push({ offset: k, transform: tfStr({ x: from.x + (to.x - from.x) * p, y: from.y + (to.y - from.y) * p - a, r: from.r + ((to.r || 0) - from.r) * p, s: from.s + ((to.s == null ? 1 : to.s) - from.s) * p }) });
+  }
+  const an = el.animate(fr, { duration: dur, delay: o.delay || 0, easing: 'linear', fill: 'forwards' });
+  el._pa = an;
+  an.addEventListener('finish', () => { if (el._pa !== an) return; el.style.transform = tfStr(to); an.cancel(); el._pa = null; if (o.done) o.done(); });
+  return an;
+}
+// la carte se retourne (dos ↔ face), en se soulevant un peu au milieu du geste
+const flipTf = (a, s) => `perspective(${Math.round((PCS.lay ? PCS.lay.g.w : 52) * 6)}px) rotateY(${a.toFixed(2)}deg) scale(${s.toFixed(4)})`;
+function pcFlipNow(c, a) {
+  const inn = c.el && c.el.querySelector('.pc-inner'); if (!inn) return;
+  if (inn._fa) { inn._fa.cancel(); inn._fa = null; }
+  inn.style.transform = flipTf(a, 1); inn._ang = a; c.flip = a;
+}
+function flipTo(c, back, dur, delay) {
+  const inn = c.el && c.el.querySelector('.pc-inner'); if (!inn) return;
+  const to = back ? 180 : 0;
+  if ((c.flip || 0) === to && !inn._fa) return;
+  c.flip = to;
+  let cur = inn._ang || 0;
+  if (inn._fa) { // déjà en train de se retourner : on repart de l'angle où elle en est
+    const ti = inn._fa.effect && inn._fa.effect.getComputedTiming(), p = (ti && ti.progress) || 0;
+    cur = inn._fa._from + (inn._fa._to - inn._fa._from) * HE.inOut(p);
+    inn._fa.cancel(); inn._fa = null;
+  }
+  inn._ang = to;
+  if (G.reduced || !inn.animate || Math.abs(to - cur) < .5) { inn.style.transform = flipTf(to, 1); return; }
+  const D = dur || 320, n = Math.max(8, Math.round(D / 16)), fr = [];
+  for (let i = 0; i <= n; i++) { const k = i / n; fr.push({ offset: k, transform: flipTf(cur + (to - cur) * HE.inOut(k), 1 + .09 * Math.sin(Math.PI * k)) }); }
+  const a = inn.animate(fr, { duration: D, delay: delay || 0, easing: 'linear', fill: 'forwards' });
+  a._from = cur; a._to = to; inn._fa = a;
+  a.addEventListener('finish', () => { if (inn._fa !== a) return; inn.style.transform = flipTf(to, 1); a.cancel(); inn._fa = null; });
+}
+
+/* ---- les mains : où elles sont, et leur ombre qui suit la hauteur ---- */
+// « lift » de 0 (posée) à 1 (levée) : la main grossit un peu, son ombre s'éloigne, s'élargit et pâlit
+function handTo(side, t, o) {
+  const H = PCS.hands[side], Sh = PCS.shadows && PCS.shadows[side]; if (!H) return;
+  const lift = t.lift || 0, sc = (t.s == null ? 1 : t.s) * (1 + .07 * lift);
+  glide(H, { x: t.x, y: t.y, r: t.r || 0, s: sc }, o);
+  if (Sh && Sh.animate) {
+    const dx = (side === 'l' ? -1 : 1) * 4 * lift, dy = 12 * lift + 2;
+    glide(Sh, { x: t.x + dx, y: t.y + dy, r: 0, s: 1 + .24 * lift }, Object.assign({}, o, { arc: (o.arc || 0) * .2, done: null }));
+    if (Sh._oa) Sh._oa.cancel();
+    const op0 = getComputedStyle(Sh).opacity;
+    Sh._oa = Sh.animate([{ opacity: op0 }, { opacity: String(.55 - .28 * lift) }], { duration: G.reduced ? 1 : o.dur || 300, delay: o.delay || 0, easing: 'ease-out', fill: 'forwards' });
+  }
+}
+const handBusy = side => !!(PCS.hands[side] && PCS.hands[side]._pa);
+const handUp = (H, on) => { H.style.zIndex = on ? 10 : ''; };
+
+/* ---- les gestes ---- */
+// une main se lève, vient en arc au-dessus de la carte, se pose, glisse la carte jusqu'à la pile, puis rentre
+function pcPush(side, c, d0) {
+  const H = PCS.hands[side], L = PCS.lay, g = L.g, gen = PCS.gen, d = d0 || 0;
+  if (!H || G.reduced) { pcToPile(c, 0, 300); return; }
+  const h0 = L.hand[side], cx = pcCX(c), px = L.pile + g.w / 2 + 2.5 * PCS.pile.length, dy = pcDY(g), sgn = side === 'l' ? 1 : -1;
+  const later = (fn, ms) => setTimeout(() => { if (PCS.gen === gen) fn(); }, d + ms);
+  later(() => { handUp(H, true); handTo(side, { x: cx - h0, y: dy - 5, r: 5 * sgn, lift: 1 }, { dur: 250, ease: HE.out, arc: 18 }); Snd.cardPick(c.k); }, 0);
+  later(() => { H.classList.add('grab'); handTo(side, { x: cx - h0, y: dy + 2, r: 0, s: .97, lift: 0 }, { dur: 95, ease: HE.in }); if (c.st === 'out') pcPress(c); }, 250);
+  later(() => { if (c.st === 'out') pcToPile(c, 0, 360, true); handTo(side, { x: px - h0, y: dy + 4, r: -3 * sgn, s: .97, lift: .12 }, { dur: 360, ease: HE.inOut }); Snd.cardSwish(); }, 345);
+  later(() => { H.classList.remove('grab'); handTo(side, { x: 0, y: 0, r: 0, lift: 0 }, { dur: 620, ease: HE.calm, arc: 22, done: () => handUp(H, false) }); Snd.cardTap(); }, 715);
+}
+// deux cartes : la droite part la première, la gauche suit
+function pcHands(list) {
+  list = list.filter(c => c.st === 'out' && c.el.isConnected);
+  if (!list.length) return;
+  const L = PCS.lay, now = performance.now();
+  if (list.length === 1) { pcPush(pcCX(list[0]) < L.mid ? 'l' : 'r', list[0]); PCS.freeAt = now + 830; }
+  else if (list.length === 2) { pcPush('r', list[1]); pcPush('l', list[0], 170); PCS.freeAt = now + 1000; }
+  else { pcSweep(list); PCS.freeAt = now + 960; }
+}
+// trois cartes ou plus : la main droite balaie tout d'un coup (chaque carte part quand la main la touche), la gauche accompagne
+function pcSweep(list) {
+  const H = PCS.hands.r, L = PCS.lay, g = L.g, gen = PCS.gen, h0 = L.hand.r, dy = pcDY(g);
+  if (!H || G.reduced) { for (const c of list) pcToPile(c, 0, 300); return; }
+  const x0 = pcCX(list[0]) - g.w * .3, px = L.pile + g.w / 2, span = Math.max(1, px - x0), T = 420, edge = g.hw * .32;
+  const later = (fn, ms) => setTimeout(() => { if (PCS.gen === gen) fn(); }, ms);
+  handUp(H, true);
+  handTo('r', { x: x0 - h0, y: dy + 2, r: 10, lift: 1 }, { dur: 210, ease: HE.out, arc: 14 });
+  // la gauche s'écarte pour laisser passer la droite
+  if (PCS.hands.l) handTo('l', { x: -14, y: 12, r: -9, lift: .3 }, { dur: 300, ease: HE.out, arc: 6 });
+  Snd.cardPick(list[0].k);
+  later(() => {
+    H.classList.add('grab');
+    handTo('r', { x: px - h0, y: dy + 4, r: -4, s: .97, lift: .1 }, { dur: T, ease: HE.inOut });
+    for (const c of list) {
+      if (c.st !== 'out') continue;
+      const f = clamp((L.slot(c.k) - edge - x0) / span, 0, .9), tf = T * heInv(HE.inOut, f), D = Math.max(70, Math.round(T - tf));
+      // la carte suit la main à partir du moment où elle la touche, et arrive sur la pile avec elle
+      const ease = k => (HE.inOut((tf + k * (T - tf)) / T) - f) / (1 - f);
+      later(() => { if (c.st === 'out') { pcPress(c); pcToPile(c, 0, D, ease); } }, Math.round(tf));
+    }
+    Snd.cardSweep(list.length);
+  }, 210);
+  later(() => {
+    H.classList.remove('grab');
+    handTo('r', { x: 0, y: 0, r: 0, lift: 0 }, { dur: 620, ease: HE.calm, arc: 22, done: () => handUp(H, false) });
+    if (PCS.hands.l) handTo('l', { x: 0, y: 0, r: 0, lift: 0 }, { dur: 560, ease: HE.calm });
+    Snd.cardTap();
+  }, 210 + T + 30);
+}
+// la BILLE perd une charge mais il en reste : une petite tape du bout des doigts
+function pcTap(c) {
+  if (G.reduced || performance.now() < PCS.freeAt || c.st !== 'in') return;
+  const L = PCS.lay, side = pcCX(c) < L.mid ? 'l' : 'r', H = PCS.hands[side]; if (!H) return;
+  const g = L.g, x = pcCX(c) - L.hand[side], dy = pcDY(g), gen = PCS.gen;
+  handUp(H, true);
+  handTo(side, { x, y: dy - 6, r: 0, lift: 1 }, { dur: 200, ease: HE.out, arc: 10 });
+  setTimeout(() => { if (PCS.gen !== gen) return; H.classList.add('grab'); handTo(side, { x, y: dy + 1, r: 0, s: .97, lift: 0 }, { dur: 85, ease: HE.in }); pcPress(c); }, 200);
+  setTimeout(() => { if (PCS.gen !== gen) return; H.classList.remove('grab'); handTo(side, { x: 0, y: 0, r: 0, lift: 0 }, { dur: 500, ease: HE.calm, arc: 12, done: () => handUp(H, false) }); }, 300);
+  PCS.freeAt = performance.now() + 520;
+}
+function pcPress(c) {
+  const f = c.el && c.el.querySelector('.pc-face'); if (!f) return;
+  f.classList.remove('press'); void f.offsetWidth; f.classList.add('press');
+}
+// sa place sur la pile
+const pcPileT = (c, k) => ({ x: PCS.lay.pile - PCS.lay.slot(c.k) + 2.5 * k, y: 4 - 3.5 * k, r: 8 - 3.2 * k, s: .9 });
+// la carte part sur la pile et se retourne. how : rien (lancée, en arc), true (poussée par la main), ou une courbe (le balayage)
+function pcToPile(c, delay, dur, how) {
+  if (!c.el || !c.el.isConnected) return;
+  if (!PCS.pile.includes(c)) PCS.pile.push(c);
+  const k = PCS.pile.indexOf(c), D = dur || 300, d = delay || 0, hand = !!how;
+  c.el.style.zIndex = 8;
+  c.el.classList.add('away');
+  flipTo(c, true, Math.round(D * (hand ? .66 : .8)), d + Math.round(D * (hand ? .3 : .1)));
+  const a = glide(c.el, pcPileT(c, k), { dur: hand ? D : D + 120, delay: d, ease: typeof how === 'function' ? how : hand ? HE.inOut : HE.back, arc: hand ? 0 : 18 });
+  if (a) a.addEventListener('finish', () => { if (c.st === 'out') c.el.style.zIndex = 3 + PCS.pile.indexOf(c); });
+}
+// rechargée : la carte quitte la pile en arc, se remet face visible, et se pose à sa place (ressort + reflet)
+function pcBack(c) {
+  c.st = 'in';
+  const i = PCS.pile.indexOf(c); if (i >= 0) PCS.pile.splice(i, 1);
+  c.el.classList.remove('away');
+  c.el.style.zIndex = 8;
+  flipTo(c, false, 400, 30);
+  const home = c.aim ? { x: 0, y: -16, r: -4, s: 1.07 } : { x: 0, y: 0, r: 0, s: 1 };
+  const a = glide(c.el, home, { dur: 680, ease: HE.soft, arc: 26 });
+  if (a) a.addEventListener('finish', () => { if (c.st === 'in') c.el.style.zIndex = 2; });
+  PCS.pile.forEach((o, k) => { glide(o.el, pcPileT(o, k), { dur: 280, ease: HE.out }); o.el.style.zIndex = 3 + k; });
+  const f = c.el.querySelector('.pc-face'), el = c.el;
+  if (f) setTimeout(() => {
+    f.classList.remove('pop'); void f.offsetWidth; f.classList.add('pop');
+    el.classList.remove('shine'); void el.offsetWidth; el.classList.add('shine');
+    setTimeout(() => el.classList.remove('shine'), 800);
+  }, 400);
+  if (G.mode === 'combat') Snd.cardBack(c.k);
+}
+// la Bombe qu'on vise : la carte se lève avec un ressort
+function pcAim(c, on) {
+  c.el.classList.toggle('aim', on);
+  if (c.st !== 'in') return;
+  glide(c.el, on ? { x: 0, y: -16, r: -4, s: 1.07 } : { x: 0, y: 0, r: 0, s: 1 }, { dur: on ? 440 : 400, ease: HE.spring });
+  if (on) Snd.cardPick(c.k);
+}
+
+/* ---- au repos : de temps en temps, une main pianote sur la table ---- */
+setInterval(() => {
+  if (G.headless || G.mode !== 'combat' || G.paused || G.reduced || document.visibilityState === 'hidden') return;
+  if (!PCS.hands || performance.now() < PCS.freeAt + 1500 || Math.random() < .45) return;
+  const side = Math.random() < .5 ? 'l' : 'r', H = PCS.hands[side]; if (!H || handBusy(side) || H.classList.contains('grab')) return;
+  H.classList.remove('drum'); void H.offsetWidth; H.classList.add('drum');
+  setTimeout(() => H.classList.remove('drum'), 900);
+}, 3200);
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
@@ -20541,7 +21478,7 @@ const HAND_ART = `<g class="hd-sleeve"><path d="M13 82C13 75 18 71 25 71H59C66 7
   <path d="M60 36C64 40 65 52 62.6 62C61 58 60.4 48 60 36Z" fill="#e3ad86" opacity=".55"/>
   <g fill="#fbe1cc" opacity=".9"><rect x="27.6" y="11" width="5.2" height="5.6" rx="2.2" transform="rotate(-7 30 26)"/><rect x="39" y="6.2" width="5.4" height="5.8" rx="2.3" transform="rotate(-1.5 41.6 23)"/><rect x="50.4" y="10" width="5" height="5.4" rx="2.2" transform="rotate(5 52.8 25)"/><rect x="60.2" y="19" width="4.4" height="4.8" rx="2" transform="rotate(12 62.5 30)"/></g>
   <path d="M30 44Q31.4 45.6 33 44.4M41 43.4Q42.4 45 44 43.8M51.4 44Q52.8 45.6 54.4 44.4" stroke="#dba27c" stroke-width="1" fill="none" stroke-linecap="round" opacity=".7"/>`;
-function handSVG(side) {
+function handSVG0(side) {
   return `<svg class="hand-svg" viewBox="0 0 84 130" aria-hidden="true">${side === 'l' ? `<g transform="translate(84 0) scale(-1 1)">${HAND_ART}</g>` : HAND_ART}</svg>`;
 }
 
@@ -20578,7 +21515,7 @@ function pcAnim(el, frames, o) {
   a.addEventListener('finish', () => { try { a.commitStyles(); } catch (e) { el.style.transform = frames[frames.length - 1].transform; } a.cancel(); if (el._pa === a) el._pa = null; });
   return a;
 }
-function pcCardHTML(id, k, L) {
+function pcCardHTML0(id, k, L) {
   const g = L.g, pos = `left:calc(50% + ${L.slot(k).toFixed(1)}px);top:${g.top}px`;
   if (id === 'bil') {
     const key = esc((keysOf('bille')[0] || 'Z').toUpperCase());
@@ -20604,15 +21541,17 @@ function renderSpellBar() {
   el.classList.add('cards');
   el.innerHTML = `<div class="pc-row" style="--cw:${g.w}px;--ch:${g.h}px;--hw:${g.hw}px;--hh:${g.hh}px;--rh:${g.top + g.h + g.rest}px">${ids.map((id, k) => pcCardHTML(id, k, L)).join('')}
     <div class="pc-pilespot" style="left:calc(50% + ${L.pile.toFixed(1)}px);top:${g.top + 4}px"></div>
+    <div class="pc-hsh l" style="left:calc(50% + ${(L.hand.l - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px"></div><div class="pc-hsh r" style="left:calc(50% + ${(L.hand.r - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px"></div>
     <div class="pc-hand l" style="left:calc(50% + ${(L.hand.l - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px">${handSVG('l')}</div>
     <div class="pc-hand r" style="left:calc(50% + ${(L.hand.r - g.hw / 2).toFixed(1)}px);top:${g.top + g.h - g.ovl}px">${handSVG('r')}</div></div><div class="ab-fx" id="ab-fx"></div>`;
   el.dataset.n = list.length;
   el.style.setProperty('--rh', (g.top + g.h + g.rest) + 'px');
   PCS.hands = { l: el.querySelector('.pc-hand.l'), r: el.querySelector('.pc-hand.r') };
+  PCS.shadows = { l: el.querySelector('.pc-hsh.l'), r: el.querySelector('.pc-hsh.r') };
   const btns = el.querySelectorAll('.pcard'), slots = el.querySelectorAll('.pc-slot');
   PCS.cards = ids.map((id, k) => ({ id, k, el: btns[k], slot: slots[k], st: 'in', p: null, t: null, aim: false, sil: false, ch: null }));
   // ce qui recharge déjà (début de manche : les sorts démarrent à mi-recharge) attend sur la pile
-  if (cb && !cb.demo) for (const c of PCS.cards) if (pcAway(c, cb)) { c.st = 'out'; PCS.pile.push(c); c.el.classList.add('away'); c.el.style.transform = pcPileTf(c, PCS.pile.length - 1); c.el.style.zIndex = 2 + PCS.pile.length; }
+  if (cb && !cb.demo) for (const c of PCS.cards) if (pcAway(c, cb)) { c.st = 'out'; PCS.pile.push(c); c.el.classList.add('away'); c.el.style.transform = pcPileTf(c, PCS.pile.length - 1); c.el.style.zIndex = 2 + PCS.pile.length; pcFlipNow(c, 180); }
   delete hc.spfx;
 }
 function pcAway(c, cb) {
@@ -20671,7 +21610,7 @@ function updateAbilities(on) {
   if (hc.spfx !== st) { hc.spfx = st; fx.innerHTML = st; }
 }
 // la Bombe qu'on vise : la carte se lève
-function pcAim(c, on) {
+function pcAim0(c, on) {
   c.el.classList.toggle('aim', on);
   if (c.st !== 'in') return;
   pcAnim(c.el, [{}, { transform: on ? 'translate(0px, -14px) rotate(-3deg) scale(1.05)' : PC_HOME }], { duration: 180, easing: 'cubic-bezier(.3,1.4,.5,1)' });
@@ -20692,7 +21631,7 @@ function pcFlush() {
   if (G.reduced || wait > 650) { for (const c of list) pcToPile(c, 0, 260); Snd.cardSwish(); return; }
   setTimeout(() => { if (PCS.gen === gen) pcHands(list); }, wait);
 }
-function pcHands(list) {
+function pcHands0(list) {
   list = list.filter(c => c.st === 'out' && c.el.isConnected);
   if (!list.length) return;
   const L = PCS.lay, now = performance.now();
@@ -20701,7 +21640,7 @@ function pcHands(list) {
   else { pcSweep(list); PCS.freeAt = now + 900; }
 }
 // une main se pose à plat sur la carte et la glisse à droite, sur la pile
-function pcPush(side, c, d0) {
+function pcPush0(side, c, d0) {
   const H = PCS.hands[side], L = PCS.lay, g = L.g, gen = PCS.gen, d = d0 || 0;
   if (!H) { pcToPile(c, 0, 280); return; }
   const h0 = L.hand[side], cx = pcCX(c), px = L.pile + g.w / 2 + 2.5 * PCS.pile.length, dy = pcDY(g);
@@ -20724,7 +21663,7 @@ function pcPush(side, c, d0) {
   }, d + 560);
 }
 // trois cartes ou plus : la main droite balaie tout d'un coup
-function pcSweep(list) {
+function pcSweep0(list) {
   const H = PCS.hands.r, Hl = PCS.hands.l, L = PCS.lay, g = L.g, gen = PCS.gen, h0 = L.hand.r, dy = pcDY(g);
   const x0 = pcCX(list[0]) - g.w * .3, px = L.pile + g.w / 2, span = Math.max(1, px - x0), T = 340;
   const at = (x, y, s) => `translate(${(x - h0).toFixed(1)}px, ${y.toFixed(1)}px) rotate(${(-8 * (1 - s)).toFixed(1)}deg) scale(1)`;
@@ -20748,7 +21687,7 @@ function pcSweep(list) {
   }, 180 + T + 30);
 }
 // la BILLE perd une charge mais il en reste : une petite tape sur la carte
-function pcTap(c) {
+function pcTap0(c) {
   if (G.reduced || performance.now() < PCS.freeAt || c.st !== 'in') return;
   const L = PCS.lay, side = pcCX(c) < L.mid ? 'l' : 'r', H = PCS.hands[side]; if (!H) return;
   const g = L.g, x = (pcCX(c) - L.hand[side]).toFixed(1), dy = pcDY(g);
@@ -20756,8 +21695,8 @@ function pcTap(c) {
   setTimeout(() => pcPress(c), 260);
   PCS.freeAt = performance.now() + 450;
 }
-function pcPress(c) { const f = c.el && c.el.querySelector('.pc-face'); if (!f) return; f.classList.remove('press'); void f.offsetWidth; f.classList.add('press'); }
-function pcToPile(c, delay, dur) {
+function pcPress0(c) { const f = c.el && c.el.querySelector('.pc-face'); if (!f) return; f.classList.remove('press'); void f.offsetWidth; f.classList.add('press'); }
+function pcToPile0(c, delay, dur) {
   if (!c.el || !c.el.isConnected) return;
   if (!PCS.pile.includes(c)) PCS.pile.push(c);
   const k = PCS.pile.indexOf(c);
@@ -20767,7 +21706,7 @@ function pcToPile(c, delay, dur) {
   if (a) a.addEventListener('finish', () => { if (c.st === 'out') c.el.style.zIndex = 3 + PCS.pile.indexOf(c); });
 }
 // rechargée : la carte revient toute seule à sa place, et les autres se resserrent sur la pile
-function pcBack(c) {
+function pcBack0(c) {
   c.st = 'in';
   const i = PCS.pile.indexOf(c); if (i >= 0) PCS.pile.splice(i, 1);
   c.el.classList.remove('away');
@@ -21224,6 +22163,7 @@ const SKINS = {
   ],
 };
 SKINS.bille = BILLE_SKINS;
+hardenSkins();
 const SKIN_DEF = { cannon: 'classic', flipper: 'classic', base: 'auto', bille: 'classic' };
 const SKIN_KIND = { cannon: ['Canons', 'NOUVEAU CANON DÉBLOQUÉ'], flipper: ['Flippers', 'NOUVEAU FLIPPER DÉBLOQUÉ'], base: ['Bases', 'NOUVELLE BASE DÉBLOQUÉE'], bille: ['Billes', 'NOUVELLE BILLE DÉBLOQUÉE'] };
 const SKN = { cannon: {}, flipper: {}, base: {}, bille: {} };
@@ -21252,7 +22192,7 @@ function skinOf(kind) {
 // quand une condition est remplie : on le dit tout de suite (toast + son)
 function checkUnlocks() {
   if (G.headless) return;
-  deckUnlocks();
+  deckUnlocks(); machUnlocks();
   const sk = skinMeta(), fresh = [];
   for (const kind in SKINS) for (const S2 of SKINS[kind]) {
     if (!S2.need || sk.got[kind + ':' + S2.id]) continue;
@@ -22369,6 +23309,7 @@ function endRun(cashed) {
   m.jetons += jet; m.life.tickets = (m.life.tickets || 0) + jet;
   bankLife(run);
   m.best = Math.max(m.best, run.round);
+  const dw0 = run.deck ? ((m.dw || {})[run.deck] || 0) : 0;
   if (won) { m.wins++; if (run.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1) { m.stakeMax = run.stake + 1; } if (run.deck) { m.dw = m.dw || {}; m.dw[run.deck] = Math.max(m.dw[run.deck] || 0, (run.stake || 0) + 1); } }
   const sk = run.stake || 0, prevBest = bestScoreOf(sk), newBest = (run.score || 0) > prevBest;
   if (newBest) { m.bestScore = m.bestScore || {}; m.bestScore[sk] = run.score; }
@@ -22381,8 +23322,8 @@ function endRun(cashed) {
   $('#o-stats').innerHTML = cells.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
   $('#o-score').innerHTML = `<small>SCORE</small><b>${fmtS(run.score || 0)}</b>${newBest ? '<em>NOUVEAU RECORD !</em>' : prevBest ? `<i>record : ${fmtS(prevBest)}</i>` : ''}`;
   if (newBest && (run.score || 0) > 0) setTimeout(() => { Snd.record(); celebrate(true); }, 900);
-  const unl = won && m.stakeMax > run.stake;
-  $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? 'Nouvelle mise débloquée !' : '';
+  const dw1 = run.deck ? ((m.dw || {})[run.deck] || 0) : 0, unl = won && dw1 > dw0 && dw1 <= STAKES.length - 1;
+  $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? `${STAKES[dw1].name} débloquée avec ${deckById(run.deck).name} !` : '';
   show('#over', true);
   overFx(cashed, run);
   lbAfterRun(run);
@@ -22455,7 +23396,7 @@ function devAction(k) {
     case 'punchall': G.meta.secrets = G.meta.secrets || {}; for (const id of NORMAL_JOKERS) G.meta.secrets[id] = 1; saveMeta(); refreshTitle(); msg('Tous les secrets sont découverts.'); break;
     case 'catall': for (const T of CAT_TABS) for (const [c, id] of T.items()) { const o = G.meta.cat[c] || (G.meta.cat[c] = {}); o[id] = 1; } saveMeta(); refreshTitle(); msg('Tout le catalogue est débloqué.'); break;
     case 'tips': G.meta.seen = {}; saveMeta(); msg('Les astuces réapparaîtront.'); break;
-    case 'stakes': G.meta.stakeMax = STAKES.length - 1; saveMeta(); refreshTitle(); msg('Toutes les mises sont débloquées.'); break;
+    case 'stakes': G.meta.stakeMax = STAKES.length - 1; G.meta.stakeAll = 1; G.meta.machAll = 1; saveMeta(); refreshTitle(); msg('Toutes les mises (avec tous les jeux) et toutes les machines sont débloquées.'); break;
     case 'reset': {
       const b = $('#dev-reset');
       if (!b.dataset.arm) { b.dataset.arm = '1'; b.textContent = 'Confirmer'; msg('Touche encore pour tout effacer.'); return; }
@@ -22607,7 +23548,7 @@ function simMachine(first) {
   for (const j of res.list) addJokerSim(j);
   autoArrange(G.run);
 }
-const BAR_PRIO = { triplesec: 3, ricochet: 3, grandcru: 6, critik: 3, pyro: 3, bmary: 4, tisane: 5, spritz: 3, flipfizz: 5, disco: 5, kir: 5, rhum: 5, lagon: 3, cactus: 2, ressort: 4, mystere: 4, absinthe: 4, champagne: 3, renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
+const BAR_PRIO = { mojito: 3, triplesec: 3, ricochet: 3, grandcru: 6, critik: 3, pyro: 3, bmary: 4, tisane: 5, spritz: 3, flipfizz: 5, disco: 5, kir: 5, rhum: 5, lagon: 3, cactus: 2, ressort: 4, mystere: 4, absinthe: 4, champagne: 3, renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
 function simBar(sk) {
   const run = G.run;
   Object.assign(BAR, genBar(), { busy: false });
@@ -23328,7 +24269,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

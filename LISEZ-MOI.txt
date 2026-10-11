@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v11.4-202610111556
+JACKPOT DEFENSE v11.9-202610111909
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,45 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v11.9 — les mains et les cartes
+- Les mains sont redessinées : des mains de croupier, avec ongles, jointures, une bague dorée et une manchette blanche à bouton doré.
+- Elles se lèvent, arrivent en arc, se posent sur la carte, la glissent jusqu'à la pile, puis reviennent en douceur. Leur ombre suit leur hauteur.
+- Au repos, elles bougent un peu et pianotent de temps en temps.
+- Les cartes ont une nouvelle face : un médaillon comme un jeton de casino, le nom sur un ruban, et un reflet qui passe.
+- Elles ont aussi un vrai dos : bordeaux, avec un treillis doré et un pique. Elles se retournent en partant sur la pile.
+- Rechargées, elles reviennent face visible, en arc, avec un petit rebond.
+- Les cartes prêtes flottent doucement, avec un halo de leur couleur.
+- Pendant la recharge, un anneau se remplit autour du compte à rebours.
+- 2 cartes à la fois : la main droite part la première, la gauche suit.
+- À partir de 3 cartes, la main droite balaie : chaque carte part quand la main la touche, et la gauche s'écarte.
+- Le petit numéro à l'envers, en bas à droite des cartes, est retiré (il cachait le médaillon). Le numéro en haut à gauche reste.
+- Tout reste fluide, aussi rapide qu'avant.
+
+Nouveautés de la v11.8 — les boss
+- Fripouille, le rat du Baron : à chaque boss (manches 5 à 25), il arrive en courant avec la carte du boss, la pose sur la table, te nargue, et lance un bâton dans tes roues (un de tes sorts prend +6 s de recharge). Le boss est invincible pendant son arrivée.
+- Chaque boss a son skin : un vrai portrait de figure sur sa carte (béret du Valet, couronne de la Dame, barbe et épée des Rois…).
+- À mi-vie, chaque boss devient invincible : petite animation, toutes les cartes de la table disparaissent, puis le combat repart avec un nouveau pouvoir :
+  Valet : carreaux en éventail · Dame : cœurs par trois · Roi de Pique : rafales en éventail · Roi de Trèfle : 4 gardes plus solides.
+- Le Roi de Cœur se multiplie (4 corps, puis 5, 6, 7) : les faux ne prennent aucun dégât. Ta BILLE sur un faux le fait éclater ; sur le vrai, ils se réunissent tous et le Roi est sonné. Puis il recommence.
+- Le Baron est invincible tant qu'il s'installe en parlant. « EN GARDE ! » : là, le combat commence.
+
+Nouveautés de la v11.7 — le classement sur l'écran titre
+- Le classement en direct est sur le tapis de l'écran titre, au-dessus de JOUER : le top 5 de ta mise et ta place, mis à jour toutes les 30 secondes. Touche-le pour la page complète. Le menu descend un peu.
+- La page du classement remplit l'écran : toujours 10 places (les vides affichent « Place à prendre ! »), et sur PC les mises à gauche, le top 10 à droite.
+
+Nouveautés de la v11.6 — la progression
+- Les mises se débloquent jeu par jeu : bats le Baron avec une mise pour débloquer la suivante, avec ce jeu seulement.
+- Sur la carte de chaque jeu, une pile de jetons montre les mises où tu as battu le Baron avec lui (blanc, rouge, vert…). La plus haute mise débloquée est choisie d'office.
+- Les machines se débloquent petit à petit : 3 au début (La Fournaise, Le Grand Bleu, Haute Tension), puis Le Jardin de Pierre (manche 10), Le Salon (4 boss), Le Stand de Tir (2 500 cartes), Le Flipper (400 BILLES), Le Casino Maudit (manche 20), La Fortune (8 000 or), L'Atelier (battre le Baron). La Jackpot Machine montre la prochaine.
+- Défis 2 à 3 fois plus durs au vestiaire et pour débloquer les jeux. Ce qui est déjà débloqué le reste.
+
+Nouveautés de la v11.5 — le bar, la machine et la Mémoire tampon
+- Un verre bu reste vide (il se remplissait quand le comptoir se redessinait).
+- Cocktail Mystère : 200 or (au lieu de 70).
+- Nouveau cocktail BILLE, le Mojito Rebond : ta BILLE ricoche vers 1 carte de plus (2 au niveau 2). Le Ricochet Royal (canon) ne fait plus que la Carambole et les tirs renvoyés.
+- Mémoire tampon : elle se prend même rack plein, et elle ajoute une vraie place en plus (les places à gagner restent). Au-delà de 8 places, le rack reste sur une seule ligne.
+- Le Salon, coup de coude : le rouleau touché glisse d'une case, vers le haut ou vers le bas (au hasard), avec une animation. Il ne se bloque plus.
 
 Nouveautés de la v11.4 — la chasse aux bugs (étape 4)
 - Correctif : l'Hypothèque retire vraiment une place. Posée sur ta dernière place libre, le rack passait à « 5/4 » et son malus ne comptait pas. Il faut maintenant 2 places libres pour la poser (pas de malus en secrète ULTIME, comme avant).
