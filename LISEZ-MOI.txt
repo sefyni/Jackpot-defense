@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.4-202610110157
+JACKPOT DEFENSE v10.5-202610110204
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,15 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.5
+- Les animaux se choisissent en lançant la partie : sur l'écran « Nouvelle partie », une ligne « Compagnon » (Aucun, Coco, Marcel ou Boris). Ton choix est gardé pour la fois suivante. Zaza ne vend plus ses bêtes au bar.
+- Gaston, le rat de l'Inspecteur, reste le seul qu'on achète en pleine partie, au marché noir.
+- Coco, le perroquet : +25 % d'or gagné (sauf les ventes). Il pousse de vrais cris de perroquet, et chaque pièce gagnée sur une carte file dans son bec.
+- Marcel, le poisson : toutes les 16 s, il chante vraiment, avec sa musique (batterie, basse, accords) et sa voix de poisson en plastique. Les paroles s'affichent, et les cartes dansent sur place 2,8 s.
+- Boris, l'ours : +20 % de PV max. Toutes les 16 s, il RUGIT : onde de choc, les cartes proches reculent et ralentissent de 40 % pendant 3 s. Il grogne quand il parle.
+- Gaston, le rat : depuis son coin en haut à droite, il tire sur la carte la plus proche de ta base avec son pistolet (une balle toutes les 2 s, 180 % des dégâts de ta base), et garde ses −20 % au marché noir. Il couine quand il parle.
+- À la 1re manche, ton compagnon se présente.
 
 Nouveautés de la v10.4
 - 5 sorts au lieu de 4 : avec la BILLE, ça fait 6 cartes devant toi (touche 5 pour le 5e sort). Les cartes rapetissent un peu sur téléphone pour tenir.

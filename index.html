@@ -2764,6 +2764,32 @@ body:not(.lpc) .petrow .po-art .pet-svg{width:46px;height:46px}
 .lp-kit .spill.spet .pet-svg{width:24px;height:24px}
 .ri-ic.ri-pet{padding:0;border-radius:50%;background:rgba(14,9,24,.7);overflow:visible}
 .ri-ic.ri-pet .pet-svg{width:100%;height:100%}
+/* v10.5 · les pouvoirs : la pièce de Coco, le rugissement de Boris, le coup de feu de Gaston */
+.pt-pet.pt-coin::after{content:"";position:absolute;right:-3px;top:-6px;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff3a8,#ffcc4d 55%,#c98a1a);box-shadow:0 0 0 1.5px #6b4210;animation:ptCoin .65s ease-out both}
+@keyframes ptCoin{0%{transform:translate(-18px,26px) scale(.6);opacity:0}35%{opacity:1}100%{transform:translate(0,-4px) scale(1);opacity:0}}
+.pt-pet.pt-roar{animation:ptRoar .11s linear 9}
+.pt-pet.pt-roar .br-jaw{transform:translateY(4.5px)}
+.pt-pet.pt-roar .pet-svg{transform:scale(1.14);transition:transform .12s}
+@keyframes ptRoar{0%,100%{translate:0 0}25%{translate:-2px 1px}75%{translate:2px -1px}}
+.pt-pet.pt-shoot::before{content:"";position:absolute;left:-6px;bottom:4px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,#fff6c8,#ffb33a 45%,rgba(255,120,30,0) 70%);animation:ptFlash .26s ease-out both}
+@keyframes ptFlash{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.6);opacity:0}}
+/* le choix du compagnon, sur l'écran « Nouvelle partie » */
+.nr-pets{width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 8px 8px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge)}
+.nrp-l{font:700 10px/1 var(--f-pix);letter-spacing:.2em;color:var(--muted)}
+.nrp-row{display:flex;justify-content:center;gap:8px}
+.nrp{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;border:0;background:none;color:var(--muted);font:600 11px/1.1 var(--f-pix);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nrp-art{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 50% 38%,rgba(52,38,74,.9),rgba(14,9,24,.9) 70%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.12);transition:transform .15s,box-shadow .15s}
+.nrp-art .pet-svg{width:40px;height:40px;overflow:visible}
+.nrp-art.none{font:700 18px/1 sans-serif;color:#6b6578}
+.nrp.on{color:#fff}
+.nrp.on .nrp-art{box-shadow:inset 0 0 0 3px var(--pc),0 0 14px color-mix(in srgb,var(--pc) 55%,transparent);transform:scale(1.1)}
+.nrp:not(.on) .nrp-art{filter:saturate(.55) brightness(.8)}
+.nrp-t{max-width:340px;font-size:12px;line-height:1.25;color:var(--cream);text-align:center}
+.nrp-t b.n{color:#ffcc4d}
+body:not(.lpc) .nr-cardbox{width:min(36vw,150px)}
+body.lpc .nr-pets{align-items:stretch}
+body.lpc .nrp-row{justify-content:flex-start}
+body.lpc .nrp-t{max-width:none;text-align:left;font-size:13px}
 /* v10.3 · les pouvoirs en cartes, et tes deux mains */
 #abs.cards{left:0;right:0;bottom:0;top:auto;height:auto;padding:0;display:block;background:none;pointer-events:none}
 body.lpc #abs.cards{height:auto;padding:0;background:linear-gradient(180deg,rgba(12,8,20,0),rgba(12,8,20,.5) 70%)}
@@ -3401,6 +3427,7 @@ body.lpc .nr .sbox .nr-r{font-size:13px}
         <div class="sbox"><b><i id="nr-schip"></i><span id="nr-stake">Mise blanche</span></b><span id="nr-stxt"></span></div>
         <button class="sarrow" id="nr-snext" data-nr="snext" aria-label="Mise plus dure">▶</button>
       </div>
+      <div class="nr-pets" id="nr-pets"></div>
       <button class="btn big red nr-go" data-nr="go">LANCER</button>
     </div>
   </div>
@@ -4670,7 +4697,7 @@ function computeStats(run) {
   s.bulletSpdMul = 1 + .3 * U('vitesse'); s.bulletSize = 1 + .22 * U('calibre');
   s.hpMul = curses.fragile ? Math.pow(.7, curses.fragile) : 1; s.hpAdd = 20 * U('pv') + (run.overheal || 0) + (run.hpPerm || 0);
   if (hasPet(run, 'boris')) s.hpMul *= PET_BORIS;
-  s.marcel = hasPet(run, 'marcel');
+  s.marcel = hasPet(run, 'marcel'); s.boris = hasPet(run, 'boris'); s.gaston = hasPet(run, 'gaston');
   s.armor = 0; s.regen = 0;
   s.goldMul = (curses.radin ? Math.pow(.6, curses.radin) : 1) * (bo.dore ? 1.6 : 1);
   s.enemySpeedMul = curses.appat ? Math.pow(1.2, curses.appat) : 1; s.eShotMul = 1;
@@ -9382,6 +9409,10 @@ const Snd = (() => {
     postBreak() { noise(.3, .16, 2400, 'highpass', 0, 6000); [1500, 1200, 900].forEach((f, i) => tone(f, .1, 'triangle', .06, f * .6, i * .05)); for (let i = 0; i < 5; i++) clack(.06 + i * .04, .06, arnd(2400, 4000)); },
     floorBreak() { tone(70, .35, 'sine', .28, 40); noise(.55, .24, 900, 'lowpass', 0, 160); for (let i = 0; i < 9; i++) clack(.04 + i * .045 + arnd(0, .02), .08, arnd(2200, 4200)); tone(196, .3, 'sawtooth', .04, 98, .05); },
     armor() { if (th('armor', 90)) { tone(820, .25, 'triangle', .06, 790); tone(1290, .2, 'triangle', .04, 1250); noise(.05, .08, 5000, 'highpass'); } },
+    squawk() { if (!th('squawk', 260)) return; const f = arnd(1000, 1350); tone(f, .08, 'sawtooth', .06, f * 1.8); tone(f * 1.7, .16, 'square', .045, f * 1.05, .07); noise(.24, .1, 2700, 'bandpass', 0, 1700, 2.6); noise(.12, .06, 3400, 'bandpass', .12, 2100, 3); tone(f * .55, .18, 'sawtooth', .035, f * .8, .04); },
+    growl() { if (!th('growl', 300)) return; noise(.5, .14, 380, 'lowpass', 0, 140); tone(78, .45, 'sawtooth', .06, 62); tone(118, .3, 'sawtooth', .03, 90, .05); },
+    squeak() { if (!th('squeak', 200)) return; [0, .07].forEach((d, i) => tone(arnd(2600, 3200), .045, 'sine', .04, arnd(3400, 3900), d)); },
+    bearRoar() { if (!th('broar', 500)) return; noise(1.15, .34, 760, 'lowpass', 0, 150, .8); tone(112, .95, 'sawtooth', .14, 60); tone(168, .75, 'sawtooth', .07, 82, .05); noise(.6, .13, 320, 'bandpass', .08, 95, 3); noise(.25, .1, 1400, 'bandpass', 0, 500, 1.4); },
     cardPick(k) { if (!th('cpick', 40)) return; const f = 520 * Math.pow(2, (k || 0) / 6); tone(f, .05, 'sine', .045, f * 1.25); noise(.03, .06, 3800, 'highpass'); },
     cardSwish() { if (!th('cswish', 60)) return; noise(.18, .085, 2600, 'bandpass', 0, 700, 1.1); noise(.05, .04, 5200, 'highpass', .02); },
     cardTap() { if (!th('ctap', 60)) return; noise(.035, .07, 1500, 'bandpass', 0, null, 2); tone(170, .06, 'triangle', .05, 120); },
@@ -12155,7 +12186,7 @@ function heal(h) {
   if (!(h > 0) || run.over) return;
   run.hp = Math.min(run.maxHp, run.hp + h * (s.healMul || 1));
 }
-function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; if (src && src !== 'sell' && src !== 'dette' && hasPet(G.run, 'coco')) g *= PET_COCO; G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
+function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; if (src && src !== 'sell' && src !== 'dette' && hasPet(G.run, 'coco')) { g *= PET_COCO; if (src === 'kill' && !G.headless) petCoin(); } G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
 
 /* ---------- tir de la base ---------- */
 function inRange(e, R2) { return !e.dead && e.deal <= .15 && e.x * e.x + e.y * e.y <= R2; }
@@ -12283,7 +12314,7 @@ function onBulletHit(e, b) {
     e.flash = .05;
     if (!G.headless) { Snd.shield(); if (e.shield <= 0) { floater(e.x, e.y - e.r - 2, 'BOUCLIER BRISÉ', '#c3cde0', 3.8); burst(e.x, e.y, '#c3cde0', 10, 36, 1, .4); } }
     if (e.shield < 0) { dealDmg(e, -e.shield, { src: 'bullet', b }); e.shield = 0; }
-  } else dealDmg(e, b.dmg, { src: 'bullet', crit: b.crit, b });
+  } else dealDmg(e, b.dmg, { src: b.src || 'bullet', crit: b.crit, b });
   if (b.crit && !G.headless) { Snd.crit(); if (!b.dart) jokerPing('lunette', `×${fmtM(s.critMult)}`); }
   if (e.dead && s.caram && b.kind === 'b' && (b.bounce || 0) < 2) {
     const nx = nearestTo(e.x, e.y, 70, true, e);
@@ -12319,7 +12350,7 @@ function dealDmg(e, amt, o) {
 }
 /* ---------- dégâts par seconde : ce que ta base inflige vraiment (sans compter le surplus sur une carte déjà morte) ---------- */
 const DPS_N = 16, DPS_STEP = .25;   // fenêtre glissante : 16 × 0,25 s = 4 s
-const DPS_SRC = { famS: 'Sorts de famille', orageS: 'Orage (sort)', bomb: 'Bombe (sort)', bullet: 'Canon', reflect: 'Flipper', rake: 'Flipper', burn: 'Brûlure', chain: 'Foudre', orage: 'Foudre', giant: 'Foudre', expl: 'Explosions', nuke: 'Explosions', poison: 'Poison', shard: 'Givre', wave: 'Vagues', drain: 'Vampire', ring: 'Onde', hole: 'Trou noir', beam: 'Rayon', ally: 'Alliés', queue: 'Billard', bille: 'BILLE' };
+const DPS_SRC = { gaston: 'Gaston (le rat)', famS: 'Sorts de famille', orageS: 'Orage (sort)', bomb: 'Bombe (sort)', bullet: 'Canon', reflect: 'Flipper', rake: 'Flipper', burn: 'Brûlure', chain: 'Foudre', orage: 'Foudre', giant: 'Foudre', expl: 'Explosions', nuke: 'Explosions', poison: 'Poison', shard: 'Givre', wave: 'Vagues', drain: 'Vampire', ring: 'Onde', hole: 'Trou noir', beam: 'Rayon', ally: 'Alliés', queue: 'Billard', bille: 'BILLE' };
 function dpsOf(cb) { return cb.dps || (cb.dps = { tot: 0, buf: new Float64Array(DPS_N), i: 0, acc: 0, act: 0, src: {}, peak: 0, win: 0 }); }
 function trackDmg(cb, v, src) {
   if (!(v > 0)) return;
@@ -12421,6 +12452,8 @@ function updateTimers(dt) {
   if (s.volee && (tm.vol = (tm.vol || 0) + dt) >= 9) { tm.vol = dinaVolley() ? 0 : 8.5; }
   if (s.queue && (tm.queue = (tm.queue || 0) + dt) >= 10) { tm.queue = momoShot() ? 0 : 9.5; }
   if (s.marcel && !cb.demo && (tm.marcel = (tm.marcel || 0) + dt) >= (tm.mar1 ? PET_SONG : PET_SONG1)) { tm.mar1 = 1; tm.marcel = marcelSing() ? 0 : PET_SONG - 1; }
+  if (s.boris && !cb.demo && (tm.boris = (tm.boris || 0) + dt) >= (tm.bor1 ? PET_ROAR : PET_ROAR1)) { tm.bor1 = 1; tm.boris = borisRoar() ? 0 : PET_ROAR - 1; }
+  if (s.gaston && !cb.demo && (tm.gaston = (tm.gaston || 0) + dt) >= PET_SHOT) { tm.gaston = gastonShoot() ? 0 : PET_SHOT - .4; }
   updatePBalls(dt);
 }
 /* ---------- malus dévastateurs ---------- */
@@ -14256,6 +14289,7 @@ function renderNewRun(dir) {
   $('#nr-schip').style.background = st.col;
   // v10.4 : ce que la mise change vraiment, en chiffres (avec les règles des mises d'avant)
   setHTML('#nr-stxt', stakeRulesHTML(m.stake) + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? '<span class="nr-r lock">Gagne une partie pour débloquer la mise suivante.</span>' : ''));
+  setHTML('#nr-pets', petPickHTML(m.pet));
   $('#nr-sprev').disabled = m.stake <= 0;
   $('#nr-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
 }
@@ -14285,6 +14319,7 @@ function nrClick(e) {
   else if (a === 'sprev') nrStake(-1);
   else if (a === 'snext') nrStake(1);
   else if (a === 'go') nrGo();
+  else if (a === 'pet') { G.meta.pet = b.dataset.pet || ''; saveMeta(); renderNewRun(0); if (G.meta.pet) petCry(G.meta.pet); else Snd.click(); haptic(8); }
 }
 // glisser la carte du jeu (téléphone) : à gauche = suivant
 function nrDown(e) { if (!e.target.closest('#nr-cardbox')) return; NR.x0 = e.clientX; NR.y0 = e.clientY; }
@@ -16582,17 +16617,18 @@ const PET_ART = {
 };
 function petSVG(id, cls) { return `<svg class="pet-svg ${cls || ''}" viewBox="0 0 64 64" aria-hidden="true">${PET_ART[id] || ''}</svg>`; }
 
-/* ================= v10.2 · les animaux compagnons =================
-   Coco (le perroquet de Zaza), Marcel (le poisson du mur), Boris (l'ours en tapis) : au bar.
-   Gaston (le rat de l'Inspecteur) : au marché noir. Ils restent toute la partie, en haut à droite de la table,
-   et ils parlent (plus ou moins poliment) au début et à la fin de chaque manche. */
+/* ================= v10.2 → v10.5 · les animaux compagnons =================
+   Coco (le perroquet de Zaza), Marcel (le poisson du mur), Boris (l'ours en tapis) : on en choisit un en lançant la partie.
+   Gaston (le rat de l'Inspecteur) : seulement au marché noir. Ils restent toute la partie, en haut à droite de la table,
+   parlent (plus ou moins poliment) au début et à la fin de chaque manche, et ont chacun un pouvoir à leur image. */
 const PET_IDS = ['coco', 'marcel', 'boris', 'gaston'];
-const PET_COCO = 1.15, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 15, PET_SONG1 = 6, PET_DANCE = 2.5;
+const PET_START = ['coco', 'marcel', 'boris'];
+const PET_COCO = 1.25, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 16, PET_SONG1 = 7, PET_DANCE = 2.8, PET_ROAR = 16, PET_ROAR1 = 5, PET_SHOT = 2;
 const PETS = {
-  coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'bar', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+15${NB}% d'or gagné (sauf les ventes).`, quote: '« Crétin ! Crétin ! »' },
-  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'bar', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il chante : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
-  boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'bar', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max pour ta base.`, quote: '« Grmbl. Essuie-toi les pieds. »' },
-  gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `−20${NB}% au marché noir (sauf le Punch-o-matic), qui ouvre plus souvent.`, quote: '« J\'ai rien vu. J\'ai tout noté. »' },
+  coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'start', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+25${NB}% d'or gagné (sauf les ventes). Il ramasse tout ce qui brille… et le crie bien fort.`, short: `+25${NB}% d'or`, quote: '« Crétin ! Crétin ! »' },
+  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il chante sa chanson, musique comprise : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
+  boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'start', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max. Toutes les ${PET_ROAR}${NB}s, il rugit : les cartes proches reculent, et ralentissent de 40${NB}% pendant 3${NB}s.`, short: 'rugit, +20 % PV', quote: '« Grmbl. Essuie-toi les pieds. »' },
+  gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `Depuis son coin, il tire sur les cartes avec son pistolet (une balle toutes les ${PET_SHOT}${NB}s, 180${NB}% des dégâts de ta base). Et −20${NB}% au marché noir (sauf le Punch-o-matic), qui ouvre plus souvent.`, short: 'tire au pistolet', quote: '« J\'ai rien vu. J\'ai tout noté. »' },
 };
 const PET_LINES = {
   coco: {
@@ -16628,6 +16664,7 @@ const PET_LINES = {
     close: ['Grr… c\'était moins une. J\'ai failli redevenir orphelin.', 'Moins une. J\'ai vu ma vie défiler. Elle était plate.'],
     bossKO: ['Ça, c\'est une descente de lit digne de ce nom.', 'Il fera un joli tapis. Je le formerai.'],
     over: ['Grmbl. Je retourne devant la cheminée.', 'Bon. Quelqu\'un peut me rouler et me ranger ?'],
+    roar: ['GRAOOOU !', 'GRRRAAAH !', 'Reculez. Tous.', 'GROAAAR ! …Pardon. Ça m\'a échappé.'],
   },
   gaston: {
     adopt: ['L\'Inspecteur ? Il me cherchera pas. Je lui ai piqué son portefeuille.', 'Je viens avec toi. Les affaires vont mieux quand le chef regarde ailleurs.'],
@@ -16639,6 +16676,7 @@ const PET_LINES = {
     close: ['On a eu chaud. J\'avais déjà fait les valises.', 'Moins une. J\'ai failli te revendre au marché noir.'],
     bossKO: ['Le gros est tombé. Je fouille ses poches.', 'Un boss en moins. Sa couronne vaut combien, d\'après toi ?'],
     over: ['Bon. Je retourne chez l\'Inspecteur. Il paie mieux.', 'J\'ai rien vu. Je suis jamais venu. Salut.'],
+    shoot: ['Pan.', 'Dans le mille.', 'Celle-là, elle me regardait de travers.', 'Une de moins. Note-le.'],
   },
 };
 // quand deux animaux se chamaillent, en fin de manche
@@ -16715,12 +16753,19 @@ function adoptPet(id) {
 }
 
 /* ---------- le bar : Zaza propose une de ses bêtes ---------- */
-function petOfferBar(run) {
-  const free = PET_IDS.filter(id => PETS[id].at === 'bar' && !hasPet(run, id));
-  if (G.dev.pet) { const id = G.dev.pet; G.dev.pet = null; if (free.includes(id)) return { id, price: petPrice(run, id), sold: false }; }
-  if (!free.length || run.round + 1 < 2 || rnd() > .55) return null;
-  const id = pick(free);
-  return { id, price: petPrice(run, id), sold: false };
+// v10.5 : Zaza ne vend plus ses bêtes : on choisit son compagnon en lançant la partie
+function petOfferBar(run) { return null; }
+// au lancement : le compagnon choisi sur l'écran « Nouvelle partie »
+function petStart(run) {
+  const id = G.meta.pet;
+  if (!run || !id || !PETS[id] || PETS[id].at !== 'start') return;
+  run.pets = [id];
+  catSee('a', id);
+}
+function petPickHTML(sel) {
+  const opts = [['', 'Aucun', 'pas de compagnon'], ...PET_START.map(id => [id, PETS[id].name, PETS[id].short])];
+  const cur = PETS[sel] && PETS[sel].at === 'start' ? sel : '';
+  return `<small class="nrp-l">COMPAGNON</small><div class="nrp-row">${opts.map(([id, n]) => `<button class="nrp${id === cur ? ' on' : ''}" data-nr="pet" data-pet="${id}" style="--pc:${id ? PETS[id].col : '#8d98ad'}" aria-label="${n}">${id ? `<span class="nrp-art pet-${id}">${petSVG(id)}</span>` : '<span class="nrp-art none">✕</span>'}<b>${n}</b></button>`).join('')}</div><span class="nrp-t">${cur ? colorNums(PETS[cur].txt) : 'Aucun animal : tu joues seul. (Gaston, le rat, s\'achète au marché noir.)'}</span>`;
 }
 function petRowArt(id, extra) { return `<span class="po-art pet-${id}${extra || ''}" style="--pc:${PETS[id].col}">${petSVG(id)}</span>`; }
 function renderBarPet() {
@@ -16849,7 +16894,7 @@ function petSay(id, text, delay, o) {
     el.innerHTML = `<b class="ps-n">${PETS[id].name}</b><span class="ps-t"></span>`;
     el.hidden = false; el.classList.remove('out', 'in'); void el.offsetWidth; el.classList.add('in');
     const t = el.querySelector('.ps-t');
-    if (o.mute) t.textContent = text; else typeInto(t, text, id);
+    if (o.mute) t.textContent = text; else { typeInto(t, text, id); petCry(id); }
     for (const p of box.querySelectorAll('.pt-pet')) p.classList.toggle('pt-talk', p === pe);
     const n = [...text].length;
     PETV.talkT = setTimeout(() => pe.classList.remove('pt-talk'), o.mute ? 300 : Math.min(4200, n * 48 + 400));
@@ -16862,7 +16907,7 @@ function petsRoundStart() {
   const run = G.run, cb = G.cb;
   if (G.headless || !run || !(run.pets || []).length || !cb || cb.final) return;
   const boss = isBossRound(run.round), low = run.hp < run.maxHp * .4;
-  const id = petPick(run), kind = boss && Math.random() < .75 ? 'boss' : low && Math.random() < .75 ? 'low' : 'start';
+  const id = petPick(run), kind = run.round === 1 ? 'adopt' : boss && Math.random() < .75 ? 'boss' : low && Math.random() < .75 ? 'low' : 'start';
   const r = run.round;
   setTimeout(() => { if (G.mode === 'combat' && G.run === run && run.round === r) petSay(id, petLine(id, kind)); }, 1150);
 }
@@ -16900,13 +16945,12 @@ function marcelSing() {
   cb.danceT = cb.t + PET_DANCE;
   dbg('marcel');
   if (G.headless) return true;
-  Snd.marcelSong();
+  petSong();
   floater(0, -BAL.baseR - 12, '♪ MARCEL CHANTE ♪', '#9be15d', 4);
   let k = 0;
   for (const e of cb.enemies) { if (e.dead || e.ai === 'decoy') continue; if (k++ > 14) break; floater(e.x, e.y - e.r - 3, k % 2 ? '♪' : '♫', ['#9be15d', '#ffcc4d', '#7fd8ff', '#ff7eb6'][k % 4], 3.4); }
   const pe = $('#pets .pt-pet[data-pet="marcel"]');
   if (pe) { pe.classList.add('pt-sing'); clearTimeout(pe._st); pe._st = setTimeout(() => pe.classList.remove('pt-sing'), PET_DANCE * 1000 + 300); }
-  if (Math.random() < .5) petSay('marcel', petLine('marcel', 'song'), 0, { mute: true, ms: 1900 });
   return true;
 }
 
@@ -16923,7 +16967,112 @@ function petRiHTML(run) {
 }
 function petCatDesc(id) {
   const P = PETS[id];
-  return `<p class="cd-sub">Compagnon · ${P.at === 'bar' ? 'au bar de Zaza' : 'au marché noir de l\'Inspecteur'} · toute la partie</p><p>${colorNums(P.txt)}</p><p class="cd-goal">${esc(P.quote)} Il parle au début et à la fin de chaque manche. Poliment, parfois.</p>`;
+  return `<p class="cd-sub">Compagnon · ${P.at === 'start' ? 'à choisir en lançant la partie' : 'au marché noir de l\'Inspecteur'} · toute la partie</p><p>${colorNums(P.txt)}</p><p class="cd-goal">${esc(P.quote)} Il parle au début et à la fin de chaque manche. Poliment, parfois.</p>`;
+}
+
+/* ---------- v10.5 · leurs pouvoirs, à leur image ---------- */
+function petCry(id) {
+  if (G.headless) return;
+  if (id === 'coco') Snd.squawk(); else if (id === 'boris') Snd.growl(); else if (id === 'gaston') Snd.squeak();
+}
+// la position (dans l'arène) du portrait d'un animal : c'est de là que part la balle de Gaston
+function petWorldPos(id) {
+  const pe = $(`#pets .pt-pet[data-pet="${id}"]`);
+  if (G.headless || !pe || $('#pets').hidden) return { x: VIEW.hx - 8, y: -VIEW.hy + 8 };
+  const r = pe.getBoundingClientRect(), c = cv.getBoundingClientRect();
+  return { x: (r.left + r.width / 2 - c.left - CX) / S, y: (r.top + r.height / 2 - c.top - CY) / S };
+}
+function petAnim(id, cls, ms) {
+  const pe = $(`#pets .pt-pet[data-pet="${id}"]`); if (!pe) return;
+  pe.classList.remove(cls); void pe.offsetWidth; pe.classList.add(cls);
+  clearTimeout(pe['_' + cls]); pe['_' + cls] = setTimeout(() => pe.classList.remove(cls), ms);
+}
+// Coco : chaque pièce gagnée sur une carte, il la ramasse (et il crie, de temps en temps)
+let petCoinT = 0, petSqT = 0;
+function petCoin() {
+  const t = performance.now();
+  if (t - petCoinT < 700) return;
+  petCoinT = t; petAnim('coco', 'pt-coin', 650);
+  if (t - petSqT > 9000 && Math.random() < .5) { petSqT = t; Snd.squawk(); }
+}
+// Boris : le rugissement
+function borisRoar() {
+  const cb = G.cb; if (!cb || cb.demo || cb.ended) return false;
+  const R = 70;
+  let n = 0;
+  for (const e of cb.enemies) {
+    if (e.dead || e.ai === 'decoy') continue;
+    const d = Math.hypot(e.x, e.y) || 1; if (d > R + e.r) continue;
+    n++;
+    if (e.boss) { e.slowT = Math.max(e.slowT, 1.5); e.slowAmt = Math.max(e.slowAmt, .2); continue; }
+    const f = 170 * (1 - d / (R + 20));
+    e.kbx += e.x / d * f; e.kby += e.y / d * f;
+    e.slowT = Math.max(e.slowT, 3); e.slowAmt = Math.max(e.slowAmt, .4);
+    e.stunT = Math.max(e.stunT, .3);
+    if (e.st && e.st.cast) interruptCast(e);
+  }
+  if (!n) return false;
+  dbg('boris');
+  if (G.headless) return true;
+  Snd.bearRoar(); shake(7); haptic(70);
+  fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: R + 10, col: '224,69,63', life: .55, max: .55 });
+  fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: R - 14, col: '255,214,170', life: .4, max: .4 });
+  floater(0, -BAL.baseR - 12, 'GRAOOOU !', '#ff8a6a', 5);
+  petAnim('boris', 'pt-roar', 1100);
+  const bub = $('#pet-say'); if (Math.random() < .35 && (!bub || bub.hidden)) petSay('boris', petLine('boris', 'roar'), 0, { mute: true, ms: 1500 });
+  return true;
+}
+// Gaston : une balle de pistolet, depuis son coin, sur la carte la plus proche de ta base
+function gastonShoot() {
+  const cb = G.cb, s = cb && cb.stats; if (!cb || cb.demo || cb.ended || !s) return false;
+  let t = null, bd = 1e9;
+  for (const e of cb.enemies) { if (e.dead || e.ai === 'decoy' || e.fake || e.deal > .15) continue; const d = Math.hypot(e.x, e.y); if (d < bd) { bd = d; t = e; } }
+  if (!t) return false;
+  const o = petWorldPos('gaston'), a = Math.atan2(t.y - o.y, t.x - o.x), sp = s.bulletSpd * 1.6;
+  cb.bullets.push({ kind: 'b', x: o.x, y: o.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, speed: sp, tgt: t, dmg: s.dmg * 1.8, crit: false, life: 3, extra: true, pierce: 0, hitIds: null, rev: true, size: 1.1, src: 'gaston' });
+  dbg('gaston');
+  if (G.headless) return true;
+  Snd.revolver();
+  petAnim('gaston', 'pt-shoot', 260);
+  const bub = $('#pet-say'); if (Math.random() < .06 && (!bub || bub.hidden)) petSay('gaston', petLine('gaston', 'shoot'), 0, { mute: true, ms: 1300 });
+  return true;
+}
+// Marcel : sa chanson, avec la musique (batterie, basse, accords) et sa voix de poisson en plastique
+const PET_SONGS = [
+  'Dansez, dansez, petites cartes, tout le monde se trémousse !',
+  'Plouf plouf, c\'est toi qui tombes, la la la, plus personne ne bouge !',
+  'Glou glou, je suis un poisson, et vous dansez sur ma chanson !',
+  'Une, deux, et on se fige ! Les as, les rois, tout le monde danse !',
+];
+const PET_MELO = [[67, 67, 64, 67, 72, 71, 69, 67, 65, 67, 69, 67, 64, 62, 60, 60], [72, 72, 69, 72, 74, 72, 69, 67, 65, 64, 65, 67, 69, 67, 64, 60], [64, 67, 69, 67, 64, 67, 72, 71, 69, 67, 65, 64, 62, 64, 60, 60]];
+let petSongK = 0;
+function petSong() {
+  if (G.headless) return;
+  const e8 = 60 / 168 / 2, text = PET_SONGS[petSongK % PET_SONGS.length], melo = PET_MELO[petSongK % PET_MELO.length]; petSongK++;
+  petSay('marcel', '♪ ' + text + ' ♪', 0, { mute: true, ms: 16 * e8 * 1000 + 300 });
+  if (!AU.ac || AU.offline || !G.meta.sound) return;
+  const ac = AU.ac, t0 = ac.currentTime + .04, out = ac.createGain();
+  out.gain.value = .95; out.connect(AU.sfx);
+  const env = (g, t, v, d) => { g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .008); g.gain.exponentialRampToValueAtTime(.0001, t + d); };
+  const osc = (type, f, t, d, v, f2) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + d); env(g, t, v, d); o.connect(g); g.connect(out); o.start(t); o.stop(t + d + .02); };
+  const nz = (t, d, v, fq, type) => { const b = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); b.buffer = AU.nbuf; f.type = type; f.frequency.value = fq; env(g, t, v, d); b.connect(f); f.connect(g); g.connect(out); b.start(t, Math.random() * .4); b.stop(t + d + .02); };
+  // batterie
+  for (let i = 0; i < 16; i++) {
+    const t = t0 + i * e8;
+    if (i % 4 === 0) osc('sine', 120, t, .16, .32, 48);
+    if (i % 4 === 2) { nz(t, .12, .16, 1800, 'bandpass'); osc('triangle', 190, t, .07, .06, 120); }
+    nz(t, .035, i % 2 ? .03 : .05, 7200, 'highpass');
+  }
+  // basse « oum-pa » et accords piqués (Do, Fa, Sol, Do)
+  [[48, [60, 64, 67]], [53, [60, 65, 69]], [55, [59, 62, 67]], [48, [60, 64, 67]]].forEach(([b, ch], k) => {
+    const t = t0 + k * 4 * e8;
+    osc('triangle', mtof(b), t, e8 * 1.7, .16); osc('triangle', mtof(b + 7), t + 2 * e8, e8 * 1.5, .11);
+    for (const m of ch) { osc('square', mtof(m), t + e8, e8 * .7, .022); osc('square', mtof(m), t + 3 * e8, e8 * .7, .022); }
+  });
+  // la voix : une syllabe par croche, sur la mélodie
+  const syl = parseSyl(text).syl.slice(0, 16), V = VOICES.marcel;
+  syl.forEach((sy, i) => vSyllable(ac, out, AU.nbuf, t0 + i * e8, sy, mtof(melo[i % melo.length]), e8 * (i === syl.length - 1 ? 2.4 : .92), V, 1.15));
+  duckTalk(16 * e8);
 }
 
 
@@ -20847,7 +20996,7 @@ function startRun(cp) {
     startNextRound();
     return;
   }
-  G.run = applyDeck(newRun(G.meta.stake), G.meta.deck); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
+  G.run = applyDeck(newRun(G.meta.stake), G.meta.deck); petStart(G.run); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
   const cb = newCombat(); cb.stats = computeStats(G.run); cb.sc = roundScale(G.run, 1); cb.ended = true; G.cb = cb;
   if (!hasDeck(G.run, 'sorts')) { catSee('q', 'bomb'); catSee('q', 'gel'); }
   renderRack(); renderSpellBar(); updateHUD();
@@ -21902,7 +22051,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
