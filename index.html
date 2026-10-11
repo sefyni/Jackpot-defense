@@ -3023,6 +3023,25 @@ body.go-dying #tip,body.go-dying #toast{display:none!important}
 body.lpc .lb-fi{width:min(100%,640px)}
 .lb-box,.lb-cap{text-align:left}.lb-ps{align-items:flex-start}
 #title .mgrid #t-lb{grid-column:auto}
+
+/* ---------- v11.3 · lisibilité ---------- */
+/* l'annonce « nouveau » : plus petite sur téléphone, et sous le message du haut quand il y en a un */
+#newnote{transition:top .25s}
+body.lmob #newnote{top:58px;right:8px;max-width:min(264px,calc(100% - 16px));gap:8px;padding:6px 10px 6px 6px;border-radius:10px}
+body.lmob #bossbar:not([hidden])~#newnote{top:106px}
+body.lmob .nn-art{width:34px;height:40px}
+body.lmob .nn-art .chip{width:30px}
+body.lmob .nn-art .ct-ico{width:28px;height:28px}
+body.lmob .nn-art .cthumb{height:38px}
+body.lmob .nn-txt small{font-size:10px;letter-spacing:.12em}
+body.lmob .nn-txt b{font-size:14px}
+body.lmob .nn-txt em{font-size:11.5px}
+#toast.show~#newnote{top:92px}
+#bossbar:not([hidden])~#toast.show~#newnote{top:140px}
+/* le bouton du bar sur une seule ligne, même sur un petit téléphone */
+@media (max-width:384px){#b-go{font-size:15px;padding:6px 10px;white-space:nowrap}}
+/* l'écran « Nouvelle partie » : la table du fond ne passe plus derrière les textes */
+#newrun{background:radial-gradient(ellipse at 50% 40%,rgba(20,13,31,.74),rgba(20,13,31,.93) 78%)}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3556,7 +3575,7 @@ body.lpc .lb-fi{width:min(100%,640px)}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v11</p>
+  <p class="proto">Sefy Industries · v11.4</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -4440,7 +4459,7 @@ const TOK9 = [
   { id: "pivot", n: "Pivot", c: "vois", m: 4, el: null, l: "bascule", bp: "vent", caps: ["Toutes les 10 s, Pivot donne [+40 %] de puissance à un de ses voisins, en alternant gauche et droite.", "[+60 %].", "Pendant les 3 premières secondes de chaque bascule, les deux voisins ont le bonus.", "Pivot central : chaque bascule déclenche aussitôt l'effet à minuteur du voisin qui reçoit le bonus."], note: "Un boost qui va et vient ; parfait entre deux jetons à minuteur." },
   { id: "lunette", n: "Lunette", c: "balle", m: 6, el: null, l: "crit", bp: "crit", caps: ["[+15 %] de chance de coup critique (×2).", "Portée [+25 %], et les critiques font ×2,5.", "Viseur : le 1er tir sur chaque carte est toujours un critique.", "Une balle, un mort : un critique sur une carte sous 30 % de PV la tue net (sur un boss : ×4)."], note: "La précision pure ; la Perforante en fait un tir d'élite." },
   { id: "rafale", n: "Rafale", c: "balle", m: 7, el: null, l: "+25 % cad.", bp: "split", caps: ["[+25 %] de cadence.", "Rafale : toutes les 4 s, 5 balles partent d'un coup, en plus de tes tirs.", "Toutes les 3 s, et 7 balles.", "Mitrailleuse : chaque kill fait par une balle de rafale ajoute 1 balle à la rafale suivante (max +10)."], note: "Le volume de feu : il multiplie tous les effets à l'impact." },
-  { id: "perforante", n: "Perforante", c: "balle", m: 3, el: null, l: "traverse", bp: "perce", caps: ["Tes balles traversent 1 carte (la 2e prend [60 %]).", "2 cartes, et les boucliers des blindés ne les arrêtent plus.", "Plus de perte : chaque carte traversée prend [100 %], et la balle gagne [+15 %] pour la suivante.", "Rayon : toutes les 6 balles, un rayon traverse toute la table ([500 %] des dégâts) et brise les boucliers."], note: "Contre les files de cartes et les blindés." },
+  { id: "perforante", n: "Perforante", c: "balle", m: 3, el: null, l: "traverse", bp: "perce", caps: ["Tes balles traversent 1 carte (la 2e prend [60 %]).", "2 cartes, et les boucliers des blindés ne les arrêtent plus.", "Moins de perte : la 2e carte prend 80 %, puis la balle gagne +10 % à chaque carte traversée.", "Rayon : toutes les 6 balles, un rayon traverse toute la table ([500 %] des dégâts) et brise les boucliers."], note: "Contre les files de cartes et les blindés." },
   { id: "spirale", n: "Spirale", c: "balle", m: 5, el: null, l: "tourbillon", bp: "orbite", caps: ["Tes balles tournent en spirale : elles touchent les cartes à côté de leur ligne ([40 %] des dégâts).", "La spirale s'élargit de 50 %.", "Toutes les 5 s, une balle part en spirale autour de ta base (6 tours, [80 %] à chaque carte touchée).", "Hypnose : une carte touchée par une spirale tourne sur elle-même 1 s (elle ne tire pas et n'avance pas), au plus une fois toutes les 4 s."], note: "Couvre les côtés que le canon ne regarde pas." },
   { id: "chevrotine", n: "Chevrotine", c: "balle", m: 5, el: null, l: "éventail", bp: "eclats", caps: ["Chaque tir part en éventail de 3 plombs ([40 %] des dégâts chacun). Au-delà de la moitié de ta portée, les plombs ne font plus que [25 %].", "5 plombs.", "Bout portant : les plombs font ×2 sur les cartes près de ta base.", "Double canon : un tir sur 3 part en double éventail."], note: "Une arme de mêlée : redoutable quand ça colle." },
   { id: "boulet", n: "Boulet", c: "balle", m: 8, el: null, l: "lourd", bp: "grosse", caps: ["Tes balles sont des boulets : [+50 %] de dégâts et elles repoussent, mais [−25 %] de cadence.", "Les boulets assomment 0,5 s.", "Écrasement : un boulet qui tue sa cible continue avec les dégâts qu'il lui reste.", "Canon de marine : toutes les 10 s, un boulet géant ([500 %]) écrase tout sur sa ligne."], note: "Moins de balles, mais chacune compte : idéal avec Lunette et Bullseye." },
@@ -4490,7 +4509,7 @@ const TOK9 = [
   { id: "coccinelle", n: "Coccinelle", c: "chance", m: 2, el: null, l: "porte-bonheur", bp: "or", caps: ["Une coccinelle se pose sur une carte au hasard : quand cette carte meurt, tu gagnes [2 or] et elle s'envole vers une autre.", "Deux coccinelles.", "Les cartes avec une coccinelle prennent [+30 %] de dégâts.", "Sept points : la 7e carte à coccinelle abattue dans la manche donne [+0,7 MULT] pour la manche."], note: "De petits gains réguliers, et une cible pour ta BILLE." },
   { id: "ticket", n: "Ticket à gratter", c: "chance", m: 5, el: null, l: "gratte", bp: "or", caps: ["Chaque manche, un ticket à 3 cases se gratte tout seul (une case tous les 10 kills). 1 fois sur 4, il gagne : [30 or], ou 20 PV, ou [+0,5 MULT] pour la manche.", "1 fois sur 3.", "Le ticket gagne 1 fois sur 2.", "Ticket d'or : chaque gain est doublé."], note: "Un bonus de plus à chaque manche, qui vient avec les kills." },
   { id: "cookie", n: "Fortune cookie", c: "chance", m: 9, el: null, l: "prophétie", bp: "marque", caps: ["Au début de chaque manche, le biscuit annonce une prophétie (« les cœurs te porteront chance »…) : [+25 %] de dégâts contre une enseigne ou un type de carte.", "[+40 %].", "Deux prophéties par manche.", "Prophétie réalisée : chaque carte visée par la prophétie lâche [3 or] en mourant."], note: "Un bonus ciblé, différent à chaque manche." },
-  { id: "lapin", n: "Patte de lapin", c: "chance", m: 8, el: null, l: "+20 % or", bp: "vent", caps: ["[+20 %] d'or gagné.", "[+30 %], et les boss lâchent 25 or de plus.", "Chaque tranche de 100 or gagnés dans la manche donne [+0,2 MULT].", "Terrier : une carte abattue sur 6 compte double pour l'objectif."], note: "Le jeton de l'or, tout simplement." },
+  { id: "lapin", n: "Patte de lapin", c: "chance", m: 8, el: null, l: "+20 % or", bp: "vent", caps: ["[+20 %] d'or sur les cartes abattues.", "[+30 %], et les boss lâchent 25 or de plus.", "Chaque tranche de 100 or gagnés dans la manche donne [+0,2 MULT].", "Terrier : une carte abattue sur 6 compte double pour l'objectif."], note: "Le jeton de l'or, tout simplement." },
   { id: "pochette", n: "Pochette surprise", c: "chance", m: 3, el: null, l: "?", bp: "split", caps: ["Au début de chaque manche, la pochette devient un jeton commun au hasard, de n'importe quelle machine, pour la manche (jamais un Malus ni un jeton qui compte les manches).", "Un jeton rare au hasard.", "Un jeton ultime au hasard.", "Secouer : tu vois son contenu avant la manche, et tu peux la secouer une fois pour en tirer un autre."], note: "Une découverte par manche : la meilleure façon d'essayer les autres machines." },
   { id: "yahtzee", n: "Yahtzee", c: "jeux", m: 8, el: null, l: "5 dés", bp: "crit", caps: ["Au début de chaque manche, 5 dés sont lancés : chaque paire donne [+10 %] de dégâts, chaque brelan [+25 %], un Yahtzee (5 identiques) [+1 MULT].", "Les dés qui ne font rien sont relancés une fois.", "Grande suite (5 dés qui se suivent) : [+60 %] de cadence.", "Dé truqué : un dé tombe toujours sur 6, et chaque 6 donne [+5 %] de dégâts."], note: "Un petit casino à chaque manche, en ta faveur." },
   { id: "coffre", n: "Coffre-fort", c: "base", m: 8, el: null, l: "blindé", bp: "acier", caps: ["Ton or protège ta base : −1 dégât par coup reçu par tranche de 100 or en poche (max −4).", "Les malus Pickpocket et Grève de la banque n'ont plus d'effet sur toi.", "Combinaison : en fin de manche, si ta base a pris moins de 10 coups, [+20 or].", "Coffre plein : avec 500 or ou plus, les tirs ennemis ne te touchent plus (seules les cartes au contact te blessent)."], note: "Garder son or devient une défense." },
@@ -4870,7 +4889,7 @@ function computeStats(run) {
   if (hasMalus(run, 'saboteur')) dur -= 2;
   s.rakeRebuild = BAL.rakeRebuild * (1 - .3 * U('huile')) * (hasMalus(run, 'saboteur') ? 2 : 1);
   s.tmrSpeed = 1; s.spellCdMul = 1; s.bilCdMul = 1; s.bilDmgMul = 1; s.spellsLocked = false; s.mult0 = 0;
-  if (run.deck === 'bille') { s.bilDmgMul = 1.5; s.bilDeck = 1; }
+  if (run.deck === 'bille') { s.bilDmgMul = 1.3; s.bilDeck = 1; }
   ckStats(s, U, bo, run);
   s.horloger = 0; s.ghost = false; s.alea = 0; s.crevard = false; s.necro = false; s.midas = false; s.hole = false; s.ace = false; s.depipe = false;
   s.dart = T.triple20[1] > 0; s.caram = T.carambole[1] > 0; s.oeil = T.oeilnox[1] > 0;
@@ -6443,7 +6462,7 @@ TKH.rafale = {
   kill(v, e, o, b) { if (v[4] > 0 && b && b.rafale) G.cb.K.rafBonus = (G.cb.K.rafBonus || 0) + 1; },
 };
 TKH.perforante = {
-  shot(v, b) { if (b.extra && !b.twin) return; b.pierce += v[2] > 0 ? 2 : 1; b.perf = v[3] > 0 ? 1.15 : .6; if (v[2] > 0) b.shieldPass = true; },
+  shot(v, b) { if (b.extra && !b.twin) return; b.pierce += v[2] > 0 ? 2 : 1; b.perf = v[3] > 0 ? 1.1 : .6; b.perf0 = v[3] > 0 ? .8 : 0; if (v[2] > 0) b.shieldPass = true; },
   volley(v, cb, tg) {
     if (!(v[4] > 0) || !tg[0] || !everyN(cb, 'rayon', 6)) return;
     lineStrike(Math.atan2(tg[0].y, tg[0].x), DM() * 5 * v[4], { src: 'perforante', w: 3, col: '255,240,200', fxw: 1.4, each: e => { if (e.shield > 0) e.shield = 0; } });
@@ -8738,10 +8757,10 @@ const FAM_SP = {
   deluge: { short: 'Déluge', fam: 'elem', name: 'Déluge de feu', icon: 'brasier', cd: 26, price: 90, txt: `Toutes les cartes brûlent : 60${NB}% des dégâts par seconde pendant 4${NB}s.` },
   salve: { fam: 'balle', name: 'Salve', icon: 'rafale', cd: 20, price: 85, txt: `12 balles partent en étoile et transpercent tout : 150${NB}% des dégâts.` },
   etoiles: { short: 'Étoiles', fam: 'astro', name: 'Pluie d\'étoiles', icon: 'star', cd: 24, price: 90, txt: `8 étoiles filantes tombent sur 8 cartes : 250${NB}% des dégâts chacune.` },
-  colere: { short: 'Colère', fam: 'myth', name: 'Colère divine', icon: 'mjolnir', cd: 28, price: 100, txt: `La foudre frappe la carte la plus costaude (1000${NB}% des dégâts), puis des éclairs jaillissent en tourbillonnant dans tous les sens depuis l'impact : 200${NB}% des dégâts et étourdit chaque carte touchée.` },
+  colere: { short: 'Colère', fam: 'myth', name: 'Colère divine', icon: 'mjolnir', cd: 28, price: 100, txt: `La foudre frappe la carte la plus costaude (1000${NB}% des dégâts), puis des éclairs partent en tous sens : 200${NB}%, et ils étourdissent.` },
   bowling: { short: 'Strike', fam: 'jeux', name: 'Strike !', icon: 'strike', cd: 22, price: 85, txt: `Une boule de bowling traverse la table : 200${NB}% des dégâts, et les cartes touchées sont sonnées 1,5${NB}s.` },
   multibilles: { fam: 'flip', name: 'Multibille', icon: 'multibille', cd: 18, price: 80, txt: 'Trois BILLES partent en éventail, sans utiliser ta charge.' },
-  forteresse: { fam: 'base', name: 'Forteresse', icon: 'muraille', cd: 22, price: 85, txt: `Ta base se répare de 30${NB}% de ses PV max et se blinde : un rempart de 25${NB}% de ses PV max encaisse les coups à sa place.` },
+  forteresse: { fam: 'base', name: 'Forteresse', icon: 'muraille', cd: 22, price: 85, txt: `Ta base se répare de 30${NB}% de ses PV max, et un rempart de 25${NB}% encaisse les coups à sa place.` },
   coupbol: { short: 'Coup de bol', fam: 'chance', name: 'Coup de bol', icon: 'trefle4', cd: 30, price: 80, txt: `Pendant 8${NB}s, chaque carte abattue rapporte 3× plus d'or.` },
   pacteS: { fam: 'malus', name: 'Pacte', icon: 'pacte', cd: 26, price: 90, txt: `Ta base perd 10${NB}% de ses PV, puis 400${NB}% des dégâts à toutes les cartes.` },
   jackpotS: { fam: 'mult', name: 'Jackpot', icon: 'ampli', cd: 25, price: 95, txt: '+0,4 MULT pour toute la manche (cumulable).' },
@@ -9048,7 +9067,7 @@ const EVENT_ROUNDS = [8, 13, 18, 23, 28];
 // v10 : chaque mise ajoute sa règle à celles d'avant
 const STAKES = [
   { id: 'blanche', name: 'Mise blanche', col: '#f3eee6', short: 'Normale', txt: 'La partie normale.', tok: 1 },
-  { id: 'rouge', name: 'Mise rouge', col: '#ff5c6c', short: 'Fauché', txt: `Fauché : 30${NB}% d'or en moins, et tout coûte 25${NB}% plus cher.`, tok: 1.5 },
+  { id: 'rouge', name: 'Mise rouge', col: '#ff5c6c', short: 'Fauché', txt: `Fauché : les cartes et la prime rapportent 30${NB}% d'or en moins, et tout coûte 25${NB}% plus cher.`, tok: 1.5 },
   { id: 'verte', name: 'Mise verte', col: '#5fd68a', short: 'Chaos', txt: 'Chaos : chaque manche a son événement surprise.', tok: 2 },
   { id: 'noire', name: 'Mise noire', col: '#3a2c50', short: 'Triche', txt: 'La maison triche : un malus à chaque manche.', tok: 2.5 },
   { id: 'bleue', name: 'Mise bleue', col: '#4f8bff', short: 'Truquée', txt: 'Machine truquée : plus de relance gratuite, et plus de crânes.', tok: 3 },
@@ -9087,7 +9106,7 @@ const SHOTS = {
   poudre: { name: 'Shot Poudre', price: 10, liq: '#ff6a4d', icon: 'dynamite', txt: `BOMBE prête au départ, rayon +50${NB}% pendant une manche` },
   givre: { name: 'Shot Givré', price: 10, liq: '#8fe3ff', icon: 'givre', txt: 'GEL prêt au départ, il dure 2× plus longtemps pendant une manche' },
   recharge: { name: 'Shot Recharge', price: 12, liq: '#a98bff', icon: 'horloger', txt: 'Tous tes sorts se rechargent 2× plus vite pendant une manche' },
-  dore: { name: 'Shot Doré', price: 10, liq: '#ffcc4d', icon: 'banquier', txt: `+60${NB}% d'or pendant une manche` },
+  dore: { name: 'Shot Doré', price: 10, liq: '#ffcc4d', icon: 'banquier', txt: `+60${NB}% d'or sur les cartes pendant une manche` },
   antidote: { name: 'Antidote', price: 16, liq: '#7dff6b', icon: 'regen', txt: 'Annule le malus gentil de la prochaine manche' },
 };
 const CIMENT = { name: 'Ciment Frais', price: 16, txt: 'Répare tous tes étages, même cassés' };
@@ -10924,9 +10943,10 @@ function checkGoal(cb) {
   cb.spawn = cb.spawn.slice(0, cb.spawnIdx).concat(keep);
   cb.total = Math.max(cb.killed, cb.total - n);
   cb.skipped = n; dbg('skipped', n);
-  if (gold > 0 && !hasMalus(G.run, 'greve')) addGold(gold * cb.stats.goldMul, 'skip');
+  const sg = gold > 0 && !hasMalus(G.run, 'greve') ? Math.round(gold * cb.stats.goldMul * goldK('skip')) : 0;
+  if (sg > 0) addGold(sg, 'skipR');
   if (!G.headless) {
-    banner('OBJECTIF ATTEINT !', bossUp(cb) ? 'mais tant que le boss vit, ses cartes arrivent : abats-le !' : n ? `plus de renforts · +${Math.round(gold * cb.stats.goldMul)} or · finis les cartes restantes` : 'plus de renforts : finis les cartes restantes', 'good', 1.6);
+    banner('OBJECTIF ATTEINT !', bossUp(cb) ? 'mais tant que le boss vit, ses cartes arrivent : abats-le !' : n && sg ? `plus de renforts · +${sg} or · finis les cartes restantes` : 'plus de renforts : finis les cartes restantes', 'good', 1.6);
     Snd.goal(); haptic(60);
     fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: 120, col: '95,214,138', life: .7, max: .7 });
   }
@@ -12055,6 +12075,7 @@ function fbrClick(e) {
   if (b.id === 'fr-ok' && FBR.sel.length === 2) { Snd.click(); fbrTake(); return; }
   if (b.dataset.fro != null && FBR.cur) {
     const run = G.run, i = run.jokers.findIndex(j => j.uid === +b.dataset.fro); if (i < 0) return;
+    if (!replaceOk(FBR.cur)) { toast(HYPO_TXT); Snd.deny(); return; }
     const old = run.jokers[i], v = sellValue(old); run.jokers[i] = FBR.cur; addGold(v);
     toast(`${jName(old)} vendu (+${v} or), ${jName(FBR.cur)} prend sa place.`); Snd.coin();
     FBR.cur = null; fbrNext(); return;
@@ -12066,7 +12087,8 @@ function fbrNext() {
   const run = G.run;
   while (FBR.queue.length) {
     const j = FBR.queue.shift();
-    if (freeSlots() > 0) { run.jokers.push(j); toast(`${jName(j)} rejoint ton rack !`); continue; }
+    if (fitsRack(j)) { run.jokers.push(j); toast(`${jName(j)} rejoint ton rack !`); continue; }
+    if (G.dev.auto && !replaceOk(j)) { addGold(sellValue(j)); continue; }
     if (G.dev.auto) { let wi = 0; run.jokers.forEach((x, i) => { if (sellValue(x) < sellValue(run.jokers[wi])) wi = i; }); addGold(sellValue(run.jokers[wi])); run.jokers[wi] = j; continue; }
     FBR.cur = j; renderRack(); updateHUD(); fbrRender(); return;
   }
@@ -12371,7 +12393,16 @@ function heal(h) {
   if (!(h > 0) || run.over) return;
   run.hp = Math.min(run.maxHp, run.hp + h * (s.healMul || 1));
 }
-function addGold(g, src) { if (g <= 0) return; if (src !== 'sell' && stakeHas(G.run, ST.GOLD)) g *= .7; if (src && src !== 'sell' && src !== 'dette' && hasPet(G.run, 'coco')) { g *= PET_COCO; if (src === 'kill' && !G.headless) petCoin(); } G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); }
+// v11.1 · l'or des cartes (abattues ou annulées) suit la mise et Coco ; tout le reste tombe pile comme annoncé
+const GOLD_CARDS = { kill: 1, skip: 1 };
+function goldK(src, run) { run = run || G.run; if (!run || !GOLD_CARDS[src]) return 1; return (stakeHas(run, ST.GOLD) ? .7 : 1) * (hasPet(run, 'coco') ? PET_COCO : 1); }
+// en partie : les PV et le coup d'une carte à la manche en cours (la mise d'or compte)
+function cardRealLine(d) {
+  const run = G.run; if (!run || run.over || !(run.round > 0)) return '';
+  const sc = roundScale(run, Math.max(1, run.round));   // la mise d'or (×1,5) est déjà dedans
+  return `<p class="cd-stats real">Dans ta partie (manche ${roundLabel(run.round)}) : PV ${Math.round(d.hp * sc.hp)} · coup ${Math.round(d.dmg * sc.dmg)}</p>`;
+}
+function addGold(g, src) { if (!(g > 0)) return 0; g *= goldK(src); if (src === 'kill' && !G.headless && hasPet(G.run, 'coco')) petCoin(); G.run.gold += g; G.run.stats.gold += g; if (G.headless) dbg('g_' + (src || 'autre'), g); return g; }
 
 /* ---------- tir de la base ---------- */
 function inRange(e, R2) { return !e.dead && e.deal <= .15 && e.x * e.x + e.y * e.y <= R2; }
@@ -12470,7 +12501,7 @@ function updateBullets(dt) {
         const f = windFactor(ux, uy), step = b.speed * f * dt;
         if (d <= step + t.r * .6) {
           onBulletHit(t, b);
-          if (b.pierce > 0) { b.pierce--; if (b.perf) b.dmg *= b.perf; if (cb.stats.wall) b.dmg *= cb.stats.wall; (b.hitIds || (b.hitIds = [])).push(t.id); b.x = t.x; b.y = t.y; b.tgt = null; const nx = nearestTo(t.x, t.y, 30, true, t); if (nx && !b.hitIds.includes(nx.id)) b.tgt = nx; else { arr.splice(i, 1); } continue; }
+          if (b.pierce > 0) { b.pierce--; if (b.perf) { b.dmg *= b.perf0 && !b.pierced ? b.perf0 : b.perf; b.pierced = 1; } if (cb.stats.wall) b.dmg *= cb.stats.wall; (b.hitIds || (b.hitIds = [])).push(t.id); b.x = t.x; b.y = t.y; b.tgt = null; const nx = nearestTo(t.x, t.y, 30, true, t); if (nx && !b.hitIds.includes(nx.id)) b.tgt = nx; else { arr.splice(i, 1); } continue; }
           arr.splice(i, 1); continue;
         }
         b.vx = ux * b.speed; b.vy = uy * b.speed;
@@ -14098,7 +14129,7 @@ function renderRack() {
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
   clRefresh();
-  setTxt('#r-hint', CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ranger, empiler, vendre' : 'touche un jeton pour le détail');
+  setTxt('#r-hint', CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse : ranger, empiler, vendre' : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
@@ -14282,7 +14313,7 @@ function openDetail(j, where) {
   if (where === 'tray') {
     const partner = stackPartner(j);
     if (partner) h += `<button class="btn blue" data-dtstack="${j.uid}">Empiler → ${stackLabel(stackResult(partner, j))}</button>`;
-    h += `<button class="btn" data-dkeep="${j.uid}" ${freeSlots() > 0 ? '' : 'disabled'}>Garder</button><button class="btn ghost" data-dtsell="${j.uid}">Vendre +${sellValue(j)}</button>`;
+    h += `<button class="btn" data-dkeep="${j.uid}" ${fitsRack(j) ? '' : 'disabled'}>Garder</button><button class="btn ghost" data-dtsell="${j.uid}">Vendre +${sellValue(j)}</button>`;
   }
   if (where === 'pkwin') { const i = PK.offer.indexOf(j); if (i >= 0) h += `<button class="btn gold" data-dpkwin="${i}">Je prends ${esc(jName(j))}</button>`; }
   h += '<button class="btn ghost" data-dclose="1">Fermer</button></div>';
@@ -14365,15 +14396,15 @@ function newRunAsk() {
    Comme les jeux de Balatro : chaque jeu change ta base de départ. On choisit son jeu et sa mise, puis on lance. */
 const DECKS = [
   { id: 'coffre', name: 'Coffre-fort', icon: 'banquier', col: '#ffcc4d', txt: '200 pièces dès le départ.' },
-  { id: 'pack', name: 'Pack fou', icon: 'cartes', col: '#39ff88', txt: 'Tu ouvres un pack surprise : 2 jetons fous.' },
+  { id: 'pack', name: 'Pack fou', icon: 'cartes', col: '#39ff88', txt: 'Tu ouvres un pack surprise : 3 jetons fous, et une place de jeton en plus.' },
   { id: 'inspecteur', name: "L'ami de l'Inspecteur", icon: 'chapeau', col: '#d9a35b', txt: 'Ton 1er marché noir : 3 articles offerts.' },
   { id: 'seconde', name: 'Seconde chance', icon: 'heart', col: '#ff5c7c', txt: `Une fois par partie, ta base renaît au lieu de tomber (50${NB}% de ses PV).` },
   { id: 'sorts', name: 'Sorcier', icon: 'occulte', col: '#a98bff', txt: 'Tu choisis tes 2 sorts de départ.' },
   { id: 'barman', name: 'Barman', icon: 'bar', col: '#ff9a3d', txt: `Boissons et shots 30${NB}% moins chers.` },
-  { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +50${NB}% de dégâts.` },
-  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: `3 poinçons dans la partie, aux manches 8, 18 et 28 : chacun passe n'importe quel jeton de ton rack en rareté SECRÈTE (+25${NB}% de puissance, et sa capacité secrète s'il est ULTIME). Il reste secret même quand tu l'empiles ou le mixes.` },
+  { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +30${NB}% de dégâts.` },
+  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: `Aux manches 8, 18 et 28, un poinçon : passe le jeton de ton choix en rareté SECRÈTE (+25${NB}% de puissance).` },
   { id: 'xxl', name: 'Rack XXL', icon: 'etage', col: '#5fd68a', txt: '7 places de jetons, mais 30 PV de moins.' },
-  { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage, et des rouleaux plus lents.' },
+  { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+2 relances gratuites à chaque tirage, et des rouleaux plus lents.' },
 ];
 const deckById = id => DECKS.find(d => d.id === id) || DECKS[0];
 const hasDeck = (run, id) => !!run && run.deck === id;
@@ -14381,6 +14412,7 @@ const hasDeck = (run, id) => !!run && run.deck === id;
 function applyDeck(run, id) {
   const D = deckById(id); run.deck = D.id;
   if (D.id === 'coffre') run.gold += 200;
+  if (D.id === 'pack') run.slots += 1;   // v11.2 : les jetons fous ne prennent plus la place des autres
   if (D.id === 'xxl') { run.slots += 2; run.hpPerm = (run.hpPerm || 0) - 30; run.maxHp = Math.max(10, run.maxHp - 30); run.hp = run.maxHp; }
   return run;
 }
@@ -14395,7 +14427,7 @@ function deckAfterJPM(o) { openMachine(o); }
 function deckGiftList(kind, run) {
   if (kind === 'pack') {
     const owned = new Set(run.jokers.flatMap(j => j.parts.map(p => p.t)));
-    return shuffle(fousPool().filter(id => !owned.has(id))).slice(0, 2).map(id => mkFou(id));
+    return shuffle(fousPool().filter(id => !owned.has(id))).slice(0, 3).map(id => mkFou(id));
   }
   return [mkJoker('ultime', [{ t: pick(MACH9[run.machine || 0].ids), lv: 3 }], 1)];
 }
@@ -14570,7 +14602,7 @@ function spkClick(e) {
   if (b.id === 'spk-go') spkGo(); else spkTap(b.dataset.spk);
 }
 
-/* ---------- les cadeaux du départ : le pack fou (2 jetons fous) ou la pièce du collectionneur ---------- */
+/* ---------- les cadeaux du départ : le pack fou (3 jetons fous) ou la pièce du collectionneur ---------- */
 const GF = { list: [], then: null, st: 'off', kind: null };
 function giftCap(j) {
   const t = j.parts[0].t, J = JK[t];
@@ -15415,7 +15447,7 @@ function resetMachine(first) {
   const run = G.run, st = computeStats(run), mi = run.machine || 0;
   Object.assign(M, { first: !!first, stacks: 0, relDone: 0, paid: 0, state: 'ready', tray: [], note: null, malusCard: null, line: [run.pool[0], run.pool[1], run.pool[2]], held: [false, false, false], stuck: [false, false, false], spun: [], landed: 0, stopQ: [],
     heat: 0, drown: -1, target: null, targetHit: false, elbowUsed: false, elbowArm: false, refunded: false, zeroHit: false, flipBack: false, sandUsed: false, seedLine: null, ballFx: false, mi });
-  M.rel = (first ? 1 : stakeHas(run, ST.MACH) ? 0 : 1) + (run.relBonus || 0) + (st.oeil ? 1 : 0) + (hasDeck(run, 'veinard') ? 1 : 0);
+  M.rel = (first ? 1 : stakeHas(run, ST.MACH) ? 0 : 1) + (run.relBonus || 0) + (st.oeil ? 1 : 0) + (hasDeck(run, 'veinard') ? 2 : 0);
   run.relBonus = 0;
   M.horl = st.horloger;
   M.sablier = st.T.sablier[1] > 0 ? (st.T.sablier[3] > 0 ? 3 : st.T.sablier[2] > 0 ? 2 : 1) : 0;
@@ -15804,8 +15836,9 @@ function updateMachineButtons() {
     const sb = $('#m-sand'); if (sb) sb.hidden = true;
   }
   const sb2 = $('#m-sand'); if (sb2) sb2.hidden = !(st === 'spinning' && M.sablier && computeStats(G.run).T.sablier[4] > 0 && !M.sandUsed && M.lastStopped != null && REEL.r[M.lastStopped] && REEL.r[M.lastStopped].landed);
-  const go = $('#m-go');
+  const go = $('#m-go'), goWas = go.disabled;
   go.disabled = !(st === 'done' && M.tray.length === 0);
+  if (goWas && !go.disabled) mgoReveal(go);
   go.textContent = G.run && G.run.bugDue ? 'La machine buggée →' : 'Au bar';
   REEL.r.forEach((R, i) => {
     R.el.classList.toggle('held', st === 'result' && M.held[i]);
@@ -15925,7 +15958,7 @@ function onGain(j) {
 }
 function keepFromTray(uid) {
   const k = M.tray.findIndex(j => j.uid === uid); if (k < 0) return;
-  if (freeSlots() <= 0) { toast('Rack plein : empile, ou touche un jeton du rack pour le vendre.'); return; }
+  if (!fitsRack(M.tray[k])) { toast(freeSlots() > 0 ? HYPO_TXT : 'Rack plein : empile, ou touche un jeton du rack pour le vendre.'); return; }
   const fly = prepFly(document.querySelector(`#m-tray .tcard[data-uid="${uid}"] .chip`));
   const j = M.tray.splice(k, 1)[0], run = G.run;
   // Mal montée (L'Atelier) : le jeton arrive à la place de son rouleau
@@ -16192,12 +16225,12 @@ function addToTray(list, note) {
   if (note) M.note = note;
   renderTray(); updateMachineButtons();
   const auto = M.tray.filter(j => !stackPartner(j));
-  if (auto.length && freeSlots() >= auto.length && auto.length === M.tray.length) setTimeout(placeAll, 800);
+  if (auto.length && freeSlots() >= auto.reduce((a, j) => a + needSlots(j), 0) && auto.length === M.tray.length) setTimeout(placeAll, 800);
   else if (M.tray.some(j => stackPartner(j)) && seenOnce('stack')) setTimeout(() => queueTip(TIPS.stack), 700);
 }
 function placeAll() {
   if (G.mode !== 'machine') return;
-  M.tray.slice().forEach((j, k) => setTimeout(() => { if (freeSlots() > 0 && !stackPartner(j)) keepFromTray(j.uid); }, k * 160));
+  M.tray.slice().forEach((j, k) => setTimeout(() => { if (fitsRack(j) && !stackPartner(j)) keepFromTray(j.uid); }, k * 160));
 }
 function trayCardHTML(j, free) {
   const partner = stackPartner(j);
@@ -16206,7 +16239,7 @@ function trayCardHTML(j, free) {
       ${chipHTML(j, 'button', `data-act="info" data-uid="${j.uid}" aria-label="Détails : ${esc(jName(j))}"`)}
       <div class="tname">${esc(jName(j))}</div>
       <div class="trar" style="--rc:var(--r-${j.kind})">${rarLabel(j)}${j.p > 1.001 ? ` · +${Math.round((j.p - 1) * 100)}${NB}%` : ''}</div>
-      <div class="tact">${res ? `<button class="mini blue" data-act="stack" data-uid="${j.uid}" title="Empiler sur ${esc(jName(partner))}">Empiler → ${stackLabel(res)}</button>` : ''}<button class="mini" data-act="keep" data-uid="${j.uid}" ${free > 0 ? '' : 'disabled'}>Garder</button><button class="mini dark" data-act="sell" data-uid="${j.uid}">+${sellValue(j)} or</button></div>
+      <div class="tact">${res ? `<button class="mini blue" data-act="stack" data-uid="${j.uid}" title="Empiler sur ${esc(jName(partner))}">Empiler → ${stackLabel(res)}</button>` : ''}<button class="mini" data-act="keep" data-uid="${j.uid}" ${free >= needSlots(j) ? '' : 'disabled'}>Garder</button><button class="mini dark" data-act="sell" data-uid="${j.uid}">+${sellValue(j)} or</button></div>
     </div>`;
 }
 function renderTray() {
@@ -16217,7 +16250,8 @@ function renderTray() {
   if (M.tray.length) {
     const free = freeSlots();
     h += '<div class="tcards">' + M.tray.map(j => trayCardHTML(j, free)).join('') + '</div>';
-    if (free < M.tray.filter(j => !stackPartner(j)).length) h += '<p class="tnote warn">Rack plein : empile, vends, ou touche un jeton du rack pour le vendre.</p>';
+    const needT = M.tray.filter(j => !stackPartner(j)).reduce((a, j) => a + needSlots(j), 0);
+    if (free < needT) h += free > 0 && M.tray.some(j => needSlots(j) > 1) ? `<p class="tnote warn">${HYPO_TXT}</p>` : '<p class="tnote warn">Rack plein : empile, vends, ou touche un jeton du rack pour le vendre.</p>';
   } else if (!M.malusCard) {
     h += `<p class="hint">${M.state === 'done' ? 'Bac vide. Direction le bar.' : M.state === 'result' ? 'Maintiens des rouleaux et relance, ou encaisse.' : M.state === 'spinning' ? 'Touche un rouleau pour l\'arrêter.' : 'Le bac est vide. Tire le levier.'}</p>`;
   }
@@ -16365,7 +16399,7 @@ function renderMarket() {
     return `<div class="offer${o.sold ? ' sold' : ''}">
       ${chipHTML(j, 'button', `data-info="${i}" aria-label="Détails : ${esc(jName(j))}"`, 'oicon')}
       <div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${j.kind})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${j.curse ? `<span class="cur">Malédiction ${CURSES[j.curse].name} : ${CURSES[j.curse].txt}</span>` : ''}${partner ? '<span class="stk-hint">s\'empile sur ton jeton</span>' : ''}</div>
-      <div class="obuy">${buyB(free <= 0 && !partner ? `${o.price} or<small>rack plein</small>` : o.price + ' or', free <= 0 && !partner)}</div></div>`;
+      <div class="obuy">${buyB(free < needSlots(j) && !partner ? `${o.price} or<small>${free > 0 ? '2 places' : 'rack plein'}</small>` : o.price + ' or', free < needSlots(j) && !partner)}</div></div>`;
   }).join('');
   setHTML('#k-spells', spellStripHTML());
 }
@@ -16403,7 +16437,7 @@ function buy(i) {
   } else {
     let j = o.joker;
     const partner = stackPartner(j);
-    if (freeSlots() <= 0 && !partner) { toast('Rack plein : vends un jeton d\'abord.'); return; }
+    if (!partner && !fitsRack(j)) { toast(freeSlots() > 0 ? HYPO_TXT : 'Rack plein : vends un jeton d\'abord.'); return; }
     run.gold -= o.price; o.sold = true;
     named = inspBought();
     if (!o.gift && rnd() < .12) {
@@ -16764,15 +16798,15 @@ function spellArtSymbols() { let h = ''; for (const id in SA) h += `<symbol id="
    Base : Bombe, Gel, Tornade, Orage, Bouclier, Surchauffe + Trou noir, Laser, Feu d'artifice, Arrêt du temps.
    Fous (au marché noir, dès la manche 6, plus rares) : Ctrl+Z, Quitte ou double, Écran bleu, Erreur 404, Lag. */
 const SP106 = {
-  trounoir: { name: 'Trou noir', col: '#b48cff', cd: 20, price: 90, txt: `Un trou noir s'ouvre au cœur du plus gros paquet de cartes : il les aspire pendant 3${NB}s (60${NB}% des dégâts par seconde), puis implose (250${NB}%).` },
+  trounoir: { name: 'Trou noir', col: '#b48cff', cd: 20, price: 90, txt: `Aspire le plus gros paquet de cartes pendant 3${NB}s (60${NB}% des dégâts par seconde), puis implose (250${NB}%).` },
   laser: { name: 'Laser', col: '#ff3d6e', cd: 18, price: 85, txt: `Un rayon laser fait le tour complet de ta base en 1,6${NB}s : 220${NB}% des dégâts à chaque carte qu'il balaie.` },
   artifice: { short: 'Artifice', name: 'Feu d\'artifice', col: '#ff7eb6', cd: 20, price: 85, txt: `6 fusées filent sur 6 cartes et explosent en gerbes de couleurs : 250${NB}% des dégâts chacune, et autour.` },
   temps: { short: 'Temps', name: 'Arrêt du temps', col: '#ffd36b', cd: 26, price: 95, txt: `Le temps s'arrête : toutes les cartes de la table sont figées 2,5${NB}s (les boss, moins longtemps).` },
-  ctrlz: { fou: 1, name: 'Ctrl+Z', col: '#3dff7a', cd: 30, price: 110, txt: 'Annule les 4 dernières secondes : les cartes reviennent là où elles étaient, et ta base récupère les PV perdus.' },
-  pileface: { fou: 1, short: 'Pile/face', name: 'Quitte ou double', col: '#3dff7a', cd: 20, price: 100, txt: `Pile (60${NB}%) : 400${NB}% des dégâts à toutes les cartes. Face : elles se soignent un peu (30${NB}% de leurs PV max)… mais ton lancer suivant sera forcément Pile, et double : 800${NB}%.` },
-  ecranbleu: { fou: 1, short: 'Écran bleu', name: 'Écran bleu', col: '#3dff7a', cd: 32, price: 110, txt: `Tout plante 1,5${NB}s, ta base aussi : plus rien ne bouge ni ne tire… puis chaque carte perd 30${NB}% de ses PV max (les boss, 10${NB}%).` },
+  ctrlz: { fou: 1, name: 'Ctrl+Z', col: '#3dff7a', cd: 30, price: 110, txt: 'Annule les 4 dernières secondes : les cartes reculent et ta base récupère ses PV perdus.' },
+  pileface: { fou: 1, short: 'Pile/face', name: 'Quitte ou double', col: '#3dff7a', cd: 20, price: 100, txt: `Pile (60${NB}%) : 400${NB}% des dégâts à toutes les cartes. Face : elles regagnent 30${NB}% de PV… mais ton lancer suivant sera Pile, et double (800${NB}%).` },
+  ecranbleu: { fou: 1, short: 'Écran bleu', name: 'Écran bleu', col: '#3dff7a', cd: 32, price: 110, txt: `Tout plante 1,5${NB}s, ta base aussi… puis chaque carte perd 30${NB}% de ses PV max (les boss, 10${NB}%).` },
   erreur404: { fou: 1, short: '404', name: 'Erreur 404', col: '#3dff7a', cd: 30, price: 110, txt: '3 cartes au hasard deviennent introuvables : supprimées de la table (pas les boss).' },
-  lag: { fou: 1, name: 'Lag', col: '#3dff7a', cd: 24, price: 95, txt: `Les cartes rament pendant 6${NB}s : 65${NB}% plus lentes, elles saccadent, et la désynchro leur fait encaisser +50${NB}% de dégâts (les boss : 3${NB}s, 35${NB}% plus lents).` },
+  lag: { fou: 1, name: 'Lag', col: '#3dff7a', cd: 24, price: 95, txt: `Les cartes rament 6${NB}s : 65${NB}% plus lentes, et elles prennent +50${NB}% de dégâts (les boss : 3${NB}s, 35${NB}%).` },
 };
 for (const id in SP106) PSPELLS[id] = Object.assign({ x106: 1 }, SP106[id], { cd: Math.round(SP106[id].cd * .7), cdK: 1 });
 // les nouveaux logos, pour tous les sorts
@@ -17020,7 +17054,7 @@ Object.assign(ICONS, {
 // ---- les nouvelles boissons ----
 const CK_NEW = {
   // le canon
-  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [40, 66], icon: 'dk_ricochet', amp: 1, txt: lv => `Tout ce qui rebondit rebondit ${lv} fois de plus : balles de la Carambole, tirs renvoyés, BILLE qui ricoche`, quip: ['Au shaker, pas à la cuillère. Et ça rebondit.', 'Elle rebondit, et elle rebondit encore.'] },
+  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [40, 66], icon: 'dk_ricochet', amp: 1, txt: lv => `Tout ce qui rebondit rebondit ${lv} fois de plus (Carambole, tirs renvoyés, BILLE)`, quip: ['Au shaker, pas à la cuillère. Et ça rebondit.', 'Elle rebondit, et elle rebondit encore.'] },
   pyro: { cat: 'canon', name: 'Piña Pyro', glass: 'tiki', liq: '#ffb33a', gar: 'fire', max: 3, price: [30, 48, 72], icon: 'dk_pyro', amp: 1, txt: lv => `Tes brûlures font +${30 * lv}${NB}% de dégâts`, quip: ['Ananas flambé. Tes flammes vont adorer.', 'Attention, le verre aussi est chaud.'] },
   critik: { cat: 'canon', name: 'Tequila Boum', glass: 'shooter', liq: '#ffe08a', gar: 'lime', max: 3, price: [28, 46, 70], icon: 'dk_critik', amp: 1, txt: lv => `Tes coups critiques font +${50 * lv}${NB}% de dégâts`, quip: ['Sel, citron, BOUM.', 'Un coup sec. Comme un critique.'] },
   lagon: { cat: 'canon', name: 'Blue Lagoon', glass: 'hurricane', liq: '#3fb8ff', gar: 'orange', max: 2, price: [26, 44], icon: 'dk_lagon', amp: 1, txt: lv => `Tout ce qui gèle les cartes les gèle ${40 * lv}${NB}% plus longtemps`, quip: ['Bleu comme un lagon. Froid comme mon ex.', 'Ça glace les dents. Et les cartes.'] },
@@ -17029,15 +17063,15 @@ const CK_NEW = {
   flipfizz: { cat: 'rateau', name: 'Flip Fizz', glass: 'flute', liq: '#ffe8a8', gar: 'ball', max: 2, price: [50, 80], icon: 'dk_flipfizz', txt: lv => `${[0, 20, 35][lv]}${NB}% de chances qu'une parade lance une BILLE bonus (gratuite)`, quip: ['Des bulles et des billes. Mon cocktail préféré.', 'Ça fizz, ça flippe.'] },
   // la base
   grandcru: { cat: 'base', name: 'Grand Cru', glass: 'wine', liq: '#8a1035', gar: 'none', max: 3, price: [45, 70, 100], icon: 'dk_grandcru', txt: lv => `PV max de la base +${8 * lv}${NB}%`, quip: ['Un grand millésime. Il te rend plus solide, pas plus malin.', 'Garde de cave : 30 ans. Garde de base : toute la partie.'] },
-  bmary: { cat: 'base', name: 'Bloody Mary', glass: 'highball', liq: '#d61e3c', gar: 'celery', max: 3, price: [32, 50, 74], icon: 'dk_bmary', amp: 1, txt: lv => `Tous tes soins sont ${25 * lv}${NB}% plus forts (même entre les manches)`, quip: ['Mary te salue. Elle soigne, à sa façon.', 'Avec du céleri. Pour la santé.'] },
+  bmary: { cat: 'base', name: 'Bloody Mary', glass: 'highball', liq: '#d61e3c', gar: 'celery', max: 3, price: [32, 50, 74], icon: 'dk_bmary', amp: 1, txt: lv => `Tous tes soins sont ${25 * lv}${NB}% plus forts${G.run && stakeHas(G.run, ST.HEAL) ? '' : ' (même entre les manches)'}`, quip: ['Mary te salue. Elle soigne, à sa façon.', 'Avec du céleri. Pour la santé.'] },
   tisane: { cat: 'base', name: 'Tisane de Mamie', glass: 'tea', liq: '#b5d66b', gar: 'steam', max: 2, price: [40, 66], icon: 'dk_tisane', txt: lv => `Ta base se soigne de ${dec(.5 * lv)}${NB}PV par seconde, en plein combat`, quip: ['La recette de ma grand-mère. Elle a enterré tout le monde.', 'Verveine, tilleul, et un secret.'] },
   cactus: { cat: 'base', name: 'Cactus Margarita', glass: 'margarita', liq: '#9be15d', gar: 'salt', max: 2, price: [28, 48], icon: 'dk_cactus', amp: 1, txt: lv => `Tes épines (Ronces, Herse) font +${60 * lv}${NB}% de dégâts`, quip: ['Ça pique. C\'est le principe.', 'Le sel sur le bord, les épines dans le verre.'] },
   // la BILLE
   disco: { cat: 'bille', name: 'Disco Punch', glass: 'punch', liq: '#c9a8ff', gar: 'disco', max: 3, price: [30, 50, 76], icon: 'dk_disco', txt: lv => `La BILLE fait +${25 * lv}${NB}% de dégâts`, quip: ['Ça tourne, ça brille, ça frappe.', 'Mets tes pattes d\'eph.'] },
   ressort: { cat: 'bille', name: 'Ressort Sour', glass: 'coupe', liq: '#d6f56b', gar: 'lime', max: 2, price: [30, 52], icon: 'dk_ressort', txt: lv => `La BILLE se recharge ${[0, 20, 35][lv]}${NB}% plus vite`, quip: ['Acide. Ça te met un coup de ressort.', 'Boing.'] },
-  triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [70], icon: 'dk_triplesec', amp: 1, txt: () => 'Quand ta BILLE se divise (Multibille, dédoublement…), une bille de plus part avec elle', quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
+  triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [70], icon: 'dk_triplesec', amp: 1, txt: () => 'Quand ta BILLE se divise, une bille de plus part avec elle', quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
   // les spécialités de Zaza (une de temps en temps, sur le comptoir)
-  kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or gagné`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
+  kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or sur les cartes abattues`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
   mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [70], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
   rhum: { cat: 'zaza', name: 'Rhum Arrangé', glass: 'tumbler', liq: '#c98a3a', gar: 'ice', max: 3, price: [40, 62, 90], icon: 'dk_rhum', txt: lv => `Tes sorts se rechargent ${10 * lv}${NB}% plus vite`, quip: ['Vanille, cannelle, et un peu de magie.', 'Il a macéré dix ans. Toi, tu attendras moins.'] },
   absinthe: { cat: 'zaza', name: 'La Fée Verte', glass: 'wine', liq: '#7dff6b', gar: 'star', max: 1, price: [85], icon: 'dk_absinthe', txt: () => 'Tous tes sorts sont prêts au début de chaque manche', quip: ['Si tu vois une fée, c\'est normal.', 'Elle murmure des sorts. Écoute-la.'] },
@@ -17060,7 +17094,7 @@ Object.assign(UPG.etage, { glass: 'mug', gar: 'none' });
 Object.assign(UPG.pv, { glass: 'mug', gar: 'cherry', max: 5, price: [25, 40, 58, 80, 105], txt: lv => `PV max de la base +${25 * lv}` });
 Object.assign(UPG.remontant, { glass: 'tea', gar: 'mint', max: 3, price: [26, 42, 62], txt: lv => `+${15 * lv}${NB}% de soin entre les manches` });
 // le Barbelé devient le Pop Fizz : des bumpers de flipper
-Object.assign(UPG.barriere, { cat: 'bille', name: 'Pop Fizz', glass: 'pop', liq: '#ff5fa2', gar: 'ball', icon: 'dk_bumper', txt: lv => `${[0, 3, 5, 7][lv]} bumpers de flipper qui bloquent les cartes. La BILLE y rebondit et les fait briller 5${NB}s : tous allumés, BILLE bonus ! Les cartes peuvent les casser${lv >= 3 ? '. Un bumper qui brille renvoie les tirs' : ''}.`, quip: ['Des bumpers ! Comme au vieux flipper du fond de la salle.', 'Pop, pop, pop. Ça tilte, hein ?'] });
+Object.assign(UPG.barriere, { cat: 'bille', name: 'Pop Fizz', glass: 'pop', liq: '#ff5fa2', gar: 'ball', icon: 'dk_bumper', txt: lv => `${[0, 3, 5, 7][lv]} bumpers cassables qui bloquent les cartes. La BILLE les allume 5${NB}s : tous allumés, BILLE bonus !${lv >= 3 ? ' Allumés, ils renvoient les tirs.' : ''}`, quip: ['Des bumpers ! Comme au vieux flipper du fond de la salle.', 'Pop, pop, pop. Ça tilte, hein ?'] });
 // trois shots de plus
 Object.assign(SHOTS, {
   rebond: { name: 'Shot Rebond', price: 14, liq: '#c9a8ff', icon: 'bille', txt: 'Une BILLE de plus en réserve pendant une manche' },
@@ -17711,6 +17745,30 @@ document.addEventListener('click', e => {
 // au lancement : les scores restés en attente partent
 setTimeout(() => { try { if (!G.headless) lbFlush(); } catch (e) { /* rien */ } }, 5000);
 
+/* ================= v11.3 · la lisibilité ================= */
+// le bouton « Au bar » caché sous le rack (petit téléphone) : on fait défiler la machine jusqu'à lui
+function mgoReveal(go) {
+  if (G.headless) return;
+  setTimeout(() => {
+    const ov = $('#machine'); if (!ov || ov.hidden || go.disabled) return;
+    const r = go.getBoundingClientRect(), o = ov.getBoundingClientRect(), rk = $('#rack');
+    const lim = Math.min(o.bottom, rk ? rk.getBoundingClientRect().top : o.bottom);
+    if (r.bottom > lim - 6) ov.scrollTo({ top: ov.scrollTop + (r.bottom - lim) + 14, behavior: G.reduced ? 'auto' : 'smooth' });
+  }, 450);
+}
+
+/* ================= v11.4 · corrections ================= */
+// l'Hypothèque (sauf secrète ULTIME) prend 2 places : la sienne, et celle qu'elle retire au rack
+function needSlots(j) {
+  if (!j || !j.parts || j.kind === 'faux') return 1;
+  let n = 1; for (const pt of j.parts) if (pt.t === 'hypotheque' && !(isSecret(j) && pt.lv >= 3)) n += 1;
+  return n;
+}
+const fitsRack = j => freeSlots() >= needSlots(j);
+// remplacer un jeton du rack par celui-ci (l'ancien est vendu) garde-t-il le rack dans ses places ?
+const replaceOk = j => freeSlots() + 1 >= needSlots(j);
+const HYPO_TXT = "L'Hypothèque prend 2 places : vends un jeton d'abord.";
+
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
 /* ---------- les portraits des animaux (SVG 64×64, dans le style du jeu : aplats, ombres douces) ---------- */
@@ -17819,12 +17877,12 @@ function petSVG(id, cls) { return `<svg class="pet-svg ${cls || ''}" viewBox="0 
    parlent (plus ou moins poliment) au début et à la fin de chaque manche, et ont chacun un pouvoir à leur image. */
 const PET_IDS = ['coco', 'marcel', 'boris', 'gaston'];
 const PET_START = ['coco', 'marcel', 'boris'];
-const PET_COCO = 1.25, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 16, PET_SONG1 = 7, PET_DANCE = 2.8, PET_ROAR = 16, PET_ROAR1 = 5, PET_SHOT = 2;
+const PET_COCO = 1.4, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 16, PET_SONG1 = 7, PET_DANCE = 2.8, PET_ROAR = 16, PET_ROAR1 = 5, PET_SHOT = 2;
 const PETS = {
-  coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'start', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+25${NB}% d'or gagné (sauf les ventes). Il ramasse tout ce qui brille… et le crie bien fort.`, short: `+25${NB}% d'or`, quote: '« Crétin ! Crétin ! »' },
-  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il met la musique (les notes s'envolent) : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
-  boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'start', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max. Toutes les ${PET_ROAR}${NB}s, il rugit : les cartes proches reculent, et ralentissent de 40${NB}% pendant 3${NB}s.`, short: 'rugit, +20 % PV', quote: '« Grmbl. Essuie-toi les pieds. »' },
-  gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `Depuis son coin, il tire sur les cartes avec son pistolet (une balle toutes les ${PET_SHOT}${NB}s, 180${NB}% des dégâts de ta base). Et −20${NB}% au marché noir (sauf le Punch-o-matic), qui ouvre plus souvent.`, short: 'tire au pistolet', quote: '« J\'ai rien vu. J\'ai tout noté. »' },
+  coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'start', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+40${NB}% d'or sur les cartes abattues et la prime de manche.`, short: `+40${NB}% d'or`, quote: '« Crétin ! Crétin ! »' },
+  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il met la musique : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
+  boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'start', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max. Toutes les ${PET_ROAR}${NB}s, il rugit : les cartes proches reculent et ralentissent 3${NB}s.`, short: 'rugit, +20 % PV', quote: '« Grmbl. Essuie-toi les pieds. »' },
+  gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `Il tire sur les cartes toutes les ${PET_SHOT}${NB}s (180${NB}% de tes dégâts). Marché noir : −20${NB}% (sauf Punch-o-matic), et il ouvre plus souvent.`, short: 'tire au pistolet', quote: '« J\'ai rien vu. J\'ai tout noté. »' },
 };
 const PET_LINES = {
   coco: {
@@ -18317,7 +18375,7 @@ function genBar() {
   const run = G.run, r = Math.max(1, run.round + 1), sc = barScale(r) * priceMul(run), mid = (computeStats(run).midas ? .75 : 1) * (hasDeck(run, 'barman') ? .7 : 1);
   const drinks = [];
   for (const cat of ['canon', 'rateau', 'base', 'bille'].concat(rnd() < .45 ? ['zaza'] : [])) {
-    const ids = Object.keys(UPG).filter(id => UPG[id].cat === cat && upLv(run, id) < UPG[id].max);
+    const ids = Object.keys(UPG).filter(id => UPG[id].cat === cat && upLv(run, id) < UPG[id].max && !(id === 'remontant' && stakeHas(run, ST.HEAL)));
     if (!ids.length) continue;
     const id = pick(ids), lv = upLv(run, id);
     drinks.push({ id, lv, price: run.firstDrink ? 0 : Math.round(UPG[id].price[lv] * sc * mid), sold: false });
@@ -18986,7 +19044,7 @@ function nextReplace() {
   const run = G.run;
   while (PK.queue && PK.queue.length) {
     const j = PK.queue.shift();
-    if (freeSlots() > 0) { run.jokers.push(j); toast(`${jName(j)} rejoint ton rack !`); renderRack(); Snd.coin(); continue; }
+    if (fitsRack(j)) { run.jokers.push(j); toast(`${jName(j)} rejoint ton rack !`); renderRack(); Snd.coin(); continue; }
     PK.replacing = j; renderPoker(); return;
   }
   PK.replacing = null;
@@ -18996,6 +19054,7 @@ function nextReplace() {
 function pokerReplace(uid) {
   const run = G.run, i = run.jokers.findIndex(j => j.uid === uid);
   if (!PK.replacing || i < 0) return false;
+  if (!replaceOk(PK.replacing)) { toast(HYPO_TXT); Snd.deny(); return true; }
   const old = run.jokers[i], v = sellValue(old);
   run.jokers[i] = PK.replacing; addGold(v);
   toast(`${jName(old)} vendu (+${v} or), ${jName(PK.replacing)} prend sa place.`);
@@ -19123,7 +19182,7 @@ function catDesc(c, id) {
     case 'k': { const g = id[0] === 'g', M2 = (g ? GLITCH9 : MACH9)[+id.slice(1)]; return `<p class="cd-sub">${g ? 'Machine buggée · après chaque boss · 10 jetons fous' : 'Machine · 15 jetons'}</p><p><b>Bug · ${M2.bugName}</b> : ${M2.bug}</p>${g ? '' : `<p class="cd-goal">Builds : ${M2.builds.map(b => `<b>${b[0]}</b> (${b[1].join(', ')})`).join(' · ')}</p>`}<div class="cd-chips">${M2.ids.map(t => protoChip(t, g ? 'k-fou' : 'k-commun')).join('')}</div>`; }
     case 'f': if (JK[id].boost) { const B0 = JK[id].boost; return `<p class="cd-sub">Jeton bonus de ${B0 === 'zaza' ? 'Zaza' : B0 === 'baron' ? 'du Baron' : B0 === 'dealer' ? 'l\'Inspecteur' : VISITORS[B0] ? VISITORS[B0].short : ''} · ne prend pas de place sur ta table</p><p>${JK[id].txt}</p><p class="cd-goal">Pour l'avoir : ${JK[id].how}. Il ne dure qu'une partie : refais l'exploit à chaque partie.</p>`; }
       return `<p class="cd-sub">${JK[id].gift ? `Jeton fou · cadeau de ${VISITORS[JK[id].gift].short} (3 victoires dans une partie), puis chez le Baron` : `Jeton fou · machine buggée ${GLITCH9[JK[id].g].name}`}</p><p>${JK[id].txt}</p>${JK[id].xtxt ? `<p class="cd-goal">Corrompu (trois sur la ligne) : ${JK[id].xtxt}</p>` : ''}`;
-    case 'e': { const d = ENEMIES[id]; return `<p class="cd-sub">${d.name}${d.from ? ` · dès la manche ${d.from}` : ''}</p><p>${d.info || ''}</p><p class="cd-stats">PV ${d.hp} · vitesse ${d.spd} · coup ${d.dmg}</p>`; }
+    case 'e': { const d = ENEMIES[id]; return `<p class="cd-sub">${d.name}${d.from ? ` · dès la manche ${d.from}` : ''}</p><p>${d.info || ''}</p><p class="cd-stats">PV ${d.hp} · vitesse ${d.spd} · coup ${d.dmg}</p>${cardRealLine(d)}`; }
     case 'b': { const d = ENEMIES[id]; return `<p class="cd-sub">${id === 'b_baron' ? 'Boss final · manche 30 · 3 vies' : id === 'b_joker' ? 'Le bras droit du Baron : il revient pendant sa grande donne, et en manches infinies' : `Boss de la manche ${(BOSS_ORDER.indexOf(id) + 1) * 5}`}</p><p>${d.intro}</p><p class="cd-stats">PV ${d.hp} · coup ${d.dmg}</p>`; }
     case 'm': { const M2 = MALUS[id], T = TIERS[M2.tier]; return `<p class="cd-sub" style="color:${T.col}">Malus ${T.name.toLowerCase()} · ${M2.tier} crâne${M2.tier > 1 ? 's' : ''}</p><p>${M2.txt[0].toUpperCase() + M2.txt.slice(1)}.</p>`; }
     case 'q': { const P = PSPELLS[id]; return `<p class="cd-sub">${P.base ? 'Sort de départ · toujours dans ta barre' : P.fou ? `Sort fou · marché noir, dès la manche 6 (plus rare) · recharge ${P.cd}${NB}s` : P.fam ? `Sort de famille ${CATS[P.fam].n} · marché noir · recharge ${P.cd}${NB}s` : `Sort à acheter au marché noir · recharge ${P.cd}${NB}s`}</p><p>${P.txt}</p>${P.fam ? `<p class="cd-goal">+25${NB}% de puissance par jeton ${CATS[P.fam].s} dans ton rack (jusqu'à ×3).</p>` : ''}`; }
@@ -20733,11 +20792,11 @@ function botSpells(cb) {
 // le marché noir vend un sort que tu n'as pas
 function spellOffer(run) {
   const have = spellsOf(run), fous = SP_FOUS.filter(id => !have.includes(id)), ids = Object.keys(PSPELLS).filter(id => !have.includes(id) && !PSPELLS[id].fou);
-  if (fous.length && run.round >= 6 && rnd() < .28) { const id = pick(fous), sc0 = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1); return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc0 * petMk(run)), haggled: false, sold: false }; }
+  if (fous.length && run.round >= 6 && rnd() < .28) { const id = pick(fous), sc0 = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1); return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc0 * petMk(run) * priceMul(run)), haggled: false, sold: false }; }
   if (!ids.length) return null;
   const pref = ids.filter(x => PSPELLS[x].fam && famCount(run, PSPELLS[x].fam) > 0);
   const id = pref.length && rnd() < .6 ? pick(pref) : pick(ids), sc = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1);
-  return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc * petMk(run)), haggled: false, sold: false };
+  return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc * petMk(run) * priceMul(run)), haggled: false, sold: false };
 }
 function learnSpell(id) {
   const run = G.run, L = spellsOf(run);
@@ -22229,7 +22288,7 @@ function startNextRound() {
   for (const k of ['vent', 'feu', 'seisme', 'brouillard']) document.body.classList.toggle('dv-' + k, dv === k);
   const sub0 = cb.event ? EVENTS[cb.event].name + ' · ' + EVENTS[cb.event].txt : dv ? 'DÉVASTATEUR · ' + MALUS[dv].name : isBossRound(r) ? 'un boss arrive sur la table' : run.malus.length ? 'malus : ' + run.malus.map(m => MALUS[m].name).join(', ') : '';
   const A = r <= 30 ? ACTS[actIdx(r)] : null, actStart = A && actPos(r) === 1;
-  const sub = (actStart ? `${A.name} · ${A.txt} · boss manche ${r + 4} : ${ENEMIES[bossOf(r + 4)].name} · ` : '') + `objectif : ${fmtS(cb.goal)} points` + (sub0 ? ' · ' + sub0 : '');
+  const sub = (actStart ? `${A.name} · boss manche ${r + 4} : ${ENEMIES[bossOf(r + 4)].name} · ` : '') + `objectif : ${fmtS(cb.goal)} points` + (sub0 ? ' · ' + sub0 : '');
   if (!cb.final) banner(actStart ? `ACTE ${A.n} · MANCHE ${r}` : `MANCHE ${roundLabel(r)}`, sub, isBossRound(r) || dv ? 'boss' : run.malus.length ? 'bad' : '', actStart ? 2.6 : 1.8);
   Snd.round();
   if (dv) { setTimeout(() => { Snd.alarm(); shake(5); }, 300); if (TIPS['dv_' + dv] && seenOnce('dv_' + dv)) setTimeout(() => queueTip(TIPS['dv_' + dv]), 1900); }
@@ -22501,7 +22560,7 @@ function autoMachine() {
     cashOutMachine(); return;
   }
   if (M.state === 'done') {
-    if (M.tray.length) { for (const j of M.tray.slice()) { if (stackPartner(j)) stackFromTray(j.uid); else if (freeSlots() > 0) keepFromTray(j.uid); else sellFromTray(j.uid); } setTimeout(autoMachine, 700); return; }
+    if (M.tray.length) { for (const j of M.tray.slice()) { if (stackPartner(j)) stackFromTray(j.uid); else if (fitsRack(j)) keepFromTray(j.uid); else sellFromTray(j.uid); } setTimeout(autoMachine, 700); return; }
     closeMachine();
   }
 }
@@ -22510,7 +22569,8 @@ function addJokerSim0(j) {
   const run = G.run;
   const partner = stackPartner(j);
   if (partner) { applyStack(partner, j); return; }
-  if (run.jokers.length < effSlots(run)) { run.jokers.push(j); return; }
+  if (effSlots(run) - run.jokers.length >= needSlots(j)) { run.jokers.push(j); return; }
+  if (!replaceOk(j)) { addGold(sellValue(j), 'sell'); return; }
   let wi = -1, wv = Infinity;
   run.jokers.forEach((x, i) => { const v = stakeValue(x); if (v < wv) { wv = v; wi = i; } });
   if (stakeValue(j) > wv) { addGold(sellValue(run.jokers[wi]), 'sell'); run.jokers[wi] = j; } else addGold(sellValue(j), 'sell');
@@ -22621,6 +22681,7 @@ function benchSim(jokers, seed, roulette, R) {
   cb.sc = roundScale(run, run.round);
   cb.spawn = []; cb.goal = 1e15; cb.goalHit = false; cb.reinfT = 1e9; cb.reinfTypes = ['soldat'];
   initSpells(cb, run);
+  tkRoundStart(cb, run);
   // les cartes de la vraie manche (même mélange de types), distribuées en groupes depuis le bord du tapis,
   // sans fin : il y a toujours de quoi tirer, même pour un rack très fort
   const types = buildWave(R, run, null).map(x => x.type).filter(ty => !ENEMIES[ty].boss && ty !== 'voleur' && ty !== 'sorcier');
@@ -22685,7 +22746,7 @@ function simOne(o) {
   const sk = BOT[o.skill || 'moyen'], dt = 1 / 30, out = { round: 0, won: false, t: 0, parries: 0, blocks: 0, deathBy: null, perRound: [], gold: 0 };
   G.cb = newCombat(); G.cb.stats = computeStats(G.run); G.cb.sc = roundScale(G.run, 1);
   G.run.machine = o.machine != null ? o.machine : irand(0, MACH9.length - 1);
-  if (o.deck === 'pack' || o.deck === 'collec') for (const j of deckGiftList(o.deck, G.run)) addJokerSim(j);
+  if (o.deck === 'pack') for (const j of deckGiftList(o.deck, G.run)) addJokerSim(j);
   simMachine(true);
   simBar(sk);
   while (!G.run.over && G.run.round < (o.maxRound || 45)) {
@@ -22704,7 +22765,6 @@ function simOne(o) {
     if (G.run.won) G.run.inf = true;
     if (res.reward) addJokerSim(res.reward);
     if (chooserDue(G.run) && o.machine == null && rnd() < .4) G.run.machine = irand(0, MACH9.length - 1);
-    if (o.deck === 'collec' && chooserDue(G.run)) addJokerSim(mkJoker('ultime', [{ t: pick(MACH9[G.run.machine || 0].ids), lv: 3 }], 1));
     simMachine(false);
     if (G.run.bugDue) { G.run.bugDue = false; BUGM.g = bugmNext(G.run); BUGM.then = null; simBug(); autoArrange(G.run); }
     const gNight = gamblerDue(G.run);
@@ -23268,7 +23328,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

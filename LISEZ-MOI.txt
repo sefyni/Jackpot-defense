@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v11-202610111400
+JACKPOT DEFENSE v11.4-202610111556
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,36 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v11.4 — la chasse aux bugs (étape 4)
+- Correctif : l'Hypothèque retire vraiment une place. Posée sur ta dernière place libre, le rack passait à « 5/4 » et son malus ne comptait pas. Il faut maintenant 2 places libres pour la poser (pas de malus en secrète ULTIME, comme avant).
+- Testé sans autre erreur : des parties entières en pilote automatique (téléphone et PC, jusqu'au Baron et aux manches infinies), 400 parties simulées (tous les jeux, mises et animaux), les 20 sorts, la reprise d'une partie sauvegardée, le classement sans internet.
+
+Nouveautés de la v11.3 — la lisibilité (étape 3)
+- Textes raccourcis : Collectionneur, Pop Fizz, Ricochet Royal, Triple Sec, les 4 animaux, et 7 sorts (Colère divine, Quitte ou double, Lag, Trou noir, Écran bleu, Forteresse, Ctrl+Z). Les chiffres ne changent pas.
+- Début d'un acte : l'annonce dit juste l'acte, le boss et l'objectif.
+- « NOUVELLE CARTE / NOUVEAU MALUS » : plus petit sur téléphone, et il ne passe plus sur le message du haut.
+- Petit téléphone : le bouton « Au bar » remonte tout seul après « Encaisser » (il était caché sous tes jetons), et « Au combat · manche X » tient sur une ligne.
+- Nouvelle partie : le fond est plus sombre, les textes se lisent mieux.
+- Rack : « glisse : ranger, empiler, vendre » (ça ne se coupe plus).
+
+Nouveautés de la v11.2 — l'équilibrage (étape 2)
+- Correctif : le pourcentage « +X % de dégâts si tu le prends » affiché sur les jetons était faux pour une trentaine d'entre eux (Verseau, Pulsar, Spirale, Mjölnir affichaient 0 %, l'Hydre −100 %, le Compte-tours +155 % au lieu d'environ +40 %). Il est juste maintenant.
+- Bille double : +30 % de dégâts de BILLE (au lieu de +50 %). Les 2 charges restent.
+- Pack fou : 3 jetons fous au lieu de 2, et une place de jeton en plus (sans elle, les jetons fous prenaient la place des autres et le jeu restait le plus faible).
+- Veinard : 2 relances gratuites à chaque tirage (au lieu d'une).
+- Coco : +40 % d'or sur les cartes abattues et la prime de manche (au lieu de +25 %).
+- Perforante (niveau ULTIME) : la 2e carte traversée prend 80 % des dégâts, puis la balle gagne +10 % à chaque carte (avant : +15 % dès la 2e carte).
+
+Nouveautés de la v11.1 — des chiffres justes partout
+- L'or annoncé est maintenant l'or que tu reçois. Le bug venait de la mise rouge : la bannière « plus de renforts · +14 or » n'en donnait en réalité que 9 (−30 %). Pareil pour les ventes (« vendu : +14 or » → 9), les jeux du bar, l'or des relances à la machine et la Dette.
+- La règle est maintenant simple et dite clairement :
+  · la mise rouge (−30 %) et Coco (+25 %) ne touchent que l'or des cartes abattues et la prime de fin de manche ;
+  · tout le reste (ventes, paris du bar, jetons qui donnent de l'or, bumpers, Champagne, Dette…) tombe exactement comme annoncé.
+- Le Kir Royal, la Patte de lapin et le Shot Doré disent maintenant clairement qu'ils augmentent l'or des cartes abattues (c'était déjà le cas, le texte disait « or gagné »).
+- Mise rouge : les sorts du marché noir coûtent aussi 25 % plus cher, comme tout le reste.
+- Mise orange (pas de soin entre les manches) : Zaza ne sert plus le Remontant, qui ne servait à rien. Le Bloody Mary n'annonce plus « même entre les manches ».
+- La fiche d'une carte dans le catalogue montre, pendant une partie, ses vrais PV et son vrai coup à la manche en cours (mise d'or comprise).
 
 Nouveautés de la v11
 - Le classement en ligne, un par mise :
