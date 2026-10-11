@@ -2970,6 +2970,59 @@ body.go-dying #cv{filter:grayscale(.85) contrast(1.12) brightness(.82);transform
 @keyframes ovPop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:none}}
 body.reduced #over.go-in *{animation-duration:.01s!important;animation-delay:0s!important}
 body.go-dying #tip,body.go-dying #toast{display:none!important}
+/* v11 · le classement en ligne */
+.lbn{z-index:45;background:rgba(8,4,14,.88)}
+.lbn-box{width:min(100%,420px);display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 16px;text-align:center}
+.lbn-t,.lb-t{display:flex;align-items:center;gap:8px;margin:0;font:700 26px/1 var(--f-pix);color:var(--gold);text-shadow:0 3px 0 #000}
+.lbn-t .ico,.lb-t .ico{width:28px;height:28px}
+.lbn-p{margin:0;font-size:14px;color:var(--muted);line-height:1.3}
+.lbn-p b{color:var(--cream)}
+#lbn-in{width:100%;padding:12px 14px;border:0;border-radius:12px;background:#0d0816;color:#fff;font:700 22px/1 var(--f-pix);text-align:center;box-shadow:inset 0 0 0 2px var(--gold)}
+#lbn-in:focus{outline:none;box-shadow:inset 0 0 0 3px var(--gold),0 0 16px rgba(255,204,77,.4)}
+.lbn-err{min-height:1.2em;margin:0;font-size:13px;color:#ff7a8a}
+.lbn-row{width:100%;display:flex}
+.lbn-row .btn{flex:1}
+.lbs{z-index:44;background:radial-gradient(ellipse at 50% 0%,#3a2a10 0%,#170f1c 55%,#0b0610 100%)}
+.lb-fi{width:min(100%,560px);gap:12px}
+.lb-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lb-tabs{width:100%;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.lb-tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:0;border-radius:999px;background:rgba(255,255,255,.07);color:var(--muted);font:700 13px/1 var(--f-pix);cursor:pointer}
+.lb-tab i{width:11px;height:11px;border-radius:50%;background:var(--sc);box-shadow:0 0 0 1.5px #000}
+.lb-tab.on{background:var(--sc);color:#140c1c;box-shadow:0 3px 0 rgba(0,0,0,.45)}
+.lb-tab.on i{box-shadow:0 0 0 2px #fff}
+.lb-box{width:100%;padding:10px 10px 8px;box-shadow:inset 0 0 0 2px var(--sc),0 6px 0 rgba(0,0,0,.4)}
+.lb-cap,.lb-row,.lb-me{display:grid;grid-template-columns:40px minmax(0,1fr) auto 58px;align-items:center;gap:8px}
+.lb-cap{padding:0 8px 6px;font:700 11px/1 var(--f-pix);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.lb-cap span:nth-child(3),.lb-cap span:nth-child(4){text-align:right}
+.lb-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.lb-row{padding:8px;border-radius:10px;background:rgba(255,255,255,.05)}
+.lb-row.me{box-shadow:inset 0 0 0 2px var(--gold);background:rgba(255,204,77,.12)}
+.lb-pl{font:700 17px/1 var(--f-pix);color:var(--muted);text-align:center}
+.lb-med{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-style:normal;color:#2a1a08;box-shadow:0 2px 0 rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.55)}
+.lb-row.p1 .lb-med{background:radial-gradient(circle at 35% 30%,#fff3c4,#ffcc4d 45%,#c9932a)}
+.lb-row.p2 .lb-med{background:radial-gradient(circle at 35% 30%,#ffffff,#d6dce8 45%,#8d98ad)}
+.lb-row.p3 .lb-med{background:radial-gradient(circle at 35% 30%,#ffe2c4,#e0965a 45%,#9a5a2a)}
+.lb-row.p1{background:linear-gradient(90deg,rgba(255,204,77,.18),rgba(255,255,255,.04))}
+.lb-ps{min-width:0;display:flex;flex-direction:column;gap:2px}
+.lb-ps b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px;color:var(--cream)}
+.lb-ps small{font-size:11px;color:var(--muted)}
+.lb-sc{font:700 17px/1 var(--f-pix);color:var(--gold);text-align:right}
+.lb-rd{font:700 15px/1 var(--f-pix);color:#9fd8ff;text-align:right}
+.lb-msg{padding:16px 8px;text-align:center;color:var(--muted);font-size:14px}
+.lb-me{margin-top:8px;padding:9px 8px;border-radius:10px;background:#0d0816;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18);font-size:14px;color:var(--muted)}
+.lb-me:not(:has(.lb-pl)){display:block;text-align:center}
+.lb-me .lb-ps{flex-direction:row;gap:4px;white-space:nowrap;overflow:hidden}
+.lb-foot{margin:0;font-size:12.5px;color:var(--muted);text-align:center}
+.lb-foot b{color:var(--cream)}
+#o-score .o-lb{display:block;margin-top:4px;font-size:13px;color:#d9ffe6}
+#o-score .o-lb b{color:#fff}
+#o-score .o-lb.top{color:#fff3c4;text-shadow:0 0 10px rgba(255,204,77,.7)}
+#o-score .o-lb .mini{padding:3px 8px}
+.lbp-name{font:700 16px/1 var(--f-pix);color:var(--gold);margin-right:6px}
+#title .mgrid #t-stats{grid-column:auto}
+body.lpc .lb-fi{width:min(100%,640px)}
+.lb-box,.lb-cap{text-align:left}.lb-ps{align-items:flex-start}
+#title .mgrid #t-lb{grid-column:auto}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3498,11 +3551,12 @@ body.go-dying #tip,body.go-dying #toast{display:none!important}
         <button class="mbtn" id="t-vest" style="--b:#e0365a;--bd:#8a1a33"><svg class="ico"><use href="#i-canon"/></svg><span>VESTIAIRE<small id="t-vest-n">2/16</small></span></button>
         <button class="mbtn" id="t-opts" style="--b:var(--orange);--bd:var(--orange-d)"><svg class="ico"><use href="#i-enraye"/></svg><span>OPTIONS<small>son, écran</small></span></button>
         <button class="mbtn" id="t-stats" style="--b:#2aa59a;--bd:#17675f"><svg class="ico"><use href="#i-trophee"/></svg><span>PROFIL<small id="t-prof-n">Profil 1</small></span></button>
+        <button class="mbtn" id="t-lb" style="--b:#c9932a;--bd:#7a5510"><svg class="ico"><use href="#i-couronne"/></svg><span>CLASSEMENT<small>en ligne</small></span></button>
       </div>
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v10</p>
+  <p class="proto">Sefy Industries · v11</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -14442,6 +14496,7 @@ function nrStake(d) {
 }
 function nrGo() {
   if (!deckOpen(DECKS[NR.i])) { Snd.deny(); return; }
+  if (lbNeedPseudo()) { lbAsk(nrGo); return; }
   const cp = loadCheckpoint();
   const go = () => { clearCheckpoint(); show('#newrun', false); startRun(null); };
   if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', go);
@@ -17483,6 +17538,178 @@ function overFx(cashed, run) {
   }
 }
 document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#r-clp')) { e.preventDefault(); clClick(); } });
+
+/* ================= v11 · le classement en ligne (Supabase) =================
+   Un pseudo par profil (obligatoire, 20 lettres max, unique). Un classement par mise : ta meilleure partie
+   (le score, puis la manche). Le top 10, et ta place. Hors ligne : le score part plus tard. */
+const LB = { url: 'https://ncfhqowbnyiaispbeova.supabase.co', key: 'sb_publishable_cDpW93F1p-7quHIsV9WfXw_wZhPr5_d', cache: {}, stake: 0, skip: false, busy: false };
+const LB_ERR = {
+  pseudo_pris: 'Ce pseudo est déjà pris. Choisis-en un autre.',
+  pseudo_longueur: 'Ton pseudo doit faire entre 2 et 20 lettres.',
+  reseau: 'Le classement ne répond pas (pas d\'internet ?).',
+  joueur: 'Ton profil n\'est pas reconnu par le classement.',
+  score_invalide: 'Score refusé par le classement.',
+};
+const lbMe = () => G.meta && G.meta.lb && G.meta.lb.id ? G.meta.lb : null;
+// un appel au serveur : { data } ou { error }
+async function lbRpc(name, body) {
+  if (G.headless) return { error: 'reseau' };
+  const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null, to = setTimeout(() => ctl && ctl.abort(), 9000);
+  try {
+    const r = await fetch(`${LB.url}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: LB.key, 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body || {}), signal: ctl ? ctl.signal : undefined });
+    const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) { j = null; }
+    if (!r.ok) { const m = (j && (j.message || j.hint)) || 'reseau'; return { error: LB_ERR[m] ? m : (r.status >= 500 || r.status === 0 ? 'reseau' : m) }; }
+    return { data: j };
+  } catch (e) { return { error: 'reseau' }; }
+  finally { clearTimeout(to); }
+}
+const lbErrTxt = e => LB_ERR[e] || 'Erreur du classement : ' + e;
+
+/* ---- le pseudo ---- */
+const LB_BAD = ['merde', 'putain', 'salope', 'connard', 'connasse', 'encule', 'batard', 'couille', 'niquer', 'nique', 'enfoire', 'pouffiasse', 'chienne', 'tapette', 'negre', 'nazi', 'hitler', 'fuck', 'shit', 'bitch', 'cunt', 'nigg', 'whore', 'pussy', 'porn', 'penis', 'vagin', 'sperme'];
+const LB_BADW = ['pute', 'bite', 'cul', 'pd', 'tg', 'ntm', 'fdp', 'sex', 'viol', 'dick', 'fag', 'con', 'conne'];
+function lbPseudoCheck(raw) {
+  const ps = String(raw || '').replace(/\s+/g, ' ').trim();
+  if (ps.length < 2 || ps.length > 20) return { error: 'Ton pseudo doit faire entre 2 et 20 lettres.' };
+  if (!/^[\p{L}\p{N} _.\-']+$/u.test(ps)) return { error: 'Lettres, chiffres, espaces, - _ . et \' seulement.' };
+  const flat = ps.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/0/g, 'o').replace(/1/g, 'i').replace(/3/g, 'e').replace(/4/g, 'a').replace(/5/g, 's').replace(/7/g, 't').replace(/\$/g, 's');
+  const glued = flat.replace(/[^a-z]/g, ''), words = flat.split(/[^a-z]+/).filter(Boolean);
+  if (LB_BAD.some(w => glued.includes(w)) || words.some(w => LB_BADW.includes(w))) return { error: 'Ce pseudo n\'est pas autorisé.' };
+  return { ps };
+}
+function lbSecret() { const a = new Uint8Array(24); (window.crypto || {}).getRandomValues ? crypto.getRandomValues(a) : a.forEach((_, i) => { a[i] = Math.floor(Math.random() * 256); }); return Array.from(a, b => b.toString(16).padStart(2, '0')).join(''); }
+async function lbRegister(raw) {
+  const c = lbPseudoCheck(raw); if (c.error) return { error: c.error };
+  const secret = lbSecret(), r = await lbRpc('lb_register', { p_pseudo: c.ps, p_secret: secret });
+  if (r.error) return { error: lbErrTxt(r.error), net: r.error === 'reseau' };
+  G.meta.lb = { id: r.data, secret, pseudo: c.ps }; saveMeta();
+  lbFlush();
+  return { ok: true };
+}
+// il faut un pseudo pour lancer une partie (sauf si le classement ne répond pas)
+const lbNeedPseudo = () => !lbMe() && !LB.skip && !G.headless;
+function lbAsk(next, from) {
+  let ov = $('#lbname');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
+  ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
+      <h2 class="lbn-t"><svg class="ico"><use href="#i-couronne"/></svg>Ton pseudo</h2>
+      <p class="lbn-p">Il faut un pseudo pour jouer : c'est ton nom au <b>classement en ligne</b>. 20 lettres maximum, et il est définitif.</p>
+      <input id="lbn-in" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ton pseudo" value="${esc((G.meta.prof && G.meta.prof.name) || '')}">
+      <p class="lbn-err" id="lbn-err"></p>
+      <div class="lbn-row"><button class="btn big red" id="lbn-ok">VALIDER</button></div>
+      <button class="btn ghost small" id="lbn-skip" hidden>Jouer sans classement pour l'instant</button>
+      ${from === 'lb' ? '<button class="btn ghost small" id="lbn-back">Retour</button>' : ''}
+    </div></div>`;
+  ov.hidden = false;
+  const inp = $('#lbn-in'), err = $('#lbn-err'), ok = $('#lbn-ok');
+  setTimeout(() => { try { inp.focus(); } catch (e) { /* rien */ } }, 60);
+  const go = async () => {
+    if (LB.busy) return;
+    const c = lbPseudoCheck(inp.value); if (c.error) { err.textContent = c.error; Snd.deny(); return; }
+    LB.busy = true; ok.disabled = true; ok.textContent = '…'; err.textContent = '';
+    const r = await lbRegister(c.ps);
+    LB.busy = false; ok.disabled = false; ok.textContent = 'VALIDER';
+    if (r.error) { err.textContent = r.error; Snd.deny(); if (r.net) $('#lbn-skip').hidden = false; return; }
+    ov.hidden = true; Snd.record(); toast(`Bienvenue au classement, ${G.meta.lb.pseudo} !`);
+    if (next) next();
+  };
+  ok.onclick = go;
+  inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); go(); } e.stopPropagation(); };
+  $('#lbn-skip').onclick = () => { LB.skip = true; ov.hidden = true; if (next) next(); };
+  const back = $('#lbn-back'); if (back) back.onclick = () => { ov.hidden = true; };
+  Snd.pop();
+}
+
+/* ---- envoyer un score ---- */
+// les parties avec les outils de test ne comptent pas
+const lbRunOk = run => !!run && !run.devUsed && !G.headless && (run.score || 0) > 0 && run.round >= 1;
+function lbQueue(run) {
+  const q = G.meta.lbq || (G.meta.lbq = {}), k = String(run.stake || 0), cur = q[k];
+  if (!cur || run.score > cur.score || (run.score === cur.score && run.round > cur.round)) q[k] = { score: Math.round(run.score), round: run.round, deck: run.deck || '' };
+  saveMeta();
+}
+async function lbSend(stake, e) {
+  const me = lbMe(); if (!me) return { error: 'joueur' };
+  const r = await lbRpc('lb_submit', { p_id: me.id, p_secret: me.secret, p_stake: +stake, p_score: e.score, p_round: Math.min(999, e.round), p_deck: e.deck || '' });
+  if (!r.error) { delete LB.cache[stake]; const q = G.meta.lbq || {}; if (q[stake] && q[stake].score <= e.score) { delete q[stake]; saveMeta(); } }
+  return r;
+}
+// les scores en attente (pas d'internet la dernière fois)
+async function lbFlush() {
+  const q = G.meta.lbq; if (!q || !lbMe()) return;
+  for (const k of Object.keys(q)) { const r = await lbSend(k, q[k]); if (r.error === 'reseau') return; if (r.error) { delete q[k]; saveMeta(); } }
+}
+// la fin de partie : le score part tout seul, et on dit sa place
+async function lbAfterRun(run) {
+  const box = $('#o-score'); if (!box) return;
+  let el = $('#o-lb'); if (!el) { el = document.createElement('span'); el.id = 'o-lb'; el.className = 'o-lb'; }
+  box.appendChild(el);
+  if (!lbRunOk(run)) { el.textContent = run && run.devUsed ? 'Partie de test : hors classement' : ''; return; }
+  const S = STAKES[run.stake || 0].name.toLowerCase();
+  lbQueue(run);
+  if (!lbMe()) { el.innerHTML = 'Hors classement : <button class="mini" id="o-lbp">choisis ton pseudo</button>'; $('#o-lbp').onclick = () => lbAsk(() => lbAfterRun(run)); return; }
+  el.textContent = 'Classement…';
+  const sc = Math.round(run.score), r = await lbSend(String(run.stake || 0), { score: sc, round: run.round, deck: run.deck || '' });
+  if (r.error) { el.textContent = r.error === 'reseau' ? 'Hors ligne : ton score partira plus tard' : lbErrTxt(r.error); return; }
+  const row = Array.isArray(r.data) ? r.data[0] : r.data; if (!row) { el.textContent = ''; return; }
+  const place = +row.place, rec = +row.best === sc && +row.best_round === run.round;
+  el.innerHTML = rec ? `<b>${place}<sup>${place === 1 ? 'er' : 'e'}</sup></b> au classement · ${esc(S)}` : `Ton record reste ${fmtS(row.best)} (manche ${row.best_round}) : <b>${place}<sup>${place === 1 ? 'er' : 'e'}</sup></b>`;
+  if (rec && place <= 10) { el.classList.add('top'); setTimeout(() => { Snd.record(); celebrate(true); toast(place === 1 ? `1er du classement en ${S} !` : `Tu entres dans le top 10 en ${S} : ${place}e !`); }, 600); }
+}
+
+/* ---- l'écran du classement ---- */
+function lbOpen() {
+  firstGesture();
+  if (!lbMe() && !LB.skip) { lbAsk(() => lbOpen(), 'lb'); return; }
+  let ov = $('#lb');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'lb'; ov.className = 'full lbs'; document.body.appendChild(ov); }
+  LB.stake = clamp(LB.stake, 0, Math.min(STAKES.length - 1, G.meta.stakeMax || 0));
+  ov.hidden = false;
+  lbRender(); Snd.pop();
+}
+function lbClose() { const ov = $('#lb'); if (ov) ov.hidden = true; Snd.click(); }
+async function lbRender() {
+  const ov = $('#lb'); if (!ov || ov.hidden) return;
+  const m = G.meta, top = Math.min(STAKES.length - 1, m.stakeMax || 0), k = LB.stake, S = STAKES[k], me = lbMe();
+  ov.innerHTML = `<div class="fi lb-fi">
+    <div class="lb-head"><h2 class="lb-t"><svg class="ico"><use href="#i-couronne"/></svg>CLASSEMENT</h2><button class="btn ghost small" id="lb-x">Retour</button></div>
+    <div class="lb-tabs">${STAKES.slice(0, top + 1).map((s, i) => `<button class="lb-tab${i === k ? ' on' : ''}" data-lbs="${i}" style="--sc:${s.col}"><i></i>${esc(s.name.replace('Mise ', ''))}</button>`).join('')}</div>
+    <div class="panel lb-box" style="--sc:${S.col}">
+      <div class="lb-cap"><span>#</span><span>Joueur</span><span>Score</span><span>Manche</span></div>
+      <ol class="lb-list" id="lb-list"><li class="lb-msg">Chargement…</li></ol>
+      <div class="lb-me" id="lb-me">${me ? '' : 'Choisis un pseudo pour apparaître ici.'}</div>
+    </div>
+    <p class="lb-foot">${me ? `Ton pseudo : <b>${esc(me.pseudo)}</b> · ` : ''}une ligne par joueur : sa meilleure partie dans cette mise.</p>
+  </div>`;
+  $('#lb-x').onclick = lbClose;
+  ov.querySelectorAll('[data-lbs]').forEach(b => { b.onclick = () => { LB.stake = +b.dataset.lbs; Snd.click(); lbRender(); }; });
+  const c = LB.cache[k], fresh = c && Date.now() - c.t < 30000;
+  const [t, mine] = fresh ? [c.top, c.mine] : await Promise.all([lbRpc('lb_top', { p_stake: k }), me ? lbRpc('lb_me', { p_id: me.id, p_stake: k }) : Promise.resolve({ data: [] })]);
+  if (LB.stake !== k || ov.hidden) return;
+  const list = $('#lb-list'), meEl = $('#lb-me'); if (!list) return;
+  if (t.error) { list.innerHTML = `<li class="lb-msg">${esc(lbErrTxt(t.error))}</li>`; return; }
+  if (!fresh) LB.cache[k] = { t: Date.now(), top: t, mine };
+  const rows = t.data || [];
+  list.innerHTML = rows.length ? rows.map(r => {
+    const p = +r.place, mine2 = me && r.pseudo === me.pseudo, D = (typeof deckById === 'function' && r.deck) ? deckById(r.deck) : null;
+    return `<li class="lb-row${p <= 3 ? ' p' + p : ''}${mine2 ? ' me' : ''}"><span class="lb-pl">${p <= 3 ? `<i class="lb-med">${p}</i>` : p}</span><span class="lb-ps"><b>${esc(r.pseudo)}</b>${D ? `<small>${esc(D.name)}</small>` : ''}</span><span class="lb-sc">${fmtS(r.score)}</span><span class="lb-rd">${r.round}</span></li>`;
+  }).join('') : '<li class="lb-msg">Personne encore. La première place est à prendre !</li>';
+  const row = mine && !mine.error && Array.isArray(mine.data) ? mine.data[0] : null;
+  if (meEl && me) meEl.innerHTML = row ? `<span class="lb-pl">${row.place}</span><span class="lb-ps"><b>Toi</b> · ${esc(me.pseudo)}</span><span class="lb-sc">${fmtS(row.best)}</span><span class="lb-rd">${row.best_round}</span>` : 'Pas encore de partie dans cette mise.';
+}
+// le profil : le pseudo du classement
+function lbProfRow() {
+  const me = lbMe();
+  return oRow('Pseudo du classement', me ? `<b class="lbp-name">${esc(me.pseudo)}</b> <button class="btn small gold" data-lbopen="1">Classement</button>` : '<button class="btn small gold" data-lbp="1">Choisir mon pseudo</button>', me ? 'définitif, unique' : 'obligatoire pour jouer');
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('[data-lbp],[data-lbopen],#t-lb');
+  if (!t) return;
+  if (t.id === 't-lb' || t.dataset.lbopen) lbOpen();
+  else lbAsk(() => { if (typeof renderOptions === 'function') renderOptions(); });
+});
+// au lancement : les scores restés en attente partent
+setTimeout(() => { try { if (!G.headless) lbFlush(); } catch (e) { /* rien */ } }, 5000);
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
@@ -20657,6 +20884,7 @@ function renderOptions() {
       h += oRow('Touches par défaut', '<button class="btn small ghost" data-oact="keyreset">Rétablir</button>', 'AZERTY : Q / D pour le flipper, 1 à 4 avec ou sans Maj');
       break;
     case 'profil': {
+      h += lbProfRow();
       const L = m.life || {}, st = (a, b) => `<div class="ost"><dt>${a}</dt><dd>${b}</dd></div>`;
       h += '<dl class="ostats2">' + [
         st('Parties', fmtS(m.runs || 0)), st('Victoires', fmtS(m.wins || 0)), st('Meilleure manche', roundLabel(m.best || 0)), st('Temps de jeu', fmtTime(L.time)),
@@ -22098,6 +22326,7 @@ function endRun(cashed) {
   $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? 'Nouvelle mise débloquée !' : '';
   show('#over', true);
   overFx(cashed, run);
+  lbAfterRun(run);
   Music.play('lounge'); duckMusic(false); BG.setMode('over');
   setTimeout(() => Snd.jetons(), 700);
 }
@@ -22129,6 +22358,7 @@ function openPause() {
 }
 function closePause() { show('#pause', false); if (!tipOpen && $('#detail').hidden && $('#runinfo').hidden && !RL.on) G.paused = false; duckMusic(false); }
 function devAction(k) {
+  if (G.run && !G.headless) G.run.devUsed = true;
   const run = G.run, cb = G.cb, msg = t => { $('#dev-msg').textContent = t; };
   const inRun = run && G.mode !== 'title' && G.mode !== 'over';
   switch (k) {
@@ -23038,7 +23268,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

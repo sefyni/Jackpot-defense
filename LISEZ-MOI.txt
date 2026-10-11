@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.9.1-202610111159
+JACKPOT DEFENSE v11-202610111400
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v11
+- Le classement en ligne, un par mise :
+  · Bouton « CLASSEMENT » sur l'écran titre, à côté du profil : un onglet par mise débloquée et le top 10, avec la place, le pseudo, le score, la manche et le jeu de départ. Médailles d'or, d'argent et de bronze pour les 3 premiers.
+  · Ta ligne à toi reste toujours affichée sous le top 10.
+  · Un pseudo est obligatoire pour jouer : 20 lettres max, unique, définitif. Le jeu le demande avant ta première partie, et les gros mots sont refusés.
+  · Ton pseudo est aussi affiché dans Profil > Records et sauvegarde.
+  · Une seule ligne par joueur et par mise : ta meilleure partie. À score égal, la manche la plus haute passe devant, puis celui qui l'a fait en premier.
+  · À la fin de chaque partie, ton score part tout seul et ta place s'affiche sous le score. Fête si tu entres dans le top 10.
+  · Sans internet, le score est gardé et part plus tard.
+  · Les parties où tu as utilisé les outils de test ne comptent pas.
 
 Nouveautés de la v10.9.1
 - Les bumpers (Pop Fizz) changent :
