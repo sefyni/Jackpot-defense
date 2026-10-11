@@ -3228,21 +3228,37 @@ body.lpc #abs .pc-face .pc-ico::before{inset:-12%}
 body.reduced #abs .pc-bob,body.reduced #abs .pc-bob::before,body.reduced #abs .pc-gloss::before,body.reduced #abs .hand-svg,body.reduced #abs .hd-f,body.reduced #abs .pc-chipw,body.reduced #abs .pc-chip{animation:none!important}
 body.reduced #abs .pc-chip{transform:translate(calc(var(--hw) * .53),0)}
 
-/* ---------- v12.1 · le Mix de Zaza ---------- */
-.shot.zmix{background:linear-gradient(90deg,rgba(255,126,182,.14),rgba(0,0,0,.26) 70%);box-shadow:inset 0 0 0 2px rgba(255,126,182,.42)}
-.shot.zmix.on{box-shadow:inset 0 0 0 2px #ff7eb6,0 0 16px rgba(255,126,182,.45);animation:zmGlow 1.2s ease-in-out infinite alternate}
-@keyframes zmGlow{to{box-shadow:inset 0 0 0 2px #ffb3d4,0 0 22px rgba(255,126,182,.6)}}
-.shot.zmix .zm-mood{display:block;margin-top:2px;font-style:normal;font-weight:700;color:#ffcc4d}
-.shot.zmix .mini.cancel{background:#5a3a4e;box-shadow:inset 0 0 0 2px #ff7eb6;color:#fff}
-.glass.zm-shake{animation:zmShake .85s ease-in-out}
-@keyframes zmShake{0%,100%{transform:none}10%{transform:translateY(-5px) rotate(-16deg)}22%{transform:translateY(-8px) rotate(14deg)}34%{transform:translateY(-6px) rotate(-14deg)}46%{transform:translateY(-8px) rotate(12deg)}58%{transform:translateY(-5px) rotate(-10deg)}72%{transform:translateY(-3px) rotate(6deg)}86%{transform:translateY(-1px) rotate(-3deg)}}
+/* ---------- le Mix de Zaza : son verre, sur le comptoir, devant elle ---------- */
+.zm-glass{position:absolute;z-index:5;left:74px;bottom:9px;width:52px;height:64px;padding:0;margin:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transform-origin:50% 92%;transition:transform .22s cubic-bezier(.3,1.5,.5,1),filter .25s;filter:drop-shadow(0 3px 2px rgba(0,0,0,.45))}
+.zm-glass .zm-svg{display:block;width:100%;height:100%;overflow:visible}
+.zm-glass:hover{transform:translateY(-2px) scale(1.04)}
+.zm-glass:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:10px}
+.zm-glass .zm-in{position:absolute;left:50%;top:9%;display:flex;gap:2px;transform:translateX(-50%);pointer-events:none}
+.zm-glass .zm-in .chip{display:block;width:17px;height:17px;animation:zmBob 1.6s ease-in-out infinite}
+.zm-glass .zm-in .chip+.chip{animation-delay:-.8s}
+@keyframes zmBob{50%{transform:translateY(1.5px) rotate(8deg)}}
+.zm-glass .zm-tag{position:absolute;left:calc(100% - 4px);bottom:-4px;padding:2px 7px 1px;border-radius:999px;background:linear-gradient(180deg,#ff8ec4,#d64a8e);box-shadow:0 0 0 1.5px #3a0f22,0 2px 0 rgba(0,0,0,.4);color:#fff;font:700 10px/1.2 var(--f-pix);letter-spacing:.04em;white-space:nowrap;pointer-events:none}
+.zm-glass.used{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) saturate(.35) brightness(.8)}
+.zm-glass.used .zm-tag{background:#5a4660}
+.zm-glass.can{animation:zmCan 1s ease-in-out infinite}
+@keyframes zmCan{0%,100%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 4px rgba(255,126,182,.5))}50%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 12px rgba(255,126,182,.95))}}
+.zm-glass.hot{transform:translateY(-4px) scale(1.16);filter:drop-shadow(0 0 14px #ff7eb6) drop-shadow(0 0 3px #fff)}
+.zm-glass.picking{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 10px rgba(255,126,182,.9))}
+.zm-glass.plop{animation:zmPlop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes zmPlop{30%{transform:scale(1.12,.92)}}
+.zm-glass.shake{animation:zmShake .9s ease-in-out}
+@keyframes zmShake{0%,100%{transform:none}10%{transform:translateY(-8px) rotate(-16deg)}22%{transform:translateY(-12px) rotate(14deg)}34%{transform:translateY(-10px) rotate(-14deg)}46%{transform:translateY(-12px) rotate(12deg)}58%{transform:translateY(-8px) rotate(-10deg)}72%{transform:translateY(-4px) rotate(6deg)}86%{transform:translateY(-1px) rotate(-3deg)}}
+body.lpc .zm-glass{left:80px;bottom:10px;width:60px;height:74px}
+body.lpc .zm-glass .zm-in .chip{width:20px;height:20px}
+body.lpc .zm-glass .zm-tag{font-size:11px}
 .zm-fly{position:fixed;z-index:80;pointer-events:none;will-change:transform}
 .zm-fly .chip{display:block;width:100%;height:100%}
-#rack-slots .slot.zmgo .chip{opacity:.18;transition:opacity .2s}
+#rack-slots .slot.zmin .chip{opacity:.22;transition:opacity .2s}
 #rack-slots .slot.zmixin .chip{animation:zmIn .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes zmIn{0%{transform:scale(.6)}55%{transform:scale(1.2)}100%{transform:none}}
 /* le classement n'a plus de bouton dans le menu (le tableau en direct suffit) : PROFIL prend toute la largeur */
 #title .mgrid #t-stats{grid-column:1 / -1}
+@media (prefers-reduced-motion:reduce){.zm-glass,.zm-glass .zm-in .chip{animation:none!important}}
 
 /* ---------- v12.2 · le « +0,1× » des jetons MULT ---------- */
 .mfly{position:fixed;z-index:70;pointer-events:none;padding:2px 7px 1px;border-radius:999px;background:linear-gradient(180deg,#3a1030,#22081c);box-shadow:inset 0 0 0 1.5px var(--mc),0 0 12px color-mix(in srgb,var(--mc) 55%,transparent),0 3px 6px rgba(0,0,0,.5);color:#fff;font:700 13px/1.1 var(--f-pix);letter-spacing:.02em;text-shadow:0 0 6px var(--mc);white-space:nowrap;will-change:transform,opacity}
@@ -3308,6 +3324,84 @@ body.lpc #lp .lp-spark{position:absolute;left:var(--x);top:var(--y);width:6px;he
 body.lpc #lp .lp-kit{background:rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
 @media (prefers-reduced-motion:reduce){body.lpc #lp .lp-gbar i::after,body.lpc #lp .lp-money .coin{animation:none}}
 body.reduced.lpc #lp .lp-gbar i::after,body.reduced.lpc #lp .lp-money .coin{animation:none}
+
+/* ---------- v12.4 · le compteur de MULT électrifié, en plus doux ---------- */
+body.lpc #lp .lp-box.mult.el1{box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35),0 0 0 1px rgba(150,220,255,.55),0 0 14px rgba(110,200,255,.35)}
+body.lpc #lp .lp-box.mult.el2{box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35),0 0 0 1px #c9d6ff,0 0 22px rgba(150,140,255,.55),0 0 46px rgba(176,124,255,.22);animation:elBreath 1.9s ease-in-out infinite}
+body.lpc #lp .lp-box.mult.el3{box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.4),0 0 0 1.5px #fff,0 0 28px rgba(230,150,255,.7),0 0 64px rgba(176,124,255,.35);animation:elBreath 1.2s ease-in-out infinite}
+body.lpc #lp .lp-box.mult.el2 b{text-shadow:0 3px 0 rgba(0,0,0,.4),0 0 10px #d8ccff}
+body.lpc #lp .lp-box.mult.el3 b{text-shadow:0 3px 0 rgba(0,0,0,.4),0 0 12px #ffd6f4}
+body.lpc #lp .lp-box.mult.hit{animation:lpHit2 .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes elBreath{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13) saturate(1.1)}}
+.hud-score .hm.el1{box-shadow:0 0 0 1px rgba(150,220,255,.6),0 0 8px rgba(110,200,255,.4)}
+.hud-score .hm.el2{background:#24204a;color:#fff;box-shadow:0 0 0 1px #c9d6ff,0 0 12px rgba(150,140,255,.6);animation:elBreath 1.9s ease-in-out infinite}
+.hud-score .hm.el3{background:#3a1d4a;color:#fff;box-shadow:0 0 0 1px #fff,0 0 14px rgba(230,150,255,.75);animation:elBreath 1.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){body.lpc #lp .lp-box.mult.el2,body.lpc #lp .lp-box.mult.el3,.hud-score .hm.el2,.hud-score .hm.el3{animation:none}}
+
+/* ---------- v12.7 · la première partie guidée : coups de projecteur ---------- */
+#coach{position:fixed;inset:0;z-index:300;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:none}
+#coach[hidden]{display:none}
+#coach .co-hole{position:fixed;pointer-events:none;box-shadow:0 0 0 2px #ffcc4d,0 0 24px rgba(255,204,77,.55),0 0 0 3000px rgba(10,6,18,.64);animation:coPulse 1.5s ease-in-out infinite;transition:left .25s,top .25s,width .25s,height .25s}
+@keyframes coPulse{50%{box-shadow:0 0 0 3px #ffe58a,0 0 36px rgba(255,204,77,.85),0 0 0 3000px rgba(10,6,18,.64)}}
+#coach .co-bub{position:fixed;max-width:min(330px,calc(100vw - 20px));padding:10px 14px 8px;border-radius:14px;background:var(--cream);color:var(--ink);font-weight:700;font-size:16px;line-height:1.25;text-align:left;box-shadow:0 6px 0 rgba(0,0,0,.35),0 0 0 2px #ffcc4d;animation:coIn .35s cubic-bezier(.3,1.5,.5,1) both;pointer-events:none}
+#coach .co-bub p{margin:0}
+#coach .co-bub small{display:block;margin-top:5px;font-size:11px;font-weight:600;color:#7a6a8a}
+@keyframes coIn{from{opacity:0;transform:translateY(8px) scale(.95)}}
+#coach .co-bub.up{animation-name:coInUp}
+@keyframes coInUp{from{opacity:0;transform:translateY(-8px) scale(.95)}}
+#coach .co-fing{position:fixed;z-index:2;width:40px;height:46px;margin:-1px 0 0 -17.5px;pointer-events:none;transform-origin:17.5px 1px;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+#coach .co-fing svg{display:block;width:100%;height:100%}
+#coach .co-fing.tap{animation:coTap 1.3s ease-in-out infinite}
+@keyframes coTap{0%,100%{transform:translate(8px,18px)}45%,70%{transform:translate(0,0)}55%{transform:translate(0,0) scale(.86)}}
+#coach .co-fing.drag{animation:coDrag 2.1s ease-in-out infinite}
+@keyframes coDrag{0%{transform:translate(0,0);opacity:0}12%{transform:translate(0,0) scale(.88);opacity:1}72%{transform:translate(var(--dx,0px),var(--dy,0px)) scale(.88);opacity:1}84%{transform:translate(var(--dx,0px),var(--dy,0px));opacity:1}100%{transform:translate(var(--dx,0px),var(--dy,0px));opacity:0}}
+#coach .co-fing.pull{animation:coPull 2.1s ease-in-out infinite}
+@keyframes coPull{0%{transform:translate(0,0);opacity:0}12%{transform:translate(0,0) scale(.86);opacity:1}62%{transform:translate(0,var(--dy,60px)) scale(.86);opacity:1}72%{transform:translate(0,var(--dy,60px));opacity:1}100%{transform:translate(0,var(--dy,60px));opacity:0}}
+#coach .co-fing.arc{animation:coArc 1.6s ease-in-out infinite alternate}
+@keyframes coArc{from{transform:rotate(-75deg) translateY(calc(-1 * var(--R,60px))) rotate(75deg)}to{transform:rotate(75deg) translateY(calc(-1 * var(--R,60px))) rotate(-75deg)}}
+@media (prefers-reduced-motion:reduce){#coach .co-hole,#coach .co-fing{animation:none!important}}
+
+/* ---------- v12.8 · plus confortable sur téléphone ---------- */
+/* le bar : une boisson par ligne (verre, catégorie, nom et niveau, effet, bouton à droite) : on défile beaucoup moins */
+body:not(.lpc) .drinks.n4{grid-template-columns:minmax(0,1fr);gap:6px}
+body:not(.lpc) .drinks.n4 .drink:not(.zz){display:grid;grid-template-columns:40px auto minmax(0,1fr) auto;grid-template-areas:"g c c b" "g n l b" "g e e b";column-gap:8px;row-gap:1px;align-items:center;text-align:left;padding:6px 10px 7px}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .dcat{grid-area:c;font-size:10px}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .glass{grid-area:g;justify-self:center}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .dname{grid-area:n;font-size:14.5px;white-space:nowrap}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .dlv{grid-area:l;align-self:center}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .deff{grid-area:e;font-size:12px;line-height:1.18}
+body:not(.lpc) .drinks.n4 .drink:not(.zz) .mini,body:not(.lpc) .drinks.n4 .drink:not(.zz) .stamp{grid-area:b;width:auto;min-width:78px;align-self:center}
+/* le marché noir : le texte prend toute la largeur, les boutons passent dessous, côte à côte */
+body:not(.lpc) .offer{grid-template-columns:44px minmax(0,1fr);grid-template-rows:auto auto;align-items:start;gap:7px 10px;padding:9px 10px}
+body:not(.lpc) .offer .oicon,body:not(.lpc) .offer .slotico{width:44px;grid-row:1 / span 2}
+body:not(.lpc) .offer .slotico{height:44px;font-size:18px}
+body:not(.lpc) .offer .otext b{font-size:15.5px}
+body:not(.lpc) .offer .otext span{font-size:13.5px;line-height:1.22}
+body:not(.lpc) .offer .obuy{grid-column:2;flex-direction:row;flex-wrap:wrap;min-width:0}
+body:not(.lpc) .offer .obuy .mini{flex:1 1 40%;min-height:38px;padding:6px 8px;font-size:14px}
+body:not(.lpc) .offer .stamp-sold{top:14px;transform:rotate(-12deg)}
+
+/* ---------- v13.0 · la même finition partout : la machine, le marché noir, l'écran titre ---------- */
+/* la machine : une vitre sur les rouleaux, une ligne de gain qui respire, des pastilles plus douces */
+#machine .reel::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:8px;background:linear-gradient(104deg,rgba(255,255,255,0) 28%,rgba(255,255,255,.3) 40%,rgba(255,255,255,0) 50%),linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0) 18%)}
+#machine .payline{animation:plGlow 2.6s ease-in-out infinite}
+@keyframes plGlow{0%,100%{box-shadow:0 0 0 3px rgba(255,92,108,.8),0 0 10px rgba(255,92,108,.3)}50%{box-shadow:0 0 0 3px rgba(255,120,135,.95),0 0 18px rgba(255,92,108,.55)}}
+#machine .pill{background:linear-gradient(180deg,rgba(0,0,0,.44),rgba(0,0,0,.3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.1)}
+#machine .led{box-shadow:inset 0 0 0 2px #000,inset 0 0 18px rgba(169,139,255,.35),0 1px 0 rgba(255,255,255,.12)}
+#machine .tray{box-shadow:inset 0 4px 10px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.06),0 1px 0 rgba(255,255,255,.12)}
+#machine .lever .ball::after{content:"";position:absolute;left:5px;top:4px;width:7px;height:5px;border-radius:50%;background:rgba(255,255,255,.75);filter:blur(.5px)}
+/* le marché noir : des offres au liseré fin, une ombre douce, et elles se soulèvent au survol (PC) */
+#market .offer{border-radius:14px;box-shadow:inset 0 0 0 1px rgba(169,139,255,.36),inset 0 1px 0 rgba(255,255,255,.06),0 10px 18px -12px rgba(0,0,0,.9);transition:transform .18s ease,box-shadow .2s ease}
+#market .offer.punch{box-shadow:inset 0 0 0 1px rgba(201,168,255,.75),inset 0 1px 0 rgba(255,255,255,.08),0 10px 18px -12px rgba(0,0,0,.9),0 0 18px rgba(169,139,255,.18)}
+body.lpc #market .offer:not(.sold):hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,214,140,.5),inset 0 1px 0 rgba(255,255,255,.08),0 14px 22px -12px rgba(0,0,0,.95)}
+/* l'écran titre : un reflet passe sur JOUER, et les boutons se soulèvent au survol (PC) */
+#title #t-play{position:relative;overflow:hidden}
+#title #t-play::after{content:"";position:absolute;top:-10%;bottom:-10%;left:-45%;width:28%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.42),rgba(255,255,255,0));transform:skewX(-18deg);pointer-events:none;animation:tGlint 5s ease-in-out infinite}
+@keyframes tGlint{0%,72%{left:-45%}100%{left:130%}}
+body.lpc #title .mbtn{transition:transform .16s ease,filter .2s ease}
+body.lpc #title .mbtn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+@media (prefers-reduced-motion:reduce){#machine .payline,#title #t-play::after{animation:none}}
+body.reduced #machine .payline,body.reduced #title #t-play::after{animation:none}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3607,6 +3701,7 @@ body.reduced.lpc #lp .lp-gbar i::after,body.reduced.lpc #lp .lp-money .coin{anim
               <ellipse class="b-mo" cx="55" cy="70" rx="4" ry="3" fill="#4a0a1e"/>
             </g>
           </svg></div>
+          <button class="zm-glass" id="zm-glass" aria-label="Le verre de Zaza : glisse deux jetons dedans pour un mix"></button>
           <div class="counter-top" aria-hidden="true"></div>
         </div>
         <div class="counter">
@@ -3841,7 +3936,7 @@ body.reduced.lpc #lp .lp-gbar i::after,body.reduced.lpc #lp .lp-money .coin{anim
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v12.3</p>
+  <p class="proto">Sefy Industries · v13.0</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -9650,11 +9745,12 @@ function audioInit() {
     const ac = new (window.AudioContext || window.webkitAudioContext)();
     AU.ac = ac;
     const comp = ac.createDynamicsCompressor();
-    comp.threshold.value = -12; comp.knee.value = 8; comp.ratio.value = 4; comp.attack.value = .003; comp.release.value = .18;
+    comp.threshold.value = -14; comp.knee.value = 14; comp.ratio.value = 3; comp.attack.value = .006; comp.release.value = .25;
+    const soft = (fq, db) => { const f = ac.createBiquadFilter(); f.type = 'highshelf'; f.frequency.value = fq; f.gain.value = db; f.connect(comp); return f; };
     AU.master = ac.createGain(); AU.master.gain.value = volOf('master');
     comp.connect(AU.master); AU.master.connect(ac.destination); AU.comp = comp;
-    AU.sfx = ac.createGain(); AU.sfx.gain.value = volOf('sfx'); AU.sfx.connect(comp);
-    AU.mus = ac.createGain(); AU.mus.gain.value = volOf('mus'); AU.mus.connect(comp);
+    AU.sfx = ac.createGain(); AU.sfx.gain.value = volOf('sfx'); AU.sfx.connect(soft(5200, -3.5));
+    AU.mus = ac.createGain(); AU.mus.gain.value = volOf('mus'); AU.mus.connect(soft(7000, -2.5));
     AU.vox = ac.createGain(); AU.vox.gain.value = volOf('vox'); AU.vox.connect(comp);
     AU.duck = ac.createGain(); AU.duck.gain.value = 1; AU.duck.connect(AU.mus);
     AU.amb = ac.createGain(); AU.amb.gain.value = volOf('amb'); AU.amb.connect(AU.sfx);
@@ -10291,7 +10387,13 @@ const Music = (() => {
   ];
   const COMP = [[[0, 6], [6, 6]], [[2, 4], [8, 8]], [[0, 16]], [[0, 3], [6, 3], [10, 6]], [[0, 8], [10, 6]]];
   // combat : Dm Bb Gm A (2 mesures chacun)
-  const CCH = [{ r: 38, v: [50, 57, 62, 65] }, { r: 34, v: [46, 53, 58, 62] }, { r: 31, v: [43, 50, 55, 58] }, { r: 33, v: [45, 52, 57, 61] }];
+  const CCH0 = [{ r: 38, v: [50, 57, 62, 65] }, { r: 34, v: [46, 53, 58, 62] }, { r: 31, v: [43, 50, 55, 58] }, { r: 33, v: [45, 52, 57, 61] }];
+  // v12.9 : Ré mineur à l'acte I, puis d'autres tonalités et d'autres enchaînements ; aux boss, un accord de Mi bémol qui grince
+  const TRSP = (P, k) => P.map(c => ({ r: c.r + k, v: c.v.map(x => x + k) }));
+  const P2 = [{ r: 38, v: [50, 57, 62, 65] }, { r: 43, v: [50, 55, 58, 62] }, { r: 36, v: [48, 52, 55, 60] }, { r: 33, v: [45, 52, 57, 61] }];
+  const PB = [{ r: 38, v: [50, 57, 62, 65] }, { r: 39, v: [51, 55, 58, 63] }, { r: 38, v: [50, 57, 62, 65] }, { r: 33, v: [45, 52, 57, 61] }];
+  const HARM = [CCH0, TRSP(CCH0, 2), P2, TRSP(P2, 3), TRSP(CCH0, 5), TRSP(P2, 5)], HKEY = [0, 2, 0, 3, 5, 5];
+  let CCH = CCH0;
   const K = ['x.........x.....', 'x.x.......x.....'], S = ['....x.......x...', '....x.......x.x.'], GH = ['..o....o.......o', '......o..o...o.o'], HH = ['x.x.x.x.x.x.x.xo', 'x.x.x.x.x.x.x.x.'];
 
   function env(g, t, a, peak, d, sus, rel, end) {
@@ -10417,7 +10519,8 @@ const Music = (() => {
   function coreSched(tr, step, t, d) {
     const s = step % 16, s32 = step % 32, bar = Math.floor(step / 16), ci = Math.floor(step / 32) % 4, ch = CCH[ci], I = inten;
     tr.drum.frequency.setTargetAtTime(Math.min(AU.ac.sampleRate / 2 - 200, 700 * Math.pow(18, clamp(I * 1.4 - .1, 0, 1))), t, .1);
-    if (brk) {
+    if (bar % 24 >= 22 && I < .85) { /* respiration : la batterie se tait deux mesures */ }
+    else if (brk) {
       const fill = bar % 4 === 3 && s >= 12;
       if (fill && (I > .45 || s >= 14)) { const sn = ar() < .5 ? 4 : 12; playSlice(tr, t, sn, .5, 1 + (s - 12) * .08); playSlice(tr, t + d / 2, sn, .5, 1.05 + (s - 12) * .08); }
       else {
@@ -11019,6 +11122,7 @@ const Music = (() => {
     resume() { if (!AU.ac || G.headless) return; const c = cur; cur = undefined; play(c === undefined ? null : c); },
     stop() { play(null); },
     setIntensity(x) { iTarget = clamp(x, 0, 1); },
+    setHarm(a, boss) { const i = clamp(a | 0, 0, HARM.length - 1); CCH = boss ? TRSP(PB, HKEY[i]) : HARM[i]; },
     beatPhase() {
       const tr = TR.combat, ac = AU.ac;
       if (!ac || !tr || !tr.active || cur !== 'combat') return -1;
@@ -11482,7 +11586,7 @@ function updateCombat(dt) {
    et chaque hausse du mult lâche une décharge. */
 const ELEC = { c: null, g: null, arcs: [], I: 0, acc: 0, burst: 0, w: 0, h: 0, drawn: false };
 const elecLevel = m => clamp((m - 1.3) / 3, 0, 1);
-function elecKick(n) { ELEC.burst = Math.min(1.6, ELEC.burst + (n || .6)); }
+function elecKick0(n) { ELEC.burst = Math.min(1.6, ELEC.burst + (n || .6)); }
 function jagPath(x, y, ang, len, seg, amp) {
   const pts = [[x, y]], c = Math.cos(ang), s2 = Math.sin(ang);
   for (let i = 1; i <= seg; i++) { const d = len * i / seg, off = i < seg ? (Math.random() - .5) * 2 * amp : 0; pts.push([x + c * d - s2 * off, y + s2 * d + c * off]); }
@@ -11503,12 +11607,12 @@ function elecSpawn(r, I, big) {
   if (len > 28 && Math.random() < .45 + I * .35) { const k = 1 + Math.floor(Math.random() * (a.pts.length - 2)), p = a.pts[k]; a.br = jagPath(p[0], p[1], ang + (Math.random() < .5 ? -1 : 1) * (.5 + Math.random() * .7), len * .45, 3 + Math.floor(len / 22), amp * .7); }
   ELEC.arcs.push(a);
 }
-function elecBridge(r1, r2, I) {
+function elecBridge0(r1, r2, I) {
   // un arc qui saute des POINTS au MULT, par-dessus le ×
   const x1 = r1.right - 3, y1 = r1.top + r1.height * (.25 + Math.random() * .5), x2 = r2.left + 3, y2 = r2.top + r2.height * (.25 + Math.random() * .5);
   ELEC.arcs.push({ pts: jagPath(x1, y1, Math.atan2(y2 - y1, x2 - x1), Math.hypot(x2 - x1, y2 - y1), 6, 3 + I * 5), life: .07 + Math.random() * .06, max: .13, w: 1.2 + I * 1.6, br: null });
 }
-function elecFrame(dt) {
+function elecFrame0(dt) {
   const E = ELEC;
   if (!E.c) { E.c = $('#elc'); if (!E.c) return; }
   const cb = G.cb, live = G.mode === 'combat' && !!cb && !cb.demo && !cb.ended && !G.paused && !G.headless && !!G.run;
@@ -13829,6 +13933,7 @@ function render(dtReal) {
   const topY = -VIEW.hy - 6;
   for (const fx of cb.fx) {
     const a = Math.max(0, fx.life / fx.max);
+    if (drawBolt12(fx, a, t)) continue;
     if (drawFx9(fx, a, t)) continue;
     if (fx.type === 'bolt' || fx.type === 'sky') {
       const paths = fx.type === 'bolt' ? fx.paths : (fx.paths || (fx.paths = fx.pts.map(p => jag(p[0] + rand(-12, 12), topY, p[0], p[1], 7, 3.2))));
@@ -14324,7 +14429,7 @@ function toast(msg) {
 const TIPQ = [];
 let tipOpen = false, tipPaused = false;
 function queueTip(html) { if (G.headless || (G.cb && G.cb.demo && G.mode === 'title') || G.dev.auto || (G.meta.opts && !G.meta.opts.tips)) return; TIPQ.push(html); if (!tipOpen) showNextTip(); }
-function showNextTip() {
+function showNextTip0() {
   const html = TIPQ.shift(); if (!html) return;
   tipOpen = true;
   const el = $('#tip');
@@ -14333,7 +14438,7 @@ function showNextTip() {
   if (G.mode === 'combat' && !G.paused) { G.paused = true; tipPaused = true; }
   $('#tip-ok').addEventListener('click', closeTip);
 }
-function closeTip() {
+function closeTip0() {
   $('#tip').hidden = true; tipOpen = false;
   if (tipPaused) { tipPaused = false; G.paused = false; }
   if (TIPQ.length) setTimeout(showNextTip, 220);
@@ -14383,7 +14488,7 @@ function renderRack() {
       const kc = j.kind === 'faux' ? '#8d8d99' : JK[j.parts[0].t].col, key = jokerKey(j);
       const mr = (st.mirrors || []).find(m => m.i === i && m.d < 0), mr2 = (st.mirrors || []).find(m => m.i === i && m.d > 0);
       const isSrc = (st.mirrors || []).some(m => m.ok && m.src === i);
-      const pmc = G.mode === 'bar' && BAR.mixing ? (j.uid === BAR.mixSel ? ' pmsel' : zmixOk(j) && !(BAR.mixSel != null && (run.jokers.find(x => x.uid === BAR.mixSel) || { parts: [{}] }).parts[0].t === j.parts[0].t) ? ' pmok' : ' pmno') : CL.on || CL.sel != null ? (j.uid === CL.sel ? ' pmsel' : clOk(j) ? ' pmok' : ' pmno') : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
+      const pmc = G.mode === 'bar' && (BAR.glass || []).includes(j.uid) ? ' zmin' : G.mode === 'bar' && BAR.mixing ? (zmixOk(j) && !(zmixIn()[0] && zmixIn()[0].parts[0].t === j.parts[0].t) ? ' pmok' : ' pmno') : CL.on || CL.sel != null ? (j.uid === CL.sel ? ' pmsel' : clOk(j) ? ' pmok' : ' pmno') : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
       let mcls = '', mbits = '', minfo = '';
       if (mr) {
         const prevMir = (st.mirrors || []).some(m => m.i === i - 1 && m.d < 0);
@@ -14406,7 +14511,7 @@ function renderRack() {
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
   clRefresh();
-  setTxt('#r-hint', G.mode === 'bar' && BAR.mixing ? (BAR.mixSel == null ? 'touche 2 jetons à mixer' : 'et le 2e jeton (un autre type)') : CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse : ranger, empiler, vendre' : 'touche un jeton pour le détail');
+  setTxt('#r-hint', G.mode === 'bar' && BAR.mixing ? ((BAR.glass || []).length ? 'et le 2e jeton (un autre type)' : 'touche 2 jetons pour le verre') : CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? (G.mode === 'bar' && (BAR.mixLeft || 0) > 0 ? 'glisse : empiler, vendre, mixer' : 'glisse : ranger, empiler, vendre') : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
@@ -14455,6 +14560,7 @@ function rackMove(e) {
     drag.el.classList.add('dragging'); Snd.chipPick(); hideJTip();
     showSellZone(G.run.jokers[drag.i]);
     const B = G.run.jokers[drag.i];
+    if (G.mode === 'bar') zmixCan(zmixOk(B) && (BAR.mixLeft || 0) > 0 && !BAR.busy);
     G.run.jokers.forEach((A, k) => { if (k !== drag.i && stackResult(A, B)) { const s = $(`#rack-slots .slot[data-i="${k}"]`); if (s) s.classList.add('canstack'); } });
   }
   if (drag.on) {
@@ -14464,12 +14570,14 @@ function rackMove(e) {
     if (s && +s.dataset.i !== drag.i && run.jokers[+s.dataset.i] && stackResult(run.jokers[+s.dataset.i], run.jokers[drag.i])) { mode = 'stack'; target = s; }
     else target = nearestSlot(e.clientX, e.clientY);
     if (sellZoneHit(e.clientX, e.clientY)) { mode = 'sell'; target = null; }
+    else if (G.mode === 'bar' && zmixOver(e.clientX, e.clientY) && zmixOk(run.jokers[drag.i]) && (BAR.mixLeft || 0) > 0 && !BAR.busy) { mode = 'zmix'; target = null; }
     const sz = $('#sellzone'); if (sz) sz.classList.toggle('hot', mode === 'sell');
     drag.ghost.classList.toggle('selling', mode === 'sell');
     if (drag.over && (drag.over !== target || drag.mode !== mode)) drag.over.classList.remove('drop', 'stackto');
     drag.over = target; drag.mode = mode;
     if (target) target.classList.add(mode === 'stack' ? 'stackto' : 'drop');
     drag.ghost.classList.toggle('stacking', mode === 'stack');
+    if (G.mode === 'bar') zmixHot(mode === 'zmix');
     e.preventDefault();
   }
 }
@@ -14493,9 +14601,11 @@ function rackUp(e) {
   if (d.ghost) d.ghost.remove();
   d.el.classList.remove('dragging');
   $$('#rack-slots .canstack').forEach(s => s.classList.remove('canstack'));
+  if (G.mode === 'bar') { zmixCan(false); zmixHot(false); }
   if (d.over) d.over.classList.remove('drop', 'stackto');
   hideSellZone();
   const run = G.run;
+  if (d.on && d.mode === 'zmix') { const j = run.jokers[d.i]; if (j) zmixPut(j, { left: e.clientX - 17, top: e.clientY - 17, width: 34, height: 34 }); return; }
   if (d.on && d.mode === 'sell') { const j = run.jokers[d.i]; if (j && canReorder()) sellJoker(j.uid); return; }
   if (!d.on) {
     const j = run.jokers[d.i]; if (!j) return;
@@ -14547,7 +14657,7 @@ function openDetail(j, where) {
     h += `<div class="dpart"><h4>${iconSVG(pt.t, 'dic')} ${def.name}<span>niveau ${sec ? 'secret' : LV_NAME[Math.min(3, pt.lv) - 1].toLowerCase()}</span>${sec ? `<em>Rareté secrète +25${NB}%</em>` : ''}</h4><ol class="caps">`;
     for (let k = 0; k < 4; k++) {
       if (k < 3) h += `<li class="${pt.lv > k ? 'on' : 'off'}"><b>${LV_NAME[k]}</b><span>${def.caps[k](T)}</span></li>`;
-      else h += `<li class="secret${sec ? ' on' : known ? '' : ' off'}"><b>Rareté secrète</b><span>${sec ? def.caps[3](T) : known ? def.caps[3](T * 1.25) + ' <i class="sechow">(passe-le ULTIME au Punch-o-matic du marché noir : rareté secrète pour la partie)</i>' : '??? Passe ce jeton ULTIME au <b>Punch-o-matic</b> du marché noir (' + punchPrice({ kind: 'ultime' }) + ' or) pour découvrir sa rareté secrète.'}</span></li>`;
+      else h += `<li class="secret${sec ? ' on' : known ? '' : ' off'}"><b>Rareté secrète</b><span>${sec ? def.caps[3](T) : known ? def.caps[3](T * 1.25) + ' <i class="sechow">(passe-le ULTIME au Punch-o-matic du marché noir : rareté secrète pour la partie)</i>' : '??? Passe ce jeton ULTIME au <b>Punch-o-matic</b> du marché noir pour découvrir sa rareté secrète.'}</span></li>`;
     }
     h += '</ol>';
     const bp = BP[def.bp];
@@ -15513,7 +15623,7 @@ function rulesSections() {
       <p><b>L'ordre compte.</b> Deux jetons voisins peuvent former un combo, et les signes astro d'un même élément forment des <b>Constellations</b> (+MULT). Les jetons <b>Voisins</b> (Reflet, Haut-parleur, Pont, Pivot…) agissent selon leur place : à gauche, ou au-dessus sur PC.</p>
       <ul class="combo-rules">${COMBOS.map(c => `<li><b>${c.name}</b> (${JK[c.a].name} + ${JK[c.b].name}) : ${c.txt}</li>`).join('')}${CONSTEL.map(c => `<li><b>${c.name}</b> (${c.signs.map(s => JK[s].name).join(', ')}) : +0,3 MULT par paire de signes voisins, +1 MULT avec les trois réunis.</li>`).join('')}</ul>`],
     ['Bar et marché', `<p><b>Le bar de Zaza</b> : à chaque manche, une boisson pour le <b>canon</b>, une pour le <b>flipper</b> et une pour la <b>base</b>. Elles durent toute la partie. Les <b>shots</b> boostent une seule manche.</p>
-      <p><b>Le Mix de Zaza</b> : une fois par passage (deux si elle est d'humeur), elle verse deux de tes jetons simples, de types différents, dans un verre. Il en sort un mix : les deux pouvoirs, une seule place.</p>
+      <p><b>Le Mix de Zaza</b> : sur le comptoir, devant elle, il y a son verre. Glisses-y deux de tes jetons simples, de types différents (ou touche le verre, puis les jetons) : elle secoue, et il en sort un mix, les deux pouvoirs dans une seule place. Une fois par passage (deux si elle est d'humeur).</p>
       <p><b>Le marché noir</b> : au fond de la ruelle, l'Inspecteur vend des jetons « tombés du camion », la seule place de table à acheter, des objets et des <b>sorts</b>. Tu peux marchander… à tes risques.</p>
       <p><b>Les habitués</b> (Dina, Momo, Madame Nox) passent parfois au bar et te défient. Chaque victoire te donne une étoile ★ : à 2 étoiles, leur jeton bonus ; à 3, leur cadeau (un jeton fou). Les étoiles repartent à zéro à chaque partie.</p>
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
@@ -17711,7 +17821,7 @@ function barQuick() {
     if (b) b.disabled = run.gold < s2.price;
   });
   const c = BAR.ciment, cb2 = $('#b-shots [data-buyc]'); if (c && cb2 && !c.sold) cb2.disabled = run.gold < c.price;
-  const zb = $('#b-shots [data-zmix]'); if (zb && !BAR.mixing) zb.disabled = BAR.busy || run.gold < zmixPrice(run) || !zmixAny(run);
+  if (G.mode === 'bar') zmixGlassRender();
 }
 
 /* ================= v10.8 · les jeux à débloquer, le poinçon du Collectionneur, la défaite au ralenti ================= */
@@ -18862,21 +18972,23 @@ setInterval(() => {
   setTimeout(() => H.classList.remove('drum'), 900);
 }, 3200);
 
-/* ================= v12.1 · le Mix de Zaza =================
-   Au bar, Zaza verse deux de tes jetons (simples, de types différents) dans un verre, secoue, et en sort un MIX :
-   les deux pouvoirs dans une seule place. Une fois par passage au bar (deux si elle est d'humeur). 50 or, plus cher
-   avec la Mise d'or (comme les autres prix). */
+/* ================= le Mix de Zaza (v12.1, le verre sur le comptoir depuis la v12.6) =================
+   Sur le comptoir du bar, le verre de Zaza. On y glisse deux de ses jetons (simples, de types différents) :
+   Zaza secoue, et il en sort un MIX, les deux pouvoirs dans une seule place. On peut aussi toucher le verre,
+   puis toucher les jetons dans le rack. Une fois par passage au bar (deux si elle est d'humeur).
+   50 or, plus cher avec la Mise d'or (comme les autres prix). */
 const ZMIX = { price: 50, mood: .25 };
 const zmixPrice = run => Math.round(ZMIX.price * priceMul(run));
 const ZMIX_LINES = {
-  start: ['Deux jetons dans mon verre ? Choisis-les dans ton rack. Différents, hein.', 'Un mix maison ? Montre-moi les deux jetons à marier.'],
+  start: ['Glisse deux jetons dans mon verre. Ou touche-les dans ton rack. Différents, hein.', 'Un mix maison ? Mets-moi deux jetons dans le verre.'],
   first: ['Et avec quoi je le marie, celui-là ?', 'Bon choix. Le deuxième ?'],
   same: ['Deux pareils ? C\'est un doublon, ça : empile-les toi-même, c\'est gratuit.'],
   bad: ['Celui-là, je ne le mets pas dans mon verre. Un jeton simple, sinon rien.', 'Pas celui-là. Je ne mélange que des jetons simples.'],
   none: ['Il me faut deux jetons simples, de types différents. Là, je n\'ai rien à secouer.'],
   done: ['Et voilà. Deux jetons, un seul verre. À la tienne.', 'Secoué, pas remué. Ton mix est prêt.', 'Goûte-moi ça. Deux pouvoirs, une seule place.'],
   out: ['Un mix par soir, mon chou. Reviens à la prochaine manche.'],
-  mood: ['Ce soir je suis d\'humeur : deux mix, si tu veux.'],
+  back: ['Je te les rends. Rien n\'est perdu.', 'Pas de mix ? Tes jetons, mon chou.'],
+  broke: ['Le mix, c\'est {p} or. Reviens avec de quoi payer.'],
 };
 // un jeton qui peut aller dans le verre : simple (un seul type), ni faux, ni maudit, ni fou, ni secret, ni volé
 function zmixOk(j) {
@@ -18884,47 +18996,86 @@ function zmixOk(j) {
   return !!j && !!j.parts && j.parts.length === 1 && !['faux', 'maudit', 'fou'].includes(j.kind) && !isSecret(j) && !(run && (run.stolen || []).includes(j.uid));
 }
 const zmixAny = run => new Set(run.jokers.filter(zmixOk).map(j => j.parts[0].t)).size >= 2;
-// la ligne du comptoir (avec les shots)
-function zmixRowHTML() {
-  const run = G.run; if (!run || BAR.mixLeft == null) return '';
-  const pr = zmixPrice(run), left = BAR.mixLeft || 0, used = left <= 0 && !BAR.zmAnim;
-  if (BAR.zmAnim) return `<div class="shot zmix on serving">${glassHTML('martini', BAR.zmLiq || '#ff7eb6', 'cherry')}<div class="stext"><b>Mix de Zaza</b><span>Zaza secoue…</span></div><button class="mini" disabled>…</button></div>`;
-  const can = !used && !BAR.busy && (BAR.mixing || (run.gold >= pr && zmixAny(run)));
-  const sub = BAR.mixing ? 'Touche deux jetons de ton rack, de types différents.' : used ? 'Fini pour ce soir. Reviens à la prochaine manche.' : `Je verse deux de tes jetons dans un verre : il en sort un mix. Les deux pouvoirs, une seule place.${BAR.mixMood && left > 1 ? ' <em class="zm-mood">Zaza est d\'humeur : 2 mix ce soir !</em>' : ''}`;
-  return `<div class="shot zmix${used ? ' drunk' : ''}${BAR.mixing ? ' on' : ''}">${glassHTML('martini', '#ff7eb6', 'cherry')}<div class="stext"><b>Mix de Zaza</b><span>${sub}</span></div>${used ? '<em class="stamp">FAIT</em>' : `<button class="mini${BAR.mixing ? ' cancel' : ''}" data-zmix="1" ${can ? '' : 'disabled'}>${BAR.mixing ? 'Annuler' : pr + ' or'}</button>`}</div>`;
+const zmixIn = () => (BAR.glass || []).map(u => G.run.jokers.find(x => x.uid === u)).filter(Boolean);
+// plus de ligne au comptoir : le verre est sur le comptoir, dans la scène
+function zmixRowHTML() { zmixGlassRender(); return ''; }
+const hexMix = (a, b) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); try { const x = p(a), y = p(b); return '#' + x.map((v, i) => Math.round((v + y[i]) / 2).toString(16).padStart(2, '0')).join(''); } catch (e) { return '#ff7eb6'; } };
+// le verre : sa liqueur prend la couleur des jetons qu'il contient ; une étiquette dit le prix (ou « fini »)
+function zmixGlassRender() {
+  const el = $('#zm-glass'); if (!el || !G.run) return;
+  const run = G.run, inG = zmixIn(), left = BAR.mixLeft || 0, used = left <= 0 && !BAR.zmAnim;
+  const liq = BAR.zmLiq || (inG.length === 2 ? hexMix(JK[inG[0].parts[0].t].col, JK[inG[1].parts[0].t].col) : inG.length === 1 ? JK[inG[0].parts[0].t].col : '#ff7eb6');
+  const lvl = BAR.zmAnim ? 1 : inG.length === 2 ? .95 : inG.length === 1 ? .7 : .42;
+  const key = [liq, lvl, inG.map(j => j.uid).join('-'), used, left, BAR.mixing, BAR.zmAnim].join('|');
+  if (el._k === key) return;
+  el._k = key;
+  const y = 36 - 26 * lvl, xh = 30 - 23 * lvl * .95;   // la surface de la liqueur dans la coupe
+  el.classList.toggle('used', used); el.classList.toggle('picking', !!BAR.mixing); el.classList.toggle('zm-has', inG.length > 0);
+  el.innerHTML = `<svg class="zm-svg" viewBox="0 0 60 72" aria-hidden="true">
+      <path d="M${(30 - (30 - xh)).toFixed(1)} ${y.toFixed(1)}H${(30 + (30 - xh)).toFixed(1)}L31.6 37.4H28.4Z" fill="${liq}" opacity=".88"/>
+      <path d="M${(30 - (30 - xh)).toFixed(1)} ${y.toFixed(1)}H${(30 + (30 - xh)).toFixed(1)}" stroke="#fff" stroke-opacity=".55" stroke-width="1.2"/>
+      <path d="M3 5H57L32 38.5H28Z" fill="rgba(255,255,255,.1)" stroke="#eef6ff" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M9 8.5L22 25" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+      <path d="M30 38.5V62" stroke="#eef6ff" stroke-width="2.4"/>
+      <ellipse cx="30" cy="64" rx="14" ry="3.6" fill="rgba(255,255,255,.18)" stroke="#eef6ff" stroke-width="1.6"/>
+      <g class="zm-cherry"><path d="M49 6C50 1 54 -1 56 -1" stroke="#3a7a2a" stroke-width="1.4" fill="none"/><circle cx="48" cy="7" r="4.2" fill="#e0365a"/><circle cx="46.6" cy="5.6" r="1.2" fill="#fff" opacity=".7"/></g>
+    </svg><span class="zm-in">${inG.map(j => chipHTML(j)).join('')}</span><span class="zm-tag">${used ? 'FINI CE SOIR' : BAR.zmAnim ? '…' : `MIX · ${zmixPrice(run)} or${left > 1 ? ' · ×2' : ''}`}</span>`;
 }
+// le verre touché : il rend ses jetons, ou il attend qu'on touche des jetons dans le rack
 function zmixClick() {
   const run = G.run; if (!run || BAR.busy || G.mode !== 'bar') return;
-  if (BAR.mixing) { BAR.mixing = false; BAR.mixSel = null; Snd.click(); renderRack(); renderBar(); return; }
+  if ((BAR.glass || []).length) { BAR.glass = []; BAR.mixing = false; Snd.click(); sayZ(pick(ZMIX_LINES.back)); renderRack(); zmixGlassRender(); return; }
+  if (BAR.mixing) { BAR.mixing = false; Snd.click(); renderRack(); zmixGlassRender(); return; }
   if ((BAR.mixLeft || 0) <= 0) { sayZ(pick(ZMIX_LINES.out)); Snd.deny(); return; }
-  if (run.gold < zmixPrice(run)) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
   if (!zmixAny(run)) { sayZ(pick(ZMIX_LINES.none)); Snd.deny(); return; }
-  BAR.mixing = true; BAR.mixSel = null; Snd.click();
+  BAR.mixing = true; Snd.click();
   sayZ(pick(ZMIX_LINES.start));
-  renderRack(); renderBar();
+  renderRack(); zmixGlassRender();
 }
-// un jeton touché dans le rack pendant que Zaza attend
-function zmixPick(uid) {
-  const run = G.run, j = run.jokers.find(x => x.uid === uid); if (!j || BAR.busy) return;
+// un jeton touché dans le rack pendant que le verre attend
+function zmixPick(uid) { zmixPut(G.run.jokers.find(x => x.uid === uid)); }
+// pendant qu'on glisse un jeton : le verre s'allume s'il peut le prendre, et grossit quand on est dessus
+function zmixCan(on) { const el = $('#zm-glass'); if (el) el.classList.toggle('can', !!on); }
+function zmixHot(on) { const el = $('#zm-glass'); if (el) el.classList.toggle('hot', !!on); }
+function zmixOver(x, y) {
+  const el = $('#zm-glass'); if (!el || G.mode !== 'bar' || $('#bar').hidden) return false;
+  const r = el.getBoundingClientRect(); if (!r.width) return false;
+  const m = 26; return x > r.left - m && x < r.right + m && y > r.top - m && y < r.bottom + m;
+}
+// un jeton tombe dans le verre (glissé, ou touché) ; au deuxième, Zaza fait le mix
+function zmixPut(j, from) {
+  const run = G.run; if (!j || BAR.busy || G.mode !== 'bar') return;
+  if ((BAR.mixLeft || 0) <= 0) { sayZ(pick(ZMIX_LINES.out)); Snd.deny(); return; }
   if (!zmixOk(j)) { sayZ(pick(ZMIX_LINES.bad)); Snd.deny(); return; }
-  if (BAR.mixSel == null) { BAR.mixSel = uid; Snd.chipPick(); sayZ(pick(ZMIX_LINES.first)); renderRack(); return; }
-  if (BAR.mixSel === uid) { BAR.mixSel = null; Snd.click(); renderRack(); return; }
-  const A = run.jokers.find(x => x.uid === BAR.mixSel);
-  if (!A) { BAR.mixSel = uid; renderRack(); return; }
-  if (A.parts[0].t === j.parts[0].t) { sayZ(pick(ZMIX_LINES.same)); Snd.deny(); return; }
-  zmixDo(A, j);
+  const gl = BAR.glass || (BAR.glass = []);
+  if (gl.includes(j.uid)) return;
+  const other = zmixIn()[0];
+  if (other && other.parts[0].t === j.parts[0].t) { sayZ(pick(ZMIX_LINES.same)); Snd.deny(); return; }
+  // le jeton vole jusqu'au verre (depuis le doigt, ou depuis sa place dans le rack)
+  const i = run.jokers.indexOf(j), src = $(`#rack-slots .slot[data-i="${i}"] .chip`), glEl = $('#zm-glass');
+  const r0 = from || (src && src.getBoundingClientRect()), r1 = glEl && glEl.getBoundingClientRect();
+  gl.push(j.uid); Snd.chipPick();
+  renderRack(); updateHUD();
+  if (r0 && r1 && !G.reduced && document.body.animate) {
+    const w = Math.max(18, Math.min(40, (r0.width || 34))), f = document.createElement('div'); f.className = 'zm-fly'; f.innerHTML = chipHTML(j);
+    const x0 = (r0.left + (r0.width || 0) / 2), y0 = (r0.top + (r0.height || 0) / 2), x1 = r1.left + r1.width / 2, y1 = r1.top + r1.height * .3;
+    Object.assign(f.style, { left: (x0 - w / 2) + 'px', top: (y0 - w / 2) + 'px', width: w + 'px', height: w + 'px' });
+    document.body.appendChild(f);
+    const dx = x1 - x0, dy = y1 - y0, up = -Math.max(30, Math.abs(dx) * .2);
+    const a = f.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: `translate(${dx * .5}px, ${dy * .5 + up}px) scale(1.08) rotate(180deg)`, offset: .55 }, { transform: `translate(${dx}px, ${dy}px) scale(.42) rotate(340deg)`, opacity: .85 }], { duration: from ? 340 : 520, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' });
+    a.addEventListener('finish', () => { f.remove(); const g2 = $('#zm-glass'); if (g2) { g2.classList.remove('plop'); void g2.offsetWidth; g2.classList.add('plop'); } zmixGlassRender(); });
+  } else zmixGlassRender();
+  if (gl.length < 2) { BAR.mixing = true; sayZ(pick(ZMIX_LINES.first)); renderRack(); return; }
+  const A = zmixIn()[0], B = j;
+  if (run.gold < zmixPrice(run)) { sayZ(ZMIX_LINES.broke[0].replace('{p}', zmixPrice(run))); Snd.deny(); return; }
+  setTimeout(() => { if (G.mode === 'bar' && (BAR.glass || []).length === 2) zmixDo(A, B); }, from ? 360 : 540);
 }
-const hexMix = (a, b) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); try { const x = p(a), y = p(b); return '#' + x.map((v, i) => Math.round((v + y[i]) / 2).toString(16).padStart(2, '0')).join(''); } catch (e) { return '#ff7eb6'; } };
-// Zaza fait le mix : les deux jetons tombent dans le verre, elle secoue, le mix ressort et file dans ton rack
+// Zaza fait le mix : elle secoue le verre, et le mix en ressort pour filer à la place du premier jeton
 function zmixDo(A, B) {
   const run = G.run, pr = zmixPrice(run);
-  if (run.gold < pr) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
-  run.gold -= pr; BAR.mixLeft = Math.max(0, (BAR.mixLeft || 1) - 1); BAR.mixing = false; BAR.mixSel = null; BAR.busy = true; BAR.zmAnim = true; BAR.zmLiq = null;
-  const ia = run.jokers.indexOf(A), ib = run.jokers.indexOf(B);
-  const chipEl = i => $(`#rack-slots .slot[data-i="${i}"] .chip`);
-  const ra = chipEl(ia) && chipEl(ia).getBoundingClientRect(), rb = chipEl(ib) && chipEl(ib).getBoundingClientRect();
-  const gl = $('#b-shots .zmix .glass'), rg = gl && gl.getBoundingClientRect();
-  const colA = JK[A.parts[0].t].col, colB = JK[B.parts[0].t].col;
+  if (!A || !B || run.gold < pr || BAR.busy) return;
+  run.gold -= pr; BAR.mixLeft = Math.max(0, (BAR.mixLeft || 1) - 1); BAR.mixing = false; BAR.busy = true; BAR.zmAnim = true;
+  BAR.zmLiq = hexMix(JK[A.parts[0].t].col, JK[B.parts[0].t].col);
   const finish = () => {
     // le mix : les deux types, le plus haut niveau d'abord ; la puissance (étoiles) du meilleur des deux
     const parts = [{ t: A.parts[0].t, lv: Math.min(3, A.parts[0].lv) }, { t: B.parts[0].t, lv: Math.min(3, B.parts[0].lv) }].sort((a, b) => b.lv - a.lv);
@@ -18932,7 +19083,7 @@ function zmixDo(A, B) {
     A.stars = Math.max(A.stars || 0, B.stars || 0); A.over = Math.max(A.over || 0, B.over || 0);
     const k = run.jokers.indexOf(B); if (k >= 0) run.jokers.splice(k, 1);
     run.stats.zmix = (run.stats.zmix || 0) + 1;
-    BAR.busy = false; BAR.zmAnim = false;
+    BAR.busy = false; BAR.zmAnim = false; BAR.zmLiq = null; BAR.glass = [];
     if (G.headless) return;
     renderRack(); updateHUD(); renderBar();
     Snd.stack(4); haptic(30);
@@ -18940,53 +19091,32 @@ function zmixDo(A, B) {
     sayZ(pick(ZMIX_LINES.done));
     const s = $(`#rack-slots .slot[data-i="${run.jokers.indexOf(A)}"]`); if (s) { s.classList.remove('zmixin'); void s.offsetWidth; s.classList.add('zmixin'); }
   };
-  if (G.headless || G.reduced || !ra || !rb || !rg || !document.body.animate) { renderBar(); finish(); return; }
-  renderBar(); updateHUD();
-  const gl2 = $('#b-shots .zmix .glass'), rg2 = gl2 ? gl2.getBoundingClientRect() : rg;
-  const gx = rg2.left + rg2.width / 2, gy = rg2.top + rg2.height * .3;
-  // les deux jetons s'envolent vers le verre
-  const fly = (j, r, delay) => {
-    const f = document.createElement('div'); f.className = 'zm-fly'; f.innerHTML = chipHTML(j);
-    Object.assign(f.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
-    document.body.appendChild(f);
-    const dx = gx - (r.left + r.width / 2), dy = gy - (r.top + r.height / 2), up = -Math.max(60, Math.abs(dx) * .25);
-    const a = f.animate([
-      { transform: 'translate(0,0) scale(1) rotate(0deg)' },
-      { transform: `translate(${dx * .5}px, ${dy * .5 + up}px) scale(1.1) rotate(200deg)`, offset: .55 },
-      { transform: `translate(${dx}px, ${dy}px) scale(.35) rotate(380deg)`, opacity: .9 },
-    ], { duration: 620, delay, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' });
-    a.addEventListener('finish', () => { f.remove(); Snd.chipPick(); });
-  };
-  for (const i of [ia, ib]) { const sl = $(`#rack-slots .slot[data-i="${i}"]`); if (sl) sl.classList.add('zmgo'); }
-  fly(A, ra, 0); fly(B, rb, 140);
-  sayZ('Hop, dans le verre…');
-  // elle secoue, le verre prend la couleur des deux
+  if (G.headless || G.reduced || !document.body.animate || !$('#zm-glass')) { finish(); return; }
+  updateHUD(); renderBar();
+  sayZ('Hop… je secoue !');
+  const glEl = $('#zm-glass'); glEl.classList.remove('shake'); void glEl.offsetWidth; glEl.classList.add('shake');
+  Snd.cardSwish && Snd.cardSwish();
   setTimeout(() => {
-    const g3 = $('#b-shots .zmix .glass'); if (!g3) return;
-    BAR.zmLiq = hexMix(colA, colB);
-    g3.outerHTML = glassHTML('martini', BAR.zmLiq, 'cherry');
-    const g4 = $('#b-shots .zmix .glass'); if (g4) g4.classList.add('zm-shake');
-    Snd.cardSwish && Snd.cardSwish();
-  }, 780);
-  // le mix ressort du verre et file à la place du premier jeton
-  setTimeout(() => {
-    const g5 = $('#b-shots .zmix .glass'); if (g5) g5.classList.remove('zm-shake');
-    const tgt = chipEl(run.jokers.indexOf(A)), rt = tgt ? tgt.getBoundingClientRect() : ra;
+    const g5 = $('#zm-glass'); if (!g5) { finish(); return; }
+    g5.classList.remove('shake');
+    const rg = g5.getBoundingClientRect(), gx = rg.left + rg.width / 2, gy = rg.top + rg.height * .25;
+    const tgt = $(`#rack-slots .slot[data-i="${run.jokers.indexOf(A)}"] .chip`), rt = tgt ? tgt.getBoundingClientRect() : { left: gx, top: gy + 200, width: 34, height: 34 };
     const tmp = { parts: [{ t: A.parts[0].t, lv: A.parts[0].lv }, { t: B.parts[0].t, lv: B.parts[0].lv }], kind: 'mix', p: Math.max(A.p || 1, B.p || 1), uid: -1 };
     const f = document.createElement('div'); f.className = 'zm-fly out'; f.innerHTML = chipHTML(tmp);
-    const w = rt.width;
+    const w = rt.width || 34;
     Object.assign(f.style, { left: (gx - w / 2) + 'px', top: (gy - w / 2) + 'px', width: w + 'px', height: w + 'px' });
     document.body.appendChild(f);
+    BAR.glass = []; zmixGlassRender();
     const dx = rt.left + rt.width / 2 - gx, dy = rt.top + rt.height / 2 - gy;
     const a = f.animate([
-      { transform: 'translate(0,0) scale(.2)', opacity: 0 },
-      { transform: 'translate(0,-34px) scale(1.35)', opacity: 1, offset: .32 },
+      { transform: 'translate(0,0) scale(.3)', opacity: 0 },
+      { transform: 'translate(0,-38px) scale(1.35)', opacity: 1, offset: .3 },
       { transform: `translate(${dx * .5}px, ${dy * .5 - 50}px) scale(1.15) rotate(-180deg)`, offset: .62 },
       { transform: `translate(${dx}px, ${dy}px) scale(1) rotate(-360deg)` },
     ], { duration: 900, easing: 'cubic-bezier(.3,0,.4,1)', fill: 'forwards' });
-    celebrate(false, gx, gy - 30);
+    celebrate(false, gx, gy - 20);
     a.addEventListener('finish', () => { f.remove(); finish(); });
-  }, 1650);
+  }, 900);
 }
 
 /* ================= v12.2 · les jetons MULT rapportent de l'or, et on les voit travailler =================
@@ -19080,6 +19210,288 @@ function lpSparks() {
     s.style.cssText = `--x:${(x0 - 3).toFixed(1)}px;--y:${(y0 - 3).toFixed(1)}px;--dx:${(Math.cos(a) * d).toFixed(1)}px;--dy:${(Math.sin(a) * d).toFixed(1)}px;animation-delay:${(i * 18)}ms`;
     box.appendChild(s); setTimeout(() => s.remove(), 900);
   }
+}
+
+/* ================= v12.4 · l'électricité, refaite =================
+   Le compteur de MULT : des arcs fins et nerveux qui courent le long du bord de la case (au lieu de partir au hasard),
+   un cœur blanc et un halo de la couleur du niveau (bleu → violet → rose), une montée en puissance lisible
+   (étincelles, puis arcs, puis la case qui grésille), une décharge à chaque gain de MULT, et plus de clignotement brutal.
+   Sur la table (Orage, chaînes d'éclairs, foudre) : des éclairs ramifiés qui frémissent, un éclat sur chaque carte
+   touchée, et des étincelles qui retombent. Tout le décor est tiré au hasard « visuel » (pas celui de la partie). */
+const ELEC2 = { kick: 0, ring: 0 };
+// la couleur du halo selon le niveau : bleu électrique, violet, puis rose blanc
+function elecCol(I) {
+  const A = [[110, 200, 255], [176, 124, 255], [255, 150, 220]], k = clamp(I, 0, 1) * 2, i = Math.min(1, Math.floor(k)), m = k - i;
+  return A[i].map((v, j) => Math.round(v + (A[i + 1][j] - v) * m)).join(',');
+}
+// un point du bord de la case (u : la distance parcourue sur le tour), avec la normale vers l'extérieur
+function rectAt(r, u) {
+  const P = 2 * (r.width + r.height); u = ((u % P) + P) % P;
+  if (u < r.width) return [r.left + u, r.top, 0, -1];
+  u -= r.width; if (u < r.height) return [r.right, r.top + u, 1, 0];
+  u -= r.height; if (u < r.width) return [r.right - u, r.bottom, 0, 1];
+  u -= r.width; return [r.left, r.bottom - u, -1, 0];
+}
+// un arc qui court le long du bord, un peu à l'extérieur, en zigzag ; parfois une branche qui saute vers l'extérieur
+function elecCrawl(r, I, big) {
+  const P = 2 * (r.width + r.height), u0 = Math.random() * P, dir = Math.random() < .5 ? -1 : 1;
+  const len = (10 + 70 * I) * (.5 + Math.random() * .7) * (big ? 1.6 : 1), seg = Math.max(3, Math.round(len / 5)), off = 1.5 + I * 3, pts = [];
+  for (let i = 0; i <= seg; i++) {
+    const p = rectAt(r, u0 + dir * len * i / seg), j = i === 0 || i === seg ? 0 : (Math.random() - .3) * (2.5 + I * 6);
+    pts.push([p[0] + p[2] * (off + j), p[1] + p[3] * (off + j)]);
+  }
+  const a = { pts, life: .08 + Math.random() * .1, w: .7 + I * 1.2 + (big ? .5 : 0), br: null, I };
+  a.max = a.life;
+  if (len > 18 && Math.random() < .2 + I * .5) {
+    const k = 1 + Math.floor(Math.random() * (pts.length - 2)), p = pts[k], n = rectAt(r, u0 + dir * len * k / seg);
+    a.br = jagPath(p[0], p[1], Math.atan2(n[3], n[2]) + (Math.random() - .5) * 1.1, (6 + 46 * I) * (big ? 1.6 : 1) * (.5 + Math.random() * .5), 4, 1.5 + I * 3.5);
+  }
+  ELEC.arcs.push(a);
+}
+// la décharge d'un gain de MULT : de grands éclairs ramifiés qui partent de la case, et un anneau de lumière
+function elecDischarge(r, I) {
+  const n = 2 + Math.round(I * 3), J = Math.max(.45, I);
+  for (let i = 0; i < n; i++) {
+    const p = rectAt(r, Math.random() * 2 * (r.width + r.height)), ang = Math.atan2(p[3], p[2]) + (Math.random() - .5) * 1.3;
+    const len = 34 + 90 * J * (.6 + Math.random() * .5), pts = jagPath(p[0], p[1], ang, len, 6 + Math.floor(len / 14), 3 + len * .1);
+    const a = { pts, life: .15 + Math.random() * .08, w: 1.4 + J * 1.4, br: null, I: J }; a.max = a.life;
+    const k = 2 + Math.floor(Math.random() * Math.max(1, pts.length - 4)), q = pts[k];
+    a.br = jagPath(q[0], q[1], ang + (Math.random() < .5 ? -1 : 1) * (.5 + Math.random() * .6), len * .5, 4, 2 + len * .06);
+    ELEC.arcs.push(a);
+  }
+  ELEC2.ring = 1;
+}
+function elecKick(n) { ELEC.burst = Math.min(1.6, ELEC.burst + (n || .6)); ELEC2.kick = 1; }
+function elecBridge(r1, r2, I) {
+  // un arc qui saute des POINTS au MULT, par-dessus le ×
+  const x1 = r1.right - 3, y1 = r1.top + r1.height * (.3 + Math.random() * .4), x2 = r2.left + 3, y2 = r2.top + r2.height * (.3 + Math.random() * .4);
+  ELEC.arcs.push({ pts: jagPath(x1, y1, Math.atan2(y2 - y1, x2 - x1), Math.hypot(x2 - x1, y2 - y1), 6, 2.5 + I * 4), life: .08 + Math.random() * .06, max: .14, w: 1 + I * 1.3, br: null, I });
+}
+function elecFrame(dt) {
+  const E = ELEC;
+  if (!E.c) { E.c = $('#elc'); if (!E.c) return; }
+  const cb = G.cb, live = G.mode === 'combat' && !!cb && !cb.demo && !cb.ended && !G.paused && !G.headless && !!G.run;
+  const tgt = live ? elecLevel(liveMult(G.run, cb)) : 0;
+  E.I += (tgt - E.I) * Math.min(1, dt * 2.5);
+  E.burst = Math.max(0, E.burst - dt * 1.8);
+  ELEC2.ring = Math.max(0, ELEC2.ring - dt * 3);
+  if (!live) { E.arcs.length = 0; E.burst = 0; ELEC2.kick = 0; ELEC2.ring = 0; }
+  const I = E.I, act = live && !G.reduced && (I > .01 || E.burst > .02 || ELEC2.ring > 0);
+  Amb.set('elec', live ? Math.min(1.4, I * 1.1 + E.burst * .45) : 0);
+  if (!act && !E.arcs.length) { if (E.drawn) { E.g.clearRect(0, 0, E.c.width, E.c.height); E.drawn = false; } return; }
+  const d = Math.min(2, devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  if (E.w !== w * d || E.h !== h * d || !E.g) { E.c.width = w * d; E.c.height = h * d; E.w = w * d; E.h = h * d; E.g = E.c.getContext('2d'); }
+  const g = E.g; g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h); E.drawn = true;
+  const anchor = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
+  g.globalCompositeOperation = 'lighter'; g.lineCap = 'round'; g.lineJoin = 'round';
+  if (act && anchor) {
+    const r = anchor.getBoundingClientRect();
+    if (r.width) {
+      if (ELEC2.kick) { ELEC2.kick = 0; elecDischarge(r, I); }
+      // d'abord quelques étincelles, puis des arcs de plus en plus longs, de plus en plus nombreux
+      E.acc += dt * ((I > .02 ? 5 + I * 30 : 0) + E.burst * 44) * (OPT().parts ? 1 : .4);
+      while (E.acc >= 1) { E.acc--; elecCrawl(r, I, E.burst > .5 && Math.random() < .4); }
+      if (LAY.pc && I > .4 && Math.random() < dt * (3 + I * 10)) { const p = $('#lp-ptsbox'); if (p) elecBridge(p.getBoundingClientRect(), r, I); }
+      // l'anneau de lumière d'une décharge, qui s'élargit en s'effaçant
+      if (ELEC2.ring > 0) {
+        const k = 1 - ELEC2.ring, pad = 3 + k * 16, rr = Math.min(16, r.height / 2) + pad * .5;
+        g.strokeStyle = `rgba(${elecCol(Math.max(.4, I))},${(ELEC2.ring * .7).toFixed(3)})`; g.lineWidth = 2 + ELEC2.ring * 3;
+        g.beginPath(); if (g.roundRect) g.roundRect(r.left - pad, r.top - pad, r.width + pad * 2, r.height + pad * 2, rr); else g.rect(r.left - pad, r.top - pad, r.width + pad * 2, r.height + pad * 2); g.stroke();
+      }
+    }
+  }
+  // le dessin : un halo de la couleur du niveau, puis un cœur blanc ; ça s'éteint en douceur (plus de clignotement)
+  for (let i = E.arcs.length - 1; i >= 0; i--) {
+    const a = E.arcs[i]; a.life -= dt;
+    if (a.life <= 0) { E.arcs.splice(i, 1); continue; }
+    const al = Math.pow(Math.min(1, a.life / a.max), .7), col = elecCol(a.I != null ? a.I : I);
+    for (const P of [a.pts, a.br]) {
+      if (!P) continue;
+      const wk = P === a.br ? .7 : 1;
+      g.beginPath(); g.moveTo(P[0][0], P[0][1]); for (let k = 1; k < P.length; k++) g.lineTo(P[k][0], P[k][1]);
+      g.strokeStyle = `rgba(${col},${(.14 * al).toFixed(3)})`; g.lineWidth = a.w * 6 * wk; g.stroke();
+      g.strokeStyle = `rgba(${col},${(.5 * al).toFixed(3)})`; g.lineWidth = a.w * 2.3 * wk; g.stroke();
+      g.strokeStyle = `rgba(255,255,255,${(.92 * al).toFixed(3)})`; g.lineWidth = a.w * .8 * wk; g.stroke();
+    }
+  }
+  g.globalCompositeOperation = 'source-over';
+  if (E.arcs.length > 160) E.arcs.splice(0, E.arcs.length - 160);
+}
+
+/* ---- sur la table : les éclairs (chaînes, foudre du ciel, Orage) ---- */
+const mrand = (a, b) => a + Math.random() * (b - a);
+function boltJag(x1, y1, x2, y2, seg, amp) {
+  const pts = [[x1, y1]], dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+  for (let i = 1; i < seg; i++) { const t = i / seg, o = (Math.random() - .5) * 2 * amp * Math.sin(Math.PI * t) * 1.3; pts.push([x1 + dx * t + nx * o, y1 + dy * t + ny * o]); }
+  pts.push([x2, y2]);
+  return pts;
+}
+// à la première image : les chemins (avec leurs branches), les points d'impact, les étincelles
+function boltInit(fx) {
+  const sky = fx.type === 'sky', topY = -VIEW.hy - 6, mains = [];
+  if (sky) for (const p of fx.pts) mains.push({ a: [p[0] + mrand(-14, 14), topY], b: [p[0], p[1]] });
+  else for (const p of fx.paths) mains.push({ a: p[0], b: p[p.length - 1] });
+  fx.B = mains.map(m => {
+    const len = Math.hypot(m.b[0] - m.a[0], m.b[1] - m.a[1]), seg = Math.max(4, Math.round(len / (sky ? 13 : 8))), amp = sky ? 5 + len * .025 : 2.4 + len * .04;
+    return { m, seg, amp, len };
+  });
+  fx.hits = mains.map(m => m.b);
+  // les étincelles qui retombent (calculées à l'avance : position = départ + vitesse × temps + gravité)
+  fx.sp = [];
+  for (const h of fx.hits) for (let i = 0; i < (sky ? 7 : 4); i++) { const an = mrand(-Math.PI, 0), v = mrand(30, 95); fx.sp.push({ x: h[0], y: h[1], vx: Math.cos(an) * v, vy: Math.sin(an) * v - 10, r: mrand(.6, 1.4) }); }
+  fx.T0 = fx.max;                     // la durée de l'éclair lui-même
+  fx.life += .45; fx.max += .45;     // les étincelles et l'éclat durent un peu plus
+  fx.jt = -1;
+}
+// les chemins frémissent : nouvelle forme toutes les 55 ms environ
+function boltShape(fx, step) {
+  if (fx.jt === step) return;
+  fx.jt = step;
+  fx.P = fx.B.map(({ m, seg, amp, len }) => {
+    const main = boltJag(m.a[0], m.a[1], m.b[0], m.b[1], seg, amp), br = [];
+    const nb = fx.type === 'sky' ? 2 : len > 30 ? 1 : 0;
+    for (let i = 0; i < nb; i++) {
+      const k = 1 + Math.floor(Math.random() * (main.length - 2)), p = main[k], ang = Math.atan2(m.b[1] - m.a[1], m.b[0] - m.a[0]) + (Math.random() < .5 ? -1 : 1) * mrand(.35, .9), L = len * mrand(.18, .35);
+      br.push(boltJag(p[0], p[1], p[0] + Math.cos(ang) * L, p[1] + Math.sin(ang) * L, 4, 2 + L * .08));
+    }
+    return { main, br };
+  });
+}
+function strokePath(g, P) { g.beginPath(); g.moveTo(P[0][0], P[0][1]); for (let k = 1; k < P.length; k++) g.lineTo(P[k][0], P[k][1]); g.stroke(); }
+function drawBolt12(fx, a, t) {
+  if (fx.type !== 'bolt' && fx.type !== 'sky') return false;
+  if (!fx.B) boltInit(fx);
+  const el = fx.max - fx.life, sky = fx.type === 'sky', T0 = fx.T0;
+  void a; void t;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  // l'éclair : vif au début, puis il s'éteint (avec un petit rallumage, comme la vraie foudre)
+  if (el < T0) {
+    boltShape(fx, Math.floor(el / .055));
+    const k = el / T0, al = (k < .1 ? 1 : Math.pow(1 - (k - .1) / .9, 1.3)) * (k > .35 && k < .45 ? .55 : 1);
+    const w = sky ? 1.25 : 1;
+    for (const { main, br } of fx.P) {
+      ctx.strokeStyle = `rgba(90,170,255,${(.16 * al).toFixed(3)})`; ctx.lineWidth = 7.5 * w; strokePath(ctx, main);
+      ctx.strokeStyle = `rgba(140,215,255,${(.55 * al).toFixed(3)})`; ctx.lineWidth = 3 * w; strokePath(ctx, main);
+      ctx.strokeStyle = `rgba(255,255,255,${al.toFixed(3)})`; ctx.lineWidth = 1.15 * w; strokePath(ctx, main);
+      for (const b of br) {
+        ctx.strokeStyle = `rgba(140,215,255,${(.4 * al).toFixed(3)})`; ctx.lineWidth = 2 * w; strokePath(ctx, b);
+        ctx.strokeStyle = `rgba(255,255,255,${(.8 * al).toFixed(3)})`; ctx.lineWidth = .7 * w; strokePath(ctx, b);
+      }
+    }
+  }
+  // l'éclat sur chaque carte touchée : un flash blanc-bleu qui s'élargit et s'éteint
+  const fk = Math.min(1, el / (T0 + .2));
+  if (fk < 1) for (const h of fx.hits) {
+    const r = (sky ? 13 : 9) + 12 * fk, gr = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], r), al = Math.pow(1 - fk, 1.6);
+    gr.addColorStop(0, `rgba(255,255,255,${(.85 * al).toFixed(3)})`); gr.addColorStop(.35, `rgba(150,215,255,${(.5 * al).toFixed(3)})`); gr.addColorStop(1, 'rgba(110,190,255,0)');
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(h[0], h[1], r, 0, TAU); ctx.fill();
+  }
+  // les étincelles qui retombent
+  const sl = Math.max(0, 1 - el / fx.max);
+  if (sl > 0) for (const s of fx.sp) {
+    const x = s.x + s.vx * el, y = s.y + s.vy * el + 160 * el * el, al = Math.min(1, sl * 1.4) * (Math.sin(el * 40 + s.x) > -.6 ? 1 : .35);
+    ctx.fillStyle = `rgba(210,240,255,${al.toFixed(3)})`; ctx.beginPath(); ctx.arc(x, y, s.r, 0, TAU); ctx.fill();
+  }
+  ctx.restore();
+  return true;
+}
+
+/* ================= v12.7 · la première partie guidée : on montre, au lieu d'expliquer =================
+   Les astuces deviennent des « coups de projecteur » : l'écran s'assombrit sauf ce dont on parle, une phrase courte,
+   et un doigt qui montre le geste (toucher, glisser, tirer, tourner). Une chose à la fois, au bon moment.
+   On touche n'importe où pour continuer. Les astuces sans cible gardent leur petite bulle. (Options : « astuces ».) */
+const BASE_SCR = () => { const r = $('#stage').getBoundingClientRect(); return { x: r.left + CX, y: r.top + CY, rf: BAL.rakeR * S, rb: BAL.baseR * S }; };
+const COACH = {
+  r1: { at: () => LAY.pc ? $('#lp-goal') : $('#h-score'), txt: 'Ta base tire toute seule. Remplis l\'<b>objectif</b> : la manche est gagnée.', demo: 'tap' },
+  bille: { at: 'base', txt: 'La <b>BILLE</b> : appuie sur ta base, tire vers toi, lâche.', demo: 'pull' },
+  co_flip: { at: 'base', txt: 'Glisse le doigt autour de ta base : ton <b>flipper</b> tourne et bloque les tirs.', demo: 'arc' },
+  rake: { at: 'base', txt: 'Un <b>Tireur</b> ! Tourne ton flipper face à ses tirs. Juste avant l\'impact : <b>PARADE</b>.', demo: 'arc' },
+  abil: { at: () => $('#abs .pc-row'), txt: 'Tes <b>sorts</b> : touche une carte pour la jouer.', demo: 'tap', pt: () => { const c = $('#abs .pcard[data-sp]'); return c && c.getBoundingClientRect(); } },
+  machine: { at: () => $('#reels'), txt: 'Touche un rouleau pour l\'<b>arrêter</b>.', demo: 'tap' },
+  co_rack: { at: () => $('#rack-slots'), txt: 'Tes <b>jetons</b> jouent tout seuls. Touche-en un pour voir ce qu\'il fait.', demo: 'tap', pt: () => { const c = $('#rack-slots .slot[data-i="0"]'); return c && c.getBoundingClientRect(); } },
+  bar: { at: () => $('#b-drinks'), txt: 'Une <b>boisson</b> par catégorie : elle dure toute la partie.', demo: 'tap', pt: () => { const b = $('#b-drinks [data-buyd]:not([disabled])'); return b && b.getBoundingClientRect(); } },
+  co_glass: { at: () => $('#zm-glass'), txt: 'Glisse deux jetons dans le verre de Zaza : un <b>mix</b>, une seule place.', demo: 'drag', from: () => { const c = $('#rack-slots .slot[data-i="0"]'); return c && c.getBoundingClientRect(); } },
+  co_market: { at: () => $('#b-market'), txt: 'Le <b>marché noir</b> est ouvert : jetons, sorts, et le Punch-o-matic.', demo: 'tap' },
+  stack: { at: () => $('#rack-slots'), txt: 'Un <b>doublon</b> : glisse-le sur son jumeau pour le monter de niveau.', demo: 'tap' },
+};
+const COACH_KEY = new Map(Object.entries(TIPS).map(([k, v]) => [v, k]));
+const CO = { key: null, raf: 0 };
+// une astuce : si on sait quoi montrer, c'est un coup de projecteur ; sinon, la bulle d'avant
+function showNextTip() {
+  const html = TIPQ[0]; if (html == null) return;
+  const key = typeof html === 'object' ? html.k : COACH_KEY.get(html), C = key && COACH[key];
+  const el = C && coachTarget(C);
+  if (!el) { if (typeof html === 'object') { TIPQ.shift(); if (TIPQ.length) showNextTip(); return; } return showNextTip0(); }
+  TIPQ.shift();
+  tipOpen = true; CO.key = key;
+  const co = $('#coach');
+  co.innerHTML = `<i class="co-hole"></i><div class="co-bub"><p>${C.txt}</p><small>touche pour continuer</small></div><i class="co-fing ${C.demo}">${COACH_HAND}</i>`;
+  co.hidden = false; Snd.tipOpen();
+  if (G.mode === 'combat' && !G.paused) { G.paused = true; tipPaused = true; }
+  coachPlace();
+  cancelAnimationFrame(CO.raf);
+  const loop = () => { if (co.hidden) return; coachPlace(); CO.raf = requestAnimationFrame(loop); };
+  CO.raf = requestAnimationFrame(loop);
+}
+function coachTarget(C) {
+  if (C.at === 'base') return G.mode === 'combat' && !$('#stage').hidden ? $('#stage') : null;
+  const el = C.at(); if (!el) return null;
+  const r = el.getBoundingClientRect();
+  return r.width > 4 && r.height > 4 && r.bottom > 0 && r.top < innerHeight ? el : null;
+}
+// le projecteur, la bulle et le doigt suivent la cible (si elle bouge)
+function coachPlace() {
+  const co = $('#coach'), C = COACH[CO.key]; if (!co || co.hidden || !C) return;
+  let r, cx, cy, round = 14;
+  if (C.at === 'base') { const b = BASE_SCR(), R = b.rf + 10; r = { left: b.x - R, top: b.y - R, width: R * 2, height: R * 2 }; cx = b.x; cy = b.y; round = R; }
+  else { const el = C.at(); if (!el) return; const q = el.getBoundingClientRect(); r = { left: q.left - 7, top: q.top - 7, width: q.width + 14, height: q.height + 14 }; cx = q.left + q.width / 2; cy = q.top + q.height / 2; }
+  const k = [r.left, r.top, r.width, r.height].map(Math.round).join(',');
+  if (CO.k === k) return; CO.k = k;
+  const hole = co.querySelector('.co-hole'), bub = co.querySelector('.co-bub'), fing = co.querySelector('.co-fing');
+  Object.assign(hole.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: round + 'px' });
+  // la bulle : sous la cible s'il y a la place, sinon au-dessus
+  // (assez loin pour que le doigt, qui descend parfois sous la cible, ne cache pas le texte)
+  const gap = C.demo === 'pull' ? Math.round(BASE_SCR().rf * 2.2) + 40 : C.demo === 'arc' ? 18 : 50;
+  const bh = bub.offsetHeight || 70, bw = bub.offsetWidth || 260, below = r.top + r.height + gap + bh < innerHeight - 8;
+  const by = below ? r.top + r.height + gap : Math.max(8, r.top - 16 - bh), bx = clamp(cx - bw / 2, 10, innerWidth - bw - 10);
+  Object.assign(bub.style, { left: bx + 'px', top: by + 'px' });
+  bub.classList.toggle('up', !below);
+  // le doigt : là où il faut toucher (ou d'où il faut partir)
+  let fx = cx, fy = cy;
+  const p = C.pt && C.pt(); if (p && p.width) { fx = p.left + p.width / 2; fy = p.top + p.height / 2; }
+  if (C.demo === 'drag') { const f = C.from && C.from(); if (f && f.width) { fing.style.setProperty('--dx', (cx - (f.left + f.width / 2)).toFixed(0) + 'px'); fing.style.setProperty('--dy', (cy - (f.top + f.height / 2)).toFixed(0) + 'px'); fx = f.left + f.width / 2; fy = f.top + f.height / 2; } }
+  if (C.demo === 'pull') fing.style.setProperty('--dy', Math.round(BASE_SCR().rf * 2.2) + 'px');
+  if (C.demo === 'arc') { fing.style.setProperty('--R', Math.round(BASE_SCR().rf * 1.35) + 'px'); }
+  Object.assign(fing.style, { left: fx + 'px', top: fy + 'px' });
+}
+function closeTip() {
+  const co = $('#coach'); if (co && !co.hidden) { co.hidden = true; co.innerHTML = ''; cancelAnimationFrame(CO.raf); CO.key = null; CO.k = null; }
+  closeTip0();
+}
+// une astuce « coup de projecteur » qui n'existait pas avant (le flipper, le rack, le verre, le marché noir)
+function coachOnce(key, delay) {
+  if (!COACH[key] || G.headless || G.dev.auto || (G.meta.opts && !G.meta.opts.tips) || !seenOnce(key)) return;
+  setTimeout(() => { TIPQ.push({ k: key }); if (!tipOpen) showNextTip(); }, delay || 0);
+}
+// le doigt (une main qui montre)
+const COACH_HAND = `<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M17 4.5C17 2 19 1 21 1S25 2 25 4.5V22L27 21C29 20.4 31 21 31.6 23L33 22.4C35 21.8 37 23 37.4 25L38.6 24.8C40.6 24.6 42.4 26 42.4 28.2V38C42.4 46 36.6 52 28.6 52H24C18.6 52 15 49.6 12 45.4L4.6 34.6C3.4 32.8 3.8 30.4 5.6 29.2C7.4 28 9.6 28.4 11 30L17 36.4Z" fill="#fff6ec" stroke="#2a1530" stroke-width="2.4" stroke-linejoin="round"/><path d="M25 22V31M31.6 23V31M37.4 25V31" stroke="#2a1530" stroke-width="1.8" stroke-linecap="round"/><path d="M18.4 4.8C18.6 3.4 19.6 2.6 21 2.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg>`;
+// toucher n'importe où pendant un coup de projecteur : on continue
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#coach')) { e.stopPropagation(); e.preventDefault(); closeTip(); } }, true);
+addEventListener('resize', () => { CO.k = null; });
+
+/* ================= v12.8 · plus confortable sur téléphone =================
+   Avec 5 sorts, les cartes ne rapetissent presque plus : moins de marge, cartes un peu plus serrées, et la pile
+   prend un peu moins de place (ses cartes sont face cachée, inclinées). Le bar et le marché noir sont plus compacts (CSS). */
+function pcLayout(n, availW) {
+  if (LAY.pc || n < 5 || !availW) return pcLayout0(n, availW);
+  const g0 = pcGeo(), gap = 4, pileGap = 8, side = 8, reserve = .9;
+  const maxW = (availW - side * 2 - (n - 1) * gap - pileGap) / (n + reserve);
+  const k = Math.min(1, maxW / g0.w), g = Object.assign({}, g0, { gap, pile: pileGap, w: Math.floor(g0.w * k), h: Math.floor(g0.h * k), rest: Math.round(g0.rest * (.5 + .5 * k)) });
+  const rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w * reserve, L = -totW / 2;
+  const slot = i => L + i * (g.w + g.gap);
+  const rc = L + rowW / 2, hs = Math.max(g.hw * .62, rowW * .27);
+  return { g, n, rowW, L, slot, pile: L + rowW + g.pile, hand: { l: rc - hs, r: rc + hs }, mid: rc };
 }
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
@@ -19705,7 +20117,7 @@ function openBar() {
   G.mode = 'bar';
   const o = genBar();
   Object.assign(BAR, o, { busy: false, leaving: false, gDone: false });
-  BAR.mixing = false; BAR.mixSel = null; BAR.mixMood = rnd() < ZMIX.mood; BAR.mixLeft = BAR.mixMood ? 2 : 1;
+  BAR.mixing = false; BAR.mixSel = null; BAR.glass = []; BAR.zmAnim = false; BAR.zmLiq = null; BAR.mixMood = rnd() < ZMIX.mood; BAR.mixLeft = BAR.mixMood ? 2 : 1;
   const r = run.round + 1;
   BAR.market = !!G.dev.market || (r >= 3 && (isBossRound(run.round) || rnd() < petMkChance(run) || (r >= 4 && !run.marketSeen)));
   G.dev.market = false;
@@ -19732,6 +20144,8 @@ function openBar() {
   petBarOpen();
 
   if (seenOnce('bar')) setTimeout(() => queueTip(TIPS.bar), 1300);
+  if (run.round >= 2 && zmixAny(run)) coachOnce('co_glass', 1700);
+  if (BAR.market) coachOnce('co_market', 1900);
   if (G.dev.auto) setTimeout(autoBar, 1100);
 }
 function sayZ(t) { typeInto('#z-say', t, 'zaza'); }
@@ -21870,7 +22284,7 @@ const PCG = {
 const PCS = { cards: [], pile: [], q: [], qT: 0, freeAt: 0, lay: null, hands: {}, pc: null, gen: 0 };
 const pcGeo = () => LAY.pc ? PCG.pc : PCG.tel;
 // les cartes rapetissent s'il le faut, pour que les 6 (BILLE + 5 sorts) et la pile tiennent dans la largeur
-function pcLayout(n, availW) {
+function pcLayout0(n, availW) {
   const g0 = pcGeo(), maxW = availW ? (availW - 16 - (n - 1) * g0.gap - g0.pile) / (n + 1) : g0.w;
   const k = Math.min(1, maxW / g0.w), g = k < 1 ? Object.assign({}, g0, { w: Math.floor(g0.w * k), h: Math.floor(g0.h * k), rest: Math.round(g0.rest * (.5 + .5 * k)) }) : g0;
   const rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w, L = -totW / 2;
@@ -23560,7 +23974,7 @@ function startDemo() {
 const PANES = ['#machine', '#bar', '#market', '#poker', '#chooser', '#jpm', '#mini'];
 // (la machine buggée vit dans le panneau de la machine)
 function hidePanes() { bugClear(); const bm = $('#bugm'); if (bm) bm.hidden = true; for (const id of PANES) { const el = $(id); if (el) { el.hidden = true; el.getAnimations && el.getAnimations().forEach(a => a.cancel()); } } }
-function hideScreens() { for (const id of ['#title', '#books', '#book', '#prof', '#newrun', '#spick', '#gift', '#over', '#win', '#fbrew', '#punch', '#rules', '#opts', '#pause', '#dev', '#detail', '#cata', '#anatole', '#vest', '#runinfo']) show(id, false); if (FB.cut) fbCutEnd(true); FB.on = false; const fw = $('#fbwheel'); if (fw) fw.hidden = true; hidePanes(); $('#tip').hidden = true; TIPQ.length = 0; tipOpen = false; tipPaused = false; }
+function hideScreens() { for (const id of ['#title', '#books', '#book', '#prof', '#newrun', '#spick', '#gift', '#over', '#win', '#fbrew', '#punch', '#rules', '#opts', '#pause', '#dev', '#detail', '#cata', '#anatole', '#vest', '#runinfo']) show(id, false); if (FB.cut) fbCutEnd(true); FB.on = false; const fw = $('#fbwheel'); if (fw) fw.hidden = true; hidePanes(); $('#tip').hidden = true; TIPQ.length = 0; tipOpen = false; tipPaused = false; const co = $('#coach'); if (co) { co.hidden = true; co.innerHTML = ''; } }
 function toTitle() {
   hideScreens();
   document.body.classList.remove('dvround');
@@ -23610,10 +24024,12 @@ function startNextRound() {
   if (!cb.final) banner(actStart ? `ACTE ${A.n} · MANCHE ${r}` : `MANCHE ${roundLabel(r)}`, sub, isBossRound(r) || dv ? 'boss' : run.malus.length ? 'bad' : '', actStart ? 2.6 : 1.8);
   Snd.round();
   if (dv) { setTimeout(() => { Snd.alarm(); shake(5); }, 300); if (TIPS['dv_' + dv] && seenOnce('dv_' + dv)) setTimeout(() => queueTip(TIPS['dv_' + dv]), 1900); }
-  Music.play('combat'); BG.setMode(run.inf ? 'inf' : 'combat');
+  Music.setHarm(Math.floor((r - 1) / 5), isBossRound(r)); Music.play('combat'); BG.setMode(run.inf ? 'inf' : 'combat');
   renderRack(); renderSpellBar(); showStatus(); updateHUD(); tableWake();
   if (r === 1 && seenOnce('r1')) setTimeout(() => queueTip(TIPS.r1), 900);
   if (seenOnce('bille')) setTimeout(() => queueTip(TIPS.bille), r === 1 ? 1500 : 900);
+  if (r === 2) coachOnce('co_flip', 1200);
+  if (r >= 4 && run.jokers.length) coachOnce('co_rack', 1500);
   if (r === 3 && spellsOf(run).includes('bomb') && spellsOf(run).includes('gel') && seenOnce('abil')) setTimeout(() => queueTip(TIPS.abil), 900);
   if (hasMalus(run, 'pickpocket')) setTimeout(() => toast('Un pickpocket rôde : abats-le pour récupérer ton jeton.'), 1600);
   setTimeout(() => { if (G.mode === 'combat' && !newBusy) showNewNote(); }, 2200);
@@ -24482,7 +24898,7 @@ function bindUI() {
     if (b.dataset.buyd != null) buyDrink(+b.dataset.buyd);
     else if (b.dataset.buys != null) buyShot(+b.dataset.buys);
     else if (b.dataset.buyc != null) buyCiment();
-    else if (b.dataset.zmix != null) zmixClick();
+    else if (b.dataset.zmix != null || b.id === 'zm-glass') zmixClick();
     else if (b.dataset.buyp != null) buyBarPet();
     else if (b.dataset.vis === 'yes') { Snd.click(); visAccept(); }
     else if (b.dataset.vis === 'no') visRefuse();
@@ -24649,7 +25065,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
@@ -24662,5 +25078,6 @@ else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});
 <script>
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 </script>
+<div id="coach" hidden aria-live="polite"></div>
 </body>
 </html>

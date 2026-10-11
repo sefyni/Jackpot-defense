@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v12.3-202610111958
+JACKPOT DEFENSE v13.0-202610112350
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,51 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.0 — la même finition partout
+- La machine : une vitre sur les rouleaux (avec un reflet), une ligne de gain qui respire doucement, des pastilles d'info et un écran plus doux, une bille de levier qui brille.
+- Le marché noir : les offres ont un liseré fin et une ombre douce ; sur PC, elles se soulèvent au survol. Le Punch-o-matic garde son halo violet.
+- L'écran titre : un reflet passe sur JOUER de temps en temps ; sur PC, les boutons du menu se soulèvent au survol.
+- Équilibre vérifié (robot « bon », 24 parties par mise) : mise blanche, en moyenne manche 23, 4 victoires sur 24 ; mise 3, manche 19 ; mise 6, manche 17, aucune victoire. C'est comme avant les dernières nouveautés : je ne change pas la difficulté. Le Mix de Zaza (que le robot n'utilise pas) aidera surtout les vrais joueurs.
+
+Nouveautés de la v12.9 — le son
+- La musique de combat change à chaque acte : Ré mineur à l'acte I, puis d'autres tonalités et d'autres enchaînements d'accords (6 couleurs différentes sur la partie).
+- Aux manches de boss, la musique prend une couleur plus menaçante (un accord qui grince).
+- Elle respire : environ toutes les 30 secondes, la batterie se tait deux mesures (sauf quand ça chauffe vraiment).
+- Mixage plus doux : le compresseur pompe moins, et les aigus des bruitages et de la musique sont un peu adoucis.
+
+Nouveautés de la v12.8 — plus confortable sur téléphone
+- Avec 5 sorts, les cartes ne rapetissent presque plus (marges et écarts réduits, la pile prend un peu moins de place).
+- Le bar : une boisson par ligne (verre, catégorie, nom et niveau, effet, bouton à droite). Plus lisible, et on défile moins.
+- Le marché noir : le texte prend toute la largeur, les boutons (prix, marchander) passent dessous, côte à côte. Environ un quart de défilement en moins.
+- Rien ne change sur PC.
+
+Nouveautés de la v12.7 — la première partie guidée
+- Les astuces deviennent des « coups de projecteur » : l'écran s'assombrit sauf ce dont on parle, une phrase courte, et un doigt qui montre le geste (toucher, glisser, tirer, tourner).
+- Une chose à la fois : l'objectif et la BILLE à la manche 1, le flipper à la manche 2, les sorts à la 3, tes jetons à la 4.
+- Au bar : les boissons, puis le verre de Zaza (à partir de ta 2e visite), puis le marché noir la première fois que sa porte s'ouvre.
+- Le Tireur, la machine et les doublons ont aussi leur coup de projecteur.
+- On touche n'importe où pour continuer. Chaque astuce n'apparaît qu'une fois (Options : « Astuces », et « Tout revoir » pour les revoir).
+- Les astuces sans rien à montrer (vent, feu, élites…) gardent leur petite bulle.
+
+Nouveautés de la v12.6 — le verre de Zaza, sur le comptoir
+- Le Mix de Zaza n'est plus une ligne de la carte : son verre est posé sur le comptoir, devant elle.
+- Glisse un jeton de ton rack jusqu'au verre : il s'allume quand il peut le prendre, grossit quand tu es dessus, et le jeton tombe dedans.
+- Au 2e jeton (d'un autre type), Zaza secoue le verre et le mix ressort, droit dans ton rack. 50 or (plus avec la Mise d'or).
+- Autre façon : touche le verre, puis touche deux jetons dans ton rack.
+- Touche le verre quand il contient déjà un jeton : Zaza te le rend.
+- Les jetons dans le verre sont grisés dans ton rack. L'étiquette du verre dit le prix, « ×2 » quand elle est d'humeur, et « fini ce soir » une fois le mix fait.
+
+Nouveautés de la v12.5
+- Fiche d'un jeton : si sa rareté secrète n'est pas encore découverte, elle dit juste de passer le jeton ULTIME au Punch-o-matic du marché noir (le prix n'est plus affiché).
+
+Nouveautés de la v12.4 — l'électricité
+- Le compteur de MULT : les arcs sont plus fins et plus nerveux, et courent le long du bord de la case au lieu de partir au hasard.
+- Leur couleur suit le niveau : bleu, puis violet, puis rose blanc quand le MULT est très haut. Toujours un cœur blanc.
+- Ça monte en puissance : quelques étincelles au début, puis des arcs, puis la case qui grésille fort.
+- À chaque gain de MULT : une décharge (de grands éclairs qui partent de la case) et un anneau de lumière.
+- Plus doux à l'œil : plus de clignotement brutal, les arcs s'éteignent en douceur et la case respire.
+- Sur la table (Orage, chaînes d'éclairs, foudre) : des éclairs ramifiés qui frémissent, avec un cœur blanc et un halo bleu, un éclat sur chaque carte touchée, et des étincelles qui retombent.
 
 Nouveautés de la v12.3 — le panneau de gauche (PC)
 - Les blocs (manche, score, base, or, sorts) sont en feutre sombre avec un liseré doré fin et des ombres douces, au lieu des gros contours noirs.
