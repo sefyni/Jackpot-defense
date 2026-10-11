@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.5-202610110204
+JACKPOT DEFENSE v10.8-202610110850
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,79 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.8
+- Le Collectionneur change :
+  · Plus de jeton ULTIME offert. À la place, tu reçois un poinçon au départ, puis un autre après chaque boss.
+  · Le poinçon passe N'IMPORTE QUEL jeton de ton rack en rareté secrète (commun, rare, ultime, mix…) : +25 % de puissance, et sa capacité secrète s'éveille s'il est ULTIME.
+  · Il s'utilise depuis l'en-tête du rack, sur la machine, au bar ou au marché : touche « ★ POINÇON », touche le jeton, puis « Poinçonner ».
+  · Les poinçons non utilisés se gardent.
+  · Avec ce jeu, un jeton secret le reste quand tu l'empiles ou que tu le mixes.
+- Les jeux de départ se débloquent. Seul le Coffre-fort est ouvert d'office. Pour les autres :
+  · Barman : bois 40 boissons chez Zaza.
+  · Bille double : lance 200 BILLES.
+  · Sorcier : lance 300 sorts.
+  · Pack fou : gagne 4 jetons fous.
+  · L'ami de l'Inspecteur : achète 25 articles au marché noir.
+  · Seconde chance : bats 6 boss.
+  · Rack XXL : empile 40 jetons.
+  · Veinard : atteins la manche 20.
+  · Collectionneur : passe 3 jetons en rareté secrète au Punch-o-matic.
+  Tes progrès sur toutes tes parties comptent, et un jeu avec lequel tu as déjà gagné reste ouvert. Un jeu verrouillé montre sa condition et ta progression. Quand tu le débloques, une annonce apparaît.
+- La défaite se voit enfin :
+  · Quand ta base tombe, tout passe au ralenti. Le disque raye, la base se fend, les couleurs s'éteignent et on entend un cœur battre.
+  · Un gros tampon « PERDU » s'abat, suivi du trombone triste.
+  · Puis l'écran de fin arrive : un fond plein, un jeton cassé, et les résultats qui s'affichent un par un avec le score qui monte.
+- Correctif : deux jetons Pivot secrets côte à côte pouvaient faire planter le jeu.
+
+Nouveautés de la v10.7
+- Le bar de Zaza s'agrandit : 17 nouveaux cocktails. Chacun a son verre et sa garniture (olive, ombrelle, céleri, citron, fumée, flamme…).
+  · Canon : Ricochet Royal (ta balle ricoche sur d'autres cartes), Piña Pyro (tes balles mettent le feu), Tequila Boum (coups critiques, ×3 au niveau 3), Blue Lagoon (tes balles glacent).
+  · Flipper : Spritz Électrique (chaque parade lance un éclair), Flip Fizz (une parade peut lancer une BILLE bonus).
+  · Base : Grand Cru (+8 % de PV max par niveau), Bloody Mary (chaque carte abattue te soigne), Tisane de Mamie (soin en plein combat), Cactus Margarita (les cartes qui te frappent se piquent).
+  · BILLE (nouveau rayon) : Pop Fizz (les bumpers), Disco Punch (+25 % de dégâts de BILLE par niveau), Ressort Sour (recharge plus rapide), Triple Sec (chaque BILLE part avec 2 billes bonus).
+  · Les spécialités de Zaza, parfois en vitrine : Kir Royal (+12 % d'or par niveau), Cocktail Mystère (un shot offert à chaque manche), Rhum Arrangé (sorts plus rapides), La Fée Verte (tous tes sorts prêts au début de la manche), Champagne ! (+25 or pour une manche sans perdre un PV).
+- Au comptoir, 4 boissons au lieu de 3 (canon, flipper, base et BILLE), plus de temps en temps la spécialité de Zaza. Elle te glisse un mot sur chaque nouveau cocktail.
+- 3 nouveaux shots : Rebond (une BILLE de plus), Vampire (chaque carte abattue soigne 1 PV) et Béton (flipper +3 de solidité).
+- Les boissons de base sont plus fortes :
+  · Longue-Vue : +16 % de portée par niveau.
+  · Turbo Tonic : +18 % de cadence par niveau.
+  · Gros Calibre : +18 % de dégâts par niveau.
+  · Double Shot : la 2e balle fait 80 % des dégâts.
+  · Balle Express : +35 % de vitesse par niveau.
+  · La Rallonge : flipper +22 % plus large par niveau.
+  · Le Renvoi : ×4, ×6 puis ×9.
+  · Double Flipper : −25 % de solidité seulement.
+  · Acier Trempé : +2 de solidité par niveau.
+  · Huile de Coude : +25 % plus vif par niveau.
+  · Le Bunker : étages de 65 PV.
+- Plus de vie :
+  · Bloody Brique : 5 niveaux de +25 PV max.
+  · Remontant : 3 niveaux de +15 % de soin entre les manches.
+  · Les nouveaux Grand Cru, Bloody Mary et Tisane de Mamie. Avec tout ça, ta base peut dépasser 300 PV.
+- Les mini-barrières deviennent de vrais bumpers de flipper (le Pop Fizz : 3, 5 puis 7 bumpers) :
+  · Ils renvoient la BILLE à toute vitesse, et chaque coup de bumper lui donne un peu plus de dégâts.
+  · Ils repoussent les cartes et renvoient les tirs vers leur tireur.
+  · Ils ne cassent plus, mais un boss qui les percute les fait « TILTER » quelques secondes.
+  · Chaque bumper touché par la BILLE s'allume. Tous allumés : BILLE bonus et un peu d'or.
+  · Au niveau 3, chaque coup fait une onde de choc.
+- Carnet : les boissons tiennent maintenant sur deux pages, « Les boissons » et « Les cocktails ».
+
+Nouveautés de la v10.6
+- 10 sorts de base au lieu de 6. Les 4 nouveaux se trouvent au marché noir, comme les autres :
+  · Trou noir (recharge 14 s) : il s'ouvre près du plus gros paquet de cartes, les aspire pendant 3 s (60 % des dégâts par seconde), puis implose (250 %).
+  · Laser (13 s) : un rayon fait le tour complet de ta base en 1,6 s et inflige 220 % des dégâts à chaque carte balayée.
+  · Feu d'artifice (14 s) : 6 fusées filent sur 6 cartes et explosent en gerbes de couleurs (250 % chacune, et autour).
+  · Arrêt du temps (18 s) : toutes les cartes sont figées 2,5 s (les boss, moins longtemps) et la table passe en sépia.
+- 5 sorts fous, plus rares : au marché noir à partir de la manche 6. Leurs cartes sont vertes et « buguent ».
+  · Ctrl+Z : annule les 4 dernières secondes. Les cartes reviennent là où elles étaient, et ta base récupère les PV perdus.
+  · Quitte ou double : Pile (60 %), 400 % des dégâts à toutes les cartes. Face, elles se soignent un peu… mais ton lancer suivant tombe forcément sur Pile, et double (800 %).
+  · Écran bleu : tout plante 1,5 s, ta base aussi, puis chaque carte perd 30 % de ses PV max (les boss, 10 %).
+  · Erreur 404 : 3 cartes disparaissent de la table (jamais les boss).
+  · Lag : pendant 6 s, les cartes rament et saccadent. Elles sont 65 % plus lentes et encaissent +50 % de dégâts.
+- Nouveaux logos pour tous les sorts (de base, de famille et fous) : de vrais emblèmes en couleur, sur les cartes en main, au marché et dans le carnet.
+- Les noms longs ne sont plus coupés sur les cartes : ils sont resserrés (TROU NOIR, FORTERESSE, COUP DE BOL…).
+- Carnet : nouvelle page « Les sorts fous ».
 
 Nouveautés de la v10.5
 - Les animaux se choisissent en lançant la partie : sur l'écran « Nouvelle partie », une ligne « Compagnon » (Aucun, Coco, Marcel ou Boris). Ton choix est gardé pour la fois suivante. Zaza ne vend plus ses bêtes au bar.

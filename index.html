@@ -2802,6 +2802,13 @@ body.lpc #abs.cards{height:auto;padding:0;background:linear-gradient(180deg,rgba
 .pc-ico{position:absolute;left:50%;top:45%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;color:var(--sc);background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--sc) 22%,#fff),color-mix(in srgb,var(--sc) 38%,#2a1d33));box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--sc) 70%,#120a1c)}
 .pcard .pc-ico{color:#fff;filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))}
 .pc-ico .ico{width:66%;height:66%}
+/* v10.6 : les sorts ont leur médaillon en couleurs : il remplit le rond */
+.pcard:not(.bil) .pc-ico,.pc-slot .pc-ico{background:none;box-shadow:none;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
+.pcard:not(.bil) .pc-ico .ico,.pc-slot .pc-ico .ico{width:100%;height:100%}
+.pcard.fou .pc-face{background:linear-gradient(165deg,#f2fff6 0%,#d8f5e2 100%);box-shadow:inset 0 0 0 2px #3dff7a,inset 0 0 0 4px #f2fff6,inset 0 0 0 5px rgba(255,47,180,.5),0 3px 0 rgba(0,0,0,.5),0 7px 14px rgba(0,0,0,.35)}
+.pcard.fou .pc-n{background:#0b0e14;color:#3dff7a}
+.pcard.fou.ready .pc-face{animation:pcFou 2.6s steps(1) infinite}
+@keyframes pcFou{0%,92%,100%{filter:none}94%{filter:hue-rotate(90deg) saturate(2)}96%{filter:none;translate:1px 0}98%{translate:-1px 0}}
 .pc-k,.pc-k2{position:absolute;z-index:2;font:700 11px/1 var(--f-pix);font-style:normal;color:#3a2440}
 .pc-k{left:5px;top:4px}
 .pc-k2{right:5px;bottom:14px;transform:rotate(180deg);opacity:.55}
@@ -2850,6 +2857,9 @@ body:not(.lpc) #statusbar{bottom:114px}
 body:not(.lpc) #tip{bottom:116px}
 body.lpc #tip{bottom:146px}
 @media (prefers-reduced-motion:reduce){.pc-hand .hand-svg,.pc-face{animation:none!important}}
+/* v10.6 · les noms longs sont resserrés, pas coupés */
+.pcard:not(.bil) .pc-n{display:flex;justify-content:center;overflow:visible;text-overflow:clip}
+.pcard:not(.bil) .pc-n>i{flex:none;font-style:normal;transform:scaleX(var(--k,1));transform-origin:50% 50%}
 /* v10.4 · accueil : la donne des cartes garde leur place et leur angle ; le menu ne rejoue plus son apparition */
 #title.enter .ttc{animation-name:tCardDeal}
 @keyframes tCardDeal{0%{opacity:0;transform:translate(calc(-50% - 30px),calc(-50% - 46px)) rotate(-90deg) scale(1.25)}70%{opacity:1;transform:translate(-50%,calc(-50% + 2px)) rotate(calc(var(--r) + 6deg)) scale(.96)}100%{opacity:1;transform:translate(-50%,-50%) rotate(var(--r))}}
@@ -2867,6 +2877,95 @@ body.lpc .al-door{height:72px}
 .sbox .nr-r.none::before,.sbox .nr-r.lock::before{display:none}
 .sbox .nr-r.lock{color:var(--gold)}
 body.lpc .nr .sbox .nr-r{font-size:13px}
+/* v10.6 · les sorts fous au marché noir */
+.offer.spell.fou{box-shadow:inset 0 0 0 2px #3dff7a,0 3px 0 rgba(0,0,0,.35);background:linear-gradient(rgba(61,255,122,.07),rgba(0,0,0,.25))}
+.offer.spell.fou .otag{background:#3dff7a;color:#0b0e14}
+.offer.spell .slotico .ico{width:100%;height:100%}
+.offer.spell .slotico{padding:2px}
+/* v10.7 · les verres des cocktails (SVG, chacun avec sa garniture) */
+.glass.gsvg{width:40px;height:48px;margin:2px 0 1px}
+.glass.gsvg::before,.glass.gsvg::after{content:none}
+.glass.gsvg svg{display:block;width:100%;height:100%;overflow:visible}
+.gsvg .liq{transition:transform .7s ease-in;transform-box:fill-box;transform-origin:50% 100%}
+.drink.gulp .gsvg .liq{transform:scaleY(0)}
+.gsvg .ck-bub{transform-box:fill-box;animation:ckBub 1.7s linear infinite;transition:opacity .4s}
+@keyframes ckBub{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-9px);opacity:0}}
+.drink.gulp .gsvg .ck-bub{opacity:0;animation:none}
+.gsvg .ck-steam{animation:ckSteam 2.4s ease-in-out infinite}
+@keyframes ckSteam{0%,100%{opacity:.25;transform:translateY(1px)}50%{opacity:.95;transform:translateY(-1.5px)}}
+.gsvg .ck-fire{transform-box:fill-box;transform-origin:50% 100%;animation:ckFire .45s ease-in-out infinite alternate}
+@keyframes ckFire{to{transform:scale(1.1,1.22)}}
+.gsvg .ck-twk{transform-box:fill-box;transform-origin:50% 50%;animation:ckTwk 1.6s ease-in-out infinite}
+@keyframes ckTwk{0%,100%{opacity:.35;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
+.cat-d .glass.gsvg,.cd-ico .glass.gsvg{margin:0 auto}
+/* le comptoir : 4 boissons (2 × 2 sur téléphone, 4 de front sur PC), et parfois la spécialité de Zaza, en long */
+.drinks.n4{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.lpc .drinks.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.drink.zz{grid-column:1/-1;display:grid;grid-template-columns:54px minmax(0,1fr) auto;grid-template-areas:"g c b" "g n b" "g l b" "g e b";column-gap:10px;row-gap:2px;align-items:center;text-align:left;padding:8px 10px;background:linear-gradient(100deg,rgba(255,95,162,.18),rgba(0,0,0,.28) 62%);box-shadow:inset 0 0 0 2px var(--cat),0 0 18px rgba(255,95,162,.25),0 4px 0 rgba(0,0,0,.35)}
+.drink.zz .dcat{grid-area:c}
+.drink.zz .dcat::before{content:"★ "}
+.drink.zz .glass{grid-area:g;justify-self:center;transform:scale(1.15)}
+.drink.zz .dname{grid-area:n}
+.drink.zz .dlv{grid-area:l}
+.drink.zz .deff{grid-area:e}
+.drink.zz .mini,.drink.zz .stamp{grid-area:b;width:auto;min-width:86px;align-self:center}
+.drink.zz:not(.drunk) .dname{text-shadow:0 0 10px rgba(255,95,162,.6)}
+/* dans le carnet (papier clair), les verres gardent un contour */
+.bk-it .glass.gsvg svg,.cat-d .glass.gsvg svg{filter:drop-shadow(0 0 .5px #4a2c1a) drop-shadow(0 0 .5px #4a2c1a)}
+/* v10.8 · les jeux verrouillés */
+.nr-card.lk .nr-med,.nr-card.lk .nr-cn,.nr-card.lk .nr-pat{filter:grayscale(1) brightness(.62);opacity:.7}
+.nr-card.lk::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(30,20,44,.18) 0 10px,rgba(30,20,44,.3) 10px 20px);pointer-events:none}
+.nr-lock{position:absolute;z-index:2;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;display:grid;place-items:center;border-radius:50%;background:#231b35;color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 5px 0 #000}
+.nr-lock svg{width:24px;height:24px}
+.nr-lockl{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px auto 0;padding:7px 12px;width:fit-content;max-width:100%;border-radius:12px;background:rgba(14,8,22,.82);box-shadow:inset 0 0 0 1.5px rgba(255,204,77,.4)}
+.nr-lockl b{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:14px}
+.nr-lockl b svg{width:15px;height:15px;flex:none}
+.nr-lbar{position:relative;display:block;width:min(220px,80%);height:8px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden}
+.nr-lbar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:linear-gradient(90deg,#ffcc4d,#ff9a3d)}
+.nr-lockl small{font:700 12px/1 var(--f-pix);color:var(--muted)}
+.nr-dots i.lk{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.nr-dots i.lk.on{background:color-mix(in srgb,var(--dc) 35%,#2c2142)}
+.nr-go:disabled{filter:grayscale(.8);opacity:.7}
+.unote .un-deck{flex:none;width:64px;height:64px;display:grid;place-items:center;border-radius:12px;background:#fff3e6;color:var(--dc);box-shadow:inset 0 0 0 3px var(--dc)}
+.unote .un-deck .ico{width:40px;height:40px}
+/* v10.8 · le poinçon du Collectionneur, dans l'en-tête du rack */
+.rack-head .clp{flex:none;margin:0 4px;padding:3px 9px;border:0;border-radius:999px;background:linear-gradient(#5a8cff,#2f5fd0);color:#fff;font:700 12px/1.1 var(--f-pix);letter-spacing:.04em;box-shadow:0 2px 0 #1a2f6a,0 0 12px rgba(74,168,255,.55);cursor:pointer;animation:clpPulse 1.6s ease-in-out infinite;white-space:nowrap;max-width:60%;overflow:hidden;text-overflow:ellipsis}
+.rack-head .clp.on{background:linear-gradient(#c9a8ff,#8a5cff);box-shadow:0 2px 0 #3a2470,0 0 14px rgba(201,168,255,.7);animation:none}
+@keyframes clpPulse{50%{box-shadow:0 2px 0 #1a2f6a,0 0 22px rgba(74,168,255,.95)}}
+.slot.clfx{animation:clFx 1.1s ease-out}
+@keyframes clFx{0%{transform:scale(1);filter:brightness(1)}20%{transform:scale(1.28);filter:brightness(2.2) drop-shadow(0 0 12px #c9a8ff)}60%{transform:scale(1.08);filter:brightness(1.4) drop-shadow(0 0 8px #c9a8ff)}100%{transform:scale(1);filter:none}}
+/* v10.8 · la défaite : ralenti, couleurs qui s'éteignent, tampon « PERDU », puis le noir */
+body.go-dying #cv{filter:grayscale(.85) contrast(1.12) brightness(.82);transform:scale(1.07);transition:filter 1.6s ease-out,transform 3s ease-out}
+#godie{position:fixed;inset:0;z-index:39;pointer-events:none}
+#godie .gd-vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 32%,rgba(120,0,24,.5) 78%,rgba(40,0,10,.88));opacity:0;animation:gdVig 1.4s ease-out forwards}
+@keyframes gdVig{to{opacity:1}}
+#godie .gd-stamp{position:absolute;left:50%;top:42%;text-align:center;transform:translate(-50%,-50%) rotate(-9deg) scale(2.6);opacity:0}
+#godie.gd-on .gd-stamp{animation:gdStamp .42s cubic-bezier(.2,1.5,.4,1) forwards}
+@keyframes gdStamp{0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(2.8)}60%{opacity:1}100%{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}}
+#godie .gd-stamp b{display:block;padding:4px 22px 8px;border:6px solid #ff3d5a;border-radius:16px;color:#ff3d5a;font:700 clamp(56px,18vw,120px)/1 var(--f-pix);letter-spacing:.06em;text-shadow:0 0 22px rgba(255,61,90,.55);background:rgba(20,4,10,.6);box-shadow:0 0 30px rgba(255,61,90,.35),inset 0 0 18px rgba(255,61,90,.25)}
+#godie .gd-stamp small{display:block;margin-top:12px;color:#ffd0d8;font:700 clamp(14px,4vw,18px)/1.2 var(--f-pix);text-shadow:0 2px 0 #000}
+#godie .gd-fade{position:absolute;inset:0;background:#0b0610;opacity:0;transition:opacity .6s ease-in}
+#godie.out .gd-fade{opacity:1}
+/* v10.8 · l'écran de fin : fond plein, une entrée qui se déroule */
+#over{background:radial-gradient(ellipse at 50% 18%,#3a1426 0%,#1a0a14 55%,#0b0610 100%)}
+#over.lost{background:radial-gradient(ellipse at 50% 18%,#4a0f1e 0%,#1c0810 55%,#0b0610 100%)}
+#over .o-broke{display:block;width:120px;height:80px;margin:0 auto 6px}
+#over .o-broke svg{width:100%;height:100%;overflow:visible}
+#over .o-broke .ob-l{transform-box:fill-box;transform-origin:100% 100%;animation:obL 3.2s ease-in-out infinite}
+#over .o-broke .ob-r{transform-box:fill-box;transform-origin:0 100%;animation:obR 3.2s ease-in-out infinite}
+@keyframes obL{0%,100%{transform:rotate(-8deg) translateX(-3px)}50%{transform:rotate(-12deg) translateX(-5px)}}
+@keyframes obR{0%,100%{transform:rotate(8deg) translateX(3px)}50%{transform:rotate(12deg) translateX(5px)}}
+#over.go-in .over-t{animation:ovDrop .7s cubic-bezier(.2,1.3,.4,1) both}
+#over.go-in .osub{animation:ovFade .5s ease-out .35s both}
+#over.go-in .oscore{animation:ovPop .5s cubic-bezier(.2,1.5,.4,1) .45s both}
+#over.go-in .ostats>div{animation:ovFade .4s ease-out both}
+#over.go-in .ostats>div:nth-child(1){animation-delay:.7s}#over.go-in .ostats>div:nth-child(2){animation-delay:.78s}#over.go-in .ostats>div:nth-child(3){animation-delay:.86s}#over.go-in .ostats>div:nth-child(4){animation-delay:.94s}#over.go-in .ostats>div:nth-child(5){animation-delay:1.02s}#over.go-in .ostats>div:nth-child(6){animation-delay:1.1s}#over.go-in .ostats>div:nth-child(7){animation-delay:1.18s}#over.go-in .ostats>div:nth-child(8){animation-delay:1.26s}
+#over.go-in .tbtns{animation:ovFade .5s ease-out 1.35s both}
+@keyframes ovDrop{0%{opacity:0;transform:translateY(-60px) scale(1.2)}100%{opacity:1;transform:none}}
+@keyframes ovFade{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}
+@keyframes ovPop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:none}}
+body.reduced #over.go-in *{animation-duration:.01s!important;animation-delay:0s!important}
+body.go-dying #tip,body.go-dying #toast{display:none!important}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3353,7 +3452,7 @@ body.lpc .nr .sbox .nr-r{font-size:13px}
   </main>
 
   <footer id="rack">
-    <div class="rack-head"><span>TES JETONS</span><em id="r-hint">touche un jeton pour le détail</em><span id="r-count">0/5</span></div>
+    <div class="rack-head"><span>TES JETONS</span><button class="clp" id="r-clp" hidden>★ POINÇON</button><em id="r-hint">touche un jeton pour le détail</em><span id="r-count">0/5</span></div>
     <div class="combos" id="r-combos"></div>
     <div class="rack-slots" id="rack-slots"></div>
   </footer>
@@ -4146,7 +4245,7 @@ function injectIcons() {
       ? `<path d="${sp.d}" fill="none" stroke="currentColor" stroke-width="${sp.s}" stroke-linecap="round" stroke-linejoin="round"/>`
       : `<path d="${sp.d}" fill="currentColor"${sp.e ? ' fill-rule="evenodd"' : ''}/>`).join('') + '</symbol>';
   }
-  defs.innerHTML = h;
+  defs.innerHTML = h + spellArtSymbols();
 }
 const iconSVG = (id, cls) => `<svg class="ico${cls ? ' ' + cls : ''}" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 
@@ -4192,7 +4291,7 @@ const BAL = {
   eliteFrom: 8,
   // v9.2 : à la machine, les jetons que tu as déjà tombent 3 fois plus souvent (les 15 sont sur les rouleaux)
   ownW: 3,
-  floorHp: 50, postHp: 22, postR: 3, postRad: 27,
+  floorHp: 65, postHp: 22, postR: 3, postRad: 27,
   relBase: 10, relR: 2.5, relPaid: 12,
   spinV: 13, nudge: .22, cloverRun: 3,
   // l'escorte du boss : tant qu'un boss vit, des cartes arrivent sans fin (moitié d'or et de points, pour ne pas « farmer »)
@@ -4689,31 +4788,32 @@ function computeStats(run) {
   // ---- les stats de base ----
   const c = id => s.combos.has(id);
   const up = run.up || {}, U = k => up[k] || 0, bo = run.boost || {};
-  s.dmgMul = (1 + .15 * U('calibre')) * (bo.piment ? 1.3 : 1);
-  s.rateMul = (1 + .15 * U('cadence')) * (bo.turbo ? 1.35 : 1) * (hasMalus(run, 'enraye') ? .78 : 1) * (curses.rouille ? Math.pow(.8, curses.rouille) : 1);
-  s.rangeMul = (1 + .12 * U('portee')) * (hasMalus(run, 'eclipse') ? .7 : 1);
+  s.dmgMul = (1 + .18 * U('calibre')) * (bo.piment ? 1.3 : 1);
+  s.rateMul = (1 + .18 * U('cadence')) * (bo.turbo ? 1.35 : 1) * (hasMalus(run, 'enraye') ? .78 : 1) * (curses.rouille ? Math.pow(.8, curses.rouille) : 1);
+  s.rangeMul = (1 + .16 * U('portee')) * (hasMalus(run, 'eclipse') ? .7 : 1);
   s.crit = .05; s.critMult = 2;
   s.multishot = 0; s.double = U('double') > 0; s.pierce = U('calibre') >= 3 ? 1 : 0;
-  s.bulletSpdMul = 1 + .3 * U('vitesse'); s.bulletSize = 1 + .22 * U('calibre');
-  s.hpMul = curses.fragile ? Math.pow(.7, curses.fragile) : 1; s.hpAdd = 20 * U('pv') + (run.overheal || 0) + (run.hpPerm || 0);
+  s.bulletSpdMul = 1 + .35 * U('vitesse'); s.bulletSize = 1 + .22 * U('calibre');
+  s.hpMul = curses.fragile ? Math.pow(.7, curses.fragile) : 1; s.hpAdd = 25 * U('pv') + (run.overheal || 0) + (run.hpPerm || 0);
   if (hasPet(run, 'boris')) s.hpMul *= PET_BORIS;
   s.marcel = hasPet(run, 'marcel'); s.boris = hasPet(run, 'boris'); s.gaston = hasPet(run, 'gaston');
   s.armor = 0; s.regen = 0;
   s.goldMul = (curses.radin ? Math.pow(.6, curses.radin) : 1) * (bo.dore ? 1.6 : 1);
   s.enemySpeedMul = curses.appat ? Math.pow(1.2, curses.appat) : 1; s.eShotMul = 1;
   s.takeMul = hasMalus(run, 'verre') ? 1.4 : 1;
-  s.rakeHalfMul = (1 + .18 * U('taille')); s.rakeTurnMul = 1 + .2 * U('huile');
+  s.rakeHalfMul = (1 + .22 * U('taille')); s.rakeTurnMul = 1 + .25 * U('huile');
   s.swingMul = 1; s.parryHeal = 0; s.renvoi = U('renvoi');
   s.bombMul = BAL.bombMul; s.bombCdMul = bo.recharge ? .5 : 1; s.bombR = BAL.bombR * (bo.poudre ? 1.5 : 1);
   s.gelCdMul = bo.recharge ? .5 : 1; s.gelDur = BAL.gelDur * (bo.givre ? 2 : 1);
-  s.healBetween = BAL.healBetween + .1 * U('remontant'); s.healMul = 1;
+  s.healBetween = BAL.healBetween + .15 * U('remontant'); s.healMul = 1;
   s.posts = [0, 3, 5, 7][U('barriere')] || 0;
   s.rake2 = U('double_r') > 0;
-  let dur = BAL.rakeDur + U('solide') + (run.rakeBonus || 0);
+  let dur = BAL.rakeDur + 2 * U('solide') + (run.rakeBonus || 0);
   if (hasMalus(run, 'saboteur')) dur -= 2;
   s.rakeRebuild = BAL.rakeRebuild * (1 - .3 * U('huile')) * (hasMalus(run, 'saboteur') ? 2 : 1);
   s.tmrSpeed = 1; s.spellCdMul = 1; s.bilCdMul = 1; s.bilDmgMul = 1; s.spellsLocked = false; s.mult0 = 0;
   if (run.deck === 'bille') { s.bilDmgMul = 1.5; s.bilDeck = 1; }
+  ckStats(s, U, bo, run);
   s.horloger = 0; s.ghost = false; s.alea = 0; s.crevard = false; s.necro = false; s.midas = false; s.hole = false; s.ace = false; s.depipe = false;
   s.dart = T.triple20[1] > 0; s.caram = T.carambole[1] > 0; s.oeil = T.oeilnox[1] > 0;
   if (s.oeil) s.horloger = 4;
@@ -4735,7 +4835,7 @@ function computeStats(run) {
   s.maxHp = Math.max(10, Math.round((BAL.baseHp + s.hpAdd) * s.hpMul));
   s.rakeHalf = BAL.rakeHalf * Math.min(2.2, s.rakeHalfMul);
   s.rakeMirror = 0;
-  if (s.rake2) dur = Math.ceil(dur * .6);
+  if (s.rake2) dur = Math.ceil(dur * .75);
   s.rakeDur = Math.max(1, dur + (s.rakeDurAdd || 0));
   s.rakeTurn = BAL.rakeTurn * s.rakeTurnMul;
   s.swingWin = BAL.swingWin * s.swingMul;
@@ -6252,7 +6352,7 @@ TKH.pivot = {
       if (v[3] > 0) { run.pivotBoth[j.uid] = true; setTimeoutGame(() => { if (G.run.pivotBoth) G.run.pivotBoth[j.uid] = false; refreshStats(); }, 3); }
       if (v[4] > 0) {
         const i = run.jokers.indexOf(j), k = run.pivot[j.uid] ? i + 1 : i - 1, nb = run.jokers[k];
-        if (nb) for (const key in cb.tmr) if (nb.parts.some(p => p.t === cb.tmr[key].D.id)) tmrFire(key, 1, true);
+        if (nb && !cb.pivotIn) { cb.pivotIn = true; try { for (const key in cb.tmr) if (nb.parts.some(p => p.t === cb.tmr[key].D.id)) tmrFire(key, 1, true); } finally { cb.pivotIn = false; } }
       }
     }
     refreshStats();
@@ -7526,6 +7626,7 @@ function bilLaunch(ang, pow) {
   // dédoublement au lancer
   let extra = bpk(s, 'split') > 0 ? Math.min(3, Math.max(1, Math.round(bpk(s, 'split')))) : 0;
   if (s.c('lancement') && b.full) extra += T.multibille[2] > 0 ? 2 : 1;
+  extra += s.bilExtra || 0;
   for (let k = 0; k < extra; k++) { const a = ang + (k % 2 ? 1 : -1) * (.18 + .1 * Math.floor(k / 2)); B.balls.push(newBall(b.x, b.y, Math.cos(a) * v, Math.sin(a) * v, { dm: .6, r: b.r, ric: b.ric, perce: b.perce, life: b.life * .8 })); }
   dbg('bille');
   if (!G.headless) { Snd.cue(.35 + .65 * pow); haptic(20); }
@@ -7707,6 +7808,7 @@ function updateBille(dt) {
         b.last[e.id] = b.t + .25;
         bilHit(e, b, sp, nx, ny);
       }
+      if (cb.posts.length) bumpBall(b);
       // les cibles tombantes
       if (cb.targets) for (const T2 of cb.targets) if (T2.up && Math.hypot(T2.x - b.x, T2.y - b.y) < R + 4) targetHit(cb, T2);
       const d = Math.hypot(b.x, b.y), vr = (b.x * b.vx + b.y * b.vy) / (d || 1);
@@ -8141,6 +8243,7 @@ function drawTk9Top(cb, t) {
 // les effets des jetons (trident, fusée, regard de Méduse, boule de pétanque, tir en cloche)
 function drawFx9(fx, a, t) {
   if (fx.fam && drawFxFam(fx, a, t)) return true;
+  if (fx.s106 && drawFx106(fx, a, t)) return true;
   switch (fx.type) {
     case 'trident': {
       ctx.save(); ctx.rotate(fx.ang);
@@ -9413,6 +9516,25 @@ const Snd = (() => {
     growl() { if (!th('growl', 300)) return; noise(.5, .14, 380, 'lowpass', 0, 140); tone(78, .45, 'sawtooth', .06, 62); tone(118, .3, 'sawtooth', .03, 90, .05); },
     squeak() { if (!th('squeak', 200)) return; [0, .07].forEach((d, i) => tone(arnd(2600, 3200), .045, 'sine', .04, arnd(3400, 3900), d)); },
     bearRoar() { if (!th('broar', 500)) return; noise(1.15, .34, 760, 'lowpass', 0, 150, .8); tone(112, .95, 'sawtooth', .14, 60); tone(168, .75, 'sawtooth', .07, 82, .05); noise(.6, .13, 320, 'bandpass', .08, 95, 3); noise(.25, .1, 1400, 'bandpass', 0, 500, 1.4); },
+    bumper(ball) { if (!th('bump', 45)) return; noise(.05, ball ? .16 : .1, 900, 'lowpass', 0, 200); tone(150, .07, 'sine', ball ? .14 : .08, 70); const f = arnd(1250, 1450); tone(f, .24, 'triangle', ball ? .07 : .04, f * .995, .012, true); tone(f * 2.76, .12, 'sine', .022, null, .012); clack(.004, .07, 3000); },
+    bumperJack() { [784, 988, 1175, 1568].forEach((f, i) => { tone(f, .16, 'square', .045, null, i * .07); tone(f * 2, .1, 'triangle', .03, null, i * .07 + .02); }); tone(2093, .5, 'triangle', .05, null, .3, true); noise(.4, .05, 5000, 'highpass', .3); },
+    tilt() { if (!th('tilt', 300)) return; tone(110, .45, 'sawtooth', .07, 90); tone(116, .45, 'square', .05, 95); noise(.2, .06, 400, 'lowpass'); },
+    scratch() { noise(.2, .16, 900, 'bandpass', 0, 3200, 5); noise(.14, .12, 2600, 'bandpass', .19, 500, 5); tone(180, .3, 'sawtooth', .04, 60, .05); },
+    heart() { tone(62, .13, 'sine', .3, 44); tone(58, .16, 'sine', .24, 40, .19); noise(.06, .05, 200, 'lowpass'); },
+    stampThud() { tone(90, .32, 'sine', .3, 40); noise(.18, .2, 500, 'lowpass', 0, 120); clack(0, .12, 1400); },
+    lose() {
+      if (!ok()) return;
+      const ac = AU.ac; let t = ac.currentTime + .03;
+      [[392, .42], [370, .42], [349, .42], [330, 1.4]].forEach(([f, d], i) => {
+        const o = ac.createOscillator(), g = ac.createGain(), lp = ac.createBiquadFilter();
+        o.type = 'sawtooth'; o.frequency.setValueAtTime(f, t);
+        lp.type = 'lowpass'; lp.Q.value = 7; lp.frequency.setValueAtTime(450, t); lp.frequency.linearRampToValueAtTime(1500, t + .14); lp.frequency.linearRampToValueAtTime(650, t + d);
+        g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.13, t + .05); g.gain.setValueAtTime(.13, t + d - .1); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+        if (i === 3) { const l = ac.createOscillator(), lg = ac.createGain(); l.frequency.value = 6; lg.gain.value = 10; l.connect(lg); lg.connect(o.frequency); l.start(t + .3); l.stop(t + d); o.frequency.setValueAtTime(f, t + .3); o.frequency.linearRampToValueAtTime(f * .93, t + d); }
+        o.connect(lp); lp.connect(g); g.connect(AU.sfx); o.start(t); o.stop(t + d + .05);
+        t += d + .05;
+      });
+    },
     cardPick(k) { if (!th('cpick', 40)) return; const f = 520 * Math.pow(2, (k || 0) / 6); tone(f, .05, 'sine', .045, f * 1.25); noise(.03, .06, 3800, 'highpass'); },
     cardSwish() { if (!th('cswish', 60)) return; noise(.18, .085, 2600, 'bandpass', 0, 700, 1.1); noise(.05, .04, 5200, 'highpass', .02); },
     cardTap() { if (!th('ctap', 60)) return; noise(.035, .07, 1500, 'bandpass', 0, null, 2); tone(170, .06, 'triangle', .05, 120); },
@@ -10669,7 +10791,7 @@ function beginRound() {
   if (stakeHas(run, ST.MALUS) && !run.malus.length && !(run.round === 30 && !run.inf)) run.malus = [pick(MALUS_BY_TIER(run.round >= 10 && rnd() < .3 ? 2 : 1))];
   run.skulls = run.pendingSkulls; run.pendingSkulls = 0;
   run.stolen = [];
-  run.boost = {}; for (const id of run.shots || []) run.boost[id] = 1; run.shots = [];
+  run.boost = {}; for (const id of run.shots || []) run.boost[id] = 1; run.shots = []; ckMystere(run);
   run.K = run.K || {};
   tkPreRound(run);
   const cb = newCombat();
@@ -10784,7 +10906,7 @@ function bossEscort(cb) {
   }
   cb.escT = cb.t + cb.escGap;
 }
-function buildPosts() {
+function buildPosts0() {
   const cb = G.cb, n = cb.stats.posts;
   cb.posts = [];
   for (let k = 0; k < n; k++) {
@@ -10825,7 +10947,7 @@ function finishRound() {
   let reward = null;
   if (run.skulls >= 3) reward = mkJoker('ultime', [{ t: pick(run.pool), lv: 3 }], 1);
   else if (run.skulls === 2) reward = mkJoker('rare', [{ t: pick(run.pool), lv: 2 }], 1);
-  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] };
+  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] }; ckChampagne(run, cb, s, res); if (hasDeck(run, 'collec')) { if (isBossRound(r)) run.clPunch = (run.clPunch || 0) + 1; if (G.headless) clAuto(run); }
   tkEnd(run, res);
   run.gold = Math.floor(run.gold);
   run.malus = []; run.skulls = 0; run.stolen = []; run.boost = {};
@@ -11095,7 +11217,7 @@ function separate() {
   }
 }
 // mini-barrières : les cartes s'y écrasent, les boss les renversent
-function postCollisions() {
+function postCollisions0() {
   const cb = G.cb;
   for (const p of cb.posts) {
     if (p.hp <= 0) continue;
@@ -11112,7 +11234,7 @@ function postCollisions() {
     }
   }
 }
-function hitPost(p, dmg) {
+function hitPost0(p, dmg) {
   p.hp -= dmg; p.hit = .15;
   if (p.hp <= 0) { p.hp = 0; if (!G.headless) { burst(p.x, p.y, '#ffcc4d', 14, 40, 1.2, .5); burst(p.x, p.y, '#5a3d10', 8, 26, 1, .5); Snd.postBreak(); shake(2); } }
   else if (!G.headless) Snd.post();
@@ -12010,7 +12132,7 @@ function updateEShots(dt) {
     if (p.hold > 0) { p.hold -= dt; continue; }
     p.x += p.vx * dt; p.y += p.vy * dt;
     const d = Math.hypot(p.x, p.y);
-    if (cb.posts.length && d < BAL.postRad + 6 && d > BAL.postRad - 6 && postHitShot(p)) { arr.splice(i, 1); continue; }
+    if (cb.posts.length && d < 50 && bumpShot(p)) continue;
     if (!p.checked) {
       const rk = rakeContact(p, d);
       if (rk) {
@@ -12045,6 +12167,7 @@ function parry(p) {
   cb.hitstop = .06;
   if (s.parryHeal > 0) { heal(s.parryHeal); jokerPing('balance', '+PV'); }
   cdrSpells(cb, BAL.parryCdr);
+  if (s.spritz || s.flipfizz) ckParry(p, rk);
   const src = p.src && !p.src.dead && p.src.ai !== 'decoy' ? p.src : null;
   if (p.src && p.src.type === 'b_dame' && p.src.st.phase === 'drink') endDrink(p.src, true);
   if (s.hk) { tkParry(p); bilParry(); }
@@ -12058,7 +12181,7 @@ function parry(p) {
     p.spd = BAL.reflectSpd; p.life = 3;
     p.bounces = s.renvoi >= 3 ? 1 : 0;
     p.fdmg = null;
-    p.dmg = DM() * [0, 3, 5, 7][s.renvoi] * (1 + BAL.streakStep * Math.min(BAL.streakMax, cb.streak - 1)) * (p.kind === 'orb' ? 2 : 1);
+    p.dmg = DM() * [0, 4, 6, 9][s.renvoi] * (1 + BAL.streakStep * Math.min(BAL.streakMax, cb.streak - 1)) * (p.kind === 'orb' ? 2 : 1);
     const d = Math.hypot(p.x, p.y) || 1;
     p.vx = p.x / d * p.spd; p.vy = p.y / d * p.spd;
   } else {
@@ -12139,6 +12262,7 @@ function hurtBase(dmg, kind, e, quiet) {
   const cb = G.cb, s = cb.stats, run = G.run;
   // la partie de démo derrière l'écran titre ne doit jamais pouvoir perdre
   if (run.over || cb.ended || cb.demo) return;
+  if (s.cactus && kind === 'melee' && e && !e.dead) { hitE(e, DM() * s.cactus, 'cactus'); if (!G.headless) burst(e.x, e.y, '#9be15d', 6, 24, .8, .3); }
   if (cb.final && FB.red) dmg *= 1 + .1 * FB.red;
   if (cb.shield > 0) { cb.shield--; if (!G.headless) { fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR + 3, r1: BAL.baseR + 9, col: '143,227,255', life: .3, max: .3 }); Snd.shield(); } return; }
   if (cb.invuln > 0) { if (!G.headless) { fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR + 4, r1: BAL.baseR + 12, col: '159,216,255', life: .3, max: .3 }); Snd.shield(); } return; }
@@ -12234,7 +12358,7 @@ function updateTower(dt) {
   tg.forEach((t, i) => fireBullet(t, i === 0 || s.mtFull ? 1 : .7, i > 0, 0, false, s.double && i === 0 ? -1 : 0));
   if (tg.length > 1) jokerPing('multithread', `×${tg.length}`, 2200);
   if (s.dart && ++cb.dartK >= 10) { cb.dartK = 0; fireDart(tg[0]); }
-  if (s.double) setTimeoutGame(() => { const t2 = tg[0].dead ? findTargets(1)[0] : tg[0]; if (t2) { fireBullet(t2, .6, true, .06, false, 1); cb.muzzle2 = .06; } }, .07);
+  if (s.double) setTimeoutGame(() => { const t2 = tg[0].dead ? findTargets(1)[0] : tg[0]; if (t2) { fireBullet(t2, .8, true, .06, false, 1); cb.muzzle2 = .06; } }, .07);
   if (!G.headless) Snd.shoot();
 }
 function fireBullet(t, mul, extra, angOff, ghost, side, o) {
@@ -12315,6 +12439,7 @@ function onBulletHit(e, b) {
     if (!G.headless) { Snd.shield(); if (e.shield <= 0) { floater(e.x, e.y - e.r - 2, 'BOUCLIER BRISÉ', '#c3cde0', 3.8); burst(e.x, e.y, '#c3cde0', 10, 36, 1, .4); } }
     if (e.shield < 0) { dealDmg(e, -e.shield, { src: 'bullet', b }); e.shield = 0; }
   } else dealDmg(e, b.dmg, { src: b.src || 'bullet', crit: b.crit, b });
+  if (b.kind === 'b' && !b.src && !cb.demo) ckBulletHit(e, b);
   if (b.crit && !G.headless) { Snd.crit(); if (!b.dart) jokerPing('lunette', `×${fmtM(s.critMult)}`); }
   if (e.dead && s.caram && b.kind === 'b' && (b.bounce || 0) < 2) {
     const nx = nearestTo(e.x, e.y, 70, true, e);
@@ -12336,6 +12461,7 @@ function dealDmg(e, amt, o) {
   if (e.vuln > 0) d *= 1.5;
   if (e.cutT > cb.t) d *= 1 + (e.cutK || 0);
   if (e.markT > cb.t) d *= 1 + (e.markK || 0);
+  if (e.lagT > cb.t) d *= 1.5;
   if (s.hk && !cb.demo) d *= tkDmgMul(e, o);
   if (s.crevard) d *= 1 + .4 * crevK();
   const hp0 = Math.max(0, e.hp);
@@ -12350,7 +12476,7 @@ function dealDmg(e, amt, o) {
 }
 /* ---------- dégâts par seconde : ce que ta base inflige vraiment (sans compter le surplus sur une carte déjà morte) ---------- */
 const DPS_N = 16, DPS_STEP = .25;   // fenêtre glissante : 16 × 0,25 s = 4 s
-const DPS_SRC = { gaston: 'Gaston (le rat)', famS: 'Sorts de famille', orageS: 'Orage (sort)', bomb: 'Bombe (sort)', bullet: 'Canon', reflect: 'Flipper', rake: 'Flipper', burn: 'Brûlure', chain: 'Foudre', orage: 'Foudre', giant: 'Foudre', expl: 'Explosions', nuke: 'Explosions', poison: 'Poison', shard: 'Givre', wave: 'Vagues', drain: 'Vampire', ring: 'Onde', hole: 'Trou noir', beam: 'Rayon', ally: 'Alliés', queue: 'Billard', bille: 'BILLE' };
+const DPS_SRC = { bumper: 'Bumpers', cactus: 'Cactus Margarita', spritz: 'Spritz Électrique', sp106: 'Sorts', gaston: 'Gaston (le rat)', famS: 'Sorts de famille', orageS: 'Orage (sort)', bomb: 'Bombe (sort)', bullet: 'Canon', reflect: 'Flipper', rake: 'Flipper', burn: 'Brûlure', chain: 'Foudre', orage: 'Foudre', giant: 'Foudre', expl: 'Explosions', nuke: 'Explosions', poison: 'Poison', shard: 'Givre', wave: 'Vagues', drain: 'Vampire', ring: 'Onde', hole: 'Trou noir', beam: 'Rayon', ally: 'Alliés', queue: 'Billard', bille: 'BILLE' };
 function dpsOf(cb) { return cb.dps || (cb.dps = { tot: 0, buf: new Float64Array(DPS_N), i: 0, acc: 0, act: 0, src: {}, peak: 0, win: 0 }); }
 function trackDmg(cb, v, src) {
   if (!(v > 0)) return;
@@ -12388,6 +12514,7 @@ function killEnemy(e, o) {
   if (!hasMalus(run, 'greve') && !cb.demo) addGold(e.gold * s.goldMul * BAL.goldKill * (s.hk ? tkGoldKill(e) : 1) * (cb.luckT > cb.t ? cb.luckK : 1), 'kill');
   scoreKill(e);
   cb.frenzy++;
+  if (s.bmary && !cb.demo) heal(s.bmary);
   cdrSpells(cb, BAL.killCdr);
   if (s.hk && !cb.demo) tkKill(e, o, o.b);
   if (e.d.split) {
@@ -12444,6 +12571,7 @@ function explode(ex) {
 }
 function updateTimers(dt) {
   const cb = G.cb, s = cb.stats, tm = cb.tm;
+  sp106Tick(dt);
   if (cb.later && cb.later.length) { const due = cb.later.filter(x => x.t <= cb.t); cb.later = cb.later.filter(x => x.t > cb.t); for (const x of due) x.fn(); }
   if (s.hk && !cb.demo) tkTick(cb, dt);
   if (s.zap && (tm.zap = (tm.zap || 0) + dt) >= 5) { if (zapotron()) tm.zap = 0; else tm.zap = 4.5; }
@@ -12987,7 +13115,7 @@ function drawBase(cb, t) {
   if (cb.baseFlash > 0) { ctx.fillStyle = `rgba(255,80,100,${cb.baseFlash * 3})`; ctx.beginPath(); ctx.arc(0, 0, BAL.baseR + .6, 0, TAU); ctx.fill(); }
   if (cb.armor > 0) { ctx.strokeStyle = `rgba(195,205,224,${.45 + .2 * Math.sin(t * 5)})`; ctx.lineWidth = 1; ctx.setLineDash([1.6, 1]); ctx.beginPath(); ctx.arc(0, 0, BAL.baseR + 2.2, 0, TAU); ctx.stroke(); ctx.setLineDash([]); }
 }
-function drawPosts(cb, t) {
+function drawPosts0(cb, t) {
   for (const p of cb.posts) {
     ctx.save(); ctx.translate(p.x, p.y);
     if (p.hp <= 0) {
@@ -13196,6 +13324,7 @@ function render(dtReal) {
     if (e.lunge > 0) { const d = edist(e) || 1, l = Math.sin(e.lunge / .18 * Math.PI) * 2.2; bx -= e.x / d * l; by -= e.y / d * l; }
     let rot = e.tilt + (still ? 0 : Math.sin(t * 4 + e.wob) * .05), scl = sc, alpha = 1;
     if (cb.danceT > cb.t && e.stunT > 0) { const k = Math.sin(t * 14 + e.wob); rot += k * .32; by -= Math.abs(k) * 1.6; }
+    if (cb.lagT > cb.t) { bx = Math.round(bx / 3) * 3; by = Math.round(by / 3) * 3; }
     if (e.deal > 0) { const p = e.deal / .4; rot += p * 2.4; scl *= 1 + p * .5; alpha = 1 - p * .7; }
     if (e.ai === 'decoy') alpha *= .55 + .25 * Math.sin(t * 10);
     ctx.save(); ctx.translate(bx, by); ctx.rotate(rot); ctx.scale(scl, scl); ctx.globalAlpha = alpha;
@@ -13417,6 +13546,7 @@ function render(dtReal) {
     gr.addColorStop(0, 'rgba(255,40,70,0)'); gr.addColorStop(1, `rgba(255,40,70,${.35 * p})`);
     ctx.fillStyle = gr; ctx.fillRect(0, 0, cv.width, cv.height);
   }
+  if (!cb.demo) drawOverlay106(cb);
   if (cb.flash > 0) { ctx.fillStyle = `rgba(${cb.flashCol},${Math.min(.55, cb.flash * 1.8)})`; ctx.fillRect(0, 0, cv.width, cv.height); cb.flash -= dtReal; }
 }
 
@@ -13883,7 +14013,7 @@ function renderRack() {
       const kc = j.kind === 'faux' ? '#8d8d99' : JK[j.parts[0].t].col, key = jokerKey(j);
       const mr = (st.mirrors || []).find(m => m.i === i && m.d < 0), mr2 = (st.mirrors || []).find(m => m.i === i && m.d > 0);
       const isSrc = (st.mirrors || []).some(m => m.ok && m.src === i);
-      const pmc = G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
+      const pmc = CL.on || CL.sel != null ? (j.uid === CL.sel ? ' pmsel' : clOk(j) ? ' pmok' : ' pmno') : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? (j.uid === MK.pmSel ? ' pmsel' : !punchRefusal(j) ? ' pmok' : ' pmno') : '';
       let mcls = '', mbits = '', minfo = '';
       if (mr) {
         const prevMir = (st.mirrors || []).some(m => m.i === i - 1 && m.d < 0);
@@ -13905,7 +14035,8 @@ function renderRack() {
   }
   $('#rack-slots').innerHTML = h;
   setTxt('#r-count', `${run.jokers.length}/${eff}`);
-  setTxt('#r-hint', G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ranger, empiler, vendre' : 'touche un jeton pour le détail');
+  clRefresh();
+  setTxt('#r-hint', CL.on || CL.sel != null ? 'touche le jeton à passer en rareté SECRÈTE' : G.mode === 'market' && (MK.punching || MK.pmSel != null) ? 'touche un ULTIME ou un MIX ULTIME pour la machine' : (G.mode === 'poker' && PK.replacing) || (G.mode === 'mini' && MG.replacing) ? 'touche le jeton à remplacer' : canReorder() ? 'glisse un jeton : ranger, empiler, vendre' : 'touche un jeton pour le détail');
   setHTML('#r-combos', [...st.combos].map(id => { const C = COMBOS.find(c => c.id === id); return `<span class="cpill">${C.name}</span>`; }).join('') + (st.consts || []).map(c => `<span class="cpill const">${c[2]}</span>`).join(''));
   if (!G.cb || !G.cb.demo || G.mode !== 'title') for (const id of st.combos) catSee('c', id);
 }
@@ -14000,6 +14131,7 @@ function rackUp(e) {
     const j = run.jokers[d.i]; if (!j) return;
     if (G.mode === 'poker' && PK.replacing) { hideJTip(); pokerReplace(j.uid); return; }
     if (G.mode === 'mini' && MG.replacing) { hideJTip(); miniReplace(j.uid); return; }
+    if (CL.on || CL.sel != null) { hideJTip(); clPick(j.uid); return; }
     if (G.mode === 'market' && (MK.punching || MK.pmSel != null)) { hideJTip(); punchPickJoker(j.uid); return; }
     if (JT.uid === j.uid && !$('#jtip').hidden && (e.pointerType !== 'mouse' || now() - JT.t > 250)) { hideJTip(); openDetail(j, 'rack'); return; }
     if (e.pointerType === 'mouse' && JT.uid === j.uid) { hideJTip(); openDetail(j, 'rack'); return; }
@@ -14177,7 +14309,7 @@ const DECKS = [
   { id: 'sorts', name: 'Sorcier', icon: 'occulte', col: '#a98bff', txt: 'Tu choisis tes 2 sorts de départ.' },
   { id: 'barman', name: 'Barman', icon: 'bar', col: '#ff9a3d', txt: `Boissons et shots 30${NB}% moins chers.` },
   { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +50${NB}% de dégâts.` },
-  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: 'Un jeton ULTIME de ta machine dès le départ, puis un autre après chaque boss.' },
+  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: `Au départ, puis après chaque boss : un poinçon gratuit pour passer n'importe quel jeton de ton rack en rareté SECRÈTE (+25${NB}% de puissance, et sa capacité secrète s'il est ULTIME). Il reste secret même quand tu l'empiles ou le mixes.` },
   { id: 'xxl', name: 'Rack XXL', icon: 'etage', col: '#5fd68a', txt: '7 places de jetons, mais 30 PV de moins.' },
   { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage, et des rouleaux plus lents.' },
 ];
@@ -14187,6 +14319,7 @@ const hasDeck = (run, id) => !!run && run.deck === id;
 function applyDeck(run, id) {
   const D = deckById(id); run.deck = D.id;
   if (D.id === 'coffre') run.gold += 200;
+  if (D.id === 'collec') run.clPunch = 1;
   if (D.id === 'xxl') { run.slots += 2; run.hpPerm = (run.hpPerm || 0) - 30; run.maxHp = Math.max(10, run.maxHp - 30); run.hp = run.maxHp; }
   return run;
 }
@@ -14195,13 +14328,9 @@ function deckStart(next) { if (hasDeck(G.run, 'sorts')) openSpellPick(next); els
 function deckAfterMachine(next) {
   const run = G.run;
   if (hasDeck(run, 'pack')) openGift('pack', next);
-  else if (hasDeck(run, 'collec')) openGift('collec', next);
   else next();
 }
-function deckAfterJPM(o) {
-  if (hasDeck(G.run, 'collec')) openGift('collec', list => openMachine(Object.assign({}, o, { gift: list })), true);
-  else openMachine(o);
-}
+function deckAfterJPM(o) { openMachine(o); }
 function deckGiftList(kind, run) {
   if (kind === 'pack') {
     const owned = new Set(run.jokers.flatMap(j => j.parts.map(p => p.t)));
@@ -14273,17 +14402,18 @@ function deckCardHTML(D, won, cls) {
   return `<div class="nr-card${cls ? ' ' + cls : ''}" style="--dc:${D.col}">
     <span class="nr-pat" aria-hidden="true"></span>
     <i class="nr-cn tl">${iconSVG('su_s')}</i><i class="nr-cn tr">${iconSVG('su_h')}</i><i class="nr-cn bl">${iconSVG('su_d')}</i><i class="nr-cn br">${iconSVG('su_c')}</i>
-    <span class="nr-med">${iconSVG(D.icon)}</span>
+    <span class="nr-med">${iconSVG(D.icon)}</span>${/\blk\b/.test(cls || '') ? `<span class="nr-lock">${LOCK_SVG}</span>` : ''}
     ${st ? `<span class="nr-stk" style="--sc:${st.col}" title="Gagné avec ce jeu jusqu'à la ${esc(st.name)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : ''}
   </div>`;
 }
 function renderNewRun(dir) {
-  const m = G.meta, D = DECKS[NR.i], won = (m.dw || {})[D.id] || 0;
-  $('#nr-cardbox').innerHTML = deckCardHTML(D, won, dir > 0 ? 'in-r' : dir < 0 ? 'in-l' : '');
+  const m = G.meta, D = DECKS[NR.i], won = (m.dw || {})[D.id] || 0, open = deckOpen(D);
+  $('#nr-cardbox').innerHTML = deckCardHTML(D, won, (dir > 0 ? 'in-r' : dir < 0 ? 'in-l' : '') + (open ? '' : ' lk'));
   setTxt('#nr-name', D.name);
-  setTxt('#nr-txt', D.txt);
+  setHTML('#nr-txt', esc(D.txt) + (open ? '' : deckNeedHTML(D)));
+  const go = $('#newrun .nr-go'); if (go) { go.disabled = !open; go.textContent = open ? 'LANCER' : 'VERROUILLÉ'; }
   $('#nr-name').style.setProperty('--dc', D.col);
-  setHTML('#nr-dots', DECKS.map((d, i) => `<i class="${i === NR.i ? 'on' : ''}${(m.dw || {})[d.id] ? ' won' : ''}" style="--dc:${d.col}"></i>`).join(''));
+  setHTML('#nr-dots', DECKS.map((d, i) => `<i class="${i === NR.i ? 'on' : ''}${(m.dw || {})[d.id] ? ' won' : ''}${deckOpen(d) ? '' : ' lk'}" style="--dc:${d.col}"></i>`).join(''));
   const st = stakeInfo(m.stake);
   setTxt('#nr-stake', st.name);
   $('#nr-schip').style.background = st.col;
@@ -14304,6 +14434,7 @@ function nrStake(d) {
   m.stake = v; saveMeta(); renderNewRun(0); Snd.click();
 }
 function nrGo() {
+  if (!deckOpen(DECKS[NR.i])) { Snd.deny(); return; }
   const cp = loadCheckpoint();
   const go = () => { clearCheckpoint(); show('#newrun', false); startRun(null); };
   if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', go);
@@ -14342,7 +14473,7 @@ function nrKey(e) {
 /* ---------- le Sorcier : choisir ses 2 sorts ---------- */
 const SPK = { sel: [], then: null };
 const SPELL_SHORT = { bomb: 'Explosion là où tu vises.', gel: 'Gèle les cartes autour de ta base.', tornade: 'Repousse les cartes proches.', orage: 'La foudre frappe les 6 plus costaudes.', bouclier: `3${NB}s sans dégâts, les tirs repartent.`, surchauffe: `Ton canon tire 3× plus vite, 4${NB}s.` };
-const spkIds = () => Object.keys(PSPELLS).filter(id => !PSPELLS[id].fam);
+const spkIds = () => Object.keys(PSPELLS).filter(id => !PSPELLS[id].fam && !PSPELLS[id].fou);
 function openSpellPick(then) {
   SPK.sel = []; SPK.then = then;
   G.mode = 'chooser';
@@ -14668,10 +14799,13 @@ function bookPages(n) {
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les boss', col: '#ff7eb6', note: 'Le dernier, c\'est mon frère. Ne lui dites pas que je vous aide.', blocks: [blk(null, 'cards', [...BOSS_ORDER, 'b_baron'].map(id => ['b', id])), blk('Les élites', 'icons', Object.keys(ELITES).map(id => ['l', id]))] });
     P.push({ k: 'grid', sec: 'Les malus', toc: 'Malus, événements et sorts', title: 'Les crânes', col: '#e0365a', note: '1 crâne : ça pique. 2 : ça mord. 3 : sortez le parapluie.', blocks: [blk(null, 'icons', Object.keys(MALUS).map(id => ['m', id]), 4)] });
     P.push({ k: 'grid', sec: 'Les malus', title: 'Événements et sorts', col: '#a98bff', note: 'Les Sorciers lisent mes carnets. Je le sais.', blocks: [blk('Les événements', 'icons', Object.keys(EVENTS).map(id => ['v', id])), blk('Les sorts des Sorciers', 'icons', Object.keys(SPELLS).map(id => ['s', id]))] });
-    P.push({ k: 'grid', sec: 'Le bar de Zaza', toc: 'Le bar et tes sorts', title: 'Les boissons', col: '#ff9a3d', note: 'Zaza ne fait pas crédit. Même à moi.', blocks: [blk(null, 'icons', Object.keys(UPG).map(id => ['d', id]), 4)] });
-    const fam = Object.keys(PSPELLS).filter(id => PSPELLS[id].fam), mine = Object.keys(PSPELLS).filter(id => !PSPELLS[id].fam);
+    const ckA = id => UPG[id].cat === 'canon' || UPG[id].cat === 'rateau';
+    P.push({ k: 'grid', sec: 'Le bar de Zaza', toc: 'Le bar et tes sorts', title: 'Les boissons', col: '#ff9a3d', note: 'Zaza ne fait pas crédit. Même à moi.', blocks: [blk(null, 'icons', Object.keys(UPG).filter(ckA).map(id => ['d', id]), 4)] });
+    P.push({ k: 'grid', sec: 'Le bar de Zaza', title: 'Les cocktails', col: '#ff5fa2', note: 'Pour la base, pour la BILLE, et les spécialités de la maison.', blocks: [blk(null, 'icons', Object.keys(UPG).filter(id => !ckA(id)).map(id => ['d', id]), 4)] });
+    const fam = Object.keys(PSPELLS).filter(id => PSPELLS[id].fam), fous = Object.keys(PSPELLS).filter(id => PSPELLS[id].fou), mine = Object.keys(PSPELLS).filter(id => !PSPELLS[id].fam && !PSPELLS[id].fou);
     P.push({ k: 'grid', sec: 'Le bar de Zaza', title: 'Shots et sorts', col: '#5fd4c4', note: 'Un shot, une manche. Un sort, toute la partie.', blocks: [blk('Les shots', 'icons', Object.keys(SHOTS).map(id => ['h', id])), blk('Tes sorts', 'icons', mine.map(id => ['q', id]))] });
     if (fam.length) P.push({ k: 'grid', sec: 'Le marché noir', toc: 'Les sorts de famille', title: 'Les sorts de famille', col: '#c9a8ff', note: 'Plus vous avez de jetons de leur famille, plus ils frappent fort.', blocks: [blk(null, 'icons', fam.map(id => ['q', id]), 3)] });
+    if (fous.length) P.push({ k: 'grid', sec: 'Le marché noir', toc: 'Les sorts fous', title: 'Les sorts fous', col: '#3dff7a', note: 'Tombés d\'une machine buggée. Ils marchent… la plupart du temps.', glitch: true, blocks: [blk(null, 'icons', fous.map(id => ['q', id]), 3)] });
     for (let k = 0; k < COMBOS.length; k += 14) P.push({ k: 'grid', sec: 'Les combos', toc: k === 0 ? 'Les combos' : null, title: k === 0 ? 'Les combos' : 'Les combos (suite)', col: '#ff5fa2', note: k === 0 ? 'Deux jetons côte à côte. Rien de plus, rien de moins.' : null, blocks: [blk(null, 'duo', COMBOS.slice(k, k + 14).map(c => ['c', c.id]), 7)] });
     P.push({ k: 'grid', sec: 'Les habitués', toc: 'Les habitués', title: 'Les habitués', col: '#ffb07a', note: 'Ils viennent tous les soirs. Moi aussi, en cachette.', blocks: [blk(null, 'faces', PEOPLE.map(id => ['p', id]), 2)] });
     P.push({ k: 'grid', sec: 'Les animaux', toc: 'Les animaux', title: 'Les animaux', col: '#9be15d', note: "Ils parlent, ils jurent, et ils restent toute la partie. Zaza en a trois. L'Inspecteur, un seul : il le regrette.", blocks: [blk(null, 'faces', PET_IDS.map(id => ['a', id]), 2)] });
@@ -16052,7 +16186,7 @@ function applyStack(A, B) {
   const res = stackResult(A, B); if (!res) return false;
   const before = rarLabel(A);
   A.parts = res.parts; A.kind = res.kind; A.p = res.p;
-  if (B.secret && !A.secret && A.parts.length === 1) A.secret = true;
+  if (B.secret && !A.secret && (A.parts.length === 1 || hasDeck(G.run, 'collec'))) A.secret = true;
   if (res.over) { A.over = Math.round(((A.over || 0) + res.over) * 100) / 100; A.stars = (A.stars || 0) + starsOf(res.over); }
   const run = G.run, bi = run.jokers.indexOf(B);
   if (bi >= 0) run.jokers.splice(bi, 1);
@@ -16154,7 +16288,7 @@ function renderMarket() {
     if (o.type === 'spell') {
       const P = PSPELLS[o.id], L = spellsOf(run), full = L.length >= SPELL_SLOTS && !o.sold;
       const note = full ? `<div class="orep"><em>Sorts pleins (${SPELL_SLOTS}/${SPELL_SLOTS}) : vends-en un ↓</em></div>` : '';
-      return `<div class="offer spell${o.sold ? ' sold' : ''}" style="--sc:${P.col}"><div class="slotico" aria-hidden="true">${iconSVG(P.icon)}</div><div class="otext"><b>${P.name}<i class="otag">SORT</i></b><span>${P.txt} Recharge ${spellCdTxt(o.id)}${NB}s.${P.fam ? `<em class="famp">${famPowTxt(run, o.id)}</em>` : ''}</span>${note}</div><div class="obuy">${buyB(o.price + ' or', full)}</div></div>`;
+      return `<div class="offer spell${P.fou ? ' fou' : ''}${o.sold ? ' sold' : ''}" style="--sc:${P.col}"><div class="slotico" aria-hidden="true">${iconSVG(P.icon)}</div><div class="otext"><b>${P.name}<i class="otag">${P.fou ? 'SORT FOU' : 'SORT'}</i></b><span>${P.txt} Recharge ${spellCdTxt(o.id)}${NB}s.${P.fam ? `<em class="famp">${famPowTxt(run, o.id)}</em>` : ''}</span>${note}</div><div class="obuy">${buyB(o.price + ' or', full)}</div></div>`;
     }
     if (o.type === 'punch') {
       const sel = MK.pmSel != null ? run.jokers.find(x => x.uid === MK.pmSel) : null;
@@ -16514,6 +16648,782 @@ function nearPath(e, pts, r) {
   }
   return false;
 }
+
+/* ================= v10.6 · les logos des sorts : un médaillon en couleurs pour chacun ================= */
+const SA = (() => {
+  const O = '#140c20', f1 = n => Math.round(n * 10) / 10;
+  const pts = a => a.map(p => f1(p[0]) + ' ' + f1(p[1])).join(' ');
+  const star = (cx, cy, r1, r2, n, rot) => { const p = []; for (let i = 0; i < n * 2; i++) { const a = (rot || -Math.PI / 2) + i * Math.PI / n, r = i % 2 ? r2 : r1; p.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]); } return 'M' + pts(p) + 'Z'; };
+  const rays = (cx, cy, r1, r2, n, rot) => { let d = ''; for (let i = 0; i < n; i++) { const a = (rot || 0) + i * 2 * Math.PI / n; d += `M${f1(cx + Math.cos(a) * r1)} ${f1(cy + Math.sin(a) * r1)}L${f1(cx + Math.cos(a) * r2)} ${f1(cy + Math.sin(a) * r2)}`; } return d; };
+  const frame = (bg, ring, inner, glitch) => `<circle cx="50" cy="50" r="45" fill="${bg}"/>${glitch ? '<path d="M8 38H92M8 62H92" stroke="#3dff7a" stroke-opacity=".12" stroke-width="2"/>' : ''}${inner}<circle cx="50" cy="50" r="45" fill="none" stroke="${ring}" stroke-width="7"/><circle cx="50" cy="50" r="48.5" fill="none" stroke="${O}" stroke-width="3"/><path d="M19 35A33 33 0 0 1 43 15" stroke="#fff" stroke-opacity=".3" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  // les sorts fous : l'image est décalée en cyan et magenta, comme un écran qui bugue
+  const glitchy = inner => `<g transform="translate(-2.6 0)" opacity=".75" style="mix-blend-mode:screen">${inner.replace(/fill="(?!none)[^"]*"/g, 'fill="#22e6ff"').replace(/stroke="(?!none)[^"]*"/g, 'stroke="#22e6ff"')}</g><g transform="translate(2.6 0)" opacity=".75">${inner.replace(/fill="(?!none)[^"]*"/g, 'fill="#ff2fb4"').replace(/stroke="(?!none)[^"]*"/g, 'stroke="#ff2fb4"')}</g>${inner}`;
+  const snow = (() => { let main = '', br = ''; for (let k = 0; k < 6; k++) { const a = -Math.PI / 2 + k * Math.PI / 3, c = Math.cos(a), s = Math.sin(a); main += `M50 50L${f1(50 + c * 30)} ${f1(50 + s * 30)}`; for (const sg of [-1, 1]) { const b = a + sg * .9; br += `M${f1(50 + c * 19)} ${f1(50 + s * 19)}L${f1(50 + c * 19 + Math.cos(b) * 9)} ${f1(50 + s * 19 + Math.sin(b) * 9)}`; } } return main + br; })();
+  const ellPts = (cx, cy, rx, ry, rot, a0, a1, n) => { const p = [], cr = Math.cos(rot), sr = Math.sin(rot); for (let i = 0; i <= n; i++) { const t = a0 + (a1 - a0) * i / n, x = Math.cos(t) * rx, y = Math.sin(t) * ry; p.push([cx + x * cr - y * sr, cy + x * sr + y * cr]); } return p; };
+  const ringBack = ellPts(50, 50, 37, 11, -.35, Math.PI, 2 * Math.PI, 24), ringFront = ellPts(50, 50, 37, 11, -.35, 0, Math.PI, 24);
+  const merlons = (() => { let d = ''; for (let i = 0; i < 4; i++) d += `M${30 + i * 11} 30h7v-8h-7z`; return d; })();
+  const pix = (s, x0, y0, k) => { const F = { 4: ['101', '101', '111', '001', '001'], 0: ['111', '101', '101', '101', '111'] }; let d = ''; [...s].forEach((ch, j) => F[ch].forEach((row, r) => [...row].forEach((v, c) => { if (v === '1') d += `M${x0 + (j * 4 + c) * k} ${y0 + r * k}h${k}v${k}h-${k}z`; }))); return d; };
+  const A = {
+    bomb: frame('#5a1a24', '#ff6a4d', `<path d="M59 30Q64 20 72 18" stroke="#c8a96a" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="45" cy="57" r="23" fill="#2b2438" stroke="${O}" stroke-width="4"/><rect x="50" y="27" width="14" height="10" rx="2" transform="rotate(35 57 32)" fill="#5c5278" stroke="${O}" stroke-width="3.5"/><ellipse cx="37" cy="48" rx="7.5" ry="5" fill="#fff" opacity=".32" transform="rotate(-35 37 48)"/><path d="${star(73, 17, 10, 4, 5)}" fill="#ffe066" stroke="#ff8a3d" stroke-width="2.4" stroke-linejoin="round"/>`),
+    gel: frame('#12354f', '#8fe3ff', `<path d="${snow}" stroke="${O}" stroke-width="11" stroke-linecap="round" fill="none"/><path d="${snow}" stroke="#e6fbff" stroke-width="5.5" stroke-linecap="round" fill="none"/><path d="${star(50, 50, 9, 5, 6, 0)}" fill="#8fe3ff" stroke="${O}" stroke-width="2.6"/>`),
+    tornade: frame('#1d4640', '#bff5e8', [0, 1, 2, 3, 4, 5].reverse().map(i => `<ellipse cx="${f1(50 + Math.sin(i * 1.1) * 5)}" cy="${26 + i * 10}" rx="${27 - i * 4}" ry="5.5" fill="${i % 2 ? '#dff7f0' : '#bff5e8'}" stroke="${O}" stroke-width="3.4"/>`).join('') + `<circle cx="24" cy="70" r="3" fill="#dff7f0" stroke="${O}" stroke-width="2"/><circle cx="76" cy="62" r="2.4" fill="#dff7f0" stroke="${O}" stroke-width="2"/>`),
+    orage: frame('#272748', '#ffe066', `<path d="M27 54A12 12 0 0 1 30 31A16 16 0 0 1 59 25A13 13 0 0 1 77 36A10 10 0 0 1 74 54Z" fill="#8a8ea8" stroke="${O}" stroke-width="4" stroke-linejoin="round"/><path d="M33 40A10 10 0 0 1 49 31" stroke="#c3c7da" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 44L39 67H50L43 87L66 59H54L60 44Z" fill="#ffe066" stroke="${O}" stroke-width="4" stroke-linejoin="round"/>`),
+    bouclier: frame('#163454', '#9fd8ff', `<path d="M50 17L77 27V50C77 66 65 77 50 85C35 77 23 66 23 50V27Z" fill="#4aa8ff" stroke="${O}" stroke-width="4" stroke-linejoin="round"/><path d="M50 25L69 32V50C69 62 60 71 50 76Z" fill="#8fcfff"/><path d="${star(50, 51, 15, 6.5, 5)}" fill="#fff" stroke="${O}" stroke-width="2.8" stroke-linejoin="round"/>`),
+    surchauffe: frame('#4a1a10', '#ff9a3d', `<path d="M62 44C55 33 62 24 69 16C69 25 78 27 76 38C82 34 83 27 83 27C90 38 86 50 77 54C70 56 65 52 62 44Z" fill="#ffb33a" stroke="${O}" stroke-width="3.4" stroke-linejoin="round"/><path d="M68 46C65 40 69 35 72 31C73 37 78 38 77 44C76 49 70 50 68 46Z" fill="#fff3a8"/><rect x="20" y="50" width="48" height="18" rx="7" transform="rotate(-28 44 59)" fill="#ff6a2f" stroke="${O}" stroke-width="4"/><path d="M30 60L58 45" stroke="#ffd36b" stroke-width="3.5" stroke-linecap="round" opacity=".8"/><circle cx="34" cy="72" r="10" fill="#5c3a2a" stroke="${O}" stroke-width="3.5"/><circle cx="34" cy="72" r="3" fill="${O}"/>`),
+    trounoir: frame('#110a22', '#b48cff', `<path d="M${pts(ringBack)}" stroke="#b48cff" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="50" cy="50" r="17" fill="#04020a" stroke="#ff7eb6" stroke-width="3.4"/><path d="M${pts(ringFront)}" stroke="#d9c8ff" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 24L30 30M80 74L71 68M76 20L69 28" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="22" r="2.4" fill="#fff"/><circle cx="82" cy="76" r="2.4" fill="#fff"/><circle cx="78" cy="18" r="2" fill="#fff"/>`),
+    laser: frame('#2a0f1c', '#ff3d6e', `<path d="M36 61L84 25" stroke="#ff3d6e" stroke-width="16" stroke-linecap="round" opacity=".45"/><path d="M36 61L84 25" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><path d="${star(82, 26, 9, 3.5, 4, 0)}" fill="#fff3f6"/><path d="M19 66L29 54L39 66L29 80Z" fill="#ff3d6e" stroke="${O}" stroke-width="3.6" stroke-linejoin="round"/><path d="M29 54L29 80M19 66H39" stroke="#ffd0dc" stroke-width="2" opacity=".8"/>`),
+    artifice: frame('#191440', '#ff7eb6', `<path d="M40 86Q38 70 36 42" stroke="#ffd36b" stroke-width="3" stroke-dasharray="3 4" fill="none" stroke-linecap="round"/><path d="${rays(36, 38, 5, 15, 9)}" stroke="#ff7eb6" stroke-width="4" stroke-linecap="round"/><circle cx="36" cy="38" r="4" fill="#fff"/><path d="${rays(66, 30, 4, 12, 8, .3)}" stroke="#ffe066" stroke-width="4" stroke-linecap="round"/><circle cx="66" cy="30" r="3.4" fill="#fff"/><path d="${rays(63, 62, 4, 13, 10, .1)}" stroke="#6ff2ff" stroke-width="4" stroke-linecap="round"/><circle cx="63" cy="62" r="3.6" fill="#fff"/>`),
+    temps: frame('#262040', '#ffd36b', `<rect x="28" y="18" width="44" height="8" rx="3" fill="#ffd36b" stroke="${O}" stroke-width="3.4"/><rect x="28" y="74" width="44" height="8" rx="3" fill="#ffd36b" stroke="${O}" stroke-width="3.4"/><path d="M34 26H66C66 41 54 44 54 50C54 56 66 59 66 74H34C34 59 46 56 46 50C46 44 34 41 34 26Z" fill="#e8f4ff" fill-opacity=".9" stroke="${O}" stroke-width="3.4" stroke-linejoin="round"/><path d="M39 31H61C60 38 53 41 50 45C47 41 40 38 39 31Z" fill="#ffcf8a"/><path d="M50 47V66" stroke="#ffcf8a" stroke-width="2.4"/><path d="M38 72C40 64 46 62 50 62C54 62 60 64 62 72Z" fill="#ffcf8a"/><path d="M42 50H58" stroke="#8fe3ff" stroke-width="2" opacity=".7"/>`),
+    // les sorts de famille
+    bigbang: frame('#24123e', '#c9a8ff', `<path d="M82 18L46 54L56 64L88 26Z" fill="#ff7a2f" opacity=".85"/><path d="M78 22L48 52L54 58L84 28Z" fill="#ffd36b"/><circle cx="41" cy="63" r="17" fill="#6b4a3a" stroke="${O}" stroke-width="4"/><circle cx="35" cy="60" r="4" fill="#4a3226"/><circle cx="46" cy="69" r="3" fill="#4a3226"/><circle cx="45" cy="56" r="2.4" fill="#8a6a54"/>`),
+    deluge: frame('#4a120a', '#ff7a2f', `<path d="M50 84C30 84 22 70 26 56C28 48 34 44 34 36C40 42 42 48 42 52C44 42 50 32 48 18C60 28 66 40 64 52C66 48 70 46 72 40C78 52 76 64 70 72C66 80 58 84 50 84Z" fill="#ff5a2a" stroke="${O}" stroke-width="3.6" stroke-linejoin="round"/><path d="M50 80C40 80 35 72 38 64C40 58 45 55 46 48C52 54 52 60 52 64C56 58 58 54 60 50C64 60 64 68 60 74C57 78 54 80 50 80Z" fill="#ffb33a"/><path d="M50 78C45 78 43 73 45 69C46 66 49 64 50 60C53 64 54 67 54 70C55 74 53 78 50 78Z" fill="#fff3a8"/>`),
+    salve: frame('#3a2a0e', '#ffcc4d', [0, 1, 2, 3, 4, 5, 6, 7].map(i => { const a = i * Math.PI / 4; return `<rect x="-4" y="-9" width="8" height="18" rx="4" transform="translate(${f1(50 + Math.cos(a) * 26)} ${f1(50 + Math.sin(a) * 26)}) rotate(${f1(a * 180 / Math.PI + 90)})" fill="#ffcc4d" stroke="${O}" stroke-width="2.6"/>`; }).join('') + `<circle cx="50" cy="50" r="9" fill="#fff3a8" stroke="${O}" stroke-width="3"/>`),
+    etoiles: frame('#1c1640', '#d9c8ff', `<path d="M18 22L40 44M44 14L60 34M62 40L80 60" stroke="#d9c8ff" stroke-width="3" stroke-linecap="round" opacity=".7"/><path d="${star(44, 48, 12, 5, 5)}" fill="#fff3c4" stroke="${O}" stroke-width="3" stroke-linejoin="round"/><path d="${star(64, 38, 8, 3.4, 5)}" fill="#ffe066" stroke="${O}" stroke-width="2.6" stroke-linejoin="round"/><path d="${star(70, 66, 10, 4.2, 5)}" fill="#ffd0ff" stroke="${O}" stroke-width="2.8" stroke-linejoin="round"/>`),
+    colere: frame('#2e2a12', '#ffe066', `<path d="M24 30L32 38L26 44L36 52M78 28L70 36L77 42L66 50" stroke="#ffe066" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="45" y="44" width="10" height="38" rx="4" fill="#8a5a2a" stroke="${O}" stroke-width="3.4"/><path d="M45 74H55M45 66H55" stroke="#5e3818" stroke-width="2.4"/><rect x="28" y="22" width="44" height="24" rx="5" fill="#c3cde0" stroke="${O}" stroke-width="4"/><path d="M28 30H72" stroke="#8d98ad" stroke-width="3"/><path d="${star(50, 34, 6, 2.6, 4, 0)}" fill="#ffe066"/>`),
+    bowling: frame('#1a2a3c', '#7fd8ff', `<path d="M66 20C61 20 60 26 61 31C62 35 59 38 59 46C59 56 62 66 66 70C70 66 73 56 73 46C73 38 70 35 71 31C72 26 71 20 66 20Z" fill="#fff8ec" stroke="${O}" stroke-width="3"/><path d="M60.6 33H71.4M60 37H72" stroke="#e0365a" stroke-width="2.6"/><circle cx="42" cy="58" r="21" fill="#4b2a7a" stroke="${O}" stroke-width="4"/><circle cx="36" cy="50" r="3.2" fill="${O}"/><circle cx="45" cy="47" r="3.2" fill="${O}"/><circle cx="41" cy="57" r="3.2" fill="${O}"/><ellipse cx="33" cy="64" rx="6" ry="3.6" fill="#fff" opacity=".2" transform="rotate(-30 33 64)"/>`),
+    multibilles: frame('#262040', '#dfe6f2', [[38, 40], [62, 42], [50, 64]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14" fill="#c3cde0" stroke="${O}" stroke-width="3.6"/><circle cx="${x - 4}" cy="${y - 4}" r="4.6" fill="#fff"/><path d="M${x - 8} ${y + 7}A10 10 0 0 0 ${x + 8} ${y + 6}" stroke="#8d98ad" stroke-width="2.6" fill="none"/>`).join('')),
+    forteresse: frame('#20301f', '#5fd68a', `<path d="M58 22V10L72 15L58 20" fill="#e0365a" stroke="${O}" stroke-width="2.6" stroke-linejoin="round"/><path d="${merlons}" fill="#c3c0b4" stroke="${O}" stroke-width="3"/><rect x="28" y="30" width="44" height="50" rx="2" fill="#c3c0b4" stroke="${O}" stroke-width="4"/><path d="M28 44H72M28 58H72M40 30V44M58 44V58M44 58V72" stroke="#9a978b" stroke-width="2.4"/><path d="M42 80V68A8 8 0 0 1 58 68V80Z" fill="#4a3428" stroke="${O}" stroke-width="3"/>`),
+    coupbol: frame('#173a1e', '#9be15d', [0, 1, 2, 3].map(i => `<circle cx="${f1(46 + Math.cos(i * Math.PI / 2 + Math.PI / 4) * 12)}" cy="${f1(44 + Math.sin(i * Math.PI / 2 + Math.PI / 4) * 12)}" r="12" fill="#5fd68a" stroke="${O}" stroke-width="3.4"/>`).join('') + `<circle cx="46" cy="44" r="6" fill="#9be15d"/><path d="M46 52Q46 66 38 76" stroke="#3e8a3e" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="68" cy="68" r="12" fill="#ffcc4d" stroke="${O}" stroke-width="3.4"/><path d="M68 62V74M64 65H71Q74 68 71 71H64" stroke="#8a5a10" stroke-width="2.4" fill="none"/>`),
+    pacteS: frame('#3a0a16', '#e0365a', `<path d="M28 24H64Q72 24 72 32V76H36Q28 76 28 68Z" fill="#f2e6c8" stroke="${O}" stroke-width="3.6"/><path d="M36 36H62M36 44H62M36 52H54" stroke="#b09a72" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="66" r="11" fill="#e0365a" stroke="${O}" stroke-width="3.2"/><path d="M57 63L60 59L62 63L64 59L67 63L62 71Z" fill="#a8243c"/><path d="M24 22L30 32L22 30Z M78 22L72 32L80 30Z" fill="#e0365a" stroke="${O}" stroke-width="2.4" stroke-linejoin="round"/>`),
+    jackpotS: frame('#3a2a00', '#ffcc4d', `<rect x="22" y="26" width="56" height="46" rx="8" fill="#e0365a" stroke="${O}" stroke-width="4"/><rect x="28" y="36" width="44" height="22" rx="3" fill="#fff8ec" stroke="${O}" stroke-width="3"/><path d="M31 41H38L34 53M45 41H52L48 53M59 41H66L62 53" stroke="#e0365a" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 36H84V24" stroke="${O}" stroke-width="3.4" fill="none" stroke-linecap="round"/><circle cx="84" cy="21" r="4.4" fill="#ffcc4d" stroke="${O}" stroke-width="2.6"/><rect x="34" y="72" width="32" height="8" rx="2" fill="#a8243c" stroke="${O}" stroke-width="3"/>`),
+    echoS: frame('#262040', '#f2ecff', `<circle cx="50" cy="50" r="7" fill="#f2ecff" stroke="${O}" stroke-width="3"/><path d="M36 36A20 20 0 0 0 36 64M64 36A20 20 0 0 1 64 64" stroke="#f2ecff" stroke-width="4.4" fill="none" stroke-linecap="round"/><path d="M27 27A33 33 0 0 0 27 73M73 27A33 33 0 0 1 73 73" stroke="#c9b8ff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>`),
+    // les sorts fous
+    ctrlz: frame('#0b0e14', '#3dff7a', glitchy(`<path d="M34 46H62A14 14 0 0 1 62 74H44" stroke="#eafff0" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 32L24 46L40 60Z" fill="#eafff0"/>`), true),
+    pileface: frame('#0b0e14', '#3dff7a', glitchy(`<circle cx="50" cy="50" r="24" fill="#ffcc4d"/><path d="M33 33L67 67A24 24 0 0 1 33 33Z" fill="#c3cde0"/><path d="M41 44H50M45 40V48M53 56H62" stroke="#3a2a10" stroke-width="3.4" stroke-linecap="round"/>`), true),
+    ecranbleu: frame('#0b0e14', '#3dff7a', glitchy(`<rect x="20" y="24" width="60" height="42" rx="4" fill="#2a6fd0"/><path d="M40 76H60M50 66V76" stroke="#c3cde0" stroke-width="5" stroke-linecap="round"/><circle cx="38" cy="40" r="3.6" fill="#fff"/><circle cx="38" cy="52" r="3.6" fill="#fff"/><path d="M58 38Q50 46 58 56" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>`), true),
+    erreur404: frame('#0b0e14', '#3dff7a', glitchy(`<path d="${pix('404', 22, 37, 4.6)}" fill="#eafff0"/>`), true),
+    lag: frame('#0b0e14', '#3dff7a', glitchy(`<g fill="#eafff0">${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<circle cx="${f1(50 + Math.cos(i * Math.PI / 4) * 20)}" cy="${f1(50 + Math.sin(i * Math.PI / 4) * 20)}" r="${f1(2.4 + i * .55)}" opacity="${f1(.25 + i * .1)}"/>`).join('')}</g><path d="M56 56L56 78L62 72L67 82L71 80L66 70L74 70Z" fill="#fff" stroke="#140c20" stroke-width="2"/>`), true),
+  };
+  return A;
+})();
+function spellArtSymbols() { let h = ''; for (const id in SA) h += `<symbol id="i-sp_${id}" viewBox="0 0 100 100">${SA[id]}</symbol>`; return h; }
+
+/* ================= v10.6 · de nouveaux sorts : 10 sorts de base, et des sorts fous =================
+   Base : Bombe, Gel, Tornade, Orage, Bouclier, Surchauffe + Trou noir, Laser, Feu d'artifice, Arrêt du temps.
+   Fous (au marché noir, dès la manche 6, plus rares) : Ctrl+Z, Quitte ou double, Écran bleu, Erreur 404, Lag. */
+const SP106 = {
+  trounoir: { name: 'Trou noir', col: '#b48cff', cd: 20, price: 90, txt: `Un trou noir s'ouvre au cœur du plus gros paquet de cartes : il les aspire pendant 3${NB}s (60${NB}% des dégâts par seconde), puis implose (250${NB}%).` },
+  laser: { name: 'Laser', col: '#ff3d6e', cd: 18, price: 85, txt: `Un rayon laser fait le tour complet de ta base en 1,6${NB}s : 220${NB}% des dégâts à chaque carte qu'il balaie.` },
+  artifice: { short: 'Artifice', name: 'Feu d\'artifice', col: '#ff7eb6', cd: 20, price: 85, txt: `6 fusées filent sur 6 cartes et explosent en gerbes de couleurs : 250${NB}% des dégâts chacune, et autour.` },
+  temps: { short: 'Temps', name: 'Arrêt du temps', col: '#ffd36b', cd: 26, price: 95, txt: `Le temps s'arrête : toutes les cartes de la table sont figées 2,5${NB}s (les boss, moins longtemps).` },
+  ctrlz: { fou: 1, name: 'Ctrl+Z', col: '#3dff7a', cd: 30, price: 110, txt: 'Annule les 4 dernières secondes : les cartes reviennent là où elles étaient, et ta base récupère les PV perdus.' },
+  pileface: { fou: 1, short: 'Pile/face', name: 'Quitte ou double', col: '#3dff7a', cd: 20, price: 100, txt: `Pile (60${NB}%) : 400${NB}% des dégâts à toutes les cartes. Face : elles se soignent un peu (30${NB}% de leurs PV max)… mais ton lancer suivant sera forcément Pile, et double : 800${NB}%.` },
+  ecranbleu: { fou: 1, short: 'Écran bleu', name: 'Écran bleu', col: '#3dff7a', cd: 32, price: 110, txt: `Tout plante 1,5${NB}s, ta base aussi : plus rien ne bouge ni ne tire… puis chaque carte perd 30${NB}% de ses PV max (les boss, 10${NB}%).` },
+  erreur404: { fou: 1, short: '404', name: 'Erreur 404', col: '#3dff7a', cd: 30, price: 110, txt: '3 cartes au hasard deviennent introuvables : supprimées de la table (pas les boss).' },
+  lag: { fou: 1, name: 'Lag', col: '#3dff7a', cd: 24, price: 95, txt: `Les cartes rament pendant 6${NB}s : 65${NB}% plus lentes, elles saccadent, et la désynchro leur fait encaisser +50${NB}% de dégâts (les boss : 3${NB}s, 35${NB}% plus lents).` },
+};
+for (const id in SP106) PSPELLS[id] = Object.assign({ x106: 1 }, SP106[id], { cd: Math.round(SP106[id].cd * .7), cdK: 1 });
+// les nouveaux logos, pour tous les sorts
+for (const id in SA) if (PSPELLS[id]) PSPELLS[id].icon = 'sp_' + id;
+const SP_FOUS = Object.keys(SP106).filter(id => SP106[id].fou);
+
+function useSp106(id) {
+  const cb = G.cb, run = G.run, hl = G.headless;
+  if (!canUse(id)) return false;
+  const L = famTargets(), D = DM();
+  const go = () => { cb.ab[id] = spellCd(id); dbg('sp_' + id); };
+  switch (id) {
+    case 'trounoir': {
+      if (!L.length) return famNone();
+      let best = L[0], bn = -1;
+      for (const e of L) { let n = 0; for (const o of L) if (Math.hypot(o.x - e.x, o.y - e.y) < 30) n++; if (n > bn) { bn = n; best = e; } }
+      go();
+      // le trou s'ouvre entre le paquet et ta base, toujours bien dans la table (et à l'écran)
+      const br = Math.hypot(best.x, best.y), lim = 68, hx = br > lim ? best.x * lim / br : best.x, hy = br > lim ? best.y * lim / br : best.y;
+      (cb.holes106 || (cb.holes106 = [])).push({ x: hx, y: hy, t: 3, acc: 0 });
+      if (!hl) { fxPush({ type: 'hole106', s106: 1, x: hx, y: hy, life: 3.3, max: 3.3 }); Snd.whoosh(); Snd.roar(); shake(3); haptic(40); }
+      return true;
+    }
+    case 'laser': {
+      go();
+      const a0 = rand(0, TAU), T = 1.6, R = 118;
+      for (const e of cb.enemies) {
+        if (e.dead || e.ai === 'decoy' || Math.hypot(e.x, e.y) > R) continue;
+        let da = Math.atan2(e.y, e.x) - a0; da = ((da % TAU) + TAU) % TAU;
+        const hit = () => { if (e.dead) return; dealDmg(e, D * 2.2, { src: 'sp106' }); if (!hl) burst(e.x, e.y, '#ff6a8e', 6, 26, 1, .3); };
+        if (hl) hit(); else setTimeoutGame(hit, T * da / TAU);
+      }
+      if (!hl) { fxPush({ type: 'laser106', s106: 1, a0, R, life: T, max: T }); Snd.beam(); Snd.zap(); haptic(30); }
+      return true;
+    }
+    case 'artifice': {
+      if (!L.length) return famNone();
+      go();
+      const cols = ['#ff7eb6', '#ffe066', '#6ff2ff', '#9be15d', '#c9a8ff', '#ff9a3d'];
+      shuffle(L.slice()).slice(0, 6).forEach((e, k) => {
+        const x = e.x, y = e.y, c = cols[k % cols.length], dt = .38 + k * .13;
+        const boom = () => { queueExplosion(x, y, 16, D * 2.5, { color: 'dyn', src: 'sp106' }); if (!hl) { burst(x, y, c, 28, 75, 1.7, .9); burst(x, y, '#ffffff', 8, 40, 1, .5); Snd.pop(); } };
+        if (hl) boom(); else { fxPush({ type: 'rocket106', s106: 1, x, y, c, life: dt, max: dt }); setTimeoutGame(boom, dt); }
+      });
+      if (!hl) Snd.whoosh();
+      return true;
+    }
+    case 'temps': {
+      if (!L.length) return famNone();
+      go();
+      for (const e of cb.enemies) if (!e.dead) { freeze(e, 2.5); if (e.st && e.st.cast) interruptCast(e); }
+      cb.stopT = cb.t + 2.5;
+      if (!hl) { Snd.ice(); Snd.chime(); haptic(50); floater(0, -BAL.baseR - 10, 'ARRÊT DU TEMPS', '#ffd36b', 5); }
+      return true;
+    }
+    case 'ctrlz': {
+      const H = cb.hist;
+      if (!H || H.length < 2) { if (!hl) toast('Ctrl+Z : rien à annuler pour l\'instant.'); Snd.deny(); return false; }
+      const snap = H.find(h => h.t >= cb.t - 4.2) || H[0];
+      go();
+      const lost = Math.max(0, snap.hp - run.hp);
+      for (const e of cb.enemies) { if (e.dead) continue; const p = snap.pos.get(e.id); if (!p) continue; e.x = p[0]; e.y = p[1]; e.kbx = e.kby = 0; e.contact = false; }
+      for (const p of cb.eshots) if (!p.friendly) p.life = 0;
+      if (lost > 0) heal(lost);
+      if (!hl) { cb.glitchT = cb.t + .7; Snd.glitch(); Snd.whoosh(); haptic(60); floater(0, -BAL.baseR - 10, lost > 0 ? `CTRL+Z · +${Math.round(lost)} PV` : 'CTRL+Z', '#3dff7a', 5.4); }
+      return true;
+    }
+    case 'pileface': {
+      if (!L.length) return famNone();
+      go();
+      // quitte ou double : après un Face, le lancer suivant est forcément Pile, et double
+      const dbl = !!run.qod, pile = dbl || rnd() < .6;
+      if (pile) { run.qod = 0; famHitAll(dbl ? 8 : 4, { big: true }); }
+      else { run.qod = 1; for (const e of cb.enemies) if (!e.dead && e.ai !== 'decoy') e.hp = Math.min(e.maxHp, e.hp + e.maxHp * (e.boss ? .05 : .3)); }
+      if (!hl) { cb.glitchT = cb.t + .35; floater(0, -BAL.baseR - 12, pile ? (dbl ? 'PILE ! DOUBLE ×8' : 'PILE ! ×4') : 'FACE… prochain : PILE ×8', pile ? '#ffcc4d' : '#c3cde0', 5.6); if (pile) { cb.flash = .3; cb.flashCol = '255,214,90'; shake(7); Snd.jackpot(); } else Snd.malus(); Snd.coinFlip && Snd.coinFlip(); }
+      return true;
+    }
+    case 'ecranbleu': {
+      if (!L.length) return famNone();
+      go();
+      for (const e of cb.enemies) if (!e.dead) freeze(e, 1.5);
+      cb.bsodT = cb.t + 1.5; cb.turretStun = Math.max(cb.turretStun || 0, 1.5);
+      const crash = () => { for (const e of G.cb.enemies.slice()) if (!e.dead && e.ai !== 'decoy') dealDmg(e, e.maxHp * (e.boss ? .1 : .3), { src: 'sp106', big: true }); if (!hl) { shake(8); Snd.boom(); Snd.glitch(); } };
+      if (hl) crash(); else { setTimeoutGame(crash, 1.5); Snd.glitch(); haptic(80); }
+      return true;
+    }
+    case 'erreur404': {
+      const pool = L.filter(e => !e.boss);
+      if (!pool.length) return famNone();
+      go();
+      for (const e of shuffle(pool).slice(0, 3)) {
+        const x = e.x, y = e.y;
+        hitE(e, e.hp + 1, 'sp106');
+        if (!hl) { fxPush({ type: 'g404', s106: 1, x, y, life: .7, max: .7 }); floater(x, y - 6, '404', '#3dff7a', 4.4); }
+      }
+      if (!hl) { cb.glitchT = cb.t + .4; Snd.glitch(); }
+      return true;
+    }
+    case 'lag': {
+      if (!L.length) return famNone();
+      go();
+      for (const e of cb.enemies) if (!e.dead) { e.slowT = Math.max(e.slowT, e.boss ? 3 : 6); e.slowAmt = Math.max(e.slowAmt, e.boss ? .35 : .65); e.lagT = cb.t + (e.boss ? 3 : 6); }
+      cb.lagT = cb.t + 6;
+      if (!hl) { Snd.glitch(); floater(0, -BAL.baseR - 10, 'L A G . . .', '#3dff7a', 5); }
+      return true;
+    }
+  }
+  return false;
+}
+// chaque instant : le trou noir aspire, Ctrl+Z garde la mémoire des 5 dernières secondes
+function sp106Tick(dt) {
+  const cb = G.cb, run = G.run; if (!cb || cb.demo) return;
+  if (cb.holes106 && cb.holes106.length) {
+    const D = DM();
+    for (const h of cb.holes106) {
+      h.t -= dt; h.acc += dt;
+      for (const e of cb.enemies) {
+        if (e.dead || e.ai === 'decoy') continue;
+        const dx = h.x - e.x, dy = h.y - e.y, d = Math.hypot(dx, dy) || 1; if (d > 72) continue;
+        const k = (e.boss ? .15 : 1) * 320 * (1 - d / 80) * dt;
+        if (d > 3) { e.kbx += dx / d * k; e.kby += dy / d * k; }
+      }
+      if (h.acc >= .5) { h.acc -= .5; for (const e of cb.enemies.slice()) if (!e.dead && e.ai !== 'decoy' && Math.hypot(h.x - e.x, h.y - e.y) < 30) dealDmg(e, D * .3, { src: 'sp106' }); }
+      if (h.t <= 0) { queueExplosion(h.x, h.y, 24, D * 2.5, { color: 'dyn', src: 'sp106', kb: 60 }); if (!G.headless) { Snd.boom(); shake(6); burst(h.x, h.y, '#c9a8ff', 30, 70, 1.6, .7); } }
+    }
+    cb.holes106 = cb.holes106.filter(h => h.t > 0);
+  }
+  if (spellsOf(run).includes('ctrlz')) {
+    cb.histT = (cb.histT || 0) + dt;
+    if (cb.histT >= .25) {
+      cb.histT = 0;
+      const H = cb.hist || (cb.hist = []);
+      H.push({ t: cb.t, hp: run.hp, pos: new Map(cb.enemies.filter(e => !e.dead).map(e => [e.id, [e.x, e.y]])) });
+      while (H.length && H[0].t < cb.t - 5) H.shift();
+    }
+  }
+}
+// le pilote automatique (et la simulation)
+function botSp106(cb) {
+  const run = G.run, L = famTargets(), n = L.length, boss = L.some(e => e.boss), near = L.filter(e => Math.hypot(e.x, e.y) < 50).length;
+  for (const id of spellsOf(run)) {
+    if (!PSPELLS[id].x106 || !canUse(id)) continue;
+    if ((id === 'trounoir' || id === 'artifice' || id === 'pileface' || id === 'ecranbleu' || id === 'laser') && (n >= 5 || boss)) useSp106(id);
+    else if ((id === 'temps' || id === 'lag') && (near >= 4 || boss)) useSp106(id);
+    else if (id === 'erreur404' && n >= 3) useSp106(id);
+    else if (id === 'ctrlz' && cb.hist && cb.hist.length > 8 && cb.hist[0].hp - run.hp > run.maxHp * .2) useSp106(id);
+  }
+}
+// ce que l'on voit
+function drawFx106(fx, a, t) {
+  const p = 1 - a;
+  switch (fx.type) {
+    case 'hole106': {
+      const k = Math.min(1, p * 5) * (a < .1 ? a * 10 : 1), r = 13 * k;
+      ctx.save(); ctx.translate(fx.x, fx.y);
+      for (let i = 0; i < 3; i++) { ctx.rotate(t * (2.2 + i)); ctx.strokeStyle = `rgba(${i === 1 ? '255,126,182' : '180,140,255'},${.55 * k})`; ctx.lineWidth = 2.2 - i * .5; ctx.beginPath(); ctx.ellipse(0, 0, r * (1.9 + i * .5), r * (.7 + i * .2), 0, 0, TAU); ctx.stroke(); }
+      ctx.fillStyle = '#05020a'; ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.fill();
+      ctx.strokeStyle = `rgba(255,190,240,${.8 * k})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.stroke();
+      ctx.restore();
+      return true;
+    }
+    case 'laser106': {
+      const ang = fx.a0 + TAU * p, R = fx.R;
+      ctx.save(); ctx.rotate(ang);
+      ctx.fillStyle = 'rgba(255,61,110,.35)'; ctx.fillRect(BAL.baseR, -4, R, 8);
+      ctx.fillStyle = 'rgba(255,200,215,.9)'; ctx.fillRect(BAL.baseR, -1.3, R, 2.6);
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(BAL.baseR, 0, 3.4, 0, TAU); ctx.fill();
+      ctx.restore();
+      // la traînée
+      ctx.strokeStyle = 'rgba(255,61,110,.18)'; ctx.lineWidth = R - BAL.baseR; ctx.beginPath(); ctx.arc(0, 0, (R + BAL.baseR) / 2, ang - .5, ang); ctx.stroke();
+      return true;
+    }
+    case 'rocket106': {
+      const x = fx.x * p, y = fx.y * p - Math.sin(p * Math.PI) * 26;
+      ctx.strokeStyle = fx.c; ctx.globalAlpha = .6; ctx.lineWidth = 1.2; ctx.setLineDash([1.5, 1.5]);
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(fx.x / 2, fx.y / 2 - 26, x, y); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      ctx.fillStyle = '#fff3e6'; ctx.beginPath(); ctx.arc(x, y, 1.8, 0, TAU); ctx.fill();
+      ctx.fillStyle = fx.c; ctx.beginPath(); ctx.arc(x, y, 1.1, 0, TAU); ctx.fill();
+      return true;
+    }
+    case 'g404': {
+      ctx.fillStyle = `rgba(61,255,122,${.7 * a})`;
+      for (let i = 0; i < 9; i++) { const s2 = rand(1.5, 4); ctx.fillRect(fx.x + rand(-9, 9), fx.y + rand(-12, 12), s2 * 2, s2); }
+      return true;
+    }
+    // v10.8 · la base se fend quand elle tombe
+    case 'crack108': {
+      const k = Math.min(1, (fx.max - fx.life) * 3.2), R = BAL.baseR + 1.2;
+      const C = fx.C || (fx.C = [0, 1, 2, 3, 4].map(i => { const a0 = -1.2 + i * 1.33 + rand(-.25, .25), pts = [[0, 0]]; let r = 0; while (r < R) { r += rand(1.6, 3); const a = a0 + rand(-.35, .35); pts.push([Math.cos(a) * Math.min(r, R), Math.sin(a) * Math.min(r, R)]); } return pts; }));
+      ctx.save(); ctx.translate(fx.x, fx.y); ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      for (const pts of C) {
+        const n = Math.max(2, Math.ceil(pts.length * k));
+        for (const [w, col] of [[1.5, 'rgba(20,4,10,.9)'], [.55, 'rgba(255,225,160,.85)']]) { ctx.lineWidth = w; ctx.strokeStyle = col; ctx.beginPath(); for (let i = 0; i < n; i++) ctx[i ? 'lineTo' : 'moveTo'](pts[i][0], pts[i][1]); ctx.stroke(); }
+      }
+      ctx.restore();
+      return true;
+    }
+  }
+  return false;
+}
+// par-dessus tout : le temps arrêté (sépia), l'écran bleu, et le glitch des sorts fous
+function drawOverlay106(cb) {
+  const W2 = cv.width, H2 = cv.height;
+  if (cb.stopT > cb.t) { const k = Math.min(1, (cb.stopT - cb.t) * 2); ctx.fillStyle = `rgba(120,96,60,${.22 * k})`; ctx.fillRect(0, 0, W2, H2); }
+  if (cb.bsodT > cb.t) {
+    ctx.fillStyle = 'rgba(30,90,200,.62)'; ctx.fillRect(0, 0, W2, H2);
+    const fs = Math.round(Math.min(W2, H2) * .12);
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.font = `700 ${fs}px ${FONT}`; ctx.fillText(':(', W2 * .14, H2 * .3);
+    ctx.font = `600 ${Math.round(fs * .26)}px ${FONT}`; ctx.fillText('Les cartes ont rencontré un problème.', W2 * .14, H2 * .3 + fs * 1.2);
+    ctx.fillText(`Redémarrage… ${Math.min(100, Math.round((1 - (cb.bsodT - cb.t) / 1.5) * 100))} %`, W2 * .14, H2 * .3 + fs * 1.6);
+  }
+  if (cb.glitchT > cb.t) {
+    for (let i = 0; i < 6; i++) { const y = Math.random() * H2, h = Math.random() * 18 + 4; ctx.fillStyle = i % 2 ? 'rgba(61,255,122,.12)' : 'rgba(255,47,180,.12)'; ctx.fillRect(0, y, W2, h); }
+  }
+}
+
+/* ================= v10.7 · le bar de Zaza : plein de cocktails, des boissons de base plus fortes, et des bumpers de flipper ================= */
+// ---- les logos des nouvelles boissons (même style que les autres : une couleur) ----
+const ckStarD = (cx, cy, r1, r2, n, rot) => { let d = ''; for (let i = 0; i < n * 2; i++) { const a = (rot == null ? -Math.PI / 2 : rot) + i * Math.PI / n, r = i % 2 ? r2 : r1; d += (i ? 'L' : 'M') + (Math.round((cx + Math.cos(a) * r) * 10) / 10) + ' ' + (Math.round((cy + Math.sin(a) * r) * 10) / 10); } return d + 'Z'; };
+const ckCirc = (cx, cy, r) => `M${cx - r} ${cy}A${r} ${r} 0 1 0 ${cx + r} ${cy}A${r} ${r} 0 1 0 ${cx - r} ${cy}Z`;
+const ckDisco = (() => { let d = ckCirc(50, 58, 30); for (let i = -3; i <= 3; i++) for (let j = -3; j <= 3; j++) { const x = 50 + i * 8.4, y = 58 + j * 8.4; if (Math.hypot(i * 8.4, j * 8.4) < 22) d += `M${x - 2.6} ${y - 2.6}h5.2v5.2h-5.2z`; } return d; })();
+Object.assign(ICONS, {
+  dk_ricochet: [{ d: 'M12 86L36 50L56 74L72 46', s: 8 }, { d: 'M62 50L82 24Q90 14 93 17Q96 20 88 30L68 56Z', f: 1 }, { d: 'M36 50L24 44M36 50L32 36M56 74L64 86M56 74L70 76', s: 4 }],
+  dk_pyro: [{ d: 'M50 42C66 42 72 56 72 68C72 82 62 92 50 92C38 92 28 82 28 68C28 56 34 42 50 42ZM41 55L46 60L41 65L36 60ZM59 55L64 60L59 65L54 60ZM50 66L55 71L50 76L45 71ZM41 77L46 82L41 87L36 82ZM59 77L64 82L59 87L54 82Z', f: 1, e: 1 }, { d: 'M50 40C38 33 40 22 47 7C48 17 54 19 54 25C57 21 57 15 57 15C65 24 64 35 50 40Z', f: 1 }],
+  dk_critik: [{ d: ckStarD(50, 50, 47, 27, 8) + 'M45 26H55L53 57H47ZM45 63H55V73H45Z', f: 1, e: 1 }],
+  dk_lagon: [{ d: 'M50 8C60 26 76 42 76 62A26 26 0 0 1 24 62C24 42 40 26 50 8Z', s: 7 }, { d: 'M50 46V78M36 54L64 70M64 54L36 70', s: 6 }],
+  dk_spritz: [{ d: 'M28 12H72C72 40 63 54 50 54C37 54 28 40 28 12Z', s: 6 }, { d: 'M50 54V84M34 88H66', s: 6 }, { d: 'M56 18L42 36H51L45 50L62 30H52L58 18Z', f: 1 }],
+  dk_flipfizz: [{ d: 'M12 76L62 56A10 10 0 1 1 68 74L16 84A4.5 4.5 0 0 1 12 76Z', f: 1 }, { d: ckCirc(75, 30, 11), f: 1 }, { d: ckCirc(43, 40, 5) + ckCirc(32, 22, 4) + ckCirc(55, 14, 3), s: 4 }],
+  dk_grandcru: [{ d: 'M43 6H57V26C66 30 70 37 70 46V88A6 6 0 0 1 64 94H36A6 6 0 0 1 30 88V46C30 37 34 30 43 26ZM50 79C40 71 36 66 36 60C36 55 40 52 44 52C47 52 49 54 50 56C51 54 53 52 56 52C60 52 64 55 64 60C64 66 60 71 50 79Z', f: 1, e: 1 }],
+  dk_bmary: [{ d: 'M24 30H68L62 92H30ZM46 78C38 72 35 68 35 63C35 59 38 56 41.5 56C44 56 45.5 57.5 46 59C46.5 57.5 48 56 50.5 56C54 56 57 59 57 63C57 68 54 72 46 78Z', f: 1, e: 1 }, { d: 'M56 32L76 6', s: 6 }, { d: 'M76 6L88 3M76 6L80 18M70 14L80 11', s: 4 }],
+  dk_tisane: [{ d: 'M16 44H70V56C70 72 60 82 43 82C26 82 16 72 16 56Z', f: 1 }, { d: 'M70 50C85 50 85 68 68 68', s: 7 }, { d: 'M8 90H82', s: 6 }, { d: 'M32 36C28 30 36 26 32 18M48 36C44 30 52 26 48 18', s: 5 }],
+  dk_cactus: [{ d: 'M42 90V24A8 8 0 0 1 58 24V90ZM42 62H30A7 7 0 0 1 23 55V40A5 5 0 0 1 33 40V52H42ZM58 54H67V36A5 5 0 0 1 77 36V54A8 8 0 0 1 69 62H58Z', f: 1 }, { d: 'M22 92H78', s: 6 }, { d: 'M36 30L42 33M64 30L58 33M36 44L42 46M64 44L58 46', s: 3 }],
+  dk_bumper: [{ d: 'M10 50A40 40 0 1 0 90 50A40 40 0 1 0 10 50', s: 7 }, { d: 'M24 50A26 26 0 1 0 76 50A26 26 0 1 0 24 50', s: 5 }, { d: ckStarD(50, 50, 16, 7, 5), f: 1 }],
+  dk_disco: [{ d: ckDisco, f: 1, e: 1 }, { d: 'M50 4V28', s: 4 }, { d: ckStarD(84, 20, 10, 3, 4, 0) + ckStarD(15, 30, 7, 2.2, 4, 0), f: 1 }],
+  dk_ressort: [{ d: 'M28 90H72L32 78L68 66L32 54L68 42L28 32H72', s: 6 }, { d: ckCirc(50, 16, 10), f: 1 }],
+  dk_triplesec: [{ d: ckCirc(32, 66, 16) + ckCirc(27, 61, 4.5) + ckCirc(68, 66, 16) + ckCirc(63, 61, 4.5) + ckCirc(50, 36, 16) + ckCirc(45, 31, 4.5), f: 1, e: 1 }],
+  dk_kir: [{ d: 'M12 40L30 58L42 26L50 52L58 26L70 58L88 40L78 84H22ZM46 70A4 4 0 1 0 54 70A4 4 0 1 0 46 70ZM30 71A3 3 0 1 0 36 71A3 3 0 1 0 30 71ZM64 71A3 3 0 1 0 70 71A3 3 0 1 0 64 71Z', f: 1, e: 1 }],
+  dk_mystere: [{ d: 'M32 34C32 16 68 14 68 34C68 47 52 47 52 62', s: 11 }, { d: ckCirc(52, 80, 7.5) + ckStarD(84, 22, 9, 2.6, 4, 0) + ckStarD(16, 64, 7, 2.2, 4, 0), f: 1 }],
+  dk_rhum: [{ d: 'M30 10H70C77 30 77 70 70 90H30C23 70 23 30 30 10ZM29 26H71V33H29ZM29 67H71V74H29Z', f: 1, e: 1 }],
+  dk_absinthe: [{ d: 'M47 46C34 16 10 20 13 37C15 51 33 55 47 50ZM53 46C66 16 90 20 87 37C85 51 67 55 53 50ZM47 56C35 59 22 70 28 80C34 89 45 75 47 60ZM53 56C65 59 78 70 72 80C66 89 55 75 53 60Z', f: 1 }, { d: 'M50 36V80', s: 7 }, { d: ckCirc(50, 30, 6), f: 1 }],
+  dk_champagne: [{ d: 'M30 94V54C30 46 34 40 40 37V22H52V37C58 40 62 46 62 54V94Z', f: 1 }, { d: 'M41 6H51V15H41Z', f: 1 }, { d: ckCirc(68, 26, 3) + ckCirc(76, 14, 2.5) + ckCirc(62, 12, 2) + ckCirc(80, 32, 2), s: 3 }, { d: 'M36 8L31 3M56 8L61 3', s: 3 }],
+});
+
+// ---- les nouvelles boissons ----
+const CK_NEW = {
+  // le canon
+  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [48, 78], icon: 'dk_ricochet', txt: lv => `Ta balle ricoche ensuite sur une autre carte (${lv} fois, 60${NB}% des dégâts)`, quip: ['Au shaker, pas à la cuillère. Comme tes balles.', 'Elle rebondit, et elle rebondit encore.'] },
+  pyro: { cat: 'canon', name: 'Piña Pyro', glass: 'tiki', liq: '#ffb33a', gar: 'fire', max: 3, price: [32, 52, 78], icon: 'dk_pyro', txt: lv => `${[0, 15, 25, 35][lv]}${NB}% de tes balles mettent le feu (40${NB}% des dégâts par seconde, 3${NB}s)`, quip: ['Ananas flambé. Ne souffle pas dessus.', 'Attention, le verre aussi est chaud.'] },
+  critik: { cat: 'canon', name: 'Tequila Boum', glass: 'shooter', liq: '#ffe08a', gar: 'lime', max: 3, price: [30, 50, 76], icon: 'dk_critik', txt: lv => `+${7 * lv}${NB}% de coups critiques${lv >= 3 ? ', et un critique fait ×3' : ''}`, quip: ['Sel, citron, BOUM.', 'Un coup sec. Comme un critique.'] },
+  lagon: { cat: 'canon', name: 'Blue Lagoon', glass: 'hurricane', liq: '#3fb8ff', gar: 'orange', max: 2, price: [28, 46], icon: 'dk_lagon', txt: lv => `Tes balles glacent : la carte touchée ralentit de ${[0, 20, 35][lv]}${NB}% pendant 1,5${NB}s`, quip: ['Bleu comme un lagon. Froid comme mon ex.', 'Ça glace les dents. Et les cartes.'] },
+  // le flipper
+  spritz: { cat: 'rateau', name: 'Spritz Électrique', glass: 'wine', liq: '#ff7a3d', gar: 'spark', max: 2, price: [42, 68], icon: 'dk_spritz', txt: lv => `Chaque parade lance un éclair qui saute sur ${2 * lv} cartes (80${NB}% des dégâts)`, quip: ['Ça pétille. Littéralement : touche pas le verre.', 'L\'apéro qui fait des étincelles.'] },
+  flipfizz: { cat: 'rateau', name: 'Flip Fizz', glass: 'flute', liq: '#ffe8a8', gar: 'ball', max: 2, price: [50, 80], icon: 'dk_flipfizz', txt: lv => `${[0, 20, 35][lv]}${NB}% de chances qu'une parade lance une BILLE bonus (gratuite)`, quip: ['Des bulles et des billes. Mon cocktail préféré.', 'Ça fizz, ça flippe.'] },
+  // la base
+  grandcru: { cat: 'base', name: 'Grand Cru', glass: 'wine', liq: '#8a1035', gar: 'none', max: 3, price: [45, 70, 100], icon: 'dk_grandcru', txt: lv => `PV max de la base +${8 * lv}${NB}%`, quip: ['Un grand millésime. Il te rend plus solide, pas plus malin.', 'Garde de cave : 30 ans. Garde de base : toute la partie.'] },
+  bmary: { cat: 'base', name: 'Bloody Mary', glass: 'highball', liq: '#d61e3c', gar: 'celery', max: 3, price: [36, 56, 82], icon: 'dk_bmary', txt: lv => `Chaque carte abattue soigne ta base de ${dec(.4 * lv)}${NB}PV`, quip: ['Mary te salue. Elle aime quand ça saigne.', 'Avec du céleri. Pour la santé.'] },
+  tisane: { cat: 'base', name: 'Tisane de Mamie', glass: 'tea', liq: '#b5d66b', gar: 'steam', max: 2, price: [40, 66], icon: 'dk_tisane', txt: lv => `Ta base se soigne de ${dec(.5 * lv)}${NB}PV par seconde, en plein combat`, quip: ['La recette de ma grand-mère. Elle a enterré tout le monde.', 'Verveine, tilleul, et un secret.'] },
+  cactus: { cat: 'base', name: 'Cactus Margarita', glass: 'margarita', liq: '#9be15d', gar: 'salt', max: 2, price: [32, 54], icon: 'dk_cactus', txt: lv => `Les cartes qui frappent ta base se piquent : ${150 * lv}${NB}% des dégâts en retour`, quip: ['Ça pique. C\'est le principe.', 'Le sel sur le bord, les épines dans le verre.'] },
+  // la BILLE
+  disco: { cat: 'bille', name: 'Disco Punch', glass: 'punch', liq: '#c9a8ff', gar: 'disco', max: 3, price: [30, 50, 76], icon: 'dk_disco', txt: lv => `La BILLE fait +${25 * lv}${NB}% de dégâts`, quip: ['Ça tourne, ça brille, ça frappe.', 'Mets tes pattes d\'eph.'] },
+  ressort: { cat: 'bille', name: 'Ressort Sour', glass: 'coupe', liq: '#d6f56b', gar: 'lime', max: 2, price: [30, 52], icon: 'dk_ressort', txt: lv => `La BILLE se recharge ${[0, 20, 35][lv]}${NB}% plus vite`, quip: ['Acide. Ça te met un coup de ressort.', 'Boing.'] },
+  triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [95], icon: 'dk_triplesec', txt: () => `Chaque BILLE part avec 2 billes bonus (60${NB}% des dégâts)`, quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
+  // les spécialités de Zaza (une de temps en temps, sur le comptoir)
+  kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or gagné`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
+  mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [70], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
+  rhum: { cat: 'zaza', name: 'Rhum Arrangé', glass: 'tumbler', liq: '#c98a3a', gar: 'ice', max: 3, price: [40, 62, 90], icon: 'dk_rhum', txt: lv => `Tes sorts se rechargent ${10 * lv}${NB}% plus vite`, quip: ['Vanille, cannelle, et un peu de magie.', 'Il a macéré dix ans. Toi, tu attendras moins.'] },
+  absinthe: { cat: 'zaza', name: 'La Fée Verte', glass: 'wine', liq: '#7dff6b', gar: 'star', max: 1, price: [85], icon: 'dk_absinthe', txt: () => 'Tous tes sorts sont prêts au début de chaque manche', quip: ['Si tu vois une fée, c\'est normal.', 'Elle murmure des sorts. Écoute-la.'] },
+  champagne: { cat: 'zaza', name: 'Champagne !', glass: 'flute', liq: '#ffe8a8', gar: 'bubbles', max: 1, price: [60], icon: 'dk_champagne', txt: () => `Une manche finie sans perdre un seul PV rapporte +25${NB}or`, quip: ['On fête quoi ? On verra bien.', 'Sans une égratignure, et ça mousse.'] },
+};
+Object.assign(UPG, CK_NEW);
+Object.assign(UPG_CATS, { bille: { name: 'BILLE', col: '#c9a8ff' }, zaza: { name: 'Spécialité', col: '#ff5fa2' } });
+// les boissons de base, plus fortes (v10.7) et dans de nouveaux verres
+Object.assign(UPG.portee, { glass: 'highball', gar: 'lime', txt: lv => `Portée du canon +${16 * lv}${NB}%` });
+Object.assign(UPG.cadence, { glass: 'pop', gar: 'straw', txt: lv => `Cadence de tir +${18 * lv}${NB}%` });
+Object.assign(UPG.calibre, { glass: 'tumbler', gar: 'ice', txt: lv => `Balles plus grosses : +${18 * lv}${NB}% de dégâts${lv >= 3 ? ', et elles traversent une carte' : ''}` });
+Object.assign(UPG.double, { glass: 'shooter', gar: 'cherry', txt: () => `Le canon tire une 2e balle (80${NB}% des dégâts)` });
+Object.assign(UPG.vitesse, { glass: 'pop', gar: 'bubbles', txt: lv => `Balles ${35 * lv}${NB}% plus rapides (utile contre le vent)` });
+Object.assign(UPG.taille, { glass: 'coupe', gar: 'orange', txt: lv => `Flipper ${22 * lv}${NB}% plus large` });
+Object.assign(UPG.renvoi, { glass: 'coupe', gar: 'cherry', txt: lv => `Une parade parfaite RENVOIE le tir (×${[0, 4, 6, 9][lv]} dégâts)${lv >= 3 ? ' et il rebondit sur une carte' : ''}` });
+Object.assign(UPG.double_r, { glass: 'martini', gar: 'cherry', txt: () => `Un 2e flipper dans ton dos. Chacun a 25${NB}% de solidité en moins` });
+Object.assign(UPG.solide, { glass: 'tumbler', gar: 'none', txt: lv => `Flipper +${2 * lv} de solidité` });
+Object.assign(UPG.huile, { glass: 'coupe', gar: 'mint', txt: lv => `Flipper ${25 * lv}${NB}% plus vif, reconstruction ${30 * lv}${NB}% plus rapide` });
+Object.assign(UPG.etage, { glass: 'mug', gar: 'none' });
+Object.assign(UPG.pv, { glass: 'mug', gar: 'cherry', max: 5, price: [25, 40, 58, 80, 105], txt: lv => `PV max de la base +${25 * lv}` });
+Object.assign(UPG.remontant, { glass: 'tea', gar: 'mint', max: 3, price: [26, 42, 62], txt: lv => `+${15 * lv}${NB}% de soin entre les manches` });
+// le Barbelé devient le Pop Fizz : des bumpers de flipper
+Object.assign(UPG.barriere, { cat: 'bille', name: 'Pop Fizz', glass: 'pop', liq: '#ff5fa2', gar: 'ball', icon: 'dk_bumper', txt: lv => `${[0, 3, 5, 7][lv]} bumpers de flipper : la BILLE y rebondit à toute vitesse, les cartes et les tirs aussi${lv >= 3 ? ', avec une onde de choc' : ''}. Allume-les tous : BILLE bonus !`, quip: ['Des bumpers ! Comme au vieux flipper du fond de la salle.', 'Pop, pop, pop. Ça tilte, hein ?'] });
+// trois shots de plus
+Object.assign(SHOTS, {
+  rebond: { name: 'Shot Rebond', price: 14, liq: '#c9a8ff', icon: 'bille', txt: 'Une BILLE de plus en réserve pendant une manche' },
+  vampire: { name: 'Shot Vampire', price: 13, liq: '#9b1e3e', icon: 'vampire', txt: 'Chaque carte abattue soigne 1 PV pendant une manche' },
+  beton: { name: 'Shot Béton', price: 11, liq: '#a8a294', icon: 'rempart', txt: 'Flipper +3 de solidité pendant une manche' },
+});
+const CK_SHOTS = ['piment', 'turbo', 'fer', 'poudre', 'givre', 'recharge', 'dore', 'rebond', 'vampire', 'beton'];
+
+// ---- ce que les cocktails changent (appelé dans computeStats) ----
+function ckStats(s, U, bo, run) {
+  s.rico = U('ricochet'); s.pyro = [0, .15, .25, .35][U('pyro')] || 0; s.chill = [0, .2, .35][U('lagon')] || 0;
+  if (U('critik')) { s.crit += .07 * U('critik'); if (U('critik') >= 3) s.critMult = Math.max(s.critMult, 3); }
+  s.spritz = 2 * U('spritz'); s.flipfizz = [0, .2, .35][U('flipfizz')] || 0;
+  s.hpMul *= 1 + .08 * U('grandcru');
+  s.bmary = .4 * U('bmary') + (bo.vampire ? 1 : 0);
+  s.regen += .5 * U('tisane');
+  s.cactus = 1.5 * U('cactus');
+  s.bilDmgMul *= 1 + .25 * U('disco');
+  s.bilCdMul *= [1, .8, .65][U('ressort')] || 1;
+  s.bilExtra = U('triplesec') ? 2 : 0;
+  s.goldMul *= 1 + .12 * U('kir');
+  s.rhum = 1 - .1 * U('rhum');
+  s.champagne = U('champagne') > 0;
+  if (bo.rebond) s.bilDeck = (s.bilDeck || 0) + 1;
+  if (bo.beton) s.rakeDurAdd = (s.rakeDurAdd || 0) + 3;
+}
+// les balles du canon
+function ckBulletHit(e, b) {
+  const cb = G.cb, s = cb.stats;
+  if (s.pyro && !e.dead && rnd() < s.pyro) { burnE(e, DM() * .4, 3); if (!G.headless && rnd() < .5) burst(e.x, e.y, '#ff8a3d', 4, 20, .8, .3); }
+  if (s.chill && !e.dead) { e.slowT = Math.max(e.slowT, 1.5); e.slowAmt = Math.max(e.slowAmt, e.boss ? s.chill * .5 : s.chill); }
+  if (s.rico && (b.rico || 0) < s.rico) {
+    const nx = nearestTo(e.x, e.y, 60, true, e);
+    if (nx && !(b.hitIds && b.hitIds.includes(nx.id))) {
+      const a = Math.atan2(nx.y - e.y, nx.x - e.x), sp = b.speed || s.bulletSpd;
+      cb.bullets.push({ kind: 'b', x: e.x, y: e.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, speed: sp, tgt: nx, dmg: b.dmg * .6, crit: false, life: 1.2, extra: true, pierce: 0, hitIds: [e.id], rico: (b.rico || 0) + 1, size: (b.size || 1) * .85 });
+      if (!G.headless) { Snd.ballHit(.3); burst(e.x, e.y, '#4aa8ff', 3, 18, .7, .2); }
+    }
+  }
+}
+// une parade
+function ckParry(p, rk) {
+  const cb = G.cb, s = cb.stats;
+  if (s.spritz) {
+    const hit = arcChain({ id: -1, x: p.x, y: p.y }, s.spritz, DM() * .8, { src: 'spritz' });
+    if (hit && !G.headless) floater(p.x * 1.8, p.y * 1.8 - 4, 'SPRITZ !', '#ff9a3d', 3.8);
+  }
+  if (s.flipfizz && cb.bil && cb.bil.balls.length < 6 && rnd() < s.flipfizz) {
+    bilBonus((rk || cb.rake).ang, .7, true);
+    if (!G.headless) { floater(p.x * 1.8, p.y * 1.8 - 8, 'FLIP FIZZ ! BILLE BONUS', '#ffe8a8', 4.2); Snd.cue(.9); }
+  }
+}
+// le Cocktail Mystère : un shot offert à chaque manche
+function ckMystere(run) {
+  if (!(run.up && run.up.mystere)) return;
+  const ids = CK_SHOTS.filter(id => SHOTS[id] && !run.boost[id]); if (!ids.length) return;
+  const id = pick(ids); run.boost[id] = 1; run.mystShot = id;
+  if (!G.headless) setTimeout(() => { if (G.cb && !G.cb.ended && G.mode === 'combat') { floater(0, -BAL.baseR - 16, 'COCKTAIL MYSTÈRE : ' + SHOTS[id].name.toUpperCase(), '#c9a8ff', 4.6); Snd.cue(.6); } }, 1400);
+}
+// le Champagne : une manche sans une égratignure
+function ckChampagne(run, cb, s, res) {
+  if (!s.champagne || cb.demo || ptsOf(cb).hurt) return;
+  const g = 25; run.gold += g; run.stats.gold += g;
+  res.notes.push('Champagne ! Manche sans une égratignure : +' + g + ' or');
+}
+// le Rhum Arrangé : tous les sorts se rechargent plus vite
+function spellCd(id) { const s = G.cb && G.cb.stats; return spellCd0(id) * (s && s.rhum ? s.rhum : 1); }
+// la Fée Verte : les sorts sont prêts au début de la manche
+const ckFee = run => !!(run.up && run.up.absinthe);
+
+/* ---- les bumpers de flipper (le Pop Fizz, qui remplace le Barbelé) ---- */
+const BUMP = { R: 5.4, kick: 225, vmax: 310, kb: 100, dmg: .35, cdE: .7, tilt: 3.5 };
+const BUMP_COL = [['#ff3d6e', '#ffd0dc', '255,61,110'], ['#4aa8ff', '#d6ecff', '74,168,255'], ['#ffcc4d', '#fff3c4', '255,204,77']];
+function buildPosts() {
+  const cb = G.cb, n = cb.stats.posts, lv = (G.run && G.run.up && G.run.up.barriere) || 0;
+  cb.posts = [];
+  if (!n) return;
+  const rr = n >= 7 ? 41 : n >= 5 ? 38 : 35;
+  for (let k = 0; k < n; k++) {
+    const a = -Math.PI / 2 + Math.PI / n + k * TAU / n;
+    cb.posts.push({ ang: a, x: Math.cos(a) * rr, y: Math.sin(a) * rr, r: BUMP.R, hp: 1, max: 1, hit: 0, tiltT: -9, lit: false, col: k % 3, last: {}, lv });
+  }
+}
+// les cartes rebondissent sur les bumpers ; un boss les fait « tilter »
+function postCollisions() {
+  const cb = G.cb;
+  for (const p of cb.posts) {
+    if (p.tiltT > cb.t) continue;
+    for (const e of cb.enemies) {
+      if (e.dead || e.deal > .15 || e.ai === 'decoy') continue;
+      const dx = e.x - p.x, dy = e.y - p.y, rr = e.r * .85 + p.r, d2 = dx * dx + dy * dy;
+      if (d2 >= rr * rr) continue;
+      if (e.boss) { bumpTilt(p); break; }
+      const d = Math.sqrt(d2) || .001, nx = dx / d, ny = dy / d;
+      e.x = p.x + nx * rr; e.y = p.y + ny * rr;
+      if ((p.last[e.id] || 0) > cb.t) continue;
+      p.last[e.id] = cb.t + BUMP.cdE;
+      if (e.ai !== 'guard') { e.kbx += nx * BUMP.kb; e.kby += ny * BUMP.kb; }
+      e.stunT = Math.max(e.stunT, .25);
+      hitE(e, DM() * BUMP.dmg * (p.lv >= 2 ? 1.5 : 1), 'bumper');
+      bumpPop(p, p.x + nx * p.r, p.y + ny * p.r, false);
+    }
+  }
+}
+// la BILLE : le bumper la renvoie à toute vitesse, et s'allume
+function bumpBall(b) {
+  const cb = G.cb;
+  for (const p of cb.posts) {
+    if (p.tiltT > cb.t) continue;
+    const dx = b.x - p.x, dy = b.y - p.y, rr = b.r + p.r, d2 = dx * dx + dy * dy;
+    if (d2 >= rr * rr) continue;
+    const d = Math.sqrt(d2) || .001, nx = dx / d, ny = dy / d;
+    b.x = p.x + nx * (rr + .1); b.y = p.y + ny * (rr + .1);
+    let vn = b.vx * nx + b.vy * ny;
+    if (vn < 0) { b.vx -= 2 * vn * nx; b.vy -= 2 * vn * ny; vn = -vn; }
+    const kick = BUMP.kick * .8;
+    if (vn < kick) { b.vx += nx * (kick - vn); b.vy += ny * (kick - vn); }
+    const sp = Math.hypot(b.vx, b.vy); if (sp > BUMP.vmax) { b.vx *= BUMP.vmax / sp; b.vy *= BUMP.vmax / sp; }
+    if (b.bumpP === p && (b.bumpT || 0) > b.t) continue;
+    b.bumpP = p; b.bumpT = b.t + .08;
+    b.bumps = (b.bumps || 0) + 1;
+    if (b.bumps <= 4) b.dm *= 1.05;
+    b.life = Math.min(BAL.bilLife + 3, b.life + .15);
+    G.run.stats.bumps = (G.run.stats.bumps || 0) + 1;
+    bumpPop(p, p.x + nx * p.r, p.y + ny * p.r, true);
+    if (!p.lit) { p.lit = true; if (cb.posts.every(q => q.lit || q.tiltT > cb.t)) bumpJackpot(); }
+  }
+}
+function bumpPop(p, x, y, ball) {
+  const cb = G.cb;
+  p.hit = .22;
+  if (p.lv >= 3) {
+    for (const e of enemiesNear(p.x, p.y, 14)) if (!e.boss) { hitE(e, DM() * .35, 'bumper'); const dd = Math.hypot(e.x - p.x, e.y - p.y) || 1; kb(e, (e.x - p.x) / dd, (e.y - p.y) / dd, 60); }
+    if (!G.headless) ringFx(p.x, p.y, p.r, 17, BUMP_COL[p.col][2], .3);
+  }
+  if (G.headless || cb.demo) return;
+  Snd.bumper(ball);
+  fxPush({ type: 'ring', x: p.x, y: p.y, r0: p.r, r1: p.r + (ball ? 8 : 5), col: ball ? '255,255,255' : BUMP_COL[p.col][2], life: .22, max: .22 });
+  burst(x, y, BUMP_COL[p.col][0], ball ? 7 : 4, 34, .9, .3);
+  if (ball) { haptic(12); shake(.9); }
+}
+// tous les bumpers allumés : BILLE bonus et or
+function bumpJackpot() {
+  const cb = G.cb, n = cb.posts.length;
+  for (const q of cb.posts) { q.lit = false; q.hit = .6; }
+  cb.bumpJack = (cb.bumpJack || 0) + 1;
+  addGold(n, 'bumper');
+  bilBonus(rand(0, TAU), .8, false);
+  if (G.headless) return;
+  floater(0, -BAL.baseR - 18, 'TOUS ALLUMÉS ! BILLE BONUS', '#ff5fa2', 5.6);
+  Snd.bumperJack(); shake(3); haptic(60);
+  for (const q of cb.posts) ringFx(q.x, q.y, q.r, q.r + 12, '255,95,162', .5);
+  coinBurst(0, -BAL.baseR - 6);
+}
+function bumpTilt(p) {
+  const cb = G.cb; if (p.tiltT > cb.t) return;
+  p.tiltT = cb.t + BUMP.tilt; p.lit = false;
+  if (!G.headless && !cb.demo) { floater(p.x, p.y - p.r - 3, 'TILT !', '#ff3d6e', 4.4); Snd.tilt(); burst(p.x, p.y, '#ff3d6e', 10, 30, 1, .4); }
+}
+function hitPost(p) { bumpTilt(p); }   // le séisme fait tilter les bumpers
+// les tirs ennemis rebondissent sur les bumpers et repartent vers leur tireur
+function bumpShot(p) {
+  const cb = G.cb;
+  for (const q of cb.posts) {
+    if (q.tiltT > cb.t) continue;
+    const dx = p.x - q.x, dy = p.y - q.y, rr = (p.r || 1.5) + q.r;
+    if (dx * dx + dy * dy > rr * rr) continue;
+    if (p.kind === 'orb' || p.kind === 'pball') { bumpTilt(q); return false; }
+    bounceShot(p);
+    const d = Math.hypot(dx, dy) || 1; p.vx = dx / d * p.spd; p.vy = dy / d * p.spd;
+    bumpPop(q, p.x, p.y, false);
+    return true;
+  }
+  return false;
+}
+function drawPosts(cb, t) {
+  const T = cb.t;
+  for (const p of cb.posts) {
+    const C = BUMP_COL[p.col], tilt = p.tiltT > T, hot = p.hit > 0, R = p.r, k = 1 + (hot ? p.hit * 1.1 : 0);
+    ctx.save(); ctx.translate(p.x, p.y);
+    ctx.fillStyle = 'rgba(8,4,16,.42)'; ctx.beginPath(); ctx.ellipse(.9, 1.8, R * 1.2, R * .85, 0, 0, TAU); ctx.fill();
+    // le halo quand il est allumé
+    if ((p.lit || hot) && !tilt) {
+      const gr = ctx.createRadialGradient(0, 0, R * .4, 0, 0, R * 2.3);
+      gr.addColorStop(0, `rgba(${C[2]},${hot ? .55 : .3})`); gr.addColorStop(1, `rgba(${C[2]},0)`);
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(0, 0, R * 2.3, 0, TAU); ctx.fill();
+    }
+    // la jupe en plastique
+    ctx.fillStyle = tilt ? '#4a4558' : C[0]; ctx.beginPath(); ctx.arc(0, 0, R * k, 0, TAU); ctx.fill();
+    ctx.lineWidth = .5; ctx.strokeStyle = 'rgba(10,4,20,.7)'; ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.22)'; ctx.beginPath(); ctx.arc(-R * .25, -R * .3, R * .62 * k, Math.PI * .95, Math.PI * 1.75); ctx.lineTo(0, 0); ctx.fill();
+    // l'anneau d'acier
+    ctx.strokeStyle = tilt ? '#8a8598' : '#eef2fa'; ctx.lineWidth = .95; ctx.beginPath(); ctx.arc(0, 0, R * .74, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = 'rgba(40,30,60,.6)'; ctx.lineWidth = .3; ctx.beginPath(); ctx.arc(0, 0, R * .74 + .5, 0, TAU); ctx.stroke();
+    // le chapeau (la lampe)
+    ctx.fillStyle = tilt ? '#6a6578' : hot ? '#ffffff' : p.lit ? C[1] : '#2a2238';
+    ctx.beginPath(); ctx.arc(0, -.25, R * .52, 0, TAU); ctx.fill();
+    ctx.lineWidth = .35; ctx.strokeStyle = 'rgba(10,4,20,.6)'; ctx.stroke();
+    // une étoile sur le chapeau
+    ctx.fillStyle = tilt ? '#8a8598' : hot || p.lit ? C[0] : 'rgba(255,255,255,.45)';
+    ctx.beginPath();
+    for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5 + (hot ? T * 9 : 0), r = i % 2 ? R * .16 : R * .38; ctx[i ? 'lineTo' : 'moveTo'](Math.cos(a) * r, -.25 + Math.sin(a) * r); }
+    ctx.closePath(); ctx.fill();
+    if (tilt && Math.sin(T * 12) > 0) { ctx.fillStyle = '#ff3d6e'; ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('TILT', 0, -R - 2.4); }
+    ctx.restore();
+  }
+}
+
+/* ---- les verres : chaque cocktail a le sien, avec sa garniture ---- */
+// o : le contour ; l : le liquide ; x : pied et anse ; s : le reflet ; rim : où poser la garniture ; ins : l'intérieur (glaçons, bulles)
+const CK_GLASS = {
+  martini: { o: 'M4 6H36L20 25Z', x: 'M20 25V42M12 43.5Q20 41 28 43.5', l: 'M7.6 9H32.4L20 23.4Z', s: 'M9 8.4L14.6 14.6', rim: [32, 6], ins: [14, 10, 26, 18] },
+  coupe: { o: 'M3 9H37C37 15 29 20 20 20C11 20 3 15 3 9Z', x: 'M20 20V41M12 42.5Q20 40 28 42.5', l: 'M4.6 10.5H35.4C34.6 15 27.6 18.4 20 18.4C12.4 18.4 5.4 15 4.6 10.5Z', s: 'M7 11.6Q9 15 13 16.4', rim: [34, 9], ins: [10, 11, 30, 17] },
+  tiki: { tiki: 1, o: 'M9 7H31L33 41Q20 46 7 41Z', l: 'M9.7 7.7H30.3L30.5 10.6H9.5Z', rim: [29, 7], ins: [11, 8, 29, 10] },
+  shooter: { o: 'M11 12H29L27 43H13Z', x: 'M13.2 39.4H26.8', l: 'M12.3 17H27.7L26.6 38.4H13.4Z', s: 'M13.7 14.6L14.6 36', rim: [28, 12], ins: [14, 19, 26, 37] },
+  hurricane: { o: 'M11 5H29C29.5 12 25 15 25 21C25 27 31 29 29 37H11C9 29 15 27 15 21C15 15 10.5 12 11 5Z', x: 'M20 37V42M13 43.5Q20 41.5 27 43.5', l: 'M11.8 10H28.2C27.6 14 24 16.5 24 21C24 27 29.6 29.4 28.2 35.6H11.8C10.4 29.4 16 27 16 21C16 16.5 12.4 14 11.8 10Z', s: 'M13 8Q14 13 16.4 16', rim: [28, 5], ins: [13, 11, 27, 34] },
+  wine: { o: 'M9 5H31C32 18 27.5 25 20 25C12.5 25 8 18 9 5Z', x: 'M20 25V41M12 42.5Q20 40 28 42.5', l: 'M9.6 13H30.4C30.2 19.8 26.4 23.4 20 23.4C13.6 23.4 9.8 19.8 9.6 13Z', s: 'M11.6 9Q11.6 16 14 20', rim: [30, 5], ins: [12, 14, 28, 22] },
+  flute: { o: 'M14.5 3H25.5C26 16 24.4 26 20 27C15.6 26 14 16 14.5 3Z', x: 'M20 27V42M13 43.5Q20 41.5 27 43.5', l: 'M15 8H25C25.2 17 23.8 24.8 20 25.6C16.2 24.8 14.8 17 15 8Z', s: 'M16.1 6Q15.8 15 17.2 21', rim: [25, 3], ins: [16.5, 9, 23.5, 24] },
+  tea: { tea: 1, o: 'M6 21H32V27C32 35.5 26.5 39.5 19 39.5C11.5 39.5 6 35.5 6 27Z', x: 'M32 24C38.5 24 38.5 33 30.5 33M2 42Q19 47.5 36 42', l: 'M7.4 22.2H30.6V25.4H7.4Z', rim: [31, 21], ins: [9, 22, 29, 25] },
+  margarita: { o: 'M2 7H38C38 12.5 30 14.5 25.5 14.5C27.5 16.5 26.5 21 21 22H19C13.5 21 12.5 16.5 14.5 14.5C10 14.5 2 12.5 2 7Z', x: 'M20 22V41M12 42.5Q20 40 28 42.5', l: 'M3.8 8.6H36.2C35.4 11.6 29 13 25.2 13C26.6 15.8 25.4 19.6 20.6 20.4H19.4C14.6 19.6 13.4 15.8 14.8 13C11 13 4.6 11.6 3.8 8.6Z', s: 'M5 9.6Q8 11.6 12 12.2', rim: [36, 7], ins: [15, 13, 25, 19] },
+  punch: { o: 'M9 11C1 22 4 41 20 41C36 41 39 22 31 11', x: 'M9 11Q20 14 31 11M9 11Q20 8 31 11M14 41.4L13 44H27L26 41.4', l: 'M5.2 19H34.8C36 30 31 39.5 20 39.5C9 39.5 4 30 5.2 19Z', s: 'M7.4 22Q7 31 12 36', rim: [30, 11], ins: [9, 21, 31, 36] },
+  tumbler: { o: 'M7 16H33L31.2 43H8.8Z', x: 'M9 39.2H31', l: 'M8.2 24H31.8L30.9 38.6H9.1Z', s: 'M10 19L10.8 36', rim: [32, 16], ins: [10, 22, 30, 37] },
+  pop: { o: 'M10 4H30L27.5 40Q27 43.5 24 43.5H16Q13 43.5 12.5 40Z', l: 'M10.8 10H29.2L27 39.4Q26.6 42 24 42H16Q13.4 42 13 39.4Z', s: 'M12.5 8L14 34', rim: [29, 4], ins: [13, 12, 27, 40] },
+  highball: { o: 'M10 5H30L28.5 43H11.5Z', x: 'M11.7 40H28.3', l: 'M10.7 11H29.3L28.4 39.4H11.6Z', s: 'M12.4 8L13.2 37', rim: [29, 5], ins: [12, 13, 28, 38] },
+  mug: { mug: 1, o: 'M7 9H27V42H7Z', x: 'M27 15C35 15 35 34 27 34M27 19C31 19 31 30 27 30', l: 'M8.5 13H25.5V40.5H8.5Z', s: 'M10 14V38', rim: [26, 8], ins: [9, 14, 25, 39] },
+};
+const ckF = n => Math.round(n * 10) / 10;
+function ckBubbles(ins, n) {
+  let h = ''; const [x1, y1, x2, y2] = ins;
+  for (let i = 0; i < n; i++) { const x = ckF(x1 + (x2 - x1) * ((i * .37 + .15) % 1)), y = ckF(y2 - (y2 - y1) * ((i * .53 + .2) % 1)), r = ckF(.55 + (i % 3) * .25); h += `<circle class="ck-bub" cx="${x}" cy="${y}" r="${r}" style="animation-delay:-${ckF(i * .37)}s"/>`; }
+  return h;
+}
+const CK_GAR = {
+  olive: ([x, y]) => `<path d="M${x + 6} ${y - 9}L${x - 5} ${y + 8}" stroke="#e8d8b0" stroke-width="1.1" stroke-linecap="round"/><ellipse cx="${x - 2.4}" cy="${y + 3.6}" rx="2.7" ry="2.3" fill="#8ab83a" stroke="#2a3a10" stroke-width=".6"/><circle cx="${x - 2.9}" cy="${y + 3.2}" r=".9" fill="#e0365a"/>`,
+  umbrella: ([x, y]) => `<path d="M${x - 3} ${y + 4}L${x + 5} ${y - 10}" stroke="#e8d8b0" stroke-width="1" stroke-linecap="round"/><path d="M${x - 4} ${y - 8}Q${x + 5} ${y - 19} ${x + 14} ${y - 8}Q${x + 5} ${y - 11} ${x - 4} ${y - 8}Z" fill="#ff5fa2" stroke="#6a1a40" stroke-width=".6"/><path d="M${x + 5} ${y - 13.6}L${x + 1} ${y - 8.8}M${x + 5} ${y - 13.6}L${x + 9} ${y - 8.8}" stroke="#ffd0e6" stroke-width=".7"/>`,
+  lime: ([x, y], c) => { const [f, s] = c || ['#c9f08a', '#5a9a2a']; let seg = ''; for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; seg += `M${x} ${y + 1}L${ckF(x + Math.cos(a) * 3.6)} ${ckF(y + 1 + Math.sin(a) * 3.6)}`; } return `<circle cx="${x}" cy="${y + 1}" r="4.6" fill="${f}" stroke="${s}" stroke-width="1"/><path d="${seg}" stroke="#fffbe6" stroke-width=".55"/>`; },
+  orange: p => CK_GAR.lime(p, ['#ffd08a', '#e08a20']),
+  cherry: ([x, y]) => `<path d="M${x - 1} ${y - .6}Q${x + 1} ${y - 6.5} ${x + 4.5} ${y - 7.5}" stroke="#5a3d10" stroke-width=".8" fill="none" stroke-linecap="round"/><circle cx="${x - 1}" cy="${y + 1.8}" r="2.6" fill="#e0365a" stroke="#5a0a1c" stroke-width=".6"/><circle cx="${x - 1.9}" cy="${y + .9}" r=".8" fill="#ffd0dc"/>`,
+  celery: ([x, y]) => `<path d="M${x - 6} ${y + 14}L${x + 2} ${y - 9}" stroke="#8fd06a" stroke-width="2.6" stroke-linecap="round"/><path d="M${x - 6} ${y + 14}L${x + 2} ${y - 9}" stroke="#c9f0a8" stroke-width=".6"/><ellipse cx="${x + 3}" cy="${y - 11}" rx="3.4" ry="1.8" fill="#5fb84a" transform="rotate(-40 ${x + 3} ${y - 11})"/><ellipse cx="${x - .4}" cy="${y - 11.5}" rx="2.6" ry="1.4" fill="#4aa83a" transform="rotate(-100 ${x - .4} ${y - 11.5})"/>`,
+  mint: ([x, y]) => `<ellipse cx="${x - 1}" cy="${y - 1.5}" rx="3.6" ry="1.8" fill="#5fd68a" stroke="#1d6a3a" stroke-width=".5" transform="rotate(-30 ${x - 1} ${y - 1.5})"/><ellipse cx="${x + 2.4}" cy="${y - 2.4}" rx="3.2" ry="1.6" fill="#7fe8a0" stroke="#1d6a3a" stroke-width=".5" transform="rotate(-70 ${x + 2.4} ${y - 2.4})"/>`,
+  straw: ([x, y]) => `<path d="M${x - 9} ${y + 12}L${x + 2} ${y - 10}" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M${x - 9} ${y + 12}L${x + 2} ${y - 10}" stroke="#ff3d6e" stroke-width="2.2" stroke-dasharray="1.6 2.2"/>`,
+  fire: ([x, y]) => `<path class="ck-fire" d="M${x - 4} ${y + .5}C${x - 7} ${y - 4} ${x - 3} ${y - 8} ${x - 2} ${y - 12}C${x} ${y - 9} ${x + 2} ${y - 9} ${x + 1} ${y - 5}C${x + 3} ${y - 6} ${x + 3} ${y - 8} ${x + 3} ${y - 8}C${x + 6} ${y - 4} ${x + 4} ${y + .5} ${x} ${y + .5}Z" fill="#ff7a2f" stroke="#7a2a08" stroke-width=".5"/><path d="M${x - 2} ${y}C${x - 3.4} ${y - 2.6} ${x - 1.4} ${y - 4} ${x - .8} ${y - 6}C${x + .6} ${y - 4} ${x + 2} ${y - 3} ${x + 1} ${y}Z" fill="#ffe066"/>`,
+  star: ([x, y]) => `<path class="ck-twk" d="M${x + 2} ${y - 11}L${x + 3} ${y - 7.6}L${x + 6.4} ${y - 6.6}L${x + 3} ${y - 5.6}L${x + 2} ${y - 2.2}L${x + 1} ${y - 5.6}L${x - 2.4} ${y - 6.6}L${x + 1} ${y - 7.6}Z" fill="#eaffd6"/><circle cx="${x - 4}" cy="${y - 10}" r=".9" fill="#eaffd6"/>`,
+  berry: ([x, y]) => [[0, 0], [1.8, .4], [.9, 1.8], [-.6, 1.6], [2.4, 2.1], [1.2, -1.4]].map(([dx, dy]) => `<circle cx="${ckF(x - 1.6 + dx)}" cy="${ckF(y + 1 + dy)}" r="1.25" fill="#c2185b" stroke="#5a0a2a" stroke-width=".35"/>`).join(''),
+  ball: ([x, y]) => `<circle cx="${x - 1}" cy="${y - 2.6}" r="3.3" fill="#c3cde0" stroke="#3a4558" stroke-width=".7"/><circle cx="${x - 2.1}" cy="${y - 3.7}" r="1.1" fill="#fff"/>`,
+  spark: ([x, y]) => `<path d="M${x + 2} ${y - 13}L${x - 3} ${y - 5}H${x + .6}L${x - 1.6} ${y + 1}L${x + 4.6} ${y - 7.4}H${x + 1}L${x + 3.8} ${y - 13}Z" fill="#ffe066" stroke="#5a4a08" stroke-width=".6" stroke-linejoin="round"/>`,
+  disco: ([x, y]) => `<path d="M${x - 1} ${y - 14}V${y - 9}" stroke="#e8eef8" stroke-width=".6"/><circle cx="${x - 1}" cy="${y - 5}" r="4.2" fill="#c3cde0" stroke="#3a4558" stroke-width=".6"/><path d="M${x - 5} ${y - 5}H${x + 3}M${x - 1} ${y - 9}V${y - 1}M${x - 4} ${y - 7.4}H${x + 2}M${x - 4} ${y - 2.6}H${x + 2}" stroke="#7a86a0" stroke-width=".45"/><path class="ck-twk" d="M${x + 5} ${y - 11}l.6 1.6 1.6 .6-1.6 .6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z" fill="#fff"/>`,
+  salt: ([x, y]) => { let d = ''; for (let i = 0; i < 18; i++) d += `<circle cx="${ckF(x - 33 + i * 1.95)}" cy="${ckF(y - .2 + (i % 2) * .5)}" r=".55" fill="#fff"/>`; return d + CK_GAR.lime([x - 1, y]); },
+  steam: () => `<path class="ck-steam" d="M14 18c-2 -3 2 -5 0 -9M20 17c-2 -3 2 -5 0 -9M26 18c-2 -3 2 -5 0 -9" stroke="#fff" stroke-opacity=".7" stroke-width="1.2" fill="none" stroke-linecap="round"/>`,
+  none: () => '',
+};
+// le reflet sur la surface du liquide (le haut du chemin « M x y H x2 »)
+function ckTop(d) { const m = /^M([\d.]+) ([\d.]+)H([\d.]+)/.exec(d); return m ? `<path class="liq" d="M${ckF(+m[1] + 1)} ${ckF(+m[2] + .6)}H${ckF(+m[3] - 1)}" stroke="rgba(255,255,255,.55)" stroke-width=".9" stroke-linecap="round"/>` : ''; }
+function glassSVG(kind, liq, gar) {
+  const K = CK_GLASS[kind];
+  const O = 'rgba(255,255,255,.88)';
+  let h = `<svg viewBox="0 0 40 48" aria-hidden="true">`;
+  if (K.tiki) {
+    h += `<path d="${K.o}" fill="#a8642a" stroke="#4a2410" stroke-width="1.3" stroke-linejoin="round"/>`
+      + `<path class="liq" d="${K.l}" fill="${liq}"/>` + ckTop(K.l)
+      + `<path d="M13 18q3 -3 6 0M21 18q3 -3 6 0M20 20v5M17 25h6" stroke="#4a2410" stroke-width="1.2" fill="none" stroke-linecap="round"/><rect x="13" y="29" width="14" height="5" rx="1" fill="#4a2410"/><path d="M16.5 29v5M20 29v5M23.5 29v5" stroke="#d9a06a" stroke-width=".8"/><path d="M8.6 37Q20 41 31.6 37" stroke="#4a2410" stroke-width=".9" fill="none"/>`;
+  } else if (K.tea) {
+    h += `<path d="${K.x}" stroke="${O}" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="${K.o}" fill="#fff8ec" stroke="${O}" stroke-width="1.4"/><path d="M8 30Q19 34 30 30" stroke="#ff9ab4" stroke-width="1.1" fill="none"/>`
+      + `<path class="liq" d="${K.l}" fill="${liq}"/>`;
+  } else {
+    h += `<path d="${K.o}" fill="rgba(255,255,255,.08)"/>`
+      + `<path class="liq" d="${K.l}" fill="${liq}"/>`
+      + ckTop(K.l);
+    if (K.mug) h += `<path class="liq" d="M5.4 11.4C5.4 6.4 9.6 5.4 11.6 7.4C12.6 4.4 17.6 4.4 18.6 7.4C20.6 5.4 27 5.4 28.4 10C29.4 12.4 26.4 13.8 24.4 12.8C22.4 14.4 19.4 14.4 17.4 12.8C15.4 14.4 11.4 14.4 10.4 12.8C8.4 13.8 5.4 13.4 5.4 11.4Z" fill="#fff8ec"/>`;
+    if (gar === 'ice' || kind === 'tumbler') h += `<g class="liq"><rect x="11" y="25" width="7" height="7" rx="1.4" fill="rgba(255,255,255,.55)" stroke="rgba(255,255,255,.9)" stroke-width=".5" transform="rotate(-12 14.5 28.5)"/><rect x="20" y="27" width="7" height="7" rx="1.4" fill="rgba(255,255,255,.45)" stroke="rgba(255,255,255,.9)" stroke-width=".5" transform="rotate(14 23.5 30.5)"/></g>`;
+    if (gar === 'bubbles' || kind === 'flute' || kind === 'pop') h += `<g fill="rgba(255,255,255,.75)">${ckBubbles(K.ins, kind === 'flute' ? 5 : 6)}</g>`;
+    if (kind === 'punch') h += `<g class="liq"><rect x="12" y="22" width="6" height="6" rx="1.3" fill="rgba(255,255,255,.5)" transform="rotate(20 15 25)"/><rect x="22" y="23" width="6" height="6" rx="1.3" fill="rgba(255,255,255,.45)" transform="rotate(-15 25 26)"/></g>`;
+    h += `<path d="${K.o}" fill="none" stroke="${O}" stroke-width="1.5" stroke-linejoin="round"/>`;
+    if (K.x) h += `<path d="${K.x}" fill="none" stroke="${O}" stroke-width="1.5" stroke-linecap="round"/>`;
+    if (K.s) h += `<path d="${K.s}" stroke="rgba(255,255,255,.6)" stroke-width="1.2" stroke-linecap="round" fill="none"/>`;
+  }
+  const g = CK_GAR[gar] || CK_GAR.none;
+  h += g(K.rim);
+  return h + '</svg>';
+}
+// les verres : les nouveaux (SVG) ou les anciens (shots, seau de ciment)
+function glassHTML(kind, liq, gar) {
+  if (!CK_GLASS[kind]) return `<span class="glass g-${kind}" style="--liq:${liq}"><i class="liq"></i><i class="shine"></i></span>`;
+  return `<span class="glass gsvg g-${kind}" style="--liq:${liq}">${glassSVG(kind, liq, gar)}</span>`;
+}
+
+/* ================= v10.8 · les jeux à débloquer, le poinçon du Collectionneur, la défaite au ralenti ================= */
+
+/* ---- les jeux de départ se débloquent (le Coffre-fort est ouvert d'office) ---- */
+const DECK_NEED = {
+  barman: { k: 'drinks', n: 40, txt: 'Bois 40 boissons chez Zaza' },
+  bille: { k: 'billes', n: 200, txt: 'Lance 200 BILLES' },
+  sorts: { k: 'spells', n: 300, txt: 'Lance 300 sorts' },
+  pack: { k: 'fous', n: 4, txt: 'Gagne 4 jetons fous' },
+  inspecteur: { k: 'mkBuys', n: 25, txt: 'Achète 25 articles au marché noir' },
+  seconde: { k: 'bossKills', n: 6, txt: 'Bats 6 boss' },
+  xxl: { k: 'stacks', n: 40, txt: 'Empile 40 jetons' },
+  veinard: { k: 'best', n: 20, txt: 'Atteins la manche 20' },
+  collec: { k: 'punches', n: 3, txt: 'Passe 3 jetons en rareté secrète au Punch-o-matic' },
+};
+function deckOpen(D) {
+  const N = DECK_NEED[D.id], m = G.meta; if (!N) return true;
+  if ((m.decksGot || {})[D.id] || (m.dw || {})[D.id]) return true;
+  return skinProgress(N) >= N.n;
+}
+const LOCK_SVG = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 9V6.5a4 4 0 0 1 8 0V9" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="4" y="9" width="12" height="9" rx="2" fill="currentColor"/></svg>';
+const deckNeedHTML = D => { const N = DECK_NEED[D.id], v = Math.min(N.n, skinProgress(N)); return `<span class="nr-lockl"><b>${LOCK_SVG}${esc(N.txt)}</b><i class="nr-lbar"><i style="width:${Math.round(v / N.n * 100)}%"></i></i><small>${fmtN(v)} / ${fmtN(N.n)}</small></span>`; };
+// une condition remplie : le jeu se débloque, on le dit
+function deckUnlocks() {
+  if (G.headless) return;
+  const m = G.meta, got = m.decksGot || (m.decksGot = {}), fresh = [];
+  for (const D of DECKS) { const N = DECK_NEED[D.id]; if (!N || got[D.id]) continue; if ((m.dw || {})[D.id] || skinProgress(N) >= N.n) { got[D.id] = 1; fresh.push(D); } }
+  if (!fresh.length) return;
+  saveMeta();
+  const nr = $('#newrun'); if (nr && !nr.hidden) renderNewRun(0);
+  fresh.forEach((D, i) => setTimeout(() => deckNote(D), 900 + i * 2800));
+}
+function deckNote(D) {
+  const el = $('#unote'); if (!el) return;
+  el.innerHTML = `<span class="un-deck" style="--dc:${D.col}">${iconSVG(D.icon)}</span><div><small>NOUVEAU JEU DÉBLOQUÉ</small><b>${esc(D.name)}</b><span>${esc(D.txt)}</span></div>`;
+  el.hidden = false; el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  Snd.record(); haptic(80);
+  clearTimeout(el._t); el._t = setTimeout(() => { el.classList.remove('show'); setTimeout(() => { el.hidden = true; }, 400); }, 3800);
+}
+
+/* ---- le Collectionneur : à chaque manche, un poinçon pour passer n'importe quel jeton du rack en rareté SECRÈTE ---- */
+const CL = { on: false, sel: null };
+const clHas = run => !!run && hasDeck(run, 'collec') && (run.clPunch || 0) > 0;
+const clOk = j => !!j && !isSecret(j) && j.kind !== 'faux' && j.kind !== 'fou' && !(G.run.stolen || []).includes(j.uid);
+const clWhere = () => ['machine', 'bar', 'market', 'chooser'].includes(G.mode);
+function clRefresh() {
+  const b = $('#r-clp'); if (!b) return;
+  const on = clHas(G.run) && clWhere();
+  if (!on && CL.on) { CL.on = false; CL.sel = null; }
+  b.hidden = !on;
+  if (!on) return;
+  const j = CL.sel != null ? G.run.jokers.find(x => x.uid === CL.sel) : null;
+  b.classList.toggle('on', CL.on || !!j);
+  b.innerHTML = j ? `✓ Poinçonner ${esc(jName(j))}` : CL.on ? 'Annuler' : '★ POINÇON' + (G.run.clPunch > 1 ? ' ×' + G.run.clPunch : '');
+}
+function clClick() {
+  const run = G.run; if (!clHas(run) || !clWhere()) return;
+  firstGesture();
+  if (CL.sel != null) { const j = run.jokers.find(x => x.uid === CL.sel); if (j && clOk(j)) { clApply(j); return; } }
+  if (CL.on) { CL.on = false; CL.sel = null; Snd.click(); }
+  else {
+    if (!run.jokers.some(clOk)) { toast('Aucun jeton à poinçonner : ils sont déjà tous secrets.'); Snd.deny(); return; }
+    CL.on = true; CL.sel = null; Snd.chipPick(); toast('Le poinçon du collectionneur : touche le jeton à passer en rareté SECRÈTE.');
+  }
+  renderRack();
+}
+function clPick(uid) {
+  const j = G.run.jokers.find(x => x.uid === uid); if (!j) return;
+  if (!clOk(j)) { toast(isSecret(j) ? 'Celui-là est déjà secret.' : 'Le poinçon ne prend pas ce jeton-là.'); Snd.deny(); return; }
+  CL.sel = uid; Snd.chipPick(); haptic(10);
+  toast(`${jName(j)} ? Touche « Poinçonner » pour confirmer.`);
+  renderRack();
+}
+function clApply(j) {
+  const run = G.run;
+  j.secret = true; run.clPunch = Math.max(0, (run.clPunch || 0) - 1);
+  CL.on = false; CL.sel = null;
+  let fresh = false; for (const pt of j.parts) if (pt.lv >= 3 && discoverSecret(pt.t)) fresh = true;
+  if (G.cb && !G.cb.demo) refreshStats();
+  renderRack(); updateHUD();
+  if (G.headless) return;
+  const ult = j.parts.some(pt => pt.lv >= 3);
+  toast(`${jName(j)} passe en rareté secrète : +25${NB}% de puissance${ult ? ', et sa capacité secrète s\'éveille !' : '.'}${fresh ? ' Nouveau secret pour Monsieur Anatole.' : ''}`);
+  Snd.punch(); haptic(60); celebrate(false);
+  const i = run.jokers.indexOf(j), el = $(`#rack-slots .slot[data-i="${i}"]`);
+  if (el) { el.classList.remove('clfx'); void el.offsetWidth; el.classList.add('clfx'); setTimeout(() => el.classList.remove('clfx'), 1200); }
+}
+// le bot (simulation) : il poinçonne son meilleur jeton (après chaque boss ; le poinçon du départ, à la 1re fin de manche)
+function clAuto(run) {
+  if (!clHas(run)) return;
+  let best = null, bs = -1;
+  for (const j of run.jokers) { if (!clOk(j)) continue; const sc = Math.max(...j.parts.map(p => p.lv)) * 10 + (j.p || 1); if (sc > bs) { bs = sc; best = j; } }
+  if (best) clApply(best);
+}
+
+/* ---- la défaite : un ralenti, le son de la défaite, puis l'écran de fin ---- */
+const GO = { t0: 0 };
+// la vitesse du jeu pendant la chute : 1 → 0,12 en une demi-seconde
+function goSlow() { const k = Math.min(1, (performance.now() - GO.t0) / 500); return 1 - .88 * (1 - Math.pow(1 - k, 2)); }
+const GO_BROKE = `<svg viewBox="0 0 120 80" aria-hidden="true"><g class="ob-l"><path d="M58 10A30 30 0 0 0 58 70L52 58L60 47L50 37L59 25Z" fill="#e0365a" stroke="#120c18" stroke-width="4" stroke-linejoin="round"/><path d="M57 18A22 22 0 0 0 57 62" fill="none" stroke="#fff3e6" stroke-width="5" stroke-dasharray="7 6"/></g><g class="ob-r"><path d="M62 10A30 30 0 0 1 62 70L56 58L64 47L54 37L63 25Z" fill="#c42a4c" stroke="#120c18" stroke-width="4" stroke-linejoin="round"/><path d="M63 18A22 22 0 0 1 63 62" fill="none" stroke="#fff3e6" stroke-width="5" stroke-dasharray="7 6"/></g></svg>`;
+function uiGameOver() {
+  G.mode = 'dying';
+  clearCheckpoint();
+  const cb = G.cb, run = G.run;
+  GO.t0 = performance.now();
+  cb.flash = .6; cb.flashCol = '255,60,80'; shake(14);
+  burst(0, 0, '#e0365a', 46, 70, 2.2, 1.6); burst(0, 0, '#fff3e6', 24, 50, 1.6, 1.4);
+  for (let i = 0; i < 26; i++) { const a = rand(0, TAU), v = rand(18, 60); addPart({ x: Math.cos(a) * 4, y: Math.sin(a) * 4, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 2.4, max: 2.4, size: rand(1.2, 2.6), col: pick(['#e0365a', '#fff3e6', '#9b1e3e', '#ffcc4d']), drag: 1.2, g: 0 }); }
+  fxPush({ type: 'crack108', s106: 1, x: 0, y: 0, life: 9, max: 9 });
+  Snd.scratch(); Snd.over(); haptic(250);
+  Music.play(null); BG.setMode('over');
+  petsOver();
+  const tip = $('#tip'); if (tip) tip.hidden = true;
+  document.body.classList.add('go-dying');
+  let ov = $('#godie');
+  if (!ov) { ov = document.createElement('div'); ov.id = 'godie'; ov.setAttribute('aria-hidden', 'true'); document.body.appendChild(ov); }
+  ov.className = '';
+  ov.innerHTML = `<div class="gd-vig"></div><div class="gd-stamp"><b>PERDU</b><small>Ta base est tombée · manche ${roundLabel(run.round)}</small></div><div class="gd-fade"></div>`;
+  setTimeout(() => Snd.heart(), 450);
+  setTimeout(() => Snd.heart(), 1250);
+  setTimeout(() => { ov.classList.add('gd-on'); Snd.stampThud(); shake(6); haptic(90); }, 1150);
+  setTimeout(() => Snd.lose(), 1500);
+  setTimeout(() => ov.classList.add('out'), 4100);
+  setTimeout(() => { document.body.classList.remove('go-dying'); ov.remove(); endRun(false); }, 4750);
+}
+// l'écran de fin : une entrée animée, le score qui monte, le jeton cassé
+function overFx(cashed, run) {
+  const o = $('#over'); if (!o) return;
+  o.classList.toggle('lost', !cashed);
+  o.classList.remove('go-in'); void o.offsetWidth; o.classList.add('go-in');
+  if (!cashed) { const t = $('#o-title'); if (t && !t.querySelector('.o-broke')) t.insertAdjacentHTML('afterbegin', `<span class="o-broke">${GO_BROKE}</span>`); }
+  const b = $('#o-score b'), S = Math.round(run.score || 0);
+  if (b && S > 0 && !G.reduced) {
+    const t0 = performance.now(), D = 1200;
+    b.textContent = '0';
+    const step = () => { const k = Math.min(1, (performance.now() - t0) / D); b.textContent = fmtS(S * (1 - Math.pow(1 - k, 3))); if (k < 1 && !o.hidden) requestAnimationFrame(step); };
+    setTimeout(() => requestAnimationFrame(step), 420);
+  }
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#r-clp')) { e.preventDefault(); clClick(); } });
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
 const BAR = { drinks: [], shots: [], ciment: null, busy: false, market: false, firstVisit: false, gambler: false, visitor: null, visState: null, freeDrink: false };
@@ -17111,7 +18021,7 @@ const barScale = r => 1.15 + .03 * (Math.min(r, 30) - 1);
 function genBar() {
   const run = G.run, r = Math.max(1, run.round + 1), sc = barScale(r) * priceMul(run), mid = (computeStats(run).midas ? .75 : 1) * (hasDeck(run, 'barman') ? .7 : 1);
   const drinks = [];
-  for (const cat of ['canon', 'rateau', 'base']) {
+  for (const cat of ['canon', 'rateau', 'base', 'bille'].concat(rnd() < .45 ? ['zaza'] : [])) {
     const ids = Object.keys(UPG).filter(id => UPG[id].cat === cat && upLv(run, id) < UPG[id].max);
     if (!ids.length) continue;
     const id = pick(ids), lv = upLv(run, id);
@@ -17197,18 +18107,19 @@ function barTap(e) {
   if (typeBusy(z)) { typeFinish(z); return; }
   Snd.click(); barGo();
 }
-function glassHTML(kind, liq) { return `<span class="glass g-${kind}" style="--liq:${liq}"><i class="liq"></i><i class="shine"></i></span>`; }
+function glassHTML0(kind, liq) { return `<span class="glass g-${kind}" style="--liq:${liq}"><i class="liq"></i><i class="shine"></i></span>`; }
 function renderBar() {
   const run = G.run;
   $('#b-gold').textContent = Math.floor(run.gold);
   const vc = $('#b-vis');
   if (BAR.visitor && BAR.visState === 'invite') { vc.innerHTML = visCardHTML(); vc.hidden = false; } else { vc.hidden = true; vc.innerHTML = ''; }
   if (BAR.freeDrink) for (const d of BAR.drinks) if (!d.sold) d.free = true;
+  $('#b-drinks').classList.toggle('n4', BAR.drinks.filter(d => UPG[d.id].cat !== 'zaza').length >= 4);
   $('#b-drinks').innerHTML = BAR.drinks.map((d, i) => {
     const U = UPG[d.id], C = UPG_CATS[U.cat], can = !d.sold && run.gold >= d.price && !BAR.busy;
-    return `<div class="drink${d.sold ? ' drunk' : ''}" data-d="${i}" style="--cat:${C.col}">
+    return `<div class="drink${U.cat === 'zaza' ? ' zz' : ''}${d.sold ? ' drunk' : ''}" data-d="${i}" style="--cat:${C.col}">
       <span class="dcat">${C.name}</span>
-      ${glassHTML(U.glass, U.liq)}
+      ${glassHTML(U.glass, U.liq, U.gar)}
       <b class="dname">${U.name}</b>
       <span class="dlv">${'●'.repeat(d.lv + 1)}${'○'.repeat(U.max - d.lv - 1)}</span>
       <span class="deff">${U.txt(d.lv + 1)}</span>
@@ -17262,7 +18173,7 @@ function buyDrink(i) {
   if (G.headless) { BAR.busy = false; return; }
   updateHUD();
   drinkAnim($(`#b-drinks .drink[data-d="${i}"]`), U.txt(d.lv + 1), false, () => { BAR.busy = false; renderBar(); renderRack(); });
-  setTimeout(() => sayZ(pick(ZAZA.buy)), 200);
+  setTimeout(() => sayZ(U.quip && rnd() < .7 ? pick(U.quip) : pick(ZAZA.buy)), 200);
 }
 function buyShot(i) {
   const run = G.run, s = BAR.shots[i];
@@ -17884,7 +18795,7 @@ function catTile(c, id) {
     case 'q': return `<span class="ct-ico" style="--ic:${PSPELLS[id].col}">${iconSVG(PSPELLS[id].icon)}</span>`;
     case 'l': return `<span class="ct-ico" style="--ic:${ELITES[id].col}">${iconSVG(ELITES[id].icon)}</span>`;
     case 'v': return `<span class="ct-ico" style="--ic:#a98bff">${iconSVG(id === 'nuit' ? 'brouillard' : id === 'piques' ? 'mitraille' : id === 'maree' ? 'horde' : id === 'holdup' ? 'banquier' : id === 'sabbat' ? 'occulte' : 'teleport')}</span>`;
-    case 'd': return glassHTML(UPG[id].glass, UPG[id].liq);
+    case 'd': return glassHTML(UPG[id].glass, UPG[id].liq, UPG[id].gar);
     case 'h': return glassHTML('shot', SHOTS[id].liq);
     case 'c': { const C = COMBOS.find(x => x.id === id); return `<span class="ct-duo">${protoChip(C.a, 'k-commun')}${protoChip(C.b, 'k-commun')}</span>`; }
     case 'p': return `<span class="ct-face">${personFace(id)}</span>`;
@@ -17920,7 +18831,7 @@ function catDesc(c, id) {
     case 'e': { const d = ENEMIES[id]; return `<p class="cd-sub">${d.name}${d.from ? ` · dès la manche ${d.from}` : ''}</p><p>${d.info || ''}</p><p class="cd-stats">PV ${d.hp} · vitesse ${d.spd} · coup ${d.dmg}</p>`; }
     case 'b': { const d = ENEMIES[id]; return `<p class="cd-sub">${id === 'b_baron' ? 'Boss final · manche 30 · 3 vies' : id === 'b_joker' ? 'Le bras droit du Baron : il revient pendant sa grande donne, et en manches infinies' : `Boss de la manche ${(BOSS_ORDER.indexOf(id) + 1) * 5}`}</p><p>${d.intro}</p><p class="cd-stats">PV ${d.hp} · coup ${d.dmg}</p>`; }
     case 'm': { const M2 = MALUS[id], T = TIERS[M2.tier]; return `<p class="cd-sub" style="color:${T.col}">Malus ${T.name.toLowerCase()} · ${M2.tier} crâne${M2.tier > 1 ? 's' : ''}</p><p>${M2.txt[0].toUpperCase() + M2.txt.slice(1)}.</p>`; }
-    case 'q': { const P = PSPELLS[id]; return `<p class="cd-sub">${P.base ? 'Sort de départ · toujours dans ta barre' : P.fam ? `Sort de famille ${CATS[P.fam].n} · marché noir · recharge ${P.cd}${NB}s` : `Sort à acheter au marché noir · recharge ${P.cd}${NB}s`}</p><p>${P.txt}</p>${P.fam ? `<p class="cd-goal">+25${NB}% de puissance par jeton ${CATS[P.fam].s} dans ton rack (jusqu'à ×3).</p>` : ''}`; }
+    case 'q': { const P = PSPELLS[id]; return `<p class="cd-sub">${P.base ? 'Sort de départ · toujours dans ta barre' : P.fou ? `Sort fou · marché noir, dès la manche 6 (plus rare) · recharge ${P.cd}${NB}s` : P.fam ? `Sort de famille ${CATS[P.fam].n} · marché noir · recharge ${P.cd}${NB}s` : `Sort à acheter au marché noir · recharge ${P.cd}${NB}s`}</p><p>${P.txt}</p>${P.fam ? `<p class="cd-goal">+25${NB}% de puissance par jeton ${CATS[P.fam].s} dans ton rack (jusqu'à ×3).</p>` : ''}`; }
     case 's': return `<p class="cd-sub">Sort des Sorciers · dès la manche ${SPELL_FROM[id]}</p><p>${SPELLS[id].txt[0].toUpperCase() + SPELLS[id].txt.slice(1)}.</p>`;
     case 'l': return `<p class="cd-sub">Carte élite</p><p>${{ rapide: 'Fonce 60 % plus vite.', costaud: '2,2× plus de PV, frappe plus fort.', regen: 'Se soigne toute seule.', cuirasse: 'Prend 40 % de dégâts en moins.', dore: 'Rapporte 6× plus d\'or.' }[id]} Toutes les élites rapportent plus d'or.</p>`;
     case 'v': return `<p class="cd-sub">Événement · dès la manche ${EVENTS[id].from}</p><p>${EVENTS[id].txt}</p>`;
@@ -19100,7 +20011,7 @@ function onLayoutChange() {
 
 /* ================= tes sorts : la barre du bas (Bombe, Gel, et ceux du marché noir) ================= */
 const spellsOf = run => !run ? [] : run.spells || (run.spells = ['bomb', 'gel']);
-function spellCd(id) {
+function spellCd0(id) {
   const cb = G.cb, s = cb && cb.stats;
   if (!s) return PSPELLS[id].cd || 20;
   if (id === 'bomb') return s.bombCd;
@@ -19109,7 +20020,7 @@ function spellCd(id) {
   return PSPELLS[id].cd * (G.run.boost && G.run.boost.recharge ? .5 : 1);
 }
 function initSpells(cb, run) {
-  for (const id of spellsOf(run)) cb.ab[id] = id === 'bomb' && run.boost.poudre ? 0 : id === 'gel' && run.boost.givre ? 0 : spellCd(id) * .25;
+  for (const id of spellsOf(run)) cb.ab[id] = ckFee(run) ? 0 : id === 'bomb' && run.boost.poudre ? 0 : id === 'gel' && run.boost.givre ? 0 : spellCd(id) * .25;
 }
 function tickSpells(cb, dt) {
   for (const id in PSPELLS) if (cb.ab[id] > 0) cb.ab[id] -= dt;
@@ -19130,7 +20041,7 @@ function castSpellP(id) {
     else Snd.deny();
     return false;
   }
-  const ok = id === 'gel' ? useGel() !== false : id === 'tornade' ? useTornade() : id === 'orage' ? useOrage() : id === 'bouclier' ? useBouclier() : id === 'surchauffe' ? useSurchauffe() : PSPELLS[id] && PSPELLS[id].fam ? useFam(id) : false;
+  const ok = id === 'gel' ? useGel() !== false : id === 'tornade' ? useTornade() : id === 'orage' ? useOrage() : id === 'bouclier' ? useBouclier() : id === 'surchauffe' ? useSurchauffe() : PSPELLS[id] && PSPELLS[id].fam ? useFam(id) : PSPELLS[id] && PSPELLS[id].x106 ? useSp106(id) : false;
   if (ok) { spellFx(id); G.run.stats.spells = (G.run.stats.spells || 0) + 1; disqueRecast(id); if (id !== 'echoS' && G.cb) G.cb.lastSp = id; }
   return ok;
 }
@@ -19322,7 +20233,12 @@ function pcCardHTML(id, k, L) {
   }
   const P = PSPELLS[id], fp = P.fam ? famPow(G.run, id) : 1;
   return `<div class="pc-slot" style="--sc:${P.col};${pos}"><span class="pc-ico">${iconSVG(P.icon)}</span><i class="pc-fill"></i><b class="pc-cd"></b></div>
-    <button class="pcard${P.fam ? ' fam' : ''}" data-sp="${id}" style="--sc:${P.col};${pos}" aria-label="${esc(P.name)} (touche ${k}) : ${esc(P.txt)}" title="${esc(P.name)} · ${esc(P.txt)}"><span class="pc-face"><i class="pc-k">${k}</i>${fp > 1 ? `<i class="abp">×${dec(fp)}</i>` : ''}<span class="pc-ico">${iconSVG(P.icon)}</span><span class="pc-n">${esc((P.short || P.name).toUpperCase())}</span><i class="pc-k2">${k}</i></span></button>`;
+    <button class="pcard${P.fam ? ' fam' : ''}${P.fou ? ' fou' : ''}" data-sp="${id}" style="--sc:${P.col};${pos}" aria-label="${esc(P.name)} (touche ${k}) : ${esc(P.txt)}" title="${esc(P.name)} · ${esc(P.txt)}"><span class="pc-face"><i class="pc-k">${k}</i>${fp > 1 ? `<i class="abp">×${dec(fp)}</i>` : ''}<span class="pc-ico">${iconSVG(P.icon)}</span>${pcLabel(P.short || P.name)}<i class="pc-k2">${k}</i></span></button>`;
+}
+// l'étiquette de la carte : les noms longs sont resserrés (en largeur) au lieu d'être coupés
+function pcLabel(n) {
+  const L = String(n).toUpperCase(), k = L.length > 7 ? Math.max(.58, 7.2 / L.length) : 1;
+  return `<span class="pc-n"><i${k < 1 ? ` style="--k:${k.toFixed(2)}"` : ''}>${esc(L)}</i></span>`;
 }
 function renderSpellBar() {
   if (G.headless) return;
@@ -19513,7 +20429,7 @@ function pcBack(c) {
 // pilote auto / simulation : quand lancer les nouveaux sorts
 function botSpells(cb) {
   const run = G.run;
-  botFamSpells(cb);
+  botFamSpells(cb); botSp106(cb);
   if (canUse('tornade')) { let n = 0; for (const e of cb.enemies) if (!e.dead && edist(e) < 34) n++; if (n >= 4) useTornade(); }
   if (canUse('orage')) { const big = cb.enemies.some(e => !e.dead && e.boss); let n = 0; for (const e of cb.enemies) if (!e.dead && e.deal <= .15 && e.ai !== 'decoy') n++; if (big || n >= 6) useOrage(); }
   if (canUse('bouclier') && run.hp < run.maxHp * .45) { let n = 0; for (const e of cb.enemies) if (!e.dead && edist(e) < 30) n++; if (n >= 2 || cb.eshots.some(p => !p.friendly && Math.hypot(p.x, p.y) < 40)) useBouclier(); }
@@ -19521,7 +20437,8 @@ function botSpells(cb) {
 }
 // le marché noir vend un sort que tu n'as pas
 function spellOffer(run) {
-  const have = spellsOf(run), ids = Object.keys(PSPELLS).filter(id => !have.includes(id));
+  const have = spellsOf(run), fous = SP_FOUS.filter(id => !have.includes(id)), ids = Object.keys(PSPELLS).filter(id => !have.includes(id) && !PSPELLS[id].fou);
+  if (fous.length && run.round >= 6 && rnd() < .28) { const id = pick(fous), sc0 = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1); return { type: 'spell', id, price: Math.round(PSPELLS[id].price * sc0 * petMk(run)), haggled: false, sold: false }; }
   if (!ids.length) return null;
   const pref = ids.filter(x => PSPELLS[x].fam && famCount(run, PSPELLS[x].fam) > 0);
   const id = pref.length && rnd() < .6 ? pick(pref) : pick(ids), sc = 1 + .04 * (Math.min(Math.max(1, run.round), 30) - 1);
@@ -19980,6 +20897,7 @@ function skinOf(kind) {
 // quand une condition est remplie : on le dit tout de suite (toast + son)
 function checkUnlocks() {
   if (G.headless) return;
+  deckUnlocks();
   const sk = skinMeta(), fresh = [];
   for (const kind in SKINS) for (const S2 of SKINS[kind]) {
     if (!S2.need || sk.got[kind + ':' + S2.id]) continue;
@@ -21072,7 +21990,7 @@ function openSalon(o) {
   if (chooserDue(run)) { G.dev.choose = false; openChooser(() => deckAfterJPM(o)); }
   else openMachine(o);
 }
-function uiGameOver() {
+function uiGameOver0() {
   G.mode = 'dying';
   clearCheckpoint();
   const cb = G.cb;
@@ -21111,6 +22029,7 @@ function endRun(cashed) {
   const unl = won && m.stakeMax > run.stake;
   $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? 'Nouvelle mise débloquée !' : '';
   show('#over', true);
+  overFx(cashed, run);
   Music.play('lounge'); duckMusic(false); BG.setMode('over');
   setTimeout(() => Snd.jetons(), 700);
 }
@@ -21330,7 +22249,7 @@ function simMachine(first) {
   for (const j of res.list) addJokerSim(j);
   autoArrange(G.run);
 }
-const BAR_PRIO = { renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
+const BAR_PRIO = { triplesec: 7, ricochet: 6, grandcru: 6, critik: 5, pyro: 5, bmary: 5, tisane: 5, spritz: 5, flipfizz: 5, disco: 5, kir: 5, rhum: 5, lagon: 4, cactus: 4, ressort: 4, mystere: 4, absinthe: 4, champagne: 3, renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
 function simBar(sk) {
   const run = G.run;
   Object.assign(BAR, genBar(), { busy: false });
@@ -21794,7 +22713,7 @@ function frame(t) {
   const pf0 = G.perf ? performance.now() : 0;
   if (cb && !G.paused && (G.mode === 'combat' || G.mode === 'title' || G.mode === 'dying' || G.mode === 'cleared')) {
     if (G.mode === 'combat') { keyRake(dt); if (G.dev.auto) botStep(dt, BOT.auto); }
-    const n = G.mode === 'combat' ? G.speed : 1, sdt = G.mode === 'dying' ? dt * .3 : dt;
+    const n = G.mode === 'combat' ? G.speed : 1, sdt = G.mode === 'dying' ? dt * goSlow() : dt;
     for (let i = 0; i < n; i++) updateCombat(sdt);
   } else if (cb && CALM.includes(G.mode)) updateVisuals(dt);
   const pf1 = G.perf ? performance.now() : 0;
@@ -22051,7 +22970,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
