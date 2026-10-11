@@ -3247,6 +3247,67 @@ body.reduced #abs .pc-chip{transform:translate(calc(var(--hw) * .53),0)}
 /* ---------- v12.2 · le « +0,1× » des jetons MULT ---------- */
 .mfly{position:fixed;z-index:70;pointer-events:none;padding:2px 7px 1px;border-radius:999px;background:linear-gradient(180deg,#3a1030,#22081c);box-shadow:inset 0 0 0 1.5px var(--mc),0 0 12px color-mix(in srgb,var(--mc) 55%,transparent),0 3px 6px rgba(0,0,0,.5);color:#fff;font:700 13px/1.1 var(--f-pix);letter-spacing:.02em;text-shadow:0 0 6px var(--mc);white-space:nowrap;will-change:transform,opacity}
 body.lpc .mfly{font-size:15px;padding:3px 9px 2px}
+
+/* ---------- v12.3 · le panneau de gauche (PC) : plus beau, plus doux ---------- */
+body.lpc #lp{gap:10px;background:radial-gradient(140% 55% at 0% 0%,rgba(169,139,255,.11),rgba(169,139,255,0) 60%),radial-gradient(120% 40% at 100% 100%,rgba(255,204,77,.06),rgba(255,204,77,0) 60%),linear-gradient(180deg,#1d1431,#110a1e);border-right:1px solid rgba(255,214,140,.2);box-shadow:inset -1px 0 0 rgba(255,255,255,.04),10px 0 26px -10px rgba(0,0,0,.7)}
+/* des cartes en feutre sombre, avec un liseré doré fin et une ombre douce (fini les gros contours noirs) */
+body.lpc #lp .lp-round,body.lpc #lp .lp-score,body.lpc #lp .lp-base,body.lpc #lp .lp-kit,body.lpc #lp .lp-money{border-radius:16px;background:radial-gradient(120% 80% at 20% 0%,rgba(255,255,255,.07),rgba(255,255,255,0) 55%),linear-gradient(180deg,#281b3c,#191027);box-shadow:inset 0 0 0 1px rgba(255,214,140,.2),inset 0 1px 0 rgba(255,255,255,.08),0 12px 22px -12px rgba(0,0,0,.85),0 2px 4px rgba(0,0,0,.3);transition:box-shadow .5s ease,background .5s ease}
+body.lpc #lp .lp-score{background:radial-gradient(120% 70% at 50% 0%,rgba(255,255,255,.06),rgba(255,255,255,0) 55%),linear-gradient(180deg,#1f1530,#130c20)}
+body.lpc #lp .lp-round small,body.lpc #lp .lp-score>small,body.lpc #lp .lp-row small,body.lpc #lp .lpk small{color:#b7a6d6;letter-spacing:.2em}
+body.lpc #lp .lp-round.boss{background:radial-gradient(120% 80% at 20% 0%,rgba(255,126,182,.16),rgba(255,126,182,0) 60%),linear-gradient(180deg,#351638,#1d0c22);box-shadow:inset 0 0 0 1px rgba(255,126,182,.75),0 0 26px rgba(255,126,182,.22),0 12px 22px -12px rgba(0,0,0,.85)}
+body.lpc #lp .lp-round.ev{box-shadow:inset 0 0 0 1px rgba(169,139,255,.85),0 0 20px rgba(169,139,255,.2),0 12px 22px -12px rgba(0,0,0,.85)}
+body.lpc #lp .lp-round.dv{background:radial-gradient(120% 80% at 20% 0%,rgba(255,92,108,.18),rgba(255,92,108,0) 60%),linear-gradient(180deg,#3a1220,#1f0912);animation:lpDv 1.6s ease-in-out infinite}
+@keyframes lpDv{0%,100%{box-shadow:inset 0 0 0 1px rgba(255,92,108,.7),0 0 18px rgba(255,92,108,.25),0 12px 22px -12px rgba(0,0,0,.85)}50%{box-shadow:inset 0 0 0 1px #ff6b7a,0 0 34px rgba(255,45,70,.5),0 12px 22px -12px rgba(0,0,0,.85)}}
+body.lpc #lp .lp-rn b{text-shadow:0 3px 0 #8a5a10,0 6px 10px rgba(0,0,0,.6)}
+body.lpc #lp .lp-round.boss .lp-rn b{text-shadow:0 3px 0 #8a2252,0 6px 10px rgba(0,0,0,.6)}
+body.lpc #lp .lp-stake{background:rgba(0,0,0,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+/* les boutons du haut */
+body.lpc #lp .lpb{border-radius:12px;background:linear-gradient(180deg,#34254c,#241938);box-shadow:inset 0 0 0 1px rgba(255,214,140,.18),inset 0 1px 0 rgba(255,255,255,.08),0 6px 12px -6px rgba(0,0,0,.8);transition:transform .14s ease,background .2s,box-shadow .2s}
+body.lpc #lp .lpb:hover{background:linear-gradient(180deg,#3f2e5a,#2c1f43);transform:translateY(-1px)}
+body.lpc #lp .lpb:active{transform:translateY(1px);box-shadow:inset 0 0 0 1px rgba(255,214,140,.18),0 2px 4px -2px rgba(0,0,0,.8)}
+body.lpc #lp #lp-run{background:linear-gradient(180deg,#24395a,#172540);box-shadow:inset 0 0 0 1px rgba(74,168,255,.7),inset 0 1px 0 rgba(255,255,255,.1),0 6px 12px -6px rgba(0,0,0,.8)}
+body.lpc #lp #lp-opts{background:linear-gradient(180deg,#46213a,#2f1626);box-shadow:inset 0 0 0 1px rgba(255,92,108,.7),inset 0 1px 0 rgba(255,255,255,.1),0 6px 12px -6px rgba(0,0,0,.8)}
+/* points × MULT : des pavés plus doux, un reflet, un rebond plus calme */
+body.lpc #lp .lp-box{border-radius:14px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35),0 8px 14px -8px rgba(0,0,0,.8);overflow:hidden}
+body.lpc #lp .lp-box::before{content:"";position:absolute;inset:0 0 50% 0;border-radius:14px 14px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0));pointer-events:none}
+body.lpc #lp .lp-box.pts{background:linear-gradient(180deg,#72e6a2,#2e8a55)}
+body.lpc #lp .lp-box.mult{background:linear-gradient(180deg,#ff8190,#b5303e)}
+body.lpc #lp .lp-box.bump{animation:lpBump2 .3s cubic-bezier(.3,1.5,.5,1)}
+body.lpc #lp .lp-box.hit{animation:lpHit2 .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes lpBump2{40%{transform:scale(1.05)}}
+@keyframes lpHit2{0%{transform:none}30%{transform:scale(1.12) rotate(-2deg);filter:brightness(1.35)}65%{transform:scale(.98) rotate(1deg)}100%{transform:none}}
+body.lpc #lp .lp-eq .x{color:#ff8a96;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+/* l'objectif : une barre qui glisse, avec un reflet qui passe */
+body.lpc #lp .lp-goal{border-radius:12px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:background .4s,box-shadow .4s}
+body.lpc #lp .lp-gbar{height:9px;border-radius:5px;background:rgba(0,0,0,.45);box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+body.lpc #lp .lp-gbar i{position:relative;border-radius:5px;transition:width .5s cubic-bezier(.25,.8,.3,1)}
+body.lpc #lp .lp-gbar i::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 70%);background-size:220% 100%;animation:lpSheen 2.6s ease-in-out infinite}
+@keyframes lpSheen{0%{background-position:120% 0}60%,100%{background-position:-120% 0}}
+body.lpc #lp .lp-goal.hit{background:rgba(95,214,138,.1);box-shadow:inset 0 0 0 1px rgba(95,214,138,.75),0 0 18px rgba(95,214,138,.18)}
+body.lpc #lp .lp-goal.pop{animation:lpGoal .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes lpGoal{0%{transform:none}35%{transform:scale(1.05);box-shadow:inset 0 0 0 1px #b8ffcf,0 0 30px rgba(95,214,138,.55)}100%{transform:none}}
+body.lpc #lp .lp-tot{border-radius:12px;background:rgba(0,0,0,.22);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+/* la base : la vie glisse, et ce qu'on perd s'efface doucement (en rouge clair) */
+body.lpc #lp .lp-hpbar{height:26px;border-radius:10px;background:rgba(0,0,0,.5);box-shadow:inset 0 1px 3px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
+body.lpc #lp .lp-hpbar #lp-hpfill{border-radius:10px;transition:width .3s cubic-bezier(.25,.8,.3,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+body.lpc #lp .lp-hpbar .lp-hpghost{position:absolute;inset:0 auto 0 0;border-radius:10px;background:linear-gradient(180deg,#ffd3d8,#ff8a96);opacity:.75;transition:width .7s cubic-bezier(.4,0,.2,1) .35s}
+body.lpc #lp .lp-wave{border-radius:4px;background:rgba(0,0,0,.4)}
+/* l'or : une pièce qui brille, des éclats quand on en gagne */
+body.lpc #lp .lp-money{position:relative;overflow:visible;padding:8px 14px;background:radial-gradient(120% 120% at 15% 50%,rgba(255,204,77,.14),rgba(255,204,77,0) 60%),linear-gradient(180deg,#281b3c,#191027);box-shadow:inset 0 0 0 1px rgba(255,204,77,.45),inset 0 1px 0 rgba(255,255,255,.08),0 12px 22px -12px rgba(0,0,0,.85)}
+body.lpc #lp .lp-money b{text-shadow:0 3px 0 #6b4c16,0 6px 10px rgba(0,0,0,.55);transition:color .3s}
+body.lpc #lp .lp-money .coin{animation:lpCoin 5s ease-in-out infinite}
+@keyframes lpCoin{0%,86%,100%{transform:none}90%{transform:scaleX(.15)}94%{transform:none}}
+body.lpc #lp .lp-money.bump{animation:none}
+body.lpc #lp .lp-money.bump b{animation:lpGold .45s cubic-bezier(.3,1.6,.5,1)}
+body.lpc #lp .lp-money.spend{animation:none}
+body.lpc #lp .lp-money.spend b{animation:lpSpend .35s ease-out}
+@keyframes lpGold{40%{transform:scale(1.1);color:#fff2b0}}
+@keyframes lpSpend{40%{transform:translateX(-3px);color:#ffb3bd}}
+body.lpc #lp .lp-spark{position:absolute;left:var(--x);top:var(--y);width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#fff,#ffcc4d 55%,rgba(255,204,77,0) 70%);pointer-events:none;animation:lpSpark .7s ease-out forwards}
+@keyframes lpSpark{0%{transform:translate(0,0) scale(.6);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+body.lpc #lp .lp-kit{background:rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+@media (prefers-reduced-motion:reduce){body.lpc #lp .lp-gbar i::after,body.lpc #lp .lp-money .coin{animation:none}}
+body.reduced.lpc #lp .lp-gbar i::after,body.reduced.lpc #lp .lp-money .coin{animation:none}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3271,7 +3332,7 @@ body.lpc .mfly{font-size:15px;padding:3px 9px 2px}
     </div>
     <div class="lp-base">
       <div class="lp-row"><small>BASE</small><span class="lp-fl" id="lp-floors"></span></div>
-      <div class="hpbar lp-hpbar" id="lp-hpbar"><i id="lp-hpfill"></i><span id="lp-hp">100 / 100</span></div>
+      <div class="hpbar lp-hpbar" id="lp-hpbar"><i class="lp-hpghost" id="lp-hpghost"></i><i id="lp-hpfill"></i><span id="lp-hp">100 / 100</span></div>
       <div class="lp-row"><small>CARTES</small><span id="lp-cards"></span></div>
       <div class="wave lp-wave"><i id="lp-wave"></i></div>
     </div>
@@ -3780,7 +3841,7 @@ body.lpc .mfly{font-size:15px;padding:3px 9px 2px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v12.2</p>
+  <p class="proto">Sefy Industries · v12.3</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -14084,7 +14145,7 @@ void main(){
 
 /* ================= interface : HUD, rack, bulles, écrans ================= */
 const hc = {};
-function setTxt(id, v) { if (hc[id] !== v) { hc[id] = v; const el = $(id); if (el) el.textContent = v; } }
+function setTxt0(id, v) { if (hc[id] !== v) { hc[id] = v; const el = $(id); if (el) el.textContent = v; } }
 function setHTML(id, v) { if (hc[id] !== v) { hc[id] = v; const el = $(id); if (el) el.innerHTML = v; } }
 function show(id, on) { const el = $(id); if (el) el.hidden = !on; }
 function roundLabel(r) { return r > 30 ? `∞+${r - 30}` : String(r); }
@@ -14204,7 +14265,7 @@ function updateLP(run, cb, r, inCombat) {
   const hp = Math.max(0, Math.ceil(run.hp)), pctHp = clamp(run.hp / run.maxHp, 0, 1), arm = cb && !cb.demo && cb.armor > 0 ? ` +${Math.ceil(cb.armor)}` : '';
   setTxt('#lp-hp', `${hp} / ${Math.round(run.maxHp)}${arm}`);
   const fw = Math.round(pctHp * 1000) / 10 + '%';
-  if (hc.lphpw !== fw) { hc.lphpw = fw; $('#lp-hpfill').style.width = fw; }
+  if (hc.lphpw !== fw) { hc.lphpw = fw; $('#lp-hpfill').style.width = fw; lpGhost(); }
   $('#lp-hpbar').classList.toggle('low', pctHp < .3);
   const fl = run.floors || [], fk = fl.map(h => Math.round(clamp(h / BAL.floorHp, 0, 1) * 10)).join(',');
   if (hc.lpfl !== fk) { hc.lpfl = fk; $('#lp-floors').innerHTML = fl.length ? fl.map(h => `<i class="${h <= 0 ? 'broken' : ''}" style="--f:${clamp(h / BAL.floorHp, 0, 1)}"></i>`).join('') : ''; }
@@ -14213,7 +14274,7 @@ function updateLP(run, cb, r, inCombat) {
   const wv = inCombat && cb.goalHit ? Math.round(clamp(1 - left / Math.max(1, left + 4), 0, 1) * 1000) / 10 + '%' : '0%';
   if (hc.lpwave !== wv) { hc.lpwave = wv; $('#lp-wave').style.width = wv; }
   const gold = String(Math.floor(run.gold));
-  if (hc.lpgold !== gold) { const up = hc.lpgold != null && +gold > +hc.lpgold, down = hc.lpgold != null && +gold < +hc.lpgold; setTxt('#lp-gold', gold); if (up || down) bumpCls($('#lp-goldbox'), up ? 'bump' : 'spend'); hc.lpgold = gold; }
+  if (hc.lpgold !== gold) { const up = hc.lpgold != null && +gold > +hc.lpgold, down = hc.lpgold != null && +gold < +hc.lpgold; setTxt('#lp-gold', gold); if (up || down) bumpCls($('#lp-goldbox'), up ? 'bump' : 'spend'); if (up && +gold - +hc.lpgold >= 3) lpSparks(); hc.lpgold = gold; }
   setTxt('#lp-speed-v', G.speed === 2 ? '×2' : '×1');
   // ton équipement : boissons du bar et sorts
   const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
@@ -18971,6 +19032,54 @@ function multFly(id, v) {
     { transform: `translate(-50%,-50%) translate(${dx}px, ${dy}px) scale(.55)`, opacity: .2 },
   ], { duration: 820, easing: 'cubic-bezier(.35,0,.35,1)' });
   an.addEventListener('finish', () => { f.remove(); bumpCls(to, 'hit'); Snd.multIn && Snd.multIn(); });
+}
+
+/* ================= v12.3 · le panneau de gauche : des chiffres qui défilent, une vie qui s'efface, des éclats d'or ================= */
+// les chiffres défilent au lieu de sauter (score, objectif, score total, or)
+const ROLL = { '#lp-pts': fmtS, '#lp-total': fmtS, '#lp-gnow': fmtS, '#lp-gold': v => String(Math.floor(v)) };
+const ROLLS = new Set();
+let rollRaf = 0;
+function setTxt(id, v) {
+  const f = ROLL[id];
+  if (!f || G.reduced || G.headless) return setTxt0(id, v);
+  if (hc[id] === v) return;
+  hc[id] = v;
+  const el = $(id); if (!el) return;
+  const s = String(v), n = +s.replace(/[^\d-]/g, '');
+  if (!/^-?[\d\s  ]+$/.test(s) || !isFinite(n)) { el._r = null; el.textContent = s; return; }
+  if (!el._r) { el._r = { v: n, to: n, f }; el.textContent = s; return; }
+  const R = el._r; R.from = R.v; R.to = n; R.t0 = performance.now(); R.d = Math.min(650, 260 + Math.abs(n - R.v) * 6); R.f = f;
+  ROLLS.add(el);
+  if (!rollRaf) rollRaf = requestAnimationFrame(rollTick);
+}
+function rollTick(t) {
+  rollRaf = 0;
+  for (const el of ROLLS) {
+    const R = el._r; if (!R) { ROLLS.delete(el); continue; }
+    const k = Math.min(1, (t - R.t0) / R.d), e = 1 - Math.pow(1 - k, 3);
+    R.v = k >= 1 ? R.to : R.from + (R.to - R.from) * e;
+    el.textContent = R.f(k >= 1 ? R.to : Math.round(R.v));
+    if (k >= 1) ROLLS.delete(el);
+  }
+  if (ROLLS.size) rollRaf = requestAnimationFrame(rollTick);
+}
+// la vie perdue reste un instant en rouge clair, puis s'efface (la barre « fantôme » suit la vraie avec du retard)
+function lpGhost() {
+  const f = $('#lp-hpfill'), g = $('#lp-hpghost'); if (!f || !g) return;
+  const w = f.style.width; if (g._w !== w) { g._w = w; g.style.width = w; }
+}
+// des éclats d'or quand on en gagne
+function lpSparks() {
+  const box = $('#lp-goldbox'); if (!box || G.reduced || G.headless) return;
+  const tn = performance.now(); if (tn - (lpSparks.t || 0) < 300) return; lpSparks.t = tn;
+  const coin = box.querySelector('.coin'), r = box.getBoundingClientRect(), c = coin ? coin.getBoundingClientRect() : r;
+  const x0 = c.left + c.width / 2 - r.left, y0 = c.top + c.height / 2 - r.top;
+  for (let i = 0; i < 7; i++) {
+    const s = document.createElement('i'), a = -Math.PI / 2 + (Math.random() - .5) * 2.6, d = 18 + Math.random() * 22;
+    s.className = 'lp-spark';
+    s.style.cssText = `--x:${(x0 - 3).toFixed(1)}px;--y:${(y0 - 3).toFixed(1)}px;--dx:${(Math.cos(a) * d).toFixed(1)}px;--dy:${(Math.sin(a) * d).toFixed(1)}px;animation-delay:${(i * 18)}ms`;
+    box.appendChild(s); setTimeout(() => s.remove(), 900);
+  }
 }
 
 /* ================= le salon : machine → bar (→ marché noir) → combat ================= */
@@ -24540,7 +24649,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v12.2-202610111953
+JACKPOT DEFENSE v12.3-202610111958
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,15 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v12.3 — le panneau de gauche (PC)
+- Les blocs (manche, score, base, or, sorts) sont en feutre sombre avec un liseré doré fin et des ombres douces, au lieu des gros contours noirs.
+- Les chiffres défilent au lieu de sauter : points, objectif, score total et or.
+- La barre de vie glisse, et la vie perdue reste un instant en rouge clair avant de s'effacer.
+- L'objectif a un reflet qui passe ; quand il est atteint, il s'illumine en vert.
+- L'or : la pièce brille de temps en temps, et de petits éclats dorés partent quand tu en gagnes. Le bloc ne grossit plus d'un coup.
+- Les rebonds des cases POINTS et MULT sont plus doux. Boss, événements et manches dévastatrices gardent leurs couleurs, en plus doux.
+- Mêmes informations, au même endroit.
 
 Nouveautés de la v12.2 — les jetons MULT servent enfin
 - Le MULT de tes jetons rapporte de l'or en fin de manche : +25 % de l'or de la manche (cartes abattues et prime) par +1 MULT venu de tes jetons. Exemple : ×1,5 de jetons → +37 % d'or.
