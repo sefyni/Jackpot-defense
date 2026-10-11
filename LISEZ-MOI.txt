@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.0-202610112350
+JACKPOT DEFENSE v13.1-202610120104
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,27 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.1 — plus fluide, et un nouveau logo
+- Nouveau logo : le jeton JD avec le chapeau du Baron (icône de l'appli, de l'onglet et de l'écran d'accueil).
+  Si l'ancienne icône reste sur ton téléphone, supprime l'appli de l'écran d'accueil puis réinstalle-la.
+- OPTIONS > Graphismes > Qualité : Auto (par défaut), Haute, Moyenne ou Basse.
+  - Haute : comme avant.
+  - Moyenne : la table est dessinée un peu moins finement, un peu moins de particules, le fond bouge moins souvent.
+  - Basse : table encore moins fine, encore moins de particules, halos plus petits, les décorations qui tournent en boucle s'arrêtent.
+  - Auto : commence en Haute et baisse tout seul d'un cran si la partie rame pendant quelques secondes (un petit message le dit).
+    Un écran bloqué à 30 images/s (mode économie d'énergie) n'est pas pris pour une lenteur.
+- OPTIONS > Graphismes > Compteur FPS : affiche les images par seconde dans le coin de la table (vert, jaune ou rouge).
+- Plus léger pour tout le monde :
+  - les barres d'objectif ne forcent plus le navigateur à refaire la mise en page à chaque image ;
+  - le reflet de la barre d'objectif (PC) et le bord rouge des manches de dévastation ne repeignent plus l'écran à chaque image ;
+  - le fond animé ne se redessine plus quand il ne bouge pas ;
+  - l'électricité du MULT relit la position du compteur 4 fois par seconde au lieu de 60.
+- Mesuré sur téléphone avec un processeur ralenti 4 fois : environ 26 images/s en Haute, 38 en Moyenne, 40 en Basse.
+  Ralenti 6 fois : 20, 26 et 32. Sur un appareil normal : 60 images/s, comme avant.
+- Petit changement visible : pendant les manches de dévastation, le bord de l'écran respire en gardant sa couleur
+  (avant, il virait au rouge même pendant le vent ou le feu).
+- Rien ne change dans les règles ni dans la difficulté.
 
 Nouveautés de la v13.0 — la même finition partout
 - La machine : une vitre sur les rouleaux (avec un reflet), une ligne de gain qui respire doucement, des pastilles d'info et un écran plus doux, une bille de levier qui brille.

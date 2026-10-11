@@ -3402,6 +3402,27 @@ body.lpc #title .mbtn{transition:transform .16s ease,filter .2s ease}
 body.lpc #title .mbtn:hover{transform:translateY(-2px);filter:brightness(1.08)}
 @media (prefers-reduced-motion:reduce){#machine .payline,#title #t-play::after{animation:none}}
 body.reduced #machine .payline,body.reduced #title #t-play::after{animation:none}
+
+/* ---------- v13.1 · optimisation : qualité graphique, compteur FPS, animations qui ne repeignent plus l'écran ---------- */
+/* les barres d'objectif grandissent avec transform (le navigateur n'a plus à refaire la mise en page) */
+.wave i{width:100%;transform-origin:0 50%;transform:scaleX(0);transition:transform .2s}
+.lp-gbar i{width:100%;transform-origin:0 50%;transform:scaleX(0);transition:transform .25s ease-out}
+body.lpc #lp .lp-gbar i{overflow:hidden;transition:transform .5s cubic-bezier(.25,.8,.3,1)}
+/* le reflet de la barre d'objectif glisse (transform) au lieu de repeindre son fond */
+body.lpc #lp .lp-gbar i::after{inset:0 auto 0 0;width:50%;background:linear-gradient(100deg,rgba(255,255,255,0) 10%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 90%);background-size:auto;animation:lpSheen2 2.6s ease-in-out infinite}
+@keyframes lpSheen2{0%{transform:translateX(-110%)}60%,100%{transform:translateX(220%)}}
+/* le bord rouge des manches de dévastation respire en opacité (avant : une ombre géante repeinte à chaque image) */
+#stage::after{box-shadow:inset 0 0 96px 18px rgba(255,40,60,.64),inset 0 0 0 4px rgba(255,92,108,.72)}
+@keyframes dvEdge{0%,100%{opacity:.62}50%{opacity:1}}
+/* Basse : les décorations qui bouclent sans fin s'arrêtent (rien de ce qui sert au jeu) */
+body.q-low #abs .pc-bob::before,body.q-low #abs .pcard .pc-gloss::before,body.q-low #lp .lp-gbar i::after,body.q-low #lp .lp-money .coin,
+body.q-low .lp-box.mult.el2,body.q-low .lp-box.mult.el3,body.q-low .hud-score .hm.el2,body.q-low .chip.k-fou::after,body.q-low .chip.k-fou>.ico,
+body.q-low .slot.mlink::before,body.q-low .bulbs i,body.q-low #machine .payline,body.q-low .al-rain,body.q-low .al-neon span,body.q-low #title #t-play::after,
+body.q-low .tspark{animation:none!important}
+/* le compteur FPS */
+#fpsc{position:fixed;z-index:97;top:calc(env(safe-area-inset-top,0px) + 3px);left:6px;padding:1px 7px;border-radius:6px;background:rgba(10,6,18,.78);box-shadow:0 0 0 1px rgba(255,255,255,.12);color:#5fd68a;font:700 12px/1.35 var(--f-pix);letter-spacing:.05em;pointer-events:none;font-variant-numeric:tabular-nums}
+#fpsc.mid{color:#ffcc4d}
+#fpsc.bad{color:#ff5c6c}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3936,7 +3957,7 @@ body.reduced #machine .payline,body.reduced #title #t-play::after{animation:none
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.0</p>
+  <p class="proto">Sefy Industries · v13.1</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -11623,7 +11644,7 @@ function elecFrame0(dt) {
   const I = E.I, act = live && !G.reduced && (I > .01 || E.burst > .02);
   Amb.set('elec', live ? Math.min(1.4, I * 1.1 + E.burst * .45) : 0);
   if (!act && !E.arcs.length) { if (E.drawn) { E.g.clearRect(0, 0, E.c.width, E.c.height); E.drawn = false; } return; }
-  const d = Math.min(2, devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  const d = qDPR(), w = innerWidth, h = innerHeight;
   if (E.w !== w * d || E.h !== h * d || !E.g) { E.c.width = w * d; E.c.height = h * d; E.w = w * d; E.h = h * d; E.g = E.c.getContext('2d'); }
   const g = E.g; g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h); E.drawn = true;
   const anchor = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
@@ -13251,6 +13272,63 @@ function bossSay(e, kind) {
 
 /* ================= rendu de l'arène ================= */
 const cv = $('#cv'), ctx = cv.getContext('2d');
+/* ================= v13.1 · qualité graphique (Auto / Haute / Moyenne / Basse) et compteur FPS ================= */
+var QUAL = { lv: 2, ready: false, win: [], bad: 0, fpsOn: false, fpsEl: null, fpsAcc: 0, fpsN: 0 };
+const Q_KEY = { basse: 0, moyenne: 1, haute: 2 }, Q_NAME = ['Basse', 'Moyenne', 'Haute'];
+// la finesse du dessin de la table : Haute = écran net (×2 max), Moyenne = ×1,5, Basse = ×1
+function qDPR() { const lv = QUAL ? QUAL.lv : 2; return Math.min([1, 1.5, 2][lv], window.devicePixelRatio || 1); }
+// en Basse, les halos (ombres floues) du canvas principal sont deux fois plus petits : c'est ce qui coûte le plus
+(function () {
+  const d = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'shadowBlur');
+  if (!d || !d.set) return;
+  try { Object.defineProperty(ctx, 'shadowBlur', { configurable: true, get() { return d.get.call(this); }, set(v) { d.set.call(this, QUAL && QUAL.lv === 0 ? v * .5 : v); } }); } catch (e) { /* rien */ }
+})();
+function applyQuality() {
+  const o = OPT();
+  const want = o.quality === 'auto' ? (o.qAuto != null ? o.qAuto : 2) : (Q_KEY[o.quality] != null ? Q_KEY[o.quality] : 2);
+  const changed = want !== QUAL.lv;
+  QUAL.lv = want; QUAL.win.length = 0; QUAL.wsum = 0; QUAL.bad = 0;
+  document.body.classList.toggle('q-mid', want === 1);
+  document.body.classList.toggle('q-low', want === 0);
+  G.partK = (o.parts ? 1 : .35) * [.45, .7, 1][want];
+  try { BG.fps = [10, 20, 30][want]; BG.sig = null; } catch (e) { /* pas encore prêt */ }
+  QUAL.fpsOn = !!o.fps;
+  if (QUAL.fpsEl) QUAL.fpsEl.hidden = !QUAL.fpsOn;
+  if (changed && QUAL.ready) { try { resize(); BG.resize(); } catch (e) { /* rien */ } }
+}
+// à chaque image : le compteur FPS, et en Auto on baisse la qualité si la table rame vraiment
+function qualTick(ms) {
+  if (!QUAL.ready) { QUAL.ready = true; try { BG.fps = [10, 20, 30][QUAL.lv]; } catch (e) { /* rien */ } }
+  if (QUAL.fpsOn && ms > 0 && ms < 1000) {
+    if (!QUAL.fpsEl) { const e = document.createElement('div'); e.id = 'fpsc'; e.setAttribute('aria-hidden', 'true'); document.body.appendChild(e); QUAL.fpsEl = e; }
+    QUAL.fpsEl.hidden = false;
+    QUAL.fpsAcc += ms; QUAL.fpsN++;
+    if (QUAL.fpsAcc >= 500) {
+      const f = Math.round(QUAL.fpsN * 1000 / QUAL.fpsAcc);
+      QUAL.fpsEl.textContent = f + ' FPS';
+      QUAL.fpsEl.className = f >= 55 ? '' : f >= 40 ? 'mid' : 'bad';
+      // dans le coin haut gauche de la table (là où il n'y a rien)
+      const st = $('#stage'), r = st && st.getBoundingClientRect();
+      if (r && r.width) { const x = Math.round(r.left + 6) + 'px', y = Math.round(r.top + 6) + 'px'; if (QUAL.fx !== x || QUAL.fy !== y) { QUAL.fx = x; QUAL.fy = y; QUAL.fpsEl.style.left = x; QUAL.fpsEl.style.top = y; } }
+      QUAL.fpsAcc = 0; QUAL.fpsN = 0;
+    }
+  }
+  const o = G.meta && G.meta.opts;
+  if (!o || o.quality !== 'auto' || QUAL.lv === 0 || document.hidden) return;
+  if (G.mode !== 'combat' || G.paused || !(ms > 0 && ms < 250)) return;
+  const W2 = QUAL.win; W2.push(ms); QUAL.wsum = (QUAL.wsum || 0) + ms;
+  if (W2.length < 180 && QUAL.wsum < 3000) return;
+  QUAL.wsum = 0;
+  if (W2.length < 40) { W2.length = 0; return; }
+  const a = W2.slice().sort((x, y) => x - y), vs = a[Math.floor(a.length * .05)], med = a[a.length >> 1];
+  W2.length = 0;
+  // on rate des images quand la moitié d'entre elles dure bien plus longtemps que le rythme de l'écran
+  // (un écran bloqué à 30 images/s, comme le mode économie d'énergie, ne compte pas comme une lenteur)
+  if (med > Math.max(19, vs * 1.4)) {
+    if (++QUAL.bad >= 2) { o.qAuto = QUAL.lv - 1; saveMeta(); applyQuality(); toastAny(`Qualité ${Q_NAME[QUAL.lv]} : plus fluide`); }
+  } else QUAL.bad = 0;
+}
+
 let W = 1, H = 1, DPR = 1, S = 1, CX = 0, CY = 0, bgC = null;
 const WORLD_HALF = 84;
 const SPR = {}, CHIPC = {};
@@ -13260,7 +13338,7 @@ const WORLD_PC = 113;
 function resize() {
   const r = $('#stage').getBoundingClientRect();
   W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
-  DPR = Math.min(2, window.devicePixelRatio || 1);
+  DPR = qDPR();
   cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
   // sur PC, la barre des sorts mange le bas de la scène : l'arène se centre au-dessus
   const vh = Math.max(1, H - (LAY.pc ? LAY.barH * LAY.k : 0));
@@ -14103,7 +14181,7 @@ const FX = { c: $('#fxc'), g: null, parts: [], on: false, last: 0 };
 FX.g = FX.c.getContext('2d');
 function celebrate(big, ox, oy) {
   if (G.reduced || G.headless) return;
-  const w = innerWidth, h = innerHeight, d = Math.min(2, devicePixelRatio || 1);
+  const w = innerWidth, h = innerHeight, d = qDPR();
   if (!FX.on) { FX.c.width = w * d; FX.c.height = h * d; FX.g.setTransform(d, 0, 0, d, 0, 0); }
   const n = big ? 110 : ox != null ? 46 : 30, col = () => pick(['#e0365a', '#4aa8ff', '#a98bff', '#5fd68a', '#ff7eb6', '#ffcc4d']);
   // depuis un point précis : une gerbe qui jaillit (jeton secret, gros gains)
@@ -14223,7 +14301,7 @@ void main(){
   resize() {
     if (!this.gl) return;
     const w = Math.max(32, Math.ceil(innerWidth / 4)), h = Math.max(32, Math.ceil(innerHeight / 4));
-    this.c.width = w; this.c.height = h;
+    this.c.width = w; this.c.height = h; this.sig = null;
     this.gl.viewport(0, 0, w, h);
   },
   setMode(m) { this.mode = m; this.target = PALS[m] || PALS.menu; this.tspd = m === 'combat' ? 2.2 : m === 'inf' ? 3 : m === 'over' ? .3 : m === 'bar' ? .8 : 1; },
@@ -14239,8 +14317,11 @@ void main(){
     if ((this.mode === 'combat' || this.mode === 'inf') && G.mode === 'combat' && !G.reduced) { const ph = Music.beatPhase(); if (ph >= 0) p = Math.pow(1 - ph, 3) * (.25 + .6 * Music.intensity); }
     this.pulse += (p - this.pulse) * Math.min(1, dt * 30);
     this.acc += dt;
-    if (this.acc < 1 / 30) return;
+    if (this.acc < 1 / (this.fps || 30)) return;
     this.acc = 0;
+    const sig = this.t * 1000 + this.pulse * 7e5 + this.pal[0][0] + this.pal[1][1] * 3 + this.pal[2][2] * 7 + this.pal[3][0] * 11 + this.c.width * 1e-3 + this.c.height * 1e-6;
+    if (sig === this.sig) return;
+    this.sig = sig;
     const gl = this.gl, u = this.u;
     gl.uniform2f(u.uR, this.c.width, this.c.height); gl.uniform1f(u.uT, this.t); gl.uniform1f(u.uP, this.pulse);
     gl.uniform3fv(u.uA, this.pal[0]); gl.uniform3fv(u.uB, this.pal[1]); gl.uniform3fv(u.uC, this.pal[2]); gl.uniform3fv(u.uD, this.pal[3]);
@@ -14288,7 +14369,7 @@ function updateHUD() {
   const scH = inCombat && cb.goal ? `<b>${fmtN(roundScoreLive(cb))}</b><i>/${fmtN(cb.goal)}${cb.goalHit ? ' ✓' : ''}</i>${mlt > 1.05 ? `<em class="hm${elv > .75 ? ' el3' : elv > .38 ? ' el2' : ''}" id="h-mult">×${fmtM(mlt)}</em>` : ''}` : inCombat ? `<b>${fmtS(ptsOf(cb).chips)}</b><i>×${fmtM(liveMult(run, cb))}</i>` : `<svg class="ii" viewBox="0 0 100 100"><use href="#i-star"/></svg>${fmtS(run.score || 0)}`;
   if (hc.score !== scH) { hc.score = scH; const se = $('#h-score'); se.innerHTML = scH; se.classList.toggle('live', inCombat); }
   const wv = inCombat && cb.goal ? Math.round((cb.goalHit ? 1 : clamp(roundScoreLive(cb) / cb.goal, 0, 1)) * 1000) / 10 + '%' : G.mode === 'combat' ? '0%' : '100%';
-  if (hc.wave !== wv) { hc.wave = wv; $('#h-wave').style.width = wv; }
+  if (hc.wave !== wv) { hc.wave = wv; $('#h-wave').style.transform = `scaleX(${parseFloat(wv) / 100})`; }
   const wcls = inCombat && cb.goalHit ? 'hit' : '';
   if (hc.wcls !== wcls) { hc.wcls = wcls; $('#h-wave').parentElement.classList.toggle('hit', !!wcls); }
   setTxt('#b-speed', G.speed === 2 ? '×2' : '×1');
@@ -14357,13 +14438,13 @@ function updateLP(run, cb, r, inCombat) {
     setTxt('#lp-gnow', fmtS(cb.goalHit ? Math.max(now2, cb.goal) : now2)); setTxt('#lp-gval', ' / ' + fmtS(cb.goal));
     setTxt('#lp-glab', cb.goalHit ? 'OBJECTIF ATTEINT' : cb.reinfN ? 'OBJECTIF · RENFORTS' : 'OBJECTIF');
     const gw = Math.round((cb.goalHit ? 1 : k) * 1000) / 10 + '%';
-    if (hc.lpgw !== gw) { hc.lpgw = gw; $('#lp-gfill').style.width = gw; }
+    if (hc.lpgw !== gw) { hc.lpgw = gw; $('#lp-gfill').style.transform = `scaleX(${parseFloat(gw) / 100})`; }
     if (hc.lpgk !== gk) { hc.lpgk = gk; gl.classList.toggle('hit', gk === 'hit'); gl.classList.toggle('near', gk === 'near'); if (gk === 'hit') bumpCls(gl, 'pop'); }
     gl.classList.toggle('reinf', !cb.goalHit && cb.reinfN > 0);
     gl.hidden = false;
   } else if (G.run && G.mode !== 'combat') {
     setTxt('#lp-glab', 'OBJECTIF DE LA MANCHE'); setTxt('#lp-gnow', '—'); setTxt('#lp-gval', '');
-    if (hc.lpgw !== '0%') { hc.lpgw = '0%'; $('#lp-gfill').style.width = '0%'; }
+    if (hc.lpgw !== '0%') { hc.lpgw = '0%'; $('#lp-gfill').style.transform = 'scaleX(0)'; }
     gl.classList.remove('hit', 'near', 'reinf'); hc.lpgk = '';
   }
   // la base
@@ -14377,7 +14458,7 @@ function updateLP(run, cb, r, inCombat) {
   const left = inCombat ? cb.enemies.filter(e => !e.dead && e.ai !== 'decoy' && e.ai !== 'thief').length : 0;
   setTxt('#lp-cards', inCombat ? (cb.escN && bossUp(cb) ? `sans fin · ${left} en jeu` : cb.goalHit ? `${left} restante${left > 1 ? 's' : ''}` : `${cb.killed} abattue${cb.killed > 1 ? 's' : ''}`) : '—');
   const wv = inCombat && cb.goalHit ? Math.round(clamp(1 - left / Math.max(1, left + 4), 0, 1) * 1000) / 10 + '%' : '0%';
-  if (hc.lpwave !== wv) { hc.lpwave = wv; $('#lp-wave').style.width = wv; }
+  if (hc.lpwave !== wv) { hc.lpwave = wv; $('#lp-wave').style.transform = `scaleX(${parseFloat(wv) / 100})`; }
   const gold = String(Math.floor(run.gold));
   if (hc.lpgold !== gold) { const up = hc.lpgold != null && +gold > +hc.lpgold, down = hc.lpgold != null && +gold < +hc.lpgold; setTxt('#lp-gold', gold); if (up || down) bumpCls($('#lp-goldbox'), up ? 'bump' : 'spend'); if (up && +gold - +hc.lpgold >= 3) lpSparks(); hc.lpgold = gold; }
   setTxt('#lp-speed-v', G.speed === 2 ? '×2' : '×1');
@@ -19279,13 +19360,15 @@ function elecFrame(dt) {
   const I = E.I, act = live && !G.reduced && (I > .01 || E.burst > .02 || ELEC2.ring > 0);
   Amb.set('elec', live ? Math.min(1.4, I * 1.1 + E.burst * .45) : 0);
   if (!act && !E.arcs.length) { if (E.drawn) { E.g.clearRect(0, 0, E.c.width, E.c.height); E.drawn = false; } return; }
-  const d = Math.min(2, devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  const d = qDPR(), w = innerWidth, h = innerHeight;
   if (E.w !== w * d || E.h !== h * d || !E.g) { E.c.width = w * d; E.c.height = h * d; E.w = w * d; E.h = h * d; E.g = E.c.getContext('2d'); }
   const g = E.g; g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h); E.drawn = true;
   const anchor = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
   g.globalCompositeOperation = 'lighter'; g.lineCap = 'round'; g.lineJoin = 'round';
   if (act && anchor) {
-    const r = anchor.getBoundingClientRect();
+    const nowR = performance.now();
+    if (!E.rc || E.rcA !== anchor || nowR - E.rcT > 250) { E.rc = anchor.getBoundingClientRect(); E.rcA = anchor; E.rcT = nowR; }
+    const r = E.rc;
     if (r.width) {
       if (ELEC2.kick) { ELEC2.kick = 0; elecDischarge(r, I); }
       // d'abord quelques étincelles, puis des arcs de plus en plus longs, de plus en plus nombreux
@@ -22583,7 +22666,7 @@ function spellStripHTML() {
 }
 
 /* ================= options façon Balatro, statistiques de profil, infos de la partie ================= */
-const OPT_DEF = { vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1, keys: {} };
+const OPT_DEF = { vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1, keys: {}, quality: 'auto', qAuto: null, fps: 0 };
 function initOpts(m) {
   const first = !m.opts;
   m.opts = Object.assign({}, OPT_DEF, m.opts || {});
@@ -22598,6 +22681,7 @@ function applyOpts(silent) {
   G.shakeMul = o.shake / 100;
   G.reduced = !!o.reduced || G.sysReduced;
   G.partK = o.parts ? 1 : .35;
+  applyQuality();
   document.body.classList.toggle('nocrt', !o.crt);
   document.body.classList.toggle('reduced', G.reduced);
   BG.still = !o.bganim;
@@ -22657,6 +22741,8 @@ function renderOptions() {
       h += oRow('Plein écran', '<button class="btn small blue" data-oact="fs">Basculer</button>', 'ou touche F11');
       h += oRow('Tremblements d\'écran', oSlider('shake', o.shake));
       h += oRow('Effet écran cathodique', oTog('crt', o.crt), 'lignes et bords sombres');
+      h += oRow('Qualité', oSeg('quality', o.quality || 'auto', [['auto', 'Auto'], ['haute', 'Haute'], ['moyenne', 'Moyenne'], ['basse', 'Basse']]), (o.quality || 'auto') === 'auto' ? `en ce moment : ${Q_NAME[QUAL.lv]}` : 'Basse : plus fluide sur les vieux appareils');
+      h += oRow('Compteur FPS', oTog('fps', o.fps), 'images par seconde, en haut de l\'écran');
       h += oRow('Particules', oSeg('parts', o.parts, [[1, 'Toutes'], [0, 'Réduites']]));
       h += oRow('Nombres flottants', oTog('floats', o.floats), 'or, soins, dégâts sur la table');
       h += oRow('Fond animé', oTog('bganim', o.bganim));
@@ -22696,7 +22782,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v10</p></div>`;
+        <p class="ov5">v13.1</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -22750,6 +22836,7 @@ function optClick(e) {
     const k = t.dataset.opt, v = t.dataset.v;
     if (k === 'ctrl') G.meta.ctrl = v;
     else if (k === 'layout') o.layout = v;
+    else if (k === 'quality') { o.quality = v; o.qAuto = null; }
     else o[k] = +v;
     if (k === 'speed') G.speed = +v;
     Snd.toggle(); applyOpts(); renderOptions();
@@ -24800,7 +24887,8 @@ let lastT = 0;
 const CALM = ['machine', 'market', 'bar', 'poker', 'chooser', 'mini', 'cut', 'reward'];
 function frame(t) {
   requestAnimationFrame(frame);
-  const dt = Math.min(.05, Math.max(0, (t - lastT) / 1000)); lastT = t;
+  const rawMs = t - lastT, dt = Math.min(.05, Math.max(0, rawMs / 1000)); lastT = t;
+  qualTick(rawMs);
   BG.frame(dt);
   if (G.run && !G.run.over && G.mode !== 'title' && G.mode !== 'over' && !G.paused && G.meta.life) G.meta.life.time += dt;
   const cb = G.cb;
@@ -25065,7 +25153,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { QUAL, applyQuality, qualTick, coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
