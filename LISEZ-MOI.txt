@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v10.8-202610110850
+JACKPOT DEFENSE v10.9.1-202610111159
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,33 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v10.9.1
+- Les bumpers (Pop Fizz) changent :
+  · Ils bloquent les cartes : elles ne passent plus à travers.
+  · Les cartes au corps à corps les frappent et peuvent les casser. Les tirs des cartes les abîment aussi. Un bumper cassé revient à la manche suivante.
+  · Quand ta BILLE touche un bumper, il brille pendant 5 s. Il clignote juste avant de s'éteindre.
+  · Si tous les bumpers encore debout brillent en même temps : BILLE bonus et un peu d'or.
+  · Au niveau 3 (le dernier), un bumper qui brille renvoie les tirs des cartes au lieu de les encaisser.
+
+Nouveautés de la v10.9
+- Les cocktails ne copient plus les pouvoirs des jetons : ils les renforcent. Ils ne servent que si tu as les bons jetons.
+  · Piña Pyro : tes brûlures font +30 % par niveau.
+  · Blue Lagoon : tout ce qui gèle les cartes gèle 40 % plus longtemps par niveau.
+  · Tequila Boum : tes coups critiques font +50 % par niveau.
+  · Spritz Électrique : tes éclairs sautent sur 1 carte de plus par niveau, et font +25 %.
+  · Ricochet Royal : tout ce qui rebondit (Carambole, tirs renvoyés, BILLE qui ricoche) rebondit une fois de plus par niveau.
+  · Triple Sec : quand ta BILLE se divise, une bille de plus part avec elle.
+  · Bloody Mary : tous tes soins sont 25 % plus forts par niveau.
+  · Cactus Margarita : tes épines (Ronces, Herse) font +60 % par niveau.
+  · Shot Vampire : tes soins sont doublés pendant une manche.
+- On boit à la chaîne : plus besoin d'attendre la fin d'un verre pour commander le suivant.
+- Les mises : le texte court d'avant revient sur l'écran « Nouvelle partie ».
+- Marcel ne chante plus : quand il fait danser les cartes, la musique joue (une petite flûte à la place de sa voix) et des notes s'envolent de lui et des cartes.
+
+Nouveautés de la v10.8.1
+- Le Collectionneur n'a plus que 3 poinçons dans toute la partie, aux manches 8, 18 et 28. Un message te prévient quand le poinçon arrive. Un poinçon que tu n'utilises pas tout de suite se garde pour plus tard.
+- Rien n'est offert au départ ni après les boss.
 
 Nouveautés de la v10.8
 - Le Collectionneur change :

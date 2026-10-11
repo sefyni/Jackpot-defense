@@ -2720,7 +2720,7 @@ body.lpc .pet-say::before{top:15px;right:-8px;border:8px solid transparent;borde
 @keyframes pcJaw{from{transform:rotate(0)}to{transform:rotate(24deg)}}
 .pet-marcel .mb-tail{transform-origin:100% 50%;animation:mbTail 1.9s ease-in-out infinite}
 @keyframes mbTail{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
-.pt-talk .mb-jaw,.pt-sing .mb-jaw{transform-origin:0% 15%;animation:mbJaw .15s steps(2,jump-none) infinite alternate}
+.pt-talk .mb-jaw{transform-origin:0% 15%;animation:mbJaw .15s steps(2,jump-none) infinite alternate}
 @keyframes mbJaw{from{transform:rotate(0)}to{transform:rotate(26deg)}}
 .pt-sing .mb-fish{transform-origin:15% 55%;animation:mbTurn .45s ease-in-out infinite alternate}
 @keyframes mbTurn{from{transform:rotate(-3deg)}to{transform:rotate(-11deg) scale(1.05)}}
@@ -2790,6 +2790,10 @@ body:not(.lpc) .nr-cardbox{width:min(36vw,150px)}
 body.lpc .nr-pets{align-items:stretch}
 body.lpc .nrp-row{justify-content:flex-start}
 body.lpc .nrp-t{max-width:none;text-align:left;font-size:13px}
+
+/* v10.9 · Marcel ne chante plus : des notes s'envolent */
+.pt-pet .pt-note{position:absolute;bottom:60%;z-index:3;font:700 16px/1 sans-serif;font-style:normal;color:var(--c);text-shadow:0 2px 0 #000;pointer-events:none;animation:ptNote 1.4s ease-out forwards}
+@keyframes ptNote{0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-46px) scale(1.15) rotate(12deg)}}
 /* v10.3 · les pouvoirs en cartes, et tes deux mains */
 #abs.cards{left:0;right:0;bottom:0;top:auto;height:auto;padding:0;display:block;background:none;pointer-events:none}
 body.lpc #abs.cards{height:auto;padding:0;background:linear-gradient(180deg,rgba(12,8,20,0),rgba(12,8,20,.5) 70%)}
@@ -4830,7 +4834,7 @@ function computeStats(run) {
   s.dmg = BAL.dmg0 * s.dmgMul;
   s.rate = BAL.rate0 * s.rateMul;
   s.range = BAL.range0 * s.rangeMul;
-  s.critChance = Math.min(.9, s.crit);
+  s.critChance = Math.min(.9, s.crit); s.critMult += s.critAdd || 0;
   s.bulletSpd = BAL.bulletSpd * s.bulletSpdMul;
   s.maxHp = Math.max(10, Math.round((BAL.baseHp + s.hpAdd) * s.hpMul));
   s.rakeHalf = BAL.rakeHalf * Math.min(2.2, s.rakeHalfMul);
@@ -4957,6 +4961,7 @@ function stunE(e, d) { if (!e || e.dead) return; e.stunT = Math.max(e.stunT, e.b
 function burnE(e, dps, dur) {
   if (!e || e.dead) return;
   const cb = G.cb, s = cb.stats, T = s.T;
+  if (s.pyroAmp > 1) dps *= s.pyroAmp;
   if (s.c('fonte') && e.frzT > 0 && !e.fonteDone) { e.fonteDone = true; hitE(e, DM() * 2, 'braise', { big: true }); if (!G.headless) burst(e.x, e.y, '#bff4ff', 8, 30, 1, .3); if (e.dead) return; }
   if (e.burnT > 0 && T.braise[1] > 0) e.burnK = Math.min(s.c('coulee') && e.inMagma ? 9 : .6, (e.burnK || 0) + .15 * T.braise[1]);
   e.burnDps = Math.max(e.burnDps, dps); e.burnT = Math.max(e.burnT, dur || 3);
@@ -4993,6 +4998,7 @@ function mudE(e, step) {
 function arcChain(src, n, dmg, o) {
   const cb = G.cb, s = cb.stats, T = s.T;
   o = o || {};
+  if (s.spritzN) { n += s.spritzN; dmg *= s.spritzK; }
   n += (T.jupiter[3] > 0 ? 1 : 0) + (T.jupiter[4] > 0 ? 2 : 0) + (o.hammer && s.c('tonnerre') ? 2 : 0);
   if (T.jupiter[4] > 0) dmg *= 1.3;
   const hit = new Set([src.id]), paths = [];
@@ -7614,7 +7620,7 @@ function bilLaunch(ang, pow) {
   const v = (BAL.bilV0 + (BAL.bilV1 - BAL.bilV0) * pow) * (1 + vk), r0 = BAL.baseR + BAL.bilR + .6;
   const big = 1 + Math.min(1, .2 * bpk(s, 'grosse'));
   const b = newBall(Math.cos(ang) * r0, Math.sin(ang) * r0, Math.cos(ang) * v, Math.sin(ang) * v, { main: true, r: BAL.bilR * big, full: pow >= .97 });
-  b.ric = Math.round(bpk(s, 'ricochet')) + (bpk(s, 'ricochet') > 0 ? 1 : 0);
+  b.ric = Math.round(bpk(s, 'ricochet')) + (bpk(s, 'ricochet') > 0 ? 1 : 0); if (b.ric > 0) b.ric += s.ricoAmp || 0;
   b.perce = bpk(s, 'perce') > 0 ? 1 + Math.round(bpk(s, 'perce')) : 0;
   if (T.ressort[4] > 0 && b.full) { b.perce = 99; b.plein = true; }
   if (T.ressort[2] > 0) b.life += 2;
@@ -7626,7 +7632,7 @@ function bilLaunch(ang, pow) {
   // dédoublement au lancer
   let extra = bpk(s, 'split') > 0 ? Math.min(3, Math.max(1, Math.round(bpk(s, 'split')))) : 0;
   if (s.c('lancement') && b.full) extra += T.multibille[2] > 0 ? 2 : 1;
-  extra += s.bilExtra || 0;
+  if (extra > 0) extra += s.bilExtra || 0;
   for (let k = 0; k < extra; k++) { const a = ang + (k % 2 ? 1 : -1) * (.18 + .1 * Math.floor(k / 2)); B.balls.push(newBall(b.x, b.y, Math.cos(a) * v, Math.sin(a) * v, { dm: .6, r: b.r, ric: b.ric, perce: b.perce, life: b.life * .8 })); }
   dbg('bille');
   if (!G.headless) { Snd.cue(.35 + .65 * pow); haptic(20); }
@@ -7667,6 +7673,7 @@ function bilBand(b) {
 }
 function bilSplit(b, n) {
   const cb = G.cb, B = cb.bil;
+  n += cb.stats.bilExtra || 0;
   if (B.balls.length >= 6) return;
   const sp = Math.hypot(b.vx, b.vy), a0 = Math.atan2(b.vy, b.vx);
   for (let k = 0; k < n; k++) { const a = a0 + (k % 2 ? 1 : -1) * (.35 + .2 * Math.floor(k / 2)); B.balls.push(newBall(b.x, b.y, Math.cos(a) * sp, Math.sin(a) * sp, { dm: .7, r: b.r, life: Math.max(2, b.life), ric: b.ric, perce: b.perce, splitDone: true })); }
@@ -10947,7 +10954,7 @@ function finishRound() {
   let reward = null;
   if (run.skulls >= 3) reward = mkJoker('ultime', [{ t: pick(run.pool), lv: 3 }], 1);
   else if (run.skulls === 2) reward = mkJoker('rare', [{ t: pick(run.pool), lv: 2 }], 1);
-  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] }; ckChampagne(run, cb, s, res); if (hasDeck(run, 'collec')) { if (isBossRound(r)) run.clPunch = (run.clPunch || 0) + 1; if (G.headless) clAuto(run); }
+  const res = { bonus, interest: 0, heal: healAmt, reward, flip: 0, score, notes: [] }; ckChampagne(run, cb, s, res); if (hasDeck(run, 'collec') && CL_ROUNDS.includes(r + 1)) { run.clPunch = (run.clPunch || 0) + 1; run.clNew = r + 1; if (G.headless) clAuto(run); }
   tkEnd(run, res);
   run.gold = Math.floor(run.gold);
   run.malus = []; run.skulls = 0; run.stolen = []; run.boost = {};
@@ -12132,7 +12139,7 @@ function updateEShots(dt) {
     if (p.hold > 0) { p.hold -= dt; continue; }
     p.x += p.vx * dt; p.y += p.vy * dt;
     const d = Math.hypot(p.x, p.y);
-    if (cb.posts.length && d < 50 && bumpShot(p)) continue;
+    if (cb.posts.length && d < 50) { const bs = bumpShot(p); if (bs) { if (bs === 2) arr.splice(i, 1); continue; } }
     if (!p.checked) {
       const rk = rakeContact(p, d);
       if (rk) {
@@ -12179,7 +12186,7 @@ function parry(p) {
     p.friendly = true;
     p.tgt = src || nearestTo(p.x, p.y, 200, true);
     p.spd = BAL.reflectSpd; p.life = 3;
-    p.bounces = s.renvoi >= 3 ? 1 : 0;
+    p.bounces = (s.renvoi >= 3 ? 1 : 0) + (s.ricoAmp || 0);
     p.fdmg = null;
     p.dmg = DM() * [0, 4, 6, 9][s.renvoi] * (1 + BAL.streakStep * Math.min(BAL.streakMax, cb.streak - 1)) * (p.kind === 'orb' ? 2 : 1);
     const d = Math.hypot(p.x, p.y) || 1;
@@ -12441,7 +12448,7 @@ function onBulletHit(e, b) {
   } else dealDmg(e, b.dmg, { src: b.src || 'bullet', crit: b.crit, b });
   if (b.kind === 'b' && !b.src && !cb.demo) ckBulletHit(e, b);
   if (b.crit && !G.headless) { Snd.crit(); if (!b.dart) jokerPing('lunette', `×${fmtM(s.critMult)}`); }
-  if (e.dead && s.caram && b.kind === 'b' && (b.bounce || 0) < 2) {
+  if (e.dead && s.caram && b.kind === 'b' && (b.bounce || 0) < 2 + (s.ricoAmp || 0)) {
     const nx = nearestTo(e.x, e.y, 70, true, e);
     if (nx) {
       const a = Math.atan2(nx.y - e.y, nx.x - e.x), sp = b.speed || s.bulletSpd;
@@ -12457,6 +12464,7 @@ function dealDmg(e, amt, o) {
   o = o || {};
   if (e.inv) { if (!G.headless && rnd() < .2) { floater(e.x, e.y - e.r - 2, 'BLOQUÉ', '#9fb4d8', 3.4); Snd.shield(); } return; }
   let d = amt * e.armor;
+  if (s.thornK > 1 && (o.src === 'ronces' || o.src === 'herse')) d *= s.thornK;
   if (cb.final) { if (FB.black) d *= 1 + .15 * FB.black; if (e.st.prot) d *= .5; }
   if (e.vuln > 0) d *= 1.5;
   if (e.cutT > cb.t) d *= 1 + (e.cutK || 0);
@@ -12540,7 +12548,7 @@ function killEnemy(e, o) {
     Snd.kill();
   }
 }
-function freeze(e, d) { if (!e.dead) e.frzT = Math.max(e.frzT, e.boss ? d * .3 : d); }
+function freeze(e, d) { const s0 = G.cb && G.cb.stats; if (s0 && s0.lagon > 1) d *= s0.lagon; if (!e.dead) e.frzT = Math.max(e.frzT, e.boss ? d * .3 : d); }
 function chainLightning(src, nOver, sure) { return arcChain(src, nOver || 2, DM() * .6 * (sure ? 1.5 : 1), { src: 'chain' }); }
 function queueExplosion(x, y, rad, dmg, o) { G.cb.explQ.push({ x, y, rad, dmg, t: o.delay || 0, exclude: o.exclude, ignite: o.ignite, color: o.color || 'dyn', small: !!o.small, stun: o.stun || 0, kb: o.kb || 0, src: o.src || 'expl' }); }
 function updateExplosions(dt) {
@@ -14309,7 +14317,7 @@ const DECKS = [
   { id: 'sorts', name: 'Sorcier', icon: 'occulte', col: '#a98bff', txt: 'Tu choisis tes 2 sorts de départ.' },
   { id: 'barman', name: 'Barman', icon: 'bar', col: '#ff9a3d', txt: `Boissons et shots 30${NB}% moins chers.` },
   { id: 'bille', name: 'Bille double', icon: 'bille', col: '#9fc2ff', txt: `BILLE : 2 charges, et +50${NB}% de dégâts.` },
-  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: `Au départ, puis après chaque boss : un poinçon gratuit pour passer n'importe quel jeton de ton rack en rareté SECRÈTE (+25${NB}% de puissance, et sa capacité secrète s'il est ULTIME). Il reste secret même quand tu l'empiles ou le mixes.` },
+  { id: 'collec', name: 'Collectionneur', icon: 'star', col: '#4aa8ff', txt: `3 poinçons dans la partie, aux manches 8, 18 et 28 : chacun passe n'importe quel jeton de ton rack en rareté SECRÈTE (+25${NB}% de puissance, et sa capacité secrète s'il est ULTIME). Il reste secret même quand tu l'empiles ou le mixes.` },
   { id: 'xxl', name: 'Rack XXL', icon: 'etage', col: '#5fd68a', txt: '7 places de jetons, mais 30 PV de moins.' },
   { id: 'veinard', name: 'Veinard', icon: 'veinard', col: '#5fd4c4', txt: '+1 relance gratuite à chaque tirage, et des rouleaux plus lents.' },
 ];
@@ -14319,7 +14327,6 @@ const hasDeck = (run, id) => !!run && run.deck === id;
 function applyDeck(run, id) {
   const D = deckById(id); run.deck = D.id;
   if (D.id === 'coffre') run.gold += 200;
-  if (D.id === 'collec') run.clPunch = 1;
   if (D.id === 'xxl') { run.slots += 2; run.hpPerm = (run.hpPerm || 0) - 30; run.maxHp = Math.max(10, run.maxHp - 30); run.hp = run.maxHp; }
   return run;
 }
@@ -14418,7 +14425,7 @@ function renderNewRun(dir) {
   setTxt('#nr-stake', st.name);
   $('#nr-schip').style.background = st.col;
   // v10.4 : ce que la mise change vraiment, en chiffres (avec les règles des mises d'avant)
-  setHTML('#nr-stxt', stakeRulesHTML(m.stake) + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? '<span class="nr-r lock">Gagne une partie pour débloquer la mise suivante.</span>' : ''));
+  setTxt('#nr-stxt', st.txt + (m.stake >= 2 ? ' Et les règles des mises d\'avant.' : '') + (m.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1 ? ' Gagne une partie pour débloquer la suivante.' : ''));
   setHTML('#nr-pets', petPickHTML(m.pet));
   $('#nr-sprev').disabled = m.stake <= 0;
   $('#nr-snext').disabled = m.stake >= Math.min(STAKES.length - 1, m.stakeMax);
@@ -16958,22 +16965,22 @@ Object.assign(ICONS, {
 // ---- les nouvelles boissons ----
 const CK_NEW = {
   // le canon
-  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [48, 78], icon: 'dk_ricochet', txt: lv => `Ta balle ricoche ensuite sur une autre carte (${lv} fois, 60${NB}% des dégâts)`, quip: ['Au shaker, pas à la cuillère. Comme tes balles.', 'Elle rebondit, et elle rebondit encore.'] },
-  pyro: { cat: 'canon', name: 'Piña Pyro', glass: 'tiki', liq: '#ffb33a', gar: 'fire', max: 3, price: [32, 52, 78], icon: 'dk_pyro', txt: lv => `${[0, 15, 25, 35][lv]}${NB}% de tes balles mettent le feu (40${NB}% des dégâts par seconde, 3${NB}s)`, quip: ['Ananas flambé. Ne souffle pas dessus.', 'Attention, le verre aussi est chaud.'] },
-  critik: { cat: 'canon', name: 'Tequila Boum', glass: 'shooter', liq: '#ffe08a', gar: 'lime', max: 3, price: [30, 50, 76], icon: 'dk_critik', txt: lv => `+${7 * lv}${NB}% de coups critiques${lv >= 3 ? ', et un critique fait ×3' : ''}`, quip: ['Sel, citron, BOUM.', 'Un coup sec. Comme un critique.'] },
-  lagon: { cat: 'canon', name: 'Blue Lagoon', glass: 'hurricane', liq: '#3fb8ff', gar: 'orange', max: 2, price: [28, 46], icon: 'dk_lagon', txt: lv => `Tes balles glacent : la carte touchée ralentit de ${[0, 20, 35][lv]}${NB}% pendant 1,5${NB}s`, quip: ['Bleu comme un lagon. Froid comme mon ex.', 'Ça glace les dents. Et les cartes.'] },
+  ricochet: { cat: 'canon', name: 'Ricochet Royal', glass: 'martini', liq: '#4aa8ff', gar: 'olive', max: 2, price: [40, 66], icon: 'dk_ricochet', amp: 1, txt: lv => `Tout ce qui rebondit rebondit ${lv} fois de plus : balles de la Carambole, tirs renvoyés, BILLE qui ricoche`, quip: ['Au shaker, pas à la cuillère. Et ça rebondit.', 'Elle rebondit, et elle rebondit encore.'] },
+  pyro: { cat: 'canon', name: 'Piña Pyro', glass: 'tiki', liq: '#ffb33a', gar: 'fire', max: 3, price: [30, 48, 72], icon: 'dk_pyro', amp: 1, txt: lv => `Tes brûlures font +${30 * lv}${NB}% de dégâts`, quip: ['Ananas flambé. Tes flammes vont adorer.', 'Attention, le verre aussi est chaud.'] },
+  critik: { cat: 'canon', name: 'Tequila Boum', glass: 'shooter', liq: '#ffe08a', gar: 'lime', max: 3, price: [28, 46, 70], icon: 'dk_critik', amp: 1, txt: lv => `Tes coups critiques font +${50 * lv}${NB}% de dégâts`, quip: ['Sel, citron, BOUM.', 'Un coup sec. Comme un critique.'] },
+  lagon: { cat: 'canon', name: 'Blue Lagoon', glass: 'hurricane', liq: '#3fb8ff', gar: 'orange', max: 2, price: [26, 44], icon: 'dk_lagon', amp: 1, txt: lv => `Tout ce qui gèle les cartes les gèle ${40 * lv}${NB}% plus longtemps`, quip: ['Bleu comme un lagon. Froid comme mon ex.', 'Ça glace les dents. Et les cartes.'] },
   // le flipper
-  spritz: { cat: 'rateau', name: 'Spritz Électrique', glass: 'wine', liq: '#ff7a3d', gar: 'spark', max: 2, price: [42, 68], icon: 'dk_spritz', txt: lv => `Chaque parade lance un éclair qui saute sur ${2 * lv} cartes (80${NB}% des dégâts)`, quip: ['Ça pétille. Littéralement : touche pas le verre.', 'L\'apéro qui fait des étincelles.'] },
+  spritz: { cat: 'rateau', name: 'Spritz Électrique', glass: 'wine', liq: '#ff7a3d', gar: 'spark', max: 2, price: [36, 60], icon: 'dk_spritz', amp: 1, txt: lv => `Tes éclairs sautent sur ${lv} carte${lv > 1 ? 's' : ''} de plus et font +${25 * lv}${NB}%`, quip: ['Ça pétille. Littéralement : touche pas le verre.', 'L\'apéro qui fait des étincelles.'] },
   flipfizz: { cat: 'rateau', name: 'Flip Fizz', glass: 'flute', liq: '#ffe8a8', gar: 'ball', max: 2, price: [50, 80], icon: 'dk_flipfizz', txt: lv => `${[0, 20, 35][lv]}${NB}% de chances qu'une parade lance une BILLE bonus (gratuite)`, quip: ['Des bulles et des billes. Mon cocktail préféré.', 'Ça fizz, ça flippe.'] },
   // la base
   grandcru: { cat: 'base', name: 'Grand Cru', glass: 'wine', liq: '#8a1035', gar: 'none', max: 3, price: [45, 70, 100], icon: 'dk_grandcru', txt: lv => `PV max de la base +${8 * lv}${NB}%`, quip: ['Un grand millésime. Il te rend plus solide, pas plus malin.', 'Garde de cave : 30 ans. Garde de base : toute la partie.'] },
-  bmary: { cat: 'base', name: 'Bloody Mary', glass: 'highball', liq: '#d61e3c', gar: 'celery', max: 3, price: [36, 56, 82], icon: 'dk_bmary', txt: lv => `Chaque carte abattue soigne ta base de ${dec(.4 * lv)}${NB}PV`, quip: ['Mary te salue. Elle aime quand ça saigne.', 'Avec du céleri. Pour la santé.'] },
+  bmary: { cat: 'base', name: 'Bloody Mary', glass: 'highball', liq: '#d61e3c', gar: 'celery', max: 3, price: [32, 50, 74], icon: 'dk_bmary', amp: 1, txt: lv => `Tous tes soins sont ${25 * lv}${NB}% plus forts (même entre les manches)`, quip: ['Mary te salue. Elle soigne, à sa façon.', 'Avec du céleri. Pour la santé.'] },
   tisane: { cat: 'base', name: 'Tisane de Mamie', glass: 'tea', liq: '#b5d66b', gar: 'steam', max: 2, price: [40, 66], icon: 'dk_tisane', txt: lv => `Ta base se soigne de ${dec(.5 * lv)}${NB}PV par seconde, en plein combat`, quip: ['La recette de ma grand-mère. Elle a enterré tout le monde.', 'Verveine, tilleul, et un secret.'] },
-  cactus: { cat: 'base', name: 'Cactus Margarita', glass: 'margarita', liq: '#9be15d', gar: 'salt', max: 2, price: [32, 54], icon: 'dk_cactus', txt: lv => `Les cartes qui frappent ta base se piquent : ${150 * lv}${NB}% des dégâts en retour`, quip: ['Ça pique. C\'est le principe.', 'Le sel sur le bord, les épines dans le verre.'] },
+  cactus: { cat: 'base', name: 'Cactus Margarita', glass: 'margarita', liq: '#9be15d', gar: 'salt', max: 2, price: [28, 48], icon: 'dk_cactus', amp: 1, txt: lv => `Tes épines (Ronces, Herse) font +${60 * lv}${NB}% de dégâts`, quip: ['Ça pique. C\'est le principe.', 'Le sel sur le bord, les épines dans le verre.'] },
   // la BILLE
   disco: { cat: 'bille', name: 'Disco Punch', glass: 'punch', liq: '#c9a8ff', gar: 'disco', max: 3, price: [30, 50, 76], icon: 'dk_disco', txt: lv => `La BILLE fait +${25 * lv}${NB}% de dégâts`, quip: ['Ça tourne, ça brille, ça frappe.', 'Mets tes pattes d\'eph.'] },
   ressort: { cat: 'bille', name: 'Ressort Sour', glass: 'coupe', liq: '#d6f56b', gar: 'lime', max: 2, price: [30, 52], icon: 'dk_ressort', txt: lv => `La BILLE se recharge ${[0, 20, 35][lv]}${NB}% plus vite`, quip: ['Acide. Ça te met un coup de ressort.', 'Boing.'] },
-  triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [95], icon: 'dk_triplesec', txt: () => `Chaque BILLE part avec 2 billes bonus (60${NB}% des dégâts)`, quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
+  triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [70], icon: 'dk_triplesec', amp: 1, txt: () => 'Quand ta BILLE se divise (Multibille, dédoublement…), une bille de plus part avec elle', quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
   // les spécialités de Zaza (une de temps en temps, sur le comptoir)
   kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or gagné`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
   mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [70], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
@@ -16998,27 +17005,33 @@ Object.assign(UPG.etage, { glass: 'mug', gar: 'none' });
 Object.assign(UPG.pv, { glass: 'mug', gar: 'cherry', max: 5, price: [25, 40, 58, 80, 105], txt: lv => `PV max de la base +${25 * lv}` });
 Object.assign(UPG.remontant, { glass: 'tea', gar: 'mint', max: 3, price: [26, 42, 62], txt: lv => `+${15 * lv}${NB}% de soin entre les manches` });
 // le Barbelé devient le Pop Fizz : des bumpers de flipper
-Object.assign(UPG.barriere, { cat: 'bille', name: 'Pop Fizz', glass: 'pop', liq: '#ff5fa2', gar: 'ball', icon: 'dk_bumper', txt: lv => `${[0, 3, 5, 7][lv]} bumpers de flipper : la BILLE y rebondit à toute vitesse, les cartes et les tirs aussi${lv >= 3 ? ', avec une onde de choc' : ''}. Allume-les tous : BILLE bonus !`, quip: ['Des bumpers ! Comme au vieux flipper du fond de la salle.', 'Pop, pop, pop. Ça tilte, hein ?'] });
+Object.assign(UPG.barriere, { cat: 'bille', name: 'Pop Fizz', glass: 'pop', liq: '#ff5fa2', gar: 'ball', icon: 'dk_bumper', txt: lv => `${[0, 3, 5, 7][lv]} bumpers de flipper qui bloquent les cartes. La BILLE y rebondit et les fait briller 5${NB}s : tous allumés, BILLE bonus ! Les cartes peuvent les casser${lv >= 3 ? '. Un bumper qui brille renvoie les tirs' : ''}.`, quip: ['Des bumpers ! Comme au vieux flipper du fond de la salle.', 'Pop, pop, pop. Ça tilte, hein ?'] });
 // trois shots de plus
 Object.assign(SHOTS, {
   rebond: { name: 'Shot Rebond', price: 14, liq: '#c9a8ff', icon: 'bille', txt: 'Une BILLE de plus en réserve pendant une manche' },
-  vampire: { name: 'Shot Vampire', price: 13, liq: '#9b1e3e', icon: 'vampire', txt: 'Chaque carte abattue soigne 1 PV pendant une manche' },
+  vampire: { name: 'Shot Vampire', price: 12, liq: '#9b1e3e', icon: 'vampire', txt: 'Tes soins sont doublés pendant une manche' },
   beton: { name: 'Shot Béton', price: 11, liq: '#a8a294', icon: 'rempart', txt: 'Flipper +3 de solidité pendant une manche' },
 });
 const CK_SHOTS = ['piment', 'turbo', 'fer', 'poudre', 'givre', 'recharge', 'dore', 'rebond', 'vampire', 'beton'];
 
 // ---- ce que les cocktails changent (appelé dans computeStats) ----
 function ckStats(s, U, bo, run) {
-  s.rico = U('ricochet'); s.pyro = [0, .15, .25, .35][U('pyro')] || 0; s.chill = [0, .2, .35][U('lagon')] || 0;
-  if (U('critik')) { s.crit += .07 * U('critik'); if (U('critik') >= 3) s.critMult = Math.max(s.critMult, 3); }
-  s.spritz = 2 * U('spritz'); s.flipfizz = [0, .2, .35][U('flipfizz')] || 0;
+  // v10.9 · les cocktails « amplis » : ils renforcent ce que font tes jetons, sans copier leurs pouvoirs
+  s.pyroAmp = 1 + .3 * U('pyro');
+  s.lagon = 1 + .4 * U('lagon');
+  s.critAdd = .5 * U('critik');
+  s.spritzN = U('spritz'); s.spritzK = 1 + .25 * U('spritz');
+  s.ricoAmp = U('ricochet');
+  s.bilExtra = U('triplesec') ? 1 : 0;
+  s.healMul *= (1 + .25 * U('bmary')) * (bo.vampire ? 2 : 1);
+  s.thornK = 1 + .6 * U('cactus');
+  s.rico = 0; s.pyro = 0; s.chill = 0; s.spritz = 0; s.bmary = 0; s.cactus = 0;
+  // les cocktails « chiffres »
+  s.flipfizz = [0, .2, .35][U('flipfizz')] || 0;
   s.hpMul *= 1 + .08 * U('grandcru');
-  s.bmary = .4 * U('bmary') + (bo.vampire ? 1 : 0);
   s.regen += .5 * U('tisane');
-  s.cactus = 1.5 * U('cactus');
   s.bilDmgMul *= 1 + .25 * U('disco');
   s.bilCdMul *= [1, .8, .65][U('ressort')] || 1;
-  s.bilExtra = U('triplesec') ? 2 : 0;
   s.goldMul *= 1 + .12 * U('kir');
   s.rhum = 1 - .1 * U('rhum');
   s.champagne = U('champagne') > 0;
@@ -17069,45 +17082,57 @@ function spellCd(id) { const s = G.cb && G.cb.stats; return spellCd0(id) * (s &&
 // la Fée Verte : les sorts sont prêts au début de la manche
 const ckFee = run => !!(run.up && run.up.absinthe);
 
-/* ---- les bumpers de flipper (le Pop Fizz, qui remplace le Barbelé) ---- */
-const BUMP = { R: 5.4, kick: 225, vmax: 310, kb: 100, dmg: .35, cdE: .7, tilt: 3.5 };
+/* ---- les bumpers de flipper (le Pop Fizz) ----
+   v10.9.1 : ils bloquent les cartes, ils peuvent casser (coups et tirs des cartes),
+   la BILLE les fait briller 5 s ; au niveau 3, un bumper qui brille renvoie les tirs */
+const BUMP = { R: 5.4, kick: 225, vmax: 310, kb: 70, hp: 40, glow: 5 };
 const BUMP_COL = [['#ff3d6e', '#ffd0dc', '255,61,110'], ['#4aa8ff', '#d6ecff', '74,168,255'], ['#ffcc4d', '#fff3c4', '255,204,77']];
+const bumpLit = (p, cb) => p.hp > 0 && p.glowT > cb.t;
 function buildPosts() {
   const cb = G.cb, n = cb.stats.posts, lv = (G.run && G.run.up && G.run.up.barriere) || 0;
   cb.posts = [];
   if (!n) return;
-  const rr = n >= 7 ? 41 : n >= 5 ? 38 : 35;
+  const rr = n >= 7 ? 41 : n >= 5 ? 38 : 35, hp = Math.round(BUMP.hp * (1 + .06 * Math.max(0, G.run.round - 1)));
   for (let k = 0; k < n; k++) {
     const a = -Math.PI / 2 + Math.PI / n + k * TAU / n;
-    cb.posts.push({ ang: a, x: Math.cos(a) * rr, y: Math.sin(a) * rr, r: BUMP.R, hp: 1, max: 1, hit: 0, tiltT: -9, lit: false, col: k % 3, last: {}, lv });
+    cb.posts.push({ ang: a, x: Math.cos(a) * rr, y: Math.sin(a) * rr, r: BUMP.R, hp, max: hp, hit: 0, glowT: -9, dmgT: -9, col: k % 3, last: {}, lv });
   }
 }
-// les cartes rebondissent sur les bumpers ; un boss les fait « tilter »
+// les cartes butent sur les bumpers : celles qui arrivent au contact les frappent
 function postCollisions() {
   const cb = G.cb;
   for (const p of cb.posts) {
-    if (p.tiltT > cb.t) continue;
+    if (p.hp <= 0) continue;
     for (const e of cb.enemies) {
       if (e.dead || e.deal > .15 || e.ai === 'decoy') continue;
       const dx = e.x - p.x, dy = e.y - p.y, rr = e.r * .85 + p.r, d2 = dx * dx + dy * dy;
       if (d2 >= rr * rr) continue;
-      if (e.boss) { bumpTilt(p); break; }
       const d = Math.sqrt(d2) || .001, nx = dx / d, ny = dy / d;
-      e.x = p.x + nx * rr; e.y = p.y + ny * rr;
+      e.x = p.x + nx * rr; e.y = p.y + ny * rr;   // la carte ne passe pas
       if ((p.last[e.id] || 0) > cb.t) continue;
-      p.last[e.id] = cb.t + BUMP.cdE;
-      if (e.ai !== 'guard') { e.kbx += nx * BUMP.kb; e.kby += ny * BUMP.kb; }
-      e.stunT = Math.max(e.stunT, .25);
-      hitE(e, DM() * BUMP.dmg * (p.lv >= 2 ? 1.5 : 1), 'bumper');
-      bumpPop(p, p.x + nx * p.r, p.y + ny * p.r, false);
+      p.last[e.id] = cb.t + Math.max(.6, e.atkI || 1);
+      e.lunge = .18;
+      if (!e.boss && e.ai !== 'guard') { e.kbx += nx * BUMP.kb; e.kby += ny * BUMP.kb; }
+      bumpHurt(p, e.dmg * (e.boss ? 3 : 1));
+      if (p.hp <= 0) break;
     }
   }
 }
-// la BILLE : le bumper la renvoie à toute vitesse, et s'allume
+// un bumper prend un coup (une carte, un tir, le séisme)
+function bumpHurt(p, dmg) {
+  const cb = G.cb; if (p.hp <= 0 || !(dmg > 0)) return;
+  p.hp -= dmg; p.dmgT = cb.t + .15;
+  if (p.hp <= 0) {
+    p.hp = 0; p.glowT = -9;
+    if (!G.headless && !cb.demo) { burst(p.x, p.y, BUMP_COL[p.col][0], 16, 40, 1.2, .5); burst(p.x, p.y, '#eef2fa', 8, 30, 1, .4); floater(p.x, p.y - p.r - 3, 'CASSÉ !', '#ff5c6c', 4); Snd.postBreak(); shake(2); }
+  } else if (!G.headless && !cb.demo) Snd.post();
+}
+function hitPost(p, dmg) { bumpHurt(p, dmg || p.max * .5); }   // le séisme abîme les bumpers
+// la BILLE : le bumper la renvoie à toute vitesse, et brille 5 s
 function bumpBall(b) {
   const cb = G.cb;
   for (const p of cb.posts) {
-    if (p.tiltT > cb.t) continue;
+    if (p.hp <= 0) continue;
     const dx = b.x - p.x, dy = b.y - p.y, rr = b.r + p.r, d2 = dx * dx + dy * dy;
     if (d2 >= rr * rr) continue;
     const d = Math.sqrt(d2) || .001, nx = dx / d, ny = dy / d;
@@ -17123,86 +17148,94 @@ function bumpBall(b) {
     if (b.bumps <= 4) b.dm *= 1.05;
     b.life = Math.min(BAL.bilLife + 3, b.life + .15);
     G.run.stats.bumps = (G.run.stats.bumps || 0) + 1;
+    p.glowT = cb.t + BUMP.glow;
     bumpPop(p, p.x + nx * p.r, p.y + ny * p.r, true);
-    if (!p.lit) { p.lit = true; if (cb.posts.every(q => q.lit || q.tiltT > cb.t)) bumpJackpot(); }
+    const up = cb.posts.filter(q => q.hp > 0);
+    if (up.length >= 2 && up.every(q => bumpLit(q, cb))) bumpJackpot();
   }
 }
 function bumpPop(p, x, y, ball) {
   const cb = G.cb;
   p.hit = .22;
-  if (p.lv >= 3) {
-    for (const e of enemiesNear(p.x, p.y, 14)) if (!e.boss) { hitE(e, DM() * .35, 'bumper'); const dd = Math.hypot(e.x - p.x, e.y - p.y) || 1; kb(e, (e.x - p.x) / dd, (e.y - p.y) / dd, 60); }
-    if (!G.headless) ringFx(p.x, p.y, p.r, 17, BUMP_COL[p.col][2], .3);
-  }
   if (G.headless || cb.demo) return;
   Snd.bumper(ball);
   fxPush({ type: 'ring', x: p.x, y: p.y, r0: p.r, r1: p.r + (ball ? 8 : 5), col: ball ? '255,255,255' : BUMP_COL[p.col][2], life: .22, max: .22 });
   burst(x, y, BUMP_COL[p.col][0], ball ? 7 : 4, 34, .9, .3);
   if (ball) { haptic(12); shake(.9); }
 }
-// tous les bumpers allumés : BILLE bonus et or
+// tous les bumpers encore debout brillent en même temps : BILLE bonus et or
 function bumpJackpot() {
-  const cb = G.cb, n = cb.posts.length;
-  for (const q of cb.posts) { q.lit = false; q.hit = .6; }
+  const cb = G.cb, up = cb.posts.filter(q => q.hp > 0);
+  for (const q of up) { q.glowT = -9; q.hit = .6; }
   cb.bumpJack = (cb.bumpJack || 0) + 1;
-  addGold(n, 'bumper');
+  addGold(up.length, 'bumper');
   bilBonus(rand(0, TAU), .8, false);
   if (G.headless) return;
   floater(0, -BAL.baseR - 18, 'TOUS ALLUMÉS ! BILLE BONUS', '#ff5fa2', 5.6);
   Snd.bumperJack(); shake(3); haptic(60);
-  for (const q of cb.posts) ringFx(q.x, q.y, q.r, q.r + 12, '255,95,162', .5);
+  for (const q of up) ringFx(q.x, q.y, q.r, q.r + 12, '255,95,162', .5);
   coinBurst(0, -BAL.baseR - 6);
 }
-function bumpTilt(p) {
-  const cb = G.cb; if (p.tiltT > cb.t) return;
-  p.tiltT = cb.t + BUMP.tilt; p.lit = false;
-  if (!G.headless && !cb.demo) { floater(p.x, p.y - p.r - 3, 'TILT !', '#ff3d6e', 4.4); Snd.tilt(); burst(p.x, p.y, '#ff3d6e', 10, 30, 1, .4); }
-}
-function hitPost(p) { bumpTilt(p); }   // le séisme fait tilter les bumpers
-// les tirs ennemis rebondissent sur les bumpers et repartent vers leur tireur
+// les tirs des cartes abîment les bumpers ; au niveau 3, un bumper qui brille les renvoie (1 = renvoyé, 2 = absorbé)
 function bumpShot(p) {
   const cb = G.cb;
   for (const q of cb.posts) {
-    if (q.tiltT > cb.t) continue;
+    if (q.hp <= 0) continue;
     const dx = p.x - q.x, dy = p.y - q.y, rr = (p.r || 1.5) + q.r;
     if (dx * dx + dy * dy > rr * rr) continue;
-    if (p.kind === 'orb' || p.kind === 'pball') { bumpTilt(q); return false; }
-    bounceShot(p);
-    const d = Math.hypot(dx, dy) || 1; p.vx = dx / d * p.spd; p.vy = dy / d * p.spd;
-    bumpPop(q, p.x, p.y, false);
-    return true;
+    if (q.lv >= 3 && bumpLit(q, cb) && p.kind !== 'orb' && p.kind !== 'pball') {
+      bounceShot(p);
+      const d = Math.hypot(dx, dy) || 1; p.vx = dx / d * p.spd; p.vy = dy / d * p.spd;
+      bumpPop(q, p.x, p.y, false);
+      return 1;
+    }
+    bumpHurt(q, (p.dmg || 1) * (p.kind === 'orb' || p.kind === 'pball' ? 2 : 1));
+    if (!G.headless) burst(p.x, p.y, '#d8d2e6', 5, 22, .8, .3);
+    return 2;
   }
-  return false;
+  return 0;
 }
 function drawPosts(cb, t) {
   const T = cb.t;
   for (const p of cb.posts) {
-    const C = BUMP_COL[p.col], tilt = p.tiltT > T, hot = p.hit > 0, R = p.r, k = 1 + (hot ? p.hit * 1.1 : 0);
+    const C = BUMP_COL[p.col], R = p.r;
     ctx.save(); ctx.translate(p.x, p.y);
+    if (p.hp <= 0) {
+      // cassé : des morceaux de plastique et d'acier
+      for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? C[0] : '#8a8598'; ctx.fillRect(Math.cos(i * 1.9) * 3 - .6, Math.sin(i * 2.7) * 2.4 - .5, 1.5, 1); }
+      ctx.restore(); continue;
+    }
+    const hot = p.hit > 0, lit = bumpLit(p, cb), left = p.glowT - T, blink = lit && left < 1 && Math.sin(T * 20) < 0;
+    const hurt = p.dmgT > T, k = 1 + (hot ? p.hit * 1.1 : 0), f = p.hp / p.max;
     ctx.fillStyle = 'rgba(8,4,16,.42)'; ctx.beginPath(); ctx.ellipse(.9, 1.8, R * 1.2, R * .85, 0, 0, TAU); ctx.fill();
-    // le halo quand il est allumé
-    if ((p.lit || hot) && !tilt) {
+    if ((lit || hot) && !blink) {
       const gr = ctx.createRadialGradient(0, 0, R * .4, 0, 0, R * 2.3);
-      gr.addColorStop(0, `rgba(${C[2]},${hot ? .55 : .3})`); gr.addColorStop(1, `rgba(${C[2]},0)`);
+      gr.addColorStop(0, `rgba(${C[2]},${hot ? .55 : .35})`); gr.addColorStop(1, `rgba(${C[2]},0)`);
       ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(0, 0, R * 2.3, 0, TAU); ctx.fill();
     }
     // la jupe en plastique
-    ctx.fillStyle = tilt ? '#4a4558' : C[0]; ctx.beginPath(); ctx.arc(0, 0, R * k, 0, TAU); ctx.fill();
+    ctx.fillStyle = hurt ? '#ffffff' : C[0]; ctx.beginPath(); ctx.arc(0, 0, R * k, 0, TAU); ctx.fill();
     ctx.lineWidth = .5; ctx.strokeStyle = 'rgba(10,4,20,.7)'; ctx.stroke();
     ctx.fillStyle = 'rgba(255,255,255,.22)'; ctx.beginPath(); ctx.arc(-R * .25, -R * .3, R * .62 * k, Math.PI * .95, Math.PI * 1.75); ctx.lineTo(0, 0); ctx.fill();
     // l'anneau d'acier
-    ctx.strokeStyle = tilt ? '#8a8598' : '#eef2fa'; ctx.lineWidth = .95; ctx.beginPath(); ctx.arc(0, 0, R * .74, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = '#eef2fa'; ctx.lineWidth = .95; ctx.beginPath(); ctx.arc(0, 0, R * .74, 0, TAU); ctx.stroke();
     ctx.strokeStyle = 'rgba(40,30,60,.6)'; ctx.lineWidth = .3; ctx.beginPath(); ctx.arc(0, 0, R * .74 + .5, 0, TAU); ctx.stroke();
-    // le chapeau (la lampe)
-    ctx.fillStyle = tilt ? '#6a6578' : hot ? '#ffffff' : p.lit ? C[1] : '#2a2238';
+    // le chapeau : la lampe, allumée 5 s après un coup de BILLE
+    const on = (lit && !blink) || hot;
+    ctx.fillStyle = hot ? '#ffffff' : on ? C[1] : '#2a2238';
     ctx.beginPath(); ctx.arc(0, -.25, R * .52, 0, TAU); ctx.fill();
     ctx.lineWidth = .35; ctx.strokeStyle = 'rgba(10,4,20,.6)'; ctx.stroke();
-    // une étoile sur le chapeau
-    ctx.fillStyle = tilt ? '#8a8598' : hot || p.lit ? C[0] : 'rgba(255,255,255,.45)';
+    ctx.fillStyle = on ? C[0] : 'rgba(255,255,255,.45)';
     ctx.beginPath();
     for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5 + (hot ? T * 9 : 0), r = i % 2 ? R * .16 : R * .38; ctx[i ? 'lineTo' : 'moveTo'](Math.cos(a) * r, -.25 + Math.sin(a) * r); }
     ctx.closePath(); ctx.fill();
-    if (tilt && Math.sin(T * 12) > 0) { ctx.fillStyle = '#ff3d6e'; ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('TILT', 0, -R - 2.4); }
+    // les fissures quand il est abîmé
+    if (f < .66) {
+      ctx.strokeStyle = 'rgba(20,6,14,.85)'; ctx.lineWidth = .4; ctx.beginPath();
+      ctx.moveTo(-R * .9, -R * .2); ctx.lineTo(-R * .35, .2); ctx.lineTo(-R * .5, R * .7);
+      if (f < .33) { ctx.moveTo(R * .85, -R * .45); ctx.lineTo(R * .3, -R * .05); ctx.lineTo(R * .55, R * .6); ctx.moveTo(-R * .1, -R * .9); ctx.lineTo(R * .1, -R * .45); }
+      ctx.stroke();
+    }
     ctx.restore();
   }
 }
@@ -17285,6 +17318,29 @@ function glassHTML(kind, liq, gar) {
   return `<span class="glass gsvg g-${kind}" style="--liq:${liq}">${glassSVG(kind, liq, gar)}</span>`;
 }
 
+// v10.9 · on boit à la chaîne : les boutons du comptoir se mettent à jour sans attendre la fin des verres
+function barQuick() {
+  const run = G.run; if (!run) return;
+  const g = $('#b-gold'); if (g) g.textContent = Math.floor(run.gold);
+  BAR.drinks.forEach((d, i) => {
+    const card = $(`#b-drinks .drink[data-d="${i}"]`); if (!card) return;
+    const b = card.querySelector('[data-buyd]');
+    if (d.sold) { card.classList.add('drunk'); if (b) b.outerHTML = '<em class="stamp">BU !</em>'; return; }
+    if (!b) return;
+    const free = d.price === 0 || BAR.freeDrink;
+    b.classList.toggle('free', free);
+    b.textContent = d.price === 0 ? 'OFFERT' : BAR.freeDrink ? 'OFFERT · Momo' : d.price + ' or';
+    b.disabled = !(run.gold >= d.price || BAR.freeDrink);
+  });
+  BAR.shots.forEach((s2, i) => {
+    const card = $(`#b-shots .shot[data-s="${i}"]`); if (!card) return;
+    const b = card.querySelector('[data-buys]');
+    if (s2.sold) { card.classList.add('drunk'); if (b) b.outerHTML = '<em class="stamp">BU !</em>'; return; }
+    if (b) b.disabled = run.gold < s2.price;
+  });
+  const c = BAR.ciment, cb2 = $('#b-shots [data-buyc]'); if (c && cb2 && !c.sold) cb2.disabled = run.gold < c.price;
+}
+
 /* ================= v10.8 · les jeux à débloquer, le poinçon du Collectionneur, la défaite au ralenti ================= */
 
 /* ---- les jeux de départ se débloquent (le Coffre-fort est ouvert d'office) ---- */
@@ -17326,6 +17382,7 @@ function deckNote(D) {
 
 /* ---- le Collectionneur : à chaque manche, un poinçon pour passer n'importe quel jeton du rack en rareté SECRÈTE ---- */
 const CL = { on: false, sel: null };
+const CL_ROUNDS = [8, 18, 28];   // les 3 poinçons de la partie
 const clHas = run => !!run && hasDeck(run, 'collec') && (run.clPunch || 0) > 0;
 const clOk = j => !!j && !isSecret(j) && j.kind !== 'faux' && j.kind !== 'fou' && !(G.run.stolen || []).includes(j.uid);
 const clWhere = () => ['machine', 'bar', 'market', 'chooser'].includes(G.mode);
@@ -17335,6 +17392,8 @@ function clRefresh() {
   if (!on && CL.on) { CL.on = false; CL.sel = null; }
   b.hidden = !on;
   if (!on) return;
+  // un poinçon tout neuf : on le dit en arrivant au salon
+  if (G.run.clNew) { const n = CL_ROUNDS.indexOf(G.run.clNew) + 1; G.run.clNew = 0; setTimeout(() => { toast(`Manche ${CL_ROUNDS[n - 1]} : le Collectionneur t'offre son poinçon (${n}/3). Touche « ★ POINÇON » pour passer un jeton en rareté secrète.`); Snd.chipPick(); }, 700); }
   const j = CL.sel != null ? G.run.jokers.find(x => x.uid === CL.sel) : null;
   b.classList.toggle('on', CL.on || !!j);
   b.innerHTML = j ? `✓ Poinçonner ${esc(jName(j))}` : CL.on ? 'Annuler' : '★ POINÇON' + (G.run.clPunch > 1 ? ' ×' + G.run.clPunch : '');
@@ -17536,7 +17595,7 @@ const PET_START = ['coco', 'marcel', 'boris'];
 const PET_COCO = 1.25, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 16, PET_SONG1 = 7, PET_DANCE = 2.8, PET_ROAR = 16, PET_ROAR1 = 5, PET_SHOT = 2;
 const PETS = {
   coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'start', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+25${NB}% d'or gagné (sauf les ventes). Il ramasse tout ce qui brille… et le crie bien fort.`, short: `+25${NB}% d'or`, quote: '« Crétin ! Crétin ! »' },
-  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il chante sa chanson, musique comprise : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
+  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il met la musique (les notes s'envolent) : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins longtemps).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
   boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'start', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max. Toutes les ${PET_ROAR}${NB}s, il rugit : les cartes proches reculent, et ralentissent de 40${NB}% pendant 3${NB}s.`, short: 'rugit, +20 % PV', quote: '« Grmbl. Essuie-toi les pieds. »' },
   gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `Depuis son coin, il tire sur les cartes avec son pistolet (une balle toutes les ${PET_SHOT}${NB}s, 180${NB}% des dégâts de ta base). Et −20${NB}% au marché noir (sauf le Punch-o-matic), qui ouvre plus souvent.`, short: 'tire au pistolet', quote: '« J\'ai rien vu. J\'ai tout noté. »' },
 };
@@ -17856,9 +17915,10 @@ function marcelSing() {
   dbg('marcel');
   if (G.headless) return true;
   petSong();
-  floater(0, -BAL.baseR - 12, '♪ MARCEL CHANTE ♪', '#9be15d', 4);
-  let k = 0;
-  for (const e of cb.enemies) { if (e.dead || e.ai === 'decoy') continue; if (k++ > 14) break; floater(e.x, e.y - e.r - 3, k % 2 ? '♪' : '♫', ['#9be15d', '#ffcc4d', '#7fd8ff', '#ff7eb6'][k % 4], 3.4); }
+  floater(0, -BAL.baseR - 12, '♪ ♫ ♪', '#9be15d', 4.4);
+  // des notes s'envolent des cartes pendant toute la danse
+  const notes = () => { let k = 0; for (const e of G.cb.enemies) { if (e.dead || e.ai === 'decoy' || !(e.stunT > 0) || Math.random() < .45) continue; if (k++ > 9) break; floater(e.x + rand(-3, 3), e.y - e.r - 3, Math.random() < .5 ? '♪' : '♫', ['#9be15d', '#ffcc4d', '#7fd8ff', '#ff7eb6'][k % 4], 3.4); } };
+  notes(); for (let i = 1; i <= 4; i++) setTimeoutGame(() => { if (G.cb && !G.cb.ended && G.cb.danceT > G.cb.t) notes(); }, i * .6);
   const pe = $('#pets .pt-pet[data-pet="marcel"]');
   if (pe) { pe.classList.add('pt-sing'); clearTimeout(pe._st); pe._st = setTimeout(() => pe.classList.remove('pt-sing'), PET_DANCE * 1000 + 300); }
   return true;
@@ -17959,10 +18019,10 @@ let petSongK = 0;
 function petSong() {
   if (G.headless) return;
   const e8 = 60 / 168 / 2, text = PET_SONGS[petSongK % PET_SONGS.length], melo = PET_MELO[petSongK % PET_MELO.length]; petSongK++;
-  petSay('marcel', '♪ ' + text + ' ♪', 0, { mute: true, ms: 16 * e8 * 1000 + 300 });
+  petNotes();
   if (!AU.ac || AU.offline || !G.meta.sound) return;
   const ac = AU.ac, t0 = ac.currentTime + .04, out = ac.createGain();
-  out.gain.value = .95; out.connect(AU.sfx);
+  out.gain.value = .6; out.connect(AU.sfx);
   const env = (g, t, v, d) => { g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .008); g.gain.exponentialRampToValueAtTime(.0001, t + d); };
   const osc = (type, f, t, d, v, f2) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + d); env(g, t, v, d); o.connect(g); g.connect(out); o.start(t); o.stop(t + d + .02); };
   const nz = (t, d, v, fq, type) => { const b = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); b.buffer = AU.nbuf; f.type = type; f.frequency.value = fq; env(g, t, v, d); b.connect(f); f.connect(g); g.connect(out); b.start(t, Math.random() * .4); b.stop(t + d + .02); };
@@ -17979,10 +18039,18 @@ function petSong() {
     osc('triangle', mtof(b), t, e8 * 1.7, .16); osc('triangle', mtof(b + 7), t + 2 * e8, e8 * 1.5, .11);
     for (const m of ch) { osc('square', mtof(m), t + e8, e8 * .7, .022); osc('square', mtof(m), t + 3 * e8, e8 * .7, .022); }
   });
-  // la voix : une syllabe par croche, sur la mélodie
-  const syl = parseSyl(text).syl.slice(0, 16), V = VOICES.marcel;
-  syl.forEach((sy, i) => vSyllable(ac, out, AU.nbuf, t0 + i * e8, sy, mtof(melo[i % melo.length]), e8 * (i === syl.length - 1 ? 2.4 : .92), V, 1.15));
-  duckTalk(16 * e8);
+  // v10.9 : plus de voix, la mélodie jouée par une petite flûte
+  melo.forEach((m, i) => osc('triangle', mtof(m + 12), t0 + i * e8, e8 * (i === melo.length - 1 ? 2 : .8), .045));
+}
+// des notes de musique qui s'envolent de Marcel
+function petNotes() {
+  const pe = $('#pets .pt-pet[data-pet="marcel"]'); if (!pe || G.reduced) return;
+  for (let k = 0; k < 9; k++) setTimeout(() => {
+    if (!pe.isConnected) return;
+    const n = document.createElement('i'); n.className = 'pt-note'; n.textContent = k % 3 === 1 ? '♫' : '♪';
+    n.style.cssText = `--dx:${Math.round((Math.random() - .5) * 46)}px;--c:${['#9be15d', '#ffcc4d', '#7fd8ff', '#ff7eb6'][k % 4]};left:${20 + Math.random() * 60}%`;
+    pe.appendChild(n); setTimeout(() => n.remove(), 1400);
+  }, k * 300);
 }
 
 
@@ -18164,28 +18232,28 @@ function buyDrink(i) {
   const freeM = BAR.freeDrink && d.price > 0;
   if (!freeM && run.gold < d.price) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
   if (freeM) { BAR.freeDrink = false; for (const x of BAR.drinks) x.free = false; } else run.gold -= d.price;
-  d.sold = true; BAR.busy = true;
+  d.sold = true;
   run.up[d.id] = d.lv + 1;
   if (d.id === 'etage') run.floors.push(BAL.floorHp);
   if (run.firstDrink) { run.firstDrink = false; for (const x of BAR.drinks) if (!x.sold) { const U = UPG[x.id]; x.price = Math.round(U.price[x.lv] * barScale(run.round + 1) * (computeStats(run).midas ? .75 : 1)); } }
   run.stats.drinks++; zazaCocktail();
   const U = UPG[d.id];
-  if (G.headless) { BAR.busy = false; return; }
-  updateHUD();
-  drinkAnim($(`#b-drinks .drink[data-d="${i}"]`), U.txt(d.lv + 1), false, () => { BAR.busy = false; renderBar(); renderRack(); });
+  if (G.headless) return;
+  updateHUD(); barQuick(); renderRack(); BAR.pour = (BAR.pour || 0) + 1;
+  drinkAnim($(`#b-drinks .drink[data-d="${i}"]`), U.txt(d.lv + 1), false, () => { BAR.pour = Math.max(0, BAR.pour - 1); if (!BAR.pour && G.mode === 'bar') renderBar(); });
   setTimeout(() => sayZ(U.quip && rnd() < .7 ? pick(U.quip) : pick(ZAZA.buy)), 200);
 }
 function buyShot(i) {
   const run = G.run, s = BAR.shots[i];
   if (!s || s.sold || BAR.busy) return;
   if (run.gold < s.price) { sayZ(pick(ZAZA.broke)); Snd.deny(); return; }
-  run.gold -= s.price; s.sold = true; BAR.busy = true;
+  run.gold -= s.price; s.sold = true;
   run.stats.shotsN = (run.stats.shotsN || 0) + 1; zazaCocktail();
   if (s.id === 'antidote') { const k = run.pendingMalus.findIndex(m => MALUS[m].tier === 1); if (k >= 0) run.pendingMalus.splice(k, 1); }
   else run.shots.push(s.id);
-  if (G.headless) { BAR.busy = false; return; }
-  updateHUD();
-  drinkAnim($(`#b-shots .shot[data-s="${i}"]`), SHOTS[s.id].txt, true, () => { BAR.busy = false; renderBar(); });
+  if (G.headless) return;
+  updateHUD(); barQuick(); BAR.pour = (BAR.pour || 0) + 1;
+  drinkAnim($(`#b-shots .shot[data-s="${i}"]`), SHOTS[s.id].txt, true, () => { BAR.pour = Math.max(0, BAR.pour - 1); if (!BAR.pour && G.mode === 'bar') renderBar(); });
   setTimeout(() => sayZ(pick(ZAZA.shot)), 200);
 }
 function buyCiment() {
@@ -18195,7 +18263,7 @@ function buyCiment() {
   run.gold -= c.price; c.sold = true;
   run.floors = run.floors.map(() => BAL.floorHp);
   if (G.headless) return;
-  Snd.stack(4); toast('Étages réparés !'); updateHUD(); renderBar();
+  Snd.stack(4); toast('Étages réparés !'); updateHUD(); if (BAR.pour) barQuick(); else renderBar();
 }
 function drinkAnim(card, txt, isShot, done) {
   if (!card) { done(); return; }
@@ -22249,7 +22317,7 @@ function simMachine(first) {
   for (const j of res.list) addJokerSim(j);
   autoArrange(G.run);
 }
-const BAR_PRIO = { triplesec: 7, ricochet: 6, grandcru: 6, critik: 5, pyro: 5, bmary: 5, tisane: 5, spritz: 5, flipfizz: 5, disco: 5, kir: 5, rhum: 5, lagon: 4, cactus: 4, ressort: 4, mystere: 4, absinthe: 4, champagne: 3, renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
+const BAR_PRIO = { triplesec: 3, ricochet: 3, grandcru: 6, critik: 3, pyro: 3, bmary: 4, tisane: 5, spritz: 3, flipfizz: 5, disco: 5, kir: 5, rhum: 5, lagon: 3, cactus: 2, ressort: 4, mystere: 4, absinthe: 4, champagne: 3, renvoi: 9, etage: 8, cadence: 8, calibre: 7, barriere: 7, double: 7, portee: 6, pv: 6, solide: 5, taille: 5, double_r: 5, remontant: 4, vitesse: 3, huile: 3 };
 function simBar(sk) {
   const run = G.run;
   Object.assign(BAR, genBar(), { busy: false });
@@ -22970,7 +23038,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
