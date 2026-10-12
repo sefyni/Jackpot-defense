@@ -3989,7 +3989,7 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.8</p>
+  <p class="proto">Sefy Industries · v13.9</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -18194,7 +18194,7 @@ function lbAsk(next, from) {
   if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
   ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
       <h2 class="lbn-t"><svg class="ico"><use href="#i-couronne"/></svg>Ton pseudo</h2>
-      <p class="lbn-p">Il faut un pseudo pour jouer : c'est ton nom au <b>classement en ligne</b>. 20 lettres maximum, et il est définitif.</p>
+      <p class="lbn-p">Il faut un pseudo pour jouer : c'est ton nom au <b>classement en ligne</b>. 20 lettres maximum. Tu pourras le changer dans OPTIONS › Profil.</p>
       <input id="lbn-in" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ton pseudo" value="${esc((G.meta.prof && G.meta.prof.name) || '')}">
       <p class="lbn-err" id="lbn-err"></p>
       <div class="lbn-row"><button class="btn big red" id="lbn-ok">VALIDER</button></div>
@@ -18221,6 +18221,43 @@ function lbAsk(next, from) {
   Snd.pop();
 }
 
+
+/* ---------- v13.9 · changer de pseudo (tes scores le suivent) ---------- */
+function lbAskRename() {
+  const me = lbMe(); if (!me) { lbAsk(() => { if (typeof renderOptions === 'function') renderOptions(); }); return; }
+  let ov = $('#lbname');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
+  ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
+      <h2 class="lbn-t"><svg class="ico"><use href="#i-couronne"/></svg>Changer de pseudo</h2>
+      <p class="lbn-p">Ton nouveau nom au <b>classement</b>. 20 lettres maximum, unique. Tes scores le suivent.</p>
+      <input id="lbn-in" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="nouveau pseudo" value="${esc(me.pseudo)}">
+      <p class="lbn-err" id="lbn-err"></p>
+      <div class="lbn-row"><button class="btn big red" id="lbn-ok">VALIDER</button></div>
+      <button class="btn ghost small" id="lbn-back">Retour</button>
+    </div></div>`;
+  ov.hidden = false;
+  const inp = $('#lbn-in'), err = $('#lbn-err'), ok = $('#lbn-ok');
+  setTimeout(() => { try { inp.focus(); inp.select(); } catch (e) { /* rien */ } }, 60);
+  const go = async () => {
+    if (LB.busy) return;
+    const c = lbPseudoCheck(inp.value); if (c.error) { err.textContent = c.error; Snd.deny(); return; }
+    if (c.ps === me.pseudo) { ov.hidden = true; return; }
+    LB.busy = true; ok.disabled = true; ok.textContent = '…'; err.textContent = '';
+    const r = await lbRpc('lb_rename', { p_id: me.id, p_secret: me.secret, p_pseudo: c.ps });
+    LB.busy = false; ok.disabled = false; ok.textContent = 'VALIDER';
+    if (r.error) {
+      err.textContent = /lb_rename|schema cache|could not find/i.test(String(r.error)) ? 'Pas encore possible : le classement doit d\'abord être mis à jour.' : lbErrTxt(r.error);
+      Snd.deny(); return;
+    }
+    G.meta.lb.pseudo = c.ps; saveMeta(); LB.cache = {};
+    ov.hidden = true; Snd.record(); toast(`Au classement, tu t'appelles maintenant ${c.ps}.`);
+    if (typeof renderOptions === 'function' && !$('#opts').hidden) renderOptions();
+  };
+  ok.onclick = go;
+  inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); go(); } if (e.key === 'Escape') { e.preventDefault(); ov.hidden = true; } e.stopPropagation(); };
+  $('#lbn-back').onclick = () => { ov.hidden = true; };
+  Snd.pop();
+}
 /* ---- envoyer un score ---- */
 // les parties avec les outils de test ne comptent pas
 const lbRunOk = run => !!run && !run.devUsed && !G.headless && (run.score || 0) > 0 && run.round >= 1;
@@ -18301,11 +18338,12 @@ async function lbRender0() {
 // le profil : le pseudo du classement
 function lbProfRow() {
   const me = lbMe();
-  return oRow('Pseudo du classement', me ? `<b class="lbp-name">${esc(me.pseudo)}</b> <button class="btn small gold" data-lbopen="1">Classement</button>` : '<button class="btn small gold" data-lbp="1">Choisir mon pseudo</button>', me ? 'définitif, unique' : 'obligatoire pour jouer');
+  return oRow('Pseudo du classement', me ? `<b class="lbp-name">${esc(me.pseudo)}</b> <button class="btn small ghost" data-lbren="1">Changer</button> <button class="btn small gold" data-lbopen="1">Classement</button>` : '<button class="btn small gold" data-lbp="1">Choisir mon pseudo</button>', me ? 'unique · tu peux le changer' : 'obligatoire pour jouer');
 }
 document.addEventListener('click', e => {
-  const t = e.target.closest && e.target.closest('[data-lbp],[data-lbopen],#t-lb');
+  const t = e.target.closest && e.target.closest('[data-lbp],[data-lbopen],[data-lbren],#t-lb');
   if (!t) return;
+  if (t.dataset.lbren) { lbAskRename(); return; }
   if (t.id === 't-lb' || t.dataset.lbopen) lbOpen();
   else lbAsk(() => { if (typeof renderOptions === 'function') renderOptions(); });
 });
@@ -22178,7 +22216,7 @@ function machTipOver(e) {
   const reelEl = sy.closest('.reel'), R = REEL.r.find(x => x.el === reelEl);
   if (!R || R.phase !== 'idle') return;
   const a = sy.getBoundingClientRect(), b = reelEl.getBoundingClientRect(), cy = a.top + a.height / 2;
-  if (cy < b.top + a.height * .4 || cy > b.bottom - a.height * .4) return;
+  if (Math.abs(cy - (b.top + b.height / 2)) > a.height * .5) return;   // seulement la ligne du milieu
   // déjà ouverte pour ce jeton : on la laisse tranquille (plus de clignotement)
   if (MTIP.el === sy && JT.el && !JT.el.hidden) { clearTimeout(JT.hT); return; }
   const j = machTipJ(sy.dataset.s); if (!j) return;
@@ -22933,7 +22971,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v13.8</p></div>`;
+        <p class="ov5">v13.9</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24909,8 +24947,6 @@ const KEY_ACTS = [
   ['sp3', 'Sort 3', 'combat', ['3', '"']],
   ['sp4', 'Sort 4', 'combat', ['4', "'"]],
   ['sp5', 'Sort 5', 'combat', ['5', '(']],
-  ['bomb', 'Bombe (où qu\'elle soit)', 'combat', ['b', '']],
-  ['gel', 'Gel (où qu\'il soit)', 'combat', ['g', '']],
   ['bille', 'BILLE : maintenir pour viser (axe du flipper), lâcher pour lancer', 'combat', ['z', 'Shift']],
   ['lever', 'Tirer le levier / tout arrêter', 'machine', [' ', 'Enter']],
   ['reel1', 'Rouleau 1 : arrêter, puis garder', 'machine', ['1', '&']],
@@ -24926,7 +24962,7 @@ const KEY_ACTS = [
 ];
 // l'ordre des cases dans Options › Contrôles : les sorts (et les rouleaux) sont regroupés côte à côte
 const KEY_GRP = { sp: { ids: ['sp1', 'sp2', 'sp3', 'sp4', 'sp5'], title: 'Sorts', lab: id => 'Sort ' + id.slice(2) }, reel: { ids: ['reel1', 'reel2', 'reel3'], title: 'Rouleaux : arrêter, puis garder', lab: id => 'Rouleau ' + id.slice(4) } };
-const KEY_ORDER = { combat: ['flipL', 'flipR', 'parry', 'bille', 'bomb', 'gel', '#sp'], machine: ['lever', 'respin', 'cash', '#reel'] };
+const KEY_ORDER = { combat: ['flipL', 'flipR', 'parry', 'bille', '#sp'], machine: ['lever', 'respin', 'cash', '#reel'] };
 const KEY_CTX = { combat: 'En combat', machine: 'À la machine', rack: 'Ranger tes jetons (entre deux manches)', global: 'Partout' };
 const KEY_DEF = Object.fromEntries(KEY_ACTS.map(a => [a[0], a[3]]));
 const normKey = k => k && k.length === 1 ? k.toLowerCase() : (k || '');
@@ -25030,8 +25066,6 @@ function keyDown(e) {
   if (isKey('parry', k)) { swing(); e.preventDefault(); }
   const L = spellsOf(G.run);
   for (let n = 0; n < SPELL_SLOTS; n++) if (isKey('sp' + (n + 1), k) && L[n]) { castSpellP(L[n]); e.preventDefault(); return; }
-  if (isKey('bomb', k)) castSpellP('bomb');
-  if (isKey('gel', k)) castSpellP('gel');
 }
 // déplacer un jeton d'une place, au clavier : la fiche (ou la bulle) le suit
 function keyMove(i, d) {

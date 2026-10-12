@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.8-202610120221
+JACKPOT DEFENSE v13.9-202610120236
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,15 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.9
+- Changer de pseudo : OPTIONS > Profil > « Changer » à côté de ton pseudo. 20 lettres max, unique, tes scores le suivent.
+  (Il faut d'abord ajouter la fonction lb_rename dans Supabase. Tant qu'elle n'y est pas, le jeu dit
+  « Pas encore possible : le classement doit d'abord être mis à jour ».)
+- La fenêtre du pseudo ne dit plus « définitif ».
+- La machine : la bulle d'un jeton ne s'ouvre plus que sur la ligne du milieu.
+- OPTIONS > Contrôles : plus de touches « Bombe » et « Gel » à part. La Bombe et le Gel se lancent comme
+  les autres sorts, avec les touches Sort 1 à Sort 5.
 
 Nouveautés de la v13.8
 - Le billard de Momo : 7 s pour viser (avant 12 s). Le chrono passe au rouge à 4 s.
