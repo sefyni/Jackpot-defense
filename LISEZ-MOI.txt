@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.1-202610120104
+JACKPOT DEFENSE v13.4-202610120153
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,48 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.4 — la manette (Xbox, PlayStation, Steam Deck)
+- Branche une manette, appuie sur un bouton : « Manette prête ». Rien à régler.
+- En combat :
+  - stick gauche : le flipper vise là où tu pointes (la croix gauche/droite le fait tourner) ;
+  - A : coup de flipper (parade) ;
+  - RB ou RT : la BILLE (maintenir pour viser dans l'axe du flipper, lâcher pour lancer) ;
+  - X, Y, B, LB, LT : sorts 1 à 5 ;
+  - la BOMBE : un viseur se pose tout seul sur le plus gros paquet de cartes, le stick le déplace, A la lâche, B annule ;
+  - Start : pause · Select : infos de la partie · clic d'un stick : vitesse ×1 / ×2.
+- Dans les menus (titre, machine, bar, marché noir, options…) :
+  - la croix ou le stick choisit un bouton (encadré doré), A appuie, B revient en arrière ;
+  - le stick droit fait défiler les longues listes ;
+  - à la machine : X tire le levier, Y relance ;
+  - tes jetons : A sur un jeton ouvre sa fiche, LB / RB le déplacent dans le rack.
+- La manette vibre quand ta base prend un coup (si elle sait vibrer).
+- Dès que tu reprends la souris, le cadre doré disparaît.
+- Limite : les petits jeux du bar qui se jouent en visant sur la table (billard…) restent à la souris ou au doigt.
+- OPTIONS > Contrôles rappelle les boutons de la manette.
+
+Nouveautés de la v13.3 — tous les écrans PC
+- Écrans ultra-larges (21:9, 3440×1440, 2560×1080) : le jeu prend toute la largeur (avant : deux bandes vides sur les côtés).
+- Écrans 16:10 (1920×1200, 2560×1600, Steam Deck 1280×800) et 4:3 : le jeu prend toute la hauteur
+  (avant : deux bandes vides en haut et en bas). La table est un peu plus grande.
+- Vérifié en 1280×800, 1920×1080, 2560×1440, 3440×1440 et 4K : tout reste net (textes, jetons, machine) et rien ne déborde.
+- Rien ne change sur téléphone ni en 16:9.
+
+Nouveautés de la v13.2 — un mur plus doux, et on sait pourquoi on perd
+- Le récap de fin de partie : quand ta base tombe, l'écran de fin montre « Ce qui t'a fait tomber » :
+  - le coup fatal (quelle carte ou quel boss) ;
+  - où en était le boss (par exemple « Roi de Trèfle encore à 51 % ») ;
+  - d'où venaient les dégâts pendant la dernière manche (les 4 plus grosses sources, en %) ;
+  - un conseil court selon ce qui t'a fait le plus mal.
+- Le mur des manches 16 à 20 est adouci :
+  - manches 16 à 19 : environ 12 % de cartes en moins ;
+  - le Roi de Trèfle (manche 20) : 17 % de PV en moins, il avance 20 % moins vite, ses gardes frappent 30 % moins fort ;
+  - après sa mi-vie : ses 4 gardes ont +20 % de PV (avant +50 %), et sa fenêtre de faiblesse dure 10 s (avant 8 s).
+- Mesuré avec le robot « bon » (96 parties par mise, nouvelles graines) :
+  - mise blanche : morts entre les manches 15 et 20 : 45 → 29 ; manche moyenne 23,7 → 24,8 ; victoires 14 → 16 sur 96 ;
+  - mise 3 : morts entre 15 et 20 : 62 → 46 ; manche moyenne 19,1 → 20,2 ;
+  - mise 6 : morts entre 15 et 20 : 53 → 45 ; manche moyenne 16,6 → 17,0.
+  Les morts arrivent maintenant plus tard (manches 21 à 30) au lieu de s'entasser à la manche 20. Le jeu ne devient pas plus facile à gagner.
 
 Nouveautés de la v13.1 — plus fluide, et un nouveau logo
 - Nouveau logo : le jeton JD avec le chapeau du Baron (icône de l'appli, de l'onglet et de l'écran d'accueil).

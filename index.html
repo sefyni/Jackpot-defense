@@ -3423,6 +3423,27 @@ body.q-low .tspark{animation:none!important}
 #fpsc{position:fixed;z-index:97;top:calc(env(safe-area-inset-top,0px) + 3px);left:6px;padding:1px 7px;border-radius:6px;background:rgba(10,6,18,.78);box-shadow:0 0 0 1px rgba(255,255,255,.12);color:#5fd68a;font:700 12px/1.35 var(--f-pix);letter-spacing:.05em;pointer-events:none;font-variant-numeric:tabular-nums}
 #fpsc.mid{color:#ffcc4d}
 #fpsc.bad{color:#ff5c6c}
+
+/* ---------- v13.2 · le récap de fin de partie ---------- */
+.orecap{width:100%;padding:12px 14px;border-radius:14px;background:var(--panel);box-shadow:inset 0 0 0 2px var(--edge);text-align:left}
+.orecap h4{margin:0 0 4px;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.orc-kill{margin:0;font-size:15px}
+.orc-kill b{color:#ff8a96}
+.orc-ctx{margin:2px 0 8px;font-size:12px;color:var(--muted)}
+.orc-bars{display:flex;flex-direction:column;gap:5px}
+.orc-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 38px;align-items:center;gap:8px;font-size:13px}
+.orc-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.orc-row i{height:8px;border-radius:4px;background:var(--ink);box-shadow:inset 0 0 0 1px #000;overflow:hidden}
+.orc-row i b{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#ff5c6c,#ff9aa6)}
+.orc-row em{font-style:normal;text-align:right;color:var(--gold);font-variant-numeric:tabular-nums}
+.orc-tip{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);font-size:13px;color:#cfe6ff}
+.orc-tip::before{content:"Conseil : ";font-weight:700;color:var(--gold)}
+body.lpc #over .orecap{grid-column:1;grid-row:4}
+#over.go-in .orecap{animation:ovFade .4s ease-out .9s both}
+
+/* ---------- v13.4 · la manette : le bouton choisi est encadré ---------- */
+body.gp-on .gp-focus{outline:3px solid #ffcc4d!important;outline-offset:3px;box-shadow:0 0 0 7px rgba(255,204,77,.28),0 0 18px rgba(255,204,77,.45)!important}
+body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3957,7 +3978,7 @@ body.q-low .tspark{animation:none!important}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.1</p>
+  <p class="proto">Sefy Industries · v13.4</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -4014,6 +4035,7 @@ body.q-low .tspark{animation:none!important}
     <h2 class="over-t" id="o-title">LA MAISON<br>GAGNE TOUJOURS</h2>
     <p class="osub" id="o-sub"></p>
     <div class="oscore" id="o-score"></div>
+    <div class="orecap" id="o-recap" hidden></div>
     <dl class="ostats" id="o-stats"></dl>
     <p class="ojet" id="o-jetp" hidden><span class="jeton" aria-hidden="true"></span><span id="o-jet"></span></p>
     <div class="tbtns">
@@ -4746,8 +4768,12 @@ const BAL = {
   bossHp: 1.08, bossHpR: .0,
   // les actes : tension qui monte dans l'acte (manches 1 à 4), la vague du boss n'est plus réduite de moitié,
   // la couleur de l'acte sort plus souvent, et le boss enrage à mi-vie
-  actMod: [.8, .92, 1, 1.05], actLast: .82, bossWave: 1, bossK: { b_valet: 1, b_dame: 1.2, b_roiP: 1.2, b_roiT: .9, b_roiC: 1.25, b_joker: 1, b_baron: 1 }, fbWave: .8, fbCap: 28, fbN: 4, actSuit: 1.6, rageSpd: 1.25, rageAtk: .8, rageDmg: 1.15, rageEsc: .7,
+  actMod: [.8, .92, 1, 1.05], actLast: .82, bossWave: 1, bossK: { b_valet: 1, b_dame: 1.2, b_roiP: 1.2, b_roiT: .75, b_roiC: 1.25, b_joker: 1, b_baron: 1 }, fbWave: .8, fbCap: 28, fbN: 4, actSuit: 1.6, rageSpd: 1.25, rageAtk: .8, rageDmg: 1.15, rageEsc: .7,
   eliteFrom: 8,
+  // v13.2 : le Roi de Trèfle (manche 20) — ses gardes de mi-vie, et ses fenêtres de faiblesse
+  rtGuardHp2: 1.2, rtGuardN2: 4, rtVuln: 8, rtVuln2: 10, rtGuardDmg: .7, rtSpd: .8,
+  // v13.2 : manches 16 à 19 un peu moins chargées (la montée vers le Roi de Trèfle est plus douce)
+  wallK: .88,
   // v9.2 : à la machine, les jetons que tu as déjà tombent 3 fois plus souvent (les 15 sont sur les rouleaux)
   ownW: 3,
   floorHp: 65, postHp: 22, postR: 3, postRad: 27,
@@ -10209,7 +10235,7 @@ function talk(who, text) {
   utt = { g, end: t + d };
   if (d > 0) duckTalk(d);
 }
-const haptic = ms => { if (G.headless) return; try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) { /* aucun */ } };
+const haptic = ms => { if (G.headless) return; try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) { /* aucun */ } gpRumble(ms); };
 
 /* ---------- ambiances : vent, feu, brouillard, foule du bar, casino, gouttes ---------- */
 const Amb = (() => {
@@ -11208,6 +11234,7 @@ function buildWave(r, run, ev) {
   const boss = isBossRound(r), st = stakeLv(run);
   let budget = threat(r) * (boss ? BAL.bossWave : BAL.actMod[actPos(r) - 1] * (r > 25 && r < 30 ? BAL.actLast : 1));
   const A = r <= 30 ? ACTS[actIdx(r)] : null;
+  if (r >= 16 && r <= 19) budget *= BAL.wallK;
   if (hasMalus(run, 'horde')) budget *= 1.35;
   if (ev === 'maree') budget *= 2;
   const ids = [], w = [];
@@ -11505,6 +11532,7 @@ function aiInit(e, o) {
 function spawnGuard(king, ang, rad) {
   const g = spawnEnemy('garde', 0, { x: king.x + Math.cos(ang) * rad, y: king.y + Math.sin(ang) * rad, king, gang: ang, grad: rad });
   if (!G.cb.demo) G.cb.total++;
+  if (g && BAL.rtGuardDmg !== 1) g.dmg *= BAL.rtGuardDmg;
   return g;
 }
 function summonGuards(e) {
@@ -11995,13 +12023,13 @@ function aiRoiP(e, dt, sp, held, contactD) {
 function aiRoiT(e, dt, sp, held, contactD) {
   const st = e.st;
   st.guards = st.guards.filter(g => !g.dead);
-  if (e.inv && !st.guards.length) { e.inv = false; st.vulnT = 8; if (!G.headless) { banner('CARAPACE BRISÉE', 'frappe-le maintenant !', 'good', 1.3); shake(5); Snd.rakeBreak(); } }
+  if (e.inv && !st.guards.length) { e.inv = false; st.vulnT = e.rage ? BAL.rtVuln2 : BAL.rtVuln; if (!G.headless) { banner('CARAPACE BRISÉE', 'frappe-le maintenant !', 'good', 1.3); shake(5); Snd.rakeBreak(); } }
   if (!e.inv) {
     st.vulnT -= dt;
     bossSub(e, `Vulnérable ! ${Math.max(0, Math.ceil(st.vulnT))}${NB}s`);
     if (st.vulnT <= 0) summonGuards(e);
   } else bossSub(e, `Carapace : tue ses gardes (${st.guards.length} restant${st.guards.length > 1 ? 's' : ''})`);
-  meleeStep(e, dt, sp * (e.inv ? 1 : .6), held, contactD);
+  meleeStep(e, dt, sp * (e.inv ? 1 : .6) * BAL.rtSpd, held, contactD);
 }
 function aiRoiC0(e, dt, sp, held, contactD) {
   const st = e.st;
@@ -12626,7 +12654,7 @@ function updateEShots(dt) {
     if (cb.invuln > 0 && d <= BAL.baseR + p.r + 6) { bounceShot(p); continue; }
     if (d <= BAL.baseR + p.r) {
       arr.splice(i, 1);
-      hurtBase(p.dmg, p.kind === 'orb' || p.kind === 'pball' ? 'orb' : 'shot');
+      hurtBase(p.dmg, p.kind === 'orb' || p.kind === 'pball' ? 'orb' : 'shot', null, false, p.src);
       if (p.kind === 'orb' || p.kind === 'pball') for (const rk of rakes(cb)) if (rk.dur > 0 && !rk.broken) { breakRake(rk); break; }
       if (!G.headless) burst(p.x, p.y, p.kind === 'heart' ? '#ff7eb6' : '#d8d2e6', 5, 22, .9, .35);
       continue;
@@ -12738,7 +12766,7 @@ function enemyHitsBase(e) {
   if (G.cb.demo) { dealDmg(e, e.maxHp, { src: 'demo' }); return; }
   hurtBase(e.dmg * (1 - .3 * crevK()) * tkWeak(e, 'melee'), 'melee', e);
 }
-function hurtBase(dmg, kind, e, quiet) {
+function hurtBase(dmg, kind, e, quiet, src) {
   const cb = G.cb, s = cb.stats, run = G.run;
   // la partie de démo derrière l'écran titre ne doit jamais pouvoir perdre
   if (run.over || cb.ended || cb.demo) return;
@@ -12766,7 +12794,58 @@ function hurtBase(dmg, kind, e, quiet) {
     else if (absorbed >= 1) floater(rand(-4, 4), -BAL.baseR - 4, '-' + Math.round(absorbed), '#c3cde0', 3.8);
   }
   if (s.hk && (d > 0 || absorbed > 0)) tkHurtAfter(d + absorbed, kind, e);
+  hurtLog(e || src, kind, d + absorbed);
   if (run.hp <= 0) baseDown();
+}
+
+/* ================= v13.2 · le récap de fin de partie : d'où venaient les dégâts ================= */
+function hurtKey(w, kind) {
+  const d = w && w.type && ENEMIES[w.type];
+  if (d) return d.boss ? 'B:' + w.type : 'E:' + w.type + (kind === 'melee' ? '' : ':' + kind);
+  return 'X:' + kind;
+}
+function hurtLog(w, kind, v) {
+  if (!(v > 0)) return;
+  const cb = G.cb, run = G.run; if (!cb || !run) return;
+  const k = hurtKey(w, kind);
+  (cb.hurt || (cb.hurt = {}))[k] = (cb.hurt[k] || 0) + v;
+  const A = run.hurtAll || (run.hurtAll = {}); A[k] = (A[k] || 0) + v;
+  cb.lastHurt = k;
+}
+const HURT_ENV = { fire: 'Le feu', rock: 'Les rochers', quake: 'Les secousses', bomb: 'La bombe à retardement', magic: 'Les sorts', orb: 'Les orbes', shot: 'Les tirs', melee: 'Les coups' };
+const HURT_SUB = { shot: 'tirs', orb: 'orbes', magic: 'sorts', fire: 'feu' };
+function hurtLabel(k) {
+  const [t, id, sub] = k.split(':');
+  if (t === 'X') return HURT_ENV[id] || id;
+  const d = ENEMIES[id]; if (!d) return id;
+  if (t === 'B') return d.name;
+  return (d.role || d.name) + (sub && HURT_SUB[sub] ? ` (${HURT_SUB[sub]})` : '');
+}
+// un conseil court selon ce qui a fait le plus mal
+function hurtTip(k) {
+  const [t, id, sub] = k.split(':');
+  if (t === 'B') return ENEMIES[id] && ENEMIES[id].intro || '';
+  if (t === 'X') return id === 'fire' ? 'Le Gel, la Bombe et la Tornade éteignent les flammes.' : id === 'bomb' ? 'Désamorce la bombe avant la fin du compte à rebours.' : id === 'quake' || id === 'rock' ? 'Les secousses viennent de la manche : garde des PV d\'avance.' : '';
+  if (sub === 'shot' || sub === 'orb') return 'Renvoie leurs tirs d\'un coup de flipper : ils repartent vers eux.';
+  if (sub === 'magic' || id === 'sorcier') return 'Abats les sorciers en premier : ils frappent de loin.';
+  if (id === 'garde') return 'Les gardes protègent leur roi : tue-les pour briser sa carapace.';
+  return 'Trop de cartes au contact : la BOMBE et le GEL dégagent la table d\'un coup.';
+}
+// au moment où la base tombe : ce qu'on garde pour l'écran de fin
+function hurtSnap(cb, run) {
+  if (!cb || !run) return;
+  const boss = (cb.bosses || []).filter(b => !b.dead && !b.fake).map(b => ({ name: b.d ? b.d.name : (ENEMIES[b.type] || {}).name, pct: Math.max(1, Math.round(100 * b.hp / Math.max(1, b.maxHp))), inv: !!b.inv }));
+  run.death = { round: run.round, t: Math.round(cb.t || 0), hurt: Object.assign({}, cb.hurt || {}), last: cb.lastHurt || null, boss };
+}
+function recapHTML(run) {
+  const D = run.death; if (!D) return '';
+  const list = Object.entries(D.hurt).sort((a, b) => b[1] - a[1]), tot = list.reduce((a, b) => a + b[1], 0);
+  if (!tot) return '';
+  const top = list.slice(0, 4), main = (D.last && D.hurt[D.last] ? D.last : top[0][0]);
+  const ctx = D.boss.length ? D.boss.map(b => `${b.name} encore à ${b.pct}${NB}%${b.inv ? ' (protégé)' : ''}`).join(' · ') : `${D.t}${NB}s de combat`;
+  const bars = top.map(([k, v]) => { const p = Math.round(100 * v / tot); return `<div class="orc-row"><span>${esc(hurtLabel(k))}</span><i><b style="width:${Math.max(4, p)}%"></b></i><em>${p}${NB}%</em></div>`; }).join('');
+  const tip = hurtTip(top[0][0]);
+  return `<h4>CE QUI T'A FAIT TOMBER</h4><p class="orc-kill">Coup fatal : <b>${esc(hurtLabel(main))}</b></p><p class="orc-ctx">Manche ${roundLabel(D.round)} · ${ctx}</p><div class="orc-bars">${bars}</div>${tip ? `<p class="orc-tip">${tip}</p>` : ''}`;
 }
 function floorBreak(k) {
   const run = G.run;
@@ -12783,6 +12862,7 @@ function baseDown() {
   if (run.over) return;
   if (cb.stats.hk && tkDown()) { if (run.hp <= 0 && !cb.ended) run.hp = 1; return; }
   run.hp = 0; bankPartial(run, cb); run.over = true;
+  hurtSnap(cb, run);
   if (!G.headless) uiGameOver();
 }
 function heal(h) {
@@ -18600,8 +18680,8 @@ function bossPhase2(e) {
   e.spd *= BAL.rageSpd; e.atkI *= BAL.rageAtk; e.dmg *= BAL.rageDmg;
   cb.escGap = Math.max(BAL.escGapMin, (cb.escGap || BAL.escGap0) * BAL.rageEsc);
   if (e.type === 'b_roiT') {
-    summonGuards(e); e.st.guards.push(spawnGuard(e, Math.PI / 3, 21));
-    for (const g of e.st.guards) { g.hp *= 1.5; g.maxHp = g.hp; }
+    summonGuards(e); if (BAL.rtGuardN2 > 3) e.st.guards.push(spawnGuard(e, Math.PI / 3, 21));
+    for (const g of e.st.guards) { g.hp *= BAL.rtGuardHp2; g.maxHp = g.hp; }
   }
   if (e.type === 'b_roiC') e.st.splitT = 1.2;
   if (G.headless) return;
@@ -22146,7 +22226,8 @@ function applyLayout() {
   document.body.classList.toggle('lpc', pc);
   document.body.classList.toggle('lmob', !pc);
   if (pc) {
-    const H = 720, W = Math.round(clamp(H * innerWidth / innerHeight, 1280, 1600));
+    // v13.3 : l'écran virtuel suit la forme de l'écran — plus large en ultra-large (21:9), plus haut en 16:10 et 4:3
+    const asp = innerWidth / innerHeight, W = Math.round(clamp(720 * asp, 1280, 1720)), H = asp < 1280 / 720 ? Math.round(Math.min(880, 1280 / asp)) : 720;
     const k = Math.min(innerWidth / W, innerHeight / H);
     Object.assign(LAY, { pc, W, H, k, barH: 92 });
     ROOT.style.width = W + 'px'; ROOT.style.height = H + 'px';
@@ -22756,7 +22837,7 @@ function renderOptions() {
           return `<div class="okey bind"><span>${lab}</span>${[0, 1].map(sl => `<button class="kb${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? ' wait' : ''}" data-kbind="${id}" data-kslot="${sl}">${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? '…' : esc(keyName(ks[sl]))}</button>`).join('')}</div>`;
         }).join('') + '</div>';
       }
-      h += '<div class="okeys fixed">' + [['Souris', 'oriente le flipper · clic = coup de flipper'], ['Clic droit maintenu', 'BILLE vers la souris (ou appuie sur ta base et tire en arrière)'], ['Mobile', 'glisse pour tourner, tape pour parer, appuie sur ta base et tire en arrière : BILLE']].map(([k, t]) => `<div class="okey"><kbd>${k}</kbd><span>${t}</span></div>`).join('') + '</div>';
+      h += '<div class="okeys fixed">' + [['Souris', 'oriente le flipper · clic = coup de flipper'], ['Clic droit maintenu', 'BILLE vers la souris (ou appuie sur ta base et tire en arrière)'], ['Mobile', 'glisse pour tourner, tape pour parer, appuie sur ta base et tire en arrière : BILLE'], ['Manette', 'stick gauche : viser · A : coup de flipper · RB ou RT : BILLE · X, Y, B, LB, LT : sorts 1 à 5 · Start : pause · menus : croix + A, B pour revenir']].map(([k, t]) => `<div class="okey"><kbd>${k}</kbd><span>${t}</span></div>`).join('') + '</div>';
       h += oRow('Touches par défaut', '<button class="btn small ghost" data-oact="keyreset">Rétablir</button>', 'AZERTY : Q / D pour le flipper, 1 à 4 avec ou sans Maj');
       break;
     case 'profil': {
@@ -22782,7 +22863,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v13.1</p></div>`;
+        <p class="ov5">v13.4</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24202,6 +24283,7 @@ function endRun(cashed) {
   const st = run.stats;
   const cells = [['Manche', roundLabel(run.round)], ['Cartes abattues', fmtN(run.kills)], ['Parades', fmtN(st.parries)], ['Meilleure manche', fmtS(st.bestRound || 0)], ['Or gagné', fmtN(st.gold)], ['Boss battus', String(run.bossKills)], ['Jeux du bar', `${st.gamesWon || 0} / ${st.games || 0}`], ['Baron', `${st.gWins} – ${st.gLosses}`]];
   $('#o-stats').innerHTML = cells.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+  { const rc = $('#o-recap'), h = !cashed && !won ? recapHTML(run) : ''; rc.innerHTML = h; rc.hidden = !h; }
   $('#o-score').innerHTML = `<small>SCORE</small><b>${fmtS(run.score || 0)}</b>${newBest ? '<em>NOUVEAU RECORD !</em>' : prevBest ? `<i>record : ${fmtS(prevBest)}</i>` : ''}`;
   if (newBest && (run.score || 0) > 0) setTimeout(() => { Snd.record(); celebrate(true); }, 900);
   const dw1 = run.deck ? ((m.dw || {})[run.deck] || 0) : 0, unl = won && dw1 > dw0 && dw1 <= STAKES.length - 1;
@@ -24581,7 +24663,7 @@ function simOne(o) {
     out.t += t;
     if (cb.saveRestart) continue;
     if (o.trace) out.perRound.push([G.run.round, Math.round(t), Math.round(hp0), Math.round(G.run.hp), G.run.jokers.length, Math.round(cb.stats.dmg), Math.round(G.run.gold), Object.values(G.run.up).reduce((a, b) => a + b, 0)]);
-    if (G.run.over) { out.deathBy = cb.bosses.some(b => !b.dead) ? 'boss' : 'cartes'; out.left = cb.bosses.filter(b => !b.dead).map(b => b.type + ':' + Math.round(100 * b.hp / b.maxHp) + '%' + (b.st && b.st.guards ? ' g' + b.st.guards.filter(g => !g.dead).length + (b.inv ? 'I' : 'V') : '') + ' d' + Math.round(Math.hypot(b.x, b.y))).join(',') + ' t' + Math.round(cb.t) + ' maxHp' + G.run.maxHp + ' rate' + cb.stats.rate.toFixed(2) + ' dmg' + Math.round(cb.stats.dmg) + ' en' + cb.enemies.filter(e => !e.dead).length + ' dps' + (cb.dps ? Math.round(cb.dps.tot / Math.max(1, cb.t)) : '-'); break; }
+    if (G.run.over) { out.hurt = Object.assign({}, cb.hurt || {}); out.deathBy = cb.bosses.some(b => !b.dead) ? 'boss' : 'cartes'; out.left = cb.bosses.filter(b => !b.dead).map(b => b.type + ':' + Math.round(100 * b.hp / b.maxHp) + '%' + (b.st && b.st.guards ? ' g' + b.st.guards.filter(g => !g.dead).length + (b.inv ? 'I' : 'V') : '') + ' d' + Math.round(Math.hypot(b.x, b.y))).join(',') + ' t' + Math.round(cb.t) + ' maxHp' + G.run.maxHp + ' rate' + cb.stats.rate.toFixed(2) + ' dmg' + Math.round(cb.stats.dmg) + ' en' + cb.enemies.filter(e => !e.dead).length + ' dps' + (cb.dps ? Math.round(cb.dps.tot / Math.max(1, cb.t)) : '-'); break; }
     if (!cb.ended) { out.deathBy = 'temps'; break; }
     const res = finishRound();
     if (G.run.won && !o.inf) { out.won = true; break; }
@@ -24882,6 +24964,155 @@ function firstGesture() {
   audioInit(); Music.resume();
 }
 
+
+/* ================= v13.4 · la manette (Xbox, PlayStation, Steam Deck…) =================
+   En combat : stick gauche = viser avec le flipper, A = coup de flipper, RB / RT = BILLE (maintenir, lâcher),
+   X Y B LB LT = sorts 1 à 5, Start = pause, Select = infos, clic du stick = vitesse.
+   Dans les menus : la croix (ou le stick) choisit un bouton, A appuie, B revient en arrière. */
+const GP = { on: false, idx: -1, prev: [], ax: [0, 0], nav: { dir: null, t: 0, n: 0 }, focus: null, bx: 0, by: -30, last: 0, swapT: 0 };
+const GP_SEL = 'button, [role="button"], a[href], input[type=range], .slot[data-i], .reel, [data-nr], [data-otab], [data-opt]';
+const GP_PRI = ['#tip-ok', '[data-cf="ok"]', '#gf-ok', '#fr-ok', '#fbc-skip', '[data-nr="go"]', '#t-cont', '#t-play', '.jpm-go', '#m-spin', '#m-go', '#b-go', '.btn.big', '.btn.gold', '.btn.red'];
+const GP_MODAL = ['#tip', '#coach', '#detail', '#confirm', '#runinfo', '#pause', '#dev', '#opts'];
+function gpPad() {
+  let pads = [];
+  try { pads = navigator.getGamepads ? navigator.getGamepads() : []; } catch (e) { return null; }
+  if (GP.idx >= 0 && pads[GP.idx] && pads[GP.idx].connected) return pads[GP.idx];
+  for (const p of pads) if (p && p.connected && p.buttons && p.buttons.length >= 10) { GP.idx = p.index; return p; }
+  return null;
+}
+function gpRumble(ms) {
+  if (!GP.on || G.headless) return;
+  const p = gpPad(), a = p && p.vibrationActuator;
+  try { if (a && a.playEffect) a.playEffect('dual-rumble', { duration: Math.min(300, ms || 40), strongMagnitude: .5, weakMagnitude: .7 }); } catch (e) { /* rien */ }
+}
+const gpKey = k => { try { keyDown({ key: k, repeat: false, preventDefault() {}, target: document.body }); } finally { KEYS[normKey(k)] = false; } };
+function gpModalOpen() { return GP_MODAL.some(id => { const el = $(id); return el && !el.hidden && el.getClientRects().length; }); }
+const gpCombat = () => G.mode === 'combat' && !G.paused && G.cb && !G.cb.demo && !gpModalOpen();
+// les boutons qu'on peut vraiment toucher en ce moment (ceux cachés derrière une fenêtre ne comptent pas)
+function gpCands() {
+  const out = [], vw = innerWidth, vh = innerHeight;
+  for (const el of document.querySelectorAll(GP_SEL)) {
+    if (el.disabled || el.closest('[hidden]') || el.closest('#fpsc')) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 6 || r.height < 6 || r.right < 2 || r.bottom < 2 || r.left > vw - 2 || r.top > vh - 2) continue;
+    const cx = clamp(r.left + r.width / 2, 1, vw - 1), cy = clamp(r.top + r.height / 2, 1, vh - 1);
+    const hit = document.elementFromPoint(cx, cy);
+    if (!hit || !(el === hit || el.contains(hit))) continue;
+    out.push({ el, x: r.left + r.width / 2, y: r.top + r.height / 2 });
+  }
+  return out;
+}
+function gpSetFocus(el) {
+  if (GP.focus === el) return;
+  if (GP.focus) GP.focus.classList.remove('gp-focus');
+  GP.focus = el;
+  if (el) { el.classList.add('gp-focus'); try { el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) { /* rien */ } }
+}
+function gpEnsureFocus(C) {
+  if (GP.focus && C.some(c => c.el === GP.focus)) return;
+  let pri = null;
+  for (const sel of GP_PRI) { pri = C.find(c => c.el.matches(sel)); if (pri) break; }
+  if (!pri) { const M = C.filter(c => !c.el.closest('#lp, #hud, #rack, #rp')); pri = (M.length ? M : C).slice().sort((a, b) => (a.y - b.y) || (a.x - b.x))[0]; }
+  gpSetFocus(pri ? pri.el : null);
+}
+function gpMove(dx, dy) {
+  const C = gpCands(); if (!C.length) return;
+  gpEnsureFocus(C);
+  const cur = C.find(c => c.el === GP.focus); if (!cur) return;
+  if (cur.el.matches('input[type=range]') && dx) {
+    const st = +cur.el.step || 1; cur.el.value = clamp(+cur.el.value + dx * st, +cur.el.min || 0, +cur.el.max || 100);
+    cur.el.dispatchEvent(new Event('input', { bubbles: true })); return;
+  }
+  let best = null, bs = 1e9;
+  for (const c of C) {
+    if (c === cur) continue;
+    const vx = c.x - cur.x, vy = c.y - cur.y, along = vx * dx + vy * dy, perp = Math.abs(vx * dy - vy * dx);
+    if (along < 6) continue;
+    const sc = along + perp * 2.2;
+    if (sc < bs) { bs = sc; best = c; }
+  }
+  if (best) { gpSetFocus(best.el); if (Snd.tick) Snd.tick(.6); }
+}
+function gpPress(el) {
+  if (!el) return;
+  const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, o = { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: 'touch', isPrimary: true, button: 0 };
+  try { el.dispatchEvent(new PointerEvent('pointerdown', o)); el.dispatchEvent(new PointerEvent('pointerup', o)); } catch (e) { /* rien */ }
+  if (el.isConnected) el.click();
+}
+// la bombe à la manette : un viseur qui part sur le plus gros paquet de cartes
+function gpBombStart(cb) {
+  let bx = 0, by = -30, bn = -1;
+  for (const e of cb.enemies) { if (e.dead) continue; let n = 0; for (const o of cb.enemies) if (!o.dead && Math.hypot(o.x - e.x, o.y - e.y) < BAL.bombR) n++; if (n > bn) { bn = n; bx = e.x; by = e.y; } }
+  GP.bx = bx; GP.by = by;
+}
+function gpPoll(ms) {
+  const p = gpPad();
+  if (!p) { if (GP.on && !GP.lost) { GP.lost = true; } return; }
+  GP.lost = false;
+  const B = p.buttons.map(b => !!(b && (b.pressed || b.value > .5))), was = GP.prev, down = i => B[i] && !was[i], up = i => !B[i] && was[i];
+  const lx = p.axes[0] || 0, ly = p.axes[1] || 0, rx = p.axes[2] || 0, ry = p.axes[3] || 0;
+  const any = B.some(Boolean) || Math.hypot(lx, ly) > .5 || Math.hypot(rx, ry) > .5;
+  if (any) {
+    if (!GP.on) { GP.on = true; toastAny('Manette prête'); }
+    if (!document.body.classList.contains('gp-on')) document.body.classList.add('gp-on');
+    GP.last = performance.now();
+    if (B.some(Boolean)) firstGesture();
+  }
+  GP.prev = B;
+  if (!GP.on) return;
+  if (typeof BOOT !== 'undefined' && BOOT.on) { if (B.some((v, i) => v && !was[i])) gpKey(' '); return; }
+  const dt = Math.min(.05, (ms || 16) / 1000), cb = G.cb;
+  if (gpCombat()) {
+    if (GP.focus) gpSetFocus(null);
+    const L = spellsOf(G.run), aiming = cb.ab.aiming;
+    if (aiming) {
+      // le viseur de la bombe : stick gauche (ou droit), A ou le bouton du sort pour lâcher, B pour annuler
+      const sx = Math.abs(lx) > .2 ? lx : Math.abs(rx) > .2 ? rx : 0, sy = Math.abs(ly) > .2 ? ly : Math.abs(ry) > .2 ? ry : 0;
+      GP.bx = clamp(GP.bx + sx * 90 * dt, -VIEW.hx, VIEW.hx); GP.by = clamp(GP.by + sy * 90 * dt, -VIEW.hy, VIEW.hy);
+      Object.assign(G.pointer, { wx: GP.bx, wy: GP.by, has: true, type: 'gamepad' });
+      const bombBtn = [2, 3, 1, 4, 6].find((bi, n) => L[n] === 'bomb');
+      if (down(0) || (bombBtn != null && down(bombBtn))) { if (useBomb(GP.bx, GP.by)) { spellFx('bomb'); haptic(20); } cb.ab.aiming = false; }
+      else if (down(1) && bombBtn !== 1) cb.ab.aiming = false;
+      GP.prev = B; return;
+    }
+    // viser : le stick gauche pointe où va le flipper ; la croix le fait tourner
+    if (Math.hypot(lx, ly) > .38) cb.rake.input = Math.atan2(ly, lx);
+    else if (Math.hypot(rx, ry) > .5) cb.rake.input = Math.atan2(ry, rx);
+    if (B[14]) cb.rake.input = cb.rake.ang - .9; else if (B[15]) cb.rake.input = cb.rake.ang + .9;
+    if (down(0)) swing();
+    for (const bi of [5, 7]) { if (down(bi)) bilKeyDown(); if (up(bi) && !B[5] && !B[7]) bilKeyUp(); }
+    [2, 3, 1, 4, 6].forEach((bi, n) => { if (down(bi) && L[n]) { if (L[n] === 'bomb') { G.pointer.type = 'gamepad'; castSpellP('bomb'); if (cb.ab.aiming) gpBombStart(cb); } else castSpellP(L[n]); } });
+    if (down(9)) gpKey('Escape');
+    if (down(8)) gpKey('Tab');
+    if (down(10) || down(11)) gpKey(keysOf('speed')[0] || 'f');
+    return;
+  }
+  // fin de partie (« tape pour passer ») et coupures
+  if (G.mode === 'cut' && down(0) && typeof FB !== 'undefined' && FB.cut) { gpKey(' '); return; }
+  // les menus : la croix ou le stick choisit, A appuie, B revient
+  const nx = B[14] || lx < -.6 ? -1 : B[15] || lx > .6 ? 1 : 0, ny = B[12] || ly < -.6 ? -1 : B[13] || ly > .6 ? 1 : 0;
+  const dir = nx || ny ? nx + ',' + ny : null, now2 = performance.now();
+  if (dir) {
+    if (dir !== GP.nav.dir) { GP.nav = { dir, t: now2 + 360, n: 0 }; gpMove(nx, nx ? 0 : ny); }
+    else if (now2 >= GP.nav.t) { GP.nav.t = now2 + 110; gpMove(nx, nx ? 0 : ny); }
+  } else GP.nav.dir = null;
+  if (Math.abs(ry) > .3) { const sc = GP.focus && GP.focus.closest('.full, .ov, section, aside') || document.scrollingElement; try { (findScroller(GP.focus) || sc).scrollBy(0, ry * 900 * dt); } catch (e) { /* rien */ } }
+  if (down(0)) { const C = gpCands(); gpEnsureFocus(C); gpPress(GP.focus); }
+  if (down(1)) gpKey('Escape');
+  if (down(9)) gpKey('Escape');
+  if (down(8)) gpKey('Tab');
+  if (G.mode === 'machine' && !G.paused && !gpModalOpen()) { if (down(2)) pullLever(); if (down(3)) respin(); }
+  if (canReorder && canReorder()) { if (down(4)) gpKey(keysOf('moveUp')[0] || 'ArrowUp'); if (down(5)) gpKey(keysOf('moveDown')[0] || 'ArrowDown'); }
+}
+function findScroller(el) {
+  for (let e = el; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (/(auto|scroll)/.test(cs.overflowY) && e.scrollHeight > e.clientHeight + 4) return e; }
+  return null;
+}
+addEventListener('gamepadconnected', () => { GP.idx = -1; });
+addEventListener('gamepaddisconnected', () => { GP.idx = -1; GP.on = false; document.body.classList.remove('gp-on'); gpSetFocus(null); toastAny('Manette débranchée'); });
+// dès que la souris ou le doigt reprend la main, le cadre de la manette disparaît
+addEventListener('pointermove', e => { if (e.pointerId === 77) return; if (GP.on && performance.now() - GP.last > 400 && document.body.classList.contains('gp-on')) { document.body.classList.remove('gp-on'); } }, { passive: true });
+
 /* ---------- boucle ---------- */
 let lastT = 0;
 const CALM = ['machine', 'market', 'bar', 'poker', 'chooser', 'mini', 'cut', 'reward'];
@@ -24889,6 +25120,7 @@ function frame(t) {
   requestAnimationFrame(frame);
   const rawMs = t - lastT, dt = Math.min(.05, Math.max(0, rawMs / 1000)); lastT = t;
   qualTick(rawMs);
+  gpPoll(rawMs);
   BG.frame(dt);
   if (G.run && !G.run.over && G.mode !== 'title' && G.mode !== 'over' && !G.paused && G.meta.life) G.meta.life.time += dt;
   const cb = G.cb;
@@ -25153,7 +25385,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { QUAL, applyQuality, qualTick, coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { GP, gpPoll, gpCands, QUAL, applyQuality, qualTick, coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });
