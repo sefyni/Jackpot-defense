@@ -3447,6 +3447,14 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
 
 /* ---------- v13.5 · le 15 de la machine n'est plus un bouton ---------- */
 .mall{display:inline-block;text-align:center;cursor:default}
+
+/* ---------- v13.6 · Options › Contrôles : les sorts côte à côte ---------- */
+.okey.okgrp{grid-column:1 / -1;flex-direction:column;align-items:stretch;gap:6px}
+.okgrp>b{font-weight:600;font-size:14px}
+.okg{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px}
+.okg-c{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:6px;border-radius:8px;background:rgba(0,0,0,.18)}
+.okg-c small{text-align:center;font-size:12px;color:var(--muted)}
+.okg-c .kb{min-width:0;width:100%}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3981,7 +3989,7 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.5</p>
+  <p class="proto">Sefy Industries · v13.8</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -16429,6 +16437,7 @@ function openMachine(o) {
 }
 function pullLever() {
   if (G.mode !== 'machine') return;
+  if (MTIP.el) hideJTip();
   audioInit();
   if (M.state === 'spinning') { Snd.btn(); stopAll(true); return; }
   const lv = $('#m-lever'); lv.classList.add('pull'); setTimeout(() => lv.classList.remove('pull'), 360);
@@ -21361,6 +21370,7 @@ function mgFrame(t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height);
   g.setTransform(MG.k, 0, 0, MG.k, 0, 0);
   MG.game.draw(g, t / 1000);
+  if (MG.id === 'momo') poolClock(g);
 }
 function mgPoint(e) {
   const r = MG.cv.getBoundingClientRect();
@@ -21775,6 +21785,19 @@ function poolSides(turn) {
   const side = (k, who, col, lab, mark) => `<span class="ps ${k}${turn === k ? ' on' : ''}"><i class="pb ${col}">${mark}</i><span class="pt"><b>${who}</b><small>boules ${lab} · ${left(k)} sur la table</small></span>${turn === k ? `<em>${k === 'me' ? 'À TOI' : 'IL JOUE'}</em>` : ''}</span>`;
   return `<div class="pool-sides">${side('me', 'TOI', 'y', 'jaunes', '★')}${side('him', 'MOMO', 'r', 'rouges', 'M')}</div>`;
 }
+const PO_AIM = 7;
+// le chrono du billard, en haut de la table
+function poolClock(g) {
+  if (PO.phase !== 'aim' || PO.aimT == null || G.dev.auto) return;
+  const k = clamp(PO.aimT / PO_AIM, 0, 1), low = PO.aimT <= 4, x = 120, w = 100;
+  g.save();
+  g.fillStyle = 'rgba(10,6,18,.78)'; rrPath(g, x - 22, 2, w + 44, 11, 5.5); g.fill();
+  g.fillStyle = 'rgba(255,255,255,.12)'; rrPath(g, x, 5.5, w, 4, 2); g.fill();
+  g.fillStyle = low ? '#ff5c6c' : '#ffcc4d'; if (k > .02) { rrPath(g, x, 5.5, w * k, 4, 2); g.fill(); }
+  g.font = `700 8px ${FONT}`; g.textAlign = 'right'; g.textBaseline = 'middle'; g.fillStyle = low ? '#ff8a96' : '#fff3e6';
+  g.fillText(String(Math.ceil(PO.aimT)), x - 5, 8);
+  g.restore();
+}
 GAMES.momo = {
   W: 340, H: 200,
   open() {
@@ -21809,8 +21832,8 @@ GAMES.momo = {
       return;
     }
     if (PO.turn === 'me') {
-      PO.phase = 'aim';
-      mgInfo(poolSides('me') + '<p class="mg-hint">Vise une boule <b class="py">jaune ★</b> : glisse vers l\'arrière, relâche pour jouer. Plus tu tires loin, plus c\'est fort.</p>');
+      PO.phase = 'aim'; PO.aimT = PO_AIM;
+      mgInfo(poolSides('me') + `<p class="mg-hint">Vise une boule <b class="py">jaune ★</b> : glisse vers l'arrière, relâche pour jouer. Plus tu tires loin, plus c'est fort. Tu as <b>${PO_AIM}${NB}s</b>.</p>`);
     } else {
       PO.phase = 'him'; PO.ai = { t: 0, plan: momoPlan() };
       mgInfo(poolSides('him') + '<p class="mg-hint">Momo vise ses boules <b class="pr">rouges M</b>…</p>');
@@ -21855,6 +21878,17 @@ GAMES.momo = {
     poolShoot(Math.atan2(dy, dx), clamp(L / 110, .08, 1));
   },
   update(dt) {
+    // le temps pour viser : à 0, le coup part tel quel (si tu tirais déjà), sinon c'est à Momo
+    if (PO.phase === 'aim' && PO.aimT != null && !G.dev.auto) {
+      const was = Math.ceil(PO.aimT); PO.aimT -= dt;
+      if (PO.aimT > 0 && PO.aimT <= 3 && Math.ceil(PO.aimT) < was) Snd.tick(1.2);
+      if (PO.aimT <= 0) {
+        PO.aimT = null;
+        const D = PO.drag;
+        if (D && Math.hypot(D.x0 - D.x, D.y0 - D.y) >= 8) this.up();
+        else { PO.drag = null; PO.phase = 'wait'; mgSay('Trop lent, l\'ami. À moi.'); Snd.deny(); PO.turn = 'him'; setTimeout(() => this.nextTurn(), 700); }
+      }
+    }
     if (PO.phase === 'flip' && PO.coin) { PO.coin.t += dt; if (PO.coin.t >= 1.3 && !PO.coin.done) { PO.coin.done = true; Snd.coinLand(); this.afterFlip(); } }
     if (PO.phase === 'roll') {
       const n = 8; for (let i = 0; i < n; i++) poolStep(dt / n);
@@ -22140,14 +22174,22 @@ function machTipJ(id) {
 function machTipOver(e) {
   if (e.pointerType !== 'mouse' || !OPT().hover || (G.mode !== 'machine' && G.mode !== 'chooser')) return;
   const sy = e.target.closest && e.target.closest('.sym.chip[data-s]'); if (!sy) return;
+  // seulement les jetons bien visibles dans la fenêtre, rouleau arrêté (pas ceux cachés au-dessus ou en dessous)
+  const reelEl = sy.closest('.reel'), R = REEL.r.find(x => x.el === reelEl);
+  if (!R || R.phase !== 'idle') return;
+  const a = sy.getBoundingClientRect(), b = reelEl.getBoundingClientRect(), cy = a.top + a.height / 2;
+  if (cy < b.top + a.height * .4 || cy > b.bottom - a.height * .4) return;
+  // déjà ouverte pour ce jeton : on la laisse tranquille (plus de clignotement)
+  if (MTIP.el === sy && JT.el && !JT.el.hidden) { clearTimeout(JT.hT); return; }
   const j = machTipJ(sy.dataset.s); if (!j) return;
+  MTIP.el = sy;
   showJTip(j, sy);
   const more = JT.el && JT.el.querySelector('.jt-more'); if (more) more.remove();
 }
 function machTipOut(e) {
   if (e.pointerType !== 'mouse') return;
   const to = e.relatedTarget;
-  if (to && to.closest && (to.closest('#jtip') || (to.closest('.sym.chip[data-s]') && to.closest('#reels')))) return;
+  if (to && to.closest && (to.closest('#jtip') || (MTIP.el && MTIP.el.contains(to)))) return;
   hideJTipSoon();
 }
 function showJTip(j, anchor, pass) {
@@ -22179,7 +22221,7 @@ function showJTip(j, anchor, pass) {
   el.style.left = x + 'px'; el.style.top = y + 'px';
   JT.uid = j.uid; JT.t = now();
 }
-function hideJTip() { clearTimeout(JT.hT); if (JT.el && !JT.el.hidden) { JT.el.hidden = true; } JT.uid = null; }
+function hideJTip() { MTIP.el = null; clearTimeout(JT.hT); if (JT.el && !JT.el.hidden) { JT.el.hidden = true; } JT.uid = null; }
 // au survol : on laisse un court délai pour pouvoir rejoindre « Détails »
 function hideJTipSoon() { clearTimeout(JT.hT); JT.hT = setTimeout(hideJTip, 180); }
 /* ---------- le jeton réagit quand son effet se déclenche ---------- */
@@ -22854,11 +22896,15 @@ function renderOptions() {
       h += oRow('Mouvement réduit', oTog('reduced', o.reduced), 'moins d\'animations');
       break;
     case 'ctrl':
-      h += `<p class="okhelp">Touche une case, puis appuie sur la nouvelle touche (<b>Échap</b> pour la vider). Chaque action a deux touches.${OPV.msg ? ` <em>${esc(OPV.msg)}</em>` : ''}</p>`;
+      h += `<p class="okhelp">Touche une case, puis appuie sur la nouvelle touche, ou sur un bouton de la souris (molette, boutons du pouce). <b>Échap</b> pour la vider. Chaque action a deux touches.${OPV.msg ? ` <em>${esc(OPV.msg)}</em>` : ''}</p>`;
       for (const ctx of ['combat', 'machine', 'rack', 'global']) {
-        h += `<h4 class="okctx">${KEY_CTX[ctx]}</h4><div class="okeys">` + KEY_ACTS.filter(a => a[2] === ctx).map(([id, lab]) => {
-          const ks = keysOf(id);
-          return `<div class="okey bind"><span>${lab}</span>${[0, 1].map(sl => `<button class="kb${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? ' wait' : ''}" data-kbind="${id}" data-kslot="${sl}">${OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl ? '…' : esc(keyName(ks[sl]))}</button>`).join('')}</div>`;
+        const kbB = (id, sl) => { const w = OPV.bind && OPV.bind.act === id && OPV.bind.slot === sl; return `<button class="kb${w ? ' wait' : ''}" data-kbind="${id}" data-kslot="${sl}">${w ? '…' : esc(keyName(keysOf(id)[sl]))}</button>`; };
+        const ids = KEY_ACTS.filter(a => a[2] === ctx).map(a => a[0]), order = KEY_ORDER[ctx] || ids;
+        const rest = ids.filter(id => !order.includes(id) && !Object.values(KEY_GRP).some(g => g.ids.includes(id)));
+        h += `<h4 class="okctx">${KEY_CTX[ctx]}</h4><div class="okeys">` + order.concat(rest).map(id => {
+          if (id[0] === '#') { const g = KEY_GRP[id.slice(1)]; return `<div class="okey okgrp"><b>${g.title}</b><div class="okg" style="--n:${g.ids.length}">${g.ids.map(gi => `<div class="okg-c"><small>${g.lab(gi)}</small>${kbB(gi, 0)}${kbB(gi, 1)}</div>`).join('')}</div></div>`; }
+          const A = KEY_ACTS.find(a => a[0] === id); if (!A) return '';
+          return `<div class="okey bind"><span>${A[1]}</span>${kbB(id, 0)}${kbB(id, 1)}</div>`;
         }).join('') + '</div>';
       }
       h += '<div class="okeys fixed">' + [['Souris', 'oriente le flipper · clic = coup de flipper'], ['Clic droit maintenu', 'BILLE vers la souris (ou appuie sur ta base et tire en arrière)'], ['Mobile', 'glisse pour tourner, tape pour parer, appuie sur ta base et tire en arrière : BILLE'], ['Manette', 'stick gauche : viser · A : coup de flipper · RB ou RT : BILLE · X, Y, B, LB, LT : sorts 1 à 5 · Start : pause · menus : croix + A, B pour revenir']].map(([k, t]) => `<div class="okey"><kbd>${k}</kbd><span>${t}</span></div>`).join('') + '</div>';
@@ -22887,7 +22933,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v13.5</p></div>`;
+        <p class="ov5">v13.8</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24782,6 +24828,7 @@ function aimAt(P) {
 }
 function canvasDown(e) {
   firstGesture();
+  if (e.button >= 3 || (e.button === 1 && mouseBound('Mouse3'))) return;
   if (G.mode !== 'combat' || G.paused) return;
   const cb = G.cb; if (!cb || cb.demo) return;
   try { cv.setPointerCapture(e.pointerId); } catch (er) { /* rien */ }
@@ -24877,6 +24924,9 @@ const KEY_ACTS = [
   ['info', 'Infos de la partie', 'global', ['Tab', 'i']],
   ['pause', 'Pause', 'global', ['Escape', 'p']],
 ];
+// l'ordre des cases dans Options › Contrôles : les sorts (et les rouleaux) sont regroupés côte à côte
+const KEY_GRP = { sp: { ids: ['sp1', 'sp2', 'sp3', 'sp4', 'sp5'], title: 'Sorts', lab: id => 'Sort ' + id.slice(2) }, reel: { ids: ['reel1', 'reel2', 'reel3'], title: 'Rouleaux : arrêter, puis garder', lab: id => 'Rouleau ' + id.slice(4) } };
+const KEY_ORDER = { combat: ['flipL', 'flipR', 'parry', 'bille', 'bomb', 'gel', '#sp'], machine: ['lever', 'respin', 'cash', '#reel'] };
 const KEY_CTX = { combat: 'En combat', machine: 'À la machine', rack: 'Ranger tes jetons (entre deux manches)', global: 'Partout' };
 const KEY_DEF = Object.fromEntries(KEY_ACTS.map(a => [a[0], a[3]]));
 const normKey = k => k && k.length === 1 ? k.toLowerCase() : (k || '');
@@ -24885,7 +24935,7 @@ const isKey = (act, key) => !!key && keysOf(act).some(x => x && normKey(x) === n
 const heldAct = act => keysOf(act).some(x => x && KEYS[normKey(x)]);
 function keyName(k) {
   if (!k) return '—';
-  const N = { ' ': 'Espace', Enter: 'Entrée', Escape: 'Échap', Tab: 'Tab', ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓', Backspace: 'Retour', Shift: 'Maj', Control: 'Ctrl', Alt: 'Alt' };
+  const N = { Mouse3: 'Clic molette', Mouse4: 'Souris 4', Mouse5: 'Souris 5', ' ': 'Espace', Enter: 'Entrée', Escape: 'Échap', Tab: 'Tab', ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓', Backspace: 'Retour', Shift: 'Maj', Control: 'Ctrl', Alt: 'Alt' };
   return N[k] || (k.length === 1 ? k.toUpperCase() : k);
 }
 const keyHint = act => keysOf(act).filter(Boolean).map(keyName).join(' / ');
@@ -24903,6 +24953,28 @@ function bindKey(act, slot, key) {
   const ks = keysOf(act).slice(); ks[slot] = key || ''; o.keys[act] = ks;
   saveMeta();
   return moved;
+}
+
+/* ---------- v13.6 · les boutons de la souris comme des touches : clic molette, boutons du pouce (Souris 4 et 5) ---------- */
+const MBTN = { 1: 'Mouse3', 3: 'Mouse4', 4: 'Mouse5' };
+const mouseBound = k => KEY_ACTS.some(a => isKey(a[0], k));
+function keyUpK(k) {
+  KEYS[normKey(k)] = false;
+  if ((isKey('flipL', k) || isKey('flipR', k)) && G.cb) G.cb.rake.input = G.cb.rake.ang;
+  if (isKey('bille', k)) bilKeyUp();
+}
+function mouseKeysBind() {
+  const fake = k => ({ key: k, repeat: false, preventDefault() {}, target: document.body });
+  addEventListener('mousedown', e => {
+    const k = MBTN[e.button]; if (!k) return;
+    // les boutons du pouce ne doivent jamais faire « page précédente »
+    if (e.button >= 3 || OPV.bind || mouseBound(k)) e.preventDefault();
+    if (OPV.bind) { e.stopPropagation(); keyDown(fake(k)); return; }
+    if (mouseBound(k)) keyDown(fake(k));
+  }, true);
+  addEventListener('mouseup', e => { const k = MBTN[e.button]; if (!k) return; if (e.button >= 3 || mouseBound(k)) e.preventDefault(); keyUpK(k); }, true);
+  addEventListener('auxclick', e => { if (e.button >= 3 || (MBTN[e.button] && mouseBound(MBTN[e.button]))) e.preventDefault(); }, true);
+  addEventListener('pointerup', e => { if (e.button >= 3) e.preventDefault(); }, true);
 }
 function keyDown(e) {
   if (BOOT.on) { e.preventDefault(); if (BOOT.step) bootEnd(); else bootGo(); return; }
@@ -25198,7 +25270,8 @@ function bindUI() {
   cv.addEventListener('contextmenu', e => e.preventDefault());
   cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') G.pointer.has = false; });
   addEventListener('keydown', keyDown);
-  addEventListener('keyup', e => { KEYS[normKey(e.key)] = false; if ((isKey('flipL', e.key) || isKey('flipR', e.key)) && G.cb) G.cb.rake.input = G.cb.rake.ang; if (isKey('bille', e.key)) bilKeyUp(); });
+  addEventListener('keyup', e => keyUpK(e.key));
+  mouseKeysBind();
   addEventListener('pointerdown', firstGesture, { capture: true });
   const on = (sel, fn) => { const el = $(sel); if (el) el.addEventListener('click', e => { firstGesture(); Snd.click(); fn(e); }); };
   on('#b-speed', () => { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); });
@@ -25410,7 +25483,7 @@ function boot(data) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const k in SPR) delete SPR[k]; buildBG(); });
   if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ cp: loadCheckpoint() }));
 }
-window.__dbg = { GP, gpPoll, gpCands, QUAL, applyQuality, qualTick, coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
+window.__dbg = { openMini, PO, GP, gpPoll, gpCands, QUAL, applyQuality, qualTick, coachOnce, closeTip, TIPQ, queueTip, zmixPut, zmixOver, zmixGlassRender, ELEC2, elecKick, lpSparks, lpGhost, multGold, multFromJetons, multFly, zmixDo, zmixOk, zmixClick, zmixPick, zmixRowHTML, pcPushTwo, chipDrop, chipPick, pcHands, pcPush, pcSweep, pcBack, pcToPile, glide, cardThumbC: t => cardThumb(t, 260), bossHalf, bossHold, rcSplit, rcBilleHit, bossArrive, ratJam, FRIP, tlbRender, lbRender, deckStakeMax, nrStakeOf, machOpen, machUnlocks, MACH_NEED, renderNewRun, openNewRun, nrStake, elbowReel, elbowClick, REEL, mkFou, needSlots, fitsRack, replaceOk, keepFromTray, renderTray, effSlots, mgoReveal, goldK, cardRealLine, checkGoal, sellJoker, sellValue, LB, lbOpen, lbAsk, lbAfterRun, lbFlush, lbPseudoCheck, bumpShot, bumpHurt, barQuick, buyDrink, buyShot, DECK_NEED, deckOpen, deckUnlocks, CL, clClick, clPick, clApply, clAuto, clRefresh, goSlow, uiGameOver, overFx, renderBar, salonToBar, UPG, SHOTS, BUMP, bumpJackpot, ckStats, glassSVG, CK_GLASS, CK_NEW, useSp106, SP106, SP_FOUS, borisRoar, gastonShoot, petSong, petStart, PET_START, spellCd, tamponToBonus, stakeRules, PCS, renderSpellBar, updateAbilities, PETS, adoptPet, petSay, petsRoundStart, petsRoundEnd, marcelSing, hasPet, renderPets, petOfferBar, petLine, JPM, useFam, famPow, famCount, FAM_SP, castSpellP, learnSpell, BK, bookPages, openBooks, openBook, bkTurn, pinOpen, PROF, profProgress, openProfiles, profUse, DECKS, applyDeck, openNewRun, openGift, openSpellPick, deckSecond, GF, SPK, NR, computeStats, pickPool, openBugMachine, openCollector, openChooser, MACH9, GLITCH9, TOK9, FOU9, TKH, BP, effSlots, refreshStats, beginRound, mkFou9, bugRoll, bugChoices, openDetail, bootEnd, secretTap, checkUnlocks, openVestiaire, G, M, MK, BAL, BAR, PK, REEL, DBG, updateCombat, fireAt, newRun, newCombat, machineRoll, evalLine, collectOutcome, resetMachine, afterLanding, payRespin, canRespin, spinnable, buildWave, threat, finishRound, botStep, BOT, stealJoker, srand, spawnEnemy, devAction, startNextRound, openMachine, openMarketPane, openBar, openChooser, openPoker, openCatalog, endRun, showWin, openDetail, openRules, openPunch, mkJoker, mkFou, computeStats, refreshStats, renderRack, beginRound, useGel, useBomb, swing, castSpell, roundScale, VIEW, Music, AU, stackResult, applyStack, handScore, aiKeep, simPoker, genBar, buyDrink, buyShot, hurtBase, stopAll, reelTap, pullLever, cashOutMachine, catCount, Snd, Amb, talk, voiceOffline, parseSyl, bossSay, leaveMarketPane, closePoker, resolveGambler, MG, PO, DA, RO, VISITORS, openMini, closeMini, visitorDue, rival, momoPlan, poolStep, poolShoot, TL, showTally, jokerPing, showJTip, miniResult, giveGift, openSalon, uiRoundCleared, calcJetons, renderMarket, sellSpell, learnSpell, renderSpellBar, renderRunInfo, moveJoker, benchDps, jetonContrib, BENCH, bilLaunch, FB, fbRewards, fbCutEnd, fbCutscene, barGo, renderPoker, fousPool, punchPickJoker, runStars, fbRoulette, baronCast, fbAce, w2s: (x, y) => { const r = cv.getBoundingClientRect(); return { x: r.left + CX + x * S, y: r.top + CY + y * S }; } };
 window.__pool = () => PO;
 window.__games = GAMES;
 window.__view = () => ({ CX, CY, S });

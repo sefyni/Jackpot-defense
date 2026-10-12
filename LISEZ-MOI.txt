@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.5-202610120204
+JACKPOT DEFENSE v13.8-202610120221
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,24 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.8
+- Le billard de Momo : 7 s pour viser (avant 12 s). Le chrono passe au rouge à 4 s.
+
+Nouveautés de la v13.7 — les bulles de la machine
+- La bulle ne s'ouvre que sur les jetons bien visibles dans la fenêtre des rouleaux, rouleau arrêté
+  (plus sur ceux à moitié cachés en haut ou en bas, ni pendant que ça tourne).
+- Plus de clignotement : la bulle reste ouverte tant que la souris est sur le même jeton.
+- Elle se ferme quand tu tires.
+
+Nouveautés de la v13.6 — souris, contrôles, billard
+- Les boutons de la souris se règlent comme des touches : clic molette, et les deux boutons du pouce
+  (« Souris 4 » et « Souris 5 »). OPTIONS > Contrôles : touche une case, puis appuie sur le bouton de la souris.
+  Les boutons du pouce ne font plus « page précédente » dans le navigateur.
+- OPTIONS > Contrôles : les 5 sorts sont côte à côte dans un bloc « Sorts » (et les 3 rouleaux de la machine
+  dans un bloc « Rouleaux »). En combat, l'ordre est : flipper, parade, BILLE, Bombe, Gel, puis les sorts.
+- Le billard de Momo : tu as 12 s pour viser (un chrono en haut de la table, qui passe au rouge à 4 s, avec un tic
+  les 3 dernières secondes). À 0 : si tu tirais déjà la queue en arrière, le coup part ; sinon c'est à Momo de jouer.
 
 Nouveautés de la v13.5 — la machine
 - Passe la souris sur un jeton des rouleaux : sa bulle s'ouvre (nom, rareté, ce qu'il fait), comme dans ton rack.
