@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.9-202610120236
+JACKPOT DEFENSE v14.0-202610120335
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v14.0
+- La vitesse ×1 / ×2 ne se change plus au clavier (fini la touche F) : seulement en cliquant sur le bouton ×1 / ×2.
+  Elle n'apparaît donc plus dans OPTIONS > Contrôles.
+- Sur PC, sous le bouton ×1 / ×2 du panneau de gauche, il est écrit « Vitesse » au lieu de « F ».
+- La manette garde le clic du stick pour la vitesse (elle n'a pas de souris).
+- Le classement : la fonction lb_rename est à coller une fois dans Supabase (SQL Editor) pour que « Changer de pseudo » marche.
 
 Nouveautés de la v13.9
 - Changer de pseudo : OPTIONS > Profil > « Changer » à côté de ton pseudo. 20 lettres max, unique, tes scores le suivent.

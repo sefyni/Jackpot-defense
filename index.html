@@ -3462,7 +3462,7 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
   <aside id="lp" aria-label="Infos de la partie">
     <div class="lp-btns">
       <button class="lpb" id="lp-run"><b>Infos</b><small>Tab</small></button>
-      <button class="lpb" id="lp-speed"><b id="lp-speed-v">×1</b><small>F</small></button>
+      <button class="lpb" id="lp-speed"><b id="lp-speed-v">×1</b><small>Vitesse</small></button>
       <button class="lpb" id="lp-opts"><b>Pause</b><small>Échap</small></button>
     </div>
     <div class="lp-round" id="lp-roundbox">
@@ -3989,7 +3989,7 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.9</p>
+  <p class="proto">Sefy Industries · v14.0</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -22906,7 +22906,7 @@ function renderOptions() {
   let h = '';
   switch (OPV.tab) {
     case 'jeu':
-      h += oRow('Vitesse de départ', oSeg('speed', o.speed, [[1, '×1'], [2, '×2']]), 'touche F en partie pour changer');
+      h += oRow('Vitesse de départ', oSeg('speed', o.speed, [[1, '×1'], [2, '×2']]), 'en partie : clique sur le bouton ×1 / ×2');
       h += oRow('Contrôle du flipper', oSeg('ctrl', m.ctrl === 'glisser' ? 'glisser' : 'viser', [['viser', 'Viser'], ['glisser', 'Glisser']]), 'viser : il suit la souris ou ton doigt');
       h += oRow('Bulles d\'info au survol', oTog('hover', o.hover), 'passe la souris sur un jeton');
       h += oRow('Astuces', oTog('tips', o.tips), '<button class="mini dark" data-oact="tips">Tout revoir</button>');
@@ -22971,7 +22971,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v13.9</p></div>`;
+        <p class="ov5">v14.0</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24956,7 +24956,6 @@ const KEY_ACTS = [
   ['cash', 'Encaisser', 'machine', ['e', '']],
   ['moveUp', 'Monter le jeton choisi (vers la gauche)', 'rack', ['ArrowUp', 'ArrowLeft']],
   ['moveDown', 'Descendre le jeton choisi (vers la droite)', 'rack', ['ArrowDown', 'ArrowRight']],
-  ['speed', 'Vitesse ×1 / ×2', 'global', ['f', '']],
   ['info', 'Infos de la partie', 'global', ['Tab', 'i']],
   ['pause', 'Pause', 'global', ['Escape', 'p']],
 ];
@@ -25046,7 +25045,6 @@ function keyDown(e) {
     if ($('#pause').hidden) openPause(); else closePause(); return;
   }
   if (k === 'Tab' || isKey('info', k)) { if (k === 'Tab') e.preventDefault(); if (!$('#opts').hidden) return; if (!$('#runinfo').hidden) closeRunInfo(); else if ($('#pause').hidden && G.run && G.mode !== 'title') openRunInfo(); return; }
-  if (isKey('speed', k) && G.run && G.mode !== 'title' && $('#pause').hidden) { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); toast(`Vitesse ×${G.speed}`); return; }
   if (!$('#opts').hidden || !$('#rules').hidden || !$('#cata').hidden || !$('#book').hidden || !$('#books').hidden) return;
   // ranger ses jetons au clavier : la fiche ouverte, ou le dernier jeton touché du rack
   if (canReorder() && (isKey('moveUp', k) || isKey('moveDown', k)) && !G.paused) {
@@ -25214,7 +25212,7 @@ function gpPoll(ms) {
     [2, 3, 1, 4, 6].forEach((bi, n) => { if (down(bi) && L[n]) { if (L[n] === 'bomb') { G.pointer.type = 'gamepad'; castSpellP('bomb'); if (cb.ab.aiming) gpBombStart(cb); } else castSpellP(L[n]); } });
     if (down(9)) gpKey('Escape');
     if (down(8)) gpKey('Tab');
-    if (down(10) || down(11)) gpKey(keysOf('speed')[0] || 'f');
+    if ((down(10) || down(11)) && $('#pause').hidden) { G.speed = G.speed === 1 ? 2 : 1; updateHUD(); toast(`Vitesse ×${G.speed}`); }
     return;
   }
   // fin de partie (« tape pour passer ») et coupures
