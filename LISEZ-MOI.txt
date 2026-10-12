@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v13.4-202610120153
+JACKPOT DEFENSE v13.5-202610120204
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,11 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v13.5 — la machine
+- Passe la souris sur un jeton des rouleaux : sa bulle s'ouvre (nom, rareté, ce qu'il fait), comme dans ton rack.
+  (Option « Bulles d'info au survol » dans OPTIONS > Jeu.)
+- Le « 15 » à côté de DEDANS reste affiché, mais ce n'est plus un bouton : il n'ouvre plus la liste des jetons.
 
 Nouveautés de la v13.4 — la manette (Xbox, PlayStation, Steam Deck)
 - Branche une manette, appuie sur un bouton : « Manette prête ». Rien à régler.

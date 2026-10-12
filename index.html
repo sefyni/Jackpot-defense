@@ -3444,6 +3444,9 @@ body.lpc #over .orecap{grid-column:1;grid-row:4}
 /* ---------- v13.4 · la manette : le bouton choisi est encadré ---------- */
 body.gp-on .gp-focus{outline:3px solid #ffcc4d!important;outline-offset:3px;box-shadow:0 0 0 7px rgba(255,204,77,.28),0 0 18px rgba(255,204,77,.45)!important}
 body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
+
+/* ---------- v13.5 · le 15 de la machine n'est plus un bouton ---------- */
+.mall{display:inline-block;text-align:center;cursor:default}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -3978,7 +3981,7 @@ body.gp-on .slot.gp-focus,body.gp-on .reel.gp-focus{outline-offset:-2px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v13.4</p>
+  <p class="proto">Sefy Industries · v13.5</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -16080,8 +16083,8 @@ function symHTML(s, cell) {
   if (s === 'flamme') return `<span class="sym flm">${iconSVG('braise')}</span>`;
   if (s === 'err') return `<span class="sym err">ERR</span>`;
   const J = JK[s];
-  if (J && J.fou) return `<span class="sym chip k-fou" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(s)}</span>`;
-  return `<span class="sym chip k-commun" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(s)}</span>`;
+  if (J && J.fou) return `<span class="sym chip k-fou" data-s="${s}" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(s)}</span>`;
+  return `<span class="sym chip k-commun" data-s="${s}" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(s)}</span>`;
 }
 function buildStrip(R) { R.strip.innerHTML = [...R.syms, R.syms[0], R.syms[1], R.syms[2]].map((s, k) => `<div class="cell${M.target && R === REEL.r[M.target.r] && modN(k, RN) === M.target.cell ? ' tgt' : ''}">${symHTML(s)}</div>`).join(''); }
 function setCell(R, idx, s) {
@@ -16352,7 +16355,7 @@ function applyCabinet() {
 function setMachineInfo() {
   const run = G.run, M2 = curMach();
   const ownIn = run.pool.filter(id => ownedIds(run).has(id));
-  $('#m-pool').innerHTML = `<button class="mall" id="m-all" title="Les 15 jetons de la machine">15</button><span class="mp-t">jetons${ownIn.length ? ` · les tiens ×${BAL.ownW}` : ''}</span>` + ownIn.slice(0, 5).map(id => `<span class="chip k-commun" style="--jc:${JK[id].col};--ic2:${JK[id].dark}" title="${esc(JK[id].name)} : tombe ${BAL.ownW} fois plus souvent">${iconSVG(id)}</span>`).join('');
+  $('#m-pool').innerHTML = `<span class="mall" id="m-n" title="15 jetons sur les rouleaux">15</span><span class="mp-t">jetons${ownIn.length ? ` · les tiens ×${BAL.ownW}` : ''}</span>` + ownIn.slice(0, 5).map(id => `<span class="chip k-commun" style="--jc:${JK[id].col};--ic2:${JK[id].dark}" title="${esc(JK[id].name)} : tombe ${BAL.ownW} fois plus souvent">${iconSVG(id)}</span>`).join('');
   const b = $('#m-bonus'), pw = Math.round((relPower() - 1) * 100);
   b.textContent = `BONUS ${pw >= 0 ? '+' : ''}${pw}${NB}%`; b.classList.toggle('hot', pw > 0);
   const w = reelWeights(), tot = w.weights.reduce((x, y) => x + y, 0), pm = w.weights[run.pool.length + 1] / tot;
@@ -22126,6 +22129,27 @@ function capLines(j) {
 }
 /* ---------- la bulle d'info (survol à la souris, premier toucher au doigt) ---------- */
 const JT = { uid: null, el: null, t: 0 };
+
+/* ---------- v13.5 · au survol de la souris, un jeton des rouleaux montre sa bulle (comme dans ton rack) ---------- */
+const MTIP = { cache: {} };
+function machTipJ(id) {
+  if (MTIP.cache[id]) return MTIP.cache[id];
+  const J = JK[id]; if (!J) return null;
+  return (MTIP.cache[id] = J.fou ? mkFou(id) : mkJoker('commun', [{ t: id, lv: 1 }], 1));
+}
+function machTipOver(e) {
+  if (e.pointerType !== 'mouse' || !OPT().hover || (G.mode !== 'machine' && G.mode !== 'chooser')) return;
+  const sy = e.target.closest && e.target.closest('.sym.chip[data-s]'); if (!sy) return;
+  const j = machTipJ(sy.dataset.s); if (!j) return;
+  showJTip(j, sy);
+  const more = JT.el && JT.el.querySelector('.jt-more'); if (more) more.remove();
+}
+function machTipOut(e) {
+  if (e.pointerType !== 'mouse') return;
+  const to = e.relatedTarget;
+  if (to && to.closest && (to.closest('#jtip') || (to.closest('.sym.chip[data-s]') && to.closest('#reels')))) return;
+  hideJTipSoon();
+}
 function showJTip(j, anchor, pass) {
   if (G.headless || !anchor) return;
   const el = JT.el || (JT.el = $('#jtip'));
@@ -22863,7 +22887,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v13.4</p></div>`;
+        <p class="ov5">v13.5</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -25248,6 +25272,7 @@ function bindUI() {
   $('#m-pool').addEventListener('click', e => { if (e.target.closest('#m-all')) { firstGesture(); Snd.click(); machineSheet(G.run.machine || 0, false); } });
   $('#tally').addEventListener('pointerdown', e => { e.preventDefault(); if (TL.skip) TL.skip(); });
   $('#cata').addEventListener('click', e => { if (e.target.closest('#ca-back')) { Snd.click(); closeCatalog(); return; } catalogClick(e); });
+  { const rl = $('#reels'); if (rl) { rl.addEventListener('pointerover', machTipOver); rl.addEventListener('pointerout', machTipOut); rl.addEventListener('pointerdown', () => hideJTip()); } }
   const rs = $('#rack-slots');
   rs.addEventListener('pointerdown', rackDown);
   // bulle d'info : survol à la souris
