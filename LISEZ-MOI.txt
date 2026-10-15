@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v14.0-202610120335
+JACKPOT DEFENSE v14.4-202610152100
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,89 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v14.4 — « La Maison joue… »
+- Les jeux de table : 3 fois toutes les 10 manches (dès la 3e, jamais sur un boss, jamais deux manches de suite).
+  Mise verte : à chaque manche. Dès la manche 50 : « DOUBLE TABLE », deux jeux en même temps.
+- L'intro (3 s, la manche attend) : les lumières baissent, le néon « LA MAISON JOUE… » grésille, le nom du jeu
+  tombe sur un rouleau (clac), le tapis se retourne, la règle en une ligne, puis « Faites vos jeux… ».
+  Toucher l'écran (ou Espace, ou A à la manette) l'accélère.
+- Les 4 jeux de la Grande Salle :
+  · Rien ne va plus : la table devient une roulette. Toutes les 2 s, la cloche sonne, une flèche montre le sens,
+    puis la table fait un quart de tour (les cartes tournent avec). Chaque carte saute d'une case toutes les 1,5 s.
+    La case allumée (×3) : ta BILLE y devient dorée (dégâts ×2) et les cartes abattues dedans paient ×3.
+  · Bonneteau : les mains de l'Inspecteur posent 3 cartes, montrent la Dame, puis mélangent.
+    Tape une carte avec ta BILLE : la Dame rapporte de l'or et +0,5 MULT ; une mauvaise carte est un Joker,
+    qui lâche 3 cartes. 3 parties par manche.
+  · Happy Hour : Zaza fait glisser des shots sur la table. Un shot touché à la BILLE = 8 s de bonus
+    (tirs de feu, cartes ralenties, or ×2 ou cadence ×1,6 : l'icône est dans le verre).
+    Une carte qui marche dessus le boit : elle devient ivre (zigzag, plus rapide, frappe plus fort).
+  · Le Tiercé : choisis ton cheval (favori ×2, ×3, tocard ×6). Ils font 2 tours de table.
+    Ta BILLE freine les autres chevaux et donne un coup de fouet au tien. Ton cheval gagne : la mise ×la cote en or.
+- Plaques d'or : une par jeu réussi parfaitement (Rien ne va plus : 8 cartes abattues dans la case allumée ;
+  Bonneteau : 3 Dames sur 3 ; Happy Hour : 6 shots bus, aucun pour les cartes ; Tiercé : gagner avec le tocard).
+  Elles sont dans PROFIL (« Plaques d'or x/12 »). La Table d'Or (12 plaques) viendra avec les 12 jeux.
+- Les anciens événements : Embuscade, Marée rouge, Pluie de piques et Sabbat sont devenus des vagues sans annonce
+  (une par tranche de 10 manches). Nuit noire et Hold-up sont retirés.
+- Les Vicieuses, 7 nouvelles cartes (dès les manches 2 à 4) :
+  · Sangsue : se colle à ta base et pompe ton or et tes PV. Un coup de flipper ou ta BILLE la décolle.
+  · Origami : à mi-vie, elle se plie en grue de papier (petite, rapide, en zigzag).
+  · Carte à gratter : à sa mort, gros lot (de l'or), rien… ou piège (2 cartes surgissent).
+  · Dominos : ils arrivent à 4, en file. Quand celui de devant tombe, le suivant bascule vers ta base.
+  · Coucou : il pond un œuf dans une carte voisine ; un petit coucou en sort quand elle tombe.
+  · Mèche : elle explose au bout de 7 s (ou sur ta base). Ta BILLE éteint la mèche.
+  · Aimant : elle reste loin et attire tes tirs et ta BILLE.
+- Les malus changent de nom : 1 crâne = la Guigne, 2 = la Scoumoune, 3 = la Ruine.
+  Les anciens restent, et 18 nouveaux arrivent :
+  · Guigne : Taximètre (−1 or/s), Scellés (un jeton cadenassé 5 s toutes les 15 s), L'Or qui roule (l'or des cartes
+    roule sur la table : ramasse-le à la BILLE en 4 s), Mains moites (parade 30 % plus courte),
+    Cartes marquées (le 1er coup sur chaque carte ne compte pas), Bille fatiguée (recharge 2× plus lente).
+  · Scoumoune : Promotion (les cartes montent en grade en avançant), L'Usurier (or des cartes ×2 mais −3 or/s ;
+    à 0 en fin de manche, il saisit ton meilleur jeton pour la manche suivante), Rack mélangé (toutes les 10 s ;
+    l'ordre revient à la fin), Couvre-feu (pas de tir tant que ta BILLE roule), Doublures (1 carte sur 4 se relève
+    à 50 %), Saisie (ton meilleur jeton saisi pour la manche).
+  · Ruine : Banqueroute (−3 or/s, puis tes PV quand tu es à sec), Table inclinée (TILT : la table penche, ta BILLE
+    et les cartes glissent ; elle remplace le Brouillard), Métamorphose (des cartes changent de peau et laissent un
+    fantôme qui attire tes tirs), Menottes (flipper bloqué 2 s toutes les 6 s), Le Croupier triche (une main gantée
+    pose une carte près de ta base toutes les 8 s), Grande Saisie (la moitié de tes meilleurs jetons saisie).
+- Ce qu'on voit : un jeton scellé ou saisi est enchaîné avec un cadenas (et le tampon « SAISI »), les pièces roulent,
+  un niveau à bulle montre la pente, un compteur montre l'or qui part, la main du Croupier glisse depuis le bord.
+- Règles : un nouvel onglet « La Maison joue ».
+
+Nouveautés de la v14.3 — le tuto de Gaston
+- Premier lancement : Gaston prend la main, sans bouton « Passer ». D'abord une table d'entraînement
+  (ta base ne perd aucun PV), un défi à la fois avec un compteur. On passe au suivant seulement quand il est réussi :
+  1. ta base tire toute seule (3 cartes)   2. bloquer 3 tirs avec le flipper   3. 3 PARADES
+  4. toucher les 3 cartes à la BILLE   5. 3 REBONDS   6. une BOMBE sur un paquet (3 cartes d'un coup)
+  7. survivre au TAPIS
+- 3 ratés de suite : Gaston aide. Le jeu ralentit et il crie « MAINTENANT ! » au bon moment (parade, rebond),
+  ou il montre où viser avec « ICI » (tirs, bille, bombe).
+- Les textes changent selon ce que tu tiens : souris, doigt ou manette.
+  Le bouton de la bulle n'apparaît qu'une fois la phrase écrite (on ne zappe pas sans lire).
+- Ensuite, la vraie partie commence, guidée : ton pseudo, la Jackpot Machine, ta machine (le 1er tirage sort
+  trois pareils : un jeton ULTIME), le bar (la 1re boisson est offerte), puis « À toi de jouer ! ».
+  Pendant ces étapes, seul le bouton montré par Gaston répond.
+- Si tu quittes au milieu (Pause > Abandonner), tu reprends au même défi.
+- Les anciens joueurs ne sont pas forcés : OPTIONS > Jeu > « Tuto de Gaston » > Rejouer (depuis l'écran titre).
+- Les astuces du jeu sont maintenant dites par Gaston (son portrait et sa voix).
+  Deux nouvelles à la 1re rencontre : le premier boss, et le premier crâne à la machine.
+- L'outil de test est retiré complètement de cette version : plus de panneau, ?dev ne fait plus rien,
+  plus de pilote auto ni d'accès par la console.
+
+Nouveautés de la v14.2
+- Les outils de test ne sont plus dans OPTIONS > Jeu pour les joueurs.
+  Pour toi : ajoute ?dev à la fin de l'adresse du jeu (ex. .../Jackpot-defense/?dev) et ils reviennent.
+- Les accès de débogage (pour les tests automatiques) ne sont plus ouverts à tout le monde non plus :
+  seulement avec ?dev. Ça rend la triche au classement par la console plus difficile.
+
+Nouveautés de la v14.1 — les manches infinies restent fluides
+- Manches infinies : jamais plus de 140 cartes par manche. Au-delà, les cartes fusionnent : il y en a moins,
+  mais chacune a plus de PV, frappe plus fort et rapporte plus d'or et de points (un peu plus grande aussi).
+  La difficulté totale ne change pas. Exemple manche 48 : 140 cartes ×2,9 au lieu de ~400.
+- Manches infinies : pas plus de 160 cartes en même temps sur la table. Les suivantes attendent qu'il y ait
+  de la place (les boss arrivent toujours à l'heure).
+- La qualité automatique baisse aussi quand le jeu est lent en continu (avant, elle ne réagissait qu'aux à-coups).
+- Les 30 premières manches ne changent pas.
 
 Nouveautés de la v14.0
 - La vitesse ×1 / ×2 ne se change plus au clavier (fini la touche F) : seulement en cliquant sur le bouton ×1 / ×2.
