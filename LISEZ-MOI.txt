@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v14.4-202610152100
+JACKPOT DEFENSE v14.5-202610181500
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,52 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v14.5 — le Salon Privé, les Coriaces, les Géants
+- Le Salon Privé (manches 11 à 20) : la Maison y joue 4 nouveaux jeux, avec la même intro « La Maison joue… ».
+  · Blackjack : le croupier te donne 2 cartes et pose 5 cartes cachées. Tape une carte cachée avec ta BILLE :
+    tu tires (elle se retourne et rejoint ta main). Lui tire toutes les 2,5 s jusqu'à 17.
+    21 pile = BLACKJACK (or ×2 et +0,5 MULT). Plus près de 21 que lui, ou s'il saute : de l'or.
+    Plus de 21 (BUST), ou s'il gagne : toutes les cartes de la table prennent un bouclier. Égalité : rien. 3 mains.
+  · Main de poker : toutes les 9 s, le croupier distribue 5 cartes d'un coup : une vraie main (paire, double paire,
+    brelan, suite, couleur, full, carré). Abats les 5 en moins de 3 s (le chrono part au premier kill) : la main
+    rapporte du MULT (paire +0,5, double paire +0,8, brelan +1, suite +1,4, couleur +1,6, full +2, carré +3). 3 mains.
+  · Quitte ou double : une mise est posée sur la table. Toutes les 8 s, la Maison la double (×2, ×4, ×8) et lâche
+    un paquet de cartes (2, puis 3, puis 4). Tape la mise avec ta BILLE pour encaisser. Si ta base passe sous
+    30 % de PV avant, tout est perdu. Après ×8, la Maison rafle tout.
+  · Jackpot progressif : un compteur LED monte à chaque carte abattue ; chaque coup reçu par ta base le remet à 0.
+    À la fin de la manche, tu touches le compteur en or.
+  Plaques d'or : Blackjack (3 mains gagnées), Main de poker (3 mains sur 3), Quitte ou double (encaisser à ×8),
+  Jackpot progressif (une manche entière sans coup reçu). Dans PROFIL, il y a maintenant 8 plaques à gagner sur 12.
+  En double table (dès la manche 50), deux jeux qui se gênent ne tombent plus ensemble.
+- Les Coriaces, 6 nouvelles cartes (dès les manches 11 à 14) :
+  · Sablier : au moment de mourir, il rembobine 3 s (il revient où il était, avec ses PV d'alors). Une seule fois.
+  · Compteur de cartes : après 3 coups de la même source (canon, BILLE, flipper, feu…), elle ne lui fait plus rien,
+    jusqu'à ce qu'une autre source le touche. Ton canon arrête de le viser quand il a « compté » le canon.
+  · Miroir : tes tirs rebondissent dessus et repartent vers ta base (pare-les !). Ta BILLE et les explosions
+    le cassent ; le reste lui fait moitié moins. Ton canon le vise en dernier.
+  · Zéro : il tire de loin. Rien ne le blesse, sauf son propre tir renvoyé par une PARADE (même sans Renvoi) :
+    deux renvois et il tombe. Ton canon ne le vise pas. Au bout de 20 s, il se fissure : tout le blesse.
+  · Glitch : il avance par à-coups, devient intouchable 0,5 s toutes les 2 s (tes tirs et ta BILLE le traversent)
+    et laisse parfois un faux double qui attire tes tirs.
+  · Parieur : à chaque coup qu'il prend, pile ou face : dégâts ×2… ou rien du tout.
+  Une Coriace qui traîne plus de 25 s sur la table (20 s pour le Zéro), ou qui fait TAPIS, s'use : elle perd son truc.
+- Les Géants : une fois par tranche de 10 manches (dès la 6e, jamais sur un boss), un Géant entre en pleine manche.
+  Bandeau « ATTENTION ! » (bandes de chantier, alarme), il tombe du plafond. Pas de TAPIS tant qu'il est sur la table.
+  · Golem de 52 cartes : chaque coup lui arrache des cartes, qui tombent et foncent sur toi. Il rétrécit.
+  · Carte XXL : un As de Pique géant. Les tirs lui font 4 fois moins. Chaque coup de BILLE plie un de ses coins
+    (le plus proche du choc) : 4 coins pliés, elle s'effondre.
+  · Le Flambeur : il tourne au bord de la table et te lance ses jetons par 3 (par 4 quand il est blessé).
+    Chaque jeton PARÉ au flipper te rapporte de l'or.
+  Le Sabot et la Main de la Maison arriveront dans la v14.6.
+- Le carnet d'Anatole, les règles (nouvelle page « Coriaces et Géants ») et les petites notes (« NOUVELLE CORIACE »,
+  « NOUVEAU GÉANT ») présentent tout ça la première fois que tu les croises.
+- Correctifs :
+  · une carte posée après le TAPIS (Joker du Bonneteau, piège de la Carte à gratter…) fonce aussi : avant, une carte
+    qui tire de loin pouvait rester hors de portée et la manche ne finissait jamais ;
+  · le carnet d'Anatole : la page « Les cartes » débordait depuis les Vicieuses ; elle est coupée en quatre pages
+    (Les cartes, Les Vicieuses, Les Coriaces, Les Géants) ;
+  · poker : « Suite à la Dame » (au lieu de « Suite au Dame »).
 
 Nouveautés de la v14.4 — « La Maison joue… »
 - Les jeux de table : 3 fois toutes les 10 manches (dès la 3e, jamais sur un boss, jamais deux manches de suite).
