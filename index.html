@@ -3639,6 +3639,33 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 #banner.gt::after{animation-direction:reverse}
 @keyframes gtSlide{to{background-position:28px 0}}
 @media (prefers-reduced-motion:reduce){#banner.gt::before,#banner.gt::after{animation:none}}
+/* v14.7 · « Commencer » après l'intro d'un événement */
+#evx .evx-go{pointer-events:auto;min-width:220px;font-size:22px;animation:tuIn .42s cubic-bezier(.2,1.3,.4,1) both}
+#evx .evx-go small{display:block;font:700 11px var(--f-pix);opacity:.75;margin-top:3px}
+#evx .evx-go{flex-direction:column}
+#evx.ev-go .evx-fvj{display:none}
+/* v14.7 · le bouton du marché noir, bien visible quand il est ouvert */
+#b-market.mk-open{--b:#c23bff;--bd:#6a12b8;color:#fff;font-weight:700;box-shadow:0 5px 0 var(--bd),0 0 0 2px #f0c2ff,0 0 18px rgba(205,90,255,.75);animation:mkPulse 1.6s ease-in-out infinite}
+#b-market.mk-open .mk-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#7dffb0;box-shadow:0 0 8px #7dffb0}
+#b-market.mk-open b{color:#fff;text-decoration:underline;text-underline-offset:3px}
+@keyframes mkPulse{50%{box-shadow:0 5px 0 var(--bd),0 0 0 2px #f0c2ff,0 0 30px rgba(205,90,255,1)}}
+@media (prefers-reduced-motion:reduce){#b-market.mk-open{animation:none}}
+/* v14.7 · le shot offert par Zaza (Cocktail Mystère) */
+.shot.gift{box-shadow:inset 0 0 0 2px #c9a8ff;border-radius:10px}
+.shot.gift .mini{background:#7b5cff;color:#fff}
+/* v14.7 · tes données */
+.orow .rg-txt{display:block;font-size:13px;line-height:1.35;color:var(--muted);margin-bottom:6px;max-width:420px}
+#evx.ev-go .evx-skip{display:none}
+
+/* v14.6 · « ARCANE MAJEUR » : une carte de tarot entre en jeu (violet et or, des étoiles) */
+#banner.arc .b1{color:#f3e2ff;letter-spacing:.06em;text-shadow:0 4px 0 #000,0 0 22px rgba(201,168,255,.85),0 0 46px rgba(255,204,77,.35)}
+#banner.arc .b2{color:#ffd36b;letter-spacing:.04em}
+#banner.arc::before,#banner.arc::after{content:'✦  ✧  ✦  ✧  ✦';display:block;margin:6px auto;font:700 16px/1 var(--f-pix);letter-spacing:.3em;color:#c9a8ff;text-shadow:0 0 10px rgba(201,168,255,.9);animation:arcTw 1.2s ease-in-out infinite alternate}
+#banner.arc::after{animation-delay:.6s}
+@keyframes arcTw{from{opacity:.45}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){#banner.arc::before,#banner.arc::after{animation:none}}
+/* v14.6 · le profil : la Table d'Or au bout des 12 plaques */
+.pr-plaq .pq-to{margin:8px 0 0;font-weight:600;font-size:12px;line-height:1.25;color:rgba(255,236,190,.78);text-align:center}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -4173,7 +4200,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v14.5</p>
+  <p class="proto">Sefy Industries · v14.7</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -7799,7 +7826,7 @@ TKH.overclock = {
 };
 TKH.boucle = {
   kill(v, e) {
-    if (e.boss || e.fake || e.ai === 'decoy' || e.ai === 'thief' || G.cb.demo) return;
+    if (e.boss || e.fake || e.ai === 'decoy' || e.ai === 'thief' || e.d.prop || e.d.giant || e.d.arc || G.cb.demo) return;
     const n = e.looped || 0; if (n >= (v[4] > 0 ? 2 : 1)) return;
     const cb = G.cb, ang = Math.atan2(e.y, e.x);
     setTimeoutGame(() => {
@@ -9628,6 +9655,19 @@ const ENEMIES = {
   g_golem: { name: 'Golem de 52 cartes', role: 'Golem de 52 cartes', suit: 'x', rank: '', hp: 260, spd: 5, dmg: 16, atk: 1.4, gold: 22, r: 17, tp: 0, ai: 'giant', giant: 'golem', xf: 1, shape: 'golem', face: '#e9e2d4', rim: '#3a2a20', info: "Un tas de 52 cartes qui marche. Chaque coup lui arrache des cartes, qui foncent sur toi. Il rétrécit." },
   g_xxl: { name: 'Carte XXL', role: 'Carte XXL', suit: 'x', rank: '', hp: 300, spd: 4.2, dmg: 18, atk: 1.6, gold: 24, r: 18, tp: 0, ai: 'giant', giant: 'xxl', xf: 1, face: '#fff8ee', rim: '#e2384d', info: "Les tirs lui font peu. Chaque coup de BILLE plie un de ses coins : 4 coins pliés, elle s'effondre." },
   g_flambeur: { name: 'Le Flambeur', role: 'Le Flambeur', suit: 'x', rank: '', hp: 240, spd: 6, dmg: 12, sd: 7, atk: 2.2, gold: 26, r: 15, tp: 0, stop: 56, ai: 'giant', giant: 'flambeur', xf: 1, face: '#3a1030', rim: '#ffcc4d', info: "Il te lance des jetons. Pare-les avec ton flipper : chaque jeton paré te rapporte de l'or." },
+  // v14.6 · le Casse (Coulisses)
+  coffre: { name: 'Le coffre du Casse', role: 'Coffre du Casse', suit: 'x', rank: '', hp: 100, spd: 0, dmg: 0, atk: 9, gold: 30, r: 10, tp: 0, ai: 'safe', prop: 'coffre', xf: 1, shape: 'coffre', face: '#5a6478', rim: '#c3cde0', info: "Le Casse : il traverse la table, escorté par 3 vigiles. Tant qu'un vigile vit, il est intouchable. Ta BILLE lui fait ×3." },
+  vigile: { name: 'Vigile', role: 'Vigile', suit: 'x', rank: '', hp: 24, spd: 9, dmg: 9, atk: 1, gold: 3, r: 6, tp: 0, ai: 'guard', xf: 'vig', face: '#1d2a44', rim: '#7fd1ff', info: "Il tourne autour du coffre du Casse. Tant qu'un vigile vit, le coffre est intouchable." },
+  // v14.6 · les deux derniers Géants
+  g_sabot: { name: 'Le Sabot', role: 'Le Sabot', suit: 'x', rank: '', hp: 210, spd: 5.5, dmg: 14, atk: 1.4, gold: 24, r: 16, tp: 0, stop: 58, ai: 'giant', giant: 'sabot', xf: 1, shape: 'sabot', face: '#1d5a3a', rim: '#d9a441', info: "Il se pose au bord de la table et distribue une carte toutes les 2 s (plus vite quand il est blessé). Abats-le vite." },
+  g_main: { name: 'La Main de la Maison', role: 'La Main de la Maison', suit: 'x', rank: '', hp: 250, spd: 5.5, dmg: 16, atk: 1.4, gold: 26, r: 13, tp: 0, stop: 60, ai: 'giant', giant: 'main', xf: 1, face: '#f6f1ea', rim: '#c9933a', info: "Toutes les 5 s, son râteau balaie une bande de la table (zone rouge juste avant) : il pousse les cartes vers toi, confisque ta BILLE et, s'il touche ta base, un coup et −5 or. Pare-le au flipper au bon moment : il casse et elle prend cher." },
+  // v14.6 · les Arcanes majeurs (dès la manche 21)
+  a_mort: { name: 'La Mort', role: 'La Mort', suit: 'x', rank: '', hp: 120, spd: 5, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, ai: 'arc', arc: 'mort', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XIII. Lente… mais si elle touche ta base : −30 % de tes PV max d'un coup." },
+  a_lune: { name: 'La Lune', role: 'La Lune', suit: 'x', rank: '', hp: 90, spd: 6, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, stop: 60, ai: 'arc', arc: 'lune', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XVIII. Les cartes autour d'elle deviennent des mirages : ton canon ne les voit pas. Ta BILLE les révèle." },
+  a_pendu: { name: 'Le Pendu', role: 'Le Pendu', suit: 'x', rank: '', hp: 90, spd: 6, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, stop: 62, ai: 'arc', arc: 'pendu', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XII. De loin, il pend un de tes jetons toutes les 6 s (3 au plus) : le jeton ne marche plus. Abats-le pour les libérer." },
+  a_ermite: { name: "L'Ermite", role: "L'Ermite", suit: 'x', rank: '', hp: 100, spd: 4.5, dmg: 12, atk: 1, gold: 14, r: 11, tp: 0, ai: 'arc', arc: 'ermite', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane IX. La table s'éteint : tu ne vois et ne vises que près de sa lanterne et de ta base." },
+  a_roue: { name: 'La Roue de Fortune', role: 'La Roue de Fortune', suit: 'x', rank: '', hp: 110, spd: 6, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, stop: 60, ai: 'arc', arc: 'roue', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane X. Toutes les 5 s, elle tire une règle pour toute la table : tirs ×2, or ×2, cartes lentes… ou cartes rapides, boucliers, soin." },
+  a_jugement: { name: 'Le Jugement', role: 'Le Jugement', suit: 'x', rank: '', hp: 85, spd: 6, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, stop: 62, ai: 'arc', arc: 'jugement', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XX. Toutes les 8 s, sa trompette relève les 3 dernières cartes abattues (à 50 % de PV)." },
   b_valet: { name: 'Valet de Carreau', suit: 'd', rank: 'V', hp: 420, spd: 5, dmg: 14, atk: 1.2, gold: 40, r: 13, ai: 'b_valet', boss: true, intro: 'Il ouvre son manteau pour lâcher des cartes. Frappe-le à ce moment-là !' },
   b_dame: { name: 'Dame de Cœur', suit: 'h', rank: 'D', hp: 950, spd: 4.5, dmg: 16, sd: 9, atk: 1.2, gold: 60, r: 13, ai: 'b_dame', boss: true, stop: 52, intro: "Elle boit la vie des cartes autour d'elle. Pare ses cœurs ou gèle-la pour casser son soin." },
   b_roiP: { name: 'Roi de Pique', suit: 's', rank: 'R', hp: 1500, spd: 4, dmg: 18, sd: 8, atk: 1.2, gold: 80, r: 13, ai: 'b_roiP', boss: true, stop: 80, intro: 'Il tire en rafales. Chaque tir renvoyé lui fait très mal.' },
@@ -9658,12 +9698,12 @@ const actIdx = r => Math.min(ACTS.length - 1, Math.max(0, Math.ceil(r / 5) - 1))
 const actPos = r => ((r - 1) % 5) + 1;
 const bossOf = r => r === 30 ? 'b_baron' : r < 30 ? BOSS_ORDER[r / 5 - 1] : null;
 const SPAWNABLE = ['coureur', 'soldat', 'tireur', 'paire', 'blinde', 'soigneur', 'sorcier', 'tricheur', 'sangsue', 'origami', 'gratter', 'domino', 'coucou', 'meche', 'aimant', 'sablier', 'compteur', 'miroir', 'zero', 'glitch', 'parieur'];
-const GIANTS = ['g_golem', 'g_xxl', 'g_flambeur'];
+const GIANTS = ['g_golem', 'g_xxl', 'g_flambeur', 'g_sabot', 'g_main'];
 
-// v14.4 · « La Maison joue… » : les jeux de table (Grande Salle, et le Salon Privé en v14.5 ; les Coulisses viendront)
+// v14.4 · « La Maison joue… » : les jeux de table (Grande Salle ; Salon Privé en v14.5 ; Coulisses en v14.6)
 const EVENTS = {
   rienneva: { name: 'Rien ne va plus', icon: 'roulette', col: '#ff5c6c', salle: 1, from: 3, rule: 'La table tourne. Case allumée : bille dorée, or ×3.', txt: 'La table devient une roulette. Toutes les 2 s, la cloche sonne et la table fait un quart de tour (les cartes tournent avec), et chaque carte saute de case en case. Dans la case allumée, ta BILLE devient dorée (dégâts ×2) et les cartes abattues paient ×3.', plaque: '8 cartes abattues dans la case allumée' },
-  bonneteau: { name: 'Bonneteau', icon: 'bonneteau', col: '#4f8bff', salle: 1, from: 3, rule: 'Suis la Dame, puis tape-la à la bille.', txt: "Les mains de l'Inspecteur posent 3 cartes, montrent la Dame, puis mélangent. Tape une carte avec ta BILLE : la Dame rapporte de l'or et +0,5 MULT ; une mauvaise carte est un Joker, qui lâche 3 cartes. 3 parties par manche.", plaque: '3 Dames sur 3' },
+  bonneteau: { name: 'Bonneteau', icon: 'bonneteau', col: '#4f8bff', salle: 1, from: 3, rule: 'Suis la Dame, puis touche-la (doigt, souris ou BILLE).', txt: "Les mains de l'Inspecteur posent 3 cartes, montrent la Dame, puis mélangent. Touche une carte (doigt, souris ou BILLE) : la Dame rapporte de l'or et +0,5 MULT ; une mauvaise carte est un Joker, qui lâche 3 cartes. 3 parties par manche.", plaque: '3 Dames sur 3' },
   happyhour: { name: 'Happy Hour', icon: 'cocktail', col: '#ff7eb6', salle: 1, from: 3, rule: 'Des shots sur la table : bois-les à la bille.', txt: 'Zaza fait glisser des shots sur la table. Touche-en un avec ta BILLE : 8 s de bonus (tirs de feu, cartes ralenties, or ×2 ou cadence ×1,6). Une carte qui marche dessus le boit et devient ivre : elle zigzague, va plus vite et frappe plus fort.', plaque: '6 shots bus, aucun pour les cartes' },
   tierce: { name: 'Le Tiercé', icon: 'tierce', col: '#5fd68a', salle: 1, from: 3, rule: 'Parie sur un cheval. Bille sur les autres : ils freinent.', txt: 'Choisis un cheval : le favori paie ×2, le deuxième ×3, le tocard ×6. Ils font 2 tours de table. Ta BILLE freine les autres chevaux, et donne un coup de fouet au tien.', plaque: 'gagner avec le tocard' },
   // v14.5 · le Salon Privé (manches 11 à 20)
@@ -9671,6 +9711,11 @@ const EVENTS = {
   poker: { name: 'Main de poker', icon: 'poker', col: '#4fd8ff', salle: 2, from: 11, rule: 'Abats les 5 cartes de la main en 3 s : MULT !', txt: "Toutes les 9 s, le croupier distribue 5 cartes d'un coup : une vraie main (paire, brelan, full…). Abats les 5 en moins de 3 s (le chrono part au premier kill) : la main rapporte du MULT, de +0,5 (paire) à +3 (carré). 3 mains par manche.", plaque: '3 mains sur 3' },
   quitte: { name: 'Quitte ou double', icon: 'doubleourien', col: '#ffcc4d', salle: 2, from: 11, rule: 'La mise double toutes les 8 s. Bille dessus : tu encaisses.', txt: "Une mise est posée sur la table. Toutes les 8 s, la Maison la double (×2, ×4, ×8) et lâche un paquet de cartes. Tape la mise avec ta BILLE pour encaisser. Si ta base passe sous 30 % de PV avant, tout est perdu. Après ×8, la Maison rafle tout.", plaque: 'encaisser à ×8' },
   jackpot: { name: 'Jackpot progressif', icon: 'jackpot', col: '#ff4fd8', salle: 2, from: 11, rule: 'Chaque carte abattue fait monter le jackpot. Un coup reçu : 0.', txt: "Un compteur LED monte à chaque carte abattue. Chaque coup reçu par ta base le remet à 0. À la fin de la manche, tu touches le compteur en or.", plaque: 'une manche sans coup reçu' },
+  // v14.6 · les Coulisses (manches 21 à 30)
+  bandit: { name: 'Bandit manchot', icon: 'bandit', col: '#ffd23f', salle: 3, from: 21, excl: ['blackjack', 'jackpot', 'tierce', 'bonneteau'], rule: 'Chaque bande prend l\'effet de son rouleau. Ta BILLE l\'arrête !', txt: "La table est coupée en 3 bandes, un rouleau en haut de chacune. Toutes les 7 s, le croupier tire le levier : les rouleaux s'arrêtent un par un, ou dès que ta BILLE les touche (jamais sur un crâne, souvent sur un 7). Chaque bande prend l'effet de son symbole : 7 = or ×2, cerise = cartes ralenties, BAR = dégâts ×1,5, crâne = cartes plus rapides. 777 = JACKPOT (or + 1 MULT) ; 3 cerises = gel ; 3 BAR = +0,5 MULT ; 3 crânes = 3 cartes.", plaque: 'faire 777' },
+  des: { name: 'Dés pipés', icon: 'des', col: '#ff5c6c', salle: 3, from: 21, rule: '7 ou 11 = de l\'or. Ta BILLE relance un dé.', txt: "Toutes les 5 s, le croupier lance 2 dés géants : ils roulent et écrasent les cartes. Une fois arrêtés : 7 ou 11 = de l'or, un double = +0,3 MULT, 2 ou 12 = 3 cartes sortent des dés. Tu as 1,3 s pour relancer un dé avec ta BILLE (même arrêté). 8 lancers par manche.", plaque: '5 fois 7 ou 11' },
+  casse: { name: 'Le Casse', icon: 'casse', col: '#7fd1ff', salle: 3, from: 21, excl: ['quitte'], rule: 'Abats les 3 vigiles, puis ouvre le coffre avant qu\'il sorte !', txt: "Un coffre traverse la table, escorté par 3 vigiles. Tant qu'un vigile vit, il est intouchable. Ouvre-le avant qu'il sorte de l'autre côté : un gros paquet d'or. Ta BILLE lui fait ×3.", plaque: 'l\'ouvrir en moins de 15 s' },
+  allin: { name: 'Tapis !', icon: 'tapisev', col: '#ff3d5a', salle: 3, from: 21, rule: '20 s : tout fonce, mais chaque carte paie ×3.', txt: "Pendant 20 s, la Maison envoie tout : toutes les cartes foncent droit sur toi (même celles qui tirent de loin), et elle en rajoute quand la donne est finie. Mais chaque carte abattue paie ×3 en or.", plaque: '25 cartes pendant le Tapis' },
 };
 // les anciennes manches spéciales : des vagues sans annonce (une par tranche de 10 manches)
 const WAVES = { embuscade: { from: 8 }, maree: { from: 8 }, sabbat: { from: 9 }, piques: { from: 13 } };
@@ -9954,12 +9999,12 @@ function stackPartner(j, list) { return (list || G.run.jokers).find(x => stackRe
 function newRun(stake) {
   const run = {
     stake: stake || 0, round: 0, inf: false, hp: BAL.baseHp, maxHp: BAL.baseHp, overheal: 0, gold: 0, jokers: [], slots: 5, slotsBought: 0, cloverSlots: 0, pool: [], machine: 0, K: {}, sold: [], bugDue: false,
-    malus: [], skulls: 0, pendingMalus: [], pendingSkulls: 0, stolen: [], spins: 0, kills: 0, bossKills: 0, defeated: [], evPlan: {}, waves: {}, gPlan: {}, sealed: [], seized: [],
+    malus: [], skulls: 0, pendingMalus: [], pendingSkulls: 0, stolen: [], spins: 0, kills: 0, bossKills: 0, defeated: [], evPlan: {}, waves: {}, gPlan: {}, aPlan: {}, sealed: [], seized: [],
     foudreK: 0, nukeK: 0, phoenixUsed: false, over: false, rakeBonus: 0, relBonus: 0, zero: false, roulette: null, won: false,
     up: {}, floors: [], shots: [], boost: {}, boosters: [], spells: ['bomb', 'gel'], pets: [], firstDrink: true, gRounds: {}, gMet: {}, score: 0, vis: { last: 0, seen: {}, refused: {} },
     stats: { dmg: 0, gold: 0, triples: 0, parries: 0, blocks: 0, bestStreak: 0, drinks: 0, stacks: 0, gWins: 0, gLosses: 0, bestRound: 0, games: 0, gamesWon: 0, shotsN: 0, billes: 0, rebonds: 0, fous: 0, bugPulls: 0 },
   };
-  for (let b = 0; b < 3; b++) { evPlanBlock(run, b); gntPlanBlock(run, b); }
+  for (let b = 0; b < 3; b++) { evPlanBlock(run, b); gntPlanBlock(run, b); arcPlanBlock(run, b); }
   return run;
 }
 
@@ -11502,7 +11547,7 @@ function beginRound() {
   if (stakeHas(run, ST.MALUS) && !run.malus.length && !(run.round === 30 && !run.inf)) run.malus = [pick(malusPool(run.round >= 10 && rnd() < .3 ? 2 : 1, run))];
   run.skulls = run.pendingSkulls; run.pendingSkulls = 0;
   run.stolen = []; run.sealed = []; run.seized = [];
-  run.boost = {}; for (const id of run.shots || []) run.boost[id] = 1; run.shots = []; ckMystere(run);
+  run.boost = {}; for (const id of run.shots || []) run.boost[id] = 1; run.shots = [];
   run.K = run.K || {};
   tkPreRound(run);
   const cb = newCombat();
@@ -11515,7 +11560,7 @@ function beginRound() {
   cb.sc = roundScale(run, run.round);
   evRoundStart(cb, run);
   cb.spawn = buildWave(run.round, run, cb.wave);
-  gntWave(cb, run);
+  gntWave(cb, run); arcWave(cb, run);
   cb.total = cb.spawn.filter(x => x.type !== 'voleur').length;
   setGoal(cb, run);
   if (run.round === 30 && !run.inf) fbStart(cb); else FB.on = false;
@@ -11544,10 +11589,10 @@ function cardPts(e, sc) {
 }
 function setGoal(cb, run) {
   let pts = 0;
-  for (const e of cb.spawn) if (!ENEMIES[e.type].giant) pts += cardPts(e, cb.sc);
+  for (const e of cb.spawn) if (!ENEMIES[e.type].giant && !ENEMIES[e.type].arc) pts += cardPts(e, cb.sc);
   cb.goal = Math.max(50, Math.round(pts * BAL.goalK / 10) * 10);
   cb.goalHit = false; cb.reinfT = null; cb.reinfN = 0;
-  cb.reinfTypes = cb.spawn.filter(e => !ENEMIES[e.type].boss && !ENEMIES[e.type].giant && e.type !== 'voleur').map(e => e.type);
+  cb.reinfTypes = cb.spawn.filter(e => !ENEMIES[e.type].boss && !ENEMIES[e.type].giant && !ENEMIES[e.type].arc && e.type !== 'voleur').map(e => e.type);
   if (!cb.reinfTypes.length) cb.reinfTypes = ['soldat', 'coureur'];
   const n = cb.spawn.length, span = n > 1 ? cb.spawn[n - 1].t - cb.spawn[0].t : 10;
   cb.reinfGap = clamp(span / Math.max(1, n) * 3.2, 1.6, 4.2);
@@ -11570,9 +11615,9 @@ function checkGoal(cb) {
   dbg('goal_hit');
   if (cb.stats.hk) tkGoal(cb);
   // les renforts prévus sont annulés (sauf un boss) : une partie de leur or est rendue
-  const rest = cb.spawn.slice(cb.spawnIdx), keep = rest.filter(e => ENEMIES[e.type].boss || ENEMIES[e.type].giant);
+  const rest = cb.spawn.slice(cb.spawnIdx), keep = rest.filter(e => ENEMIES[e.type].boss || ENEMIES[e.type].giant || ENEMIES[e.type].arc);
   let gold = 0, n = 0;
-  for (const e of rest) if (!ENEMIES[e.type].boss && !ENEMIES[e.type].giant && e.type !== 'voleur') { gold += ENEMIES[e.type].gold * cb.sc.gold * (e.big || 1) * BAL.goldKill * BAL.skipGold; n++; }
+  for (const e of rest) if (!ENEMIES[e.type].boss && !ENEMIES[e.type].giant && !ENEMIES[e.type].arc && e.type !== 'voleur') { gold += ENEMIES[e.type].gold * cb.sc.gold * (e.big || 1) * BAL.goldKill * BAL.skipGold; n++; }
   cb.spawn = cb.spawn.slice(0, cb.spawnIdx).concat(keep);
   cb.total = Math.max(cb.killed, cb.total - n);
   cb.skipped = n; dbg('skipped', n);
@@ -11840,7 +11885,7 @@ function updateCombat(dt) {
   if (!cb.demo && !cb.ended && !run.over && !cb.tuto) {
     const spawned = cb.goalHit && cb.spawnIdx >= cb.spawn.length;
     let alive = 0, boss = false;
-    for (const e of E) { if (e.ai === 'decoy' || e.ai === 'thief') continue; alive++; if (e.boss || e.d.giant) boss = true; }
+    for (const e of E) { if (e.ai === 'decoy' || e.ai === 'thief') continue; alive++; if (e.boss || e.d.giant || e.d.arc || e.d.prop) boss = true; }
     if (spawned && !cb.tapis && !boss && alive > 0 && alive <= BAL.tapisN) startTapis();
     if (spawned && alive === 0 && cb.explQ.length === 0 && cb.bombs.length === 0 && !evHold(cb)) {
       cb.ended = true; xRoundWon(cb);
@@ -11926,8 +11971,8 @@ function elecFrame0(dt) {
 function startTapis() {
   const cb = G.cb;
   dbg('tapis');
-  cb.tapis = true;
-  for (const e of cb.enemies) if (!e.boss && e.ai !== 'decoy' && e.ai !== 'thief' && e.ai !== 'guard') { e.tapis = true; e.stop = 0; }
+  cb.tapis = true; cb.tapisT = cb.t;
+  for (const e of cb.enemies) if (!e.boss && !e.d.giant && !e.d.arc && !e.d.prop && e.ai !== 'decoy' && e.ai !== 'thief' && e.ai !== 'guard') { e.tapis = true; e.stop = 0; }
   if (!G.headless) { banner('TAPIS !', 'les dernières cartes foncent sur toi', 'bad', 1.3); Snd.tapis(); }
 }
 function separate() {
@@ -11939,7 +11984,7 @@ function separate() {
       const dx = b.x - a.x, dy = b.y - a.y, md = (a.r + b.r) * .78, d2 = dx * dx + dy * dy;
       if (d2 >= md * md || d2 < 1e-6) continue;
       const d = Math.sqrt(d2), push = (md - d) * .5, nx = dx / d, ny = dy / d;
-      const wa = a.boss || a.d.giant ? 0 : b.boss || b.d.giant ? 1 : .5, wb = 1 - wa;
+      const wa = a.boss || a.d.giant || a.d.prop ? 0 : b.boss || b.d.giant || b.d.prop ? 1 : .5, wb = 1 - wa;
       a.x -= nx * push * wa; a.y -= ny * push * wa; b.x += nx * push * wb; b.y += ny * push * wb;
     }
   }
@@ -11978,6 +12023,8 @@ function moveToward(e, dt, sp, minD) {
 }
 function updateEnemy(e, dt) {
   e.born += dt;
+  if (e.tapis && G.cb.tapis && G.cb.t - (G.cb.tapisT || 0) > 20) { e.regen = 0; e.kbx = 0; e.kby = 0; }
+  if (G.cb.t > 150 && !e.boss && !G.cb.demo && G.cb.spawnIdx >= G.cb.spawn.length && !e.d.giant && !e.d.arc && !e.d.prop && e.ai !== 'decoy' && !(G.cb.bosses || []).some(b => !b.dead)) { if (!e.tapis) { e.tapis = true; e.stop = 0; dbg('stall_rush'); } e.regen = 0; const d0 = Math.hypot(e.x, e.y); if (d0 > 60) { e.x *= 60 / d0; e.y *= 60 / d0; } }
   if (e.deal > 0) e.deal -= dt;
   if (e.flash > 0) e.flash -= dt;
   if (e.vuln > 0) e.vuln -= dt;
@@ -12043,6 +12090,8 @@ function updateEnemy(e, dt) {
     case 'vic': aiVic(e, dt, sp, held, contactD); break;
     case 'cor': aiCor(e, dt, sp, held, contactD); break;
     case 'giant': aiGiant(e, dt, sp, held, contactD); break;
+    case 'arc': aiArc(e, dt, sp, held, contactD); break;
+    case 'safe': aiSafe(e, dt, held); break;
   }
 }
 // à mi-vie, le boss enrage : plus vite, plus fort, et ses cartes arrivent plus vite
@@ -13123,9 +13172,9 @@ function findTargets(n) {
   const f = cb.focus;
   const firsts = [];
   if (cb.stats.aimbot) { const d = dangerous(); if (d) firsts.push(d); }
-  if (f && inRange(f, R2) && !firsts.includes(f) && !f.xNoAim) firsts.push(f);
+  if (f && inRange(f, R2) && !firsts.includes(f) && !f.xNoAim && !f.xHide) firsts.push(f);
   for (const e of cb.enemies) {
-    if (!inRange(e, R2) || firsts.includes(e) || e.xNoAim) continue;
+    if (!inRange(e, R2) || firsts.includes(e) || e.xNoAim || e.xHide) continue;
     const d2 = e.x * e.x + e.y * e.y;
     list.push([e.ai === 'decoy' ? d2 - 1e6 : d2 + (e.xAimK || 0), e]);
   }
@@ -13136,7 +13185,7 @@ function findTargets(n) {
 function dangerous() {
   let b = null, bs = 0;
   for (const e of G.cb.enemies) {
-    if (e.dead || e.ai === 'decoy' || e.deal > .15 || e.fake || e.xNoAim) continue;
+    if (e.dead || e.ai === 'decoy' || e.deal > .15 || e.fake || e.xNoAim || e.xHide) continue;
     const sc = (e.boss ? 1000 : 0) + (e.st.cast ? 400 : 0) + (e.ai === 'healer' || e.ai === 'caster' ? 200 : 0) + (isShooter(e) ? 100 : 0) + e.dmg * 4 + e.hp * .05 - edist(e) * .3;
     if (!b || sc > bs) { b = e; bs = sc; }
   }
@@ -13269,6 +13318,7 @@ function dealDmg(e, amt, o) {
   if (e.xMark && xHitCancel(e)) return;
   if (e.fake && e.real && e.real.type === 'b_roiC') { if (!G.headless && rnd() < .2) floater(e.x, e.y - e.r - 2, 'BLUFF', '#ff7eb6', 3.4); return; }
   if ((e.d.cor || e.d.giant) && !((amt = xDmg(e, amt, o)) > 0)) return;
+  if (!((amt = xDmgK(e, amt, o)) > 0)) return;
   let d = amt * e.armor;
   if (s.thornK > 1 && (o.src === 'ronces' || o.src === 'herse')) d *= s.thornK;
   if (cb.final) { if (FB.black) d *= 1 + .15 * FB.black; if (e.st.prot) d *= .5; }
@@ -13435,10 +13485,14 @@ function updateDevast(dt) {
       else { z.a -= dt * 2; if (z.a <= 0) { cb.fires[k] = newFire(rand(0, TAU), 1); if (!G.headless) Snd.fireMove(); } }
     }
   }
-  if (cb.fog && !G.headless) updateFogGhosts(dt);
+  if (cb.fog && !G.headless && !cb.xErm) updateFogGhosts(dt);
   hzUpdate(dt);
 }
-function fogHides(x, y) { return G.cb.fog && x * x + y * y > 34 * 34; }
+function fogHides(x, y) {
+  const cb = G.cb, R0 = cb.xErm ? ARC.base : 34; if (!cb.fog || x * x + y * y <= R0 * R0) return false;
+  if (cb.xLamp) for (const L of cb.xLamp) { const dx = x - L.x, dy = y - L.y; if (dx * dx + dy * dy <= L.r * L.r) return false; }
+  return true;
+}
 function updateFogGhosts(dt) {
   const cb = G.cb;
   cb.fogT += dt;
@@ -13800,7 +13854,7 @@ function buildBG() {
   const w = Math.ceil(cv.width / bgPX), h = Math.ceil(cv.height / bgPX);
   bgC = document.createElement('canvas'); bgC.width = w; bgC.height = h;
   const g = bgC.getContext('2d'), k = S * DPR / bgPX, cx = CX * DPR / bgPX, cy = CY * DPR / bgPX;
-  const RF = 95, RW = 100, RR = 110; // feutre, bois, rail
+  const RF = 95, RW = 100, RR = 110, TP = tbPal(); // feutre, bois, rail (Tapis Rouge ou Table d'Or)
   g.save(); g.translate(cx, cy); g.scale(k, k);
   // ombre portée de la table
   let gr = g.createRadialGradient(0, 4, RR * .9, 0, 4, RR * 1.18);
@@ -13808,22 +13862,22 @@ function buildBG() {
   g.fillStyle = gr; g.beginPath(); g.arc(0, 4, RR * 1.18, 0, TAU); g.fill();
   // rail en cuir capitonné
   gr = g.createRadialGradient(-30, -40, 20, 0, 0, RR);
-  gr.addColorStop(0, '#9b2d45'); gr.addColorStop(.75, '#6e1a2e'); gr.addColorStop(1, '#3a0c18');
+  gr.addColorStop(0, TP.rail[0]); gr.addColorStop(.75, TP.rail[1]); gr.addColorStop(1, TP.rail[2]);
   g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RR, 0, TAU); g.fill();
-  g.lineWidth = 1.2; g.strokeStyle = '#1c040b'; g.stroke();
-  for (let i = 0; i < 28; i++) { const a = i / 28 * TAU; g.strokeStyle = 'rgba(30,4,12,.55)'; g.lineWidth = .8; g.beginPath(); g.moveTo(Math.cos(a) * (RW + 1), Math.sin(a) * (RW + 1)); g.lineTo(Math.cos(a) * (RR - .6), Math.sin(a) * (RR - .6)); g.stroke(); }
-  g.strokeStyle = 'rgba(255,190,200,.28)'; g.lineWidth = 1.4; g.beginPath(); g.arc(0, 0, RR - 2.4, Math.PI * 1.05, Math.PI * 1.75); g.stroke();
-  g.setLineDash([1.2, 1.6]); g.strokeStyle = 'rgba(255,214,160,.55)'; g.lineWidth = .5; g.beginPath(); g.arc(0, 0, (RW + RR) / 2 + .4, 0, TAU); g.stroke(); g.setLineDash([]);
+  g.lineWidth = 1.2; g.strokeStyle = TP.line; g.stroke();
+  for (let i = 0; i < 28; i++) { const a = i / 28 * TAU; g.strokeStyle = TP.seam; g.lineWidth = .8; g.beginPath(); g.moveTo(Math.cos(a) * (RW + 1), Math.sin(a) * (RW + 1)); g.lineTo(Math.cos(a) * (RR - .6), Math.sin(a) * (RR - .6)); g.stroke(); }
+  g.strokeStyle = TP.hi; g.lineWidth = 1.4; g.beginPath(); g.arc(0, 0, RR - 2.4, Math.PI * 1.05, Math.PI * 1.75); g.stroke();
+  g.setLineDash([1.2, 1.6]); g.strokeStyle = TP.stitch; g.lineWidth = .5; g.beginPath(); g.arc(0, 0, (RW + RR) / 2 + .4, 0, TAU); g.stroke(); g.setLineDash([]);
   // anneau de bois (le « circuit » où on pose ses verres)
   gr = g.createRadialGradient(0, 0, RF, 0, 0, RW);
-  gr.addColorStop(0, '#5a3418'); gr.addColorStop(.5, '#a8692f'); gr.addColorStop(1, '#6b3d1a');
+  gr.addColorStop(0, TP.wood[0]); gr.addColorStop(.5, TP.wood[1]); gr.addColorStop(1, TP.wood[2]);
   g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RW, 0, TAU); g.arc(0, 0, RF, 0, TAU, true); g.fill();
   for (let i = 0; i < 60; i++) { const a = Math.random() * TAU, l = (.15 + Math.random() * .35); g.strokeStyle = Math.random() < .5 ? 'rgba(60,30,10,.45)' : 'rgba(255,210,150,.18)'; g.lineWidth = .35; g.beginPath(); g.arc(0, 0, (RF + .6 + Math.random() * (RW - RF - 1.2)), a, a + l); g.stroke(); }
-  g.strokeStyle = '#2a1608'; g.lineWidth = .7; g.beginPath(); g.arc(0, 0, RF, 0, TAU); g.stroke();
+  g.strokeStyle = TP.woodLine; g.lineWidth = .7; g.beginPath(); g.arc(0, 0, RF, 0, TAU); g.stroke();
   g.strokeStyle = 'rgba(255,204,77,.85)'; g.lineWidth = .6; g.beginPath(); g.arc(0, 0, RF - .9, 0, TAU); g.stroke();
   // le feutre
   gr = g.createRadialGradient(0, -10, 6, 0, 0, RF);
-  gr.addColorStop(0, '#2a8a6c'); gr.addColorStop(.6, '#1d6a55'); gr.addColorStop(1, '#0f4136');
+  gr.addColorStop(0, TP.felt[0]); gr.addColorStop(.6, TP.felt[1]); gr.addColorStop(1, TP.felt[2]);
   g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RF - 1.2, 0, TAU); g.fill();
   g.restore();
   // grain du feutre, pixel par pixel
@@ -13836,20 +13890,20 @@ function buildBG() {
   g.putImageData(img, 0, 0);
   g.save(); g.translate(cx, cy); g.scale(k, k);
   // l'impression sur le feutre : ligne de mise, cases des joueurs, emblème
-  g.strokeStyle = 'rgba(255,236,190,.22)'; g.lineWidth = .7; g.beginPath(); g.arc(0, 0, 76, 0, TAU); g.stroke();
+  g.strokeStyle = TP.pr(.22); g.lineWidth = .7; g.beginPath(); g.arc(0, 0, 76, 0, TAU); g.stroke();
   g.lineWidth = .35; g.beginPath(); g.arc(0, 0, 74.4, 0, TAU); g.stroke();
   const suits = ['s', 'h', 'c', 'd'];
   for (let i = 0; i < 8; i++) {
     const a = i / 8 * TAU + Math.PI / 8, x = Math.cos(a) * 85.5, y = Math.sin(a) * 85.5;
-    g.strokeStyle = 'rgba(255,236,190,.2)'; g.lineWidth = .5; g.beginPath(); g.arc(x, y, 4.4, 0, TAU); g.stroke();
-    g.save(); g.translate(x, y); g.rotate(a + Math.PI / 2); suitPath(g, suits[i % 4], 2.3); g.fillStyle = i % 4 === 1 || i % 4 === 3 ? 'rgba(255,120,130,.28)' : 'rgba(255,236,190,.22)'; g.fill(); g.restore();
+    g.strokeStyle = TP.pr(.2); g.lineWidth = .5; g.beginPath(); g.arc(x, y, 4.4, 0, TAU); g.stroke();
+    g.save(); g.translate(x, y); g.rotate(a + Math.PI / 2); suitPath(g, suits[i % 4], 2.3); g.fillStyle = i % 4 === 1 || i % 4 === 3 ? 'rgba(255,120,130,.28)' : TP.pr(.22); g.fill(); g.restore();
   }
   g.strokeStyle = 'rgba(255,204,77,.16)'; g.lineWidth = .9; g.beginPath(); g.arc(0, 0, 25, 0, TAU); g.stroke();
   g.setLineDash([1.4, 1.4]); g.lineWidth = .5; g.beginPath(); g.arc(0, 0, 28, 0, TAU); g.stroke(); g.setLineDash([]);
   for (let i = 0; i < 4; i++) { const a = i / 4 * TAU; g.save(); g.rotate(a); g.translate(0, -31.5); suitPath(g, suits[i], 1.5); g.fillStyle = 'rgba(255,204,77,.22)'; g.fill(); g.restore(); }
-  g.fillStyle = 'rgba(255,236,190,.26)';
+  g.fillStyle = TP.pr(.26);
   arcText(g, 'LA MAISON GAGNE TOUJOURS', 90, -Math.PI / 2, 4.2, false);
-  arcText(g, 'TRIPLE = ULTIME  ·  PAIRE = MIX', 90, Math.PI / 2, 3.6, true);
+  arcText(g, TP.bot, 90, Math.PI / 2, 3.6, true);
   g.restore();
 }
 function drawEShot(p, t, dim) {
@@ -14212,7 +14266,9 @@ function render(dtReal) {
     if (e.deal > 0) { const p = e.deal / .4; rot += p * 2.4; scl *= 1 + p * .5; alpha = 1 - p * .7; }
     if (e.ai === 'decoy') alpha *= .55 + .25 * Math.sin(t * 10);
     if (e.xA != null) alpha *= e.xA;
+    if (e.xA2 != null) alpha *= e.xA2;
     if (e.halfT > 0) { rot += Math.sin(t * 26) * .1; scl *= 1 + .1 * Math.abs(Math.sin(t * 7)); }
+    e.rr = rot; e.rs = scl;
     ctx.save(); ctx.translate(bx, by); ctx.rotate(rot); ctx.scale(scl, scl); ctx.globalAlpha = alpha;
     if (e.elite) { ctx.shadowColor = ELITES[e.elite].col; ctx.shadowBlur = 12; }
     if (e.tapis) { ctx.shadowColor = '#ff3d5a'; ctx.shadowBlur = 10; }
@@ -14231,7 +14287,7 @@ function render(dtReal) {
     if (e.flash > 0) { ctx.globalAlpha = Math.min(1, e.flash / .07) * .8 * alpha; ctx.drawImage(sp.w.c, -card.ox, -card.oy, dw, dh); }
     ctx.restore();
     ctx.globalAlpha = 1;
-    const top = by - e.r * 1.05 * sc - (('VDRJ'.includes(e.d.rank) && (e.d.boss || e.d.mob)) ? e.r * .9 : 0);
+    const top = by - e.r * 1.05 * sc - (('VDRJ'.includes(e.d.rank) && (e.d.boss || e.d.mob)) ? e.r * .9 : 0) - (e.d.arc ? e.r * .35 * sc : 0);
     if (e.type === 'b_baron') {
       if (e.st.hat !== false) {
         // son haut-de-forme (il le perd à sa 2e vie)
@@ -14347,6 +14403,7 @@ function render(dtReal) {
   }
   xDrawTop(cb, t);
   xDrawTop2(cb, t);
+  xDrawTop3(cb, t);
   drawBilleAim(cb, t);
   const topY = -VIEW.hy - 6;
   for (const fx of cb.fx) {
@@ -14478,6 +14535,7 @@ function ghostSprite(type) {
   return sp.gg;
 }
 function drawFog(cb, t, sx, sy) {
+  if (cb.xErm) { arcDark(cb, t, sx, sy); return; }
   const F = 4, w = Math.ceil(cv.width / F), h = Math.ceil(cv.height / F);
   if (!FOG.c || FOG.c.width !== w || FOG.c.height !== h) { FOG.c = document.createElement('canvas'); FOG.c.width = w; FOG.c.height = h; FOG.g = FOG.c.getContext('2d'); FOG.pat = null; }
   const g = FOG.g;
@@ -15699,7 +15757,9 @@ function bookPages(n) {
     P.push({ k: 'grid', sec: 'Les cartes', toc: 'Les cartes et les boss', title: 'Les cartes', col: '#ff5c6c', note: 'Elles marchent toutes vers vous. Toutes.', blocks: [blk(null, 'cards', [...SPAWNABLE.filter(id => !ENEMIES[id].vic && !ENEMIES[id].cor), 'mini', 'garde', 'voleur', 'leurre'].map(id => ['e', id]), 3)] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les Vicieuses', col: '#5fd68a', note: 'Elles trichent. Ne leur tournez jamais le dos.', blocks: [blk(null, 'cards', [...SPAWNABLE.filter(id => ENEMIES[id].vic), 'grue', 'coucou_p', 'fantome'].map(id => ['e', id]), 3)] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les Coriaces', col: '#4fd8ff', note: 'Celles-là ne meurent pas comme les autres. Chacune a son truc : trouvez-le.', blocks: [blk(null, 'cards', [...SPAWNABLE.filter(id => ENEMIES[id].cor), 'glitch_f'].map(id => ['e', id]), 2)] });
-    P.push({ k: 'grid', sec: 'Les cartes', title: 'Les Géants', col: '#ffd23f', note: 'Un par dizaine. Quand la sirène hurle, levez les yeux.', blocks: [blk(null, 'cards', GIANTS.map(id => ['e', id]), 1)] });
+    P.push({ k: 'grid', sec: 'Les cartes', title: 'Les Géants', col: '#ffd23f', note: 'Un par dizaine. Quand la sirène hurle, levez les yeux.', blocks: [blk(null, 'cards', GIANTS.map(id => ['e', id]), 2)] });
+    P.push({ k: 'grid', sec: 'Les cartes', title: 'Les Arcanes', col: '#c9a8ff', note: 'Madame Nox les tire pour la Maison. Chacun a son prix.', blocks: [blk(null, 'cards', ARCANES.map(id => ['e', id]), 2), blk('Le Casse', 'cards', ['coffre', 'vigile'].map(id => ['e', id]), 1)] });
+    P.push({ k: 'grid', sec: 'Les cartes', title: 'Les cartes améliorées', col: '#7fe8ff', note: 'Holographiques, en verre, en pierre… La Maison soigne ses cartes. Pas les vôtres.', blocks: [blk(null, 'icons', ENH_IDS.map(id => ['n', id]), 2)] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Figures et As', col: '#ffcc4d', note: 'Les boss battus reviennent en simples cartes. Les As, eux, sont à mon frère.', blocks: [blk('Les figures', 'cards', MOBS.map(id => ['e', id])), blk('Les As du Baron', 'cards', ACES.map(id => ['e', id]))] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les boss', col: '#ff7eb6', note: 'Le dernier, c\'est mon frère. Ne lui dites pas que je vous aide.', blocks: [blk(null, 'cards', [...BOSS_ORDER, 'b_baron'].map(id => ['b', id])), blk('Les élites', 'icons', Object.keys(ELITES).map(id => ['l', id]))] });
     P.push({ k: 'grid', sec: 'Les malus', toc: 'Malus, événements et sorts', title: 'Les crânes', col: '#e0365a', note: '1 crâne : ça pique. 2 : ça mord. 3 : sortez le parapluie.', blocks: [blk(null, 'icons', Object.keys(MALUS).map(id => ['m', id]), 4)] });
@@ -16052,14 +16112,18 @@ function rulesSections() {
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
     ['Malus', `<ul>${[1, 2, 3].map(t => `<li><b style="color:${TIERS[t].col}">${TIERS[t].the}</b> : ${MALUS_BY_TIER(t).map(id => `${MALUS[id].name} (${MALUS[id].txt})`).join(' · ')}.</li>`).join('')}</ul>`],
     ['La Maison joue', `<p>Trois fois toutes les 10 manches (dès la 3e, jamais sur un boss, jamais deux manches de suite), la Maison lance un <b>jeu de table</b> : les lumières baissent, le tapis se retourne, une règle, et « Faites vos jeux… ». Mise verte : à chaque manche. Dès la manche 50 : <b>double table</b>, deux jeux à la fois.</p>
-      <p>Manches 1 à 10 : les jeux de la <b>Grande Salle</b>. Manches 11 à 20 : ceux du <b>Salon Privé</b>. Ensuite : tous.</p>
+      <p>Manches 1 à 10 : les jeux de la <b>Grande Salle</b>. Manches 11 à 20 : ceux du <b>Salon Privé</b>. Manches 21 à 30 : ceux des <b>Coulisses</b>. Ensuite : tous.</p>
       <ul>${Object.keys(EVENTS).map(id => `<li><b>${EVENTS[id].name}</b> : ${EVENTS[id].txt} <i>Plaque d'or : ${EVENTS[id].plaque}.</i></li>`).join('')}</ul>
       <p>Chaque réussite parfaite gagne une <b>plaque d'or</b> (dans ton Profil).</p>`],
     ['Coriaces et Géants', `<p>Dès la manche 11, les <b>Coriaces</b> : des cartes qui ne meurent pas comme les autres.</p>
       <ul>${['sablier', 'compteur', 'miroir', 'zero', 'glitch', 'parieur'].map(id => `<li><b>${ENEMIES[id].name}</b> (dès la manche ${ENEMIES[id].from}) : ${ENEMIES[id].info}</li>`).join('')}</ul>
       <p>Une Coriace qui reste plus de 25 s sur la table (20 s pour le Zéro), ou qui fait TAPIS, s'use : elle perd son truc.</p>
       <p>Une fois par tranche de 10 manches (dès la 6e), un <b>Géant</b> entre en pleine manche (« ATTENTION ! »). Pas de TAPIS tant qu'il est là.</p>
-      <ul>${GIANTS.map(id => `<li><b>${ENEMIES[id].name}</b> : ${ENEMIES[id].info}</li>`).join('')}</ul>`],
+      <ul>${GIANTS.map(id => `<li><b>${ENEMIES[id].name}</b>${GNT.from[ENEMIES[id].giant] > 6 ? ` (dès la manche ${GNT.from[ENEMIES[id].giant]})` : ''} : ${ENEMIES[id].info}</li>`).join('')}</ul>`],
+    ['Arcanes et cartes améliorées', `<p>Dès la manche 21 (et en manches infinies), un <b>Arcane majeur</b> entre parfois en pleine manche : une grande carte de tarot, une par manche au plus. Pas de TAPIS tant qu'il est là.</p>
+      <ul>${ARCANES.map(id => `<li><b>${ENEMIES[id].name}</b> : ${ENEMIES[id].info.replace(/^Arcane [IVXL]+\. /, '')}</li>`).join('')}</ul>
+      <p>Dès la manche 16, certaines cartes sont <b>améliorées</b> (4 % des cartes, jusqu'à 12 % à la manche 30) :</p>
+      <ul>${ENH_IDS.map(id => `<li><b>${ENH[id].name}</b> : ${ENH[id].txt}</li>`).join('')}</ul>`],
     ['Le Baron', `<p><b>Le boss final.</b> À la manche 30, il descend lui-même à sa table. Trois vies : sa <b>grande donne</b> (toutes les cartes, et ses figures qui le protègent), <b>sans chapeau</b> (ses sorts, que ta BILLE peut couper, et ses As), puis <b>il joue</b> : un jeu de chaque mini-jeu du bar, obligatoire. Chaque jeu perdu retourne un ami contre toi. Toutes les 20${NB}s, la roue de Nox : rouge = +10${NB}% de dégâts pour eux, noir = +15${NB}% pour toi. Victoire : 2 jetons fous à choisir parmi 4.</p>
       <p><b>Au poker</b>, une fois par dizaine : il mise deux jetons fous, introuvables ailleurs. Tu mises un jeton (obligatoire) et tu n'en gagnes qu'un des deux… sauf si tu <b>doubles</b> avec un 2e jeton : là, tu rafles les deux. Une main qui ne te plaît pas ? <b>Nouvelle main</b> : 50 or, 2 fois par partie.</p>
       <p>Poker à 5 cartes : tu changes jusqu'à 3 cartes une fois. La meilleure main gagne : <b>${POKER_HANDS.slice().reverse().join(' › ')}</b>. Même combinaison : la plus haute gagne (une Paire de Rois bat une Paire de 10). Les cartes dorées montrent ce qui compte dans ta main.</p>
@@ -17385,6 +17449,7 @@ function multParts(run, cb, final) {
   if (cb.stats && cb.stats.combos.size) add(`Combo${cb.stats.combos.size > 1 ? 's' : ''} actif${cb.stats.combos.size > 1 ? 's' : ''}`, .5 * Math.min(3, cb.stats.combos.size));
   if (P.bossKO) add('Boss abattu', 1);
   for (const id of cb.evs || []) add(EVENTS[id].name, .5 + ((cb.evMult && cb.evMult[id]) || 0));
+  if (cb.xMult) for (const k in cb.xMult) add(k, cb.xMult[k]);
   if (run.inf) add('Manches infinies', 1);
   if (cb.stats && cb.stats.hk && !cb.demo) tkMult(add);
   return parts;
@@ -17875,7 +17940,7 @@ const CK_NEW = {
   triplesec: { cat: 'bille', name: 'Triple Sec', glass: 'shooter', liq: '#ffd36b', gar: 'orange', max: 1, price: [70], icon: 'dk_triplesec', amp: 1, txt: () => 'Quand ta BILLE se divise, une bille de plus part avec elle', quip: ['Triple. Sec. Comme trois billes dans la tronche.', 'Une bille, deux billes, trois billes.'] },
   // les spécialités de Zaza (une de temps en temps, sur le comptoir)
   kir: { cat: 'zaza', name: 'Kir Royal', glass: 'flute', liq: '#c2185b', gar: 'berry', max: 3, price: [40, 64, 94], icon: 'dk_kir', txt: lv => `+${12 * lv}${NB}% d'or sur les cartes abattues`, quip: ['Royal. Comme ton porte-monnaie, bientôt.', 'Le cocktail des gens qui comptent. Leur or.'] },
-  mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [200], icon: 'dk_mystere', txt: () => 'À chaque manche, un shot au hasard t\'est offert', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
+  mystere: { cat: 'zaza', name: 'Cocktail Mystère', glass: 'tiki', liq: '#7b5cff', gar: 'umbrella', max: 1, price: [200], icon: 'dk_mystere', txt: () => 'Toute la partie : à chaque passage au bar, un shot offert (au hasard), à boire ici', quip: ['Ce qu\'il y a dedans ? Moi-même, je ne sais plus.', 'Surprise. Tous les soirs.'] },
   rhum: { cat: 'zaza', name: 'Rhum Arrangé', glass: 'tumbler', liq: '#c98a3a', gar: 'ice', max: 3, price: [40, 62, 90], icon: 'dk_rhum', txt: lv => `Tes sorts se rechargent ${10 * lv}${NB}% plus vite`, quip: ['Vanille, cannelle, et un peu de magie.', 'Il a macéré dix ans. Toi, tu attendras moins.'] },
   absinthe: { cat: 'zaza', name: 'La Fée Verte', glass: 'wine', liq: '#7dff6b', gar: 'star', max: 1, price: [85], icon: 'dk_absinthe', txt: () => 'Tous tes sorts sont prêts au début de chaque manche', quip: ['Si tu vois une fée, c\'est normal.', 'Elle murmure des sorts. Écoute-la.'] },
   champagne: { cat: 'zaza', name: 'Champagne !', glass: 'flute', liq: '#ffe8a8', gar: 'bubbles', max: 1, price: [60], icon: 'dk_champagne', txt: () => `Une manche finie sans perdre un seul PV rapporte +25${NB}or`, quip: ['On fête quoi ? On verra bien.', 'Sans une égratignure, et ça mousse.'] },
@@ -18420,18 +18485,19 @@ async function lbRegister(raw) {
   const c = lbPseudoCheck(raw); if (c.error) return { error: c.error };
   const secret = lbSecret(), r = await lbRpc('lb_register', { p_pseudo: c.ps, p_secret: secret });
   if (r.error) return { error: lbErrTxt(r.error), net: r.error === 'reseau' };
-  G.meta.lb = { id: r.data, secret, pseudo: c.ps }; saveMeta();
+  G.meta.lb = { id: r.data, secret, pseudo: c.ps }; delete G.meta.lbOff; saveMeta();
   lbFlush();
   return { ok: true };
 }
 // il faut un pseudo pour lancer une partie (sauf si le classement ne répond pas)
-const lbNeedPseudo = () => !lbMe() && !LB.skip && !G.headless;
+const lbNeedPseudo = () => !lbMe() && !LB.skip && !G.meta.lbOff && !G.headless;
 function lbAsk(next, from) {
   let ov = $('#lbname');
   if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
   ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
       <h2 class="lbn-t"><svg class="ico"><use href="#i-couronne"/></svg>Ton pseudo</h2>
       <p class="lbn-p">Il faut un pseudo pour jouer : c'est ton nom au <b>classement en ligne</b>. 20 lettres maximum. Tu pourras le changer dans OPTIONS › Profil.</p>
+      <p class="lbn-p lbn-rg">Ton pseudo et tes meilleurs scores partent au classement, rien d'autre. Tu peux les effacer dans OPTIONS › Profil.</p>
       <input id="lbn-in" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ton pseudo" value="${esc((G.meta.prof && G.meta.prof.name) || '')}">
       <p class="lbn-err" id="lbn-err"></p>
       <div class="lbn-row"><button class="btn big red" id="lbn-ok">VALIDER</button></div>
@@ -18933,7 +18999,7 @@ function drawRatFx(cb) {
   }
 }
 
-/* ---- la mi-vie : invincible, une petite animation, la table se vide, puis le combat repart (plus fort) ---- */
+/* ---- la mi-vie : invincible, une petite animation (les cartes restent), puis le combat repart (plus fort) ---- */
 const P2_TXT = {
   b_valet: 'Il lance ses carreaux en éventail : pare-les !',
   b_dame: 'Elle lance ses cœurs par trois.',
@@ -18946,19 +19012,12 @@ function bossHalf(e) {
   const cb = G.cb;
   e.rage = true; e.halfT = BOSS_HALF;
   dbg('boss_half');
-  // les cartes de la table disparaissent (sans or ni points), les tirs aussi
-  for (const o of cb.enemies) {
-    if (o === e || o.dead || o.boss) continue;
-    if (o.ai === 'thief') giveBack(o);
-    o.dead = true; if (!cb.demo) cb.killed++;
-    if (!G.headless) { burst(o.x, o.y, '#e8e1f2', 7, 24, .9, .4); fxPush({ type: 'ring', x: o.x, y: o.y, r0: 2, r1: 9, col: '255,243,230', life: .35, max: .35 }); }
-  }
-  for (let i = cb.eshots.length - 1; i >= 0; i--) if (!cb.eshots[i].friendly) cb.eshots.splice(i, 1);
+  // v14.7 : les cartes de la table restent (avant, elles disparaissaient : trop simple)
   // pendant l'animation, plus rien n'arrive sur la table
   for (let i = cb.spawnIdx; i < cb.spawn.length; i++) cb.spawn[i].t = Math.max(cb.spawn[i].t, cb.t + BOSS_HALF);
   if (cb.escT != null) cb.escT = Math.max(cb.escT, cb.t + BOSS_HALF + 1);
   if (G.headless) return;
-  banner(`${e.d.name.toUpperCase()} · MI-VIE`, 'il devient invincible et vide la table…', 'boss', BOSS_HALF - .3);
+  banner(`${e.d.name.toUpperCase()} · MI-VIE`, 'il est invincible quelques secondes…', 'boss', BOSS_HALF - .3);
   cb.flash = .45; cb.flashCol = '255,204,77'; shake(9); haptic(120); Snd.alarm(); Snd.gong();
   burst(e.x, e.y, '#ffcc4d', 30, 60, 1.6, .7);
 }
@@ -20560,6 +20619,7 @@ function genBar() {
   let sids = shuffle(Object.keys(SHOTS).filter(id => id !== 'antidote'));
   if (gentil && rnd() < .65) sids = ['antidote', ...sids];
   const shots = sids.slice(0, 2).map(id => ({ id, price: Math.round(SHOTS[id].price * sc * mid), sold: false }));
+  ckGift(run, shots);
   const ciment = run.floors.some(h => h < BAL.floorHp) ? { price: Math.round(CIMENT.price * sc * mid), sold: false } : null;
   return { drinks, shots, ciment, pet: petOfferBar(run) };
 }
@@ -20657,10 +20717,10 @@ function renderBar() {
   }).join('') || '<p class="hint">Zaza n\'a plus rien de neuf pour toi : tu as tout bu !</p>';
   let sh = BAR.shots.map((s, i) => {
     const S2 = SHOTS[s.id], can = !s.sold && run.gold >= s.price && !BAR.busy;
-    return `<div class="shot${s.sold ? ' drunk' : ''}" data-s="${i}">
+    return `<div class="shot${s.sold ? ' drunk' : ''}${s.gift ? ' gift' : ''}" data-s="${i}">
       ${glassHTML('shot', S2.liq)}
       <div class="stext"><b>${S2.name}</b><span>${S2.txt}</span></div>
-      ${s.sold ? '<em class="stamp">BU !</em>' : `<button class="mini" data-buys="${i}" ${can ? '' : 'disabled'}>${s.price} or</button>`}
+      ${s.sold ? '<em class="stamp">BU !</em>' : `<button class="mini${s.gift ? ' free' : ''}" data-buys="${i}" ${can ? '' : 'disabled'}>${s.gift ? 'OFFERT' : s.price + ' or'}</button>`}
     </div>`;
   }).join('');
   if (BAR.ciment) {
@@ -20673,7 +20733,9 @@ function renderBar() {
   const mkb = $('#b-market'), arriving = barArriving();
   mkb.hidden = !BAR.market;
   mkb.disabled = arriving || BAR.busy;
-  mkb.textContent = arriving ? (baronPending() ? 'Le Baron d\'abord…' : 'Un client arrive…') : 'Marché noir →';
+  if (arriving) mkb.textContent = baronPending() ? 'Le Baron d\'abord…' : 'Un client arrive…';
+  else mkb.innerHTML = '<i class="mk-dot"></i>Marché noir <b>ouvert</b> →';
+  mkb.classList.toggle('mk-open', !mkb.disabled);
   const pend = baronPending();
   $('#b-go').disabled = !!pend || BAR.busy;
   $('#b-go').textContent = pend ? 'Le Baron t\'attend…' : `Au combat · manche ${roundLabel(run.round + 1)}`;
@@ -20695,6 +20757,7 @@ function buyDrink(i) {
   if (freeM) { BAR.freeDrink = false; for (const x of BAR.drinks) x.free = false; } else run.gold -= d.price;
   d.sold = true;
   run.up[d.id] = d.lv + 1;
+  if (d.id === 'mystere') ckGift(run, BAR.shots);
   if (d.id === 'etage') run.floors.push(BAL.floorHp);
   if (run.firstDrink) { run.firstDrink = false; for (const x of BAR.drinks) if (!x.sold) { const U = UPG[x.id]; x.price = Math.round(U.price[x.lv] * barScale(run.round + 1) * (computeStats(run).midas ? .75 : 1)); } }
   run.stats.drinks++; zazaCocktail();
@@ -21257,7 +21320,7 @@ const CAT_TABS = [
   { id: 'fous', name: 'Fous', items: () => ALL_FOUS.map(id => ['f', id]) },
   { id: 'bonus', name: 'Bonus', items: () => BOOSTERS.map(id => ['f', id]) },
   { id: 'machines', name: 'Machines', items: () => [...MACH9.map((m, i) => ['k', 'm' + i]), ...GLITCH9.map((m, i) => ['k', 'g' + i])] },
-  { id: 'cartes', name: 'Cartes', items: () => [...SPAWNABLE, 'mini', 'grue', 'coucou_p', 'glitch_f', 'pk', 'garde', 'voleur', 'leurre', 'fantome', ...GIANTS, ...MOBS, ...ACES].map(id => ['e', id]) },
+  { id: 'cartes', name: 'Cartes', items: () => [...SPAWNABLE, 'mini', 'grue', 'coucou_p', 'glitch_f', 'pk', 'vigile', 'coffre', 'garde', 'voleur', 'leurre', 'fantome', ...GIANTS, ...ARCANES, ...MOBS, ...ACES].map(id => ['e', id]) },
   { id: 'boss', name: 'Boss', items: () => BOSS_ORDER.concat(['b_baron']).map(id => ['b', id]) },
   { id: 'malus', name: 'Malus', items: () => Object.keys(MALUS).filter(id => !MALUS[id].old).map(id => ['m', id]) },
   { id: 'bar', name: 'Bar', items: () => [...Object.keys(UPG).map(id => ['d', id]), ...Object.keys(SHOTS).map(id => ['h', id])] },
@@ -21267,7 +21330,7 @@ const CAT_TABS = [
   { id: 'events', name: 'Événements', items: () => Object.keys(EVENTS).map(id => ['v', id]) },
   { id: 'habitues', name: 'Habitués', items: () => PEOPLE.map(id => ['p', id]) },
   { id: 'animaux', name: 'Animaux', items: () => PET_IDS.map(id => ['a', id]) },
-  { id: 'elites', name: 'Élites', items: () => Object.keys(ELITES).map(id => ['l', id]) },
+  { id: 'elites', name: 'Élites', items: () => [...Object.keys(ELITES).map(id => ['l', id]), ...ENH_IDS.map(id => ['n', id])] },
 ];
 const CATV = { tab: 'jokers', sel: null, from: 'title' };
 /* ---------- les habitués du bar (portraits tirés des figures du jeu) ---------- */
@@ -21298,6 +21361,7 @@ function catTile(c, id) {
     case 's': return `<span class="ct-ico" style="--ic:${SPELLS[id].col}">${iconSVG(SPELLS[id].icon)}</span>`;
     case 'q': return `<span class="ct-ico" style="--ic:${PSPELLS[id].col}">${iconSVG(PSPELLS[id].icon)}</span>`;
     case 'l': return `<span class="ct-ico" style="--ic:${ELITES[id].col}">${iconSVG(ELITES[id].icon)}</span>`;
+    case 'n': return `<span class="ct-ico" style="--ic:${ENH[id].col}">${iconSVG(ENH[id].icon)}</span>`;
     case 'v': return `<span class="ct-ico" style="--ic:${EVENTS[id].col}">${iconSVG(EVENTS[id].icon)}</span>`;
     case 'd': return glassHTML(UPG[id].glass, UPG[id].liq, UPG[id].gar);
     case 'h': return glassHTML('shot', SHOTS[id].liq);
@@ -21317,6 +21381,7 @@ function catTitle(c, id) {
     case 's': return SPELLS[id].name;
     case 'q': return PSPELLS[id].name;
     case 'l': return ELITES[id].name;
+    case 'n': return ENH[id].name;
     case 'v': return EVENTS[id].name;
     case 'd': return UPG[id].name;
     case 'h': return SHOTS[id].name;
@@ -21337,6 +21402,7 @@ function catDesc(c, id) {
     case 'm': { const M2 = MALUS[id], T = TIERS[M2.tier]; return `<p class="cd-sub" style="color:${T.col}">${T.the} · ${M2.tier} crâne${M2.tier > 1 ? 's' : ''}</p><p>${M2.txt[0].toUpperCase() + M2.txt.slice(1)}.</p>`; }
     case 'q': { const P = PSPELLS[id]; return `<p class="cd-sub">${P.base ? 'Sort de départ · toujours dans ta barre' : P.fou ? `Sort fou · marché noir, dès la manche 6 (plus rare) · recharge ${P.cd}${NB}s` : P.fam ? `Sort de famille ${CATS[P.fam].n} · marché noir · recharge ${P.cd}${NB}s` : `Sort à acheter au marché noir · recharge ${P.cd}${NB}s`}</p><p>${P.txt}</p>${P.fam ? `<p class="cd-goal">+25${NB}% de puissance par jeton ${CATS[P.fam].s} dans ton rack (jusqu'à ×3).</p>` : ''}`; }
     case 's': return `<p class="cd-sub">Sort des Sorciers · dès la manche ${SPELL_FROM[id]}</p><p>${SPELLS[id].txt[0].toUpperCase() + SPELLS[id].txt.slice(1)}.</p>`;
+    case 'n': return `<p class="cd-sub">Carte améliorée · dès la manche 16</p><p>${ENH[id].txt}</p>`;
     case 'l': return `<p class="cd-sub">Carte élite</p><p>${{ rapide: 'Fonce 60 % plus vite.', costaud: '2,2× plus de PV, frappe plus fort.', regen: 'Se soigne toute seule.', cuirasse: 'Prend 40 % de dégâts en moins.', dore: 'Rapporte 6× plus d\'or.' }[id]} Toutes les élites rapportent plus d'or.</p>`;
     case 'v': return `<p class="cd-sub">La Maison joue · dès la manche ${EVENTS[id].from}</p><p>${EVENTS[id].txt}</p><p class="cd-goal">Plaque d'or : ${EVENTS[id].plaque}${G.meta.plaques && G.meta.plaques[id] ? ' ✓' : ''}</p>`;
     case 'd': { const U = UPG[id]; return `<p class="cd-sub">Boisson ${UPG_CATS[U.cat].name.toLowerCase()} · ${U.max} niveau${U.max > 1 ? 'x' : ''}</p><ul>${Array.from({ length: U.max }, (_, k) => `<li>Niveau ${k + 1} : ${U.txt(k + 1)}</li>`).join('')}</ul>`; }
@@ -21393,7 +21459,7 @@ function catalogClick(e) {
 const NEWQ = [];
 let newBusy = false;
 function onCatNew(cat, id) {
-  if (G.headless || !['e', 's', 'm', 'v', 'l'].includes(cat)) return;
+  if (G.headless || !['e', 's', 'm', 'v', 'l', 'n'].includes(cat)) return;
   if (cat === 'e' && ENEMIES[id].from === 1) return;
   NEWQ.push([cat, id]);
   if (!newBusy) showNewNote();
@@ -21404,8 +21470,8 @@ function showNewNote() {
   const it = NEWQ.shift();
   newBusy = true;
   const [c, id] = it, el = $('#newnote');
-  const label = c === 'e' && ENEMIES[id].giant ? 'NOUVEAU GÉANT' : c === 'e' && ENEMIES[id].cor ? 'NOUVELLE CORIACE' : { e: 'NOUVELLE CARTE', b: 'NOUVEAU BOSS', s: 'NOUVEAU SORT', m: 'NOUVEAU MALUS', v: 'NOUVEL ÉVÉNEMENT', l: 'NOUVELLE ÉLITE', f: 'JETON FOU DÉCOUVERT' }[c];
-  el.innerHTML = `<span class="nn-art">${catTile(c, id)}</span><span class="nn-txt"><small>${label}</small><b>${catTitle(c, id)}</b><em>${c === 'e' ? (ENEMIES[id].info || '') : 'noté dans le carnet d\'Anatole'}</em></span>`;
+  const label = c === 'e' && ENEMIES[id].giant ? 'NOUVEAU GÉANT' : c === 'e' && ENEMIES[id].cor ? 'NOUVELLE CORIACE' : c === 'e' && ENEMIES[id].arc ? 'ARCANE MAJEUR' : { n: 'CARTE AMÉLIORÉE', e: 'NOUVELLE CARTE', b: 'NOUVEAU BOSS', s: 'NOUVEAU SORT', m: 'NOUVEAU MALUS', v: 'NOUVEL ÉVÉNEMENT', l: 'NOUVELLE ÉLITE', f: 'JETON FOU DÉCOUVERT' }[c];
+  el.innerHTML = `<span class="nn-art">${catTile(c, id)}</span><span class="nn-txt"><small>${label}</small><b>${catTitle(c, id)}</b><em>${c === 'e' ? (ENEMIES[id].info || '') : c === 'n' ? ENH[id].txt : 'noté dans le carnet d\'Anatole'}</em></span>`;
   for (const t of $$('#newnote [data-thumb]')) t.appendChild(cardThumb(t.dataset.thumb, 34));
   el.hidden = false; el.classList.remove('out'); void el.offsetWidth; el.classList.add('in');
   Snd.rakeUp();
@@ -23129,7 +23195,7 @@ function renderOptions() {
       h += oRow('Touches par défaut', '<button class="btn small ghost" data-oact="keyreset">Rétablir</button>', 'AZERTY : Q / D pour le flipper, 1 à 4 avec ou sans Maj');
       break;
     case 'profil': {
-      h += lbProfRow();
+      h += lbProfRow() + lbDataRow();
       const L = m.life || {}, st = (a, b) => `<div class="ost"><dt>${a}</dt><dd>${b}</dd></div>`;
       h += '<dl class="ostats2">' + [
         st('Parties', fmtS(m.runs || 0)), st('Victoires', fmtS(m.wins || 0)), st('Meilleure manche', roundLabel(m.best || 0)), st('Temps de jeu', fmtTime(L.time)),
@@ -23151,7 +23217,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v14.5</p></div>`;
+        <p class="ov5">v14.7</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -23424,6 +23490,7 @@ function skinProgress(need) {
     case 'wins': return m.wins || 0;
     case 'runs': return m.runs || 0;
     case 'secret': return m.secret ? 1 : 0;
+    case 'plaques': return Object.keys(m.plaques || {}).filter(k => EVENTS[k]).length;
     default: return L[need.k] || 0;
   }
 }
@@ -23452,7 +23519,7 @@ function checkUnlocks() {
 }
 function unlockNote(kind, S2) {
   const el = $('#unote'); if (!el) return;
-  el.innerHTML = `<canvas class="un-cv" width="120" height="120"></canvas><div><small>${SKIN_KIND[kind][1]}</small><b>${S2.name}</b><span>Équipe-le au vestiaire.</span></div>`;
+  el.innerHTML = `<canvas class="un-cv" width="120" height="120"></canvas><div><small>${SKIN_KIND[kind][1]}</small><b>${S2.name}</b><span>Équipe-${kind === 'cannon' || kind === 'flipper' ? 'le' : 'la'} au vestiaire.</span></div>`;
   drawSkinPreview(el.querySelector('canvas'), kind, S2.id);
   el.hidden = false; el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
   Snd.record(); haptic(80);
@@ -23985,7 +24052,8 @@ function drawSkinPreview(c, kind, id) {
   const gr = g.createRadialGradient(w / 2, h / 2, 4, w / 2, h / 2, w * .62); gr.addColorStop(0, '#2a8a6c'); gr.addColorStop(1, '#0f4136');
   g.fillStyle = gr; g.beginPath(); g.arc(w / 2, h / 2, w * .48, 0, TAU); g.fill();
   g.save(); g.translate(w / 2, h / 2);
-  if (kind === 'cannon') {
+  if (kind === 'table') tablePreview(g, w, id);
+  else if (kind === 'cannon') {
     const k = w / 34; g.scale(k, k);
     const ch = baseSprite('auto', id, k); g.drawImage(ch.c, -ch.half, -ch.half, ch.half * 2, ch.half * 2);
     drawCannonAt(g, id, -Math.PI / 4, 0, 0, 1.3, false, 0, false, 1);
@@ -24028,6 +24096,7 @@ function vestClick(e) {
   if (!skinOpen(VSV.tab, id)) return;
   sk[VSV.tab] = id; saveMeta();
   for (const k in SPR) if (k.startsWith('_chip')) delete SPR[k];
+  if (VSV.tab === 'table') buildBG();
   Snd.chipLand(); renderVestiaire();
 }
 
@@ -24632,6 +24701,7 @@ function botStep(dt, sk) {
     }
     if (bt < .085 && !best.tried) { best.tried = true; if (rnd() < sk.parry) swing(); }
   }
+  xBotStep(cb, sk);
   if (sk.bille) botBille(cb, sk);
   if (sk.abil) {
     if (canUse('gel')) { let n = 0; for (const e of cb.enemies) if (!e.dead && edist(e) < BAL.gelR) n++; if (n >= 5 || (cb.fires && cb.fires.some(z => z.state === 'on' && Math.hypot(z.x, z.y) < BAL.baseR + z.r + 6))) useGel(); }
@@ -24788,6 +24858,7 @@ function canvasDown(e) {
   pointerWorld(e);
   const P = G.pointer;
   if (cb.ab.aiming) { if (useBomb(P.wx, P.wy)) haptic(20); cb.ab.aiming = false; return; }
+  if (evTapCard(cb, P.wx, P.wy)) { e.preventDefault(); return; }
   // la BILLE : appui sur ta base (ou clic droit n'importe où)
   const onBase = Math.hypot(P.wx, P.wy) < BAL.bilGrab, rc = e.button === 2;
   if (onBase || rc) {
@@ -25780,7 +25851,7 @@ function evPlanFix(run) {
   if (!run.evPlan) { run.evPlan = {}; run.waves = {}; delete run.events; }
   const r = Math.max(1, (run.round || 0) + 1);
   evPlanBlock(run, Math.floor((r - 1) / 10)); evPlanBlock(run, Math.floor(r / 10));
-  gntPlan(run);
+  gntPlan(run); arcPlan(run);
 }
 // combien de jeux à cette manche (0, 1, ou 2 en double table)
 function evCount(run, r) {
@@ -25791,7 +25862,7 @@ function evLabel(cb) { const L = (cb && cb.evs) || []; return L.length > 1 ? 'Do
 function evPickIds(run, n) {
   const sal = evSalle(run.round);
   let pool = EV_IDS.filter(id => EVENTS[id].from <= run.round && (!sal || EVENTS[id].salle === sal));
-  if (!pool.length) pool = EV_IDS.filter(id => EVENTS[id].from <= run.round);   // (les Coulisses arrivent plus tard)
+  if (!pool.length) pool = EV_IDS.filter(id => EVENTS[id].from <= run.round);
   const last = run.evLast || [];
   let p2 = pool.filter(id => !last.includes(id));
   if (p2.length < n) p2 = pool;
@@ -25829,6 +25900,7 @@ function evPlaque(id) {
   if (G.headless) return;
   const P = G.meta.plaques || (G.meta.plaques = {}), first = !P[id];
   P[id] = (P[id] || 0) + 1; saveMeta();
+  if (first) setTimeout(checkUnlocks, 3400);
   const n = Object.keys(P).filter(k => EVENTS[k]).length;
   const el = document.createElement('div');
   el.className = 'evplaq' + (first ? ' first' : '');
@@ -25845,12 +25917,16 @@ function evPlaque(id) {
 function evMultAdd(id, v, wx, wy) {
   const cb = G.cb; if (!cb || cb.demo) return;
   cb.evMult[id] = (cb.evMult[id] || 0) + v;
+  evFly(v, wx, wy, EVENTS[id].col);
+}
+function evFly(v, wx, wy, col) {
+  const cb = G.cb; if (!cb || cb.demo) return;
   if (G.headless || G.reduced || G.mode !== 'combat') return;
   const to = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
   if (!to) return;
   const r = cv.getBoundingClientRect(), x0 = r.left + CX + wx * S, y0 = r.top + CY + wy * S, b = to.getBoundingClientRect();
   if (!b.width) return;
-  const f = document.createElement('div'); f.className = 'mfly'; f.style.setProperty('--mc', EVENTS[id].col);
+  const f = document.createElement('div'); f.className = 'mfly'; f.style.setProperty('--mc', col);
   f.textContent = `+${fmtM(v)}×`;
   document.body.appendChild(f);
   f.style.left = x0 + 'px'; f.style.top = y0 + 'px';
@@ -25893,9 +25969,10 @@ function evxEl() {
   if (EVX.el && EVX.el.isConnected) return EVX.el;
   const el = document.createElement('div');
   el.id = 'evx'; el.hidden = true;
-  el.innerHTML = `<i class="evx-dim"></i><div class="evx-box"><div class="evx-neon"><b>LA MAISON JOUE…</b></div><div class="evx-reels"></div><div class="evx-rules"></div><p class="evx-fvj">Faites vos jeux…</p><div class="evx-bet" hidden></div></div><button class="evx-skip" type="button" aria-label="Accélérer l'intro"></button>`;
+  el.innerHTML = `<i class="evx-dim"></i><div class="evx-box"><div class="evx-neon"><b>LA MAISON JOUE…</b></div><div class="evx-reels"></div><div class="evx-rules"></div><p class="evx-fvj">Faites vos jeux…</p><div class="evx-bet" hidden></div><button class="btn big red evx-go" type="button" hidden>COMMENCER<small>Espace · Entrée</small></button></div><button class="evx-skip" type="button" aria-label="Accélérer l'intro"></button>`;
   ROOT.appendChild(el);
   el.querySelector('.evx-skip').addEventListener('click', e => { e.stopPropagation(); firstGesture(); evxSkip(); });
+  el.querySelector('.evx-go').addEventListener('click', e => { e.stopPropagation(); firstGesture(); evxGo(); });
   el.querySelector('.evx-bet').addEventListener('click', e => { const b = e.target.closest('[data-horse]'); if (!b) return; e.stopPropagation(); firstGesture(); evxBet(+b.dataset.horse); });
   EVX.el = el;
   return el;
@@ -25911,7 +25988,8 @@ function evxReelHTML(id) {
 function evxIntro(cb, then) {
   const el = evxEl(), ids = cb.evs;
   EVX.on = true; EVX.freeze = true; EVX.hold = false; EVX.t = 0; EVX.i = 0; EVX.cb = cb; EVX.done = then; EVX.fast = false; EVX.tick = 0;
-  el.classList.remove('ev-on', 'ev-neon', 'ev-spin', 'ev-land', 'ev-rule', 'ev-fvj', 'ev-bet', 'ev-out', 'ev-two', 'ev-fast');
+  el.classList.remove('ev-on', 'ev-neon', 'ev-spin', 'ev-land', 'ev-rule', 'ev-fvj', 'ev-bet', 'ev-out', 'ev-two', 'ev-fast', 'ev-go');
+  EVX.goOn = false; el.querySelector('.evx-go').hidden = true;
   el.classList.toggle('ev-two', ids.length > 1);
   el.querySelector('.evx-neon b').textContent = ids.length > 1 ? 'DOUBLE TABLE !' : 'LA MAISON JOUE…';
   el.querySelector('.evx-reels').innerHTML = ids.map(evxReelHTML).join('');
@@ -25931,7 +26009,7 @@ function evxIntro(cb, then) {
     [at.land, () => { el.classList.add('ev-land'); EVX.tick = 0; EvSnd.clac(); haptic(25); }],
     [at.flip, () => { EVX.flipT = 0; EvSnd.flip(); }],
     [at.rule, () => { el.classList.add('ev-rule'); EvSnd.rule(); }],
-    [at.fvj, () => { el.classList.add('ev-fvj'); talk('nox', 'Faites vos jeux.'); Snd.chips && Snd.chips(); if (needBet) { evxBetShow(cb); return 'wait'; } }],
+    [at.fvj, () => { el.classList.add('ev-fvj'); talk('nox', 'Faites vos jeux.'); Snd.chips && Snd.chips(); if (needBet) { evxBetShow(cb); return 'wait'; } evxGoShow(); return 'wait'; }],
     [at.out, () => evxEnd()],
   ];
 }
@@ -25970,6 +26048,7 @@ function evxKey(e) {
   const k = e.key;
   if (EVX.hold) {
     // le pari : 1, 2, 3 (ou Entrée sur le cheval choisi à la manette)
+    if (EVX.goOn && (k === ' ' || k === 'Enter')) { e.preventDefault(); evxGo(); return true; }
     if (k === '1' || k === '2' || k === '3') { e.preventDefault(); evxBet(+k - 1); return true; }
     if ((k === ' ' || k === 'Enter') && GP.focus && GP.focus.dataset && GP.focus.dataset.horse != null) { e.preventDefault(); evxBet(+GP.focus.dataset.horse); return true; }
     return k !== 'Escape' && !isKey('pause', k) && k !== 'Tab';
@@ -26157,7 +26236,7 @@ const EVH = {};
 const RV = { N: 12, r0: 24, nums: [32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13], cyc: 2, warn: .6, turn: .5, hop: 1.5, hopDur: .34, need: 8 };
 function rvCase(S2, x, y) { const a = ((Math.atan2(y, x) - S2.rot) % TAU + TAU) % TAU; return Math.floor(a / (TAU / RV.N)) % RV.N; }
 function rvLit(S2, x, y) { const d2 = x * x + y * y; return d2 > RV.r0 * RV.r0 && d2 < 95 * 95 && rvCase(S2, x, y) === S2.lit; }
-const rvHopper = e => !e.dead && !e.boss && !e.d.giant && e.deal <= .15 && e.ai !== 'guard' && e.ai !== 'decoy' && e.ai !== 'thief' && !(e.frzT > 0) && !(e.stunT > 0) && !e.st.latch && !e.st.tip;
+const rvHopper = e => !e.dead && !e.boss && !e.d.giant && !e.d.prop && !e.d.arc && e.deal <= .15 && e.ai !== 'guard' && e.ai !== 'decoy' && e.ai !== 'thief' && !(e.frzT > 0) && !(e.stunT > 0) && !e.st.latch && !e.st.tip;
 EVH.rienneva = {
   init(cb, S2) { Object.assign(S2, { rot: 0, c: -1.3, dir: 1, lit: irand(0, RV.N - 1), prev: 0, chase: 1, turned: 1, rang: false, kills: 0, whir: false }); S2.prev = S2.lit; },
   tick(cb, S2, dt) {
@@ -26341,7 +26420,7 @@ EVH.bonneteau = {
       }
     } else if (S2.ph === 'back') {
       mv(S2.hand, rest1, 8); mv(S2.hand2, rest2, 8);
-      if (S2.pt >= .35) { S2.ph = 'guess'; S2.pt = 0; if (!G.headless) btSay(S2, pick(['À toi. Où est la Dame ?', 'Alors, elle est où ?', 'Tape la bonne. À la bille.'])); }
+      if (S2.pt >= .35) { S2.ph = 'guess'; S2.pt = 0; if (!G.headless) btSay(S2, pick(['À toi. Où est la Dame ?', 'Alors, elle est où ?', 'Touche la bonne.'])); }
     } else if (S2.ph === 'guess') {
       mv(S2.hand, rest1, 4); mv(S2.hand2, rest2, 4);
       if (S2.pt >= (empty ? 5 : BT.timeout)) { S2.res = 'late'; S2.ph = 'reveal'; S2.pt = 0; if (!G.headless) btSay(S2, 'Trop lent. Je ramasse.'); }
@@ -26713,6 +26792,9 @@ function vicFace(g, type, d, r, w, h) {
 // la forme : une carte, ou une grue de papier
 function cardShape(g, d, w, h, rad) {
   if (d.shape === 'golem') { golemShape(g, w, h); return; }
+  if (d.shape === 'coffre') { csShape(g, w, h, rad); return; }
+  if (d.shape === 'sabot') { sabotShape(g, w, h, rad); return; }
+  if (d.shape === 'tarot') { tarotShape(g, w, h, rad); return; }
   if (d.shape !== 'crane') { rrPath(g, -w / 2, -h / 2, w, h, rad); return; }
   const X = w * .62, Y = h * .5;
   g.beginPath();
@@ -26990,7 +27072,7 @@ function mxRoundStart(cb, run) {
 function mxSpawn(e) {
   const run = G.run; if (!run || !run.malus.length || e.boss || e.ai === 'decoy' || e.ai === 'thief') return;
   if (hasMalus(run, 'marquees')) { e.xMark = true; e.xd = true; }
-  if (hasMalus(run, 'doublures') && e.ai !== 'guard' && !e.fake && !e.d.giant) e.dblOK = rnd() < .25;
+  if (hasMalus(run, 'doublures') && e.ai !== 'guard' && !e.fake && !e.d.giant && !e.d.arc && !e.d.prop) e.dblOK = rnd() < .25;
 }
 /* ---------- le tour des malus ---------- */
 function mxTick(cb, dt) {
@@ -27248,30 +27330,32 @@ HURT_ENV.debt = 'La banqueroute';
 /* ---------- les crochets (appelés depuis la boucle de combat) ---------- */
 function xTick(cb, dt) {
   if (cb.evs && cb.evs.length) evTick(cb, dt);
+  arcTick(cb, dt);
   if (cb.mx) mxTick(cb, dt);
   let mags = null;
   for (const e of cb.enemies) if (!e.dead && e.d.vic === 'aimant' && e.deal <= .15) (mags || (mags = [])).push(e);
   cb.mags = mags;
 }
-function xSpawn(e, o) { if (G.cb.demo) return; vicInit(e, o); corInit(e); gntInit(e); mxSpawn(e); xLateTapis(e); }
+function xSpawn(e, o) { if (G.cb.demo) return; vicInit(e, o); corInit(e); gntInit(e); arcInit(e); enhInit(e, o); mxSpawn(e); xLateTapis(e); }
 // en zigzag : une carte ivre, une grue de papier
 function xPre(e, dt) {
   const d = edist(e) || 1, k = e.drunk ? 15 : 24, w = e.drunk ? 4.2 : 6.5, s = Math.sin(G.cb.t * w + e.wob) * k * dt, x = e.x;
   e.x += -e.y / d * s; e.y += x / d * s;
 }
-function xSpeedK(e) { return G.cb.hhSlow && !e.boss ? .6 : 1; }
+function xSpeedK(e) { return (G.cb.hhSlow && !e.boss ? .6 : 1) * xSpdK2(e); }
 // l'or d'une carte abattue : case allumée ×3, Happy Hour ×2, Usurier ×2
 function xGoldK(e) {
   const cb = G.cb; let k = 1;
   if (cb.evs && cb.evs.length) for (const id of cb.evs) if (EVH[id].goldK && cb.ev[id]) k *= EVH[id].goldK(cb, cb.ev[id], e);
   if (hasMalus(G.run, 'usurier')) k *= 2;
+  if (cb.xWheel) k *= arcGoldK(e);
   return k;
 }
 function xKillGold(e, g) { if (hasMalus(G.run, 'orroule') && G.cb.mx && mxCoin(e, g)) return; addGold(g, 'kill'); }
 function xKill(e, o) {
   const cb = G.cb;
   if (cb.evs && cb.evs.length) for (const id of cb.evs) if (EVH[id].kill && cb.ev[id]) EVH[id].kill(cb, cb.ev[id], e);
-  vicKill(e);
+  vicKill(e); arcKill(e); enhKill(e);
 }
 // Cartes marquées : le premier coup sur chaque carte ne compte pas
 function xHitCancel(e) {
@@ -27296,6 +27380,7 @@ function xBall(b, dt) {
 }
 function xBilHit(e, b) {
   if (e.d.giant) gntBille(e, b);
+  if (e.xMoonH) arcReveal(e);
   if (e.d.vic === 'meche' && !e.st.out) { e.st.out = true; if (!G.headless) { floater(e.x, e.y - e.r - 3, 'ÉTEINTE !', '#c3cde0', 4.4); Snd.sizzle(); burst(e.x, e.y - e.r, '#8d98ad', 8, 18, .9, .5); } }
   if (e.d.vic === 'sangsue') leechOff(e, 'bille');
 }
@@ -27327,6 +27412,9 @@ function xDrawCard(e, bx, by, top, t) {
   if (e.d.cor) corDraw(e, bx, by, top, t);
   if (e.d.giant) gntDraw(e, bx, by, top, t);
   if (e.pk) pkDraw(e, bx, by, top, t);
+  if (e.enh) enhDraw(e, bx, by, top, t);
+  if (e.d.arc || e.xMoonH || e.jgRev > 0) arcDraw(e, bx, by, top, t);
+  if (e.d.prop) csDraw(e, bx, by, top, t);
   if (e.drunk) {
     for (let i = 0; i < 3; i++) { const p = (t * 1.3 + i / 3 + e.wob) % 1, x = bx + Math.sin(t * 3 + i * 2) * 1.4 + e.r * .4, y = top - 1 - p * 6; ctx.fillStyle = `rgba(255,170,220,${.75 * (1 - p)})`; ctx.beginPath(); ctx.arc(x, y, .5 + p * .7, 0, TAU); ctx.fill(); }
   }
@@ -27350,7 +27438,7 @@ function plaquesHTML(m) {
     if (!id) { cells += '<i class="lock" title="Bientôt"></i>'; continue; }
     cells += `<i class="${P[id] ? 'on' : 'off'}" title="${esc(EVENTS[id].name)} : ${esc(EVENTS[id].plaque)}">${iconSVG(EVENTS[id].icon)}</i>`;
   }
-  return `<div class="pr-plaq"><h5><span>PLAQUES D'OR</span><b>${n}/${PLAQUES_MAX}</b></h5><div class="pq">${cells}</div></div>`;
+  return `<div class="pr-plaq"><h5><span>PLAQUES D'OR</span><b>${n}/${PLAQUES_MAX}</b></h5><div class="pq">${cells}</div><p class="pq-to">${n >= PLAQUES_MAX ? 'Table d\'Or débloquée : au Vestiaire !' : `${PLAQUES_MAX} plaques = la Table d'Or (Vestiaire)`}</p></div>`;
 }
 
 
@@ -27428,7 +27516,8 @@ function evBoard(txt, col, k) {
   ctx.restore();
 }
 // la ligne du panneau (en double table avec le Tiercé, on passe à la 2e)
-const evRow = (cb, id) => id !== 'tierce' && (cb.evs || []).includes('tierce') ? 1 : 0;
+const EV_BRD = ['poker', 'des', 'casse', 'allin'];
+const evRow = (cb, id) => { const L = cb.evs || []; if (id === 'tierce') return 0; return (L.includes('tierce') ? 1 : 0) + Math.max(0, L.filter(x => EV_BRD.includes(x)).indexOf(id)); };
 // une pastille : « TOI 15 » / « LUI 17 »
 function spPill(x, y, lab, val, col, ring) {
   const w = 17, h = 7.4;
@@ -27540,7 +27629,7 @@ const bjLanded = L => L.every(c => !c.mv);
 function bjShields(cb) {
   let n = 0;
   for (const e of cb.enemies) {
-    if (e.dead || e.boss || e.ai === 'decoy' || e.ai === 'thief' || e.d.giant) continue;
+    if (e.dead || e.boss || e.ai === 'decoy' || e.ai === 'thief' || e.d.giant || e.d.prop) continue;
     const v = e.maxHp * BJ.shield; if (e.shield >= v) continue;
     e.shield = e.shieldMax = v; n++;
     if (!G.headless) fxPush({ type: 'ring', x: e.x, y: e.y, r0: e.r, r1: e.r * 1.9, col: '195,205,224', life: .35, max: .35 });
@@ -28206,6 +28295,7 @@ function corDrawTop(cb, t) {
 }
 // les tirs spéciaux : le jeton vert du Zéro, l'éclat du Miroir, le jeton du Flambeur
 function xDrawShot(p, t) {
+  if (p.xk === 'glass') { enhShard(p, t); return; }
   if (p.xk === 'zero') {
     ctx.rotate(p.spin * .5);
     ctx.fillStyle = p.friendly ? '#7a5410' : '#0f5a2e'; ctx.beginPath(); ctx.arc(0, 0, p.r, 0, TAU); ctx.fill();
@@ -28229,8 +28319,8 @@ function xDrawShot(p, t) {
 /* ================= v14.5 · les Géants : un par tranche de 10 manches, en pleine manche (« ATTENTION ! ») =================
    Golem de 52 cartes (chaque coup lui arrache des cartes, il rétrécit), Carte XXL (les tirs lui font peu ;
    la BILLE plie ses 4 coins, et elle s'effondre), Le Flambeur (il lance des jetons : chaque jeton paré = de l'or).
-   Le Sabot et la Main de la Maison arrivent en v14.6. */
-const GNT = { ids: ['golem', 'xxl', 'flambeur'], from: { golem: 6, xxl: 6, flambeur: 6 }, shed: .09, shedMax: 10, fold: .18, chip: [1.5, .12], drop: .7 };
+   Le Sabot et la Main de la Maison (v14.6) : plus bas. */
+const GNT = { ids: ['golem', 'xxl', 'flambeur', 'sabot', 'main'], from: { golem: 6, xxl: 6, flambeur: 6, sabot: 6, main: 11 }, shed: .09, shedMax: 10, fold: .18, chip: [1.5, .12], drop: .7 };
 // le plan : une manche par tranche de 10 (de préférence sans jeu de la Maison ni vague spéciale)
 function gntPlanBlock(run, b) {
   const P = run.gPlan || (run.gPlan = {});
@@ -28269,6 +28359,7 @@ function gntInit(e) {
   if (K === 'golem') { st.shed = 0; st.step = 0; }
   if (K === 'xxl') { st.fold = [0, 0, 0, 0]; st.nf = 0; e.xBot = 8; }
   if (K === 'flambeur') { st.cd = 2.4; st.burstLeft = 0; st.bt = 0; st.dir = rnd() < .5 ? 1 : -1; }
+  gntInit2(e, K);
   dbg('giant_' + K);
   if (!G.headless && !cb.demo) { banner('ATTENTION !', `${e.d.name} entre en jeu`, 'gt', 2.4); Snd.alarm(); haptic(60); }
 }
@@ -28287,6 +28378,8 @@ function aiGiant(e, dt, sp, held, contactD) {
   }
   if (K === 'golem') gntGolem(e, dt);
   if (K === 'flambeur') { gntFlambeur(e, dt, sp, held, contactD); return; }
+  if (K === 'sabot') { gntSabot(e, dt, sp, held, contactD); return; }
+  if (K === 'main') { gntMain(e, dt, sp, held, contactD); return; }
   meleeStep(e, dt, sp, held, contactD);
 }
 function gntLand(e) {
@@ -28403,6 +28496,7 @@ function golemShape(g, w, h) {
 }
 function gntFace(g, type, d, r, w, h) {
   const K = d.giant;
+  if (K === 'sabot' || K === 'main') { gntFace2(g, type, d, r, w, h); return; }
   if (K === 'golem') {
     // des cartes collées partout, deux yeux qui brillent
     const C = [[-.3, -.15, -.3], [0, -.18, .2], [.28, -.12, -.15], [-.18, .05, .25], [.16, .06, -.3], [-.52, .02, .5], [.52, .0, -.45], [-.22, .3, .1], [.22, .3, -.1]];
@@ -28446,6 +28540,7 @@ function gntDraw(e, bx, by, top, t) {
     const k = 1 - e.xZ / 46;
     ctx.fillStyle = `rgba(0,0,0,${.15 + .3 * k})`; ctx.beginPath(); ctx.ellipse(e.x, e.y + e.r * .9, e.r * (.6 + .5 * k), e.r * (.25 + .2 * k), 0, 0, TAU); ctx.fill();
   }
+  if (K === 'sabot' || K === 'main') { gntDraw2(e, bx, by, top, t); return; }
   if (K === 'golem') {
     const n = golemCards(e);
     ctx.font = `700 3.4px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
@@ -28495,6 +28590,8 @@ function xFace(g, type, d, r, w, h) {
   if (d.xf === 'pk') pkFace(g, type, d, r, w, h);
   else if (d.cor) corFace(g, type, d, r, w, h);
   else if (d.giant) gntFace(g, type, d, r, w, h);
+  else if (d.arc) arcFace(g, type, d, r, w, h);
+  else if (d.prop || d.xf === 'vig') csFace(g, type, d, r, w, h);
 }
 // les dégâts sur une Coriace ou un Géant (0 = rien ne passe)
 function xDmg(e, amt, o) {
@@ -28515,6 +28612,7 @@ function xRoundWon(cb) {
 }
 // le bot des simulations : il tire au blackjack (jusqu'à 11), et encaisse la mise à ×4 ou plus
 function xBotTgt(cb) {
+  const t2 = xBotTgt2(cb); if (t2) return t2;
   if (!cb.evs || !cb.evs.length) return null;
   const B = cb.ev.blackjack;
   if (B && B.ph === 'play' && !B.res && bjTotal(B.pc) <= 11) { const c = B.tc.find(x => !x.used && !x.mv); if (c) return c; }
@@ -28525,7 +28623,7 @@ function xBotTgt(cb) {
 // une carte posée après le TAPIS (Joker du Bonneteau, piège de la Carte à gratter, paquet de la Maison…) fonce aussi :
 // sans ça, une carte qui tire de loin pouvait rester hors de portée, et la manche ne finissait jamais
 function xLateTapis(e) {
-  if (!G.cb.tapis || e.boss || e.d.giant || e.ai === 'decoy' || e.ai === 'thief' || e.ai === 'guard') return;
+  if (!G.cb.tapis || e.boss || e.d.giant || e.d.arc || e.d.prop || e.ai === 'decoy' || e.ai === 'thief' || e.ai === 'guard') return;
   e.tapis = true; e.stop = 0;
 }
 // le dessin par-dessus tout : le trajet du Sablier
@@ -28537,6 +28635,1516 @@ function pkDraw(e, bx, by, top, t) {
   ctx.save(); ctx.translate(bx, by); ctx.rotate(e.tilt);
   ctx.strokeStyle = e.pk.hl ? `rgba(255,214,107,${p})` : `rgba(191,239,255,${p * .8})`; ctx.lineWidth = .8; rrPath(ctx, -w / 2, -h / 2, w, h, 1.6); ctx.stroke();
   ctx.restore();
+}
+
+
+/* ================= v14.6 · les Coulisses (manches 21 à 30) : quatre jeux de la Maison =================
+   Bandit manchot (la table en 3 bandes, un rouleau par bande : 7 / cerise / BAR / crâne ; la BILLE arrête un rouleau),
+   Dés pipés (2 dés géants écrasent les cartes ; 7 ou 11 = or ; la BILLE relance un dé),
+   Le Casse (un coffre escorté de 3 vigiles traverse la table), Tapis ! (20 s : tout fonce, chaque carte paie ×3). */
+const CouSnd = (() => {
+  const last = {};
+  const th = (k, ms) => { const n = performance.now(); if (last[k] && n - last[k] < ms) return false; last[k] = n; return true; };
+  const T = (...a) => Snd.tone(...a), N = (...a) => Snd.noise(...a);
+  return {
+    rattle() { if (th('csrat', 70)) { N(.03, .12, 2600 + Math.random() * 1400, 'bandpass', 0, null, 5); T(380 + Math.random() * 160, .02, 'triangle', .04); } },
+    dieHit() { if (th('csdie', 50)) { N(.04, .16, 1800, 'bandpass', 0, null, 3); T(160, .06, 'triangle', .1, 90); } },
+    crush() { if (th('cscr', 60)) { N(.08, .14, 900, 'lowpass', 0, 300); T(120, .1, 'square', .05, 60); } },
+    whistle() { T(2200, .16, 'sine', .05, 2600); T(2200, .2, 'sine', .05, 2700, .2); },
+    vault() { T(70, .5, 'sine', .2, 50); N(.4, .1, 400, 'lowpass', 0, 120); [0, .09, .18].forEach(d => N(.03, .12, 3600, 'bandpass', d, null, 6)); },
+    allin() { T(110, .8, 'sawtooth', .06, 440); N(.6, .12, 300, 'bandpass', 0, 5000, 1.5); [0, .1, .2, .3].forEach((d, i) => T([392, 523, 659, 784][i], .14, 'square', .04, null, .5 + d)); },
+  };
+})();
+
+/* ---------- Bandit manchot : 3 bandes, un rouleau en haut de chacune ----------
+   Toutes les 7 s, le croupier tire le levier ; les rouleaux s'arrêtent un par un (ou sous ta BILLE : jamais de crâne).
+   Chaque bande prend l'effet de son symbole : 7 = or ×2, cerise = cartes ralenties, BAR = dégâts ×1,5, crâne = cartes plus rapides.
+   777 = JACKPOT (or + 1 MULT) ; 3 cerises = gel ; 3 BAR = +0,5 MULT ; 3 crânes = 3 cartes. Plaque : 777. */
+const BD = { every: 7, first: 1.6, stop: [1.5, 2.2, 2.9], spin: 15, wN: [2, 3, 3, 2], wB: [5, 3, 2, 0], band: 28, wy: -74, ww: 13, wh: 15, slow: .55, fast: 1.4, bar: 1.5, gold7: 2, frz: 2, jp: [24, 2.4] };
+const BD_SYM = ['7', 'cerise', 'bar', 'crane'];
+const BD_STRIP = ['7', 'cerise', 'bar', 'crane', 'cerise', 'bar', '7', 'bar', 'cerise', 'crane', 'bar', 'cerise'];
+const BD_FX = { 7: ['OR ×2', '#ffd36b', '255,204,77'], cerise: ['LENTES', '#ff8fbf', '255,92,150'], bar: ['DÉGÂTS ×1,5', '#7fd1ff', '110,190,255'], crane: ['RAPIDES', '#ff5c6c', '200,30,50'] };
+const bdBand = x => x < -BD.band ? 0 : x > BD.band ? 2 : 1;
+const bdX = i => (i - 1) * 56;
+const bdLever = () => ({ x: bdX(2) + 11, y: BD.wy });
+// un symbole du bandit (sur n'importe quel canvas)
+function bdSym(g, sym, x, y, s, a) {
+  g.save(); g.translate(x, y); g.globalAlpha *= a == null ? 1 : a;
+  if (sym === '7') {
+    g.font = `700 ${s * 1.05}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+    g.lineWidth = s * .14; g.strokeStyle = '#ffd36b'; g.strokeText('7', 0, s * .05); g.fillStyle = '#e2384d'; g.fillText('7', 0, s * .05);
+  } else if (sym === 'cerise') {
+    g.strokeStyle = '#3a8a3a'; g.lineWidth = s * .08; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(-s * .2, s * .1); g.quadraticCurveTo(-s * .1, -s * .25, s * .08, -s * .36); g.moveTo(s * .2, s * .16); g.quadraticCurveTo(s * .2, -s * .18, s * .08, -s * .36); g.stroke();
+    g.fillStyle = '#5fd68a'; g.beginPath(); g.ellipse(s * .2, -s * .36, s * .14, s * .07, -.4, 0, TAU); g.fill();
+    for (const [cx, cy] of [[-s * .2, s * .22], [s * .2, s * .28]]) { g.fillStyle = '#d81e3e'; g.beginPath(); g.arc(cx, cy, s * .2, 0, TAU); g.fill(); g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.arc(cx - s * .07, cy - s * .07, s * .055, 0, TAU); g.fill(); }
+  } else if (sym === 'bar') {
+    g.fillStyle = '#17101f'; rrPath(g, -s * .48, -s * .22, s * .96, s * .44, s * .08); g.fill();
+    g.strokeStyle = '#ffd36b'; g.lineWidth = s * .05; g.stroke();
+    g.fillStyle = '#ffd36b'; g.font = `700 ${s * .32}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('BAR', 0, s * .02);
+  } else {
+    drawIcon(g, 'malus', 0, 0, s * .82, '#f3eee6');
+  }
+  g.restore();
+}
+function bdNewReel(i) { return { i, st: 'idle', sym: null, pos: (i * 4 + 1) % BD_STRIP.length, t: 0, stopT: 0, land: null, bil: false, bounce: 0, tick: 0 }; }
+function bdPull(cb, S2) {
+  S2.next = BD.every; S2.pull = 0; S2.spins++; S2.combo = null; S2.done = false;
+  for (const R of S2.R) { R.st = 'spin'; R.sym = null; R.t = 0; R.stopT = BD.stop[R.i]; R.bil = false; R.land = null; }
+  dbg('bd_pull');
+  if (!G.headless) { Snd.lever(); if (S2.spins === 1) talk('croup', 'Faites tourner.'); }
+}
+function bdStop(cb, S2, R, bil) {
+  if (R.st !== 'spin') return;
+  const sym = wpick(BD_SYM, bil ? BD.wB : BD.wN), L = BD_STRIP.length;
+  let to = Math.ceil(R.pos + 1.4);
+  while (BD_STRIP[((to % L) + L) % L] !== sym) to++;
+  R.st = 'land'; R.sym = sym; R.bil = bil; R.land = { from: R.pos, to, t: 0, d: .32 };
+  if (bil) dbg('bd_bille');
+}
+function bdTickReel(cb, S2, R, dt) {
+  const L = BD_STRIP.length;
+  if (R.bounce > 0) R.bounce -= dt;
+  if (R.st === 'spin') {
+    R.t += dt; R.pos = (R.pos + BD.spin * dt) % L;
+    if (!G.headless && Math.floor(R.pos) !== R.tick) { R.tick = Math.floor(R.pos); EvSnd.reel(); }
+    if (R.t >= R.stopT) bdStop(cb, S2, R, false);
+  } else if (R.st === 'land') {
+    const M = R.land; M.t += dt;
+    const p = Math.min(1, M.t / M.d), c1 = 1.6, e = 1 + (c1 + 1) * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2);
+    R.pos = M.from + (M.to - M.from) * e;
+    if (p >= 1) {
+      R.pos = M.to % L; R.st = 'stop'; R.land = null; R.bounce = .18;
+      if (!G.headless) { Snd.reelStop(R.i); const F = BD_FX[R.sym]; floater(bdX(R.i), BD.wy + 12, F[0], F[1], 3.8); }
+      if (S2.R.every(r => r.st === 'stop') && !S2.done) bdCombo(cb, S2);
+    }
+  }
+}
+function bdCombo(cb, S2) {
+  S2.done = true;
+  const s = S2.R.map(r => r.sym);
+  if (s[0] !== s[1] || s[1] !== s[2]) return;
+  S2.combo = s[0]; S2.comboT = 2.2;
+  const r = G.run.round, X = 0, Y = BD.wy + 18;
+  dbg('bd_combo_' + s[0]);
+  if (s[0] === '7') {
+    const g = spGold(BD.jp, r); addGold(g, 'event'); evMultAdd('bandit', 1, X, BD.wy);
+    if (!G.headless) { banner('JACKPOT !', `777 · +${g} or · +1 MULT`, 'good', 2.2); for (let i = 0; i < 4; i++) coinBurst(rand(-50, 50), BD.wy + rand(0, 10)); Snd.jackpot(); Snd.coinShower(); celebrate(true); haptic(90); talk('croup', 'Sept, sept, sept. La Maison pleure.'); }
+    evPlaque('bandit');
+  } else if (s[0] === 'cerise') {
+    let n = 0; for (const e of cb.enemies) if (!e.dead && e.ai !== 'decoy') { freezeE(e, BD.frz); n++; }
+    if (!G.headless) { floater(X, Y, 'TRIPLE CERISE : GEL !', '#bfefff', 5.4); Snd.ice && Snd.ice(); fxPush({ type: 'ring', x: 0, y: 0, r0: 10, r1: 95, col: '191,239,255', life: .5, max: .5 }); }
+  } else if (s[0] === 'bar') {
+    evMultAdd('bandit', .5, X, BD.wy);
+    if (!G.headless) { floater(X, Y, 'TRIPLE BAR : +0,5 MULT', '#7fd1ff', 5.2); Snd.chime(); }
+  } else {
+    const pool = (cb.reinfTypes || []).filter(t => !ENEMIES[t].boss && !ENEMIES[t].giant && t !== 'voleur');
+    for (let k = 0; k < 3; k++) { const e = spawnEnemy(pool.length ? pick(pool) : 'soldat', 0, { x: bdX(k), y: BD.wy + 8, noDeal: true, hpMul: 1 }); if (e) { e.kby = 60; e.stunT = .3; } }
+    cb.total += 3;
+    if (!G.headless) { floater(X, Y, 'LA MAISON GAGNE : 3 CARTES !', '#ff5c6c', 5); Snd.malus(); shake(2.5); }
+  }
+}
+const bdFx = (S2, x) => { const R = S2.R[bdBand(x)]; return R.st === 'stop' ? R.sym : null; };
+EVH.bandit = {
+  init(cb, S2) { Object.assign(S2, { R: [0, 1, 2].map(bdNewReel), next: BD.first, pull: -1, spins: 0, combo: null, comboT: 0, done: true }); },
+  tick(cb, S2, dt) {
+    if (S2.pull >= 0) { S2.pull += dt; if (S2.pull > .7) S2.pull = -1; }
+    if (S2.comboT > 0) S2.comboT -= dt;
+    S2.next -= dt;
+    if (S2.next <= 0) bdPull(cb, S2);
+    for (const R of S2.R) bdTickReel(cb, S2, R, dt);
+  },
+  goldK(cb, S2, e) { return bdFx(S2, e.x) === '7' ? BD.gold7 : 1; },
+  spdK(cb, S2, e) { if (e.boss) return 1; const f = bdFx(S2, e.x); return f === 'cerise' ? BD.slow : f === 'crane' ? BD.fast : 1; },
+  dmgK(cb, S2, e) { return bdFx(S2, e.x) === 'bar' ? BD.bar : 1; },
+  ball(cb, S2, b) {
+    for (const R of S2.R) {
+      if (R.st !== 'spin') continue;
+      const X = bdX(R.i), Y = BD.wy;
+      if (!segHit(b.xpx, b.xpy, b.x, b.y, X, Y, BD.ww * .62 + b.r * .5)) continue;
+      const dx = b.x - X, dy = b.y - Y, d = Math.hypot(dx, dy) || 1, nx = dx / d, ny = dy / d, vn = b.vx * nx + b.vy * ny;
+      if (vn < 0) { b.vx -= 1.8 * vn * nx; b.vy -= 1.8 * vn * ny; }
+      bdStop(cb, S2, R, true);
+      if (!G.headless) { floater(X, Y - 11, 'STOP !', '#fff3e6', 4.2); Snd.ballHit(.6); shake(1.2); }
+      return;
+    }
+  },
+  ground(cb, S2, t) {
+    // les bandes : la teinte de leur effet, et le symbole en grand
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, 93, 0, TAU); ctx.clip();
+    for (const R of S2.R) {
+      if (R.st !== 'stop') continue;
+      const F = BD_FX[R.sym], x0 = R.i === 0 ? -100 : R.i === 1 ? -BD.band : BD.band, x1 = R.i === 0 ? -BD.band : R.i === 1 ? BD.band : 100;
+      const p = R.bounce > 0 ? R.bounce / .18 : 0, al = .15 + .12 * p + .04 * Math.sin(t * 3 + R.i);
+      ctx.fillStyle = `rgba(${F[2]},${al})`; ctx.fillRect(x0, -100, x1 - x0, 200);
+      ctx.fillStyle = `rgba(${F[2]},${.35 + .25 * p})`; if (R.i > 0) ctx.fillRect(x0, -100, 1.2, 200); if (R.i < 2) ctx.fillRect(x1 - 1.2, -100, 1.2, 200);
+      bdSym(ctx, R.sym, bdX(R.i), 22, 22, .2 + .25 * p);
+    }
+    ctx.restore();
+  },
+  top(cb, S2, t) {
+    const L = BD_STRIP.length, W = BD.ww, H = BD.wh, Y = BD.wy;
+    // le meuble du bandit : trois fenêtres chromées
+    for (const R of S2.R) {
+      const X = bdX(R.i), spin = R.st === 'spin' || R.st === 'land', glow = R.st === 'spin';
+      ctx.fillStyle = 'rgba(0,0,0,.4)'; rrPath(ctx, X - W / 2 - 1.2, Y - H / 2 - .4, W + 3, H + 3, 2.4); ctx.fill();
+      const gr = ctx.createLinearGradient(X - W / 2, 0, X + W / 2, 0); gr.addColorStop(0, '#8d98ad'); gr.addColorStop(.5, '#f3f6fb'); gr.addColorStop(1, '#6a7488');
+      ctx.fillStyle = gr; rrPath(ctx, X - W / 2 - 1.6, Y - H / 2 - 1.6, W + 3.2, H + 3.2, 2.4); ctx.fill();
+      ctx.fillStyle = '#fff8ee'; rrPath(ctx, X - W / 2, Y - H / 2, W, H, 1.4); ctx.fill();
+      // le ruban de symboles (celui du milieu est sur la ligne)
+      ctx.save(); rrPath(ctx, X - W / 2, Y - H / 2, W, H, 1.4); ctx.clip();
+      const base = Math.floor(R.pos), fr = R.pos - base, gap = 10.5;
+      for (let k = -1; k <= 1; k++) {
+        const sym = BD_STRIP[(((base + k) % L) + L) % L], yy = Y + (k - fr) * gap;
+        bdSym(ctx, sym, X, yy, 9, spin ? .85 : 1);
+      }
+      if (spin) { ctx.fillStyle = 'rgba(255,248,238,.35)'; ctx.fillRect(X - W / 2, Y - H / 2, W, H); }
+      const sh = ctx.createLinearGradient(0, Y - H / 2, 0, Y + H / 2); sh.addColorStop(0, 'rgba(0,0,0,.35)'); sh.addColorStop(.3, 'rgba(0,0,0,0)'); sh.addColorStop(.7, 'rgba(0,0,0,0)'); sh.addColorStop(1, 'rgba(0,0,0,.35)');
+      ctx.fillStyle = sh; ctx.fillRect(X - W / 2, Y - H / 2, W, H);
+      ctx.restore();
+      ctx.strokeStyle = glow ? `rgba(255,204,77,${.6 + .4 * Math.sin(t * 12 + R.i)})` : 'rgba(23,16,31,.8)'; ctx.lineWidth = glow ? .9 : .5; rrPath(ctx, X - W / 2, Y - H / 2, W, H, 1.4); ctx.stroke();
+      // la ligne gagnante
+      ctx.strokeStyle = 'rgba(226,56,77,.65)'; ctx.lineWidth = .35; ctx.beginPath(); ctx.moveTo(X - W / 2 - 1.5, Y); ctx.lineTo(X - W / 2 + 1, Y); ctx.moveTo(X + W / 2 - 1, Y); ctx.lineTo(X + W / 2 + 1.5, Y); ctx.stroke();
+      if (glow) { ctx.font = `700 3px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.1; ctx.strokeStyle = 'rgba(14,8,22,.85)'; ctx.strokeText('BILLE = STOP', X, Y - H / 2 - 3.6); ctx.fillStyle = `rgba(255,236,190,${.6 + .4 * Math.sin(t * 9)})`; ctx.fillText('BILLE = STOP', X, Y - H / 2 - 3.6); }
+      else if (R.st === 'stop') { const F = BD_FX[R.sym]; ctx.font = `700 3.7px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.4; ctx.strokeStyle = 'rgba(14,8,22,.92)'; ctx.strokeText(F[0], X, Y + H / 2 + 4.4); ctx.fillStyle = F[1]; ctx.fillText(F[0], X, Y + H / 2 + 4.4); }
+    }
+    // le levier : une tige chromée, une boule rouge (il descend quand on tire)
+    const Lv = bdLever(), pull = S2.pull >= 0 ? Math.sin(Math.min(1, S2.pull / .7) * Math.PI) : 0, ang = -Math.PI / 2 + pull * 2.2;
+    ctx.fillStyle = '#5a6478'; rrPath(ctx, Lv.x - 1.6, Lv.y - 2.4, 3.2, 4.8, 1); ctx.fill();
+    const tx = Lv.x + 1.8 + Math.cos(ang) * 11, ty = Lv.y + Math.sin(ang) * 11;
+    ctx.strokeStyle = '#c3cde0'; ctx.lineWidth = 1.1; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(Lv.x + 1.8, Lv.y); ctx.lineTo(tx, ty); ctx.stroke();
+    ctx.fillStyle = '#e2384d'; ctx.beginPath(); ctx.arc(tx, ty, 2.2, 0, TAU); ctx.fill(); ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.beginPath(); ctx.arc(tx - .7, ty - .7, .7, 0, TAU); ctx.fill();
+    // la main du croupier tire le levier
+    const near = S2.next < .45 ? 1 - S2.next / .45 : 0, show = S2.pull >= 0 ? 1 : near;
+    if (show > .02) drawHandW(tx + 6 * (1 - show), ty - 2 - 8 * (1 - show), Math.PI * .75, 10, 'croup', S2.pull >= 0 ? .7 : .2, Math.min(1, show * 1.4) * (S2.pull > .5 ? 1 - (S2.pull - .5) / .2 : 1));
+    if (S2.comboT > 0 && S2.combo) {
+      const a = Math.min(1, S2.comboT / .4), txt = S2.combo === '7' ? 'JACKPOT !' : S2.combo === 'cerise' ? 'GEL !' : S2.combo === 'bar' ? '+0,5 MULT' : 'LA MAISON GAGNE';
+      ctx.globalAlpha = a; ctx.font = `700 5px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.8; ctx.strokeStyle = 'rgba(14,8,22,.92)';
+      ctx.strokeText(txt, 0, BD.wy - 13); ctx.fillStyle = S2.combo === 'crane' ? '#ff5c6c' : '#ffd36b'; ctx.fillText(txt, 0, BD.wy - 13); ctx.globalAlpha = 1;
+    }
+  },
+};
+
+/* ---------- Dés pipés : 2 dés géants roulent sur la table ----------
+   Toutes les 5 s, le croupier lance 2 dés : ils écrasent les cartes sur leur passage. Une fois arrêtés, 1,3 s pour lire :
+   7 ou 11 = de l'or ; un double = +0,3 MULT ; 2 ou 12 = 3 cartes sortent des dés. Ta BILLE relance un dé (même arrêté).
+   8 lancers par manche. Plaque : 5 fois 7 ou 11. */
+const DS = { throws: 8, every: 5, first: 2, read: 1.3, r: 6, fr: 2.2, crush: .5, crushB: .04, gold: [4, .5], need: 5, rim: 84, hole: 25, reroll: 3 };
+const DS_PIP = { 1: [[0, 0]], 2: [[-1, -1], [1, 1]], 3: [[-1, -1], [0, 0], [1, 1]], 4: [[-1, -1], [1, -1], [-1, 1], [1, 1]], 5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]], 6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]] };
+function dsThrow(cb, S2) {
+  S2.n++; S2.ph = 'roll'; S2.pt = 0; S2.rr = 0; S2.res = null;
+  const x0 = rand(-26, 26), y0 = -92, tx = rand(-34, 34), ty = rand(4, 46), a0 = Math.atan2(ty - y0, tx - x0);
+  S2.dice = [-1, 1].map((sd, i) => {
+    const a = a0 + sd * rand(.08, .22), sp = rand(105, 135);
+    return { x: x0 + sd * 5, y: y0, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, z: 9, vz: 34, rot: rand(0, TAU), w: rand(7, 12) * (rnd() < .5 ? -1 : 1), face: irand(1, 6), fT: 0, st: 'roll', hit: {}, a: 1, i };
+  });
+  S2.hand = { x: x0, y: y0 - 6, t: 0 };
+  dbg('ds_throw');
+  if (!G.headless) { Snd.whoosh(); CouSnd.rattle(); if (S2.n === 1) talk('croup', 'Les dés sont jetés.'); }
+}
+function dsRoll(d, vx, vy) { d.st = 'roll'; d.vx = vx; d.vy = vy; d.vz = 22; d.z = Math.max(d.z, 2); d.w = rand(7, 12) * (rnd() < .5 ? -1 : 1); d.hit = {}; }
+function dsStep(cb, S2, d, dt) {
+  d.x += d.vx * dt; d.y += d.vy * dt;
+  d.vz -= 260 * dt; d.z += d.vz * dt;
+  if (d.z < 0) { d.z = 0; if (d.vz < -24) { d.vz = -d.vz * .42; if (!G.headless) CouSnd.dieHit(); } else d.vz = 0; }
+  const k = Math.exp(-(d.z > .5 ? .5 : DS.fr) * dt); d.vx *= k; d.vy *= k;
+  // le bord de la table, et la base (un dé ne s'arrête pas sur toi)
+  let dd = Math.hypot(d.x, d.y) || 1;
+  if (dd > DS.rim) { const nx = d.x / dd, ny = d.y / dd, vn = d.vx * nx + d.vy * ny; d.x = nx * DS.rim; d.y = ny * DS.rim; if (vn > 0) { d.vx -= 1.7 * vn * nx; d.vy -= 1.7 * vn * ny; } if (!G.headless) CouSnd.dieHit(); }
+  dd = Math.hypot(d.x, d.y) || 1;
+  if (dd < DS.hole) { const nx = d.x / dd, ny = d.y / dd, vn = d.vx * nx + d.vy * ny; d.x = nx * DS.hole; d.y = ny * DS.hole; if (vn < 0) { d.vx -= 1.7 * vn * nx; d.vy -= 1.7 * vn * ny; } if (Math.hypot(d.vx, d.vy) < 12) { d.vx += nx * 14; d.vy += ny * 14; } }
+  const sp = Math.hypot(d.vx, d.vy);
+  if (sp > 9) {
+    d.fT -= dt; d.rot += d.w * dt * Math.min(1, sp / 60);
+    if (d.fT <= 0) { d.fT = .045 + 2.2 / (sp + 20); let f = irand(1, 6); if (f === d.face) f = f % 6 + 1; d.face = f; if (!G.headless) CouSnd.rattle(); }
+  }
+  // les cartes sur son passage : écrasées
+  if (sp > 24) for (const e of cb.enemies) {
+    if (e.dead || e.deal > .15 || e.ai === 'decoy' || (e.xZ || 0) > 6 || d.hit[e.id]) continue;
+    const dx = e.x - d.x, dy = e.y - d.y, rr2 = DS.r + e.r * .8;
+    if (dx * dx + dy * dy > rr2 * rr2) continue;
+    d.hit[e.id] = 1;
+    dealDmg(e, e.maxHp * (e.boss || e.d.giant || e.d.prop ? DS.crushB : DS.crush), { src: 'des', big: true });
+    if (!e.dead && !e.boss && !e.d.giant && !e.d.prop) { e.kbx += d.vx / sp * 70; e.kby += d.vy / sp * 70; e.stunT = Math.max(e.stunT, .3); }
+    d.vx *= .86; d.vy *= .86;
+    if (!G.headless) { CouSnd.crush(); burst(e.x, e.y, '#ffffff', 5, 24, .9, .3); }
+  }
+  if (sp < 7 && d.z <= 0) { d.vx = d.vy = 0; d.st = 'rest'; if (!G.headless) Snd.cardTap ? Snd.cardTap() : CouSnd.dieHit(); }
+}
+// les deux dés se cognent
+function dsBump(A, B) {
+  const dx = B.x - A.x, dy = B.y - A.y, d = Math.hypot(dx, dy), m = DS.r * 2;
+  if (d >= m || d < 1e-4) return;
+  const nx = dx / d, ny = dy / d, push = (m - d) / 2;
+  A.x -= nx * push; A.y -= ny * push; B.x += nx * push; B.y += ny * push;
+  const va = A.vx * nx + A.vy * ny, vb = B.vx * nx + B.vy * ny;
+  if (va - vb > 0) { const dv = (va - vb) * .9; A.vx -= dv * nx; A.vy -= dv * ny; B.vx += dv * nx; B.vy += dv * ny; if (A.st === 'rest') A.st = 'roll'; if (B.st === 'rest') B.st = 'roll'; if (!G.headless) CouSnd.dieHit(); }
+}
+const dsSum = S2 => S2.dice.reduce((a, d) => a + d.face, 0);
+function dsResolve(cb, S2) {
+  const D = S2.dice, s = dsSum(S2), dbl = D[0].face === D[1].face, x = (D[0].x + D[1].x) / 2, y = (D[0].y + D[1].y) / 2;
+  S2.ph = 'res'; S2.pt = 0; S2.res = { s, dbl, win: s === 7 || s === 11, bad: s === 2 || s === 12 };
+  dbg('ds_sum_' + s);
+  if (S2.res.win) {
+    S2.wins++;
+    const g = spGold(DS.gold, G.run.round); addGold(g, 'event');
+    if (!G.headless) { floater(x, y - 10, `${s === 7 ? 'SEPT' : 'ONZE'} ! +${g} or`, '#ffd36b', 5.6); coinBurst(D[0].x, D[0].y); coinBurst(D[1].x, D[1].y); Snd.coin(); Snd.chime(); celebrate(false); }
+    if (S2.wins >= DS.need) evPlaque('des');
+  }
+  if (dbl) { evMultAdd('des', .3, x, y); if (!G.headless) floater(x, y - (S2.res.win ? 16 : 10), 'DOUBLE ! +0,3 MULT', '#7fd1ff', 4.8); }
+  if (S2.res.bad) {
+    const pool = (cb.reinfTypes || []).filter(t => !ENEMIES[t].boss && !ENEMIES[t].giant && t !== 'voleur');
+    for (let k = 0; k < 3; k++) { const d = D[k % 2], a = rand(0, TAU), e = spawnEnemy(pool.length ? pick(pool) : 'soldat', 0, { x: d.x + Math.cos(a) * 4, y: d.y + Math.sin(a) * 4, noDeal: true, hpMul: 1 }); if (e) { e.kbx = Math.cos(a) * 50; e.kby = Math.sin(a) * 50; e.stunT = .3; } }
+    cb.total += 3;
+    if (!G.headless) { floater(x, y - 6, `${s === 2 ? 'DEUX' : 'DOUZE'} : 3 CARTES !`, '#ff5c6c', 5); Snd.malus(); shake(2); }
+  }
+  if (!S2.res.win && !dbl && !S2.res.bad && !G.headless) { floater(x, y - 10, String(s), '#c3cde0', 5.2); Snd.dud && Snd.dud(); }
+}
+EVH.des = {
+  init(cb, S2) { Object.assign(S2, { n: 0, wins: 0, ph: 'wait', pt: 0, next: DS.first, dice: [], hand: null, res: null, rr: 0 }); },
+  hold(cb, S2) { return S2.n < DS.throws || (S2.ph !== 'wait' && S2.ph !== 'done'); },
+  tick(cb, S2, dt) {
+    const k = evEmpty(cb) ? 2.5 : 1;
+    if (S2.hand) { S2.hand.t += dt; if (S2.hand.t > .6) S2.hand = null; }
+    S2.pt += dt;
+    if (S2.ph === 'wait') { S2.next -= dt * k; if (S2.next <= 0) { if (S2.n < DS.throws) dsThrow(cb, S2); else S2.ph = 'done'; } return; }
+    if (S2.ph === 'done') return;
+    if (S2.ph === 'roll' || S2.ph === 'read') {
+      for (const d of S2.dice) if (d.st === 'roll') dsStep(cb, S2, d, dt);
+      dsBump(S2.dice[0], S2.dice[1]);
+      const still = S2.dice.every(d => d.st === 'rest');
+      if (S2.ph === 'roll' && still) { S2.ph = 'read'; S2.pt = 0; if (!G.headless) Snd.tick && Snd.tick(); }
+      else if (S2.ph === 'read' && !still) { S2.ph = 'roll'; S2.pt = 0; }
+      if (S2.ph === 'read' && S2.pt >= DS.read / (evEmpty(cb) ? 2 : 1)) dsResolve(cb, S2);
+      return;
+    }
+    if (S2.ph === 'res') {
+      // le croupier ramasse les dés
+      if (S2.pt > .9) for (const d of S2.dice) { d.y -= 130 * dt; d.a = Math.max(0, d.a - dt * 2.6); }
+      if (S2.pt > 1.35) { S2.ph = 'wait'; S2.next = Math.max(.8, DS.every - 3.2); S2.dice = []; }
+    }
+  },
+  ball(cb, S2, b) {
+    if ((S2.ph !== 'roll' && S2.ph !== 'read') || S2.rr >= DS.reroll * 2 || (b.dsT || 0) > cb.t) return;
+    for (const d of S2.dice) {
+      if (!segHit(b.xpx, b.xpy, b.x, b.y, d.x, d.y, DS.r + b.r * .6)) continue;
+      const dx = d.x - b.x, dy = d.y - b.y, dd = Math.hypot(dx, dy) || 1, nx = dx / dd, ny = dy / dd, sp = Math.max(70, Math.hypot(b.vx, b.vy) * .55);
+      const vn = b.vx * nx + b.vy * ny; if (vn > 0) { b.vx -= 1.6 * vn * nx; b.vy -= 1.6 * vn * ny; }
+      dsRoll(d, nx * sp + rand(-15, 15), ny * sp + rand(-15, 15));
+      S2.rr++; b.dsT = cb.t + .35;
+      if (S2.ph === 'read') { S2.ph = 'roll'; S2.pt = 0; }
+      dbg('ds_reroll');
+      if (!G.headless) { floater(d.x, d.y - 9, 'RELANCE !', '#fff3e6', 4.2); Snd.ballHit(.7); CouSnd.dieHit(); shake(1.2); }
+      return;
+    }
+  },
+  mid(cb, S2, t) {
+    for (const d of S2.dice) dsDraw(d, t, S2.ph === 'res' && S2.res && (S2.res.win || S2.res.dbl) ? '#ffd36b' : S2.ph === 'res' && S2.res && S2.res.bad ? '#ff5c6c' : null);
+    if (S2.ph === 'read' && S2.dice.length) {
+      const s = dsSum(S2), x = (S2.dice[0].x + S2.dice[1].x) / 2, y = Math.min(S2.dice[0].y, S2.dice[1].y) - 11, good = s === 7 || s === 11, bad = s === 2 || s === 12;
+      const f = 1 - clamp(S2.pt / DS.read, 0, 1);
+      ctx.font = `700 6px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(14,8,22,.92)';
+      ctx.strokeText(String(s), x, y); ctx.fillStyle = good ? '#ffd36b' : bad ? '#ff5c6c' : '#fff3e6'; ctx.fillText(String(s), x, y);
+      ctx.strokeStyle = 'rgba(255,236,190,.85)'; ctx.lineWidth = .8; ctx.beginPath(); ctx.arc(x, y, 5.6, -Math.PI / 2, -Math.PI / 2 + f * TAU); ctx.stroke();
+    }
+  },
+  top(cb, S2, t) {
+    if (S2.hand) {
+      // la main du croupier lâche les dés au bord de la table, puis repart
+      const u = S2.hand.t / .6, p = u < .3 ? evEase(u / .3) : 1 - evEase((u - .3) / .7);
+      drawHandW(S2.hand.x, -104 + 12 * p, Math.PI / 2, 11, 'croup', u < .3 ? .6 : 0, u > .75 ? 1 - (u - .75) / .25 : 1);
+    }
+    let txt = null, col = '#fff3e6';
+    if (S2.n < DS.throws || S2.ph !== 'done') txt = `DÉS PIPÉS · LANCER ${Math.max(1, S2.n)}/${DS.throws} · 7 OU 11 : ${S2.wins}/${DS.need}`;
+    if (S2.wins >= DS.need) col = '#ffd36b';
+    if (txt) evBoard(txt, col, evRow(cb, 'des'));
+  },
+};
+// un dé : rouge translucide, points blancs, un peu de relief
+function dsDraw(d, t, glow) {
+  if (d.a <= 0) return;
+  const R = DS.r, z = d.z || 0;
+  ctx.save(); ctx.globalAlpha = d.a;
+  ctx.fillStyle = 'rgba(0,0,0,.38)'; ctx.beginPath(); ctx.ellipse(d.x + 1 + z * .3, d.y + 2 + z * .5, R * 1.15, R * .8, 0, 0, TAU); ctx.fill();
+  ctx.translate(d.x, d.y - z); ctx.rotate(d.rot);
+  if (glow) { ctx.shadowColor = glow; ctx.shadowBlur = 8 + 3 * Math.sin(t * 9); }
+  ctx.fillStyle = '#8a0f22'; rrPath(ctx, -R + .9, -R + 1.3, R * 2, R * 2, R * .45); ctx.fill();
+  const gr = ctx.createLinearGradient(-R, -R, R, R); gr.addColorStop(0, '#ff5a6a'); gr.addColorStop(.55, '#e2253d'); gr.addColorStop(1, '#b0142b');
+  ctx.fillStyle = gr; rrPath(ctx, -R, -R, R * 2, R * 2, R * .45); ctx.fill(); ctx.shadowBlur = 0;
+  ctx.strokeStyle = 'rgba(255,220,220,.55)'; ctx.lineWidth = .4; rrPath(ctx, -R + .7, -R + .7, R * 2 - 1.4, R * 2 - 1.4, R * .35); ctx.stroke();
+  ctx.fillStyle = '#fff8ee';
+  for (const [px, py] of DS_PIP[d.face] || DS_PIP[1]) { ctx.beginPath(); ctx.arc(px * R * .5, py * R * .5, R * .17, 0, TAU); ctx.fill(); }
+  ctx.fillStyle = 'rgba(255,255,255,.28)'; ctx.beginPath(); ctx.ellipse(-R * .35, -R * .45, R * .45, R * .2, -.6, 0, TAU); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- Le Casse : un coffre escorté de 3 vigiles traverse la table ----------
+   Tant qu'un vigile vit, le coffre est intouchable. Ouvre-le avant qu'il sorte : un gros paquet d'or (ta BILLE lui fait ×3).
+   Plaque : l'ouvrir en moins de 15 s. */
+const CS = { at: 2.2, T: 22, y: 40, x: 100, vig: 3, rad: 15, plaq: 15, gold: [15, 1.5], bille: 3 };
+function csStart(cb, S2) {
+  const sd = rnd() < .5 ? -1 : 1, y = (rnd() < .5 ? -1 : 1) * CS.y;
+  const P = { x0: sd * CS.x, y0: y, x1: -sd * CS.x, y1: y, T: CS.T };
+  const e = spawnEnemy('coffre', 0, { x: P.x0, y: P.y0, noDeal: true, hpMul: 1 });
+  if (!e) { S2.res = 'none'; return; }
+  e.st.path = P; e.st.u = 0; e.st.guards = []; e.inv = true; e.xNoAim = true; e.xd = true; e.tilt = 0;
+  for (let k = 0; k < CS.vig; k++) {
+    const a = k / CS.vig * TAU, g = spawnEnemy('vigile', 0, { x: e.x + Math.cos(a) * CS.rad, y: e.y + Math.sin(a) * CS.rad, king: e, gang: a, grad: CS.rad, noDeal: true, hpMul: 1 });
+    if (g) { e.st.guards.push(g); g.xBot = 6; }
+  }
+  cb.total += 1 + e.st.guards.length;
+  S2.safe = e; S2.t0 = cb.t; S2.ph = 'live';
+  dbg('cs_start');
+  if (!G.headless) { CouSnd.whistle(); Snd.rumble(); talk('croup', 'Le coffre passe. Ne le touchez pas.'); }
+}
+function aiSafe(e, dt, held) {
+  const st = e.st, P = st.path;
+  e.kbx = 0; e.kby = 0;
+  if (e.stunT > .3) e.stunT = .3;
+  if (st.guards) {
+    st.guards = st.guards.filter(g => !g.dead);
+    const inv = st.guards.length > 0;
+    if (e.inv && !inv) {
+      e.xBot = 9; dbg('cs_bare');
+      if (!G.headless) { floater(e.x, e.y - e.r - 6, 'LE COFFRE EST À NU !', '#ffd36b', 5); Snd.door(); shake(1.5); }
+    }
+    e.inv = inv;
+  }
+  e.xNoAim = e.inv;
+  if (!P) { e.dead = true; return; }   // un coffre sans rail (copié par un jeton) : il s'en va
+  // il roule sur son rail : gelé ou ralenti, il avance moins vite (jamais en arrière) ; rien ne le pousse hors du rail
+  if (!held) st.u += dt / P.T * Math.max(.3, e.slowT > 0 ? 1 - e.slowAmt : 1);
+  st.life = (st.life || 0) + dt;
+  const u = clamp(st.u, 0, 1);
+  e.x = P.x0 + (P.x1 - P.x0) * u; e.y = P.y0 + (P.y1 - P.y0) * u;
+  if (!G.headless && !held) { st.rT = (st.rT || 0) - dt; if (st.rT <= 0) { st.rT = .5; Snd.tone(55, .12, 'sine', .06, 40); } }
+  if (st.u >= 1 || st.life > P.T * 1.6) csEscape(e);
+}
+function csEscape(e) {
+  const cb = G.cb, S2 = cb.ev && cb.ev.casse;
+  e.dead = true;
+  for (const g of e.st.guards || []) g.dead = true;
+  if (S2 && !S2.res) S2.res = 'esc';
+  dbg('cs_escape');
+  if (!G.headless) { floater(e.x * .8, e.y, 'LE COFFRE S\'ÉCHAPPE !', '#ff5c6c', 5.2); Snd.lose && Snd.lose(); talk('croup', 'Trop lent. La Maison garde tout.'); }
+}
+EVH.casse = {
+  init(cb, S2) { Object.assign(S2, { ph: 'wait', pt: 0, safe: null, t0: 0, res: null }); },
+  hold(cb, S2) { return !S2.res; },
+  tick(cb, S2, dt) {
+    S2.pt += dt;
+    if (S2.ph === 'wait' && S2.pt >= CS.at) csStart(cb, S2);
+    if (S2.safe && S2.safe.dead && !S2.res) S2.res = 'esc';
+  },
+  dmgK(cb, S2, e, amt, o) { return e === S2.safe && o.src === 'bille' ? CS.bille : 1; },
+  kill(cb, S2, e) {
+    if (e !== S2.safe || S2.res) return;
+    S2.res = 'open';
+    const g = spGold(CS.gold, G.run.round), dt2 = cb.t - S2.t0; addGold(g, 'event');
+    dbg('cs_open', Math.round(dt2));
+    if (!G.headless) {
+      floater(e.x, e.y - 14, `COFFRE OUVERT ! +${g} or`, '#ffd36b', 6); for (let i = 0; i < 5; i++) coinBurst(e.x + rand(-6, 6), e.y + rand(-4, 4));
+      CouSnd.vault(); Snd.coinShower(); celebrate(true); haptic(70); talk('croup', 'Joli casse. Ne le répétez pas.');
+    }
+    if (dt2 < CS.plaq) evPlaque('casse');
+  },
+  ground(cb, S2, t) {
+    const e = S2.safe; if (!e || S2.res) return;
+    const P = e.st.path;
+    // le trajet du coffre (pointillés) et la sortie
+    ctx.strokeStyle = 'rgba(159,180,216,.35)'; ctx.lineWidth = .8; ctx.setLineDash([2.4, 2]); ctx.lineDashOffset = -t * 6;
+    ctx.beginPath(); ctx.moveTo(e.x, e.y); ctx.lineTo(P.x1, P.y1); ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset = 0;
+    const ex = P.x1 > 0 ? Math.min(P.x1, VIEW.hx - 8) : Math.max(P.x1, -VIEW.hx + 8);
+    ctx.fillStyle = `rgba(255,92,108,${.55 + .3 * Math.sin(t * 6)})`; ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('SORTIE', ex, P.y1 - 6);
+    ctx.save(); ctx.translate(ex, P.y1); ctx.rotate(P.x1 > 0 ? 0 : Math.PI); ctx.beginPath(); ctx.moveTo(-2, -2.6); ctx.lineTo(2.6, 0); ctx.lineTo(-2, 2.6); ctx.closePath(); ctx.fill(); ctx.restore();
+  },
+  top(cb, S2, t) {
+    const e = S2.safe;
+    let txt = null, col = '#bfe0ff';
+    if (S2.ph === 'wait') txt = 'LE CASSE · LE COFFRE ARRIVE…';
+    else if (!S2.res && e) {
+      const left = Math.max(0, Math.ceil(e.st.path.T * (1 - e.st.u))), nv = (e.st.guards || []).filter(g => !g.dead).length;
+      txt = nv ? `LE CASSE · ${nv} VIGILE${nv > 1 ? 'S' : ''} · ${left} s` : `LE CASSE · OUVRE-LE ! · ${left} s`;
+      if (!nv) col = '#ffd36b'; if (left <= 5) col = '#ff5c6c';
+    }
+    if (txt) evBoard(txt, col, evRow(cb, 'casse'));
+  },
+};
+// le coffre : un bloc d'acier (la forme) ; la face : cadran, poignée, boulons
+function csShape(g, w, h, rad) { rrPath(g, -w * .58, -h * .4, w * 1.16, h * .8, rad * .45); }
+function csFace(g, type, d, r, w, h) {
+  if (d.prop === 'coffre') {
+    const W = w * 1.16, H = h * .8;
+    let gr = g.createLinearGradient(-W / 2, -H / 2, W / 2, H / 2); gr.addColorStop(0, '#8d98ad'); gr.addColorStop(.5, '#5a6478'); gr.addColorStop(1, '#3a4252');
+    g.fillStyle = gr; rrPath(g, -W / 2 + r * .14, -H / 2 + r * .14, W - r * .28, H - r * .28, r * .12); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.25)'; g.lineWidth = r * .05; g.stroke();
+    // les charnières, les boulons
+    g.fillStyle = '#2a303c'; g.fillRect(-W / 2 + r * .02, -H * .3, r * .16, H * .18); g.fillRect(-W / 2 + r * .02, H * .12, r * .16, H * .18);
+    g.fillStyle = '#c3cde0'; for (const [x, y] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { g.beginPath(); g.arc(x * (W / 2 - r * .3), y * (H / 2 - r * .3), r * .07, 0, TAU); g.fill(); }
+    // le cadran
+    g.fillStyle = '#1d2230'; g.beginPath(); g.arc(-r * .12, 0, r * .5, 0, TAU); g.fill();
+    gr = g.createRadialGradient(-r * .22, -r * .1, r * .05, -r * .12, 0, r * .42); gr.addColorStop(0, '#f3f6fb'); gr.addColorStop(1, '#8d98ad');
+    g.fillStyle = gr; g.beginPath(); g.arc(-r * .12, 0, r * .4, 0, TAU); g.fill();
+    g.strokeStyle = '#2a303c'; g.lineWidth = r * .03; for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; g.beginPath(); g.moveTo(-r * .12 + Math.cos(a) * r * .3, Math.sin(a) * r * .3); g.lineTo(-r * .12 + Math.cos(a) * r * .38, Math.sin(a) * r * .38); g.stroke(); }
+    g.fillStyle = '#e2384d'; g.beginPath(); g.moveTo(-r * .12, -r * .44); g.lineTo(-r * .06, -r * .54); g.lineTo(-r * .18, -r * .54); g.closePath(); g.fill();
+    // la poignée (trois branches) et la plaque de la Maison
+    g.strokeStyle = '#d9a441'; g.lineWidth = r * .07; g.lineCap = 'round';
+    for (let i = 0; i < 3; i++) { const a = -Math.PI / 2 + i * TAU / 3; g.beginPath(); g.moveTo(r * .62, 0); g.lineTo(r * .62 + Math.cos(a) * r * .26, Math.sin(a) * r * .26); g.stroke(); }
+    g.fillStyle = '#d9a441'; g.beginPath(); g.arc(r * .62, 0, r * .08, 0, TAU); g.fill();
+    g.font = `700 ${r * .2}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('MAISON', -r * .12, H / 2 - r * .24);
+    return true;
+  }
+  if (d.xf === 'vig') {
+    // un vigile : casquette, insigne d'or, regard sévère
+    g.fillStyle = '#0e1626'; g.beginPath(); g.ellipse(0, -h * .2, w * .34, h * .13, 0, Math.PI, TAU); g.fill();
+    g.fillRect(-w * .36, -h * .21, w * .72, h * .05);
+    g.fillStyle = '#ffcc4d'; g.beginPath(); g.arc(0, -h * .27, r * .1, 0, TAU); g.fill();
+    g.fillStyle = '#f1c6a2'; g.beginPath(); g.ellipse(0, -h * .03, w * .26, h * .14, 0, 0, TAU); g.fill();
+    g.fillStyle = '#0e1626'; g.fillRect(-w * .15, -h * .07, w * .1, h * .03); g.fillRect(w * .05, -h * .07, w * .1, h * .03);
+    g.fillStyle = '#5a3418'; g.fillRect(-w * .1, h * .03, w * .2, h * .03);
+    drawIcon(g, 'star', 0, h * .26, r * .7, '#ffcc4d');
+    return true;
+  }
+  return false;
+}
+// à chaque image : le cadenas tant que les vigiles tiennent, le ×3 de la BILLE ensuite
+function csDraw(e, bx, by, top, t) {
+  if (e.d.prop !== 'coffre') return;
+  if (e.inv) {
+    const p = .6 + .3 * Math.sin(t * 5);
+    ctx.strokeStyle = `rgba(127,209,255,${p})`; ctx.lineWidth = .9; ctx.setLineDash([2, 1.5]); ctx.beginPath(); ctx.arc(bx, by, CS.rad + 2.5, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+    drawIcon(ctx, 'cadenas', bx, top - 4, 6, '#c3cde0');
+  } else {
+    ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(14,8,22,.9)';
+    ctx.strokeText('BILLE ×3', bx, top - 4.5); ctx.fillStyle = `rgba(255,211,107,${.7 + .3 * Math.sin(t * 8)})`; ctx.fillText('BILLE ×3', bx, top - 4.5);
+  }
+}
+
+/* ---------- Tapis ! : 20 s où la Maison envoie tout ----------
+   Toutes les cartes foncent droit sur toi (même celles qui tirent de loin), la Maison en rajoute quand la donne est finie ;
+   chaque carte abattue paie ×3. Plaque : 25 cartes pendant le Tapis. */
+const AL = { warn: 2.6, dur: 20, gold: 3, spd: 1, q: 1, pack: 3, packN: 2, cap: 8, need: 25 };
+function alRush(e) { return !e.dead && !e.boss && !e.d.giant && !e.d.prop && !e.d.arc && e.ai !== 'decoy' && e.ai !== 'thief' && e.ai !== 'guard'; }
+EVH.allin = {
+  init(cb, S2) { Object.assign(S2, { ph: 'warn', pt: 0, kills: 0, packT: 0, said: 3 }); },
+  hold(cb, S2) { return S2.ph !== 'done'; },
+  tick(cb, S2, dt) {
+    S2.pt += dt;
+    if (S2.ph === 'warn') {
+      const n = Math.ceil(AL.warn - S2.pt);
+      if (n < S2.said && n > 0) { S2.said = n; if (!G.headless) Snd.countdown(n); }
+      if (S2.pt >= AL.warn) {
+        S2.ph = 'live'; S2.pt = 0;
+        dbg('al_live');
+        if (!G.headless) { banner('TAPIS !', 'tout fonce · chaque carte paie ×3', 'bad', 1.6); CouSnd.allin(); shake(3); haptic(60); talk('croup', 'Tapis. La Maison envoie tout.'); }
+      }
+      return;
+    }
+    if (S2.ph !== 'live') return;
+    // la file des cartes peut avancer plus vite (AL.q ; 1 = la vitesse normale)
+    if (AL.q !== 1) for (let i = cb.spawnIdx; i < cb.spawn.length; i++) cb.spawn[i].t -= dt * (AL.q - 1);
+    // tout ce qui est sur la table fonce
+    for (const e of cb.enemies) if (!e.xRush && alRush(e) && e.deal <= .15) { e.xRush = true; e.tapis = true; e.stop = 0; }
+    // la file est vide : la Maison envoie des paquets
+    if (cb.spawnIdx >= cb.spawn.length) {
+      S2.packT -= dt;
+      if (S2.packT <= 0) {
+        S2.packT = AL.pack;
+        let alive = 0; for (const e of cb.enemies) if (!e.dead && e.ai !== 'decoy') alive++;
+        if (alive < AL.cap) {
+          const pool = (cb.reinfTypes || []).filter(t => !ENEMIES[t].boss && !ENEMIES[t].giant && t !== 'voleur'), a = rand(0, TAU);
+          for (let k = 0; k < AL.packN; k++) spawnEnemy(pool.length ? pick(pool) : 'soldat', a + rand(-.35, .35), { hpMul: 1 });
+          cb.total += AL.packN;
+        }
+      }
+    }
+    if (S2.pt >= AL.dur) {
+      S2.ph = 'done';
+      for (const e of cb.enemies) if (e.xRush) { e.xRush = false; if (!cb.tapis) { e.tapis = false; e.stop = e.d.stop ? e.d.stop + rand(-3, 4) : 0; } }
+      dbg('al_end', S2.kills);
+      if (!G.headless) { floater(0, -30, `FIN DU TAPIS · ${S2.kills} CARTES`, '#ffd36b', 5.2); Snd.gong(); }
+    }
+  },
+  goldK(cb, S2) { return S2.ph === 'live' ? AL.gold : 1; },
+  spdK(cb, S2, e) { return e.xRush ? AL.spd / BAL.tapisSpd : 1; },
+  kill(cb, S2, e) {
+    if (S2.ph !== 'live' || e.ai === 'decoy' || e.fake) return;
+    S2.kills++;
+    if (S2.kills === AL.need) evPlaque('allin');
+  },
+  ground(cb, S2, t) {
+    if (S2.ph === 'done') return;
+    // les piles de jetons poussées au milieu (le tapis), le bord de la table qui rougeoie
+    const live = S2.ph === 'live', p = live ? .5 + .5 * Math.sin(t * 7) : .3 + .2 * Math.sin(t * 3);
+    ctx.strokeStyle = `rgba(255,61,90,${(live ? .35 : .15) + .2 * p})`; ctx.lineWidth = live ? 3 : 1.6; ctx.beginPath(); ctx.arc(0, 0, 90, 0, TAU); ctx.stroke();
+    const cols = ['#e0365a', '#17101f', '#4f8bff', '#5fd68a', '#ffcc4d', '#fff3e6'], R = live ? 28 + 48 * (1 - evEase(Math.min(1, S2.pt / .7))) : 76;
+    for (let i = 0; i < 6; i++) {
+      const a = i / 6 * TAU + .3, x = Math.cos(a) * R, y = Math.sin(a) * R, n = 3 + (i % 3);
+      for (let k = 0; k < n; k++) {
+        const yy = y - k * 1.1;
+        ctx.fillStyle = 'rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(x + .4, yy + 1.2, 2.4, 1.1, 0, 0, TAU); ctx.fill();
+        ctx.fillStyle = cols[(i + k) % 6]; ctx.beginPath(); ctx.ellipse(x, yy, 2.4, 1.2, 0, 0, TAU); ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = .25; ctx.setLineDash([.5, .5]); ctx.beginPath(); ctx.ellipse(x, yy, 1.7, .8, 0, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+      }
+    }
+  },
+  top(cb, S2, t) {
+    if (S2.ph === 'live' && S2.pt < 1) {
+      // la main du croupier pousse tous les jetons au milieu : tapis !
+      const u = Math.min(1, S2.pt / .7), R = 28 + 48 * (1 - evEase(u)) + 7, a = .3 - Math.PI / 3;
+      drawHandW(Math.cos(a) * R, Math.sin(a) * R, a + Math.PI, 12, 'croup', .2, S2.pt > .75 ? 1 - (S2.pt - .75) / .25 : 1);
+    }
+    let txt = null, col = '#ff9aa6';
+    if (S2.ph === 'warn') { txt = `TAPIS DANS ${Math.max(1, Math.ceil(AL.warn - S2.pt))}…`; col = '#ff5c6c'; }
+    else if (S2.ph === 'live') { txt = `TAPIS ! ${Math.max(0, Math.ceil(AL.dur - S2.pt))} s · OR ×3 · ${S2.kills}/${AL.need}`; col = S2.kills >= AL.need ? '#ffd36b' : '#ff5c6c'; }
+    if (txt) evBoard(txt, col, evRow(cb, 'allin'));
+  },
+};
+
+/* ---------- les tapis des Coulisses ---------- */
+Object.assign(EV_FELT, {
+  // le bandit : velours bordeaux, les trois rouleaux imprimés, la ligne gagnante
+  bandit(g, R) {
+    const gr = g.createRadialGradient(0, -10, 6, 0, 0, R); gr.addColorStop(0, '#6a1630'); gr.addColorStop(.6, '#4a0e22'); gr.addColorStop(1, '#1e0510');
+    g.fillStyle = gr; g.fillRect(-R, -R, 2 * R, 2 * R);
+    for (let i = 0; i < 3; i++) { g.fillStyle = i === 1 ? 'rgba(255,240,220,.06)' : 'rgba(255,240,220,.035)'; g.fillRect(bdX(i) - 26, -R, 52, 2 * R); }
+    for (const x of [-BD.band, BD.band]) { g.strokeStyle = 'rgba(220,226,240,.42)'; g.lineWidth = 1; g.beginPath(); g.moveTo(x, -R); g.lineTo(x, R); g.stroke(); g.strokeStyle = 'rgba(255,204,77,.3)'; g.lineWidth = .35; for (const o of [-1.6, 1.6]) { g.beginPath(); g.moveTo(x + o, -R); g.lineTo(x + o, R); g.stroke(); } }
+    for (let i = 0; i < 3; i++) for (let k = -3; k <= 3; k++) bdSym(g, BD_STRIP[(i * 4 + k + 24) % BD_STRIP.length], bdX(i), k * 24 + 6, 10, .1);
+    g.strokeStyle = 'rgba(255,204,77,.28)'; g.lineWidth = .7; g.setLineDash([2, 1.5]); g.beginPath(); g.moveTo(-R, 6); g.lineTo(R, 6); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = 'rgba(255,204,77,.24)'; g.lineWidth = .9; g.beginPath(); g.arc(0, 0, 26, 0, TAU); g.stroke();
+    g.fillStyle = 'rgba(255,214,140,.42)';
+    arcText(g, 'BANDIT MANCHOT', 87, -Math.PI / 2, 4.2, false);
+    arcText(g, '777 = JACKPOT · LA BILLE ARRÊTE UN ROULEAU', 87, Math.PI / 2, 3.2, true);
+  },
+  // la table de craps : vert profond, la ligne de passe, 7 et 11 imprimés
+  des(g, R) {
+    const gr = g.createRadialGradient(0, -10, 6, 0, 0, R); gr.addColorStop(0, '#1f6a44'); gr.addColorStop(.6, '#164f33'); gr.addColorStop(1, '#082416');
+    g.fillStyle = gr; g.fillRect(-R, -R, 2 * R, 2 * R);
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 1.1; g.beginPath(); g.arc(0, 0, 78, 0, TAU); g.stroke();
+    g.lineWidth = .45; g.beginPath(); g.arc(0, 0, 70, 0, TAU); g.stroke();
+    g.fillStyle = 'rgba(255,255,255,.4)'; arcText(g, 'LIGNE DE PASSE', 74, Math.PI * .25, 3.2, true); arcText(g, 'LIGNE DE PASSE', 74, -Math.PI * .75, 3.2, false);
+    g.font = `700 16px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillStyle = 'rgba(255,204,77,.14)'; g.fillText('7', -44, 30); g.fillText('11', 44, 30);
+    g.fillStyle = 'rgba(255,92,108,.12)'; g.font = `700 9px ${FONT}`; g.fillText('2', -40, -38); g.fillText('12', 40, -38);
+    for (let i = 0; i < 10; i++) { const a = i / 10 * TAU + .2, x = Math.cos(a) * 58, y = Math.sin(a) * 58; g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = .4; rrPath(g, x - 3, y - 3, 6, 6, 1.4); g.stroke(); }
+    g.strokeStyle = 'rgba(255,204,77,.24)'; g.lineWidth = .9; g.beginPath(); g.arc(0, 0, 26, 0, TAU); g.stroke();
+    g.fillStyle = 'rgba(255,236,190,.44)';
+    arcText(g, 'DÉS PIPÉS', 87, -Math.PI / 2, 4.2, false);
+    arcText(g, '7 OU 11 : LA MAISON PAIE · 2 OU 12 : ELLE SE VENGE', 87, Math.PI / 2, 3, true);
+  },
+  // la salle des coffres : acier bleuté, la grande porte ronde imprimée
+  casse(g, R) {
+    let gr = g.createRadialGradient(0, -10, 6, 0, 0, R); gr.addColorStop(0, '#34405a'); gr.addColorStop(.6, '#232c40'); gr.addColorStop(1, '#0c1018');
+    g.fillStyle = gr; g.fillRect(-R, -R, 2 * R, 2 * R);
+    g.strokeStyle = 'rgba(195,205,224,.16)'; g.lineWidth = .5;
+    for (let x = -R; x <= R; x += 12) { g.beginPath(); g.moveTo(x, -R); g.lineTo(x, R); g.stroke(); }
+    for (let y = -R; y <= R; y += 12) { g.beginPath(); g.moveTo(-R, y); g.lineTo(R, y); g.stroke(); }
+    for (const [r, al, lw] of [[66, .22, 2], [58, .16, 1], [44, .2, 1.4]]) { g.strokeStyle = `rgba(195,205,224,${al})`; g.lineWidth = lw; g.beginPath(); g.arc(0, 0, r, 0, TAU); g.stroke(); }
+    for (let i = 0; i < 8; i++) { const a = i / 8 * TAU; g.fillStyle = 'rgba(195,205,224,.2)'; g.beginPath(); g.arc(Math.cos(a) * 62, Math.sin(a) * 62, 2.4, 0, TAU); g.fill(); }
+    for (let i = 0; i < 3; i++) { const a = -Math.PI / 2 + i * TAU / 3; g.strokeStyle = 'rgba(217,164,65,.18)'; g.lineWidth = 2.4; g.lineCap = 'round'; g.beginPath(); g.moveTo(Math.cos(a) * 30, Math.sin(a) * 30); g.lineTo(Math.cos(a) * 42, Math.sin(a) * 42); g.stroke(); }
+    g.strokeStyle = 'rgba(255,204,77,.24)'; g.lineWidth = .9; g.beginPath(); g.arc(0, 0, 26, 0, TAU); g.stroke();
+    g.fillStyle = 'rgba(191,224,255,.4)';
+    arcText(g, 'LE CASSE', 87, -Math.PI / 2, 4.4, false);
+    arcText(g, 'ABATS LES VIGILES · LA BILLE FRACTURE LE COFFRE', 87, Math.PI / 2, 3, true);
+  },
+  // le tapis : noir et rouge, des jetons partout
+  allin(g, R) {
+    const gr = g.createRadialGradient(0, -10, 6, 0, 0, R); gr.addColorStop(0, '#3a0a18'); gr.addColorStop(.6, '#22060f'); gr.addColorStop(1, '#0a0205');
+    g.fillStyle = gr; g.fillRect(-R, -R, 2 * R, 2 * R);
+    for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; g.fillStyle = 'rgba(255,61,90,.07)'; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, R, a, a + TAU / 24); g.closePath(); g.fill(); }
+    const cols = ['#e0365a', '#4f8bff', '#5fd68a', '#ffcc4d', '#fff3e6'];
+    for (let i = 0; i < 14; i++) {
+      const a = i / 14 * TAU + .1, d = 60 + (i % 3) * 7, x = Math.cos(a) * d, y = Math.sin(a) * d;
+      g.globalAlpha = .4; g.fillStyle = cols[i % 5]; g.beginPath(); g.arc(x, y, 3.2, 0, TAU); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = .45; g.setLineDash([.8, .8]); g.beginPath(); g.arc(x, y, 2.4, 0, TAU); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
+    }
+    g.font = `700 13px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = 'rgba(255,61,90,.1)'; g.fillText('TAPIS', 0, 46);
+    g.strokeStyle = 'rgba(255,204,77,.24)'; g.lineWidth = .9; g.beginPath(); g.arc(0, 0, 26, 0, TAU); g.stroke();
+    g.fillStyle = 'rgba(255,170,180,.44)';
+    arcText(g, 'TAPIS !', 87, -Math.PI / 2, 4.6, false);
+    arcText(g, '20 SECONDES · TOUT FONCE · CHAQUE CARTE PAIE ×3', 87, Math.PI / 2, 3, true);
+  },
+});
+
+/* ================= v14.6 · les deux derniers Géants : le Sabot, la Main de la Maison =================
+   Le Sabot se pose au bord de la table et distribue une carte toutes les 2 s (1,5 s quand il est blessé).
+   La Main de la Maison ratisse une bande de la table toutes les 5 s (zone rouge juste avant) : les cartes sont
+   poussées vers toi, ta BILLE est confisquée, et si le râteau touche ta base : un coup et −5 or.
+   Pare le râteau au flipper au bon moment : il casse et elle prend cher. Bloqué sans parade : ton flipper s'use. */
+const GNT2 = {
+  sabot: { every: 2, rage: 1.5, cap: 12 },
+  main: { every: 5, first: 2.2, warn: 1.1, sweep: .75, stick: .14, back: .55, w: 40, gold: 5, parry: .22, broken: 1.6, push: 70, zone: .9, hit: .6 },
+};
+function gntInit2(e, K) {
+  const st = e.st;
+  if (K === 'sabot') { st.cd = 1.4; st.dealT = 0; st.dealt = 0; }
+  if (K === 'main') { st.ph = 'idle'; st.pt = 0; st.cd = GNT2.main.first; st.dir = rnd() < .5 ? 1 : -1; st.hit = {}; st.s = 0; st.brk = 0; e.xA = 0; }
+}
+// une position au bord, sans sortir de l'écran du téléphone (comme le Flambeur)
+function gntRim(e, dt, sp, held, turn) {
+  const st = e.st, d = edist(e);
+  if (held) return d;
+  if (d > e.stop + .5) { moveToward(e, dt, sp, e.stop); return edist(e); }
+  const a = Math.atan2(e.y, e.x) + (turn ? st.dir * dt * turn : 0), c = Math.abs(Math.cos(a)), s2 = Math.abs(Math.sin(a));
+  const lim = Math.min(c > 1e-3 ? VIEW.hx / c : 1e9, s2 > 1e-3 ? VIEW.hy / s2 : 1e9) - e.r * 1.2 - 2, R = Math.max(BAL.range0 * .8, Math.min(e.stop, LAY.pc ? e.stop : lim));
+  const nd = d + clamp(R - d, -14 * dt, 14 * dt);
+  e.x = Math.cos(a) * nd; e.y = Math.sin(a) * nd;
+  // sur téléphone, le bas de la table est caché par le bandeau : il fait demi-tour avant
+  if (!LAY.pc && turn && e.y > 40) st.dir = Math.sin(a) > 0 && Math.cos(a) > 0 ? -1 : 1;
+  return nd;
+}
+
+/* ---------- Le Sabot : il distribue une carte toutes les 2 s ---------- */
+function gntSabot(e, dt, sp, held, contactD) {
+  const st = e.st, d = gntRim(e, dt, sp, held, 0);
+  e.xRot = Math.atan2(-e.y, -e.x) - Math.PI / 2;
+  if (st.dealT > 0) st.dealT -= dt;
+  if (held || d > e.stop + 6) return;
+  st.cd -= dt;
+  if (st.cd > 0) return;
+  const rage = e.hp < e.maxHp * .5;
+  st.cd = rage ? GNT2.sabot.rage : GNT2.sabot.every;
+  let alive = 0; for (const o of G.cb.enemies) if (!o.dead && o.ai !== 'decoy') alive++;
+  if (alive >= GNT2.sabot.cap) { st.cd = .6; return; }
+  gntDeal(e);
+}
+function gntDeal(e) {
+  const cb = G.cb, st = e.st, d = edist(e) || 1, ux = -e.x / d, uy = -e.y / d;
+  const pool = (cb.reinfTypes || []).filter(t => !ENEMIES[t].boss && !ENEMIES[t].giant && t !== 'voleur');
+  const c = spawnEnemy(pool.length ? pick(pool) : 'soldat', 0, { x: e.x + ux * e.r * .95, y: e.y + uy * e.r * .95, noDeal: true, hpMul: 1, escort: true });
+  if (c) { c.kbx = ux * 60 + rand(-12, 12); c.kby = uy * 60 + rand(-12, 12); c.stunT = .25; cb.total++; }
+  st.dealT = .35; st.dealt++;
+  dbg('sabot_deal');
+  if (!G.headless) { Snd.deal(); Snd.cardSwish && Snd.cardSwish(); }
+}
+
+/* ---------- La Main de la Maison : le râteau ---------- */
+// la bande ratissée : de la main jusqu'à ta base
+function gmLane(e) { const st = e.st, a = st.la, D = st.D; return { a, D, hx: Math.cos(a) * D, hy: Math.sin(a) * D, ux: -Math.cos(a), uy: -Math.sin(a), vx: -Math.sin(a), vy: Math.cos(a) }; }
+const gmEnd = e => e.st.D - BAL.rakeR - 1.5;
+function gmIn(Ln, x, y, s0, s1, pad) {
+  const px = x - Ln.hx, py = y - Ln.hy, al = px * Ln.ux + py * Ln.uy, ac = px * Ln.vx + py * Ln.vy;
+  return al >= s0 && al <= s1 && Math.abs(ac) <= GNT2.main.w / 2 + (pad || 0);
+}
+// le flipper est-il dans la bande ? (là où le râteau arrive)
+function gmRake(cb, e) {
+  const a = e.st.la, span = Math.atan2(GNT2.main.w / 2, BAL.rakeR) * GNT2.main.zone + cb.stats.rakeHalf * .5;
+  for (const rk of rakes(cb)) if (!(rk.broken > 0) && rk.dur > 0 && Math.abs(angDiff(rk.ang, a)) <= span) return rk;
+  return null;
+}
+function gntMain(e, dt, sp, held, contactD) {
+  const st = e.st, M = GNT2.main, cb = G.cb;
+  if (st.ph === 'idle' || st.ph === 'broken') gntRim(e, dt, sp, held, .14);
+  st.pt += dt;
+  if (st.brk > 0) st.brk -= dt;
+  if (st.ph === 'broken') { if (st.pt >= M.broken) { st.ph = 'idle'; st.pt = 0; st.cd = 1.2; if (!G.headless) { floater(e.x, e.y - e.r - 6, 'NOUVEAU RÂTEAU', '#c3cde0', 4); Snd.rakeUp(); } } return; }
+  if (st.ph === 'idle') {
+    if (held || edist(e) > e.stop + 6) return;
+    st.cd -= dt;
+    if (st.cd <= 0) { st.ph = 'warn'; st.pt = 0; st.la = Math.atan2(e.y, e.x); st.D = edist(e); st.hit = {}; st.s = 0; if (!G.headless) { Snd.charge(); } dbg('main_warn'); }
+    return;
+  }
+  const Ln = gmLane(e), end = gmEnd(e);
+  if (st.ph === 'warn') { if (st.pt >= M.warn) { st.ph = 'sweep'; st.pt = 0; if (!G.headless) Snd.whoosh(); } return; }
+  if (st.ph === 'sweep') {
+    const p = Math.min(1, st.pt / M.sweep), s0 = st.s;
+    st.s = 6 + (end - 6) * (p * p * (3 - 2 * p));
+    // les cartes sous le râteau sont poussées vers toi
+    for (const o of cb.enemies) {
+      if (o === e || o.dead || o.boss || o.d.giant || o.d.prop || o.ai === 'decoy' || st.hit[o.id]) continue;
+      if (!gmIn(Ln, o.x, o.y, s0 - 4, st.s + 3, o.r * .5)) continue;
+      st.hit[o.id] = 1; o.kbx += Ln.ux * M.push; o.kby += Ln.uy * M.push; o.stunT = Math.max(o.stunT, .2);
+    }
+    // ta BILLE : confisquée
+    const B = cb.bil;
+    if (B && B.balls) for (const b of B.balls.slice()) {
+      if (!gmIn(Ln, b.x, b.y, s0 - 5, st.s + 4, b.r)) continue;
+      bilEnd(b, false); dbg('main_bille');
+      if (!G.headless) { floater(b.x, b.y - 6, 'BILLE CONFISQUÉE !', '#ff5c6c', 4.4); Snd.steal ? Snd.steal() : Snd.block(); }
+    }
+    if (p >= 1) {
+      const rk = gmRake(cb, e);
+      if (rk && cb.rake.swing > 0) gmParry(e, rk);
+      else if (rk) { st.ph = 'stick'; st.pt = 0; st.rk = rk; }
+      else gmHit(e);
+    }
+    return;
+  }
+  if (st.ph === 'stick') {
+    if (cb.rake.swing > 0) { gmParry(e, st.rk); return; }
+    if (st.pt >= M.stick) gmBlock(e, st.rk);
+    return;
+  }
+  if (st.ph === 'back') {
+    const p = Math.min(1, st.pt / M.back);
+    st.s = 6 + (st.s0 - 6) * (1 - p);
+    if (p >= 1) { st.ph = 'idle'; st.pt = 0; st.cd = Math.max(1, M.every - M.warn - M.sweep - M.back); }
+  }
+}
+function gmBack(e) { const st = e.st; st.ph = 'back'; st.pt = 0; st.s0 = st.s; }
+// paré au bon moment : le râteau casse, elle prend cher
+function gmParry(e, rk) {
+  const cb = G.cb, run = G.run, s = cb.stats, st = e.st;
+  dbg('main_parry');
+  cb.streak++; cb.rake.swingHit = true; run.stats.parries++; scoreParry();
+  run.stats.bestStreak = Math.max(run.stats.bestStreak, cb.streak);
+  rk.flash = .28; rk.hitAng = st.la; cb.hitstop = .08;
+  if (s.parryHeal > 0) heal(s.parryHeal);
+  st.ph = 'broken'; st.pt = 0; st.brk = .6;
+  const Ln = gmLane(e), hx = Ln.hx + Ln.ux * st.s, hy = Ln.hy + Ln.uy * st.s;
+  dealDmg(e, e.maxHp * GNT2.main.parry, { src: 'reflect', big: true });
+  if (!G.headless) {
+    floater(hx * 1.5, hy * 1.5, 'RÂTEAU CASSÉ !', '#ffe08a', 5.6);
+    burst(hx, hy, '#c9933a', 16, 50, 1.4, .5); burst(hx, hy, '#ffe9a0', 10, 46, 1, .35);
+    fxPush({ type: 'ring', x: hx, y: hy, r0: 2, r1: 16, col: '255,236,160', life: .32, max: .32 });
+    Snd.parry(cb.streak); Snd.rakeBreak(); haptic(40); shake(4);
+  }
+}
+// bloqué sans parade : le râteau s'arrête sur ton flipper (il s'use)
+function gmBlock(e, rk) {
+  const cb = G.cb;
+  dbg('main_block');
+  cb.streak = 0; G.run.stats.blocks++; scoreBlock();
+  rk.dur--; if (rk.dur <= 0) breakRake(rk);
+  if (!G.headless) { const Ln = gmLane(e); floater((Ln.hx + Ln.ux * e.st.s) * 1.5, (Ln.hy + Ln.uy * e.st.s) * 1.5, 'BLOQUÉ', '#ffcc4d', 4.4); Snd.block(); haptic(10); }
+  gmBack(e);
+}
+// le râteau touche ta base : un coup, et il rafle 5 or
+function gmHit(e) {
+  const cb = G.cb, run = G.run, prot = cb.shield > 0 || cb.invuln > 0;
+  dbg('main_hit');
+  hurtBase(e.dmg * GNT2.main.hit, 'melee', e);
+  if (!prot && !run.over) {
+    const g = Math.min(Math.floor(run.gold), GNT2.main.gold);
+    if (g > 0) { run.gold -= g; if (!G.headless) { floater(0, -BAL.baseR - 10, `−${g} or`, '#ff9a3d', 4.6); Snd.steal ? Snd.steal() : Snd.coin(); } }
+  }
+  gmBack(e);
+}
+
+/* ---------- le dessin ---------- */
+function sabotShape(g, w, h, rad) { rrPath(g, -w * .62, -h * .3, w * 1.24, h * .6, rad * .4); }
+function gntFace2(g, type, d, r, w, h) {
+  const K = d.giant;
+  if (K === 'sabot') {
+    // la boîte du sabot : bois sombre, plaque de laiton, la fente d'où sortent les cartes
+    const W = w * 1.24, H = h * .6;
+    let gr = g.createLinearGradient(0, -H / 2, 0, H / 2); gr.addColorStop(0, '#2a7a4a'); gr.addColorStop(1, '#123a24');
+    g.fillStyle = gr; rrPath(g, -W / 2 + r * .12, -H / 2 + r * .12, W - r * .24, H - r * .24, r * .1); g.fill();
+    g.fillStyle = '#3a2210'; g.fillRect(-W / 2 + r * .12, H * .12, W - r * .24, H * .3);
+    g.fillStyle = '#d9a441'; g.fillRect(-W / 2 + r * .12, H * .1, W - r * .24, r * .06);
+    // les cartes dans la boîte (vues par le dessus), et celle qui dépasse de la fente
+    for (let i = 0; i < 5; i++) { g.fillStyle = i % 2 ? '#e8e1d2' : '#fff6ea'; g.fillRect(-W * .32 + i * r * .05, -H * .36 + i * r * .02, W * .5, H * .4); }
+    g.fillStyle = '#1d2f6a'; rrPath(g, -W * .22, H * .2, W * .44, H * .36, r * .05); g.fill();
+    g.strokeStyle = '#ffcc4d'; g.lineWidth = r * .03; g.stroke();
+    g.fillStyle = '#ffcc4d'; g.font = `700 ${r * .22}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('SABOT', 0, -H * .2);
+    return;
+  }
+  if (K === 'main') {
+    // la vignette : le gant blanc de la Maison et son râteau
+    g.fillStyle = '#1d6a55'; rrPath(g, -w / 2 + r * .12, -h / 2 + r * .12, w - r * .24, h - r * .24, r * .1); g.fill();
+    g.strokeStyle = '#c9933a'; g.lineWidth = r * .08; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(-w * .05, -h * .05); g.lineTo(w * .12, h * .38); g.stroke();
+    g.lineWidth = r * .12; g.beginPath(); g.moveTo(-w * .14, h * .4); g.lineTo(w * .38, h * .34); g.stroke();
+    g.fillStyle = '#f6f1ea'; g.strokeStyle = '#120a1c'; g.lineWidth = r * .03;
+    g.beginPath(); g.ellipse(-w * .08, -h * .12, w * .2, h * .12, -.4, 0, TAU); g.fill(); g.stroke();
+    for (let i = 0; i < 4; i++) { g.save(); g.translate(-w * .08 + (i - 1.5) * w * .09, -h * .25); g.rotate(-.3 + i * .12); rrPath(g, -w * .035, -h * .1, w * .07, h * .14, w * .03); g.fill(); g.stroke(); g.restore(); }
+    g.fillStyle = '#ffffff'; g.fillRect(-w * .3, -h * .02, w * .4, h * .06);
+    return;
+  }
+}
+function gntDraw2(e, bx, by, top, t) {
+  const K = e.d.giant, st = e.st;
+  if (K === 'sabot') {
+    // la carte qui sort de la fente
+    if (st.dealT > 0) {
+      const p = 1 - st.dealT / .35, d = edist(e) || 1, ux = -e.x / d, uy = -e.y / d, x = bx + ux * e.r * (.4 + .9 * p), y = by + uy * e.r * (.4 + .9 * p);
+      ctx.save(); ctx.translate(x, y); ctx.rotate(Math.atan2(uy, ux) + Math.PI / 2); ctx.globalAlpha = 1 - p * .6;
+      ctx.fillStyle = '#1d2f6a'; rrPath(ctx, -3.6, -5, 7.2, 10, 1); ctx.fill(); ctx.strokeStyle = '#fff3e6'; ctx.lineWidth = .5; ctx.stroke();
+      ctx.restore();
+    }
+    const txt = `${st.dealt || 0} CARTE${(st.dealt || 0) > 1 ? 'S' : ''} DONNÉE${(st.dealt || 0) > 1 ? 'S' : ''}`;
+    ctx.font = `700 3.1px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+    ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(14,8,22,.9)'; ctx.strokeText(txt, bx, top - 4.5); ctx.fillStyle = '#f3eee6'; ctx.fillText(txt, bx, top - 4.5);
+    return;
+  }
+  if (K !== 'main') return;
+  const M = GNT2.main, a = Math.atan2(e.y, e.x), live = st.ph === 'warn' || st.ph === 'sweep' || st.ph === 'stick' || st.ph === 'back';
+  const la = live ? st.la : a, D = live ? st.D : edist(e), hx = live ? Math.cos(la) * D : e.x, hy = live ? Math.sin(la) * D : e.y - (e.xZ || 0);
+  const ux = -Math.cos(la), uy = -Math.sin(la), vx = -Math.sin(la), vy = Math.cos(la), W = M.w;
+  // la zone rouge : là où le râteau va passer
+  if (st.ph === 'warn' || st.ph === 'sweep' || st.ph === 'stick') {
+    const p = st.ph === 'warn' ? st.pt / M.warn : 1, al = st.ph === 'warn' ? .2 + .16 * Math.abs(Math.sin(t * 12)) : .26;
+    ctx.save(); ctx.translate(hx, hy); ctx.rotate(Math.atan2(uy, ux));
+    ctx.fillStyle = `rgba(255,40,60,${al})`; ctx.fillRect(0, -W / 2, D - BAL.baseR, W);
+    ctx.strokeStyle = `rgba(255,92,108,${.7 + .3 * Math.sin(t * 12)})`; ctx.lineWidth = 1; ctx.setLineDash([2.4, 1.6]); ctx.strokeRect(0, -W / 2, D - BAL.baseR, W); ctx.setLineDash([]);
+    if (st.ph === 'warn') { ctx.fillStyle = `rgba(255,170,180,${.5 + .4 * Math.sin(t * 14)})`; for (let k = 0; k < 3; k++) { const x = ((p * 2 + k / 3) % 1) * (D - 20) + 10; ctx.beginPath(); ctx.moveTo(x, -5); ctx.lineTo(x + 5, 0); ctx.lineTo(x, 5); ctx.lineTo(x + 2, 0); ctx.closePath(); ctx.fill(); } }
+    ctx.restore();
+  }
+  // le râteau : le manche, puis la tête (cassée après une parade)
+  const s = live ? Math.max(6, st.s) : 6;
+  const rx = hx + ux * s, ry = hy + uy * s;
+  if (st.ph !== 'broken') {
+    ctx.strokeStyle = '#5a3418'; ctx.lineWidth = 1.6; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(hx + ux * 4, hy + uy * 4); ctx.lineTo(rx, ry); ctx.stroke();
+    ctx.strokeStyle = '#a8692f'; ctx.lineWidth = .7; ctx.beginPath(); ctx.moveTo(hx + ux * 4, hy + uy * 4); ctx.lineTo(rx, ry); ctx.stroke();
+    const hw = live ? W / 2 : W * .3;
+    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.moveTo(rx + vx * hw + 1, ry + vy * hw + 1.5); ctx.lineTo(rx - vx * hw + 1, ry - vy * hw + 1.5); ctx.lineTo(rx - vx * hw + ux * 2.6 + 1, ry - vy * hw + uy * 2.6 + 1.5); ctx.lineTo(rx + vx * hw + ux * 2.6 + 1, ry + vy * hw + uy * 2.6 + 1.5); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#c9933a'; ctx.beginPath(); ctx.moveTo(rx + vx * hw, ry + vy * hw); ctx.lineTo(rx - vx * hw, ry - vy * hw); ctx.lineTo(rx - vx * hw + ux * 2.4, ry - vy * hw + uy * 2.4); ctx.lineTo(rx + vx * hw + ux * 2.4, ry + vy * hw + uy * 2.4); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = '#5a3418'; ctx.lineWidth = .4; ctx.stroke();
+    ctx.fillStyle = '#ffe08a'; ctx.beginPath(); ctx.arc(rx, ry, .9, 0, TAU); ctx.fill();
+  } else {
+    ctx.strokeStyle = '#5a3418'; ctx.lineWidth = 1.6; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(hx + ux * 4, hy + uy * 4); ctx.lineTo(hx + ux * 11 + vx * 1.5, hy + uy * 11 + vy * 1.5); ctx.stroke();
+  }
+  // la main gantée (le gant de la Maison) : géante, la manche sort de la table
+  const pinch = st.ph === 'sweep' || st.ph === 'stick' ? .7 : st.ph === 'broken' ? .1 : .45;
+  const recoil = st.brk > 0 ? Math.sin(st.brk / .6 * Math.PI) * 4 : 0;
+  drawHandW(hx - ux * recoil, hy - uy * recoil, Math.atan2(uy, ux), 21, 'croup', pinch, 1);
+  if (e.flash > 0) { ctx.fillStyle = `rgba(255,255,255,${Math.min(1, e.flash / .07) * .55})`; ctx.beginPath(); ctx.arc(hx, hy, e.r * .9, 0, TAU); ctx.fill(); }
+  if (e.frzT > 0) { ctx.fillStyle = 'rgba(198,244,255,.4)'; ctx.beginPath(); ctx.arc(hx, hy, e.r * .95, 0, TAU); ctx.fill(); }
+  if (st.ph === 'broken') {
+    const txt = 'SANS RÂTEAU';
+    ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+    ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(14,8,22,.9)'; ctx.strokeText(txt, bx, top - 4.5); ctx.fillStyle = '#ffd36b'; ctx.fillText(txt, bx, top - 4.5);
+  }
+}
+// le pilote des simulations : il vise d'abord les Arcanes, le Sabot et la Main (comme un joueur qui les touche du doigt),
+// il met son flipper dans la zone rouge, et pare quand le râteau arrive
+function xBotStep(cb, sk) {
+  if (!cb.focus || cb.focus.dead) {
+    const R2 = cb.stats.range * cb.stats.range, f = cb.enemies.find(e => !e.dead && (e.d.arc || e.d.giant === 'sabot' || e.d.giant === 'main') && !(e.st.flip > 0) && e.x * e.x + e.y * e.y <= R2);
+    if (f) cb.focus = f;
+  }
+  for (const e of cb.enemies) {
+    if (e.dead || e.d.giant !== 'main') continue;
+    const st = e.st;
+    if (st.ph === 'warn' || st.ph === 'sweep' || st.ph === 'stick') {
+      cb.rake.input = st.la;
+      if (st.ph === 'stick' && !st.botT) { st.botT = 1; if (rnd() < sk.parry) swing(); }
+      else if (st.ph === 'sweep') {
+        const left = GNT2.main.sweep - st.pt;
+        if (left < .09 && !st.botT) { st.botT = 1; if (rnd() < sk.parry) swing(); }
+      } else st.botT = 0;
+      return true;
+    }
+  }
+  return false;
+}
+
+/* ================= v14.6 · les Arcanes majeurs (dès la manche 21, et en manches infinies) =================
+   Une grande carte de tarot entre en pleine manche (au plus une par manche, environ une manche sur trois).
+   La Mort (XIII) : lente, mais −30 % de tes PV max si elle touche ta base. La Lune (XVIII) : les cartes autour d'elle
+   sont des mirages (ton canon ne les voit pas ; ta BILLE les révèle). Le Pendu (XII) : il pend un de tes jetons toutes
+   les 6 s (3 au plus) ; abats-le pour les libérer. L'Ermite (IX) : la table s'éteint, tu ne vois et ne vises que près
+   de sa lanterne et de ta base. La Roue de Fortune (X) : une règle pour toute la table toutes les 5 s.
+   Le Jugement (XX) : toutes les 8 s, sa trompette relève les 3 dernières cartes abattues (à 50 %). */
+const ARC = {
+  ids: ['mort', 'lune', 'pendu', 'ermite', 'roue', 'jugement'], from: 21, per: 3, at: .3,
+  num: { mort: 'XIII', lune: 'XVIII', pendu: 'XII', ermite: 'IX', roue: 'X', jugement: 'XX' },
+  mort: .3, moon: 30, pendu: { every: 6, first: 2, max: 3 }, lamp: 34, base: 40, roue: { every: 5, first: 1.6, spin: .8 }, jug: { every: 8, first: 5, n: 3, hp: .5 },
+};
+const ARCANES = ARC.ids.map(id => 'a_' + id);
+const ARC_NOX = { mort: 'La Mort. Ne la laisse pas te toucher.', lune: 'La Lune… rien n\'est ce qu\'il paraît.', pendu: 'Le Pendu. Il veut tes jetons.', ermite: 'L\'Ermite. Suis sa lanterne.', roue: 'La Roue tourne. Pour toi ou contre toi.', jugement: 'Le Jugement. Les morts se relèvent.' };
+const ROUE = [
+  { id: 'tirs', txt: 'TIRS ×2', good: 1, col: '#ffd36b' }, { id: 'or', txt: 'OR ×2', good: 1, col: '#ffd36b' }, { id: 'lentes', txt: 'CARTES LENTES', good: 1, col: '#7fd1ff' },
+  { id: 'rapides', txt: 'CARTES RAPIDES', good: 0, col: '#ff5c6c' }, { id: 'boucliers', txt: 'BOUCLIERS', good: 0, col: '#c3cde0' }, { id: 'soin', txt: 'SOIN DES CARTES', good: 0, col: '#ff7eb6' },
+];
+// le plan : 3 manches par tranche de 10 (dès la 21e, jamais sur un boss), de préférence sans Géant
+function arcPlanBlock(run, b) {
+  const P = run.aPlan || (run.aPlan = {});
+  if (b < 2 || P['b' + b]) return;
+  P['b' + b] = 1;
+  const r0 = b * 10 + 1, G2 = run.gPlan || {};
+  let ok = [];
+  for (let r = r0; r < r0 + 10; r++) if (r >= ARC.from && !isBossRound(r)) ok.push(r);
+  if (!ok.length) return;
+  let cand = ok.filter(r => !G2[r]);
+  if (cand.length < ARC.per) cand = ok;
+  for (const r of shuffle(cand.slice()).slice(0, ARC.per)) {
+    let ids = ARC.ids.filter(id => id !== P.last);
+    P[r] = pick(ids); P.last = P[r];
+  }
+}
+function arcPlan(run) {
+  if (!run) return;
+  const r = Math.max(1, (run.round || 0) + 1);
+  arcPlanBlock(run, Math.floor((r - 1) / 10)); arcPlanBlock(run, Math.floor(r / 10));
+}
+// l'Arcane entre vers 30 % de la donne (jamais avant 5 s), par le haut de la table
+function arcWave(cb, run) {
+  const P = run.aPlan, id = P && P[run.round];
+  if (!id || cb.tuto || (run.round === 30 && !run.inf)) return;
+  const L = cb.spawn, last = L.length ? L[L.length - 1].t : 10, t = Math.max(5, last * ARC.at);
+  L.push({ t, type: 'a_' + id, ang: -Math.PI / 2 + rand(-.7, .7), arc: true });
+  L.sort((a, b) => a.t - b.t);
+  dbg('arc_plan_' + id);
+}
+function arcInit(e) {
+  const K = e.d.arc; if (!K) return;
+  const st = e.st, cb = G.cb;
+  e.xd = true; e.tilt = rand(-.05, .05); st.flip = .7; e.xA = 0; e.xBot = 6;
+  if (K === 'pendu') { st.cd = ARC.pendu.first; st.hang = []; }
+  if (K === 'roue') { st.cd = ARC.roue.first; st.spin = 0; st.wa = 0; }
+  if (K === 'jugement') { st.cd = ARC.jug.first; st.blow = 0; }
+  if (K === 'ermite') { if (cb.fogPrev == null) cb.fogPrev = !!cb.fog; }
+  dbg('arc_' + K);
+  if (!G.headless && !cb.demo) {
+    banner('ARCANE MAJEUR', `${ARC.num[K]} · ${e.d.name}`, 'arc', 2.4);
+    Snd.gong(); setTimeout(() => Snd.chord && Snd.chord(), 200); haptic(50);
+    setTimeout(() => { if (G.cb === cb && !e.dead) talk('nox', ARC_NOX[K]); }, 900);
+  }
+}
+const arcLive = (cb, K) => cb.enemies.filter(e => !e.dead && e.d.arc === K && !(e.st.flip > 0));
+function aiArc(e, dt, sp, held, contactD) {
+  const K = e.d.arc, st = e.st, cb = G.cb, run = G.run;
+  if (st.flip > 0) { st.flip -= dt; if (st.flip <= 0) { e.xA = null; if (!G.headless) Snd.flip(); } return; }
+  if (K === 'mort') {
+    // son coup : 30 % de tes PV max (après tes protections)
+    e.dmg = run.maxHp * ARC.mort / Math.max(.05, cb.stats.takeMul || 1);
+    if (!G.headless && edist(e) < 46) { st.hb = (st.hb || 0) - dt; if (st.hb <= 0) { st.hb = .75; Snd.tone(55, .16, 'sine', .22, 40); Snd.tone(52, .14, 'sine', .16, 38, .2); } }
+  }
+  if (K === 'mort' || K === 'ermite' || e.tapis || !(e.stop > 0)) { meleeStep(e, dt, sp, held, contactD); }
+  else if (!held && edist(e) > e.stop + .5) moveToward(e, dt, sp, e.stop);
+  if (held) return;
+  const placed = K === 'mort' || K === 'ermite' || edist(e) <= e.stop + 6;
+  if (K === 'pendu' && placed) {
+    st.cd -= dt;
+    if (st.cd <= 0) { st.cd = ARC.pendu.every; arcHang(e); }
+  }
+  if (K === 'roue' && placed) {
+    if (st.spin > 0) { st.spin -= dt; st.wa += dt * (8 + 20 * st.spin); if (!G.headless && rnd() < dt * 18) Snd.wheelTick(st.spin); if (st.spin <= 0) arcRoue(e); }
+    else { st.cd -= dt; if (st.cd <= 0) { st.cd = ARC.roue.every; st.spin = ARC.roue.spin; if (!G.headless) Snd.wheelStart(); } }
+  }
+  if (K === 'jugement' && placed) {
+    if (st.blow > 0) st.blow -= dt;
+    st.cd -= dt;
+    if (st.cd <= 0) { st.cd = ARC.jug.every; arcJudge(e); }
+  }
+}
+// le Pendu : il pend un jeton (le meilleur qui marche encore)
+function arcHang(e) {
+  const run = G.run, st = e.st;
+  if (st.hang.length >= ARC.pendu.max) return;
+  const stolen = run.stolen || [], sealed = run.sealed || [];
+  const c = run.jokers.filter(j => j.kind !== 'faux' && !stolen.includes(j.uid) && !sealed.includes(j.uid));
+  if (!c.length) return;
+  const j = c.sort((a, b) => jetonPow(b) - jetonPow(a))[Math.min(c.length - 1, irand(0, 1))];
+  st.hang.push(j.uid);
+  sealJ(run, [j.uid], 'pendu');
+  dbg('pendu_hang');
+  if (!G.headless) { floater(e.x, e.y + e.r * 1.6 + 4, `PENDU : ${jName(j)} !`, '#c9a8ff', 4.2); toast(`Le Pendu a pendu ${jName(j)}. Abats-le pour le libérer.`); }
+}
+function arcFree(e) {
+  const st = e.st, run = G.run;
+  if (!st.hang || !st.hang.length) return;
+  const L = st.hang.slice(); st.hang = [];
+  unsealJ(run, L);
+  dbg('pendu_free');
+  if (!G.headless) { floater(e.x, e.y - e.r - 6, L.length > 1 ? 'JETONS LIBÉRÉS !' : 'JETON LIBÉRÉ !', '#5fd68a', 5); Snd.win(); }
+}
+// la Roue de Fortune : une règle pour toute la table
+function arcRoue(e) {
+  const cb = G.cb, cur = cb.xWheel && cb.xWheel.id, R = pick(ROUE.filter(x => x.id !== cur));
+  cb.xWheel = { id: R.id, txt: R.txt, good: R.good, col: R.col, t: cb.t };
+  dbg('roue_' + R.id);
+  if (R.id === 'boucliers') for (const o of cb.enemies) { if (o.dead || o.boss || o.ai === 'decoy' || o.ai === 'thief') continue; const v = o.maxHp * .3; if (o.shield < v) { o.shield = o.shieldMax = v; } }
+  if (R.id === 'soin') for (const o of cb.enemies) { if (o.dead || o.ai === 'decoy') continue; o.hp = Math.min(o.maxHp, o.hp + o.maxHp * .35); }
+  if (!G.headless) {
+    floater(e.x, e.y - e.r * 1.6 - 6, R.txt + ' !', R.col, 5.2);
+    if (R.good) { Snd.chime(); } else { Snd.malus(); shake(1.5); }
+    if (R.id === 'boucliers') Snd.shield(); if (R.id === 'soin') Snd.heal && Snd.heal();
+  }
+}
+// le Jugement : la trompette relève les dernières cartes abattues
+function arcJudge(e) {
+  const cb = G.cb, L = cb.jgList || [], n = Math.min(ARC.jug.n, L.length);
+  if (!n) return;
+  const out = L.splice(L.length - n, n);
+  e.st.blow = .9;
+  const rays = cb.xRays || (cb.xRays = []);
+  for (const k of out) {
+    // elle se relève là où elle est tombée (mais jamais collée à ta base), un peu sonnée
+    const d = Math.hypot(k.x, k.y) || 1, rr2 = Math.max(d, 46), o = spawnEnemy(k.type, 0, { x: k.x / d * rr2, y: k.y / d * rr2, noDeal: true, hpMul: ARC.jug.hp, noEnh: true });
+    if (!o) continue;
+    o.jgRev = 1.2; o.xd = true; o.stunT = .8; cb.total++;
+    if (k.sk) o.sk = k.sk;
+    rays.push({ x0: e.x, y0: e.y, x1: o.x, y1: o.y, life: .6, max: .6 });
+  }
+  dbg('jug_revive', n);
+  if (!G.headless) { floater(e.x, e.y - e.r * 1.6 - 6, `JUGEMENT ! ${n} CARTE${n > 1 ? 'S' : ''}`, '#ffe9a0', 5); Snd.revive(); shake(1.5); }
+}
+// à chaque image : les mirages de la Lune, la nuit de l'Ermite, la fin d'un Arcane
+function arcTick(cb, dt) {
+  let moons = null, lamps = null;
+  for (const e of cb.enemies) {
+    if (e.dead || !e.d.arc || e.st.flip > 0) continue;
+    if (e.d.arc === 'lune') (moons || (moons = [])).push(e);
+    if (e.d.arc === 'ermite') (lamps || (lamps = [])).push({ x: e.x, y: e.y - e.r * .6, r: ARC.lamp });
+  }
+  // un Arcane qui disparaît sans être abattu (écrasé sur ta base) : on rend ce qu'il avait pris
+  if (cb.arcs) for (const a of cb.arcs) if (a.dead && !a.arcDone) arcGone(a);
+  cb.arcs = cb.enemies.filter(e => e.d.arc && !e.dead);
+  cb.xMoon = moons; cb.xLamp = lamps;
+  const erm = !!lamps;
+  if (erm) cb.fog = true; else if (cb.xErm) cb.fog = !!cb.fogPrev;
+  cb.xErm = erm;
+  if (cb.xWheel && !cb.arcs.some(e => e.d.arc === 'roue')) cb.xWheel = null;
+  for (const e of cb.enemies) {
+    if (e.dead) continue;
+    let hide = false;
+    if (moons && !e.xRev && !e.d.arc && !e.boss && e.ai !== 'decoy') for (const m of moons) { const dx = e.x - m.x, dy = e.y - m.y; if (dx * dx + dy * dy < ARC.moon * ARC.moon) { hide = true; break; } }
+    e.xMoonH = hide;
+    if (hide) e.xd = true;
+    e.xA2 = hide ? .38 + .14 * Math.sin(cb.t * 6 + e.wob) : e.enh === 'verre' ? .78 : null;
+    e.xHide = hide || (erm && fogHides(e.x, e.y));
+    if (e.xBot === 4 && !hide) e.xBot = 0;
+    if (hide && !e.xBot && edist(e) < 60) e.xBot = 4;
+    if (e.jgRev > 0) e.jgRev -= dt;
+  }
+  if (cb.xRays) { for (const r of cb.xRays) r.life -= dt; cb.xRays = cb.xRays.filter(r => r.life > 0); }
+}
+function arcGone(e) {
+  e.arcDone = true;
+  if (e.d.arc === 'pendu') arcFree(e);
+}
+// une carte abattue : le Jugement s'en souvient ; un Arcane abattu rend ce qu'il avait pris
+function arcKill(e) {
+  const cb = G.cb;
+  if (e.d.arc) { arcGone(e); if (!G.headless) { burst(e.x, e.y, '#ffe9a0', 22, 50, 1.6, .6); Snd.gong(); } return; }
+  if (e.boss || e.d.giant || e.d.prop || e.fake || e.ai === 'decoy' || e.ai === 'guard' || e.ai === 'thief' || e.type === 'pk' || e.type === 'glitch_f') return;
+  const L = cb.jgList || (cb.jgList = []);
+  L.push({ type: e.type, x: e.x, y: e.y, sk: e.sk || null });
+  if (L.length > 8) L.shift();
+}
+function arcReveal(e) {
+  e.xRev = true; e.xMoonH = false; e.xA2 = null;
+  dbg('lune_reveal');
+  if (!G.headless) { floater(e.x, e.y - e.r - 3, 'RÉVÉLÉE !', '#bfe0ff', 4); Snd.blink(); }
+}
+// les règles de la Roue (et de la nuit) sur la table
+function arcGoldK(e) { const W = G.cb.xWheel; return W && W.id === 'or' ? 2 : 1; }
+function arcSpdK(e) { const W = G.cb.xWheel; if (!W || e.boss) return 1; return W.id === 'lentes' ? .6 : W.id === 'rapides' ? 1.35 : 1; }
+function arcDmgK(e, o) { const W = G.cb.xWheel; return W && W.id === 'tirs' && (o.src === 'bullet' || o.src === 'reflect') ? 2 : 1; }
+
+/* ---------- le dessin ---------- */
+// la forme d'une carte de tarot : plus haute qu'une carte à jouer
+function tarotShape(g, w, h, rad) { rrPath(g, -w * .44, -h * .58, w * .88, h * 1.16, rad * .6); }
+function arcFace(g, type, d, r, w, h) {
+  const K = d.arc, W = w * .88, H = h * 1.16, top = -H / 2, bot = H / 2;
+  // le cadre doré, le panneau de l'image
+  g.strokeStyle = '#b8862a'; g.lineWidth = r * .05; rrPath(g, -W / 2 + r * .14, top + r * .14, W - r * .28, H - r * .28, r * .12); g.stroke();
+  const pt = top + r * .55, pb = bot - r * .6, pw = W - r * .5;
+  const bg = { mort: ['#2a1a3a', '#120a1c'], lune: ['#1d2f6a', '#0b1532'], pendu: ['#3a5a2a', '#1a2a14'], ermite: ['#2a2238', '#0e0a14'], roue: ['#2a4a7a', '#12223a'], jugement: ['#5a8ad6', '#ffd9a0'] }[K];
+  const gr = g.createLinearGradient(0, pt, 0, pb); gr.addColorStop(0, bg[0]); gr.addColorStop(1, bg[1]);
+  g.fillStyle = gr; rrPath(g, -pw / 2, pt, pw, pb - pt, r * .08); g.fill();
+  g.strokeStyle = '#d9a441'; g.lineWidth = r * .04; g.stroke();
+  // le numéro, le nom
+  g.fillStyle = '#7a5410'; g.font = `700 ${r * .34}px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(ARC.num[K], 0, top + r * .34);
+  const nm = { mort: 'LA MORT', lune: 'LA LUNE', pendu: 'LE PENDU', ermite: 'L\'ERMITE', roue: 'LA ROUE', jugement: 'JUGEMENT' }[K];
+  g.font = `700 ${r * .22}px ${FONT}`; g.fillText(nm, 0, bot - r * .34);
+  const cy = (pt + pb) / 2, s = r;
+  g.save(); rrPath(g, -pw / 2, pt, pw, pb - pt, r * .08); g.clip();
+  if (K === 'mort') {
+    // la faux et le crâne
+    g.strokeStyle = '#8a6a3a'; g.lineWidth = s * .08; g.lineCap = 'round'; g.beginPath(); g.moveTo(-s * .45, cy + s * .8); g.lineTo(s * .35, cy - s * .7); g.stroke();
+    g.fillStyle = '#d8dce8'; g.beginPath(); g.moveTo(s * .35, cy - s * .7); g.quadraticCurveTo(-s * .2, cy - s * 1.1, -s * .55, cy - s * .55); g.quadraticCurveTo(-s * .1, cy - s * .8, s * .3, cy - s * .55); g.closePath(); g.fill();
+    drawIcon(g, 'malus', 0, cy + s * .15, s * .85, '#f3eee6');
+  } else if (K === 'lune') {
+    // le croissant de lune, les deux tours, les gouttes
+    g.fillStyle = '#ffe9a0'; g.beginPath(); g.arc(0, cy - s * .3, s * .45, 0, TAU); g.fill();
+    g.fillStyle = bg[0]; g.beginPath(); g.arc(s * .18, cy - s * .38, s * .4, 0, TAU); g.fill();
+    g.fillStyle = '#c9a8ff'; for (const x of [-s * .45, s * .45]) g.fillRect(x - s * .1, cy + s * .35, s * .2, s * .55);
+    g.fillStyle = '#7fd1ff'; for (let i = 0; i < 4; i++) { g.beginPath(); g.arc(-s * .3 + i * s * .2, cy + s * .1 + (i % 2) * s * .12, s * .05, 0, TAU); g.fill(); }
+  } else if (K === 'pendu') {
+    // le gibet, le pendu la tête en bas, son auréole
+    g.strokeStyle = '#8a5a2a'; g.lineWidth = s * .09; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(-s * .45, cy - s * .75); g.lineTo(s * .45, cy - s * .75); g.moveTo(-s * .38, cy - s * .75); g.lineTo(-s * .38, cy + s * .9); g.moveTo(s * .38, cy - s * .75); g.lineTo(s * .38, cy + s * .9); g.stroke();
+    g.strokeStyle = '#f3eee6'; g.lineWidth = s * .03; g.beginPath(); g.moveTo(0, cy - s * .75); g.lineTo(0, cy - s * .5); g.stroke();
+    g.strokeStyle = '#ffcc4d'; g.lineWidth = s * .08; g.beginPath(); g.moveTo(0, cy - s * .5); g.lineTo(0, cy + s * .15); g.moveTo(0, cy - s * .5); g.lineTo(-s * .18, cy - s * .25); g.lineTo(0, cy - s * .12); g.moveTo(-s * .2, cy - s * .05); g.lineTo(s * .2, cy - s * .05); g.stroke();
+    g.fillStyle = '#f1c6a2'; g.beginPath(); g.arc(0, cy + s * .3, s * .14, 0, TAU); g.fill();
+    g.strokeStyle = '#ffe9a0'; g.lineWidth = s * .03; g.beginPath(); g.arc(0, cy + s * .3, s * .24, 0, TAU); g.stroke();
+  } else if (K === 'ermite') {
+    // l'ermite encapuchonné, son bâton, sa lanterne
+    g.fillStyle = '#5a4a6a'; g.beginPath(); g.moveTo(-s * .1, cy - s * .65); g.quadraticCurveTo(s * .25, cy - s * .55, s * .3, cy + s * .9); g.lineTo(-s * .45, cy + s * .9); g.quadraticCurveTo(-s * .35, cy - s * .3, -s * .1, cy - s * .65); g.fill();
+    g.strokeStyle = '#8a6a3a'; g.lineWidth = s * .06; g.beginPath(); g.moveTo(-s * .5, cy - s * .2); g.lineTo(-s * .45, cy + s * .9); g.stroke();
+    g.fillStyle = 'rgba(255,214,107,.35)'; g.beginPath(); g.arc(s * .38, cy - s * .2, s * .32, 0, TAU); g.fill();
+    g.fillStyle = '#ffd36b'; g.beginPath(); g.moveTo(s * .38, cy - s * .38); g.lineTo(s * .5, cy - s * .2); g.lineTo(s * .38, cy - s * .02); g.lineTo(s * .26, cy - s * .2); g.closePath(); g.fill();
+  } else if (K === 'roue') {
+    // la roue : 8 rayons, une jante d'or
+    g.strokeStyle = '#ffcc4d'; g.lineWidth = s * .08; g.beginPath(); g.arc(0, cy, s * .6, 0, TAU); g.stroke();
+    g.lineWidth = s * .04; for (let i = 0; i < 8; i++) { const a = i / 8 * TAU; g.beginPath(); g.moveTo(0, cy); g.lineTo(Math.cos(a) * s * .6, cy + Math.sin(a) * s * .6); g.stroke(); }
+    g.fillStyle = '#ffcc4d'; g.beginPath(); g.arc(0, cy, s * .12, 0, TAU); g.fill();
+    for (let i = 0; i < 4; i++) { const a = i / 4 * TAU + Math.PI / 4; g.fillStyle = '#f3eee6'; g.beginPath(); g.arc(Math.cos(a) * s * .82, cy + Math.sin(a) * s * .82, s * .07, 0, TAU); g.fill(); }
+  } else if (K === 'jugement') {
+    // la trompette de l'ange, les rayons, les nuages
+    g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = s * .03; for (let i = 0; i < 9; i++) { const a = -Math.PI * .9 + i * Math.PI * .1; g.beginPath(); g.moveTo(0, cy - s * .2); g.lineTo(Math.cos(a) * s * 1.4, cy - s * .2 + Math.sin(a) * s * 1.4); g.stroke(); }
+    g.fillStyle = '#f3eee6'; for (const [x, y, rr2] of [[-s * .4, cy + s * .7, s * .3], [0, cy + s * .8, s * .34], [s * .4, cy + s * .7, s * .3]]) { g.beginPath(); g.arc(x, y, rr2, 0, TAU); g.fill(); }
+    g.fillStyle = '#ffcc4d'; g.beginPath(); g.moveTo(-s * .5, cy - s * .55); g.lineTo(s * .2, cy - s * .05); g.lineTo(s * .45, cy + s * .25); g.lineTo(s * .2, cy + s * .2); g.lineTo(-s * .55, cy - s * .45); g.closePath(); g.fill();
+    g.strokeStyle = '#b8862a'; g.lineWidth = s * .03; g.stroke();
+  }
+  g.restore();
+}
+// à chaque image : le retournement à l'arrivée, l'aura de la Lune, les jetons pendus, la roue qui tourne
+function arcDraw(e, bx, by, top, t) {
+  const K = e.d.arc, st = e.st;
+  if (!K) {
+    if (e.jgRev > 0) { const a = Math.min(1, e.jgRev / .5); ctx.strokeStyle = `rgba(255,233,160,${.8 * a})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.arc(bx, by, e.r * 1.6, 0, TAU); ctx.stroke(); ctx.font = `700 2.8px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = `rgba(255,233,160,${a})`; ctx.fillText('RELEVÉE', bx, top - 4); }
+    if (e.xMoonH) { ctx.strokeStyle = `rgba(191,224,255,${.35 + .2 * Math.sin(t * 7 + e.wob)})`; ctx.lineWidth = .5; ctx.setLineDash([1, 1.2]); ctx.beginPath(); ctx.arc(bx, by, e.r * 1.35, 0, TAU); ctx.stroke(); ctx.setLineDash([]); }
+    return;
+  }
+  if (st.flip > 0) {
+    // la carte arrive face cachée, puis se retourne
+    const p = 1 - st.flip / .7, sx = Math.max(.04, Math.abs(Math.cos(p * Math.PI))), sp = spr(e.type).n, D = cardDims(e.d.r), w = D.w * .88, h = D.h * 1.16, sc = e.r / e.d.r;
+    ctx.save(); ctx.translate(bx, by); ctx.rotate(e.tilt); ctx.scale(sx * sc, sc);
+    if (p < .5) {
+      ctx.fillStyle = '#2a1840'; rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.fill();
+      ctx.strokeStyle = '#d9a441'; ctx.lineWidth = .8; ctx.stroke();
+      ctx.save(); rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.clip();
+      ctx.fillStyle = '#ffcc4d'; for (let i = 0; i < 9; i++) { const x = ((i * 37) % 11 - 5) * w * .08, y = ((i * 53) % 13 - 6) * h * .07; ctx.beginPath(); ctx.arc(x, y, .5 + (i % 3) * .25, 0, TAU); ctx.fill(); }
+      ctx.restore();
+      drawIcon(ctx, 'eclipse', 0, 0, w * .6, '#ffcc4d');
+    } else ctx.drawImage(sp.c, -sp.ox, -sp.oy, sp.c.width / sp.k, sp.c.height / sp.k);
+    ctx.restore();
+    return;
+  }
+  if (K === 'mort') {
+    // une ombre qui fume autour d'elle
+    for (let i = 0; i < 5; i++) { const a = t * 1.3 + i * TAU / 5, rr2 = e.r * (1.2 + .25 * Math.sin(t * 3 + i)); ctx.fillStyle = 'rgba(20,10,30,.35)'; ctx.beginPath(); ctx.arc(bx + Math.cos(a) * rr2, by + Math.sin(a) * rr2 * .7, 2.4, 0, TAU); ctx.fill(); }
+    ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(14,8,22,.9)';
+    ctx.strokeText('−30 % PV', bx, top - 6.5); ctx.fillStyle = `rgba(255,92,108,${.7 + .3 * Math.sin(t * 6)})`; ctx.fillText('−30 % PV', bx, top - 6.5);
+  } else if (K === 'lune') {
+    ctx.strokeStyle = `rgba(191,224,255,${.25 + .12 * Math.sin(t * 2)})`; ctx.lineWidth = .7; ctx.setLineDash([2, 2]); ctx.lineDashOffset = -t * 3;
+    ctx.beginPath(); ctx.arc(e.x, e.y, ARC.moon, 0, TAU); ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset = 0;
+    ctx.fillStyle = 'rgba(127,160,255,.05)'; ctx.beginPath(); ctx.arc(e.x, e.y, ARC.moon, 0, TAU); ctx.fill();
+  } else if (K === 'pendu') {
+    // les jetons pendus, qui se balancent sous la carte
+    const n = st.hang.length, px = Math.round(6 * S * DPR);
+    st.hang.forEach((uid, i) => {
+      const j = G.run.jokers.find(x => x.uid === uid); if (!j) return;
+      const ox = (i - (n - 1) / 2) * 6, sw = Math.sin(t * 2.4 + i) * 1.6, y0 = by + e.r * 1.35, y1 = y0 + 6;
+      ctx.strokeStyle = '#c9a46a'; ctx.lineWidth = .4; ctx.beginPath(); ctx.moveTo(bx + ox * .5, y0); ctx.lineTo(bx + ox + sw, y1); ctx.stroke();
+      ctx.drawImage(chipCanvas(j.parts[0].t, px), bx + ox + sw - 3, y1, 6, 6);
+    });
+  } else if (K === 'roue') {
+    // la petite roue qui tourne au-dessus de la carte, la règle en cours
+    const W = G.cb.xWheel, y = top - 6, R = 3.4;
+    ctx.save(); ctx.translate(bx, y); ctx.rotate(st.wa || 0);
+    for (let i = 0; i < 6; i++) { ctx.fillStyle = ROUE[i].good ? '#5fd68a' : '#e2384d'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, i / 6 * TAU, (i + 1) / 6 * TAU); ctx.closePath(); ctx.fill(); }
+    ctx.strokeStyle = '#ffcc4d'; ctx.lineWidth = .5; ctx.beginPath(); ctx.arc(0, 0, R, 0, TAU); ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = '#ffcc4d'; ctx.beginPath(); ctx.moveTo(bx, y - R - 1.4); ctx.lineTo(bx - 1, y - R - 2.8); ctx.lineTo(bx + 1, y - R - 2.8); ctx.closePath(); ctx.fill();
+    if (W && !(st.spin > 0)) { ctx.font = `700 3.2px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(14,8,22,.9)'; ctx.strokeText(W.txt, bx, y - R - 5); ctx.fillStyle = W.col; ctx.fillText(W.txt, bx, y - R - 5); }
+  } else if (K === 'jugement' && st.blow > 0) {
+    const a = st.blow / .9; ctx.strokeStyle = `rgba(255,233,160,${a})`; ctx.lineWidth = 1; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(bx, by - e.r, e.r * (1 + (1 - a) * (1.5 + i)), -Math.PI * .85, -Math.PI * .15); ctx.stroke(); }
+  }
+}
+// par-dessus tout : les rayons du Jugement
+function arcDrawTop(cb, t) {
+  if (!cb.xRays || !cb.xRays.length) return;
+  for (const r of cb.xRays) {
+    const a = r.life / r.max;
+    ctx.strokeStyle = `rgba(255,233,160,${.7 * a})`; ctx.lineWidth = 2.2 * a; ctx.beginPath(); ctx.moveTo(r.x0, r.y0); ctx.lineTo(r.x1, r.y1); ctx.stroke();
+    ctx.strokeStyle = `rgba(255,255,255,${a})`; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(r.x0, r.y0); ctx.lineTo(r.x1, r.y1); ctx.stroke();
+  }
+}
+// la nuit de l'Ermite : tout est noir, sauf autour de ta base et de sa lanterne (on voit leurs yeux briller)
+const ADK = { c: null, g: null };
+function arcDark(cb, t, sx, sy) {
+  const F = 4, w = Math.ceil(cv.width / F), h = Math.ceil(cv.height / F);
+  if (!ADK.c || ADK.c.width !== w || ADK.c.height !== h) { ADK.c = document.createElement('canvas'); ADK.c.width = w; ADK.c.height = h; ADK.g = ADK.c.getContext('2d'); }
+  const g = ADK.g, kk = S * DPR / F, cx = CX * DPR / F, cy = CY * DPR / F;
+  g.globalCompositeOperation = 'source-over'; g.fillStyle = 'rgb(6,4,12)'; g.fillRect(0, 0, w, h);
+  g.globalCompositeOperation = 'destination-out';
+  const hole = (x, y, r0, r1) => { const gr = g.createRadialGradient(x, y, r0, x, y, r1); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, r1, 0, TAU); g.fill(); };
+  hole(cx, cy, 26 * kk, ARC.base * 1.1 * kk);
+  for (const L of cb.xLamp || []) { const f = 1 + .04 * Math.sin(t * 9 + L.x); hole(cx + L.x * kk, cy + L.y * kk, L.r * .45 * kk * f, L.r * 1.1 * kk * f); }
+  g.globalCompositeOperation = 'source-over';
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = .95; ctx.imageSmoothingEnabled = true; ctx.drawImage(ADK.c, sx, sy, cv.width, cv.height); ctx.restore();
+  // la lueur chaude de la lanterne
+  for (const L of cb.xLamp || []) { const gr = ctx.createRadialGradient(L.x, L.y, 1, L.x, L.y, L.r); gr.addColorStop(0, 'rgba(255,200,110,.22)'); gr.addColorStop(1, 'rgba(255,200,110,0)'); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(L.x, L.y, L.r, 0, TAU); ctx.fill(); }
+  // dans le noir : des yeux, et leurs tirs restent visibles
+  for (const e of cb.enemies) {
+    if (e.dead || !fogHides(e.x, e.y)) continue;
+    const bl = Math.sin(t * 2.2 + e.wob * 3) > .93 ? .15 : 1;
+    ctx.fillStyle = `rgba(255,70,90,${.75 * bl})`; ctx.fillRect(e.x - 1.6, e.y - .8, 1, .7 * bl + .2); ctx.fillRect(e.x + .6, e.y - .8, 1, .7 * bl + .2);
+  }
+  for (const p of cb.eshots) if (!p.friendly && fogHides(p.x, p.y)) drawEShot(p, t, false);
+}
+
+/* ================= v14.6 · les cartes améliorées (dès la manche 16, de plus en plus souvent) =================
+   Holographique (abattue : +0,1 MULT), Polychrome (1,5× PV, abattue : +0,25 MULT), Verre (un coup la casse, mais 3 éclats
+   foncent sur ta base), Acier (tirs ×0,5, BILLE ×2), Dorée (chaque coup lâche 1 or, 8 au plus), Pierre (3× PV, lente, rapporte 3×). */
+const ENH = {
+  holo: { name: 'Holographique', icon: 'holo', col: '#7fe8ff', w: 3, txt: 'Abattue : +0,1 MULT.' },
+  poly: { name: 'Polychrome', icon: 'poly', col: '#ff7eb6', w: 1.5, txt: '1,5× plus de PV. Abattue : +0,25 MULT.' },
+  verre: { name: 'Verre', icon: 'verre2', col: '#bff4ff', w: 2.5, txt: 'Un seul coup la casse… mais elle éclate en 3 éclats qui foncent sur ta base. Pare-les !' },
+  acier: { name: 'Acier', icon: 'acier', col: '#c3cde0', w: 2.5, txt: 'Tes tirs lui font moitié moins de dégâts. Ta BILLE, le double.' },
+  doree: { name: 'Dorée', icon: 'doree', col: '#ffcc4d', w: 2, txt: 'Chaque coup qu\'elle prend lâche 1 or (8 au plus).' },
+  pierre: { name: 'Pierre', icon: 'pierre', col: '#a59eb0', w: 2, txt: '3× plus de PV, lente, mais elle rapporte 3× plus.' },
+};
+const ENH_IDS = Object.keys(ENH);
+const ENH_MULT = 'Cartes améliorées';
+// la chance qu'une carte soit améliorée : 4 % à la manche 16, 12 % à la 30e (et ensuite)
+const enhP = r => r < 16 ? 0 : Math.min(.12, .04 + (r - 16) * .08 / 14);
+function enhOK(e, o) {
+  return !(o && o.noEnh) && !e.boss && !e.d.giant && !e.d.arc && !e.d.prop && !e.d.cor && !e.fake && !e.d.mob
+    && e.ai !== 'decoy' && e.ai !== 'thief' && e.ai !== 'guard' && e.type !== 'pk' && e.type !== 'mini' && e.type !== 'leurre';
+}
+function enhInit(e, o) {
+  const cb = G.cb, run = G.run;
+  if (cb.demo || cb.tuto || !enhOK(e, o)) return;
+  const p = enhP(run.round);
+  if (!(p > 0) || rnd() >= p) return;
+  enhSet(e, wpick(ENH_IDS, ENH_IDS.map(id => ENH[id].w)));
+}
+function enhSet(e, k) {
+  e.enh = k; e.xd = true;
+  if (k === 'poly') { e.hp *= 1.5; e.maxHp = e.hp; }
+  if (k === 'pierre') { e.hp *= 3; e.maxHp = e.hp; e.spd *= .6; e.gold *= 3; }
+  if (k === 'doree') e.enhG = 0;
+  if (k === 'verre') e.xA2 = .78;
+  dbg('enh_' + k);
+  if (!G.headless && !G.cb.demo) catSee('n', k);
+}
+// les dégâts : l'Acier résiste aux tirs, le Verre casse au premier coup, la Dorée lâche de l'or
+function enhDmgK(e, amt, o) {
+  const k = e.enh;
+  if (k === 'acier') {
+    if (o.src === 'bullet') { if (!G.headless && (e.enhT || 0) < G.cb.t) { e.enhT = G.cb.t + 1.6; floater(e.x, e.y - e.r - 3, 'ACIER', '#c3cde0', 3.4); } return .5; }
+    if (o.src === 'bille') return 2;
+    return 1;
+  }
+  if (k === 'verre') return Math.max(1, (e.hp + (e.shield || 0) + 1) * 4 / Math.max(.05, amt * (e.armor || 1)));
+  if (k === 'doree' && (e.enhG || 0) < 8) {
+    e.enhG = (e.enhG || 0) + 1; addGold(1, 'kill');
+    if (!G.headless) { coinBurst(e.x, e.y); if (e.enhG === 1 || e.enhG % 3 === 0) Snd.coin(); }
+  }
+  return 1;
+}
+// abattue : le MULT des Holographiques et Polychromes, les éclats du Verre
+function enhKill(e) {
+  const k = e.enh; if (!k) return;
+  const cb = G.cb;
+  if (k === 'holo' || k === 'poly') {
+    const v = k === 'holo' ? .1 : .25;
+    (cb.xMult || (cb.xMult = {}))[ENH_MULT] = ((cb.xMult && cb.xMult[ENH_MULT]) || 0) + v;
+    evFly(v, e.x, e.y, ENH[k].col);
+    if (!G.headless) floater(e.x, e.y - e.r - 3, `+${spM(v)} MULT`, ENH[k].col, 4.2);
+  }
+  if (k === 'verre') enhShatter(e);
+}
+function enhShatter(e) {
+  const cb = G.cb, d = edist(e) || 1, a0 = Math.atan2(-e.y, -e.x), sp = BAL.eShotSpd * 1.15;
+  for (let k = 0; k < 3; k++) {
+    const a = a0 + (k - 1) * .32 + rand(-.06, .06);
+    cb.eshots.push({ x: e.x, y: e.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, spd: sp, r: BAL.eShotR * .9, dmg: e.dmg * .4, kind: 'glass', src: null, friendly: false, life: 6, spin: rand(0, TAU), stuck: 0, col: null, xk: 'glass', light: true });
+  }
+  dbg('enh_shatter');
+  if (!G.headless) { Snd.glass(); burst(e.x, e.y, '#bff4ff', 14, 40, 1.1, .45); floater(e.x, e.y - e.r - 3, 'ÉCLATS !', '#bff4ff', 4.2); }
+}
+// un éclat de verre (tir ennemi, à parer)
+function enhShard(p, t) {
+  ctx.rotate(p.spin * 1.6);
+  ctx.fillStyle = p.friendly ? '#ffe08a' : 'rgba(210,248,255,.9)'; ctx.beginPath(); ctx.moveTo(0, -p.r * 1.5); ctx.lineTo(p.r * 1.1, p.r * .9); ctx.lineTo(-p.r * .9, p.r * .6); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#5ab4d8'; ctx.lineWidth = .3; ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.beginPath(); ctx.moveTo(0, -p.r * 1.1); ctx.lineTo(p.r * .3, 0); ctx.lineTo(-p.r * .2, 0); ctx.closePath(); ctx.fill();
+}
+// à chaque image : le reflet de la carte (dans son cadre, avec sa rotation)
+function enhDraw(e, bx, by, top, t) {
+  const k = e.enh; if (!k) return;
+  const D = cardDims(e.d.r), w = D.w, h = D.h;
+  ctx.save(); ctx.translate(bx, by); ctx.rotate(e.rr == null ? e.tilt : e.rr); const sc = e.rs || 1; ctx.scale(sc, sc);
+  rrPath(ctx, -w / 2, -h / 2, w, h, D.rad); ctx.save(); ctx.clip();
+  if (k === 'holo') {
+    const u = ((t * .55 + e.wob * .3) % 1.4) / 1.4, x = -w * 1.2 + u * w * 2.4;
+    const gr = ctx.createLinearGradient(x - w * .5, -h / 2, x + w * .5, h / 2);
+    gr.addColorStop(0, 'rgba(127,232,255,0)'); gr.addColorStop(.3, 'rgba(127,232,255,.45)'); gr.addColorStop(.5, 'rgba(255,126,220,.45)'); gr.addColorStop(.7, 'rgba(255,236,120,.45)'); gr.addColorStop(1, 'rgba(255,236,120,0)');
+    ctx.fillStyle = 'rgba(127,232,255,.1)'; ctx.fillRect(-w / 2, -h / 2, w, h);
+    ctx.fillStyle = gr; ctx.fillRect(-w / 2, -h / 2, w, h);
+  } else if (k === 'poly') {
+    const hh = (t * 60 + e.id * 37) % 360, gr = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
+    for (let i = 0; i <= 4; i++) gr.addColorStop(i / 4, `hsla(${(hh + i * 90) % 360},90%,62%,.38)`);
+    ctx.fillStyle = gr; ctx.fillRect(-w / 2, -h / 2, w, h);
+    for (let i = 0; i < 3; i++) { const p = (t * 1.3 + i / 3 + e.wob) % 1, x = Math.sin(i * 2.1 + e.id) * w * .35, y = -h * .4 + p * h * .8; ctx.fillStyle = `rgba(255,255,255,${.8 * (1 - p)})`; ctx.fillRect(x - .3, y - .3, .6, .6); }
+  } else if (k === 'verre') {
+    ctx.fillStyle = 'rgba(191,244,255,.22)'; ctx.fillRect(-w / 2, -h / 2, w, h);
+    ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = .5;
+    ctx.beginPath(); ctx.moveTo(-w * .4, h * .1); ctx.lineTo(-w * .05, -h * .45); ctx.moveTo(-w * .2, h * .35); ctx.lineTo(w * .3, -h * .3); ctx.stroke();
+  } else if (k === 'acier') {
+    const gr = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2); gr.addColorStop(0, 'rgba(240,246,255,.5)'); gr.addColorStop(.45, 'rgba(140,152,173,.42)'); gr.addColorStop(.55, 'rgba(240,246,255,.45)'); gr.addColorStop(1, 'rgba(70,80,98,.5)');
+    ctx.fillStyle = gr; ctx.fillRect(-w / 2, -h / 2, w, h);
+    ctx.fillStyle = '#e8eef8'; for (const [x, y] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { ctx.beginPath(); ctx.arc(x * (w / 2 - 1.1), y * (h / 2 - 1.1), .45, 0, TAU); ctx.fill(); }
+  } else if (k === 'doree') {
+    const gr = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2); gr.addColorStop(0, 'rgba(255,224,120,.5)'); gr.addColorStop(.5, 'rgba(217,164,65,.38)'); gr.addColorStop(1, 'rgba(255,214,107,.5)');
+    ctx.fillStyle = gr; ctx.fillRect(-w / 2, -h / 2, w, h);
+    const u = ((t * .8 + e.wob) % 1.6) / 1.6, x = -w + u * w * 2;
+    ctx.fillStyle = 'rgba(255,255,230,.6)'; ctx.beginPath(); ctx.moveTo(x - 1, -h / 2); ctx.lineTo(x + 1.2, -h / 2); ctx.lineTo(x - 2.4, h / 2); ctx.lineTo(x - 4.6, h / 2); ctx.closePath(); ctx.fill();
+  } else if (k === 'pierre') {
+    ctx.fillStyle = 'rgba(120,112,128,.55)'; ctx.fillRect(-w / 2, -h / 2, w, h);
+    for (let i = 0; i < 9; i++) { const x = (((e.id * 13 + i * 29) % 17) / 17 - .5) * w * .9, y = (((e.id * 7 + i * 41) % 19) / 19 - .5) * h * .9; ctx.fillStyle = i % 2 ? 'rgba(60,54,70,.55)' : 'rgba(200,194,210,.4)'; ctx.beginPath(); ctx.arc(x, y, .4 + (i % 3) * .25, 0, TAU); ctx.fill(); }
+    ctx.strokeStyle = 'rgba(40,34,48,.7)'; ctx.lineWidth = .35; ctx.beginPath(); ctx.moveTo(-w * .3, -h * .5); ctx.lineTo(-w * .1, -h * .1); ctx.lineTo(-w * .25, h * .2); ctx.moveTo(w * .2, h * .5); ctx.lineTo(w * .05, h * .15); ctx.stroke();
+  }
+  ctx.restore();
+  ctx.strokeStyle = ENH[k].col; ctx.globalAlpha = .7 + .3 * Math.sin(t * 5 + e.wob); ctx.lineWidth = .45; ctx.stroke(); ctx.globalAlpha = 1;
+  ctx.restore();
+  const sc2 = e.rs || 1;
+  ctx.fillStyle = 'rgba(14,8,22,.75)'; ctx.beginPath(); ctx.arc(bx - e.r * .85 * sc2, by - e.r * .95 * sc2, 2.6, 0, TAU); ctx.fill();
+  drawIcon(ctx, ENH[k].icon, bx - e.r * .85 * sc2, by - e.r * .95 * sc2, 4, ENH[k].col);
+  if (k === 'doree' && (e.enhG || 0) < 8) { ctx.font = `700 2.6px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#ffd36b'; ctx.fillText(`${8 - (e.enhG || 0)} or`, bx, by + e.r * 1.35); }
+}
+
+/* ================= v14.6 · les branchements : Coulisses, derniers Géants, Arcanes, cartes améliorées, Table d'Or ================= */
+Object.assign(ICONS, {
+  bandit: [{ d: rr(10, 12, 64, 78, 9), s: 6 }, { d: rr(19, 32, 14, 24, 3) + rr(35, 32, 14, 24, 3) + rr(51, 32, 14, 24, 3), f: 1 }, { d: 'M84 28V62H76', s: 6 }, { d: circ(84, 21, 7), f: 1 }, { d: 'M22 72H62', s: 6 }],
+  des: [{ d: rr(8, 34, 42, 42, 9), s: 6 }, { d: circ(19, 45, 4.5) + circ(39, 65, 4.5) + circ(29, 55, 4.5), f: 1 }, { d: 'M58 18L90 30L78 62L46 50Z', s: 6 }, { d: circ(63, 32, 4) + circ(73, 47, 4), f: 1 }],
+  casse: [{ d: rr(10, 14, 80, 68, 8), s: 6 }, { d: circ(44, 48, 17), s: 6 }, { d: 'M44 31V37M44 59V65M27 48H33M55 48H61', s: 5 }, { d: 'M76 38V58', s: 7 }, { d: 'M20 84V92M80 84V92', s: 7 }],
+  tapisev: [{ d: 'M8 70a19 7 0 1 0 38 0a19 7 0 1 0 -38 0M8 55a19 7 0 1 0 38 0a19 7 0 1 0 -38 0M8 40a19 7 0 1 0 38 0a19 7 0 1 0 -38 0', s: 6 }, { d: 'M56 52H90M76 38L90 52L76 66', s: 8 }],
+  holo: [{ d: rr(22, 10, 56, 80, 8), s: 6 }, { d: 'M30 58L58 24M34 78L72 34M50 84L72 58', s: 6 }],
+  poly: [{ d: rr(22, 10, 56, 80, 8), s: 6 }, { d: 'M50 26L70 64H30Z', f: 1 }, { d: 'M70 64L86 74M66 56L88 60', s: 4 }],
+  verre2: [{ d: rr(22, 10, 56, 80, 8), s: 6 }, { d: 'M40 10L48 40L36 56L48 90M48 40L66 50L72 70', s: 5 }],
+  acier: [{ d: rr(22, 10, 56, 80, 8), s: 6 }, { d: circ(33, 21, 4) + circ(67, 21, 4) + circ(33, 79, 4) + circ(67, 79, 4) + rr(37, 38, 26, 24, 4), f: 1 }],
+  doree: [{ d: rr(22, 10, 56, 80, 8), s: 6 }, { d: circ(50, 50, 15), f: 1 }, { d: 'M30 22L38 30M70 78L62 70', s: 5 }],
+  pierre: [{ d: 'M14 70L24 38L46 22L72 28L88 52L80 78L44 86Z', s: 6 }, { d: 'M46 22L50 48L80 52M50 48L40 70', s: 4 }],
+});
+const COULISSES = ['bandit', 'des', 'casse', 'allin'];
+
+/* ---------- les crochets ---------- */
+// les règles d'un jeu ou d'un Arcane sur une carte (vitesse, dégâts)
+function xEvK(fn, e, a, o) { const cb = G.cb; let k = 1; for (const id of cb.evs) if (EVH[id][fn] && cb.ev[id]) k *= EVH[id][fn](cb, cb.ev[id], e, a, o); return k; }
+function xSpdK2(e) { const cb = G.cb; if (cb.demo) return 1; let k = 1; if (cb.evs && cb.evs.length) k *= xEvK('spdK', e); if (cb.xWheel) k *= arcSpdK(e); return k; }
+function xDmgK(e, amt, o) {
+  const cb = G.cb; if (cb.demo) return amt;
+  let k = 1;
+  if (cb.evs && cb.evs.length) k *= xEvK('dmgK', e, amt, o);
+  if (cb.xWheel) k *= arcDmgK(e, o);
+  if (e.enh) k *= enhDmgK(e, amt * k, o);
+  return amt * k;
+}
+// le pilote des simulations : il arrête les rouleaux du bandit, et relance un dé quand la somme ne vaut rien
+const dsKeep = f => f >= 5 ? 2 : 1;
+function xBotTgt2(cb) {
+  if (!cb.evs || !cb.evs.length) return null;
+  const B = cb.ev.bandit;
+  if (B) { const R = B.R.find(r => r.st === 'spin' && r.t < r.stopT - .5); if (R) return { x: bdX(R.i), y: BD.wy }; }
+  const D = cb.ev.des;
+  if (D && D.ph === 'read' && D.dice.length === 2 && D.rr < DS.reroll * 2) {
+    const s = dsSum(D);
+    if (s !== 7 && s !== 11) { const keep = dsKeep(D.dice[0].face) >= dsKeep(D.dice[1].face) ? D.dice[0] : D.dice[1]; return D.dice.find(d => d !== keep); }
+  }
+  return null;
+}
+// le dessin par-dessus tout : les rayons du Jugement
+function xDrawTop3(cb, t) { arcDrawTop(cb, t); }
+
+/* ---------- la Table d'Or (Vestiaire : nouvel onglet « Tables ») ---------- */
+const TABLE_SKINS = [
+  { id: 'classic', name: 'Tapis Rouge', txt: 'Le feutre vert et le cuir rouge de la maison.' },
+  { id: 'or', name: 'Table d\'Or', txt: 'Le feutre des grands soirs : cuir noir, bois doré, feutre d\'or.', need: { k: 'plaques', n: 12, txt: 'Gagne les 12 plaques d\'or' } },
+];
+const TBP = {
+  classic: { rail: ['#9b2d45', '#6e1a2e', '#3a0c18'], line: '#1c040b', seam: 'rgba(30,4,12,.55)', hi: 'rgba(255,190,200,.28)', stitch: 'rgba(255,214,160,.55)', wood: ['#5a3418', '#a8692f', '#6b3d1a'], woodLine: '#2a1608', felt: ['#2a8a6c', '#1d6a55', '#0f4136'], pr: a => `rgba(255,236,190,${a})`, bot: 'TRIPLE = ULTIME  ·  PAIRE = MIX' },
+  or: { rail: ['#3c3022', '#1c160e', '#070504'], line: '#000000', seam: 'rgba(255,204,77,.28)', hi: 'rgba(255,230,160,.32)', stitch: 'rgba(255,214,107,.8)', wood: ['#7a5a14', '#f2cb5e', '#8a6a1e'], woodLine: '#3a2a08', felt: ['#d9ae4a', '#a57c24', '#553c0a'], pr: a => `rgba(58,34,4,${Math.min(1, a * 2.3)})`, bot: 'TABLE D\'OR  ·  LES DOUZE PLAQUES' },
+};
+const tbPal = () => TBP[skinOf('table')] || TBP.classic;
+SKINS.table = TABLE_SKINS; SKIN_DEF.table = 'classic'; SKIN_KIND.table = ['Tables', 'NOUVELLE TABLE DÉBLOQUÉE']; SKN.table = {};
+for (const S2 of TABLE_SKINS) SKN.table[S2.id] = S2;
+// la vignette d'une table (vestiaire, note de déblocage)
+function tablePreview(g, w, id) {
+  const P = TBP[id] || TBP.classic, k = w / 236;
+  g.save(); g.scale(k, k);
+  let gr = g.createRadialGradient(-30, -40, 20, 0, 0, 110); gr.addColorStop(0, P.rail[0]); gr.addColorStop(.75, P.rail[1]); gr.addColorStop(1, P.rail[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, 110, 0, TAU); g.fill();
+  g.setLineDash([3, 4]); g.strokeStyle = P.stitch; g.lineWidth = 1.6; g.beginPath(); g.arc(0, 0, 105, 0, TAU); g.stroke(); g.setLineDash([]);
+  gr = g.createRadialGradient(0, 0, 95, 0, 0, 100); gr.addColorStop(0, P.wood[0]); gr.addColorStop(.5, P.wood[1]); gr.addColorStop(1, P.wood[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, 100, 0, TAU); g.arc(0, 0, 95, 0, TAU, true); g.fill();
+  gr = g.createRadialGradient(0, -10, 6, 0, 0, 95); gr.addColorStop(0, P.felt[0]); gr.addColorStop(.6, P.felt[1]); gr.addColorStop(1, P.felt[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, 94, 0, TAU); g.fill();
+  g.strokeStyle = P.pr(.4); g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 76, 0, TAU); g.stroke();
+  g.strokeStyle = 'rgba(255,204,77,.4)'; g.lineWidth = 2.4; g.beginPath(); g.arc(0, 0, 26, 0, TAU); g.stroke();
+  for (let i = 0; i < 4; i++) { const a = i / 4 * TAU + Math.PI / 4; g.save(); g.translate(Math.cos(a) * 52, Math.sin(a) * 52); suitPath(g, ['s', 'h', 'c', 'd'][i], 9); g.fillStyle = P.pr(.45); g.fill(); g.restore(); }
+  g.restore();
+}
+
+
+/* ================= v14.7 · les retours de Sefy =================
+   Tes données (RGPD) : ce qui part au classement, et le bouton pour l'effacer.
+   Le Cocktail Mystère : un shot offert à chaque passage au bar, à boire soi-même.
+   Les événements attendent « Commencer » ; le Bonneteau se joue aussi au doigt / à la souris.
+   Les Géants : +50 % de PV. */
+
+/* ---------- les Géants : +50 % de PV ---------- */
+for (const id of Object.keys(ENEMIES)) if (ENEMIES[id].giant) ENEMIES[id].hp = Math.round(ENEMIES[id].hp * 1.5);
+
+/* ---------- tes données (RGPD) ---------- */
+const RGPD_TXT = 'Ton pseudo et tes meilleurs scores (score, manche, mise) partent au classement en ligne. Rien d\'autre : ta progression reste sur cet appareil.';
+function lbDataRow() {
+  const me = lbMe();
+  return oRow('Tes données', `<span class="rg-txt">${RGPD_TXT}</span>${me ? '<button class="btn small red" data-lbdel="1">Effacer mes données</button>' : ''}`, me ? 'tu peux tout effacer du classement' : 'rien au classement pour l\'instant');
+}
+function lbAskDelete() {
+  const me = lbMe(); if (!me) return;
+  let ov = $('#lbname');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
+  ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
+      <h2 class="lbn-t">Effacer mes données</h2>
+      <p class="lbn-p">Ton pseudo <b>${esc(me.pseudo)}</b> et tous tes scores seront effacés du classement, pour de bon. Ta progression sur cet appareil ne bouge pas.</p>
+      <p class="lbn-err" id="lbn-err"></p>
+      <div class="lbn-row"><button class="btn big red" id="lbn-ok">EFFACER</button></div>
+      <button class="btn ghost small" id="lbn-back">Retour</button>
+    </div></div>`;
+  ov.hidden = false;
+  const err = $('#lbn-err'), ok = $('#lbn-ok');
+  ok.onclick = async () => {
+    if (LB.busy) return;
+    LB.busy = true; ok.disabled = true; ok.textContent = '…'; err.textContent = '';
+    const r = await lbRpc('lb_delete', { p_id: me.id, p_secret: me.secret });
+    LB.busy = false; ok.disabled = false; ok.textContent = 'EFFACER';
+    // « joueur » : le classement ne le connaît déjà plus (déjà effacé)
+    if (r.error && r.error !== 'joueur') {
+      err.textContent = /lb_delete|schema cache|could not find/i.test(String(r.error)) ? 'Pas encore possible : le classement doit d\'abord être mis à jour.' : lbErrTxt(r.error);
+      Snd.deny(); return;
+    }
+    delete G.meta.lb; delete G.meta.lbq; G.meta.lbOff = true; LB.cache = {}; saveMeta();
+    ov.hidden = true; Snd.click(); toast('Tes données sont effacées du classement.');
+    if (typeof renderOptions === 'function' && !$('#opts').hidden) renderOptions();
+  };
+  $('#lbn-back').onclick = () => { ov.hidden = true; };
+  Snd.pop();
+}
+document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('[data-lbdel]'); if (t) lbAskDelete(); });
+
+/* ---------- le Cocktail Mystère : un shot offert, posé sur le comptoir ---------- */
+function ckGift(run, shots) {
+  if (!(run.up && run.up.mystere) || shots.some(s => s.gift)) return;
+  const ids = CK_SHOTS.filter(id => SHOTS[id] && !shots.some(s => s.id === id)); if (!ids.length) return;
+  shots.push({ id: pick(ids), price: 0, sold: false, gift: true });
+}
+
+/* ---------- les événements : on attend « Commencer » ---------- */
+function evxGoShow() {
+  const el = EVX.el; if (!el) return;
+  el.classList.add('ev-go');
+  const b = el.querySelector('.evx-go'); if (b) { b.hidden = false; b.disabled = false; }
+  EVX.goOn = true;
+}
+function evxGo() {
+  if (!EVX.on || !EVX.goOn) return;
+  EVX.goOn = false;
+  const el = EVX.el, b = el && el.querySelector('.evx-go');
+  if (b) { b.hidden = true; }
+  if (el) el.classList.remove('ev-go');
+  Snd.click && Snd.click();
+  evxEnd();
+}
+
+/* ---------- le Bonneteau : toucher une carte (souris ou doigt) ---------- */
+function evTapCard(cb, x, y) {
+  const S2 = cb.ev && cb.ev.bonneteau; if (!S2 || S2.ph !== 'guess') return false;
+  let best = null, bd = 12;
+  for (const c of S2.cards) { const d = Math.hypot(c.x - x, c.y - y); if (d < bd) { bd = d; best = c; } }
+  if (!best) return false;
+  S2.hit = best; S2.res = best.queen ? 'win' : 'lose'; S2.ph = 'reveal'; S2.pt = 0; S2.done1 = false;
+  dbg('bt_tap');
+  if (!G.headless) { Snd.cardTap && Snd.cardTap(); haptic(15); }
+  return true;
 }
 
 

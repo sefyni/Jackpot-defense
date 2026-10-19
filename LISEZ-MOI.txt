@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v14.5-202610181500
+JACKPOT DEFENSE v14.7-202610191200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,122 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v14.7 — tes retours
+- Événements : après l'intro « La Maison joue… », la manche attend que tu appuies sur COMMENCER
+  (ou Espace / Entrée). Tu as le temps de lire la règle. (Le Tiercé : choisir ton cheval lance la manche.)
+- Bonneteau : touche la Dame directement, au doigt ou à la souris (la BILLE marche toujours).
+- Boss à mi-vie : les cartes de la table ne disparaissent plus. Le boss est invincible quelques secondes,
+  puis repart plus fort, et tout ce qui était sur la table est toujours là.
+- Les Géants ont 50 % de PV en plus (Sabot, Golem, Carte XXL, Flambeur, Main de la Maison).
+- Cocktail Mystère (spécialité de Zaza) : pour toute la partie, à chaque passage au bar, Zaza pose un shot
+  offert (au hasard) sur le comptoir. Tu le bois toi-même : tu vois quel boost tu prends.
+  (Avant : un shot invisible t'était donné au début de chaque manche.)
+- Marché noir : quand il est ouvert, son bouton au bar est violet vif, en blanc, avec « ouvert » et un point vert.
+- Tes données (RGPD) : OPTIONS > Profil dit ce qui part au classement en ligne (ton pseudo et tes meilleurs
+  scores, rien d'autre) et a un bouton « Effacer mes données » : ton pseudo et tes scores sont effacés du
+  classement. Ta progression sur l'appareil ne bouge pas. Ensuite, tu joues sans classement (tu peux
+  rechoisir un pseudo dans OPTIONS > Profil). La fenêtre du pseudo le dit aussi.
+  À FAIRE UNE FOIS dans Supabase (SQL Editor), sinon le bouton répond « Pas encore possible » :
+
+create or replace function public.lb_delete(p_id uuid, p_secret text)
+returns void
+language plpgsql
+security definer
+set search_path to 'public', 'extensions'
+as $function$
+begin
+  if not exists (select 1 from players where id = p_id and secret_hash = crypt(p_secret, secret_hash)) then raise exception 'joueur'; end if;
+  delete from scores where player_id = p_id;
+  delete from players where id = p_id;
+end $function$;
+
+- Le Baron ne revient toujours pas après la manche 30 (comme demandé).
+- Correctif : une carte coincée loin de la table (un Roi de Trèfle et son garde, des Aimants) pouvait encore
+  bloquer une manche (rare). Au bout de 150 s, donne finie et sans boss, les dernières cartes foncent sur toi.
+- Équilibrage (simulations, mêmes graines) : le jeu est plus dur, comme voulu. Mise blanche : 23,0 manches en
+  moyenne (24,3 en v14.6), 15 % de parties gagnées (20 %). Ce sont surtout les boss des manches 15 et 20,
+  maintenant que les cartes restent à leur mi-vie. Mises verte, noire et violette : 19,2 (20,0).
+  Plus aucune manche bloquée.
+
+Nouveautés de la v14.6 — les Coulisses, les derniers Géants, les Arcanes, les cartes améliorées, la Table d'Or
+- Les Coulisses (manches 21 à 30) : la Maison y joue 4 nouveaux jeux, avec la même intro « La Maison joue… ».
+  · Bandit manchot : la table est coupée en 3 bandes, avec un rouleau en haut de chacune. Toutes les 7 s,
+    la main du croupier tire le levier : les rouleaux s'arrêtent un par un… ou dès que ta BILLE en touche un
+    (un rouleau arrêté à la BILLE ne tombe jamais sur un crâne, et une fois sur deux sur un 7).
+    Chaque bande prend l'effet de son symbole jusqu'au tour suivant : 7 = or ×2, cerise = cartes ralenties,
+    BAR = dégâts ×1,5, crâne = cartes plus rapides.
+    777 = JACKPOT (gros paquet d'or et +1 MULT) ; 3 cerises = toutes les cartes gelées 2 s ;
+    3 BAR = +0,5 MULT ; 3 crânes = « la Maison gagne » : 3 cartes sortent de la machine.
+  · Dés pipés : toutes les 5 s environ, le croupier lance 2 dés géants. Ils roulent, rebondissent et écrasent
+    les cartes sur leur passage (la moitié de leurs PV). Une fois arrêtés, la Maison lit les dés (1,3 s) :
+    7 ou 11 = de l'or ; un double = +0,3 MULT ; 2 ou 12 = 3 cartes sortent des dés. Pendant la lecture,
+    ta BILLE peut relancer un dé (même arrêté). 8 lancers par manche.
+  · Le Casse : un coffre-fort traverse la table, escorté par 3 vigiles qui tournent autour. Tant qu'un vigile vit,
+    le coffre est intouchable (cadenas). Ouvre-le avant qu'il sorte de l'autre côté (22 s) : un gros paquet d'or.
+    Ta BILLE lui fait ×3. Le trajet et la sortie sont marqués sur la table.
+  · Tapis ! : un compte à rebours, puis la main du croupier pousse tous les jetons au milieu : pendant 20 s,
+    toutes les cartes foncent droit sur toi (même celles qui tirent de loin : elles ne s'arrêtent plus),
+    et la Maison en rajoute quand la donne est finie (2 cartes toutes les 3 s). Mais chaque carte abattue
+    paie ×3 en or.
+  Plaques d'or : Bandit manchot (faire 777), Dés pipés (5 fois 7 ou 11 dans la manche), Le Casse (ouvrir le
+  coffre en moins de 15 s), Tapis ! (25 cartes abattues pendant le Tapis). Les 12 plaques sont maintenant là.
+  En double table, le Bandit ne tombe pas avec le Blackjack, le Jackpot, le Tiercé ou le Bonneteau, et le Casse
+  pas avec Quitte ou double ; le panneau du haut de la table fait une ligne par jeu.
+- Les deux derniers Géants (toujours un par tranche de 10 manches) :
+  · Le Sabot (dès la manche 6) : la boîte du croupier se pose au bord de la table et distribue une carte
+    toutes les 2 s (toutes les 1,5 s quand il est blessé ; 12 cartes au plus sur la table). Abats-le vite.
+  · La Main de la Maison (dès la manche 11) : une main gantée géante, la manche hors de la table, avec un râteau.
+    Toutes les 5 s, une zone rouge s'allume (une bande, de la main jusqu'à ta base), puis le râteau la balaie :
+    il pousse les cartes vers toi, confisque ta BILLE, et s'il touche ta base : un coup et −5 or.
+    Ton flipper dans la zone rouge l'arrête (ton flipper s'use, comme un tir bloqué). PARE-le au bon moment
+    (coup de flipper quand il arrive) : le râteau casse, elle prend 22 % de ses PV d'un coup et reste 1,6 s
+    sans râteau. Une parade compte comme une vraie parade (série, stats).
+- Les Arcanes majeurs (dès la manche 21, et en manches infinies) : environ une manche sur trois (3 par tranche
+  de 10, jamais sur un boss ni à la manche 30), une grande carte de tarot entre en pleine manche, face cachée,
+  et se retourne. Bandeau « ARCANE MAJEUR » (violet et or), et Madame Nox te souffle un conseil.
+  Pas de TAPIS tant qu'un Arcane est sur la table.
+  · La Mort (XIII) : lente. Si elle touche ta base : −30 % de tes PV max d'un coup. Son cœur bat quand elle approche.
+  · La Lune (XVIII) : elle reste au loin ; les cartes autour d'elle deviennent des mirages (transparentes) :
+    ton canon ne les voit pas. Ta BILLE les révèle (pour de bon).
+  · Le Pendu (XII) : de loin, il pend un de tes jetons toutes les 6 s (chaînes et cadenas, 3 au plus) :
+    le jeton ne marche plus. Les jetons pendus se balancent sous sa carte. Abats-le : ils sont libérés.
+  · L'Ermite (IX) : la table s'éteint. Tu ne vois (et ton canon ne vise) que près de sa lanterne et autour
+    de ta base.
+    Dans le noir, tu vois leurs yeux, et leurs tirs restent visibles. Il marche vers toi, lentement.
+  · La Roue de Fortune (X) : elle reste au loin et tourne toutes les 5 s : une règle pour toute la table, jusqu'au
+    tour suivant. Bonnes : tirs ×2, or ×2, cartes lentes. Mauvaises : cartes rapides, boucliers (30 % de PV)
+    pour toutes les cartes, soin des cartes (+35 %). À toi de voir quand l'abattre.
+  · Le Jugement (XX) : toutes les 8 s, sa trompette relève les 3 dernières cartes abattues, là où elles sont
+    tombées (jamais collées à ta base), un peu sonnées, avec la moitié de leurs PV. Abats-le d'abord.
+- Les cartes améliorées (dès la manche 16) : 4 % des cartes à la manche 16, jusqu'à 12 % à la manche 30
+  (et en manches infinies). Une petite pastille dans le coin dit laquelle c'est :
+  · Holographique : reflet arc-en-ciel. Abattue : +0,1 MULT.
+  · Polychrome : toute en couleurs, 1,5× plus de PV. Abattue : +0,25 MULT.
+  · Verre : transparente. Un seul coup la casse… mais elle éclate en 3 éclats qui foncent sur ta base
+    (pare-les : ils ne cassent pas le flipper).
+  · Acier : tes tirs lui font moitié moins de dégâts, ta BILLE le double.
+  · Dorée : chaque coup qu'elle prend lâche 1 or (8 au plus, le compte est sous la carte).
+  · Pierre : 3× plus de PV, lente, mais elle rapporte 3× plus (or et points).
+  Le MULT gagné s'affiche dans le décompte de la manche (ligne « Cartes améliorées »).
+- La Table d'Or : gagne les 12 plaques d'or (une par jeu de la Maison) et elle se débloque au Vestiaire,
+  dans le nouvel onglet « Tables » : rail en cuir noir et coutures dorées, bois doré, feutre d'or.
+  Le Profil le rappelle sous les plaques (« 12 plaques = la Table d'Or »).
+- Le carnet d'Anatole : la page des Géants passe à 5 cartes, deux nouvelles pages (« Les Arcanes » avec le coffre
+  et le vigile du Casse, « Les cartes améliorées »). Les règles : nouvelle page « Arcanes et cartes améliorées ».
+  Les petites notes : « ARCANE MAJEUR », « CARTE AMÉLIORÉE ».
+- Correctifs :
+  · une élite Régénérante repoussée sans cesse par les tirs, juste hors de portée du canon, pouvait bloquer
+    une manche pour toujours (vu en simulation, aussi en v14.5) : après 20 s de TAPIS, les dernières cartes
+    ne se soignent plus et ne reculent plus ;
+  · le jeton Boucle (qui relance une carte abattue avec 1 PV) ne relance plus les cartes spéciales :
+    un Géant revenait avec son bandeau « ATTENTION ! », et un coffre du Casse relancé sans son rail
+    bloquait la manche ;
+  · la note de déblocage disait « Équipe-le » pour une base ou une bille ; c'est « Équipe-la ».
+- Équilibrage (simulations, mêmes graines qu'en v14.5) : même difficulté. Mise blanche (360 parties) :
+  24,3 manches en moyenne, comme en v14.5 ; les manches 21 à 29 sont un peu plus dures, mais elles rapportent
+  plus (plus d'or et d'améliorations à la manche 30). Mises verte, noire et violette (180 parties) : 20,0
+  manches en moyenne (20,2 en v14.5). Plus aucune manche bloquée.
 
 Nouveautés de la v14.5 — le Salon Privé, les Coriaces, les Géants
 - Le Salon Privé (manches 11 à 20) : la Maison y joue 4 nouveaux jeux, avec la même intro « La Maison joue… ».
