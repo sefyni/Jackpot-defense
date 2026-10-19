@@ -3640,6 +3640,15 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 #banner.gt::after{animation-direction:reverse}
 @keyframes gtSlide{to{background-position:28px 0}}
 @media (prefers-reduced-motion:reduce){#banner.gt::before,#banner.gt::after{animation:none}}
+/* v15.2 · le défi du jour : la fenêtre d'explication, l'onglet du classement */
+.dh-t{color:#ffcc4d}
+.dh-l{margin:2px 0 4px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;text-align:left;font-size:15px;line-height:1.3;color:var(--muted)}
+.dh-l li{position:relative;padding-left:22px}
+.dh-l li::before{content:"";position:absolute;left:4px;top:.45em;width:8px;height:8px;border-radius:50%;background:#ffcc4d}
+.dh-l b{color:var(--cream)}
+.dlb-day{margin:0 0 8px;padding:0 8px;font:700 13px/1 var(--f-pix);letter-spacing:.08em;color:#ffcc4d}
+.lb-foot #dlb-go{margin-left:6px;vertical-align:middle}
+.oscore .o-daily .o-dpl{color:var(--cream)}
 /* v15.0 · les nouveautés en étiquette d'une ligne */
 #newnote.nn-tag{gap:7px;padding:4px 10px 4px 4px;border-radius:999px;max-width:min(300px,calc(100% - 16px))}
 #newnote.nn-tag .nn-art{width:26px;height:30px}
@@ -4276,7 +4285,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v15.1</p>
+  <p class="proto">Sefy Industries · v15.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -15995,7 +16004,7 @@ const BKS_IDLE = [
 
 /* ---------- les pages ---------- */
 const LAYC = { chips: 4, icons: 4, cards: 4, plates: 2, duo: 2, faces: 3, decks: 2, balls: 4 };
-const blk = (h, lay, items, rows) => ({ h, lay, items, rows: rows || Math.max(1, Math.ceil(items.length / LAYC[lay])) });
+const blk = (h, lay, items, rows) => ({ h, lay, items, rows: Math.max(1, rows || 0, Math.ceil(items.length / LAYC[lay])) });
 function bookPages(n) {
   const P = [];
   if (n === 1) {
@@ -16012,7 +16021,9 @@ function bookPages(n) {
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les cartes améliorées', col: '#7fe8ff', note: 'Holographiques, en verre, en pierre… La Maison soigne ses cartes. Pas les vôtres.', blocks: [blk(null, 'icons', ENH_IDS.map(id => ['n', id]), 2)] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Figures et As', col: '#ffcc4d', note: 'Les boss battus reviennent en simples cartes. Les As, eux, sont à mon frère.', blocks: [blk('Les figures', 'cards', MOBS.map(id => ['e', id])), blk('Les As du Baron', 'cards', ACES.map(id => ['e', id]))] });
     P.push({ k: 'grid', sec: 'Les cartes', title: 'Les boss', col: '#ff7eb6', note: 'Le dernier, c\'est mon frère. Ne lui dites pas que je vous aide.', blocks: [blk(null, 'cards', [...BOSS_ORDER, 'b_baron'].map(id => ['b', id])), blk('Les élites', 'icons', Object.keys(ELITES).map(id => ['l', id]))] });
-    P.push({ k: 'grid', sec: 'Les malus', toc: 'Malus, événements et sorts', title: 'Les crânes', col: '#e0365a', note: '1 crâne : ça pique. 2 : ça mord. 3 : sortez le parapluie.', blocks: [blk(null, 'icons', Object.keys(MALUS).map(id => ['m', id]), 4)] });
+    const mT = t => Object.keys(MALUS).filter(id => MALUS[id].tier === t && (!MALUS[id].old || catHas('m', id))).map(id => ['m', id]);
+    P.push({ k: 'grid', sec: 'Les malus', toc: 'Malus, événements et sorts', title: 'Les crânes', col: '#e0365a', note: '1 crâne : ça pique. 2 : ça mord. 3 : sortez le parapluie.', blocks: [blk(`${TIERS[1].the} · 1 crâne`, 'icons', mT(1), 3), blk(`${TIERS[2].the} · 2 crânes`, 'icons', mT(2), 3)] });
+    P.push({ k: 'grid', sec: 'Les malus', title: TIERS[3].the, col: '#ff5c6c', note: '3 crânes. Là, je ferme la boutique.', blocks: [blk(null, 'icons', mT(3), 3)] });
     P.push({ k: 'grid', sec: 'Les malus', title: 'Événements et sorts', col: '#a98bff', note: 'Les Sorciers lisent mes carnets. Je le sais.', blocks: [blk('Les événements', 'icons', Object.keys(EVENTS).map(id => ['v', id])), blk('Les sorts des Sorciers', 'icons', Object.keys(SPELLS).map(id => ['s', id]))] });
     const ckA = id => UPG[id].cat === 'canon' || UPG[id].cat === 'rateau';
     P.push({ k: 'grid', sec: 'Le bar de Zaza', toc: 'Le bar et tes sorts', title: 'Les boissons', col: '#ff9a3d', note: 'Zaza ne fait pas crédit. Même à moi.', blocks: [blk(null, 'icons', Object.keys(UPG).filter(ckA).map(id => ['d', id]), 4)] });
@@ -18826,12 +18837,12 @@ async function lbSend(stake, e) {
   return r;
 }
 // les scores en attente (pas d'internet la dernière fois)
-async function lbFlush() {
+async function lbFlush1() {
   const q = G.meta.lbq; if (!q || !lbMe()) return;
   for (const k of Object.keys(q)) { const r = await lbSend(k, q[k]); if (r.error === 'reseau') return; if (r.error) { delete q[k]; saveMeta(); } }
 }
 // la fin de partie : le score part tout seul, et on dit sa place
-async function lbAfterRun(run) {
+async function lbAfterRun1(run) {
   const box = $('#o-score'); if (!box) return;
   let el = $('#o-lb'); if (!el) { el = document.createElement('span'); el.id = 'o-lb'; el.className = 'o-lb'; }
   box.appendChild(el);
@@ -18854,7 +18865,7 @@ function lbOpen() {
   if (!lbMe() && !LB.skip) { lbAsk(() => lbOpen(), 'lb'); return; }
   let ov = $('#lb');
   if (!ov) { ov = document.createElement('section'); ov.id = 'lb'; ov.className = 'full lbs'; document.body.appendChild(ov); }
-  LB.stake = clamp(LB.stake, 0, Math.min(STAKES.length - 1, G.meta.stakeMax || 0));
+  LB.stake = LB.stake === 'd' ? 'd' : clamp(LB.stake, 0, Math.min(STAKES.length - 1, G.meta.stakeMax || 0));
   ov.hidden = false;
   lbRender(); Snd.pop();
 }
@@ -19065,7 +19076,7 @@ function lbRowsHTML(rows, me) {
   return h;
 }
 // la page du classement : toujours 10 places, et elle prend tout l'écran
-async function lbRender() {
+async function lbRender1() {
   const ov = $('#lb'); if (!ov || ov.hidden) return;
   const m = G.meta, top = Math.min(STAKES.length - 1, m.stakeMax || 0), k = LB.stake, S = STAKES[k], me = lbMe();
   ov.innerHTML = `<div class="fi lb-fi">
@@ -23470,7 +23481,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v15.1</p></div>`;
+        <p class="ov5">v15.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24397,7 +24408,7 @@ function bootEnd() {
   el.classList.add('out'); bootShield(1000);
   setTimeout(() => { el.hidden = true; }, 460);
   duckMusic(false);
-  if (G.mode === 'title') { if (tutoNeed()) tutoStart(); else titleEnter(); }
+  if (G.mode === 'title') titleEnter();
 }
 function titleEnter() {
   const t = $('#title'); if (!t || G.reduced) return;
@@ -30457,7 +30468,7 @@ function dailyState() {
   const alive = D.last === k || D.last === dayBefore(k);
   return { k, best: best[k], streak: alive ? (D.streak || 0) : 0 };
 }
-function dailyTitle() {
+function dailyTitle0() {
   const el = $('#t-daily-s'); if (!el) return;
   const S = dailyState();
   el.textContent = `${dayLabel(S.k)}${S.best != null ? ` · record ${fmtS(S.best)}` : ' · pas encore joué'}${S.streak > 1 ? ` · série ${S.streak} j` : ''}`;
@@ -30577,7 +30588,7 @@ async function openShare() {
 }
 document.addEventListener('click', e => {
   const t = e.target.closest && e.target.closest('#o-share,#t-daily'); if (!t) return;
-  if (t.id === 'o-share') openShare(); else startDaily();
+  if (t.id === 'o-share') openShare(); else dailyClick();
 });
 
 
@@ -30719,6 +30730,132 @@ function setLang(l) {
 }
 const langRow = () => oRow('Langue · Language', `<div class="oseg" role="radiogroup">${[['fr', 'Français'], ['en', 'English']].map(([v, n]) => `<button class="${LANG === v ? 'on' : ''}" data-lang="${v}" role="radio" aria-checked="${LANG === v}">${n}</button>`).join('')}</div>`);
 document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('[data-lang]'); if (t) { e.preventDefault(); setLang(t.dataset.lang); } });
+
+
+/* ================= v15.2 · le défi du jour devient un vrai défi =================
+   - Classement du jour en ligne (lb_daily_submit / lb_daily_top / lb_daily_me, SQL à coller par Sefy).
+     Onglet « Défi » dans la page du classement ; la place du jour en fin de partie et sous le bouton.
+   - Au premier clic sur DÉFI DU JOUR : une petite fenêtre explique le principe en 3 lignes.
+   Si le SQL n'est pas encore là, tout marche comme avant (le classement du défi dit « bientôt »). */
+const DLB_COL = '#ffcc4d';
+const dlbMissing = e => /lb_daily|schema cache|could not find|PGRST202/i.test(String(e || ''));
+const dlbPlaceTxt = p => LANG === 'en' ? `${p}${p % 10 === 1 && p % 100 !== 11 ? 'st' : p % 10 === 2 && p % 100 !== 12 ? 'nd' : p % 10 === 3 && p % 100 !== 13 ? 'rd' : 'th'}` : `${p}${p === 1 ? 'er' : 'e'}`;
+function dlbRemember(k, row) {
+  if (!row) return;
+  const D = G.meta.daily || (G.meta.daily = { best: {} });
+  D.place = D.place || {}; D.place[k] = { p: +row.place, n: +row.total || 0 };
+  const ks = Object.keys(D.place).sort(); while (ks.length > 7) delete D.place[ks.shift()];
+  saveMeta();
+}
+// envoyer son score du défi ; hors ligne : il partira plus tard (le jour même ou le lendemain)
+async function dlbSend(k, e) {
+  const me = lbMe(); if (!me) return { error: 'joueur' };
+  const r = await lbRpc('lb_daily_submit', { p_id: me.id, p_secret: me.secret, p_day: k, p_score: e.score, p_round: Math.min(999, e.round) });
+  const q = G.meta.lbdq || (G.meta.lbdq = {});
+  if (r.error === 'reseau') { if (!q[k] || e.score > q[k].score) { q[k] = e; saveMeta(); } return r; }
+  if (q[k] && q[k].score <= e.score) { delete q[k]; saveMeta(); }
+  if (!r.error) { delete LB.cache.d; const row = Array.isArray(r.data) ? r.data[0] : r.data; dlbRemember(k, row); r.row = row; }
+  return r;
+}
+async function dlbFlush() {
+  const q = G.meta.lbdq; if (!q || !lbMe()) return;
+  const today = dayKey(), yday = dayBefore(today);
+  for (const k of Object.keys(q)) {
+    if (k !== today && k !== yday) { delete q[k]; saveMeta(); continue; }
+    const r = await dlbSend(k, q[k]); if (r.error === 'reseau') return;
+    if (r.error) { delete q[k]; saveMeta(); }
+  }
+}
+async function lbFlush() { await lbFlush1(); try { await dlbFlush(); } catch (e) { /* rien */ } }
+
+// fin de partie : le classement habituel, puis la place du jour
+async function lbAfterRun(run) {
+  await lbAfterRun1(run);
+  if (!run || !run.daily || !lbRunOk(run) || !lbMe()) return;
+  const el = $('#o-score .o-daily');
+  const r = await dlbSend(run.daily, { score: Math.round(run.score), round: run.round });
+  if (!el || !el.isConnected) return;
+  if (r.row) {
+    const p = +r.row.place;
+    el.insertAdjacentHTML('beforeend', ` · <b class="o-dpl">${dlbPlaceTxt(p)} du jour</b>${r.row.total > 1 ? ` sur ${r.row.total}` : ''}`);
+    if (p <= 3 && +r.row.best === Math.round(run.score)) setTimeout(() => { Snd.record(); toast(p === 1 ? '1er du défi du jour !' : `${dlbPlaceTxt(p)} du défi du jour !`); }, 900);
+  } else if (r.error === 'reseau') el.insertAdjacentHTML('beforeend', ' · hors ligne : ta place arrivera plus tard');
+  dailyTitle();
+}
+
+// le sous-titre du bouton : la date, le principe (ou ton record et ta place), la série
+function dailyTitle() {
+  const el = $('#t-daily-s'); if (!el) return;
+  const S = dailyState(), D = G.meta.daily || {}, pl = D.place && D.place[S.k];
+  el.textContent = `${dayLabel(S.k)} · ${S.best != null ? `record ${fmtS(S.best)}${pl ? ` · ${dlbPlaceTxt(pl.p)}` : ''}` : 'même partie pour tous'}${S.streak > 1 ? ` · série ${S.streak} j` : ''}`;
+}
+
+// le premier clic : on explique avant de lancer
+function dailyClick() {
+  firstGesture();
+  if (tutoNeed() || (G.meta.daily && G.meta.daily.seen)) { startDaily(); return; }
+  let ov = $('#dhelp');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'dhelp'; ov.className = 'full lbn'; document.body.appendChild(ov); }
+  ov.innerHTML = `<div class="fi"><div class="panel lbn-box dh-box">
+      <h2 class="lbn-t dh-t">DÉFI DU JOUR</h2>
+      <ul class="dh-l">
+        <li><b>Une partie, la même pour tout le monde</b> aujourd'hui.</li>
+        <li>Mise blanche, même machine, mêmes événements.</li>
+        <li>Fais le meilleur score : <b>classement du jour</b>. Nouveau défi à minuit.</li>
+      </ul>
+      <div class="lbn-row"><button class="btn big red" id="dh-go">JOUER LE DÉFI</button></div>
+      <button class="btn ghost small" id="dh-lb">Classement du jour</button>
+      <button class="btn ghost small" id="dh-x">Retour</button>
+    </div></div>`;
+  ov.hidden = false; Snd.pop();
+  const seen = () => { const D = G.meta.daily || (G.meta.daily = { best: {} }); D.seen = 1; saveMeta(); };
+  $('#dh-go').onclick = () => { ov.hidden = true; seen(); startDaily(); };
+  $('#dh-lb').onclick = () => { ov.hidden = true; seen(); lbOpenDaily(); };
+  $('#dh-x').onclick = () => { ov.hidden = true; Snd.click(); };
+}
+document.addEventListener('keydown', e => {
+  const ov = $('#dhelp'); if (!ov || ov.hidden) return;
+  if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); ov.hidden = true; }
+  else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); $('#dh-go').click(); }
+}, true);
+
+// la page du classement : un onglet « Défi » devant les mises
+function lbOpenDaily() { lbOpen(); if (lbMe() || LB.skip) { LB.stake = 'd'; lbRender(); } }
+function dlbTab(on) { return `<button class="lb-tab dlb-tab${on ? ' on' : ''}" data-lbd="1" style="--sc:${DLB_COL}"><i></i>Défi</button>`; }
+async function lbRender() {
+  if (LB.stake !== 'd') {
+    const p = lbRender1();
+    const tabs = $('#lb .lb-tabs');
+    if (tabs) { tabs.insertAdjacentHTML('afterbegin', dlbTab(false)); tabs.querySelector('[data-lbd]').onclick = () => { LB.stake = 'd'; Snd.click(); lbRender(); }; }
+    return p;
+  }
+  const ov = $('#lb'); if (!ov || ov.hidden) return;
+  const m = G.meta, top = Math.min(STAKES.length - 1, m.stakeMax || 0), me = lbMe(), k = dayKey();
+  ov.innerHTML = `<div class="fi lb-fi">
+    <div class="lb-head"><h2 class="lb-t"><svg class="ico"><use href="#i-couronne"/></svg>CLASSEMENT</h2><button class="btn ghost small" id="lb-x">Retour</button></div>
+    <div class="lb-tabs">${dlbTab(true)}${STAKES.slice(0, top + 1).map((s, i) => `<button class="lb-tab" data-lbs="${i}" style="--sc:${s.col}"><i></i>${esc(s.name.replace('Mise ', ''))}</button>`).join('')}</div>
+    <div class="panel lb-box" style="--sc:${DLB_COL}">
+      <div class="dlb-day">DÉFI DU ${esc(dayLabel(k))}</div>
+      <div class="lb-cap"><span>#</span><span>Joueur</span><span>Score</span><span>Manche</span></div>
+      <ol class="lb-list" id="lb-list"><li class="lb-msg">Chargement…</li></ol>
+      <div class="lb-me" id="lb-me">${me ? '' : 'Choisis un pseudo pour apparaître ici.'}</div>
+    </div>
+    <p class="lb-foot">Même partie pour tout le monde aujourd'hui · nouveau défi à minuit. <button class="btn small gold" id="dlb-go">Jouer le défi</button></p>
+  </div>`;
+  $('#lb-x').onclick = lbClose;
+  $('#dlb-go').onclick = () => { ov.hidden = true; startDaily(); };
+  ov.querySelectorAll('[data-lbs]').forEach(b => { b.onclick = () => { LB.stake = +b.dataset.lbs; Snd.click(); lbRender(); }; });
+  const c = LB.cache.d, fresh = c && c.k === k && Date.now() - c.t < 30000;
+  const [t, mine] = fresh ? [c.top, c.mine] : await Promise.all([lbRpc('lb_daily_top', { p_day: k }), me ? lbRpc('lb_daily_me', { p_id: me.id, p_day: k }) : Promise.resolve({ data: [] })]);
+  if (LB.stake !== 'd' || ov.hidden) return;
+  const list = $('#lb-list'), meEl = $('#lb-me'); if (!list) return;
+  if (t.error) { list.innerHTML = `<li class="lb-msg">${dlbMissing(t.error) ? 'Le classement du défi arrive bientôt.' : esc(lbErrTxt(t.error))}</li>`; if (meEl) meEl.textContent = ''; return; }
+  if (!fresh) LB.cache.d = { k, t: Date.now(), top: t, mine };
+  list.innerHTML = lbRowsHTML(t.data || [], me);
+  const row = mine && !mine.error && Array.isArray(mine.data) ? mine.data[0] : null;
+  if (row) dlbRemember(k, row);
+  if (meEl && me) meEl.innerHTML = row ? `<span class="lb-pl">${row.place}</span><span class="lb-ps"><b>Toi</b> · ${esc(me.pseudo)}</span><span class="lb-sc">${fmtS(row.best)}</span><span class="lb-rd">${row.best_round}</span>` : 'Pas encore joué aujourd\'hui.';
+}
 
 
 /* ---------- boucle ---------- */

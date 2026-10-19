@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.1-202610192200
+JACKPOT DEFENSE v15.2-202610192330
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,77 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.2 — le défi du jour, le carnet, le premier lancement
+- Défi du jour : un vrai défi. Au premier clic, une petite fenêtre explique le principe en 3 lignes
+  (la même partie pour tout le monde aujourd'hui, mise blanche, nouveau défi à minuit).
+  Nouveau CLASSEMENT DU JOUR : onglet « Défi » dans la page du classement. En fin de défi, ta place du jour
+  s'affiche (« 2e du jour sur 7 ») ; sous le bouton : ton record et ta place. Hors ligne, le score part plus tard.
+  À FAIRE UNE FOIS dans Supabase (SQL Editor > New query > Run), sinon l'onglet dit « arrive bientôt » :
+
+-- Jackpot Defense v15.2 : le classement du défi du jour.
+-- À coller UNE FOIS dans Supabase > SQL Editor > New query > Run.
+-- Ajoute une table (un score par joueur et par jour) et 3 fonctions. Ne touche pas au classement existant.
+
+create table if not exists public.daily_scores (
+  player_id uuid not null references public.players(id) on delete cascade,
+  day date not null,
+  score bigint not null,
+  rnd int not null,
+  at timestamptz not null default now(),
+  primary key (player_id, day)
+);
+create index if not exists daily_scores_day_idx on public.daily_scores (day, score desc, rnd desc);
+alter table public.daily_scores enable row level security;
+
+-- la place d'un joueur dans le défi d'un jour
+create or replace function public.lb_daily_me(p_id uuid, p_day date)
+returns table(place bigint, best bigint, best_round int, total bigint)
+language sql stable security definer
+set search_path to 'public', 'extensions'
+as $function$
+  select r.place, r.score, r.rnd, r.total from (
+    select d.player_id, d.score, d.rnd,
+           rank() over (order by d.score desc, d.rnd desc) as place,
+           count(*) over () as total
+    from daily_scores d where d.day = p_day
+  ) r where r.player_id = p_id;
+$function$;
+
+-- le top 10 d'un jour
+create or replace function public.lb_daily_top(p_day date)
+returns table(place bigint, pseudo text, score bigint, round int)
+language sql stable security definer
+set search_path to 'public', 'extensions'
+as $function$
+  select rank() over (order by d.score desc, d.rnd desc), p.pseudo::text, d.score, d.rnd
+  from daily_scores d join players p on p.id = d.player_id
+  where d.day = p_day
+  order by d.score desc, d.rnd desc
+  limit 10;
+$function$;
+
+-- envoyer son score du défi (on garde le meilleur de la journée)
+create or replace function public.lb_daily_submit(p_id uuid, p_secret text, p_day date, p_score bigint, p_round int)
+returns table(place bigint, best bigint, best_round int, total bigint)
+language plpgsql security definer
+set search_path to 'public', 'extensions'
+as $function$
+begin
+  if not exists (select 1 from players where id = p_id and secret_hash = crypt(p_secret, secret_hash)) then raise exception 'joueur'; end if;
+  if p_day < current_date - 1 or p_day > current_date + 1 or p_score <= 0 or p_round < 1 or p_round > 999 then raise exception 'score_invalide'; end if;
+  insert into daily_scores as d (player_id, day, score, rnd) values (p_id, p_day, p_score, p_round)
+  on conflict (player_id, day) do update set score = excluded.score, rnd = excluded.rnd, at = now()
+    where excluded.score > d.score or (excluded.score = d.score and excluded.rnd > d.rnd);
+  return query select * from lb_daily_me(p_id, p_day);
+end $function$;
+
+- Carnet d'Anatole : la page des crânes ne s'empile plus. Les malus sont rangés par niveau sur 2 pages
+  (La Guigne et La Scoumoune, puis La Ruine). Les cocktails ont aussi une ligne de plus. Une page ajoute
+  maintenant toute seule les lignes qu'il lui faut.
+- Premier lancement : après l'intro, on arrive sur le menu (plus directement en partie). Le tuto de Gaston
+  démarre au premier JOUER (ou au premier défi).
+- La version PC (.exe) passe aussi en v15.2.
 
 Nouveautés de la v15.1 — le jeu en anglais
 - Le jeu existe maintenant en anglais. Deux pages, le même jeu : index.html (français) et en.html (anglais).

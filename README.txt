@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.1-202610192200
+JACKPOT DEFENSE v15.2-202610192330
 
 A casino roguelite: a slot machine for chips, Zaza's bar, the Inspector's black market,
 and a pinball-flipper base defense. Last 30 rounds and break the Baron's bank.
@@ -7,6 +7,7 @@ Play
 - Open en.html (English) or index.html (French). On first launch, the game picks your device's language;
   you can switch any time in OPTIONS › Game › "Langue · Language".
 - Your progress and the online leaderboard are the same in both languages.
+- Daily challenge: the same run for everyone each day, with its own leaderboard ("Daily" tab).
 
 Put it online (free) and install it
 1. Upload ALL the files of this folder to a static host (GitHub Pages, Netlify, Cloudflare Pages…).
