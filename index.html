@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>(function(){try{var l=localStorage.getItem('jd-lang');if(!l){l=String(navigator.language||'fr').toLowerCase().indexOf('fr')===0?'fr':'en';localStorage.setItem('jd-lang',l);}var en=document.documentElement.lang==='en';if((l==='en')!==en){var u=new URL(location.href);u.pathname=u.pathname.replace(/[^/]*$/,l==='en'?'en.html':'index.html');location.replace(u.href);}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Jackpot Defense</title>
 <meta name="description" content="Roguelite casino : machine à sous, bar, marché noir et défense de base au flipper.">
@@ -3639,6 +3640,59 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 #banner.gt::after{animation-direction:reverse}
 @keyframes gtSlide{to{background-position:28px 0}}
 @media (prefers-reduced-motion:reduce){#banner.gt::before,#banner.gt::after{animation:none}}
+/* v15.0 · les nouveautés en étiquette d'une ligne */
+#newnote.nn-tag{gap:7px;padding:4px 10px 4px 4px;border-radius:999px;max-width:min(300px,calc(100% - 16px))}
+#newnote.nn-tag .nn-art{width:26px;height:30px}
+#newnote.nn-tag .nn-art .ct-ico{width:22px;height:22px}
+#newnote.nn-tag .nn-art .cthumb{height:28px}
+#newnote.nn-tag .nn-txt{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;line-height:1.1}
+#newnote.nn-tag .nn-txt small{display:inline;font-size:10px;letter-spacing:.12em}
+#newnote.nn-tag .nn-txt b{display:inline;font-size:14px}
+#newnote.nn-tag .nn-arts{display:flex;flex:none}
+#newnote.nn-tag .nn-arts .nn-art+.nn-art{margin-left:-10px}
+/* v15.0 · les découvertes de la manche */
+#disc{position:absolute;inset:0;z-index:23;display:grid;place-items:center;padding:12px 16px;background:radial-gradient(ellipse at center,rgba(14,8,22,.6),rgba(14,8,22,.86));animation:tlIn .25s ease-out both}
+#disc.out{opacity:0;transition:opacity .2s}
+#disc .dc-card{width:min(100%,400px);max-height:calc(100% - 16px);display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:linear-gradient(#173024,#0d1d15);box-shadow:inset 0 0 0 3px #2f7a4c,0 10px 30px rgba(0,0,0,.6);animation:popin .35s cubic-bezier(.2,1.3,.4,1) both}
+#disc .dc-head{text-align:center;font:700 22px var(--f-pix);letter-spacing:.08em;color:#7dff9a}
+#disc .dc-head small{display:block;font-size:12px;font-weight:500;letter-spacing:0;color:#9fd4b0;margin-top:2px}
+#disc .dc-list{list-style:none;margin:0;padding:0 2px 0 0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;min-height:0}
+#disc .dc-list li{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:12px;background:rgba(0,0,0,.28);box-shadow:inset 0 0 0 1px rgba(125,255,154,.18)}
+#disc .dc-art{display:grid;place-items:center;flex:none;width:44px;min-height:48px}
+#disc .dc-art .ct-ico{width:36px;height:36px}
+#disc .dc-art .cthumb{height:48px}
+#disc .dc-txt{min-width:0}
+#disc .dc-txt small{display:block;font-size:10.5px;letter-spacing:.12em;color:#7dff9a}
+#disc .dc-txt b{display:block;font-size:16px;color:#fff}
+#disc .dc-txt p{margin:2px 0 0;font-size:13px;line-height:1.3;color:#cfeedd}
+#disc #dc-ok{align-self:center;min-width:200px}
+#disc #dc-ok:disabled{opacity:.6}
+/* v15.0 · le lancement : un bouclier invisible pendant l'arrivée de l'écran titre */
+#bootshield{position:fixed;inset:0;z-index:200;background:transparent;touch-action:none}
+/* v14.9 · le défi du jour (menu), le résultat du défi, l'historique, l'image à partager */
+#t-daily{--b:#ffcc4d;--bd:#a8781a;color:#2a1640;text-shadow:none;flex-direction:column}
+#t-daily small{color:#4a2a10;opacity:.9}
+.oscore .o-daily{display:block;margin-top:6px;font:700 13px var(--f-pix);color:#ffcc4d;letter-spacing:.04em}
+.ohist{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.ohist>b{display:block;font-size:12px;letter-spacing:.14em;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+.ohist ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.ohist li{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto 40px;gap:8px;align-items:center;padding:3px 6px;border-radius:7px;font-size:13px;font-variant-numeric:tabular-nums}
+.ohist li:nth-child(odd){background:rgba(255,255,255,.035)}
+.ohist li.won .oh-r{color:#7dffb0}
+.ohist .oh-d{color:var(--muted)}
+.ohist .oh-st{display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ohist .oh-st i{flex:none;width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 2px #000}
+.ohist .oh-s{font-weight:700;text-align:right}
+.ohist em{font-style:normal;font-size:10px;font-weight:700;color:#2a1640;background:#ffcc4d;border-radius:6px;padding:1px 5px;text-align:center}
+.ohist em.no{background:none}
+.ohist .none{margin:0;color:var(--muted);font-size:13px}
+#share{z-index:80}
+.shr-box{max-width:min(560px,94vw);display:flex;flex-direction:column;align-items:center;gap:10px}
+.shr-t{margin:0}
+.shr-img{width:100%;display:flex;justify-content:center;min-height:120px;align-items:center}
+.shr-img img{max-width:100%;max-height:58vh;border-radius:12px;box-shadow:0 8px 0 rgba(0,0,0,.4),0 0 0 3px #ffcc4d}
+.shr-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.shr-tip{margin:0;min-height:1em;font-size:13px;color:var(--muted);text-align:center}
 /* v14.8 · plus de barres grises : le kit du panneau de gauche ne défile plus, il se range */
 .lp-kit{overflow:hidden;scrollbar-width:none}
 .lp-kit::-webkit-scrollbar{display:none}
@@ -3745,6 +3799,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     <div id="toast" aria-live="polite"></div>
     <div id="newnote" hidden aria-live="polite"></div>
     <div id="tally" class="tally" hidden aria-live="polite"></div>
+    <div id="disc" hidden></div>
     <div id="tip" hidden></div>
     <div id="abs" class="abs" hidden></div>
 
@@ -4193,6 +4248,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     </div>
     <div class="panel tmenu popin">
       <button class="btn big red" id="t-play">JOUER</button>
+      <button class="btn" id="t-daily">DÉFI DU JOUR<small id="t-daily-s"></small></button>
       <button class="btn green" id="t-cont" hidden>CONTINUER<small id="t-cont-r"></small></button>
       <div class="mgrid">
         <button class="mbtn mb-books" id="t-books"><span class="mb-face"><svg viewBox="37 21 66 66" aria-hidden="true"><defs>
@@ -4220,7 +4276,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v14.8</p>
+  <p class="proto">Sefy Industries · v15.1</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -4282,6 +4338,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     <p class="ojet" id="o-jetp" hidden><span class="jeton" aria-hidden="true"></span><span id="o-jet"></span></p>
     <div class="tbtns">
       <button class="btn big red" id="o-again">Rejouer</button>
+      <button class="btn gold" id="o-share">Partager ma partie</button>
       <button class="btn purple" id="o-punch">La collection</button>
       <button class="btn green" id="o-cata">Le catalogue</button>
       <button class="btn ghost" id="o-menu">Menu</button>
@@ -4512,6 +4569,9 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 <script>
 (() => {
 'use strict';
+// la langue de la page (index.html = français, en.html = anglais) : nombres, dates
+const LANG = document.documentElement.lang === 'en' ? 'en' : 'fr', DECP = LANG === 'en' ? '.' : ',';
+const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 /* ================= utils ================= */
 const TAU = Math.PI * 2;
 const $ = (s, r = document) => r.querySelector(s);
@@ -4536,8 +4596,8 @@ function wpick(items, w) { let t = 0; for (const x of w) t += x; let r = rnd() *
 function angDiff(a, b) { let d = a - b; while (d > Math.PI) d -= TAU; while (d < -Math.PI) d += TAU; return d; }
 const NB = ' ';
 const pct = x => Math.round(x * 100) + NB + '%';
-const dec = x => String(Math.round(x * 10) / 10).replace('.', ',');
-const fmtN = x => x >= 100000 ? Math.round(x / 1000) + 'k' : x >= 10000 ? (Math.round(x / 100) / 10 + 'k').replace('.', ',') : String(Math.round(x));
+const dec = x => String(Math.round(x * 10) / 10).replace('.', DECP);
+const fmtN = x => x >= 100000 ? Math.round(x / 1000) + 'k' : x >= 10000 ? (Math.round(x / 100) / 10 + 'k').replace('.', DECP) : String(Math.round(x));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let UID = 1;
 const DBG = {};
@@ -5206,12 +5266,12 @@ const FOU_DARK = '#17101f';
 
 // « [30 %] » dans un texte : un chiffre qui grandit avec la puissance du jeton
 function scaleNum(inner, T) {
-  const m = inner.match(/^([+−-]?)(\d+(?:,\d+)?)(.*)$/s);
+  const m = inner.match(/^([+−-]?)(\d+(?:[.,]\d+)?)(.*)$/s);
   if (!m) return inner;
   const v = parseFloat(m[2].replace(',', '.')) * T, rest = m[3];
   let s;
   if (/%/.test(rest)) s = String(Math.round(v));
-  else if (m[2].includes(',') || (v < 10 && Math.abs(v - Math.round(v)) > .04)) s = String(Math.round(v * 100) / 100).replace('.', ',');
+  else if (/[.,]/.test(m[2]) || (v < 10 && Math.abs(v - Math.round(v)) > .04)) s = String(Math.round(v * 100) / 100).replace('.', DECP);
   else s = String(Math.round(v));
   return m[1] + s + rest;
 }
@@ -11812,7 +11872,8 @@ function checkGoal(cb) {
   const sg = gold > 0 && !hasMalus(G.run, 'greve') ? Math.round(gold * cb.stats.goldMul * goldK('skip')) : 0;
   if (sg > 0) addGold(sg, 'skipR');
   if (!G.headless) {
-    banner('OBJECTIF ATTEINT !', bossUp(cb) ? 'mais tant que le boss vit, ses cartes arrivent : abats-le !' : n && sg ? `plus de renforts · +${sg} or · finis les cartes restantes` : 'plus de renforts : finis les cartes restantes', 'good', 1.6);
+    if (bossUp(cb)) banner('OBJECTIF ATTEINT !', 'mais tant que le boss vit, ses cartes arrivent : abats-le !', 'good', 1.6);
+    else bigFloat(n && sg ? `OBJECTIF ATTEINT · +${sg} OR` : 'OBJECTIF ATTEINT !', '#5fd68a');
     Snd.goal(); haptic(60);
     fxPush({ type: 'ring', x: 0, y: 0, r0: BAL.baseR, r1: 120, col: '95,214,138', life: .7, max: .7 });
   }
@@ -12017,6 +12078,7 @@ function updateCombat(dt) {
   const cb = G.cb, run = G.run;
   if (cb.hitstop > 0) { cb.hitstop -= dt; dt *= .15; }
   cb.t += dt;
+  if (!cb.demo) tipGapTick(cb);
   if (cb.demo) {
     if (cb.t >= cb.nextDemo && cb.enemies.length < 30) { spawnEnemy(wpick(['coureur', 'soldat', 'tireur'], [.5, .4, .1]), rand(0, TAU)); cb.nextDemo = cb.t + rand(.3, .8); }
   } else {
@@ -12161,7 +12223,7 @@ function startTapis() {
   dbg('tapis');
   cb.tapis = true; cb.tapisT = cb.t;
   for (const e of cb.enemies) if (!e.boss && !e.d.giant && !e.d.arc && !e.d.prop && e.ai !== 'decoy' && e.ai !== 'thief' && e.ai !== 'guard') { e.tapis = true; e.stop = 0; }
-  if (!G.headless) { banner('TAPIS !', 'les dernières cartes foncent sur toi', 'bad', 1.3); Snd.tapis(); }
+  if (!G.headless) { bigFloat('TAPIS !', '#ff5c6c', 1.5, true); Snd.tapis(); }
 }
 function separate() {
   const E = G.cb.enemies, n = E.length;
@@ -15093,7 +15155,7 @@ function toast(msg) {
   const el = $('#toast'); el.textContent = msg; el.classList.add('show');
   clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2600);
 }
-const TIPQ = [];
+const TIPQ = [], TIPG = { cb: null, last: -1e9, wait: false };
 let tipOpen = false, tipPaused = false;
 function queueTip(html) { if (G.headless || TUTO.on || (G.cb && G.cb.demo && G.mode === 'title') || (G.meta.opts && !G.meta.opts.tips)) return; TIPQ.push(html); if (!tipOpen) showNextTip(); }
 function showNextTip0() {
@@ -15424,7 +15486,7 @@ function refreshTitle() {
   const vc = vestCount(); setTxt('#t-vest-n', `${vc.n}/${vc.tot}`);
   setTxt('#t-prof-n', profName(G.meta, PROF.cur));
   $('#t-secret').classList.toggle('found', !!m.secret);
-  renderTicker(); tlbRender();
+  renderTicker(); tlbRender(); dailyTitle();
 }
 // une petite fenêtre « tu es sûr ? »
 function askConfirm(txt, okLabel, ok, cancelLabel) {
@@ -15585,7 +15647,7 @@ function nrGo() {
   if (!deckOpen(DECKS[NR.i])) { Snd.deny(); return; }
   if (lbNeedPseudo()) { lbAsk(nrGo); return; }
   const cp = loadCheckpoint();
-  const go = () => { clearCheckpoint(); show('#newrun', false); G.meta.stake = nrStakeOf(DECKS[NR.i]); startRun(null); };
+  const go = () => { clearCheckpoint(); show('#newrun', false); G.meta.stake = nrStakeOf(DECKS[NR.i]); srand(0); startRun(null); };
   if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>En lancer une nouvelle <b>l'effacera</b>.`, 'Effacer et jouer', go);
   else { Snd.click(); go(); }
 }
@@ -16299,7 +16361,7 @@ function rulesSections() {
       <p><b>Les habitués</b> (Dina, Momo, Madame Nox) passent parfois au bar et te défient. Chaque victoire te donne une étoile ★ : à 2 étoiles, leur jeton bonus ; à 3, leur cadeau (un jeton fou). Les étoiles repartent à zéro à chaque partie.</p>
       <p>Certains personnages cachent aussi un <b>jeton bonus</b> : invisible, il ne prend pas de place sur ta table. Il ne dure qu'une partie : refais l'exploit à chaque partie. Monsieur Anatole, au Catalogue, garde la trace de ceux que tu as mérités.</p>`],
     ['Malus', `<ul>${[1, 2, 3].map(t => `<li><b style="color:${TIERS[t].col}">${TIERS[t].the}</b> : ${MALUS_BY_TIER(t).map(id => `${MALUS[id].name} (${MALUS[id].txt})`).join(' · ')}.</li>`).join('')}</ul>`],
-    ['La Maison joue', `<p>Trois fois toutes les 10 manches (dès la 3e, jamais sur un boss, jamais deux manches de suite), la Maison lance un <b>jeu de table</b> : les lumières baissent, le tapis se retourne, une règle, et « Faites vos jeux… ». Mise verte : à chaque manche. Dès la manche 50 : <b>double table</b>, deux jeux à la fois.</p>
+    ['La Maison joue', `<p>Trois fois toutes les 10 manches (aux manches 4, 7 et 9, puis 3, 6 et 9 de chaque dizaine : 13, 16, 19…), la Maison lance un <b>jeu de table</b> : les lumières baissent, le tapis se retourne, une règle, et « Faites vos jeux… ». Mise verte : à chaque manche. Dès la manche 50 : <b>double table</b>, deux jeux à la fois.</p>
       <p>Manches 1 à 10 : les jeux de la <b>Grande Salle</b>. Manches 11 à 20 : ceux du <b>Salon Privé</b>. Manches 21 à 30 : ceux des <b>Coulisses</b>. Ensuite : tous.</p>
       <ul>${Object.keys(EVENTS).map(id => `<li><b>${EVENTS[id].name}</b> : ${EVENTS[id].txt} <i>Plaque d'or : ${EVENTS[id].plaque}.</i></li>`).join('')}</ul>
       <p>Chaque réussite parfaite gagne une <b>plaque d'or</b> (dans ton Profil).</p>`],
@@ -17611,8 +17673,8 @@ function punchAnim(j, done) {
 }
 
 /* ================= score façon Balatro : JETONS × MULT ================= */
-const fmtS = x => String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g, NB);
-const fmtM = x => (Math.round(x * 10) / 10).toFixed(1).replace('.', ',');
+const fmtS = x => String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g, LANG === 'en' ? ',' : NB);
+const fmtM = x => (Math.round(x * 10) / 10).toFixed(1).replace('.', DECP);
 const SC_PTS = { parry: 25, block: 5 };
 const scoreZero = () => ({ chips: 0, kills: 0, killPts: 0, parries: 0, blocks: 0, hurt: false, bossKO: 0 });
 function ptsOf(cb) { return cb.pts || (cb.pts = scoreZero()); }
@@ -20116,7 +20178,7 @@ const COACH = {
 const COACH_KEY = new Map(Object.entries(TIPS).map(([k, v]) => [v, k]));
 const CO = { key: null, raf: 0 };
 // une astuce : si on sait quoi montrer, c'est un coup de projecteur ; sinon, la bulle d'avant
-function showNextTip() {
+function showNextTip1() {
   if (EVX.on) return;
   const html = TIPQ[0]; if (html == null) return;
   const key = typeof html === 'object' ? html.k : COACH_KEY.get(html), C = key && COACH[key];
@@ -20165,7 +20227,7 @@ function coachPlace() {
   if (C.demo === 'arc') { fing.style.setProperty('--R', Math.round(BASE_SCR().rf * 1.35) + 'px'); }
   Object.assign(fing.style, { left: fx + 'px', top: fy + 'px' });
 }
-function closeTip() {
+function closeTip1() {
   const co = $('#coach'); if (co && !co.hidden) { co.hidden = true; co.innerHTML = ''; cancelAnimationFrame(CO.raf); CO.key = null; CO.k = null; }
   closeTip0();
 }
@@ -20305,7 +20367,7 @@ const PET_START = ['coco', 'marcel', 'boris'];
 const PET_COCO = 1.4, PET_BORIS = 1.2, PET_GASTON = .8, PET_SONG = 16, PET_SONG1 = 7, PET_DANCE = 2.8, PET_ROAR = 16, PET_ROAR1 = 5, PET_SHOT = 2;
 const PETS = {
   coco: { name: 'Coco', full: 'Coco, le perroquet de Zaza', at: 'start', price: 90, col: '#ff5c6c', dk: '#b8203e', txt: `+40${NB}% d'or sur les cartes abattues et la prime de manche.`, short: `+40${NB}% d'or`, quote: '« Crétin ! Crétin ! »' },
-  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il met la musique : les cartes dansent sur place ${String(PET_DANCE).replace('.', ',')}${NB}s (les boss, moins).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
+  marcel: { name: 'Marcel', full: 'Marcel, le poisson du mur', at: 'start', price: 110, col: '#9be15d', dk: '#3e6a14', txt: `Toutes les ${PET_SONG}${NB}s, il met la musique : les cartes dansent sur place ${String(PET_DANCE).replace('.', DECP)}${NB}s (les boss, moins).`, short: 'les cartes dansent', quote: '« ♪ Plouf plouf, c\'est toi qui tombes ♪ »' },
   boris: { name: 'Boris', full: 'Boris, l\'ours en tapis', at: 'start', price: 90, col: '#e0453f', dk: '#9a1820', txt: `+20${NB}% de PV max. Toutes les ${PET_ROAR}${NB}s, il rugit : les cartes proches reculent et ralentissent 3${NB}s.`, short: 'rugit, +20 % PV', quote: '« Grmbl. Essuie-toi les pieds. »' },
   gaston: { name: 'Gaston', full: 'Gaston, le rat de l\'Inspecteur', at: 'market', price: 95, col: '#d9a35b', dk: '#7a4e14', txt: `Il tire sur les cartes toutes les ${PET_SHOT}${NB}s (180${NB}% de tes dégâts). Marché noir : −20${NB}% (sauf Punch-o-matic), et il ouvre plus souvent.`, short: 'tire au pistolet', quote: '« J\'ai rien vu. J\'ai tout noté. »' },
 };
@@ -21645,15 +21707,15 @@ function catalogClick(e) {
   if (tile) { CATV.sel = [tile.dataset.c, tile.dataset.id]; if (catHas(tile.dataset.c, tile.dataset.id)) Snd.tab(); else Snd.locked(); renderCatalog(); }
 }
 // petite annonce non bloquante quand on découvre quelque chose en partie
-const NEWQ = [];
+const NEWQ = [], DISC = [], NNT = { last: -1e9, t: 0 };
 let newBusy = false;
-function onCatNew(cat, id) {
+function onCatNew0(cat, id) {
   if (G.headless || !['e', 's', 'm', 'v', 'l', 'n'].includes(cat)) return;
   if (cat === 'e' && ENEMIES[id].from === 1) return;
   NEWQ.push([cat, id]);
   if (!newBusy) showNewNote();
 }
-function showNewNote() {
+function showNewNote0() {
   // seulement pendant une manche : sinon on garde la file pour la suivante
   if (!NEWQ.length || G.mode !== 'combat') { newBusy = false; return; }
   const it = NEWQ.shift();
@@ -22070,7 +22132,7 @@ GAMES.dina = {
   },
   info() {
     const dm = DA.mine ? Math.hypot(DA.mine.x - DB.cx, DA.mine.y - DB.cy) : null, dh = DA.hers ? Math.hypot(DA.hers.x - DB.cx, DA.hers.y - DB.cy) : null;
-    const f = d => d == null ? '—' : `${(d / DB.R * 17).toFixed(1).replace('.', ',')} cm`;
+    const f = d => d == null ? '—' : `${(d / DB.R * 17).toFixed(1).replace('.', DECP)} cm`;
     mgInfo(`<div class="mg-score"><span class="me">Toi : <b>${f(dm)}</b></span><span class="her">Dina : <b>${f(dh)}</b></span></div>`);
   },
   finish() {
@@ -23341,6 +23403,7 @@ function renderOptions() {
   let h = '';
   switch (OPV.tab) {
     case 'jeu':
+      h += langRow();
       h += oRow('Vitesse de départ', oSeg('speed', o.speed, [[1, '×1'], [2, '×2']]), 'en partie : clique sur le bouton ×1 / ×2');
       h += oRow('Contrôle du flipper', oSeg('ctrl', m.ctrl === 'glisser' ? 'glisser' : 'viser', [['viser', 'Viser'], ['glisser', 'Glisser']]), 'viser : il suit la souris ou ton doigt');
       h += oRow('Bulles d\'info au survol', oTog('hover', o.hover), 'passe la souris sur un jeton');
@@ -23392,6 +23455,7 @@ function renderOptions() {
         st('Triples', fmtS(L.triples || 0)), st('Jetons empilés', fmtS(L.stacks || 0)), st('Or gagné', fmtS(L.gold || 0)), st('Secrets découverts', `${NORMAL_JOKERS.filter(secretKnown).length}/${NORMAL_JOKERS.length}`),
         st('Jeux du bar', `${fmtS(L.gamesWon || 0)} / ${fmtS(L.games || 0)}`), st('Poker du Baron', `${L.gWins || 0} – ${L.gLosses || 0}`), st('Baron ruiné', `${G.meta.baronWins || 0} fois`), st('Boissons bues', fmtS(L.drinks || 0)), st('Sorts lancés', fmtS(L.spells || 0)),
       ].join('') + '</dl>';
+      h += histHTML();
       h += '<div class="obest">' + STAKES.map((S2, i) => `<span><i style="background:${S2.col}"></i>${S2.name} <b>${fmtS(bestScoreOf(i))}</b></span>`).join('') + '</div>';
       h += `<div class="osave"><p><b>Changer d'appareil</b> : copie ton code, puis colle-le dans le même menu sur ton autre appareil (téléphone, PC…). Tickets, catalogue, records, skins et partie en cours suivent.</p>
         <textarea id="osv-code" rows="3" spellcheck="false" autocomplete="off" placeholder="Ton code apparaît ici, ou colle celui de ton autre appareil…">${esc(OPV.code || '')}</textarea>
@@ -23406,7 +23470,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques, voix et bruitages synthétisés en direct dans le navigateur. Aucun fichier son.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v14.8</p></div>`;
+        <p class="ov5">v15.1</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24330,7 +24394,7 @@ function bootEnd() {
   if (!el || BOOT.done) return;
   BOOT.done = true; BOOT.on = false;
   el.removeEventListener('pointerdown', bootTap);
-  el.classList.add('out');
+  el.classList.add('out'); bootShield(1000);
   setTimeout(() => { el.hidden = true; }, 460);
   duckMusic(false);
   if (G.mode === 'title') { if (tutoNeed()) tutoStart(); else titleEnter(); }
@@ -24706,7 +24770,7 @@ function toTitle() {
   Music.play('lounge'); BG.setMode('menu'); duckMusic(false);
 }
 function startRun(cp) {
-  audioInit(); Music.resume();
+  audioInit(); Music.resume(); DISC.length = 0;
   hideScreens();
   document.body.classList.remove('at-title');
   for (const k in hc) delete hc[k];
@@ -24736,7 +24800,7 @@ function startNextRound() {
   for (const k of ['vent', 'feu', 'seisme', 'brouillard']) document.body.classList.toggle('dv-' + k, dv === k);
   const sub0 = dv ? 'RUINE · ' + MALUS[dv].name : isBossRound(r) ? 'un boss arrive sur la table' : run.malus.length ? 'malus : ' + run.malus.map(m => MALUS[m].name).join(', ') : '';
   const A = r <= 30 ? ACTS[actIdx(r)] : null, actStart = A && actPos(r) === 1;
-  const sub = (actStart ? `${A.name} · boss manche ${r + 4} : ${ENEMIES[bossOf(r + 4)].name} · ` : '') + `objectif : ${fmtS(cb.goal)} points` + (sub0 ? ' · ' + sub0 : '');
+  const sub = (actStart ? `${A.name} · ` : '') + `objectif : ${fmtS(cb.goal)} points` + (sub0 ? ' · ' + sub0 : '');
   const bnr = () => { if (!cb.final) banner(actStart ? `ACTE ${A.n} · MANCHE ${r}` : `MANCHE ${roundLabel(r)}`, sub, isBossRound(r) || dv ? 'boss' : run.malus.length ? 'bad' : '', actStart ? 2.6 : 1.8); };
   if (cb.evs.length && !G.headless) evxIntro(cb, bnr); else bnr();
   Snd.round();
@@ -24745,7 +24809,7 @@ function startNextRound() {
   renderRack(); renderSpellBar(); showStatus(); updateHUD(); tableWake();
   if (r === 1 && seenOnce('r1')) setTimeout(() => queueTip(TIPS.r1), 900);
   if (seenOnce('bille')) setTimeout(() => queueTip(TIPS.bille), r === 1 ? 1500 : 900);
-  if (r === 2) coachOnce('co_flip', 1200);
+  if (r === 2) coachOnce('co_flip', 300);
   if (r >= 4 && run.jokers.length) coachOnce('co_rack', 1500);
   if (r === 3 && spellsOf(run).includes('bomb') && spellsOf(run).includes('gel') && seenOnce('abil')) setTimeout(() => queueTip(TIPS.abil), 900);
   if (hasMalus(run, 'pickpocket')) setTimeout(() => toast('Un pickpocket rôde : abats-le pour récupérer ton jeton.'), 1600);
@@ -24787,7 +24851,7 @@ function uiRoundCleared() {
   if (res.notes && res.notes.length) setTimeout(() => toast(res.notes.slice(0, 3).join(' · ')), 1600);
   Snd.win(); haptic(30);
   if (run.round > G.meta.best) { G.meta.best = run.round; saveMeta(); checkUnlocks(); }
-  const next = () => { if (G.mode !== 'cleared') return; if (run.won && !run.inf) fbRewards(showWin); else openSalon({ reward: res.reward }); };
+  const next = () => { if (G.mode !== 'cleared') return; discRecap(() => { if (G.mode !== 'cleared') return; if (run.won && !run.inf) fbRewards(showWin); else openSalon({ reward: res.reward }); }); };
   setTimeout(() => { if (G.mode === 'cleared') showTally(res.score, next); }, 1350);
 }
 // toutes les 5 manches, après le boss, le patron propose de changer de machine (20 or)
@@ -24826,6 +24890,7 @@ function endRun(cashed) {
   if (won) { m.wins++; if (run.stake >= m.stakeMax && m.stakeMax < STAKES.length - 1) { m.stakeMax = run.stake + 1; } if (run.deck) { m.dw = m.dw || {}; m.dw[run.deck] = Math.max(m.dw[run.deck] || 0, (run.stake || 0) + 1); } }
   const sk = run.stake || 0, prevBest = bestScoreOf(sk), newBest = (run.score || 0) > prevBest;
   if (newBest) { m.bestScore = m.bestScore || {}; m.bestScore[sk] = run.score; }
+  histAdd(run, won); const dres = dailyEnd(run); G.lastEnd = { won, cashed, daily: dres };
   saveMeta(); clearCheckpoint(); checkUnlocks();
   hideScreens();
   $('#o-title').innerHTML = cashed ? 'TU AS FAIT<br>SAUTER LA BANQUE' : 'LA MAISON<br>GAGNE TOUJOURS';
@@ -24835,6 +24900,7 @@ function endRun(cashed) {
   $('#o-stats').innerHTML = cells.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
   { const rc = $('#o-recap'), h = !cashed && !won ? recapHTML(run) : ''; rc.innerHTML = h; rc.hidden = !h; }
   $('#o-score').innerHTML = `<small>SCORE</small><b>${fmtS(run.score || 0)}</b>${newBest ? '<em>NOUVEAU RECORD !</em>' : prevBest ? `<i>record : ${fmtS(prevBest)}</i>` : ''}`;
+  if (dres) $('#o-score').insertAdjacentHTML('beforeend', `<span class="o-daily">DÉFI DU ${dayLabel(dres.k)} · ${dres.first ? 'premier essai du jour' : dres.rec ? 'nouveau record du jour !' : 'record du jour : ' + fmtS(dres.best)} · série ${dres.streak} jour${dres.streak > 1 ? 's' : ''}</span>`);
   if (newBest && (run.score || 0) > 0) setTimeout(() => { Snd.record(); celebrate(true); }, 900);
   const dw1 = run.deck ? ((m.dw || {})[run.deck] || 0) : 0, unl = won && dw1 > dw0 && dw1 <= STAKES.length - 1;
   $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? `${STAKES[dw1].name} débloquée avec ${deckById(run.deck).name} !` : '';
@@ -26025,9 +26091,8 @@ function evPlanBlock(run, b) {
   const n = r => r >= 50 ? 2 : 1;
   if (stakeHas(run, ST.CHAOS)) for (const r of ok) P[r] = n(r);
   else {
-    let best = null;
-    for (let k = 0; k < 120 && !best; k++) { const s = shuffle(ok.slice()).slice(0, 3).sort((x, y) => x - y); if (s.length === 3 && s.every((r, i) => !i || r - s[i - 1] > 1)) best = s; }
-    for (const r of best || ok.slice(0, 3)) P[r] = n(r);
+    const want = b === 0 ? [4, 7, 9] : [r0 + 2, r0 + 5, r0 + 8];
+    for (const r of want) if (ok.includes(r)) P[r] = n(r);
   }
   // une vague spéciale par tranche, sans annonce (de préférence hors des manches de jeu)
   const fits = r => Object.keys(WAVES).some(id => WAVES[id].from <= r);
@@ -27718,7 +27783,7 @@ function spPill(x, y, lab, val, col, ring) {
   ctx.textAlign = 'right'; ctx.fillStyle = col; ctx.font = `700 5px ${FONT}`; ctx.fillText(val, x + w / 2 - 1.4, y + .4);
 }
 // un MULT lisible : « 2 », « 0,5 », « 1,4 »
-const spM = v => String(Math.round(v * 10) / 10).replace('.', ',');
+const spM = v => String(Math.round(v * 10) / 10).replace('.', DECP);
 const spGold = (base, r) => Math.round((base[0] + base[1] * Math.min(r, 40)) * (stakeHas(G.run, ST.GOLD) ? .7 : 1));
 
 /* ---------- les tapis du Salon Privé (rendus en gros pixels, comme ceux de la Grande Salle) ---------- */
@@ -30375,6 +30440,285 @@ if (DESK) {
     m.appendChild(b);
   }
 }
+
+
+/* ================= v14.9 · le défi du jour, l'image à partager, l'historique =================
+   Défi du jour : chaque jour, la même partie de départ pour tout le monde (graine du jour : machine, événements,
+   Géants, Arcanes…), en mise blanche, avec le jeu Coffre-fort et sans compagnon. Ton record du jour et ta série
+   de jours sont gardés (pas de classement en ligne pour l'instant).
+   Fin de partie : « Partager ma partie » dessine une image (format TikTok) à enregistrer ou partager.
+   PROFIL : tes 20 dernières parties. */
+const dayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const dayLabel = k => { const p = String(k).split('-'); return LANG === 'en' ? `${MONTHS_EN[+p[1] - 1]} ${+p[2]}` : `${p[2]}/${p[1]}`; };
+const dayBefore = k => { const d = new Date(k + 'T12:00:00'); d.setDate(d.getDate() - 1); return dayKey(d); };
+function daySeed(k) { let h = 2166136261; for (const c of 'JD-defi-' + k) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) || 1; }
+function dailyState() {
+  const D = G.meta.daily || {}, k = dayKey(), best = D.best || {};
+  const alive = D.last === k || D.last === dayBefore(k);
+  return { k, best: best[k], streak: alive ? (D.streak || 0) : 0 };
+}
+function dailyTitle() {
+  const el = $('#t-daily-s'); if (!el) return;
+  const S = dailyState();
+  el.textContent = `${dayLabel(S.k)}${S.best != null ? ` · record ${fmtS(S.best)}` : ' · pas encore joué'}${S.streak > 1 ? ` · série ${S.streak} j` : ''}`;
+}
+function startDaily() {
+  firstGesture();
+  if (tutoNeed()) { tutoStart(); return; }
+  const go = () => {
+    clearCheckpoint();
+    const m = G.meta, save = { stake: m.stake, deck: m.deck, pet: m.pet }, k = dayKey();
+    m.stake = 0; m.deck = 'coffre'; m.pet = '';
+    srand(daySeed(k));
+    try { startRun(null); } finally { m.stake = save.stake; m.deck = save.deck; m.pet = save.pet; saveMeta(); }
+    if (G.run) G.run.daily = k;
+    dbg('daily_start');
+  };
+  const cp = loadCheckpoint();
+  if (cp) askConfirm(`Tu as une partie en cours (manche ${roundLabel(cp.run.round + 1)}).<br>Lancer le défi du jour <b>l'effacera</b>.`, 'Effacer et jouer', go);
+  else { Snd.click(); go(); }
+}
+// fin d'un défi : le record du jour et la série
+function dailyEnd(run) {
+  if (!run || !run.daily) return null;
+  const D = G.meta.daily || (G.meta.daily = { best: {} }), k = run.daily, sc = Math.round(run.score || 0);
+  D.best = D.best || {};
+  const prev = D.best[k], rec = prev == null || sc > prev;
+  if (rec) D.best[k] = sc;
+  if (D.last !== k) { D.streak = D.last === dayBefore(k) ? (D.streak || 0) + 1 : 1; D.last = k; }
+  const ks = Object.keys(D.best).sort(); while (ks.length > 40) delete D.best[ks.shift()];
+  return { k, sc, best: D.best[k], rec: rec && prev != null, first: prev == null, streak: D.streak };
+}
+// l'historique : les 20 dernières parties
+function histAdd(run, won) {
+  const m = G.meta, H = m.hist || (m.hist = []);
+  H.unshift({ t: Date.now(), s: Math.round(run.score || 0), r: run.round, st: run.stake || 0, w: won ? 1 : 0, dk: run.deck || '', dl: run.daily || '', j: (run.jokers || []).filter(j => j && j.parts && j.parts.length).slice(0, 8).map(j => ({ k: j.kind, t: j.parts.map(p => p.t) })) });
+  if (H.length > 20) H.length = 20;
+}
+function histHTML() {
+  const H = G.meta.hist || [];
+  const row = h => {
+    const d = new Date(h.t), S = STAKES[h.st] || STAKES[0], D = h.dk && typeof deckById === 'function' ? deckById(h.dk) : null;
+    return `<li class="${h.w ? 'won' : ''}"><span class="oh-d">${dayLabel(dayKey(d))}</span><span class="oh-st" title="${esc(S.name)}${D ? ' · ' + esc(D.name) : ''}"><i style="background:${S.col}"></i>${esc(S.name.replace('Mise ', ''))}</span><span class="oh-r">${h.w ? 'Victoire !' : 'manche ' + roundLabel(h.r)}</span><span class="oh-s">${fmtS(h.s)}</span>${h.dl ? '<em>DÉFI</em>' : '<em class="no"></em>'}</li>`;
+  };
+  return `<div class="ohist"><b>${H.length ? `Tes ${H.length > 1 ? H.length + ' dernières parties' : 'dernière partie'}` : 'Tes dernières parties'}</b>${H.length ? `<ol>${H.map(row).join('')}</ol>` : '<p class="none">Pas encore de partie terminée.</p>'}</div>`;
+}
+
+/* ---------- l'image à partager (1080 × 1350, format TikTok / Insta) ---------- */
+const SHARE = { url: null, blob: null };
+async function shareCanvas(run, E) {
+  try { await Promise.all(['700 64px "JD Chiffres"', '700 64px "JD Lettres"', '700 64px "Pixelify Sans"', '400 64px "Pixelify Sans"'].map(f => document.fonts.load(f))); } catch (e) { /* les polices de secours iront */ }
+  const W = 1080, H = 1350, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d'), F = (w, px) => `${w} ${px}px "JD Chiffres","JD Lettres","Pixelify Sans","Trebuchet MS",sans-serif`;
+  // le fond : velours violet, la table de poker, les ampoules du cadre
+  let gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#2a1640'); gr.addColorStop(.55, '#1a0f2b'); gr.addColorStop(1, '#0f0819'); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.save(); g.translate(W / 2, 720); gr = g.createRadialGradient(0, 0, 60, 0, 0, 560); gr.addColorStop(0, 'rgba(42,138,108,.5)'); gr.addColorStop(.75, 'rgba(29,106,85,.32)'); gr.addColorStop(1, 'rgba(15,65,54,0)'); g.fillStyle = gr; g.beginPath(); g.arc(0, 0, 560, 0, TAU); g.fill();
+  g.strokeStyle = 'rgba(217,164,65,.35)'; g.lineWidth = 10; g.beginPath(); g.arc(0, 0, 500, 0, TAU); g.stroke(); g.restore();
+  for (let i = 0; i < 64; i++) { const k = i / 64, per = 2 * (W - 60) + 2 * (H - 60), d = k * per; let x, y; if (d < W - 60) { x = 30 + d; y = 30; } else if (d < W - 60 + H - 60) { x = W - 30; y = 30 + d - (W - 60); } else if (d < 2 * (W - 60) + H - 60) { x = W - 30 - (d - (W - 60) - (H - 60)); y = H - 30; } else { x = 30; y = H - 30 - (d - 2 * (W - 60) - (H - 60)); } g.fillStyle = i % 2 ? '#ffcc4d' : '#ffe9a8'; g.beginPath(); g.arc(x, y, 7, 0, TAU); g.fill(); }
+  const center = (txt, y, font, col, shadow) => { g.font = font; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; if (shadow) { g.fillStyle = shadow; g.fillText(txt, W / 2 + 5, y + 7); } g.fillStyle = col; g.fillText(txt, W / 2, y); };
+  // le titre
+  g.save(); g.translate(W / 2, 175); g.rotate(-.05); g.translate(-W / 2, -175);
+  center('JACKPOT', 175, F(700, 140), '#fff3e6', '#c2185b');
+  g.fillStyle = '#4aa8ff'; const pw = 400; g.beginPath(); g.roundRect(W / 2 - pw / 2, 198, pw, 76, 16); g.fill(); center('DEFENSE', 256, F(700, 56), '#ffffff');
+  g.restore();
+  let y = 345;
+  if (run.daily) { const t = `DÉFI DU JOUR · ${dayLabel(run.daily)}`; g.font = F(700, 38); const tw = g.measureText(t).width + 60; g.fillStyle = '#ffcc4d'; g.beginPath(); g.roundRect(W / 2 - tw / 2, y - 44, tw, 60, 30); g.fill(); center(t, y, F(700, 38), '#2a1640'); }
+  y = 425; center(E.won ? 'J\'AI FAIT SAUTER LA BANQUE !' : E.cashed ? 'J\'AI ENCAISSÉ !' : 'LA MAISON A GAGNÉ…', y, F(700, 50), E.won ? '#7dffb0' : '#ff8fa3', '#120a1c');
+  // le score
+  y = 455; g.fillStyle = 'rgba(0,0,0,.42)'; g.beginPath(); g.roundRect(160, y, W - 320, 200, 28); g.fill(); g.strokeStyle = '#ffcc4d'; g.lineWidth = 6; g.stroke();
+  center('SCORE', y + 56, F(700, 36), '#ffcc4d'); center(fmtS(run.score || 0), y + 165, F(700, 110), '#ffffff', '#c2185b');
+  const S = STAKES[run.stake || 0], D = run.deck ? deckById(run.deck) : null;
+  y = 735; center(run.round > 30 ? `MANCHE ${roundLabel(run.round)}` : `MANCHE ${run.round} / 30`, y, F(700, 60), '#fff3e6', '#120a1c');
+  y = 795; g.font = F(700, 34); const sline = `${S.name}${D ? ' · ' + D.name : ''}`, sw = g.measureText(sline).width + 46; g.fillStyle = S.col; g.beginPath(); g.arc(W / 2 - sw / 2 + 12, y - 11, 12, 0, TAU); g.fill(); g.fillStyle = '#e8dcf5'; g.textAlign = 'left'; g.fillText(sline, W / 2 - sw / 2 + 40, y);
+  // les jetons : jusqu'à 8, 6 par ligne
+  const J = (run.jokers || []).filter(j => j && j.parts && j.parts.length).slice(0, 8);
+  y = 870; center(J.length ? 'MES JETONS' : 'PAS UN JETON : À MAINS NUES !', y, F(700, 34), '#b7a6d6');
+  const n = J.length, R = 44, gap = 20, PER = 6, rows = Math.ceil(n / PER);
+  for (let i = 0; i < n; i++) {
+    const row = Math.floor(i / PER), inRow = Math.min(PER, n - row * PER), col = i % PER, x = W / 2 + (col - (inRow - 1) / 2) * (2 * R + gap), cy = y + 66 + row * (2 * R + gap), j = J[i], id = j.parts[0].t, K = JK[id] || {};
+    const kc = j.kind === 'ultime' ? '#ffcc4d' : j.kind === 'rare' ? '#7fd1ff' : j.kind === 'fou' ? '#ff5fa2' : '#e8e1f2';
+    g.fillStyle = '#120a1c'; g.beginPath(); g.arc(x, cy + 5, R, 0, TAU); g.fill();
+    g.fillStyle = K.col || '#5a3f8a'; g.beginPath(); g.arc(x, cy, R, 0, TAU); g.fill();
+    g.strokeStyle = kc; g.lineWidth = 6; g.setLineDash([10, 8]); g.beginPath(); g.arc(x, cy, R - 5, 0, TAU); g.stroke(); g.setLineDash([]);
+    try { drawIcon(g, JK[id] ? id : 'faux', x, cy, R * .95, '#fff3e6'); } catch (e) { /* une icône qui manque */ }
+    if (j.parts.length > 1) { g.fillStyle = '#ffcc4d'; g.beginPath(); g.arc(x + R * .72, cy - R * .72, 15, 0, TAU); g.fill(); g.fillStyle = '#2a1640'; g.font = F(700, 20); g.textAlign = 'center'; g.fillText('×' + j.parts.length, x + R * .72, cy - R * .72 + 7); }
+  }
+  // quelques chiffres
+  y = n ? 936 + (rows - 1) * (2 * R + gap) + R + 20 : 930;
+  const st = run.stats || {}, cells = [['cartes', fmtS(run.kills || 0)], ['parades', fmtS(st.parries || 0)], ['boss', String(run.bossKills || 0)]];
+  cells.forEach(([a, b], i) => { const x = W / 2 + (i - 1) * 270; g.textAlign = 'center'; g.font = F(700, 52); g.fillStyle = '#ffffff'; g.fillText(b, x, y + 40); g.font = F(700, 26); g.fillStyle = '#b7a6d6'; g.fillText(a.toUpperCase(), x, y + 76); });
+  // le pied
+  center(run.daily ? 'Même partie pour tout le monde aujourd\'hui. Tu fais mieux ?' : 'Tu fais mieux ?', H - 100, F(700, 32), '#ffcc4d');
+  center('sefyni.github.io/Jackpot-defense', H - 56, F(700, 28), '#e8dcf5');
+  return c;
+}
+async function openShare() {
+  const run = G.run; if (!run) return;
+  firstGesture(); Snd.click();
+  let ov = $('#share');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'share'; ov.className = 'full shr'; document.body.appendChild(ov); }
+  ov.innerHTML = `<div class="fi"><div class="panel shr-box"><h2 class="shr-t">Partager ma partie</h2><div class="shr-img"><p>Dessin de l'image…</p></div>
+    <div class="shr-row"><button class="btn gold" id="shr-share" hidden>Partager</button><button class="btn green" id="shr-save">Enregistrer l'image</button><button class="btn ghost" id="shr-x">Fermer</button></div>
+    <p class="shr-tip" id="shr-tip"></p></div></div>`;
+  ov.hidden = false;
+  $('#shr-x').onclick = () => { ov.hidden = true; Snd.click(); };
+  const c = await shareCanvas(run, G.lastEnd || {});
+  const blob = await new Promise(res => c.toBlob(res, 'image/png'));
+  if (SHARE.url) URL.revokeObjectURL(SHARE.url);
+  SHARE.blob = blob; SHARE.url = URL.createObjectURL(blob);
+  const name = `jackpot-defense-${run.daily ? 'defi-' + run.daily : dayKey()}-${Math.round(run.score || 0)}.png`;
+  ov.querySelector('.shr-img').innerHTML = `<img src="${SHARE.url}" alt="Ta partie de Jackpot Defense : score ${fmtS(run.score || 0)}, manche ${roundLabel(run.round)}">`;
+  const file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
+  const canShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] }));
+  const sb = $('#shr-share'); sb.hidden = !canShare;
+  if (canShare) sb.onclick = async () => { try { await navigator.share({ files: [file], title: 'Jackpot Defense', text: `Score ${fmtS(run.score || 0)} · manche ${roundLabel(run.round)}${run.daily ? ' · défi du jour ' + dayLabel(run.daily) : ''}` }); } catch (e) { /* annulé */ } };
+  $('#shr-save').onclick = () => { const a = document.createElement('a'); a.href = SHARE.url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); $('#shr-tip').textContent = 'Image enregistrée (dossier Téléchargements). Sur téléphone : appui long sur l\'image pour l\'enregistrer.'; Snd.coin && Snd.coin(); };
+  dbg('share_open');
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('#o-share,#t-daily'); if (!t) return;
+  if (t.id === 'o-share') openShare(); else startDaily();
+});
+
+
+/* ================= v15.0 · une première partie plus lisible =================
+   - les nouveautés : une étiquette d'une ligne pendant le combat, le détail en fin de manche
+   - les astuces : une à la fois, 10 s de jeu entre deux pendant le combat
+   - le lancement : l'écran titre ignore les clics pendant son arrivée */
+
+/* ---------- les nouveautés ---------- */
+function nnLabel(c, id) {
+  if (c === 'e' && ENEMIES[id].giant) return 'NOUVEAU GÉANT';
+  if (c === 'e' && ENEMIES[id].cor) return 'NOUVELLE CORIACE';
+  if (c === 'e' && ENEMIES[id].arc) return 'ARCANE MAJEUR';
+  return { n: 'CARTE AMÉLIORÉE', e: 'NOUVELLE CARTE', b: 'NOUVEAU BOSS', s: 'NOUVEAU SORT', m: 'NOUVEAU MALUS', v: 'NOUVEL ÉVÉNEMENT', l: 'NOUVELLE ÉLITE', f: 'JETON FOU DÉCOUVERT' }[c] || 'NOUVEAU';
+}
+function onCatNew(cat, id) {
+  if (G.headless || !['e', 's', 'm', 'v', 'l', 'n'].includes(cat)) return;
+  if (cat === 'e' && ENEMIES[id].from === 1) return;
+  if (!DISC.some(d => d[0] === cat && d[1] === id)) DISC.push([cat, id]);
+  if (cat === 'v') return; // l'intro de la Maison l'explique déjà
+  NEWQ.push([cat, id]);
+  if (!newBusy) showNewNote();
+}
+function showNewNote() {
+  // seulement pendant une manche : sinon on garde la file pour la suivante
+  if (!NEWQ.length || G.mode !== 'combat') { newBusy = false; return; }
+  newBusy = true;
+  // au moins 6 s entre deux étiquettes : ce qui arrive entre-temps est regroupé
+  const wait = NNT.last + 6000 - performance.now();
+  if (wait > 0) { clearTimeout(NNT.t); NNT.t = setTimeout(showNewNote, wait); return; }
+  NNT.last = performance.now();
+  const el = $('#newnote');
+  let dur;
+  if (NEWQ.length > 1) {
+    // plusieurs d'un coup : une seule étiquette, rien ne défile
+    const L = NEWQ.splice(0, NEWQ.length);
+    el.innerHTML = `<span class="nn-arts">${L.slice(0, 3).map(([c, id]) => `<span class="nn-art">${catTile(c, id)}</span>`).join('')}</span><span class="nn-txt"><b>+${L.length} NOUVEAUTÉS</b><small>en fin de manche</small></span>`;
+    dur = 2600;
+  } else {
+    const [c, id] = NEWQ.shift();
+    el.innerHTML = `<span class="nn-art">${catTile(c, id)}</span><span class="nn-txt"><small>${nnLabel(c, id)}</small><b>${catTitle(c, id)}</b></span>`;
+    dur = 2200;
+  }
+  for (const t of $$('#newnote [data-thumb]')) t.appendChild(cardThumb(t.dataset.thumb, 26));
+  el.classList.add('nn-tag');
+  el.hidden = false; el.classList.remove('out'); void el.offsetWidth; el.classList.add('in');
+  Snd.rakeUp();
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => { el.hidden = true; el.classList.remove('in', 'out'); showNewNote(); }, 380); }, dur);
+}
+// la phrase qui explique (la même que dans le carnet)
+function discLine(c, id) {
+  if (c === 'e') return ENEMIES[id].info || '';
+  try {
+    const d = document.createElement('div'); d.innerHTML = catDesc(c, id);
+    const p = [...d.querySelectorAll('p')].find(x => !x.className);
+    return p ? p.innerHTML : '';
+  } catch (e) { return ''; }
+}
+// fin de manche : ce qu'on a découvert, à lire tranquillement
+function discRecap(done) {
+  const L = DISC.splice(0, DISC.length);
+  const el = $('#disc');
+  if (G.headless || !el || !L.length) { done(); return; }
+  el.innerHTML = `<div class="dc-card" role="dialog" aria-label="Découvertes de la manche">
+    <div class="dc-head">DÉCOUVERTES<small>tout est noté dans le carnet d'Anatole</small></div>
+    <ul class="dc-list">${L.map(([c, id]) => `<li><span class="dc-art">${catTile(c, id)}</span><div class="dc-txt"><small>${nnLabel(c, id)}</small><b>${catTitle(c, id)}</b><p>${discLine(c, id)}</p></div></li>`).join('')}</ul>
+    <button class="btn big gold" id="dc-ok" type="button">Continuer</button></div>`;
+  for (const t of $$('#disc [data-thumb]')) t.appendChild(cardThumb(t.dataset.thumb, 44));
+  el.hidden = false; el.classList.remove('out');
+  try { Snd.tipOpen(); } catch (e) { /* rien */ }
+  let gone = false;
+  const go = () => {
+    if (gone) return; gone = true;
+    removeEventListener('keydown', key, true);
+    el.classList.add('out');
+    setTimeout(() => { el.hidden = true; el.innerHTML = ''; el.classList.remove('out'); }, 220);
+    done();
+  };
+  const key = e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); Snd.click(); go(); } };
+  addEventListener('keydown', key, true);
+  // un temps de lecture : le bouton ne réagit qu'après un court instant (pas de double tape par erreur)
+  const b = $('#dc-ok'); b.disabled = true;
+  setTimeout(() => { b.disabled = false; }, 450);
+  b.addEventListener('click', () => { Snd.click(); go(); });
+}
+
+/* ---------- les astuces : une à la fois, 10 s de jeu entre deux pendant le combat ---------- */
+const TIP_GAP = 10;
+// les bases d'abord : l'objectif, la bille, le flipper (avant le Tireur, qui en parle)
+const TIP_FIRST = ['r1', 'bille', 'co_flip'];
+function tipKey(h) { return typeof h === 'object' && h ? h.k : COACH_KEY.get(h); }
+function showNextTip() {
+  if (tipOpen || !TIPQ.length) return;
+  for (let k = TIP_FIRST.length - 1; k >= 0; k--) { const i = TIPQ.findIndex(h => tipKey(h) === TIP_FIRST[k]); if (i > 0) TIPQ.unshift(TIPQ.splice(i, 1)[0]); }
+  if (G.mode === 'combat' && G.cb && !G.headless && TIPG.cb === G.cb && G.cb.t - TIPG.last < TIP_GAP) { TIPG.wait = true; return; }
+  TIPG.wait = false;
+  showNextTip1();
+}
+function closeTip() {
+  closeTip1();
+  if (G.mode === 'combat' && G.cb) { TIPG.cb = G.cb; TIPG.last = G.cb.t; }
+}
+// appelé à chaque image du combat : l'astuce en attente sort quand c'est son tour
+function tipGapTick(cb) {
+  if (!TIPG.wait || tipOpen || !TIPQ.length || G.paused) return;
+  if (TIPG.cb !== cb || cb.t - TIPG.last >= TIP_GAP) showNextTip();
+}
+
+/* ---------- les annonces de fin de manche : en petit, au-dessus de la base ---------- */
+function bigFloat(txt, col, life, below) {
+  if (G.headless || !G.cb) return;
+  const F = G.cb.floats; if (F.length > 36) F.shift();
+  F.push({ x: 0, y: below ? BAL.baseR + 30 : -BAL.baseR - 18, txt, col, size: 5.2, life: life || 1.7, max: life || 1.7 });
+}
+
+/* ---------- le lancement : pas de clic perdu pendant l'arrivée de l'écran titre ---------- */
+function bootShield(ms) {
+  let sh = $('#bootshield');
+  if (!sh) { sh = document.createElement('div'); sh.id = 'bootshield'; sh.setAttribute('aria-hidden', 'true'); document.body.appendChild(sh); }
+  sh.hidden = false;
+  const keys = e => { e.preventDefault(); e.stopPropagation(); };
+  addEventListener('keydown', keys, true);
+  setTimeout(() => { sh.hidden = true; removeEventListener('keydown', keys, true); }, G.reduced ? 500 : (ms || 1000));
+}
+
+
+/* ================= v15.1 · le jeu en anglais =================
+   Deux pages, le même jeu : index.html (français) et en.html (anglais, fabriquée au build).
+   La langue est gardée sous « jd-lang » ; la sauvegarde est la même (même site). */
+function setLang(l) {
+  if (l !== 'fr' && l !== 'en') return;
+  try { localStorage.setItem('jd-lang', l); } catch (e) { /* rien */ }
+  if (l === LANG) return;
+  try { saveMeta(); } catch (e) { /* rien */ }
+  try { Snd.click(); } catch (e) { /* rien */ }
+  const u = new URL(location.href);
+  u.pathname = u.pathname.replace(/[^/]*$/, l === 'en' ? 'en.html' : 'index.html');
+  setTimeout(() => location.replace(u.href), 120);
+}
+const langRow = () => oRow('Langue · Language', `<div class="oseg" role="radiogroup">${[['fr', 'Français'], ['en', 'English']].map(([v, n]) => `<button class="${LANG === v ? 'on' : ''}" data-lang="${v}" role="radio" aria-checked="${LANG === v}">${n}</button>`).join('')}</div>`);
+document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('[data-lang]'); if (t) { e.preventDefault(); setLang(t.dataset.lang); } });
 
 
 /* ---------- boucle ---------- */

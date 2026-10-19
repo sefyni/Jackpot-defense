@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v14.8-202610191800
+JACKPOT DEFENSE v15.1-202610192200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,47 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.1 — le jeu en anglais
+- Le jeu existe maintenant en anglais. Deux pages, le même jeu : index.html (français) et en.html (anglais).
+  Mets bien les DEUX fichiers en ligne.
+- Au tout premier lancement, le jeu prend la langue du téléphone ou du PC : français si l'appareil est en
+  français, anglais sinon. Ensuite, OPTIONS › Jeu › « Langue · Language » : Français / English.
+- Même sauvegarde, même classement dans les deux langues : on peut changer de langue quand on veut.
+- On garde un peu de « French touch » : La Maison, « Rien ne va plus », « Faites vos jeux », le Tapis Rouge,
+  et les noms des personnages (Zaza, Anatole, le Baron, Gaston, Dina, Momo, Madame Nox…).
+- En anglais, les nombres s'écrivent à l'anglaise (1,200 · 1.5) et les dates aussi (Oct 19).
+- Règles (onglet La Maison joue) : le calendrier des jeux de table est à jour (manches 4, 7, 9, puis 3, 6, 9).
+- La version PC (.exe) passe aussi en v15.1, avec les deux langues.
+
+Nouveautés de la v15.0 — une première partie plus lisible
+- Les nouvelles cartes : pendant le combat, une petite étiquette d'une ligne (« Nouvelle carte · Tireur »),
+  au plus une toutes les 6 secondes ; si plusieurs arrivent entre-temps, une seule étiquette « +3 nouveautés ».
+  Le détail de chacune (ce qu'elle fait) s'affiche en fin de manche, sur un écran « Découvertes » à lire
+  tranquillement, avec un bouton Continuer. Tout reste noté dans le carnet d'Anatole.
+- Les astuces de Gaston : une à la fois, et au moins 10 secondes de jeu entre deux pendant le combat.
+  Les bases passent d'abord (l'objectif, la bille, le flipper), le Tireur ensuite.
+- Fin de manche : une seule bannière, « MANCHE GAGNÉE ». « Objectif atteint » et « Tapis ! » s'affichent
+  en petit au-dessus et en dessous de ta base. (Avec un boss encore debout, « Objectif atteint » reste une
+  bannière : il faut l'abattre.)
+- La bannière d'un nouvel acte est plus courte : « ACTE I · MANCHE 1 », puis la famille et l'objectif.
+- La Maison joue toujours aux mêmes manches : 4, 7 et 9 pour les dix premières, puis 13, 16, 19,
+  23, 26, 29, et ainsi de suite. (Mise verte et au-dessus : la Maison joue toujours à chaque manche.)
+- Le lancement : après l'intro, l'écran titre ignore les clics pendant 1 seconde, le temps d'arriver.
+  Taper vite pour passer l'intro ne lance plus rien par erreur.
+- La version PC (.exe) passe aussi en v15.0.
+
+Nouveautés de la v14.9 — le défi du jour, l'image à partager, l'historique
+- Le défi du jour : un nouveau bouton jaune sous JOUER. Chaque jour, une partie avec la même graine pour
+  tout le monde : mêmes événements, mêmes Géants et mêmes Arcanes aux mêmes manches. Toujours en mise blanche,
+  avec le jeu Coffre-fort et sans compagnon. Tu peux le rejouer autant que tu veux : ton record du jour est
+  gardé, ainsi que ta série (un défi joué chaque jour d'affilée). Le bouton affiche la date, ton record du jour
+  et ta série. Pas encore de classement du défi : il viendra avec une mise à jour du serveur.
+- Fin de partie : « Partager ma partie » dessine une image au format TikTok / Insta (1080 × 1350) : score,
+  manche, mise, jeu, tes jetons, cartes abattues, parades, boss battus, et « Défi du jour » si c'en était un.
+  « Enregistrer l'image » (dossier Téléchargements), ou « Partager » sur téléphone.
+- PROFIL › Records et sauvegarde : tes 20 dernières parties (date, mise, manche ou victoire, score, défi).
+- La version PC (.exe) passe aussi en v14.9.
 
 Nouveautés de la v14.8 — la musique signée, la version PC (.exe), le panneau rangé
 - La musique garde tous ses airs, avec en plus :
