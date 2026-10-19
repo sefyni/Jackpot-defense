@@ -4327,7 +4327,7 @@ body.cvd .mcard.t3 .skull{color:#ff4fd8}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v15.4</p>
+  <p class="proto">Sefy Industries · v15.5</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -11618,11 +11618,11 @@ const Music = (() => {
      Le synthé reste en secours : tant qu'un fichier n'est pas prêt (ou si OPTIONS › Audio › Musique = 8 bits), il joue.
      Le combat : un fichier par harmonie d'acte (combat_0…5) et par boss (combat_b0/2/3/5) ; le TAPIS accélère le fichier ;
      l'intensité ouvre un filtre ; la bille de roulette et les jetons (synthé) restent par-dessus, calés sur la grille. */
-  const FMAN = {"lounge":{"loop":42.666667,"pad":1.0,"g":2.452},"market":{"loop":50.526316,"pad":1.0,"g":0.543},"bar":{"loop":60.952381,"pad":1.0,"g":2.498},"baron":{"loop":53.333333,"pad":1.0,"g":0.61},"dina":{"loop":45.714286,"pad":1.0,"g":3.373},"momo":{"loop":75.789474,"pad":1.0,"g":2.941},"nox":{"loop":41.73913,"pad":1.0,"g":0.535},"combat_0":{"loop":22.325581,"pad":1.0,"g":2.406},"combat_1":{"loop":22.325581,"pad":1.0,"g":2.427},"combat_2":{"loop":22.325581,"pad":1.0,"g":2.43},"combat_3":{"loop":22.325581,"pad":1.0,"g":2.498},"combat_4":{"loop":22.325581,"pad":1.0,"g":2.504},"combat_5":{"loop":22.325581,"pad":1.0,"g":2.528},"combat_b0":{"loop":22.325581,"pad":1.0,"g":2.513},"combat_b2":{"loop":22.325581,"pad":1.0,"g":2.488},"combat_b3":{"loop":22.325581,"pad":1.0,"g":2.516},"combat_b5":{"loop":22.325581,"pad":1.0,"g":2.585},"final_1":{"loop":22.325581,"pad":1.0,"g":1.972},"final_2":{"loop":22.325581,"pad":1.0,"g":2.296},"final_3":{"loop":22.325581,"pad":1.0,"g":2.362}};
+  const FMAN = {"bar":{"loop":60.952381,"pad":1.0,"bpm":126,"g":2.498},"baron":{"loop":53.333333,"pad":1.0,"bpm":108,"g":0.61},"combat_0":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.458},"combat_2":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.482},"combat_3":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.484},"combat_5":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.489},"combat_b0":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.47},"combat_b2":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.482},"combat_b3":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.488},"combat_b5":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.523},"dina":{"loop":45.714286,"pad":1.0,"bpm":168,"g":3.373},"final_1":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.972},"final_2":{"loop":22.325581,"pad":1.0,"bpm":172,"g":2.296},"final_3":{"loop":22.325581,"pad":1.0,"bpm":172,"g":2.362},"lounge":{"loop":42.666667,"pad":1.0,"bpm":90,"g":2.452},"market":{"loop":58.181818,"pad":1.0,"bpm":66,"g":0.458},"momo":{"loop":75.789474,"pad":1.0,"bpm":76,"g":2.941},"nox":{"loop":41.73913,"pad":1.0,"bpm":138,"g":0.535}};
   const FM = { buf: {}, load: {}, use: [], fail: {}, h: 0, boss: false };
   const fmOn = () => { try { return !G.headless && !AU.offline && typeof fetch !== 'undefined' && OPT().musk !== 0; } catch (e) { return false; } };
   function fmFile(name) {
-    if (name === 'combat') return FM.boss ? 'combat_b' + HKEY[FM.h] : 'combat_' + FM.h;
+    if (name === 'combat') return (FM.boss ? 'combat_b' : 'combat_') + HKEY[FM.h];
     if (name === 'final') return 'final_' + clamp((typeof FB !== 'undefined' && FB.phase) || 1, 1, 3);
     return FMAN[name] ? name : null;
   }
@@ -11653,7 +11653,7 @@ const Music = (() => {
   function fmStart(tr, f, buf, t0, fade) {
     const ac = AU.ac, I = FMAN[f], src = ac.createBufferSource(), g = ac.createGain();
     src.buffer = buf; src.loop = true; src.loopStart = I.pad; src.loopEnd = I.pad + I.loop;
-    src.playbackRate.value = tr.bpm / TRACKS[tr.name].bpm;
+    src.playbackRate.value = 1;
     let out = src;
     if (tr.name === 'combat' || tr.name === 'final') { const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = .4; lp.frequency.value = fmCut(); src.connect(lp); out = lp; tr.fmLp = lp; } else tr.fmLp = null;
     out.connect(g); g.connect(tr.g);
@@ -11662,12 +11662,14 @@ const Music = (() => {
     src.start(t0, I.pad);
     if (tr.fm) fmStop(tr, t0 + .35);
     tr.fm = { f, src, g, at: t0 };
+    if (I.bpm) tr.bpm = I.bpm;
   }
   function fmStop(tr, t) {
     const F = tr.fm; if (!F) return;
     const ac = AU.ac; t = Math.max(t || 0, ac.currentTime);
     try { F.g.gain.cancelScheduledValues(t); F.g.gain.setValueAtTime(F.g.gain.value, t); F.g.gain.linearRampToValueAtTime(0, t + .3); F.src.stop(t + .4); } catch (e) { /* déjà arrêté */ }
     tr.fm = null;
+    if (TRACKS[tr.name]) tr.bpm = TRACKS[tr.name].bpm;
   }
   const fmCut = () => 1500 * Math.pow(12, clamp(inten * 1.15 + dens * .25 - .12, 0, 1));
   // à chaque tour d'horloge : démarrer quand c'est prêt, changer de fichier (acte, vie du Baron), suivre le tempo et l'intensité
@@ -11683,8 +11685,7 @@ const Music = (() => {
       else if (!FM.fail[f]) { tr.fmWait = f; fmGet(f).then(() => { if (tr.fmWait === f) tr.fmWait = null; }); }
       return;
     }
-    const r = tr.bpm / TRACKS[tr.name].bpm;
-    if (Math.abs(tr.fm.src.playbackRate.value - r) > .001) tr.fm.src.playbackRate.setValueAtTime(r, now);
+    if (FMAN[f].bpm && tr.bpm !== FMAN[f].bpm) tr.bpm = FMAN[f].bpm;
     if (tr.fmLp) tr.fmLp.frequency.setTargetAtTime(fmCut(), now, .3);
   }
   // en mode fichier, le synthé ne joue plus que la table du casino (combat) : la bille qui roule, les jetons
@@ -11805,7 +11806,7 @@ const Music = (() => {
     setIntensity(x) { iTarget = clamp(x, 0, 1); },
     setHarm(a, boss) { const i = clamp(a | 0, 0, HARM.length - 1); FM.h = i; FM.boss = !!boss; CCH = boss ? TRSP(PB, HKEY[i]) : HARM[i]; shift = 0; if (TR.combat) TR.combat.bpm = BPM_C; },
     setDensity(x) { dTarget = clamp(x, 0, 1); },
-    setTapis(on) { const tr = TR.combat, b = on ? Math.round(BPM_C * 1.07) : BPM_C; if (tr && tr.bpm !== b) tr.bpm = b; },
+    setTapis(on) { const tr = TR.combat, b = on ? Math.round(BPM_C * 1.07) : BPM_C; if (tr && !tr.fm && tr.bpm !== b) tr.bpm = b; },
     bossHalf() { if (!(TR.combat && TR.combat.fm)) shift = -1; },
     fm: FM, fmFile,
     parryNote,
@@ -23468,7 +23469,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v15.4</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v15.5</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;

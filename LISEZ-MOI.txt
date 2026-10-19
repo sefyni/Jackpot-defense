@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.4-202610200130
+JACKPOT DEFENSE v15.5-202610200200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.5 — la musique de combat « casino »
+- Nouvelle musique de combat, plus simple et plus « casino » : piano jazz piqué, vibraphone, bille de roulette,
+  jetons qui claquent, « ding ding ding » de machine à sous, et le thème Jackpot. Un peu moins rapide (128 BPM),
+  et elle n'accélère plus pendant le TAPIS. Une version par acte (sa tonalité) et une version boss plus sombre.
+- Nouveau marché noir : « Film noir », un jazz lent et louche (trompette bouchée, contrebasse, balais, vibraphone).
+- Le dossier music change (18 fichiers) : remplace l'ancien en entier.
 
 Nouveautés de la v15.4 — les musiques en vrais instruments
 - Toutes les musiques sont rejouées avec de vrais instruments (contrebasse, piano, Rhodes, saxophone, trompette,
