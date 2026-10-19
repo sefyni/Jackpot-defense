@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v14.7-202610191200
+JACKPOT DEFENSE v14.8-202610191800
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,26 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v14.8 — la musique signée, la version PC (.exe), le panneau rangé
+- La musique garde tous ses airs, avec en plus :
+  · le thème Jackpot : trois notes répétées (les trois 7 de la machine), puis le saut du jackpot
+    (sol sol sol – do mi ré). Il se cache dans chaque musique : au vibraphone au menu et à la machine,
+    en tête du solo puis au vibraphone au bar de Zaza, en boîte à musique au marché noir, en pizzicati
+    chez le Baron, et en combat quand ça chauffe. Le jackpot de la machine le joue aussi.
+  · les sons du casino comme instruments : les jetons qui claquent (caisse claire), la bille de la
+    roulette (shaker), le cliquet des rouleaux (charleston), et un « ka-ching » de caisse enregistreuse
+    de temps en temps.
+  · un combat qui suit la table : peu de cartes = la basse et la batterie ; la table se remplit = la bille
+    roule, les jetons claquent, le thème arrive ; le TAPIS (et le Tapis ! des Coulisses) emballe le tempo ;
+    à la mi-vie d'un boss, la musique descend d'un demi-ton, plus sombre.
+  · chaque parade joue la note suivante du thème : 6 parades d'affilée = le thème complet, et ka-ching !
+- La version PC (.exe) pour Windows : le jeu dans sa propre fenêtre, en plein écran (F11 ou Alt+Entrée pour
+  passer en fenêtre), sans navigateur. Un bouton « QUITTER LE JEU » sur l'écran titre. La progression est
+  gardée sur l'ordinateur. (Elle est livrée à part : Jackpot-Defense-v14.8-Windows.zip, avec son LISEZ-MOI.)
+- Le panneau de gauche (PC) : plus de barres grises. Quand il y a beaucoup de sorts, compagnons, jetons
+  bonus et boissons, les icônes se serrent sur une grille ; si ça ne tient toujours pas, un « +N » ouvre
+  la fiche complète (comme Infos). Ailleurs, les barres de défilement sont fines et aux couleurs du jeu.
 
 Nouveautés de la v14.7 — tes retours
 - Événements : après l'intro « La Maison joue… », la manche attend que tu appuies sur COMMENCER
