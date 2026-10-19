@@ -1,0 +1,24 @@
+# Jackpot Defense : réveille le classement Supabase tous les 3 jours,
+# pour que le projet gratuit ne se mette jamais en pause (pause après 7 jours sans activité).
+# Utilise seulement la clé publique (la même que dans le jeu), juste pour LIRE le top.
+name: Reveil Supabase
+
+on:
+  schedule:
+    - cron: '17 6 */3 * *'   # tous les 3 jours, 6h17 UTC
+  workflow_dispatch:          # bouton « Run workflow » pour tester à la main
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire le classement
+        run: |
+          code=$(curl -s -o reponse.json -w "%{http_code}" -X POST \
+            "https://ncfhqowbnyiaispbeova.supabase.co/rest/v1/rpc/lb_top" \
+            -H "apikey: sb_publishable_cDpW93F1p-7quHIsV9WfXw_wZhPr5_d" \
+            -H "Content-Type: application/json" \
+            -d '{"p_stake":0}')
+          echo "Réponse $code"
+          head -c 300 reponse.json; echo
+          test "$code" = "200"
