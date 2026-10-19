@@ -3640,6 +3640,48 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 #banner.gt::after{animation-direction:reverse}
 @keyframes gtSlide{to{background-position:28px 0}}
 @media (prefers-reduced-motion:reduce){#banner.gt::before,#banner.gt::after{animation:none}}
+/* v15.3 · succès (bloc PROFIL, liste, annonce) */
+.pr-ach{margin:12px 0 0;padding:10px 12px 12px;border-radius:12px;background:rgba(0,0,0,.24);box-shadow:inset 0 0 0 2px rgba(255,204,77,.18);display:flex;flex-direction:column;gap:8px}
+.pr-ach h5{margin:0;display:flex;justify-content:space-between;gap:8px;font:700 13px var(--f-pix);letter-spacing:.08em;color:#ffcc4d}
+.pr-ach h5 b{color:var(--cream)}
+.pr-ach .btn{align-self:flex-start}
+.achs{z-index:46;background:radial-gradient(ellipse at 50% 0%,#3a2a10 0%,#170f1c 55%,#0b0610 100%)}
+.ach-fi{width:min(100%,640px);gap:12px;min-height:0}
+.ach-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ach-t{display:flex;align-items:center;gap:8px;margin:0;font:700 26px/1 var(--f-pix);color:var(--gold);text-shadow:0 3px 0 #000}
+.ach-t .ico{width:28px;height:28px}
+.ach-t b{color:var(--cream);font-size:20px}
+.ach-list{flex:1;min-height:0;overflow-y:auto;margin:0;padding:0 4px 8px 0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.ach-it{position:relative;text-align:left;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.28);box-shadow:inset 0 0 0 2px #2c2140}
+.ach-it.got{background:linear-gradient(90deg,rgba(255,204,77,.16),rgba(0,0,0,.2));box-shadow:inset 0 0 0 2px rgba(255,204,77,.55)}
+.ach-ic{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:#1c1428;color:#6d5f86}
+.ach-ic .ico{width:26px;height:26px}
+.ach-it.got .ach-ic{background:#3a2a10;color:#ffcc4d}
+.ach-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ach-tx b{font:700 15px/1.15 var(--f-pix);color:var(--cream)}
+.ach-it:not(.got) .ach-tx b{color:#b9aecb}
+.ach-tx small{font-size:12.5px;line-height:1.25;color:var(--muted)}
+.ach-st{font:700 13px var(--f-pix);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ach-it.got .ach-st{color:#ffcc4d;font-size:18px}
+.ach-bar{position:absolute;left:60px;right:10px;bottom:4px;height:3px;border-radius:2px;background:#0d0818;overflow:hidden}
+.ach-bar em{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#ffcc4d,#ff9a3d)}
+.achpop{position:fixed;z-index:60;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:14px;background:#241a10;color:var(--cream);box-shadow:inset 0 0 0 2px #ffcc4d,0 6px 0 rgba(0,0,0,.45);opacity:0;transform:translate(-50%,24px);transition:transform .3s cubic-bezier(.2,1.4,.4,1),opacity .25s;pointer-events:none;max-width:calc(100% - 32px)}
+.achpop.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){.achpop{bottom:auto;top:calc(118px + env(safe-area-inset-top,0px));transform:translate(-50%,-24px)}}
+.achpop .ap-ic{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#3a2a10;color:#ffcc4d}
+.achpop .ap-ic .ico{width:24px;height:24px}
+.achpop small{display:block;font:700 11px/1 var(--f-pix);letter-spacing:.12em;color:#ffcc4d}
+.achpop b{display:block;font:700 16px/1.2 var(--f-pix)}
+/* v15.3 · mode daltonien */
+.chip .fm{display:none}
+body.cvd .chip .fm{position:absolute;left:-10%;bottom:-8%;z-index:2;display:grid;place-items:center;min-width:1.25em;height:1.25em;padding:0 2px;border-radius:50%;background:#fff;color:#120c1c;font:700 10px/1 "Segoe UI Symbol","DejaVu Sans",system-ui,sans-serif;box-shadow:0 0 0 1.5px #120c1c;pointer-events:none}
+body.cvd .mcard.t1{box-shadow:inset 3px 0 0 #56b4e9}
+body.cvd .mcard.t2{box-shadow:inset 3px 0 0 #e69f00}
+body.cvd .mcard.t3{box-shadow:inset 0 0 0 2px #ff4fd8,0 0 18px rgba(255,79,216,.35)}
+body.cvd .mcard.t3 b{color:#ff9ce8}
+body.cvd .mcard.t3 .skull{color:#ff4fd8}
+.cvlg{display:flex;flex-wrap:wrap;gap:4px 10px;margin:-2px 0 6px;padding:0 4px;font-size:12px;color:var(--muted)}
+.cvlg .cvl{white-space:nowrap}
 /* v15.2 · le défi du jour : la fenêtre d'explication, l'onglet du classement */
 .dh-t{color:#ffcc4d}
 .dh-l{margin:2px 0 4px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;text-align:left;font-size:15px;line-height:1.3;color:var(--muted)}
@@ -4285,7 +4327,7 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v15.2</p>
+  <p class="proto">Sefy Industries · v15.4</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -10035,14 +10077,14 @@ function chipClass(j, extra) {
   return `chip k-${j.kind}${j.corrupt ? ' cor' : ''}${isSecret(j) ? ' sec' : ''}${L > 1 ? ' stk' + Math.min(4, L - 1) : ''}${extra ? ' ' + extra : ''}`;
 }
 function chipInner(j) {
-  let h = iconSVG(j.kind === 'faux' ? 'faux' : j.parts[0].t);
+  let h = iconSVG(j.kind === 'faux' ? 'faux' : j.parts[0].t) + (j.kind === 'faux' ? '' : famGlyph(j.parts[0].t));
   if (j.parts.length > 1) { const J2 = JK[j.parts[1].t]; h += `<span class="ic2" style="--jc:${J2.col};--ic2:${J2.dark}">${iconSVG(j.parts[1].t)}</span>`; }
   if (j.p > 1.001) h += `<span class="pb">+${Math.round((j.p - 1) * 100)}</span>`;
   if (isPunched(j)) h += '<span class="pp" aria-hidden="true"></span>';
   return h;
 }
 function chipHTML(j, tag, attrs, extraCls) { tag = tag || 'span'; return `<${tag} class="${chipClass(j, extraCls)}" style="${chipVars(j)}"${attrs ? ' ' + attrs : ''}>${chipInner(j)}</${tag}>`; }
-function protoChip(id, cls) { const J = JK[id]; return `<span class="chip ${cls || 'k-ultime'}" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(id)}</span>`; }
+function protoChip(id, cls) { const J = JK[id]; return `<span class="chip ${cls || 'k-ultime'}" style="--jc:${J.col};--ic2:${J.dark}">${iconSVG(id)}${famGlyph(id)}</span>`; }
 function sellValue(j) {
   let base = RAR[j.kind].sell;
   if (j.kind === 'mix') base = j.parts[0].lv >= 3 ? 34 : 20;
@@ -10093,6 +10135,7 @@ function newRun(stake) {
     up: {}, floors: [], shots: [], boost: {}, boosters: [], spells: ['bomb', 'gel'], pets: [], firstDrink: true, gRounds: {}, gMet: {}, score: 0, vis: { last: 0, seen: {}, refused: {} },
     stats: { dmg: 0, gold: 0, triples: 0, parries: 0, blocks: 0, bestStreak: 0, drinks: 0, stacks: 0, gWins: 0, gLosses: 0, bestRound: 0, games: 0, gamesWon: 0, shotsN: 0, billes: 0, rebonds: 0, fous: 0, bugPulls: 0 },
   };
+  if (G.runSoft) run.soft = 1;
   for (let b = 0; b < 3; b++) { evPlanBlock(run, b); gntPlanBlock(run, b); arcPlanBlock(run, b); }
   return run;
 }
@@ -11570,6 +11613,94 @@ const Music = (() => {
       Object.assign(TR, save.TR);
     }
   }
+  /* ===== v15.4 · les musiques en vrais instruments =====
+     Des fichiers music/<nom>.mp3 (FluidSynth + FluidR3), joués en boucle parfaite (loopStart = pad, loopEnd = pad + loop).
+     Le synthé reste en secours : tant qu'un fichier n'est pas prêt (ou si OPTIONS › Audio › Musique = 8 bits), il joue.
+     Le combat : un fichier par harmonie d'acte (combat_0…5) et par boss (combat_b0/2/3/5) ; le TAPIS accélère le fichier ;
+     l'intensité ouvre un filtre ; la bille de roulette et les jetons (synthé) restent par-dessus, calés sur la grille. */
+  const FMAN = {"lounge":{"loop":42.666667,"pad":1.0,"g":2.452},"market":{"loop":50.526316,"pad":1.0,"g":0.543},"bar":{"loop":60.952381,"pad":1.0,"g":2.498},"baron":{"loop":53.333333,"pad":1.0,"g":0.61},"dina":{"loop":45.714286,"pad":1.0,"g":3.373},"momo":{"loop":75.789474,"pad":1.0,"g":2.941},"nox":{"loop":41.73913,"pad":1.0,"g":0.535},"combat_0":{"loop":22.325581,"pad":1.0,"g":2.406},"combat_1":{"loop":22.325581,"pad":1.0,"g":2.427},"combat_2":{"loop":22.325581,"pad":1.0,"g":2.43},"combat_3":{"loop":22.325581,"pad":1.0,"g":2.498},"combat_4":{"loop":22.325581,"pad":1.0,"g":2.504},"combat_5":{"loop":22.325581,"pad":1.0,"g":2.528},"combat_b0":{"loop":22.325581,"pad":1.0,"g":2.513},"combat_b2":{"loop":22.325581,"pad":1.0,"g":2.488},"combat_b3":{"loop":22.325581,"pad":1.0,"g":2.516},"combat_b5":{"loop":22.325581,"pad":1.0,"g":2.585},"final_1":{"loop":22.325581,"pad":1.0,"g":1.972},"final_2":{"loop":22.325581,"pad":1.0,"g":2.296},"final_3":{"loop":22.325581,"pad":1.0,"g":2.362}};
+  const FM = { buf: {}, load: {}, use: [], fail: {}, h: 0, boss: false };
+  const fmOn = () => { try { return !G.headless && !AU.offline && typeof fetch !== 'undefined' && OPT().musk !== 0; } catch (e) { return false; } };
+  function fmFile(name) {
+    if (name === 'combat') return FM.boss ? 'combat_b' + HKEY[FM.h] : 'combat_' + FM.h;
+    if (name === 'final') return 'final_' + clamp((typeof FB !== 'undefined' && FB.phase) || 1, 1, 3);
+    return FMAN[name] ? name : null;
+  }
+  const fmPlaying = f => Object.keys(TR).some(k => TR[k].fm && TR[k].fm.f === f && TR[k].active);
+  function fmTouch(f) {
+    FM.use = FM.use.filter(x => x !== f); FM.use.push(f);
+    while (FM.use.length > 4) { const old = FM.use.find(x => !fmPlaying(x)); if (!old) break; FM.use = FM.use.filter(x => x !== old); delete FM.buf[old]; }
+  }
+  // charger et décoder un fichier (une seule fois à la fois) ; null si impossible
+  function fmGet(f) {
+    if (!f || !FMAN[f] || FM.fail[f] || !AU.ac) return Promise.resolve(null);
+    if (FM.buf[f]) { fmTouch(f); return Promise.resolve(FM.buf[f]); }
+    if (FM.load[f]) return FM.load[f];
+    const ac = AU.ac;
+    FM.load[f] = fetch('music/' + f + '.mp3').then(r => { if (!r.ok) throw new Error('http'); return r.arrayBuffer(); })
+      .then(ab => new Promise((res, rej) => { try { const p = ac.decodeAudioData(ab, res, rej); if (p && p.catch) p.catch(rej); } catch (e) { rej(e); } }))
+      .then(b => { FM.buf[f] = b; delete FM.load[f]; fmTouch(f); return b; })
+      .catch(() => { FM.fail[f] = 1; delete FM.load[f]; return null; });
+    return FM.load[f];
+  }
+  // ce qu'on prépare en avance : la piste demandée, et ses voisines probables
+  function fmPrefetch(name) {
+    if (!fmOn()) return;
+    const want = name === 'combat' ? [fmFile('combat'), 'bar'] : name === 'bar' ? ['bar', fmFile('combat')] : name === 'lounge' ? ['lounge'] : [fmFile(name)];
+    for (const f of want) if (f) fmGet(f);
+  }
+  const fmBar = tr => { const d = 60 / tr.bpm / 4, k = (16 - (tr.step % 16)) % 16; return tr.next + k * d; };
+  function fmStart(tr, f, buf, t0, fade) {
+    const ac = AU.ac, I = FMAN[f], src = ac.createBufferSource(), g = ac.createGain();
+    src.buffer = buf; src.loop = true; src.loopStart = I.pad; src.loopEnd = I.pad + I.loop;
+    src.playbackRate.value = tr.bpm / TRACKS[tr.name].bpm;
+    let out = src;
+    if (tr.name === 'combat' || tr.name === 'final') { const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = .4; lp.frequency.value = fmCut(); src.connect(lp); out = lp; tr.fmLp = lp; } else tr.fmLp = null;
+    out.connect(g); g.connect(tr.g);
+    const gv = I.g;
+    g.gain.setValueAtTime(fade ? 0 : gv, t0); if (fade) g.gain.linearRampToValueAtTime(gv, t0 + .35);
+    src.start(t0, I.pad);
+    if (tr.fm) fmStop(tr, t0 + .35);
+    tr.fm = { f, src, g, at: t0 };
+  }
+  function fmStop(tr, t) {
+    const F = tr.fm; if (!F) return;
+    const ac = AU.ac; t = Math.max(t || 0, ac.currentTime);
+    try { F.g.gain.cancelScheduledValues(t); F.g.gain.setValueAtTime(F.g.gain.value, t); F.g.gain.linearRampToValueAtTime(0, t + .3); F.src.stop(t + .4); } catch (e) { /* déjà arrêté */ }
+    tr.fm = null;
+  }
+  const fmCut = () => 1500 * Math.pow(12, clamp(inten * 1.15 + dens * .25 - .12, 0, 1));
+  // à chaque tour d'horloge : démarrer quand c'est prêt, changer de fichier (acte, vie du Baron), suivre le tempo et l'intensité
+  function fmTick(tr) {
+    const ac = AU.ac, now = ac.currentTime;
+    if (!fmOn()) { if (tr.fm) fmStop(tr, now); return; }
+    const f = fmFile(tr.name); if (!f) return;
+    if (tr.stopAt) return;
+    if (!tr.fm || tr.fm.f !== f) {
+      if (tr.fmWait === f) return;
+      const b = FM.buf[f];
+      if (b) { const t0 = Math.max(fmBar(tr), now + .03); fmStart(tr, f, b, t0, !!tr.fm || tr.step > 2); }
+      else if (!FM.fail[f]) { tr.fmWait = f; fmGet(f).then(() => { if (tr.fmWait === f) tr.fmWait = null; }); }
+      return;
+    }
+    const r = tr.bpm / TRACKS[tr.name].bpm;
+    if (Math.abs(tr.fm.src.playbackRate.value - r) > .001) tr.fm.src.playbackRate.setValueAtTime(r, now);
+    if (tr.fmLp) tr.fmLp.frequency.setTargetAtTime(fmCut(), now, .3);
+  }
+  // en mode fichier, le synthé ne joue plus que la table du casino (combat) : la bille qui roule, les jetons
+  function fmExtras(tr, step, t, d) {
+    if (tr.name !== 'combat') return;
+    const s = step % 16, D2 = dens;
+    if (D2 > .35) roulBall(tr.drum || tr.g, t, d, clamp((D2 - .35) / .35, 0, 1) * .7, s % 4 === 2);
+    if (D2 > .5 && s % 4 === 3 && ar() < .3) chipHit(tr.drum || tr.g, t, .45 + ar() * .25);
+  }
+  // au tout début d'une piste, on attend un peu le fichier (2,5 s au plus) plutôt que de commencer au synthé
+  function fmHold(tr) {
+    if (tr.fm || tr.step > 0 || !fmOn()) return false;
+    const f = fmFile(tr.name); if (!f || FM.fail[f] || FM.buf[f]) return false;
+    if (AU.ac.currentTime - (tr.t0 || 0) > 2.5) return false;
+    fmGet(f); return true;
+  }
   const TRACKS = {
     lounge: { bpm: BPM_L, sched: loungeSched, vol: .9, swing: 1 },
     final: { bpm: BPM_C, sched: finalSched, vol: 1.3, swing: 0, setup: setupFinal },
@@ -11610,13 +11741,15 @@ const Music = (() => {
     for (const k in TR) {
       const tr = TR[k];
       if (!tr.active) continue;
-      if (tr.stopAt && ac.currentTime > tr.stopAt) { tr.active = false; tr.stopAt = 0; continue; }
+      if (tr.stopAt && ac.currentTime > tr.stopAt) { tr.active = false; tr.stopAt = 0; fmStop(tr); continue; }
       if (tr.next < ac.currentTime - .1) tr.next = ac.currentTime + .05;
+      try { fmTick(tr); } catch (e) { /* le synthé prend le relais */ }
+      if (fmHold(tr)) { tr.next = ac.currentTime + .05; continue; }
       let guard = 0;
       while (tr.next < ac.currentTime + .14 && guard++ < 16) {
         const d = 60 / tr.bpm / 4, s = tr.step % 16;
         const t = tr.next + (tr.swing && s % 4 === 2 ? d * .62 * tr.swing : 0);
-        try { tr.sched(tr, tr.step, t, d); } catch (e) { /* une note ratée ne doit pas casser la boucle */ }
+        try { if (tr.fm && t >= tr.fm.at - .001) fmExtras(tr, tr.step, t, d); else tr.sched(tr, tr.step, t, d); } catch (e) { /* une note ratée ne doit pas casser la boucle */ }
         tr.step++; tr.next += d;
       }
     }
@@ -11624,6 +11757,7 @@ const Music = (() => {
   function play(name) {
     if (!AU.ac || G.headless || AU.offline) { cur = name; return; }
     if (name && !TR[name] && TRACKS[name]) mkTrack(name);
+    try { fmPrefetch(name); } catch (e) { /* rien */ }
     if (name === 'combat' || name === 'final') renderBreak();
     if (!timer) timer = setInterval(tick, 25);
     if (cur === name) return;
@@ -11633,7 +11767,7 @@ const Music = (() => {
       const tr = TR[k];
       tr.g.gain.cancelScheduledValues(t); tr.g.gain.setValueAtTime(tr.g.gain.value, t);
       if (k === name) {
-        if (!tr.active || tr.stopAt) { if (!tr.active) { tr.step = 0; tr.next = t + .08; tr.sol = null; } tr.active = true; tr.stopAt = 0; }
+        if (!tr.active || tr.stopAt) { if (!tr.active) { tr.step = 0; tr.next = t + .08; tr.sol = null; tr.t0 = t; } tr.active = true; tr.stopAt = 0; }
         tr.g.gain.setTargetAtTime(tr.vol, t, .5);
       } else if (tr.active) { tr.g.gain.setTargetAtTime(0, t, .35); tr.stopAt = t + 1.8; }
     }
@@ -11669,10 +11803,11 @@ const Music = (() => {
     resume() { if (!AU.ac || G.headless) return; const c = cur; cur = undefined; play(c === undefined ? null : c); },
     stop() { play(null); },
     setIntensity(x) { iTarget = clamp(x, 0, 1); },
-    setHarm(a, boss) { const i = clamp(a | 0, 0, HARM.length - 1); CCH = boss ? TRSP(PB, HKEY[i]) : HARM[i]; shift = 0; if (TR.combat) TR.combat.bpm = BPM_C; },
+    setHarm(a, boss) { const i = clamp(a | 0, 0, HARM.length - 1); FM.h = i; FM.boss = !!boss; CCH = boss ? TRSP(PB, HKEY[i]) : HARM[i]; shift = 0; if (TR.combat) TR.combat.bpm = BPM_C; },
     setDensity(x) { dTarget = clamp(x, 0, 1); },
     setTapis(on) { const tr = TR.combat, b = on ? Math.round(BPM_C * 1.07) : BPM_C; if (tr && tr.bpm !== b) tr.bpm = b; },
-    bossHalf() { shift = -1; },
+    bossHalf() { if (!(TR.combat && TR.combat.fm)) shift = -1; },
+    fm: FM, fmFile,
     parryNote,
     offline2,
     _inst: { chipHit, reelTick, roulBall, kaching, drum, hit, vibes, bell, pizz, chip },
@@ -15820,6 +15955,7 @@ function renderProfiles() {
     h += `<div class="pr-prog"><div class="pr-big"><b>PROGRESS</b><i class="pr-bar"><em style="width:${(P.tot * 100).toFixed(1)}%"></em></i><strong>${pctTxt(P.tot)}</strong></div>`
       + P.parts.map(([n, f, ic]) => `<div class="pr-sub"><span class="pr-ic">${iconSVG(ic)}</span><span class="pr-n">${n}</span><i class="pr-bar s"><em style="width:${(f * 100).toFixed(1)}%"></em></i><b>${pctTxt(f)}</b></div>`).join('') + '</div>';
     h += plaquesHTML(m);
+    h += achBlock(m, cur);
     h += `<div class="pr-stats"><div><b>${fmtS(P.wins)}</b><small>win${P.wins > 1 ? 's' : ''}</small></div><div><b>${fmtS(P.runs)}</b><small>run${P.runs > 1 ? 's' : ''}</small></div><div><b>${P.best ? roundLabel(P.best) : '—'}</b><small>record</small></div></div>`;
     if (cp) h += `<p class="pr-run">Run in progress: round ${roundLabel(cp.run.round + 1)}${cp.run.deck ? ' · ' + esc(deckById(cp.run.deck).name) : ''}</p>`;
     h += `<div class="pr-acts">${cur ? '<p class="pr-curb">✓ CURRENT PROFILE</p>' : '<button class="btn big gold" data-pr="use">PLAY ON THIS PROFILE</button>'}\n      <div class="pr-row">${cur ? '<button class="btn ghost small" data-pr="records">Records and save</button>' : ''}<button class="btn ghost small pr-del" data-pr="del">Erase</button></div></div>`;
@@ -18744,7 +18880,7 @@ async function lbAfterRun1(run) {
   const row = Array.isArray(r.data) ? r.data[0] : r.data; if (!row) { el.textContent = ''; return; }
   const place = +row.place, rec = +row.best === sc && +row.best_round === run.round;
   el.innerHTML = rec ? `<b>${place}<sup>${place % 100 > 10 && place % 100 < 14 ? 'th' : ['th', 'st', 'nd', 'rd'][place % 10] || 'th'}</sup></b> on the leaderboard · ${esc(S)}` : `Your record stays ${fmtS(row.best)} (round ${row.best_round}): <b>${place}<sup>${place % 100 > 10 && place % 100 < 14 ? 'th' : ['th', 'st', 'nd', 'rd'][place % 10] || 'th'}</sup></b>`;
-  if (rec && place <= 10) { el.classList.add('top'); setTimeout(() => { Snd.record(); celebrate(true); toast(place === 1 ? `1st on the ${S} leaderboard!` : `You enter the top 10 in ${S}: #${place}!`); }, 600); }
+  if (rec && place <= 10) { achGive('top10'); el.classList.add('top'); setTimeout(() => { Snd.record(); celebrate(true); toast(place === 1 ? `1st on the ${S} leaderboard!` : `You enter the top 10 in ${S}: #${place}!`); }, 600); }
 }
 
 /* ---- l'écran du classement ---- */
@@ -20759,7 +20895,7 @@ function openBar() {
   Object.assign(BAR, o, { busy: false, leaving: false, gDone: false });
   BAR.mixing = false; BAR.mixSel = null; BAR.glass = []; BAR.zmAnim = false; BAR.zmLiq = null; BAR.mixMood = rnd() < ZMIX.mood; BAR.mixLeft = BAR.mixMood ? 2 : 1;
   const r = run.round + 1;
-  BAR.market = (r >= 3 && (isBossRound(run.round) || rnd() < petMkChance(run) || (r >= 4 && !run.marketSeen)));
+  BAR.market = (r >= (run.soft ? 5 : 3) && (isBossRound(run.round) || rnd() < petMkChance(run) || (r >= (run.soft ? 5 : 4) && !run.marketSeen)));
   BAR.firstVisit = run.firstDrink;
   BAR.gambler = gamblerDue(run);
   BAR.visitor = BAR.gambler ? null : visitorDue(run);
@@ -21705,7 +21841,7 @@ const runStars = id => { const run = G.run; if (!run) return 0; const K = run.K 
 /* ---------- qui passe ce soir ? ---------- */
 function visitorDue(run) {
   const r = run.round + 1, V = run.vis || (run.vis = { last: 0, seen: {}, refused: {} });
-  if (r < 3 || r - V.last < 2) return null;
+  if (r < (run.soft ? 8 : 3) || r - V.last < 2) return null;
   if (rnd() >= (r - V.last >= 5 ? .6 : .32)) return null;
   const ids = VIS_IDS.filter(id => !(V.refused[id] && r - V.refused[id] < 4));
   if (!ids.length) return null;
@@ -23215,7 +23351,7 @@ function spellStripHTML() {
 }
 
 /* ================= options façon Balatro, statistiques de profil, infos de la partie ================= */
-const OPT_DEF = { vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1, keys: {}, quality: 'auto', qAuto: null, fps: 0 };
+const OPT_DEF = { musk: 1, cvd: 0, vol: 80, mus: 80, sfx: 80, vox: 80, amb: 70, speed: 1, shake: 100, crt: 1, parts: 1, floats: 1, bganim: 1, reduced: 0, layout: 'auto', hover: 1, autopause: 1, confirm: 1, tips: 1, keys: {}, quality: 'auto', qAuto: null, fps: 0 };
 function initOpts(m) {
   const first = !m.opts;
   m.opts = Object.assign({}, OPT_DEF, m.opts || {});
@@ -23225,7 +23361,7 @@ function initOpts(m) {
   return m;
 }
 const OPT = () => G.meta.opts || initOpts(G.meta).opts;
-function applyOpts(silent) {
+function applyOpts1(silent) {
   const o = OPT();
   G.shakeMul = o.shake / 100;
   G.reduced = !!o.reduced || G.sysReduced;
@@ -23282,6 +23418,7 @@ function renderOptions() {
     case 'audio':
       h += oRow('Master volume', oSlider('vol', o.vol));
       h += oRow('Music', oSlider('mus', o.mus));
+      h += oRow('Music style', oSeg('musk', o.musk === 0 ? 0 : 1, [[1, 'Instruments'], [0, '8 bits']]), 'Instruments: real instruments · 8-bit: the original synth music');
       h += oRow('Sound effects', oSlider('sfx', o.sfx));
       h += oRow('Voices', oSlider('vox', o.vox));
       h += oRow('Ambience', oSlider('amb', o.amb), 'bar crowd, wind, rain…');
@@ -23297,6 +23434,8 @@ function renderOptions() {
       h += oRow('Floating numbers', oTog('floats', o.floats), 'gold, healing, damage on the table');
       h += oRow('Animated background', oTog('bganim', o.bganim));
       h += oRow('Reduced motion', oTog('reduced', o.reduced), 'fewer animations');
+      h += oRow('Colorblind mode', oTog('cvd', o.cvd), 'skulls in blue, orange and pink; a family symbol on every chip');
+      if (o.cvd) h += `<p class="cvlg">${cvdLegend()}</p>`;
       break;
     case 'ctrl':
       h += `<p class="okhelp">Tap a box, then press the new key, or a mouse button (wheel, thumb buttons). <b>Esc</b> to clear it. Each action has two keys.${OPV.msg ? ` <em>${esc(OPV.msg)}</em>` : ''}</p>`;
@@ -23329,7 +23468,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music, voices and sound effects synthesized live in the browser. No sound files.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v15.2</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v15.4</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -23618,7 +23757,7 @@ function skinOf(kind) {
   return SKN[kind][id] && skinOpen(kind, id) ? id : SKIN_DEF[kind];
 }
 // quand une condition est remplie : on le dit tout de suite (toast + son)
-function checkUnlocks() {
+function checkUnlocks1() {
   if (G.headless) return;
   deckUnlocks(); machUnlocks();
   const sk = skinMeta(), fresh = [];
@@ -24229,7 +24368,7 @@ function bootShow() {
 }
 function bootTap(e) {
   e.preventDefault();
-  if (BOOT.step) { bootEnd(); return; } // un deuxième clic : on passe l'intro
+  if (BOOT.step) return; // pendant l'animation, les clics ne font rien
   bootGo();
 }
 function bootGo() {
@@ -24253,10 +24392,10 @@ function bootEnd() {
   if (!el || BOOT.done) return;
   BOOT.done = true; BOOT.on = false;
   el.removeEventListener('pointerdown', bootTap);
-  el.classList.add('out'); bootShield(1000);
+  el.classList.add('out'); bootShield(1500);
   setTimeout(() => { el.hidden = true; }, 460);
   duckMusic(false);
-  if (G.mode === 'title') titleEnter();
+  if (G.mode === 'title') { titleEnter(); setTimeout(() => { try { achCheck(); } catch (e) { /* rien */ } }, 1600); }
 }
 function titleEnter() {
   const t = $('#title'); if (!t || G.reduced) return;
@@ -24640,7 +24779,7 @@ function startRun(cp) {
     startNextRound();
     return;
   }
-  G.run = applyDeck(newRun(G.meta.stake), G.meta.deck); petStart(G.run); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
+  G.runSoft = (G.meta.runs || 0) < 2 && !G.dailyGo && !G.headless; G.run = applyDeck(newRun(G.meta.stake), G.meta.deck); G.runSoft = false; petStart(G.run); G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
   const cb = newCombat(); cb.stats = computeStats(G.run); cb.sc = roundScale(G.run, 1); cb.ended = true; G.cb = cb;
   if (!hasDeck(G.run, 'sorts')) { catSee('q', 'bomb'); catSee('q', 'gel'); }
   renderRack(); renderSpellBar(); updateHUD();
@@ -24765,7 +24904,7 @@ function endRun(cashed) {
   $('#o-jetp').hidden = !unl; $('#o-jet').textContent = unl ? `${STAKES[dw1].name} unlocked with ${deckById(run.deck).name}!` : '';
   show('#over', true);
   overFx(cashed, run);
-  lbAfterRun(run);
+  lbAfterRun(run); achCheck();
   Music.play('lounge'); duckMusic(false); BG.setMode('over');
   setTimeout(() => Snd.jetons(), 700);
 }
@@ -25113,7 +25252,7 @@ function mouseKeysBind() {
   addEventListener('pointerup', e => { if (e.button >= 3) e.preventDefault(); }, true);
 }
 function keyDown(e) {
-  if (BOOT.on) { e.preventDefault(); if (BOOT.step) bootEnd(); else bootGo(); return; }
+  if (BOOT.on) { e.preventDefault(); if (!BOOT.step) bootGo(); return; }
   firstGesture();
   // Options › Contrôles : on attend la nouvelle touche (Échap efface)
   if (OPV.bind) {
@@ -25946,7 +26085,7 @@ function evPlanBlock(run, b) {
   const n = r => r >= 50 ? 2 : 1;
   if (stakeHas(run, ST.CHAOS)) for (const r of ok) P[r] = n(r);
   else {
-    const want = b === 0 ? [4, 7, 9] : [r0 + 2, r0 + 5, r0 + 8];
+    const want = b === 0 ? (run.soft ? [7, 9] : [4, 7, 9]) : [r0 + 2, r0 + 5, r0 + 8];
     for (const r of want) if (ok.includes(r)) P[r] = n(r);
   }
   // une vague spéciale par tranche, sans annonce (de préférence hors des manches de jeu)
@@ -28438,7 +28577,7 @@ function gntPlanBlock(run, b) {
   P['b' + b] = 1;
   const r0 = b * 10 + 1, ok = [];
   for (let r = r0; r < r0 + 10; r++) if (r >= 6 && !isBossRound(r)) ok.push(r);
-  if (!ok.length) return;
+  if (!ok.length || (run.soft && b === 0)) return;
   const E = run.evPlan || {}, W = run.waves || {};
   let cand = ok.filter(r => !E[r] && !W[r]);
   if (!cand.length) cand = ok.filter(r => !E[r]);
@@ -30319,7 +30458,8 @@ function startDaily() {
     const m = G.meta, save = { stake: m.stake, deck: m.deck, pet: m.pet }, k = dayKey();
     m.stake = 0; m.deck = 'coffre'; m.pet = '';
     srand(daySeed(k));
-    try { startRun(null); } finally { m.stake = save.stake; m.deck = save.deck; m.pet = save.pet; saveMeta(); }
+    G.dailyGo = 1;
+    try { startRun(null); } finally { G.dailyGo = 0; m.stake = save.stake; m.deck = save.deck; m.pet = save.pet; saveMeta(); }
     if (G.run) G.run.daily = k;
     dbg('daily_start');
   };
@@ -30626,7 +30766,7 @@ function dailyTitle() {
 // le premier clic : on explique avant de lancer
 function dailyClick() {
   firstGesture();
-  if (tutoNeed() || (G.meta.daily && G.meta.daily.seen)) { startDaily(); return; }
+  if (tutoNeed()) { startDaily(); return; }
   let ov = $('#dhelp');
   if (!ov) { ov = document.createElement('section'); ov.id = 'dhelp'; ov.className = 'full lbn'; document.body.appendChild(ov); }
   ov.innerHTML = `<div class="fi"><div class="panel lbn-box dh-box">\n      <h2 class="lbn-t dh-t">DAILY CHALLENGE</h2>\n      <ul class="dh-l">\n        <li><b>One run, the same for everyone</b> today.</li>\n        <li>White stake, same machine, same events.</li>\n        <li>Get the best score: <b>today's leaderboard</b>. New challenge at midnight.</li>\n      </ul>\n      <div class="lbn-row"><button class="btn big red" id="dh-go">PLAY THE CHALLENGE</button></div>\n      <button class="btn ghost small" id="dh-lb">Today's leaderboard</button>\n      <button class="btn ghost small" id="dh-x">Back</button>\n    </div></div>`;
@@ -30669,6 +30809,116 @@ async function lbRender() {
   if (row) dlbRemember(k, row);
   if (meEl && me) meEl.innerHTML = row ? `<span class="lb-pl">${row.place}</span><span class="lb-ps"><b>You</b> · ${esc(me.pseudo)}</span><span class="lb-sc">${fmtS(row.best)}</span><span class="lb-rd">${row.best_round}</span>` : 'Not played yet today.';
 }
+
+
+/* ================= v15.3 · succès, mode daltonien (les premières parties allégées sont dans le patch) ================= */
+
+/* ---------- les succès : dans PROFIL, annoncés quand on les débloque (ids prêts pour Steam : ACH_<ID>) ---------- */
+const achL = m => (m && m.life) || {};
+const achEv = (m, k) => (m && m.achEv && m.achEv[k]) ? 1 : 0;
+const ACH = [
+  ['manche', 'flipper', 'First steps', 'Win your first round.', m => achL(m).rounds, 1],
+  ['tuto', 'chapeau', 'Good student', 'Finish Gaston\'s tutorial.', m => m.tuto === 'done' ? 1 : 0, 1],
+  ['boss', 'couronne', 'First boss', 'Beat a boss.', m => achL(m).bossKills, 1],
+  ['acte2', 'coeur', 'The Hearts', 'Reach round 6.', m => m.best, 6],
+  ['m15', 'trefle', 'Halfway there', 'Reach round 15.', m => m.best, 15],
+  ['m25', 'chapeau', 'Backstage', 'Reach round 25.', m => m.best, 25],
+  ['victoire', 'trophee', 'Broke the bank', 'Win a run (beat the Baron at round 30).', m => m.wins, 1],
+  ['victoires', 'trophee', 'Loyal customer', 'Win 10 runs.', m => m.wins, 10],
+  ['infini', 'roue', 'Rien ne va plus', 'Reach round 40 in endless rounds.', m => m.best, 40],
+  ['infini2', 'chronos', 'Endless', 'Reach round 50.', m => m.best, 50],
+  ['mises', 'ticket', 'High roller', 'Unlock the black stake.', m => m.stakeMax, 3],
+  ['mise_or', 'star', 'Golden felt', 'Unlock the gold stake.', m => m.stakeMax, 7],
+  ['baron', 'cartes', 'The Baron, fleeced', 'Beat the Baron at poker.', m => achL(m).gWins, 1],
+  ['k1000', 'cible', 'Croupier', 'Down 1,000 cards.', m => achL(m).kills, 1000],
+  ['k10000', 'cible', 'Pit boss', 'Down 10,000 cards.', m => achL(m).kills, 10000],
+  ['parade', 'renvoi', 'Velvet hands', 'Land 100 parries.', m => achL(m).parries, 100],
+  ['parade2', 'renvoi', 'The wall', 'Land 1,000 parries.', m => achL(m).parries, 1000],
+  ['bille', 'bille', 'Sharpshooter', 'Launch 300 BALLS.', m => achL(m).billes, 300],
+  ['triple', 'triple20', 'Jackpot!', 'Line up 3 identical chips on the machine.', m => achL(m).triples, 1],
+  ['triple2', 'triple20', 'Slot machine', 'Line up 50 triples.', m => achL(m).triples, 50],
+  ['pile', 'double', 'Chip stack', 'Stack 25 chips.', m => achL(m).stacks, 25],
+  ['bar', 'cocktail', 'Bar regular', 'Drink 50 drinks at Zaza\'s.', m => achL(m).drinks, 50],
+  ['jeux', 'roulette', 'La Maison\'s table', 'Win 10 of La Maison\'s games.', m => achL(m).gamesWon, 10],
+  ['ruine', 'malus', 'Get the umbrella out', 'Survive a round of Ruin.', m => achL(m).devast, 1],
+  ['plaque', 'couronne', 'Gold plaque', 'Earn a gold plaque (perfect success at one of La Maison\'s games).', m => Object.keys(m.plaques || {}).filter(k => EVENTS[k]).length, 1],
+  ['plaques', 'couronne', 'Wall of plaques', 'Earn every gold plaque.', m => Object.keys(m.plaques || {}).filter(k => EVENTS[k]).length, PLAQUES_MAX],
+  ['secret', 'punchm', 'Trade secret', 'Discover a secret rarity at the Punch-o-matic.', m => Object.keys(m.secrets || {}).length, 1],
+  ['secrets', 'punchm', 'The big secret', 'Discover 50 secrets.', m => Object.keys(m.secrets || {}).length, 50],
+  ['cata', 'livre', 'Collector', 'Fill half of Anatole\'s catalogue.', m => m === G.meta ? Math.floor(catCount().n * 100 / Math.max(1, catCount().tot)) : 0, 50],
+  ['cata2', 'livre', 'Anatole is jealous', 'Fill the whole catalogue.', m => m === G.meta ? Math.floor(catCount().n * 100 / Math.max(1, catCount().tot)) : 0, 100],
+  ['amis', 'oeilnox', 'Friend of the regulars', 'Get the gifts from Dina, Momo and Madame Nox.', m => ['dina', 'momo', 'nox'].filter(k => m.gifts && m.gifts[k]).length, 3],
+  ['defi', 'ticket', 'Challenge accepted', 'Finish a daily challenge.', m => Object.keys((m.daily && m.daily.best) || {}).length, 1],
+  ['serie', 'chronos', 'A week at the casino', 'Play the daily challenge 7 days in a row.', m => (m.daily && m.daily.streak) || 0, 7],
+  ['top10', 'couronne', 'Top 10', 'Make the top 10 of an online leaderboard.', m => achEv(m, 'top10'), 1],
+  ['heures', 'horloger', 'Casino fixture', 'Play for 10 hours.', m => Math.floor((achL(m).time || 0) / 3600), 10],
+].map(([id, ic, n, d, v, goal]) => ({ id, steam: 'ACH_' + id.toUpperCase(), ic, n, d, v, goal }));
+const achGot = (m, id) => !!(m && m.ach && m.ach[id]);
+const achN = m => ACH.filter(a => achGot(m, a.id)).length;
+const ACHQ = { q: [], t: null };
+function achGive(id) { const m = G.meta; m.achEv = m.achEv || {}; if (m.achEv[id]) return; m.achEv[id] = 1; saveMeta(); achCheck(); }
+// on regarde ce qui vient d'être rempli ; l'annonce passe par la petite bannière du bas
+function achCheck(o) {
+  const m = G.meta; if (!m || G.headless) return [];
+  m.ach = m.ach || {};
+  const fresh = [];
+  for (const a of ACH) { if (m.ach[a.id]) continue; let v = 0; try { v = +a.v(m) || 0; } catch (e) { v = 0; } if (v >= a.goal) { m.ach[a.id] = Date.now(); fresh.push(a); } }
+  if (!fresh.length) return fresh;
+  saveMeta();
+  if (o && o.silent) return fresh;
+  if (fresh.length > 2) achShow(`${fresh.length} ACHIEVEMENTS UNLOCKED`, 'Check them in PROFILE');
+  else for (const a of fresh) achShow('ACHIEVEMENT', a.n, a.ic);
+  return fresh;
+}
+function achShow(top, name, ic) {
+  ACHQ.q.push([top, name, ic]);
+  if (!ACHQ.t) achNext();
+}
+function achNext() {
+  const it = ACHQ.q.shift(); if (!it) { ACHQ.t = null; return; }
+  let el = $('#achpop'); if (!el) { el = document.createElement('div'); el.id = 'achpop'; el.className = 'achpop'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
+  el.innerHTML = `<span class="ap-ic">${iconSVG(it[2] || 'trophee')}</span><span><small>${esc(it[0])}</small><b>${esc(it[1])}</b></span>`;
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  try { Snd.record(); } catch (e) { /* rien */ }
+  ACHQ.t = setTimeout(() => { el.classList.remove('show'); ACHQ.t = setTimeout(achNext, 350); }, 2800);
+}
+function checkUnlocks() { checkUnlocks1(); achCheck(); }
+// le bloc dans PROFIL
+function achBlock(m, cur) {
+  const n = achN(m), tot = ACH.length;
+  return `<div class="pr-ach"><h5><span>ACHIEVEMENTS</span><b>${n}/${tot}</b></h5><i class="pr-bar"><em style="width:${(n * 100 / tot).toFixed(1)}%"></em></i>${cur ? '<button class="btn small gold" data-achopen="1">See achievements</button>' : ''}</div>`;
+}
+function achOpen() {
+  achCheck({ silent: true });
+  let ov = $('#achs');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'achs'; ov.className = 'full achs'; document.body.appendChild(ov); }
+  const m = G.meta, n = achN(m);
+  ov.innerHTML = `<div class="fi ach-fi"><div class="ach-head"><h2 class="ach-t">${iconSVG('trophee')}ACHIEVEMENTS <b>${n}/${ACH.length}</b></h2><button class="btn ghost small" id="ach-x">Back</button></div>\n    <ul class="ach-list">${ACH.map(a => {
+      const got = achGot(m, a.id); let v = 0; try { v = Math.min(a.goal, +a.v(m) || 0); } catch (e) { v = 0; }
+      return `<li class="ach-it${got ? ' got' : ''}"><span class="ach-ic">${iconSVG(a.ic)}</span><span class="ach-tx"><b>${esc(a.n)}</b><small>${esc(a.d)}</small></span><span class="ach-st">${got ? '✓' : a.goal > 1 ? `${fmtS(v)} / ${fmtS(a.goal)}` : ''}</span>${!got && a.goal > 1 ? `<i class="ach-bar"><em style="width:${(v * 100 / a.goal).toFixed(1)}%"></em></i>` : ''}</li>`;
+    }).join('')}</ul></div>`;
+  ov.hidden = false; Snd.pop();
+  $('#ach-x').onclick = () => { ov.hidden = true; Snd.click(); };
+}
+document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('[data-achopen]'); if (t) { e.preventDefault(); achOpen(); } });
+document.addEventListener('keydown', e => { const ov = $('#achs'); if (ov && !ov.hidden && e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); ov.hidden = true; } }, true);
+
+/* ---------- mode daltonien : couleurs des crânes plus distinctes, et un symbole par famille sur les jetons ---------- */
+const FAMG = { elem: '▲', balle: '●', astro: '★', gal: '☾', myth: '◆', jeux: '♣', flip: '■', base: '✚', chance: '♥', malus: '✖', mult: '▼', vois: '◐' };
+const TIER_COL0 = { 1: TIERS[1].col, 2: TIERS[2].col, 3: TIERS[3].col };
+const TIER_CVD = { 1: '#56b4e9', 2: '#e69f00', 3: '#ff4fd8' };
+const famGlyph = id => { const J = JK[id]; return J && FAMG[J.cat] ? `<span class="fm" aria-hidden="true">${FAMG[J.cat]}</span>` : ''; };
+let CVD_ON = null;
+function cvdApply() {
+  const on = !!OPT().cvd;
+  document.body.classList.toggle('cvd', on);
+  if (on === CVD_ON) return;
+  CVD_ON = on;
+  for (const t of [1, 2, 3]) TIERS[t].col = on ? TIER_CVD[t] : TIER_COL0[t];
+  try { if (G.run) { renderRack(); updateHUD(); } } catch (e) { /* rien */ }
+}
+function applyOpts(silent) { applyOpts1(silent); cvdApply(); }
+const cvdLegend = () => CAT_ORDER.map(f => `<span class="cvl">${FAMG[f]} ${esc(CATS[f].s)}</span>`).join(' ');
 
 
 /* ---------- boucle ---------- */

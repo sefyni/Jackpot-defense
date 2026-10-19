@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.2-202610192330
+JACKPOT DEFENSE v15.4-202610200130
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,32 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.4 — les musiques en vrais instruments
+- Toutes les musiques sont rejouées avec de vrais instruments (contrebasse, piano, Rhodes, saxophone, trompette,
+  cuivres, cordes, clarinette, accordéon, orgue, guitares, batteries…). Mêmes morceaux, mêmes accords,
+  même thème Jackpot. Le combat suit toujours la partie : un morceau par acte et par boss, le TAPIS accélère,
+  la table qui se remplit ouvre le son, la bille de roulette et les jetons claquent par-dessus.
+- Les musiques sont dans le dossier « music » : mets-le bien en ligne AVEC index.html et en.html.
+  (S'il manque, le jeu reprend tout seul la musique 8 bits.)
+- OPTIONS > Audio > « Style de musique » : Instruments (nouveau) ou 8 bits (la musique synthé d'origine).
+- DÉFI DU JOUR : la petite fenêtre qui explique le défi s'ouvre maintenant à chaque clic.
+- Lancement : pendant l'animation de l'intro, les clics et les touches ne font plus rien. L'animation va jusqu'au
+  bout, l'écran titre arrive, puis on peut toucher.
+- La version PC (.exe) passe aussi en v15.4.
+
+Nouveautés de la v15.3 — premières parties allégées, succès, mode daltonien
+- Tes 2 premières parties sont plus douces, pour découvrir le jeu petit à petit : le marché noir arrive à partir
+  de la manche 5, les jeux de la Maison à partir de la 7 (manches 7 et 9), les visiteurs (Dina, Momo, Madame Nox)
+  à partir de la 8, et le 1er Géant après la manche 10. Ensuite, le jeu reprend son rythme normal.
+  Le défi du jour n'est jamais allégé (même partie pour tout le monde).
+- 35 SUCCÈS : PROFIL > « Voir les succès ». Une petite annonce en bas de l'écran quand tu en débloques un.
+  Ceux que tu as déjà mérités se débloquent tout seuls au lancement. (Ils serviront aussi pour Steam.)
+- Mode daltonien : OPTIONS > Graphismes > « Mode daltonien ». Les crânes passent en bleu / orange / rose
+  (au lieu de vert / orange / rouge) et chaque jeton porte le symbole de sa famille (▲ Élémentaire, ● Balle,
+  ★ Signe astro, ☾ Galactique, ◆ Mythologique, ♣ Jeux de bar, ■ Flipper, ✚ Base, ♥ Chance, ✖ Malus,
+  ▼ Multiplicateur, ◐ Voisins).
+- La version PC (.exe) passe aussi en v15.3.
 
 Nouveautés de la v15.2 — le défi du jour, le carnet, le premier lancement
 - Défi du jour : un vrai défi. Au premier clic, une petite fenêtre explique le principe en 3 lignes
@@ -85,7 +111,7 @@ end $function$;
 
 Nouveautés de la v15.1 — le jeu en anglais
 - Le jeu existe maintenant en anglais. Deux pages, le même jeu : index.html (français) et en.html (anglais).
-  Mets bien les DEUX fichiers en ligne.
+  Mets bien les DEUX fichiers en ligne (et le dossier music).
 - Au tout premier lancement, le jeu prend la langue du téléphone ou du PC : français si l'appareil est en
   français, anglais sinon. Ensuite, OPTIONS › Jeu › « Langue · Language » : Français / English.
 - Même sauvegarde, même classement dans les deux langues : on peut changer de langue quand on veut.
