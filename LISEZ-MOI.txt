@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.5-202610200200
+JACKPOT DEFENSE v15.6-202610201900
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,22 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.6 — le Baron, le clic dans les jeux, Gaston, les places de jeton, le Disque rayé
+- Le Baron (manche 30) : il s'installe 3 fois plus vite (≈ 3 s) ; pendant ce temps, ton canon attend (il était
+  invincible). Une bannière « LE BARON EST À SA TABLE » lance le combat : canon, sorts, BILLE.
+  Sa salve ne te tue plus d'un coup : chaque tir fait 40 % de moins, et jamais plus de 12 % de tes PV max
+  (avant : 3 tirs d'environ 40 dégâts en moins d'une demi-seconde).
+- Jeux de la Maison au clic (souris ou doigt) : Blackjack (touche une carte cachée pour tirer), Quitte ou double
+  (touche la mise pour encaisser), Bandit manchot (touche un rouleau pour l'arrêter), Dés pipés (touche un dé pour
+  le relancer). La BILLE garde un bonus : +50 % au Quitte ou double, jamais de crâne au Bandit.
+- Gaston : une fois par partie (au plus tôt 3 manches après l'achat), il peut filer au marché noir avec 20 % de ton
+  or (60 au plus). Il y revient à moitié prix (« DE RETOUR · −50 % ») ; racheté, il ne repart plus.
+- Les places de jeton à gagner ont de vrais badges : 3 trèfles (vert), l'étiquette du marché noir (or), la
+  contrefaçon de l'Inspecteur (violet), avec un petit cadenas.
+- Disque rayé : il relance maintenant TOUS les sorts (sorts de famille, sorts fous…), avec un gros « ENCORE ! ».
+  C'est un jeton ULTRA FOU : 4 fois plus rare.
+- Musiques « Instruments » 40 % moins fortes, sous les bruitages du jeu.
 
 Nouveautés de la v15.5 — la musique de combat « casino »
 - Nouvelle musique de combat, plus simple et plus « casino » : piano jazz piqué, vibraphone, bille de roulette,

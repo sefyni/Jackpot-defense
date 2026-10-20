@@ -3640,6 +3640,26 @@ body.tuto #lp-roundbox,body.tuto #lp-tags,body.tuto #lp-score,body.tuto #h-round
 #banner.gt::after{animation-direction:reverse}
 @keyframes gtSlide{to{background-position:28px 0}}
 @media (prefers-reduced-motion:reduce){#banner.gt::before,#banner.gt::after{animation:none}}
+/* v15.6 · les places de jeton à gagner : de petits badges dessinés */
+.slot.locked .lk{display:grid;place-items:center}
+.lkb{position:relative;display:flex;align-items:center;justify-content:center;width:min(44px,88%);aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.22),inset 0 -4px 0 rgba(0,0,0,.3),0 3px 0 rgba(0,0,0,.4);color:#fff}
+.lkb>.ico{flex:none;width:58%;height:58%}
+.lkb.lkb-cl{background:radial-gradient(circle at 35% 30%,#7fe8a5,#2c9a5c 60%,#14502e)}
+.lkb.lkb-cl .tri{position:relative;width:76%;height:76%}
+.lkb.lkb-cl .tri .ico{position:absolute;width:52%;height:52%;color:#eafff0;filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))}
+.lkb.lkb-cl .tri .ico:nth-child(1){left:24%;top:2%}
+.lkb.lkb-cl .tri .ico:nth-child(2){left:0;top:44%}
+.lkb.lkb-cl .tri .ico:nth-child(3){left:48%;top:44%}
+.lkb.lkb-mk{background:radial-gradient(circle at 35% 30%,#ffe9a6,#e0a32a 60%,#7a4e0c);color:#fffbe8}
+.lkb .ico{filter:drop-shadow(0 1px 0 rgba(0,0,0,.4))}
+.lkb.lkb-sc{background:radial-gradient(circle at 35% 30%,#d9b8ff,#7a4fd0 60%,#3a1f70);color:#f4eaff}
+.lkb .lkp{position:absolute!important;right:-12%;bottom:-10%;width:46%;height:46%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))}
+.lkb .lkt{position:absolute!important;left:-14%;bottom:-8%;padding:0 3px;border-radius:5px;background:#2a1a08;color:#ffcc4d;font:700 9px/1.4 var(--f-pix);box-shadow:0 0 0 1px #ffcc4d}
+#rack-slots .slot.locked{opacity:1}
+.slot.locked .sinfo small{color:rgba(255,243,230,.7)}
+/* v15.6 · l'annonce de Gaston */
+.achpop.np{box-shadow:inset 0 0 0 2px #d9a35b,0 6px 0 rgba(0,0,0,.45);background:#24180c}
+.achpop.np small{color:#d9a35b}
 /* v15.3 · succès (bloc PROFIL, liste, annonce) */
 .pr-ach{margin:12px 0 0;padding:10px 12px 12px;border-radius:12px;background:rgba(0,0,0,.24);box-shadow:inset 0 0 0 2px rgba(255,204,77,.18);display:flex;flex-direction:column;gap:8px}
 .pr-ach h5{margin:0;display:flex;justify-content:space-between;gap:8px;font:700 13px var(--f-pix);letter-spacing:.08em;color:#ffcc4d}
@@ -4327,7 +4347,7 @@ body.cvd .mcard.t3 .skull{color:#ff4fd8}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v15.5</p>
+  <p class="proto">Sefy Industries · v15.6</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -5253,7 +5273,7 @@ const FOU9 = [
   { id: "copiercoller", n: "Copier-coller", g: 0, l: "Ctrl+V", p: "Au début de chaque manche, il devient une copie à 100 % du dernier jeton que tu as vendu.", x: "copie les deux derniers vendus" },
   { id: "introuvable", n: "Introuvable", g: 0, l: "404", p: "Les cartes perdent ta trace : 30 % de leurs tirs partent au hasard, et chaque carte hésite 1 s en entrant sur la table.", x: "60 % des tirs" },
   { id: "tampon", n: "Mémoire tampon", g: 0, l: "+1 place", p: "+1 place de jeton, même au-delà de 8. Une fois pris, il devient un jeton bonus : il ne prend pas de place.", x: "+2 places" },
-  { id: "disque", n: "Disque rayé", g: 0, l: "encore", p: "Chaque sort que tu lances se relance tout seul 2 s plus tard, gratuitement.", x: "il se relance deux fois" },
+  { id: "disque", n: "Disque rayé", g: 0, l: "encore", ultra: true, p: "ULTRA FOU, très rare. Chaque sort que tu lances se relance tout seul 2 s plus tard, gratuitement.", x: "il se relance deux fois" },
   { id: "avion", n: "Mode avion", g: 0, l: "hors ligne", p: "Déconnecté : les sorts ennemis (Inversion, Silence, Leurre…) ne t'atteignent plus.", x: "et chaque tirage à la machine a un crâne de moins" },
   { id: "instable", n: "Fichier instable", g: 0, l: "×2 ?", p: "Chaque manche, un jeton de ton rack au hasard fait ×2 ; celui de la manche d'avant ne fait plus que ×0,75.", x: "×3, et plus de baisse" },
   { id: "overclock", n: "Overclock", g: 1, l: "+100 %", p: "Cadence +100 %, mais le canon surchauffe : toutes les 10 s, il s'arrête 2 s.", x: "+200 %, arrêt 3 s" },
@@ -9117,7 +9137,7 @@ function bugRoll(g) {
   for (let i = 0; i < 3; i++) {
     if (g === 0 && rnd() < 1 / 6) { line.push('err'); continue; }
     const prev = line.filter(x => x !== 'err');
-    line.push(prev.length && rnd() < dup ? pick(prev) : pick(ids));
+    line.push(prev.length && rnd() < dup ? pick(prev) : fouPick(ids));
   }
   return line;
 }
@@ -9838,13 +9858,13 @@ const EVENTS = {
   happyhour: { name: 'Happy Hour', icon: 'cocktail', col: '#ff7eb6', salle: 1, from: 3, rule: 'Des shots sur la table : bois-les à la bille.', txt: 'Zaza fait glisser des shots sur la table. Touche-en un avec ta BILLE : 8 s de bonus (tirs de feu, cartes ralenties, or ×2 ou cadence ×1,6). Une carte qui marche dessus le boit et devient ivre : elle zigzague, va plus vite et frappe plus fort.', plaque: '6 shots bus, aucun pour les cartes' },
   tierce: { name: 'Le Tiercé', icon: 'tierce', col: '#5fd68a', salle: 1, from: 3, rule: 'Parie sur un cheval. Bille sur les autres : ils freinent.', txt: 'Choisis un cheval : le favori paie ×2, le deuxième ×3, le tocard ×6. Ils font 2 tours de table. Ta BILLE freine les autres chevaux, et donne un coup de fouet au tien.', plaque: 'gagner avec le tocard' },
   // v14.5 · le Salon Privé (manches 11 à 20)
-  blackjack: { name: 'Blackjack', icon: 'blackjack', col: '#ff9a3d', salle: 2, from: 11, excl: ['bonneteau', 'tierce', 'jackpot'], rule: 'Bille sur une carte cachée : tu tires. Fais 21 !', txt: "Le croupier te donne 2 cartes et pose 5 cartes cachées. Tape-en une avec ta BILLE : tu tires. Lui tire toutes les 2,5 s jusqu'à 17. 21 pile = BLACKJACK (or ×2, +0,5 MULT) ; plus près de 21 que lui = de l'or. Plus de 21 (BUST), ou s'il gagne : toutes les cartes de la table prennent un bouclier. 3 mains par manche.", plaque: '3 mains gagnées' },
+  blackjack: { name: 'Blackjack', icon: 'blackjack', col: '#ff9a3d', salle: 2, from: 11, excl: ['bonneteau', 'tierce', 'jackpot'], rule: 'Touche une carte cachée (ou BILLE) : tu tires. Fais 21 !', txt: "Le croupier te donne 2 cartes et pose 5 cartes cachées. Tape-en une avec ta BILLE : tu tires. Lui tire toutes les 2,5 s jusqu'à 17. 21 pile = BLACKJACK (or ×2, +0,5 MULT) ; plus près de 21 que lui = de l'or. Plus de 21 (BUST), ou s'il gagne : toutes les cartes de la table prennent un bouclier. 3 mains par manche.", plaque: '3 mains gagnées' },
   poker: { name: 'Main de poker', icon: 'poker', col: '#4fd8ff', salle: 2, from: 11, rule: 'Abats les 5 cartes de la main en 3 s : MULT !', txt: "Toutes les 9 s, le croupier distribue 5 cartes d'un coup : une vraie main (paire, brelan, full…). Abats les 5 en moins de 3 s (le chrono part au premier kill) : la main rapporte du MULT, de +0,5 (paire) à +3 (carré). 3 mains par manche.", plaque: '3 mains sur 3' },
-  quitte: { name: 'Quitte ou double', icon: 'doubleourien', col: '#ffcc4d', salle: 2, from: 11, rule: 'La mise double toutes les 8 s. Bille dessus : tu encaisses.', txt: "Une mise est posée sur la table. Toutes les 8 s, la Maison la double (×2, ×4, ×8) et lâche un paquet de cartes. Tape la mise avec ta BILLE pour encaisser. Si ta base passe sous 30 % de PV avant, tout est perdu. Après ×8, la Maison rafle tout.", plaque: 'encaisser à ×8' },
+  quitte: { name: 'Quitte ou double', icon: 'doubleourien', col: '#ffcc4d', salle: 2, from: 11, rule: 'La mise double toutes les 8 s. Touche-la pour encaisser (BILLE : +50 %).', txt: "Une mise est posée sur la table. Toutes les 8 s, la Maison la double (×2, ×4, ×8) et lâche un paquet de cartes. Tape la mise avec ta BILLE pour encaisser. Si ta base passe sous 30 % de PV avant, tout est perdu. Après ×8, la Maison rafle tout.", plaque: 'encaisser à ×8' },
   jackpot: { name: 'Jackpot progressif', icon: 'jackpot', col: '#ff4fd8', salle: 2, from: 11, rule: 'Chaque carte abattue fait monter le jackpot. Un coup reçu : 0.', txt: "Un compteur LED monte à chaque carte abattue. Chaque coup reçu par ta base le remet à 0. À la fin de la manche, tu touches le compteur en or.", plaque: 'une manche sans coup reçu' },
   // v14.6 · les Coulisses (manches 21 à 30)
-  bandit: { name: 'Bandit manchot', icon: 'bandit', col: '#ffd23f', salle: 3, from: 21, excl: ['blackjack', 'jackpot', 'tierce', 'bonneteau'], rule: 'Chaque bande prend l\'effet de son rouleau. Ta BILLE l\'arrête !', txt: "La table est coupée en 3 bandes, un rouleau en haut de chacune. Toutes les 7 s, le croupier tire le levier : les rouleaux s'arrêtent un par un, ou dès que ta BILLE les touche (jamais sur un crâne, souvent sur un 7). Chaque bande prend l'effet de son symbole : 7 = or ×2, cerise = cartes ralenties, BAR = dégâts ×1,5, crâne = cartes plus rapides. 777 = JACKPOT (or + 1 MULT) ; 3 cerises = gel ; 3 BAR = +0,5 MULT ; 3 crânes = 3 cartes.", plaque: 'faire 777' },
-  des: { name: 'Dés pipés', icon: 'des', col: '#ff5c6c', salle: 3, from: 21, rule: '7 ou 11 = de l\'or. Ta BILLE relance un dé.', txt: "Toutes les 5 s, le croupier lance 2 dés géants : ils roulent et écrasent les cartes. Une fois arrêtés : 7 ou 11 = de l'or, un double = +0,3 MULT, 2 ou 12 = 3 cartes sortent des dés. Tu as 1,3 s pour relancer un dé avec ta BILLE (même arrêté). 8 lancers par manche.", plaque: '5 fois 7 ou 11' },
+  bandit: { name: 'Bandit manchot', icon: 'bandit', col: '#ffd23f', salle: 3, from: 21, excl: ['blackjack', 'jackpot', 'tierce', 'bonneteau'], rule: 'Chaque bande prend l\'effet de son rouleau. Touche-le pour l\'arrêter (BILLE : jamais de crâne).', txt: "La table est coupée en 3 bandes, un rouleau en haut de chacune. Toutes les 7 s, le croupier tire le levier : les rouleaux s'arrêtent un par un, ou dès que ta BILLE les touche (jamais sur un crâne, souvent sur un 7). Chaque bande prend l'effet de son symbole : 7 = or ×2, cerise = cartes ralenties, BAR = dégâts ×1,5, crâne = cartes plus rapides. 777 = JACKPOT (or + 1 MULT) ; 3 cerises = gel ; 3 BAR = +0,5 MULT ; 3 crânes = 3 cartes.", plaque: 'faire 777' },
+  des: { name: 'Dés pipés', icon: 'des', col: '#ff5c6c', salle: 3, from: 21, rule: '7 ou 11 = de l\'or. Touche un dé (ou BILLE) : il se relance.', txt: "Toutes les 5 s, le croupier lance 2 dés géants : ils roulent et écrasent les cartes. Une fois arrêtés : 7 ou 11 = de l'or, un double = +0,3 MULT, 2 ou 12 = 3 cartes sortent des dés. Tu as 1,3 s pour relancer un dé avec ta BILLE (même arrêté). 8 lancers par manche.", plaque: '5 fois 7 ou 11' },
   casse: { name: 'Le Casse', icon: 'casse', col: '#7fd1ff', salle: 3, from: 21, excl: ['quitte'], rule: 'Abats les 3 vigiles, puis ouvre le coffre avant qu\'il sorte !', txt: "Un coffre traverse la table, escorté par 3 vigiles. Tant qu'un vigile vit, il est intouchable. Ouvre-le avant qu'il sorte de l'autre côté : un gros paquet d'or. Ta BILLE lui fait ×3.", plaque: 'l\'ouvrir en moins de 15 s' },
   allin: { name: 'Tapis !', icon: 'tapisev', col: '#ff3d5a', salle: 3, from: 21, rule: '20 s : tout fonce, mais chaque carte paie ×3.', txt: "Pendant 20 s, la Maison envoie tout : toutes les cartes foncent droit sur toi (même celles qui tirent de loin), et elle en rajoute quand la donne est finie. Mais chaque carte abattue paie ×3 en or.", plaque: '25 cartes pendant le Tapis' },
 };
@@ -10094,7 +10114,10 @@ function sellValue(j) {
 const freeSlots = () => effSlots(G.run) - G.run.jokers.length;
 const jokerTypes = j => j.kind === 'faux' ? [] : j.parts.map(p => p.t);
 
-const fousPool = () => FOUS.concat(GIFT_FOUS.filter(id => G.meta.gifts && G.meta.gifts[JK[id].gift]));
+const fousPool = () => FOUS.concat(GIFT_FOUS.filter(id => G.meta.gifts && G.meta.gifts[JK[id].gift])).filter(id => !FOU_ULTRA.includes(id) || rnd() < .25);
+// v15.6 : les fous « ultra » (le Disque rayé) sortent 4 fois moins souvent
+const FOU_ULTRA = ['disque'];
+const fouPick = ids => wpick(ids, ids.map(id => FOU_ULTRA.includes(id) ? .25 : 1));
 /* ---------- empiler deux jetons du même joker ---------- */
 /* ---------- les doublons : rien ne se perd ----------
    Un doublon (même type qu'un de tes jetons) s'empile : les niveaux s'additionnent (commun + commun = rare…).
@@ -11618,7 +11641,7 @@ const Music = (() => {
      Le synthé reste en secours : tant qu'un fichier n'est pas prêt (ou si OPTIONS › Audio › Musique = 8 bits), il joue.
      Le combat : un fichier par harmonie d'acte (combat_0…5) et par boss (combat_b0/2/3/5) ; le TAPIS accélère le fichier ;
      l'intensité ouvre un filtre ; la bille de roulette et les jetons (synthé) restent par-dessus, calés sur la grille. */
-  const FMAN = {"bar":{"loop":60.952381,"pad":1.0,"bpm":126,"g":2.498},"baron":{"loop":53.333333,"pad":1.0,"bpm":108,"g":0.61},"combat_0":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.458},"combat_2":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.482},"combat_3":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.484},"combat_5":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.489},"combat_b0":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.47},"combat_b2":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.482},"combat_b3":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.488},"combat_b5":{"loop":30.0,"pad":1.0,"bpm":128,"g":2.523},"dina":{"loop":45.714286,"pad":1.0,"bpm":168,"g":3.373},"final_1":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.972},"final_2":{"loop":22.325581,"pad":1.0,"bpm":172,"g":2.296},"final_3":{"loop":22.325581,"pad":1.0,"bpm":172,"g":2.362},"lounge":{"loop":42.666667,"pad":1.0,"bpm":90,"g":2.452},"market":{"loop":58.181818,"pad":1.0,"bpm":66,"g":0.458},"momo":{"loop":75.789474,"pad":1.0,"bpm":76,"g":2.941},"nox":{"loop":41.73913,"pad":1.0,"bpm":138,"g":0.535}};
+  const FMAN = {"bar":{"loop":60.952381,"pad":1.0,"bpm":126,"g":1.499},"baron":{"loop":53.333333,"pad":1.0,"bpm":108,"g":0.366},"combat_0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.475},"combat_2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.49},"combat_5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.482},"combat_b2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_b3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.514},"dina":{"loop":45.714286,"pad":1.0,"bpm":168,"g":2.024},"final_1":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.183},"final_2":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.378},"final_3":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.417},"lounge":{"loop":42.666667,"pad":1.0,"bpm":90,"g":1.471},"market":{"loop":58.181818,"pad":1.0,"bpm":66,"g":0.275},"momo":{"loop":75.789474,"pad":1.0,"bpm":76,"g":1.765},"nox":{"loop":41.73913,"pad":1.0,"bpm":138,"g":0.321}};
   const FM = { buf: {}, load: {}, use: [], fail: {}, h: 0, boss: false };
   const fmOn = () => { try { return !G.headless && !AU.offline && typeof fetch !== 'undefined' && OPT().musk !== 0; } catch (e) { return false; } };
   function fmFile(name) {
@@ -12823,9 +12846,22 @@ const DUEL_LINES = {
 const fbWins = () => (G.meta && G.meta.baronWins) || 0;
 const fbTone = () => fbWins() >= 2 ? 'serious' : fbWins() === 1 ? 'mock1' : 'mock';
 function fbLine(kind) { const L = BARON_FB[kind], tn = fbTone(); return pick(L[tn] || (tn === 'mock1' ? L.mock : null) || L.mock || L); }
+// un tir du Baron : 40 % moins fort, et jamais plus de 12 % de tes PV max (une salve de 3 ne peut plus te tuer d'un coup)
+function fbShot(e) {
+  const cb = G.cb, n0 = cb.eshots.length;
+  fireAt(e, 'joker');
+  for (let i = n0; i < cb.eshots.length; i++) { const p = cb.eshots[i]; p.dmg = Math.min(p.dmg * .6, G.run.maxHp * .12); }
+}
+// les places de jeton à gagner : un badge dessiné (3 trèfles, l'étiquette du marché noir, la contrefaçon de l'Inspecteur)
+function lockBadge(k) {
+  const lock = '<svg class="lkp" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2" fill="none" stroke="#f3eee6" stroke-width="3" stroke-linecap="round"/><rect x="4" y="10" width="16" height="12" rx="3" fill="#f3eee6"/><rect x="10.5" y="13.5" width="3" height="5" rx="1.5" fill="#3a2c50"/></svg>';
+  if (k === 'cl') return `<span class="lkb lkb-cl"><span class="tri">${iconSVG('trefle')}${iconSVG('trefle')}${iconSVG('trefle')}</span>${lock}</span>`;
+  if (k === 'mk') return `<span class="lkb lkb-mk">${iconSVG('ticket')}<b class="lkt">OR</b>${lock}</span>`;
+  return `<span class="lkb lkb-sc">${iconSVG('faux')}${lock}</span>`;
+}
 function fbStart(cb) {
   Object.assign(FB, { on: true, phase: 1, e: null, res: {}, red: 0, black: 0, roulT: 20, t: {}, stolen: 0, figI: 0, duelI: 0, cut: null });
-  cb.final = true; cb.goal = 0; cb.goalHit = true;
+  cb.final = true; cb.goal = 0; cb.goalHit = true; cb.fbHold = true;
   dbg('fb_start');
 }
 function fbDeal(e, n) {
@@ -12862,7 +12898,7 @@ function aiBaron(e, dt, sp, held, contactD) {
     st.sw = (st.sw || rand(0, 6)) + dt * .9;
     const a = -Math.PI / 2 + Math.sin(st.sw) * .9, tx = Math.cos(a) * e.stop, ty = Math.sin(a) * e.stop, dx = tx - e.x, dy = ty - e.y, dd = Math.hypot(dx, dy) || 1, step = Math.min(dd, e.spd * 1.6 * dt);
     e.x += dx / dd * step; e.y += dy / dd * step;
-    st.volT -= dt; if (st.volT <= 0) { st.volT = 3.4; fireAt(e, 'joker'); }
+    st.volT -= dt; if (st.volT <= 0) { st.volT = 3.4; fbShot(e); }
     return;
   }
   if (!FB.on || e.inv) return;
@@ -12870,7 +12906,8 @@ function aiBaron(e, dt, sp, held, contactD) {
   const d = edist(e);
   // il s'installe en haut de sa table, puis glisse de côté (de plus en plus nerveux)
   if (!held) {
-    if (!st.seated && d > e.stop + .5) { moveToward(e, dt, sp, e.stop); bossSub(e, 'Le Baron s\'installe à sa table…'); return; }
+    if (!st.seated && d > e.stop + .5) { moveToward(e, dt, sp * 3.5, e.stop); cb.fbHold = true; bossSub(e, 'Le Baron s\'installe à sa table…'); return; }
+    if (!st.seated) { cb.fbHold = false; if (!G.headless) { banner('LE BARON EST À SA TABLE', 'à toi de jouer : canon, sorts, BILLE', 'boss', 1.2); } }
     st.seated = true;
     st.sw += dt * [0, .32, .6, .45][FB.phase];
     const a = -Math.PI / 2 + Math.sin(st.sw) * [0, .5, .8, .65][FB.phase], tx = Math.cos(a) * e.stop, ty = Math.sin(a) * e.stop;
@@ -12882,7 +12919,7 @@ function aiBaron(e, dt, sp, held, contactD) {
   if (st.volT <= 0 && !held) {
     st.volT = [0, 3.6, 2.8, 3.2][FB.phase];
     const n = FB.phase === 1 ? 3 : 4;
-    for (let k = 0; k < n; k++) setTimeoutGame(() => { if (!e.dead && FB.on && !e.inv) fireAt(e, 'joker'); }, k * .18);
+    for (let k = 0; k < n; k++) setTimeoutGame(() => { if (!e.dead && FB.on && !e.inv) fbShot(e); }, k * .3);
   }
   // il distribue (phases 1 et 3)
   if (FB.phase !== 2) {
@@ -13588,7 +13625,7 @@ function dangerous() {
 }
 function updateTower(dt) {
   const cb = G.cb, s = cb.stats;
-  if (cb.tutoNoFire || (cb.mx && mxNoFire(cb))) return;
+  if (cb.tutoNoFire || cb.fbHold || (cb.mx && mxNoFire(cb))) return;
   if (cb.hex.gelcanon > 0) return;
   if (cb.turretStun > 0) { cb.turretStun -= dt; return; }
   cb.shotT -= dt;
@@ -13949,8 +13986,11 @@ function disqueRecast(id, x, y) {
   for (let k = 1; k <= (v[4] > 0 ? 2 : 1); k++) setTimeoutGame(() => {
     if (cb.ended || G.cb !== cb) return;
     const keep = cb.ab[id]; cb.ab[id] = 0; cb.K.recast = true;
-    try { if (id === 'bomb') useBomb(x, y); else if (SPELL_USE[id]) SPELL_USE[id](); } finally { cb.K.recast = false; cb.ab[id] = keep; cb.ab.aiming = false; }
+    let ok = false;
+    try { ok = id === 'bomb' ? useBomb(x == null ? 0 : x, y == null ? -40 : y) : SPELL_USE[id] ? SPELL_USE[id]() !== false : PSPELLS[id] && PSPELLS[id].fam ? useFam(id) : PSPELLS[id] && PSPELLS[id].x106 ? useSp106(id) : false; } finally { cb.K.recast = false; cb.ab[id] = keep; cb.ab.aiming = false; }
     jokerPing('disque', 'relancé');
+    if (ok !== false) dbg('disque_re');
+    if (ok !== false && !G.headless) { try { spellFx(id); } catch (e) { /* rien */ } bigFloat('ENCORE !', '#3dff7a', 1.1); Snd.blink && Snd.blink(); }
   }, 2 * k);
 }
 function useBomb(x, y) {
@@ -15375,11 +15415,11 @@ function renderRack() {
     else {
       // les places encore à gagner : 3 trèfles, l'achat au marché noir, l'arnaque de l'Inspecteur
       const src = [];
-      if (run.cloverSlots < 1) src.push(['trefle', '', 'Trois trèfles au jackpot', '3 trèfles à la machine']);
-      if (run.slotsBought < 1) src.push(['chapeau', ' lk-mkt', 'En vente au marché noir', 'à acheter au marché noir']);
-      if (!run.scamSlot) src.push(['chapeau', ' lk-mkt', 'Quand l\'Inspecteur t\'arnaque', 'si l\'Inspecteur t\'arnaque']);
-      const L = src[i - eff] || src[src.length - 1] || ['chapeau', ' lk-mkt', '', ''];
-      h += `<span class="slot locked" title="${L[2]}" aria-hidden="true"><i class="lk${L[1]}">${iconSVG(L[0])}</i><span class="sinfo"><small>${L[3]}</small></span></span>`;
+      if (run.cloverSlots < 1) src.push(['cl', '', 'Trois trèfles au jackpot', '3 trèfles à la machine']);
+      if (run.slotsBought < 1) src.push(['mk', ' lk-mkt', 'En vente au marché noir', 'à acheter au marché noir']);
+      if (!run.scamSlot) src.push(['sc', ' lk-mkt', 'Quand l\'Inspecteur t\'arnaque', 'si l\'Inspecteur t\'arnaque']);
+      const L = src[i - eff] || src[src.length - 1] || ['mk', ' lk-mkt', '', ''];
+      h += `<span class="slot locked" title="${L[2]}" aria-hidden="true"><i class="lk${L[1]}">${lockBadge(L[0])}</i><span class="sinfo"><small>${L[3]}</small></span></span>`;
     }
   }
   $('#rack-slots').innerHTML = h;
@@ -20597,6 +20637,7 @@ const ZAZA_PET_HI = {
 const INSP_PET = {
   pitch: 'Tu vois le rat ? C\'est Gaston. Il connaît tous mes prix. Je te le vends… mais il te fera des remises sur MA marchandise. Traître.',
   bye: ['Traître de rat. Bon. Moins vingt pour cent. Mais je compte.', 'Va, Gaston. Et rends-moi mon portefeuille.'],
+  back: 'Tiens, ton rat est revenu. Les poches pleines, comme par hasard. Je te le fais à moitié prix : il est déjà payé.',
   hi: ['Tiens, Gaston. Toujours vivant ? Tu me dois un portefeuille.', 'Avec Gaston dans la boutique, je vends à perte. Dépêche-toi.'],
 };
 
@@ -20708,15 +20749,17 @@ function petZazaHello(run) {
 /* ---------- le marché noir : Gaston ---------- */
 function petOfferMarket(run) {
   if (hasPet(run, 'gaston')) return null;
+  if (run.gFled && !run.gBack) return { type: 'pet', id: 'gaston', price: Math.max(1, Math.round(petPrice(run, 'gaston') * .5)), haggled: false, sold: false, back: true };
   return { type: 'pet', id: 'gaston', price: petPrice(run, 'gaston'), haggled: false, sold: false };
 }
 function petMarketRow(o, btns) {
   const P = PETS[o.id];
-  return `<div class="offer mkpet${o.sold ? ' sold' : ''}" style="--sc:${P.col};--pc:${P.col}"><div class="slotico petico">${petRowArt(o.id)}</div><div class="otext"><b>${P.name}<i class="otag">COMPAGNON</i></b><span>${P.full.replace(P.name + ', ', '')[0].toUpperCase() + P.full.replace(P.name + ', ', '').slice(1)} : ${colorNums(P.txt)} Pour toute la partie.</span><span class="pq">${esc(o.said ? '« ' + o.said + ' »' : P.quote)}</span></div><div class="obuy">${btns}</div></div>`;
+  return `<div class="offer mkpet${o.sold ? ' sold' : ''}" style="--sc:${P.col};--pc:${P.col}"><div class="slotico petico">${petRowArt(o.id)}</div><div class="otext"><b>${P.name}<i class="otag">${o.back ? 'DE RETOUR · −50 %' : 'COMPAGNON'}</i></b><span>${P.full.replace(P.name + ', ', '')[0].toUpperCase() + P.full.replace(P.name + ', ', '').slice(1)} : ${colorNums(P.txt)} Pour toute la partie.</span><span class="pq">${esc(o.said ? '« ' + o.said + ' »' : P.quote)}</span></div><div class="obuy">${btns}</div></div>`;
 }
 function buyMarketPet(i) {
   const o = MK.offers[i], run = G.run;
   run.gold -= o.price; o.sold = true;
+  if (o.back) run.gBack = true; else run.gAt = run.round;
   adoptPet(o.id);
   o.said = petLine(o.id, 'adopt');
   // Gaston négocie aussitôt le reste de la boutique
@@ -20733,6 +20776,7 @@ function petMarketOpen() {
   if (G.headless || !MK.offers.some(o => o.type === 'pet')) return;
   catSee('a', 'gaston');
   const seen = run.petPitch || (run.petPitch = {});
+  if (run.gFled && !run.gBack && !seen.back) { seen.back = 1; setTimeout(() => { if (G.mode === 'market' && !MK.gone && !MK.busy && MK.offers.some(o => o.back && !o.sold)) say(INSP_PET.back); }, 2200); return; }
   if (seen.gaston) return;
   seen.gaston = 1;
   setTimeout(() => { if (G.mode === 'market' && !MK.gone && !MK.busy && !MK.punching && MK.offers.some(o => o.type === 'pet' && !o.sold)) say(INSP_PET.pitch); }, 2700);
@@ -23621,7 +23665,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v15.5</p></div>`;
+        <p class="ov5">v15.6</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24998,7 +25042,7 @@ function uiRoundCleared() {
   if (res.multGold) sub += ` · MULT +${res.multGold}`;
   if (res.flip) sub += res.flip > 0 ? ' · quitte ou double : ×2 !' : ` · quitte ou double : ${res.flip} or`;
   banner('MANCHE GAGNÉE', sub, 'good', 1.5);
-  petsRoundEnd();
+  gastonFlee(); petsRoundEnd();
   if (res.notes && res.notes.length) setTimeout(() => toast(res.notes.slice(0, 3).join(' · ')), 1600);
   Snd.win(); haptic(30);
   if (run.round > G.meta.best) { G.meta.best = run.round; saveMeta(); checkUnlocks(); }
@@ -25265,7 +25309,7 @@ function canvasDown(e) {
   pointerWorld(e);
   const P = G.pointer;
   if (cb.ab.aiming) { if (useBomb(P.wx, P.wy)) haptic(20); cb.ab.aiming = false; return; }
-  if (evTapCard(cb, P.wx, P.wy)) { e.preventDefault(); return; }
+  if (evTapCard(cb, P.wx, P.wy) || evTapAny(cb, P.wx, P.wy)) { e.preventDefault(); return; }
   // la BILLE : appui sur ta base (ou clic droit n'importe où)
   const onBase = Math.hypot(P.wx, P.wy) < BAL.bilGrab, rc = e.button === 2;
   if (onBase || rc) {
@@ -28333,7 +28377,7 @@ EVH.quitte = {
     if (!segHit(b.xpx, b.xpy, b.x, b.y, S2.x, S2.y, QD.r + b.r * .5)) return;
     const dx = b.x - S2.x, dy = b.y - S2.y, d = Math.hypot(dx, dy) || 1, nx = dx / d, ny = dy / d, vn = b.vx * nx + b.vy * ny;
     if (vn < 0) { b.vx -= 1.8 * vn * nx; b.vy -= 1.8 * vn * ny; }
-    const g = S2.v0 * S2.m; addGold(g, 'event');
+    const g = Math.max(1, Math.round(S2.v0 * S2.m * (b.click ? 2 / 3 : 1))); addGold(g, 'event');
     S2.ph = 'cash'; S2.pt = 0; S2.won = g;
     dbg('qd_cash_' + S2.m);
     if (!G.headless) {
@@ -31108,6 +31152,64 @@ function cvdApply() {
 }
 function applyOpts(silent) { applyOpts1(silent); cvdApply(); }
 const cvdLegend = () => CAT_ORDER.map(f => `<span class="cvl">${FAMG[f]} ${esc(CATS[f].s)}</span>`).join(' ');
+
+
+/* ================= v15.6 · clic dans les jeux de la Maison, la fuite de Gaston, le Disque rayé, le Baron ================= */
+
+/* ---------- une petite annonce (même style que les succès) ---------- */
+function notePop(top, name, ic, snd) {
+  let el = $('#notepop'); if (!el) { el = document.createElement('div'); el.id = 'notepop'; el.className = 'achpop np'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
+  el.innerHTML = `<span class="ap-ic">${iconSVG(ic || 'chapeau')}</span><span><small>${esc(top)}</small><b>${esc(name)}</b></span>`;
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  try { if (snd) snd(); } catch (e) { /* rien */ }
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 3400);
+}
+
+/* ---------- les jeux de la Maison : on peut aussi cliquer (souris ou doigt) ; la BILLE garde son bonus ---------- */
+const EV_TAP = ['blackjack', 'quitte', 'des', 'bandit'];
+const evSig = (id, S2) => id === 'blackjack' ? S2.tc.filter(c => c.used).length + '|' + S2.ph : id === 'quitte' ? S2.ph : id === 'des' ? S2.rr : '';
+function evTapAny(cb, x, y) {
+  if (!cb.evs || !cb.evs.length || (cb.evTapT || 0) > cb.t) return false;
+  for (const id of cb.evs) {
+    const S2 = cb.ev[id]; if (!S2 || !EV_TAP.includes(id)) continue;
+    if (id === 'bandit') {
+      for (const R of S2.R) {
+        if (R.st !== 'spin') continue;
+        const X = bdX(R.i), Y = BD.wy;
+        if (Math.hypot(X - x, Y - y) > BD.ww * .62 + 5) continue;
+        bdStop(cb, S2, R, false); cb.evTapT = cb.t + .3;
+        if (!G.headless) { floater(X, Y - 11, 'STOP !', '#fff3e6', 4.2); Snd.cardTap ? Snd.cardTap() : Snd.click(); haptic(15); }
+        return true;
+      }
+      continue;
+    }
+    // un « coup de bille » au doigt : même règle, sans l'élan (et sans le bonus de la bille)
+    const b = { x: x + (rnd() < .5 ? -3 : 3), y: y + 2, vx: 0, vy: 0, r: 7, dm: 1, click: true };
+    b.xpx = b.x; b.xpy = b.y;
+    const sig = evSig(id, S2);
+    EVH[id].ball(cb, S2, b);
+    if (evSig(id, S2) !== sig) { cb.evTapT = cb.t + .35; if (!G.headless) haptic(15); return true; }
+  }
+  return false;
+}
+
+/* ---------- Gaston : une fois par partie, il file au marché noir avec un peu de ton or ---------- */
+const GASTON_FLEE = { pct: .2, max: 60, chance: .3, after: 3 };
+function gastonFlee() {
+  const run = G.run;
+  if (!run || !hasPet(run, 'gaston') || run.gFled || run.gBack || run.round >= 30 && !run.inf) return false;
+  if (run.round < (run.gAt || 0) + GASTON_FLEE.after || (run.gold || 0) < 10 || rnd() >= GASTON_FLEE.chance) return false;
+  const stolen = Math.min(GASTON_FLEE.max, Math.max(1, Math.round(run.gold * GASTON_FLEE.pct)));
+  run.gold -= stolen;
+  run.pets = run.pets.filter(id => id !== 'gaston');
+  run.gFled = { round: run.round, stolen };
+  dbg('gaston_flee');
+  if (!G.headless) {
+    try { renderPets(); updateHUD(); } catch (e) { /* rien */ }
+    notePop('GASTON S\'EST ENFUI !', `−${stolen} or · il t'attend au marché noir`, 'chapeau', () => Snd.squeak && Snd.squeak());
+  }
+  return true;
+}
 
 
 /* ---------- boucle ---------- */
