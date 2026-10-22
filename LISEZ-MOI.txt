@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.6-202610201900
+JACKPOT DEFENSE v15.7-202610220300
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,20 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v15.7 — plus de jus à l'impact, un début plus simple, les jetons repliés
+- Les coups se sentent : la carte touchée recule et blanchit, des étincelles partent côté base, et de petits
+  chiffres de dégâts s'affichent (les petits coups s'additionnent). Les critiques sont plus gros, avec un éclair
+  blanc et un petit tremblement.
+- Une carte abattue part en morceaux, avec un anneau de souffle. Élites et boss : un micro-arrêt sur image.
+- Les explosions sont plus grosses : anneau de souffle, braises, écran qui tremble un peu plus.
+- Tes 2 premières parties : jusqu'au boss de la manche 5, la Fournaise ne montre que ses 10 jetons les plus
+  simples (sans Fièvre, Icare, Palet, Ovation, Boussole). Ensuite « LA MACHINE S'OUVRE » : les 15 jetons.
+- En combat, tes jetons se replient : sur PC, une colonne de jetons sans les textes ; sur téléphone, la rangée
+  seule. Le petit bouton flèche les rouvre en grand (ton choix est gardé). Aussi dans OPTIONS › Graphismes ›
+  « Jetons en combat ».
+- À part ces 2 premières parties, rien ne change dans les règles ni l'équilibrage (les simulations donnent
+  exactement les mêmes parties qu'en v15.6).
 
 Nouveautés de la v15.6 — le Baron, le clic dans les jeux, Gaston, les places de jeton, le Disque rayé
 - Le Baron (manche 30) : il s'installe 3 fois plus vite (≈ 3 s) ; pendant ce temps, ton canon attend (il était

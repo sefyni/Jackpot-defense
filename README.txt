@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.6-202610201900
+JACKPOT DEFENSE v15.7-202610220300
 
 A casino roguelite: a slot machine for chips, Zaza's bar, the Inspector's black market,
 and a pinball-flipper base defense. Last 30 rounds and break the Baron's bank.
@@ -9,7 +9,9 @@ Play
 - Your progress and the online leaderboard are the same in both languages.
 - Music played by real instruments (OPTIONS > Audio > Music style: Instruments or 8-bit).
 - Achievements: PROFILE > "See achievements". Colorblind mode: OPTIONS > Graphics.
-- Your first 2 runs are gentler (systems arrive a bit later).
+- Your first 2 runs are gentler (systems arrive a bit later, and the first machine shows only its 10 simplest chips until round 5).
+- Hits feel stronger: cards recoil and flash, damage numbers, card shards, bigger explosions.
+- In combat your chips fold into a compact column (or row on phones); the small arrow button opens them in full.
 - Daily challenge: the same run for everyone each day, with its own leaderboard ("Daily" tab).
 
 Put it online (free) and install it
