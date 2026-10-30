@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>(function(){try{var l=localStorage.getItem('jd-lang');if(!l){l=String(navigator.language||'fr').toLowerCase().indexOf('fr')===0?'fr':'en';localStorage.setItem('jd-lang',l);}var en=document.documentElement.lang==='en';if((l==='en')!==en){var u=new URL(location.href);u.pathname=u.pathname.replace(/[^/]*$/,l==='en'?'en.html':'index.html');location.replace(u.href);}}catch(e){}})();</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Jackpot Defense</title>
 <meta name="description" content="Roguelite casino : machine à sous, bar, marché noir et défense de base au flipper.">
 <meta name="theme-color" content="#140d1f">
@@ -4207,6 +4207,13 @@ svg.pz-fig.pz-pop{animation:pzSwap .3s ease-out!important}
 .pz-pop{animation:pzSwap .3s ease-out!important}
 @media (prefers-reduced-motion:reduce){.pz-anat .pza-im,.pzf-im,svg.pz-fig,.fp-baron.fpn-nox .fp-bb{animation:none!important}}
 
+/* ================= v16.7 ================= */
+/* marché noir (téléphone) : l'Inspecteur tient en entier dans son bandeau, la bulle aussi */
+body:not(.lpc) #market .mk-scene{height:150px}
+body:not(.lpc) #market .mk-scene .insp{height:150px;width:132px;left:-6px}
+body:not(.lpc) #market .mk-scene .bubble{left:124px;top:12px;right:8px;font-size:12.5px;line-height:1.16;padding:6px 8px}
+body:not(.lpc) #market .mk-name{z-index:4}
+
 /* v16.1 · l'intro en 3D */
 .boot.ji3on{background:#000}
 .boot.ji3on .bt-stage,.boot.ji3on .bt-flash,.boot.ji3on .bt-scan{display:none}
@@ -4569,6 +4576,15 @@ body.cvd .mcard.t3 .skull{color:#ff4fd8}
 @media (prefers-reduced-motion:reduce){#banner.arc::before,#banner.arc::after{animation:none}}
 /* v14.6 · le profil : la Table d'Or au bout des 12 plaques */
 .pr-plaq .pq-to{margin:8px 0 0;font-weight:600;font-size:12px;line-height:1.25;color:rgba(255,236,190,.78);text-align:center}
+
+/* ================= v16.8 · téléphone ================= */
+/* un double-tap ne zoome plus la page (les zones qui ont leur propre geste gardent le leur : table, rack, listes) */
+*{touch-action:manipulation}
+/* Anatole : plus de masque CSS (sur iPhone, masque + ombre + animation le rendaient invisible) ; le fondu du bas est dans l'image */
+.pz-anat .pza-im{-webkit-mask-image:none;mask-image:none}
+/* téléphone : l'image donne elle-même sa hauteur (sans dépendre d'aspect-ratio), et pas d'ombre floue recalculée à chaque image */
+body:not(.lpc) .an-fig.pz-anat{aspect-ratio:auto;height:auto}
+body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:relative;inset:auto;display:block;height:auto;filter:none}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -5182,7 +5198,7 @@ body.cvd .mcard.t3 .skull{color:#ff4fd8}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v16.6</p>
+  <p class="proto">Sefy Industries · v16.8</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -12486,7 +12502,7 @@ const Music = (() => {
   const fmPlaying = f => Object.keys(TR).some(k => TR[k].fm && TR[k].fm.f === f && TR[k].active);
   function fmTouch(f) {
     FM.use = FM.use.filter(x => x !== f); FM.use.push(f);
-    while (FM.use.length > 4) { const old = FM.use.find(x => !fmPlaying(x)); if (!old) break; FM.use = FM.use.filter(x => x !== old); delete FM.buf[old]; }
+    while (FM.use.length > fmKeep()) { const old = FM.use.find(x => !fmPlaying(x)); if (!old) break; FM.use = FM.use.filter(x => x !== old); delete FM.buf[old]; }
   }
   // charger et décoder un fichier (une seule fois à la fois) ; null si impossible
   function fmGet(f) {
@@ -16472,7 +16488,7 @@ function openDetail(j, where) {
   $('#dcard').innerHTML = h;
   $('#dcard').dataset.uid = j.uid;
   show('#detail', true); Snd.pop(); detailAt = now();
-  if (benchable) setTimeout(() => { if ($('#detail').hidden || $('#dcard').dataset.uid !== String(j.uid)) return; const el = $('#dbench'); if (el) el.innerHTML = contribHTML(jetonContrib(j)); }, 80);
+  if (benchable) { const buid = String(j.uid), alive = () => !$('#detail').hidden && $('#dcard').dataset.uid === buid; setTimeout(() => { if (alive()) jetonContribAsync(j, c => { const el = $('#dbench'); if (el) el.innerHTML = contribHTML(c); }, alive); }, 120); }
 }
 function closeDetail() { show('#detail', false); if (detailPaused) { G.paused = false; detailPaused = false; } }
 function noteSold(j) { const run = G.run; if (!run || !j.parts || j.kind === 'faux') return; run.sold = run.sold || []; for (const q of j.parts) if (JK[q.t] && !JK[q.t].fou) run.sold.push({ t: q.t, lv: q.lv, p: j.p, sec: isSecret(j) }); if (run.sold.length > 6) run.sold.splice(0, run.sold.length - 6); }
@@ -24529,7 +24545,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v16.6</p></div>`;
+        <p class="ov5">v16.8</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -24668,7 +24684,7 @@ function dmgTabHTML() {
   const real = run.jokers.filter(j => j.kind !== 'faux');
   h += `<h4>Ce que chaque jeton apporte <i>banc d'essai · manche ${roundLabel(benchRound())}</i></h4>`;
   if (!real.length) return h + '<p class="ri-empty">Aucun jeton pour l\'instant.</p>';
-  h += `<p class="ri-note">Pour chaque jeton, le jeu rejoue ${Math.round(BENCH.seeds.length * BENCH.T / 60)} minutes de combat en coulisses <b>avec</b> lui puis <b>sans</b> lui, contre les cartes de cette manche. L'écart, c'est son apport réel (combos et voisins compris). Tes sorts n'entrent pas dans la mesure.</p>`;
+  h += `<p class="ri-note">Pour chaque jeton, le jeu rejoue ${Math.round(benchSeeds().length * BENCH.T / 60)} minutes de combat en coulisses <b>avec</b> lui puis <b>sans</b> lui, contre les cartes de cette manche. L'écart, c'est son apport réel (combos et voisins compris). Tes sorts n'entrent pas dans la mesure.</p>`;
   h += '<div class="dg-tot" id="dg-tot">calcul en coulisses…</div><div class="dg-bench" id="ri-bench">' + real.map(j => `<div class="dgb" data-buid="${j.uid}">${chipHTML(j)}<b>${esc(jName(j))}</b><i class="dgb-bar"><em></em></i><span class="dgb-pc">…</span></div>`).join('') + '</div>';
   return h;
 }
@@ -24676,7 +24692,7 @@ let benchT = 0;
 function benchFill() {
   clearTimeout(benchT);
   const run = G.run, queue = run.jokers.filter(j => j.kind !== 'faux').slice(), res = new Map();
-  const alive = () => !$('#runinfo').hidden && RIV.tab === 'degats' && $('#ri-bench');
+  const gen = ++BENCHA.gen, alive = () => gen === BENCHA.gen && !$('#runinfo').hidden && RIV.tab === 'degats' && !!$('#ri-bench');
   const paint = () => {
     const vals = [...res.values()], mx = Math.max(.05, ...vals.map(c => Math.abs(c.delta)));
     for (const [uid, c] of res) {
@@ -24691,14 +24707,13 @@ function benchFill() {
   const step = () => {
     if (!alive()) return;
     if (!res.size && !$('#dg-tot').dataset.done) {
-      const all = benchDps(run.jokers), none = benchDps([]);
+      benchDpsAsync(run.jokers, all => benchDpsAsync([], none => {
       $('#dg-tot').innerHTML = `Ton rack au banc d'essai : <b>${fmtS(all)} dégâts/s</b> · sans aucun jeton : <b>${fmtS(none)}/s</b> (canon et boissons seuls)`;
       $('#dg-tot').dataset.done = '1';
-      benchT = setTimeout(step, 16); return;
+      benchT = setTimeout(step, 16); }, alive), alive); return;
     }
     const j = queue.shift(); if (!j) return;
-    res.set(j.uid, jetonContrib(j)); paint();
-    benchT = setTimeout(step, 16);
+    jetonContribAsync(j, c => { res.set(j.uid, c); paint(); benchT = setTimeout(step, 16); }, alive);
   };
   benchT = setTimeout(step, 60);
 }
@@ -26084,7 +26099,9 @@ function benchSig(jokers) {
   const run = G.run;
   return JSON.stringify([jokers.map(j => [j.kind, j.p, j.curse || '', j.parts.map(p => p.t + p.lv), j.secret ? 1 : 0]), run.up, benchRound(), run.rakeBonus || 0, Math.floor(run.gold / 10), run.boosters || []]);
 }
-function benchSim(jokers, seed, roulette, R) {
+function benchSim(jokers, seed, roulette, R) { const it = benchSimGen(jokers, seed, roulette, R); let r; while (!(r = it.next()).done); return r.value; }
+// v16.8 : la même simulation, qui rend la main quand son temps est écoulé (BENCH.yieldAt)
+function* benchSimGen(jokers, seed, roulette, R) {
   const base = G.run, run = JSON.parse(JSON.stringify(base));
   run.jokers = JSON.parse(JSON.stringify(jokers));
   Object.assign(run, { stolen: [], sealed: [], seized: [], malus: [], pendingMalus: [], skulls: 0, boost: {}, shots: [], over: false, zero: false, round: R, roulette: roulette == null ? null : { win: roulette } });
@@ -26113,6 +26130,7 @@ function benchSim(jokers, seed, roulette, R) {
     }
     botStep(dt, BENCH_BOT); updateCombat(dt); t += dt;
     if (!d0 && t >= BENCH.warm) d0 = cb.dps ? cb.dps.tot : 0;
+    if (BENCH.yieldAt && performance.now() > BENCH.yieldAt) yield 0;
   }
   BENCH.last = cb.dps ? Object.assign({}, cb.dps.src) : null;
   return cb.dps ? (cb.dps.tot - d0) / BENCH.T : 0;
@@ -33645,7 +33663,8 @@ function jzInit() {
     jzFlash(e.clientX || 0, e.clientY || 0, el);
     // l'écran sursaute (seulement dans les menus : pas pendant le combat)
     const box = el.closest('.full, .ov, #title');
-    if (box && box.animate && G.mode !== 'combat') box.animate([{ translate: '0 0' }, { translate: '0 3px' }, { translate: '-2px -1px' }, { translate: '1px 1px' }, { translate: '0 0' }], { duration: 180, easing: 'ease-out' });
+    const m0 = G.mode;
+    if (box && box.animate && m0 !== 'combat') setTimeout(() => { if (box.hidden || G.mode !== m0 || !box.isConnected || (box.id === 'bar' && BAR.leaving) || (box.id === 'market' && MK.leaving)) return; box.animate([{ translate: '0 0' }, { translate: '0 3px' }, { translate: '-2px -1px' }, { translate: '1px 1px' }, { translate: '0 0' }], { duration: 180, easing: 'ease-out' }); }, 0);
     if (jzTitleOn() && BG) BG.kick = Math.max(BG.kick || 0, .55);
   });
 }
@@ -34272,14 +34291,14 @@ function pzLayout() {
     const box = sec.querySelector('.pzf-box'), w = sec.querySelector(PZ_WRAP[sel]); if (!box || !w) continue;
     const S = sec.getBoundingClientRect(), R = w.getBoundingClientRect(), k = S.width / (sec.offsetWidth || 1) || 1;
     const gl = (R.left - S.left) / k, gr = (S.right - R.right) / k, H = sec.clientHeight;
-    const on = Math.min(gl, gr) >= 150 && H >= 420 && !G.reduced;
+    const on = Math.min(gl, gr) >= 180 && H >= 420 && !G.reduced;
     sec.classList.toggle('pzwide', on);
     if (!on) continue;
     box.style.top = sec.scrollTop + 'px';
     const L = sec.querySelector('.pzf-l'), Rt = sec.querySelector('.pzf-r');
     // le portrait tient dans l'écran : il ne dépasse jamais du bord, il se cache un peu derrière le panneau
     const SW = S.width / k;
-    const sz = g => Math.round(Math.min(H * .86, g * 1.22, 760));
+    const sz = g => Math.round(Math.min(H * .86, g * .97, 760));   // le portrait tient en entier dans le vide à côté du panneau
     const a = sz(gl), b = sz(gr);
     L.style.setProperty('--gw', Math.round(gl) + 'px'); Rt.style.setProperty('--gw', Math.round(gr) + 'px');
     L.classList.toggle('noname', gl < 230); Rt.classList.toggle('noname', gr < 230);
@@ -34495,6 +34514,90 @@ setInterval(() => {
     pzSet(w, pick(PZ_IDLE[w].filter(p => p !== PZ.pose[w] && pzHas(w, p))), false);
   }
 }, 1300);
+
+/* ================= v16.7 ================= */
+// les écrans qui se resserrent : on mesure sans l'échelle de l'écran (sinon tout devenait minuscule sur grand écran)
+scrFit = function (sec, inner) {
+  if (!sec || !inner || sec.hidden) return;
+  inner.style.zoom = '';
+  const cs = getComputedStyle(sec), avail = sec.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 4;
+  const ic = getComputedStyle(inner), need = inner.offsetHeight + (parseFloat(ic.marginTop) || 0) + (parseFloat(ic.marginBottom) || 0);
+  if (need > avail + 1) inner.style.zoom = Math.max(.6, avail / need).toFixed(3);
+  sec.scrollTop = 0;
+  pzLayout();
+};
+
+
+/* ================= v16.8 · téléphone : plus de gel, plus de zoom, le son revient ================= */
+// ---- le banc d'essai (fiche d'un jeton, onglet Dégâts) ne bloque plus le jeu : il calcule par petits bouts, entre deux images.
+//      Avant, chaque jeton touché lançait d'un coup 2 × 20 combats simulés : plusieurs secondes de gel sur téléphone.
+//      Sur téléphone, 8 combats au lieu de 20 (la moyenne bouge à peine).
+const BENCHA = { gen: 0, jobs: new Map() };
+function benchSeeds() { return LAY.pc ? BENCH.seeds : BENCH.seeds.slice(0, 8); }
+function benchSwap(st) {
+  const prev = { h: G.headless, run: G.run, cb: G.cb, mode: G.mode, seed: SEED, god: G.dev.god, hx: VIEW.hx, hy: VIEW.hy };
+  G.headless = true; G.mode = 'sim'; G.dev.god = true; VIEW.hx = 84; VIEW.hy = 131;
+  if (st.it) { G.run = st.run; G.cb = st.cb; SEED = st.seed; }
+  return prev;
+}
+function benchBack(prev, st) {
+  if (st.it) { st.run = G.run; st.cb = G.cb; st.seed = SEED; } else { st.run = st.cb = null; }
+  Object.assign(G, { headless: prev.h, run: prev.run, cb: prev.cb, mode: prev.mode }); G.dev.god = prev.god; SEED = prev.seed; VIEW.hx = prev.hx; VIEW.hy = prev.hy;
+}
+// les dégâts/s d'une liste de jetons, sans bloquer : done(v) plus tard ; on abandonne si plus personne n'attend (alive)
+function benchDpsAsync(jokers, done, alive) {
+  if (!G.run) return;
+  const seeds = benchSeeds(), key = benchSig(jokers) + '|' + seeds.length, me = { done, alive };
+  if (BENCH.cache.has(key)) { const v = BENCH.cache.get(key); setTimeout(() => { if (!alive || alive()) done(v); }, 0); return; }
+  const J = BENCHA.jobs.get(key); if (J) { J.cbs.push(me); return; }
+  const job = { cbs: [me], i: 0, sum: 0, st: { it: null }, run0: G.run, R: benchRound(), list: JSON.parse(JSON.stringify(jokers)) };
+  BENCHA.jobs.set(key, job);
+  const fin = v => {
+    BENCHA.jobs.delete(key);
+    if (v == null) return;
+    if (BENCH.cache.size > 400) BENCH.cache.clear();
+    BENCH.cache.set(key, v);
+    for (const c of job.cbs) if (!c.alive || c.alive()) c.done(v);
+  };
+  const slice = () => {
+    if (G.run !== job.run0 || !job.cbs.some(c => !c.alive || c.alive())) { fin(null); return; }
+    const st = job.st, prev = benchSwap(st);
+    let err = null;
+    try {
+      BENCH.yieldAt = performance.now() + (LAY.pc ? 16 : 10);
+      while (job.i < seeds.length) {
+        if (!st.it) { G.run = prev.run; st.it = benchSimGen(job.list, seeds[job.i], null, job.R); }
+        const r = st.it.next();
+        if (!r.done) break;
+        job.sum += r.value; job.i++; st.it = null;
+        if (performance.now() > BENCH.yieldAt) break;
+      }
+    } catch (e) { err = e; st.it = null; }
+    finally { BENCH.yieldAt = 0; benchBack(prev, st); }
+    if (err) { console.error('banc d\'essai', err); fin(0); return; }
+    if (job.i >= seeds.length) fin(job.sum / seeds.length);
+    else setTimeout(slice, LAY.pc ? 0 : 6);
+  };
+  setTimeout(slice, 0);
+}
+// l'apport d'un jeton (avec lui / sans lui), sans bloquer
+function jetonContribAsync(j, done, alive) {
+  const L = G.run.jokers, inRack = L.includes(j);
+  const withJ = inRack ? L.slice() : L.concat([j]), without = inRack ? L.filter(x => x !== j) : L.slice();
+  benchDpsAsync(withJ, a => benchDpsAsync(without, b => done({ inRack, with: a, without: b, delta: b > 0 ? a / b - 1 : (a > 0 ? 1 : 0) }), alive), alive);
+}
+
+// ---- la musique : sur téléphone, on garde 2 morceaux décodés en mémoire au lieu de 4 (chacun pèse ~25 Mo une fois décodé)
+function fmKeep() { try { return LAY.pc ? 4 : 2; } catch (e) { return 4; } }
+
+// ---- iPhone : pas de zoom par erreur en pinçant l'écran
+['gesturestart', 'gesturechange'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
+// ---- iPhone : après un appel, une notification ou l'écran verrouillé, le son restait coupé (« interrompu ») jusqu'au rechargement ;
+//      il revient au premier toucher
+(function audioWake() {
+  const wake = () => { const ac = AU.ac; if (ac && ac.state !== 'running' && !document.hidden) { try { const p = ac.resume(); if (p && p.catch) p.catch(() => {}); } catch (e) { /* rien */ } } };
+  for (const t of ['pointerdown', 'touchend', 'click', 'keydown']) addEventListener(t, wake, { capture: true, passive: true });
+})();
 
 /* ---------- boucle ---------- */
 let lastT = 0;

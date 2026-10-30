@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v16.6-202610300000
+JACKPOT DEFENSE v16.8-202610300400
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,22 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v16.8 — la version téléphone répare
+- Fini les gels : toucher un jeton (machine, rack, marché noir) figeait le jeu plusieurs secondes sur téléphone,
+  le temps de calculer « Apport aux dégâts ». Le calcul se fait maintenant en coulisses, par petits bouts :
+  le jeu reste fluide et le chiffre arrive tout seul (pareil pour l'onglet Dégâts des infos de la partie).
+- Monsieur Anatole réapparaît sur téléphone (sur iPhone, son portrait restait invisible dans la bibliothèque).
+- Plus de zoom par erreur : un double-tap ou un pincement ne grossit plus l'écran.
+- iPhone : après un appel ou l'écran verrouillé, le son revient au premier toucher (avant, il restait coupé).
+- Téléphone : la musique garde moins de morceaux en mémoire (le jeu tient mieux sur les petits téléphones).
+
+Nouveautés de la v16.7 — corrections
+- L'Inspecteur ne dépasse plus et n'est plus coupé : sur PC, son grand portrait tient toujours en entier dans
+  l'espace à côté du marché (quelle que soit sa pose) ; sur téléphone, il tient en entier dans son bandeau.
+- Corrigé : sur grand écran, le marché noir et l'écran de fin se resserraient beaucoup trop (tout devenait petit).
+- Corrigé : en quittant le bar de Zaza pour le combat, l'écran faisait un petit saut. Le bar descend maintenant
+  proprement, puis la table apparaît.
 
 Nouveautés de la v16.6 — tout le monde vit
 - Tous les persos bougent comme Anatole : Zaza, l'Inspecteur, le Baron, Madame Nox, Dina et Momo respirent,

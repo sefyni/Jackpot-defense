@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v16.6-202610300000
+JACKPOT DEFENSE v16.8-202610300400
 
 A casino roguelite: a slot machine for chips, Zaza's bar, the Inspector's black market,
 and a pinball-flipper base defense. Last 30 rounds and break the Baron's bank.
@@ -20,6 +20,8 @@ Play
 - Crude language (OPTIONS › Game, on by default): swearing and dark humour from everyone. "No" for the clean version.
 - When you lose, Gaston mocks you, together with your pet.
 - New 3D intro: you ARE the chip, rolling across the table in first person; it wobbles, falls, JACKPOT DEFENSE lights up in neon and the camera pulls back over the whole table.
+- Phones: tapping a chip no longer freezes the game for seconds (its damage test now runs in the background), Mr Anatole shows up again on iPhone, no more accidental zoom (double-tap, pinch), sound comes back after a call or a locked screen, and music uses less memory.
+- Fixes: the Inspector's portrait always fits on screen; the black market and end screen no longer shrink too much on large screens; leaving Zaza's bar for combat no longer jolts the screen.
 - Every character now breathes, sways and changes pose on their own when nobody is talking. Anatole no longer bounces: softer motion and smooth pose changes for everyone.
 - Punch-o-matic: the Inspector slips your chip into his coat and pulls it out secret. Poker hand: one of the 5 cards is a GIANT. No more scrolling on the end screen or the black market. Anatole has his own music, a sharper animated portrait and a desk that matches his library. Bigger darts game. The base health bar turns see-through under the flipper.
 - Mr Anatole's notebooks now live in his own library: tall shelves, Anatole standing in front, his two notebooks on a velvet stand. Music now waits for the intro to finish. Regulars visit once every 10 rounds. Characters leave in a puff of smoke instead of folding. The Shell game stops dealing when the table is empty.
