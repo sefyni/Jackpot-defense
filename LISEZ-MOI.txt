@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v15.7-202610220300
+JACKPOT DEFENSE v16.6-202610300000
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,170 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v16.6 — tout le monde vit
+- Tous les persos bougent comme Anatole : Zaza, l'Inspecteur, le Baron, Madame Nox, Dina et Momo respirent,
+  se balancent un peu et, quand personne ne parle, changent de pose tout seuls (des poses calmes : clin d'œil,
+  sourire en coin, il réfléchit, il compte son or…). Quand ils parlent, leur tête suit toujours leur réplique.
+- Anatole ne rebondit plus : mouvement plus lent et plus doux, et les changements de pose passent en fondu
+  au lieu d'un « pop » (pareil pour tout le monde).
+
+Nouveautés de la v16.5 — le Punch-o-matic de l'Inspecteur, Anatole en musique
+- Punch-o-matic : l'Inspecteur prend ton vrai jeton entre deux doigts, le glisse dans sa veste (ça cogne, ça
+  tremble, ça brille violet dedans)… et le ressort en rareté secrète, avec des étincelles.
+- Main de poker : une des 5 cartes posées est un GÉANT (plus grosse, plus solide, paie plus ; le chrono passe à 5 s).
+- PERDU tombe maintenant au milieu de la table.
+- Plus besoin de faire défiler l'écran de fin ni le marché noir : ils se resserrent pour tout montrer
+  (sur téléphone, le marché noir passe en deux colonnes).
+- Carnets d'Anatole : un vrai bruit de page qui se tourne (plus de « toc »). Les cartes du Casse quittent la page
+  des Arcanes : elles ont leur page avec l'événement Le Casse. Les fiches des cartes n'affichent plus les PV et
+  les dégâts.
+- Anatole a sa musique : une valse lente (clarinette, boîte à musique, clavecin, tic-tac d'horloge).
+- Anatole en haute qualité, sans cadre découpé : il respire, bouge quand il parle et change de pose tout seul
+  (il examine un jeton, chuchote, rit…). Le présentoir et les carnets sont dans la DA de la bibliothèque
+  (bois sombre, liseré de laiton, gros contours noirs, ombres dures).
+- Le jeu de Dina est bien plus grand.
+- Quand le flipper passe sur la barre de vie de la base, elle devient transparente.
+- Accueil dans la nouvelle DA : gros contours noirs et ombres dures sur le logo, le menu et ses boutons.
+
+Nouveautés de la v16.4 — la bibliothèque d'Anatole
+- Les carnets d'Anatole ont leur pièce : une grande bibliothèque (étagères pleines de livres, jetons, cartes rares,
+  échelle), Anatole en grand devant, éclairé en vert, et ses deux carnets posés sur un présentoir de velours
+  sous deux spots. Plus rien de l'ancien dessin (le bouton de l'accueil montre aussi son nouveau visage).
+- La musique attend la fin de l'intro : pendant l'intro on n'entend que l'intro, puis la musique monte doucement.
+- Accueil : plus de petit saut quand la souris passe en haut à gauche (le décor ne bouge plus de haut en bas).
+- Les habitués (Dina, Momo, Madame Nox) passent chacun UNE fois par tranche de 10 manches (1-10, 11-20, 21-29),
+  jamais le soir où le Baron vient jouer.
+- Le Bonneteau ne redistribue plus quand il n'y a plus d'ennemis : la partie en cours se termine, puis il range.
+- Quand un perso s'en va (Baron, habitués), il ne se replie plus sur lui-même : il glisse vers la sortie et se
+  dissout dans une bouffée de fumée à sa couleur. À l'arrivée, il apparaît en fondu.
+- Corrigé : sur PC, le grand portrait de l'Inspecteur (et son nom « L'Inspecteur Gontran ») dépassait du bord ;
+  les grands portraits tiennent maintenant toujours dans l'écran.
+
+Nouveautés de la v16.3 — les persos en portraits « Casino Noir » (façon Hades)
+- Zaza, l'Inspecteur, le Baron, Madame Nox, Dina, Momo et Monsieur Anatole ont un nouveau portrait illustré,
+  chacun avec son symbole de casino (as de pique, cœur, carreau, dés, trèfle, jeton, joker, as en or).
+- Chacun a 10 poses (rire, colère, surprise, clin d'œil, triche, tristesse…). À chaque réplique, le perso change
+  de tête, comme dans Hades : il ricane quand tu perds, s'énerve quand tu gagnes, chuchote ses secrets.
+- Sur PC, au bar et au marché noir, les persos apparaissent en grand sur les côtés, éclairés à leur couleur.
+  Sur téléphone, ils restent dans le bandeau du haut. Leur portrait suit aussi dans le catalogue (« Les habitués »).
+- Nouvelles répliques, écrites pour chaque pose (le Baron perd son monocle dans son cognac, Momo se fait plumer
+  jusqu'au bandana, Dina fait des bulles de chewing-gum, Nox négocie avec la roue pour payer son loyer…).
+- Les salles en vue subjective prennent l'ambiance de leur perso : Nox (lune, rideaux de velours, cartes de tarot
+  qui flottent, boule violette), Dina (cible au mur avec ses fléchettes, tags fluo), Momo (boule 8 au néon orange,
+  râtelier de queues, chaîne, enseigne orange), le Baron (rideaux, appliques dorées). Derrière chacun, une lumière à
+  sa couleur qui s'intensifie au moment décisif.
+- Le Baron est plus grand à sa table de poker. Au marché noir, un gyrophare rouge et bleu balaie la ruelle.
+- Corrigé : la salle de Madame Nox était décalée et coupée à gauche sur PC.
+
+Nouveautés de la v16.2 — le Baron en vue subjective, l'accueil qui vit
+- Le poker contre le Baron se joue à la 1re personne (façon Buckshot Roulette) : tu es assis à sa table, dans le
+  noir, sous une lampe qui grésille. Lui en face, en grand, le visage dans l'ombre, les yeux qui brillent.
+- Il distribue vers toi (les cartes partent de ses mains), pousse ses jetons au milieu ; tes cartes se soulèvent
+  quand tu les survoles. Au moment de retourner les cartes : la caméra avance sur lui, la lampe vacille, la musique
+  baisse. Il gagne : il se penche vers toi, les yeux rouges. Tu gagnes : il recule dans l'ombre.
+- Même jeu, mêmes boutons, mêmes répliques ; le duel pour Zaza aussi. Sur téléphone, le classement des mains est
+  derrière le bouton « Mains ». En « Mouvement réduit » : la vue d'avant.
+- Madame Nox aussi en vue subjective, redessinée en grand (même style que les cartes) : rideaux de velours,
+  étoiles, sa table violette au zodiaque doré, bougies qui vacillent, boule de cristal, tarots, fumée d'encens,
+  la roulette posée à plat sur le velours. Pendant que la roue tourne, la caméra avance et la musique baisse ; elle se penche
+  si tu perds (ses yeux s'ouvrent et brillent), recule dans l'ombre si tu gagnes. Même jeu, mêmes boutons (aussi pour son duel du Baron).
+- Dina et Momo aussi : chacun sa salle et son buste redessiné. Dina dans un bar punk (briques, néon DARTS,
+  guirlande, bières, fléchettes), sa cible droite face à toi. Momo dans sa salle de billard (lambris, grande lampe
+  verte, chope, craie), le billard posé à plat. Le Baron est redessiné pareil (buste, yeux qui s'allument),
+  avec jetons, whisky et cigare sur sa table.
+- L'écran d'accueil penche vers la souris (ou le doigt), le logo, le classement et le menu bougent chacun à leur
+  vitesse, le fond tourbillonne autour du pointeur, et tout tangue doucement tout seul.
+- Les boutons ont du répondant, partout dans les menus : au survol ils grossissent et tremblent (petit « tic »),
+  au clic ils s'écrasent puis rebondissent, avec un éclair et un « tchk » ; l'écran sursaute un peu.
+  (Pas de sursaut pendant le combat ; « Mouvement réduit » coupe tout.)
+- Dés pipés, nouvelle règle : toutes les 5 s le croupier lance les 2 dés. Moins de 10 : les cartes foncent sur
+  toi (3 s, traînées rouges). 10 ou plus : elles reculent (3 s, traînées dorées). Ta BILLE relance toujours un dé.
+  Il lance tant qu'il reste des cartes, et s'arrête quand tout le monde est tombé. Plaque : 5 fois 10 ou plus.
+- Le rack ne déborde plus avec la Mémoire tampon ou un jeu qui donne des places : sur PC, les places rétrécissent
+  pour toutes tenir ; partout, moins de places « à gagner » affichées quand tu en as déjà beaucoup.
+- Toutes les cartes ennemies sont redessinées (gros contours noirs, ombres en aplats, lumière sur les bords) :
+  les têtes (valets, dame, rois, Joker, Baron, vigile) ont un vrai portrait ; les cartes de base gardent un fond
+  crème de carte à jouer (bien lisibles sur le tapis) avec un petit dessin ; les spéciales, Géants et Arcanes ont
+  un fond sombre. Le Golem, le coffre, le Sabot et la grue gardent leur forme.
+- Tous les symboles du jeu (jetons, sorts, objets, boutons, badges…) passent dans la même direction artistique :
+  gros contour noir, ombre dure en bas à gauche, liseré de lumière en haut à droite.
+- Zaza et l'Inspecteur redessinés dans la nouvelle DA (mêmes looks : cheveux turquoise, lunettes roses, bouteille ;
+  feutre à l'As de pique, clin d'œil, cigarette, trench, revolver). Leur bouche bouge toujours quand ils parlent.
+- Le logo JACKPOT DEFENSE, les jetons et les familiers (Coco, Marcel, Boris, Gaston) passent aussi dans la
+  nouvelle DA : contour noir épais, ombre dure, liseré de lumière.
+- Les illustrations des sorts aussi (contour noir épais, ombre dessous).
+- Les cartes du bas (BILLE et sorts) affichent la touche du clavier vraiment attribuée (OPTIONS › Contrôles),
+  et changent tout de suite si tu changes une touche. Sur PC, la BILLE montre aussi la sienne.
+- Contre le Baron, le classement des mains se cache et se montre avec un bouton (« Cacher » / « Mains ») ;
+  ton choix est gardé. Le bouton du bas (Continuer, Changer…) reste toujours visible.
+- Corrigé : l'écran de fin (défaite) était coincé à gauche et coupé sur PC depuis la v16.0.
+- Corrigé : l'intro de secours (sans 3D) clignotait en entier quand le néon s'allumait.
+- Les shots de Zaza coûtent plus cher au fil des manches (×1,3 vers la 10, ×1,7 vers la 20, ×2 à la 30, en plus
+  de la hausse du bar) ; leurs effets en % suivent ta puissance, ils restent rentables.
+
+Nouveautés de la v16.1 — l'intro en 3D : tu ES le jeton
+- Vue subjective : le jeton roule à ras du tapis, entre les piles de jetons et les cartes ; les lumières du casino
+  s'allument une à une, la lampe au-dessus de la table grésille puis éclaire tout.
+- Il ralentit, vacille de plus en plus vite et tombe sur le dos : on voit la lampe, elle éblouit…
+- Coupe : gros plan sur le jeton, JACKPOT DEFENSE s'allume en néon, puis la caméra tourne et dézoome jusqu'à toute
+  la table, et l'écran titre arrive. Environ 6 s, on ne peut pas la passer. Le son suit l'image (roulement, piles
+  qui passent, ampoules, choc, néon).
+- Une vraie bande-son pour l'intro, façon logo de studio : grondement, cliquetis mécaniques, CLONK de la lampe,
+  pièce qui tourne sur sa tranche, puis le gros impact (basse, métal, réverb) et les cordes du dézoom.
+- Bruits de l'intro plus naturels : le jeton qui vacille et tombe sonne comme un vrai jeton sur le tapis (petits
+  claquements, choc sourd), plus de sifflets ni de « boing » ; l'impact est grave sans glissando.
+- Découvertes : la fiche tient dans l'écran et la liste défile (souris, doigt) ; avant, le bas était coupé.
+- La musique est beaucoup moins forte (8 bits : −9 dB, instruments : −4,5 dB ; les deux au même niveau).
+- En vraie 3D (WebGL). Si l'appareil rame, l'image se fait avec moins de pixels (sans ralentir). Sans WebGL ou en
+  « Mouvement réduit », c'est l'intro de la v16.0.
+
+Nouveautés de la v16.0 — beaucoup moins de texte, le langage cru, Gaston se moque, la nouvelle intro
+- Beaucoup moins de texte partout. Chaque jeton a une ligne courte avec des chiffres qui veulent dire quelque chose
+  (« Tes tirs brûlent : 30 % des dégâts/s. ») ; ses autres capacités sont dans « Détails ». Les 30 jetons fous
+  s'écrivent en vraies phrases, même corrompus (avant : « deux fois par manche » tout seul).
+- Le marché noir : une ligne par offre (jetons, place, objets, sorts, Gaston, Punch-o-matic). Le bar aussi :
+  boissons, shots, les habitués (« 1/3 · 2 = bonus · 3 = cadeau »). Les bugs des machines sont plus courts.
+- « LA MAISON JOUE… » : le rouleau tourne plus longtemps et ne se passe plus (ni clic, ni Espace, ni Entrée).
+  La règle arrive en 3 temps, chacun avec son petit dessin. COMMENCER se remplit pendant que tu lis, puis s'active.
+  Pendant la manche, la règle reste affichée (PC : panneau de gauche ; téléphone : en bas).
+- Langage cru (OPTIONS › Jeu, « Oui » par défaut) : plus de 200 répliques grossières et d'humour noir pour Zaza,
+  l'Inspecteur, le Baron, Dina, Momo, Madame Nox, Coco, Marcel, Boris, Gaston et les boss. « Non » : la version polie.
+  Jamais raciste, homophobe ou sexiste.
+- Quand tu perds, Gaston se moque de toi avec ton compagnon (Coco, Marcel ou Boris), selon ta défaite : trop tôt,
+  contre un boss, tout près du Baron… Seul s'il est ton compagnon (« J'ai changé de camp à la manche 27. »).
+- Nouvelle intro : un jeton roule dans le noir, les ampoules s'allument une à une, il ralentit, vacille, tombe à plat,
+  JACKPOT DEFENSE s'allume en néon dessus… et on plonge dedans (environ 4 s, on ne peut pas la passer).
+  « Mouvement réduit » : le jeton est déjà posé, la lumière monte, le néon s'allume, fondu.
+- Classement : un pseudo insultant est refusé avec « Ce pseudo n'est pas autorisé. » (le même filtre que le serveur).
+  Les prénoms comme Unique, Monique ou Nazir ne sont plus bloqués par erreur.
+- Rien ne change dans les règles ni l'équilibrage (les simulations donnent exactement les mêmes parties qu'en v15.9).
+
+Nouveautés de la v15.9 — la DA des persos et des cartes, le classement top 100, et plein de retours
+- Le Baron, Dina, Momo et Madame Nox sont redessinés (ombres, regards, détails des tenues), au niveau de Zaza et
+  de l'Inspecteur (eux ne changent pas).
+- Les cartes ennemies ont du caractère : des yeux et une tête à elles (le Coureur file, le Soldat a son casque,
+  le Tireur vise, le Blindé a sa visière, le Soigneur sa coiffe, le Tricheur un as dans la manche…), un papier
+  ombré et l'index aux deux coins. Les figures qui reviennent (Valet, Dame, Rois) ont leur portrait.
+- Dina, Momo et Madame Nox viennent au moins 3 fois chacun par partie (sur 30 manches), jamais le soir du Baron
+  (lui vient déjà une fois par dizaine).
+- Pixel mort (jeton fou) : il se balade partout sur la table, grossit, rétrécit et bugue d'un coin à l'autre.
+- Une barre de vie sous ta base (verte, jaune, puis rouge qui clignote ; la part perdue s'efface doucement).
+- « Passer le tuto › » : un bouton en haut, pendant tout le tuto (deux touches, pour ne pas le passer par erreur).
+- Le Tiercé est plus dur : les chevaux galopent plus vite (3 tours), la course est plus serrée, la BILLE freine
+  et fouette un peu moins.
+- Classement : jusqu'au top 100 (la liste défile), et un œil à côté des joueurs dont on peut voir la partie :
+  touche-les pour voir leurs jetons, leur mise, leur deck et leurs animaux. Il faut d'abord coller le fichier
+  top100-et-parties.sql dans Supabase (sans lui, le classement reste au top 10, comme avant). Les parties
+  s'enregistrent à partir de cette version.
+
+Nouveautés de la v15.8 — la fuite de Gaston, le marché noir, les jeux de la Maison centrés
+- Quand Gaston s'enfuit, on le voit : « Salut, patron ! », ton or s'envole en pièces jusqu'à lui (−X en rouge
+  sur ton or), il attrape son sac… et traverse l'écran en sautillant. Ensuite, le bandeau « GASTON S'EST ENFUI ! ».
+- Au marché noir, quand il revient : texte court sur sa carte (« Il est revenu ! Racheté, il ne repart plus. »)
+  et réplique courte de l'Inspecteur (« Ton rat est revenu. Moitié prix. »), qui n'est plus coupée par une autre.
+- « LA MAISON JOUE… » est de nouveau au centre de la table (avec les jetons repliés, la table s'était décalée).
+  Sur PC, les annonces (succès, Gaston…) sont aussi centrées sur la table.
 
 Nouveautés de la v15.7 — plus de jus à l'impact, un début plus simple, les jetons repliés
 - Les coups se sentent : la carte touchée recule et blanchit, des étincelles partent côté base, et de petits
