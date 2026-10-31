@@ -4898,6 +4898,29 @@ body.lpc .hzc-box{left:max(34%,260px);right:auto;width:min(560px,60%);bottom:28p
 /* l'écran de fin */
 .hz-ocell dd{color:#ffcc4d}
 .hz-orec{display:block;font-style:normal;color:#ff5c6c;font-size:15px;letter-spacing:.1em;margin-top:4px}
+/* le choix du mode dans « Jouer » */
+.nr-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.nr-modes button{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:54px;padding:6px 8px;border:0;border-radius:12px;background:#221833;color:#c3b4dc;font-size:18px;letter-spacing:.06em;box-shadow:inset 0 0 0 2px #4b3a68,0 4px 0 #0b0610}
+.nr-modes button small{font-size:11px;letter-spacing:0;opacity:.8}
+.nr-modes button.on{background:linear-gradient(#ffcc4d,#e0a040);color:#2a160a;box-shadow:0 4px 0 #6a4e12}
+.nr-modes button[data-nrm="1"].on{background:linear-gradient(#ff7a5c,#c8283a);color:#fff3e6;box-shadow:0 4px 0 #6a1020}
+#newrun.hzm .nr-deck,#newrun.hzm .nr-info>:not(.nr-go){display:none!important}
+.nr-hz{display:grid;grid-template-columns:minmax(120px,40%) 1fr;align-items:end;gap:12px;width:100%;padding:12px;border-radius:16px;background:linear-gradient(180deg,#2a1218,#160a10);box-shadow:inset 0 0 0 2px #6a3a2a;text-align:left}
+.nrh-fig{aspect-ratio:790/800;position:relative}
+.nrh-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 10px 16px rgba(0,0,0,.6))}
+.nrh-txt h3{font-size:22px;color:#ffcc4d;text-shadow:0 2px 0 #6a3a10;margin-bottom:6px}
+.nrh-txt p{font-size:14px;color:#e8dcf8;line-height:1.35;margin-bottom:6px}
+.nrh-start{color:#ffe2a0!important}
+.nrh-rec b{color:#ff7a5c}
+.nrh-lock{font-style:italic;color:#ffb07a!important}
+#newrun.hzm .nr-go{background:linear-gradient(#ff7a5c,#c8283a)}
+@media (max-width:520px){.nr-hz{grid-template-columns:110px 1fr}.nrh-txt h3{font-size:18px}.nrh-txt p{font-size:13px}}
+/* le choix des jetons de départ */
+.hzd-c.on{box-shadow:inset 0 0 0 3px #5fd68a,0 0 18px rgba(95,214,138,.45)!important;background:#1f3a2c!important}
+.hzd-c small{font-size:11px;color:#b9a3c4;line-height:1.2}
+.hzd-btns{display:flex;gap:8px;margin-top:10px}
+.hzd-btns .hzj-go{flex:1;margin:0}
+.hzd-btns .hzj-go:disabled{filter:grayscale(.7);opacity:.7}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5525,7 +5548,7 @@ body.lpc .hzc-box{left:max(34%,260px);right:auto;width:min(560px,60%);bottom:28p
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.1</p>
+  <p class="proto">Sefy Industries · v18.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24725,7 +24748,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.1</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35799,18 +35822,25 @@ function hrdOver(run) {
   const st = $('#o-stats');
   if (st) st.insertAdjacentHTML('afterbegin', `<div class="hz-ocell"><dt>${hT('Temps dans la horde', 'Time in the horde')}</dt><dd>${hrdClock(F.t)}</dd></div><div class="hz-ocell"><dt>${hT('Niveau atteint', 'Level reached')}</dt><dd>${F.lv}</dd></div>`);
   const sc = $('#o-score');
-  if (sc && run.hzRec) sc.insertAdjacentHTML('beforeend', `<em class="hz-orec">${hT('RECORD DE LA HORDE !', 'HORDE RECORD!')}</em>`);
-  hrdLbSend(run);
+  if (sc && run.hzSolo) { sc.querySelectorAll('em,i').forEach(x => x.remove()); sc.insertAdjacentHTML('beforeend', run.hzRec ? `<em class="hz-orec">${hT('RECORD DE LA HORDE !', 'HORDE RECORD!')}</em>` : `<i>${hT('record de la horde', 'horde record')} : ${fmtS((G.meta.hzBest || {}).score || 0)}</i>`); hrdLbSend(run); }
+  else if (sc && run.hzRec) sc.insertAdjacentHTML('beforeend', `<em class="hz-orec">${hT('RECORD DE LA HORDE !', 'HORDE RECORD!')}</em>`);
 }
 // le classement de la horde (une seule table, toutes mises confondues) : on n'y met que les parties qui ont atteint la horde
 const HRD_LB = 100;
 async function hrdLbSend(run) {
+  const box = $('#o-score'); let el = $('#o-lb'); if (box) { if (!el) { el = document.createElement('span'); el.id = 'o-lb'; el.className = 'o-lb'; } box.appendChild(el); }
   try {
-    if (!lbRunOk(run) || !lbMe()) return;
-    const me = lbMe();
-    await lbRpc('lb_submit', { p_id: me.id, p_secret: me.secret, p_stake: HRD_LB, p_score: Math.round(run.score), p_round: Math.min(999, run.hzFinal.lv), p_deck: run.deck || '' });
+    if (!lbRunOk(run)) { if (el) el.textContent = run && run.devUsed ? hT('Partie de test : hors classement', 'Test run: not ranked') : ''; return; }
+    if (!lbMe()) { if (el) { el.innerHTML = hT('Hors classement : ', 'Not ranked: ') + `<button class="mini" id="o-lbp">${hT('choisis ton pseudo', 'pick a name')}</button>`; $('#o-lbp').onclick = () => lbAsk(() => hrdLbSend(run)); } return; }
+    if (el) el.textContent = hT('Classement…', 'Ranking…');
+    const me = lbMe(), sc = Math.round(run.score);
+    const r = await lbRpc('lb_submit', { p_id: me.id, p_secret: me.secret, p_stake: HRD_LB, p_score: sc, p_round: Math.min(999, run.hzFinal.lv), p_deck: '' });
     delete LB.cache[HRD_LB];
-  } catch (e) { /* le classement de la horde est facultatif */ }
+    if (!el) return;
+    if (r.error) { el.textContent = r.error === 'reseau' ? hT('Hors ligne : classement plus tard', 'Offline: ranking later') : hT('Classement Horde indisponible', 'Horde ranking unavailable'); return; }
+    const row = Array.isArray(r.data) ? r.data[0] : r.data; if (!row) { el.textContent = ''; return; }
+    const pl = +row.place; el.innerHTML = `<b>${pl}<sup>${pl === 1 ? (HRD_EN ? 'st' : 'er') : (HRD_EN ? 'th' : 'e')}</sup></b> ${hT('au classement Horde', 'in the Horde ranking')}`;
+  } catch (e) { if (el) el.textContent = ''; }
 }
 // l'onglet « Horde » du classement
 const HRD_LBS = { name: 'Horde', col: '#ff7a5c', tok: 1 };
@@ -36687,6 +36717,145 @@ punchAnim = function (j, done) {
   step(6700, () => ov.classList.add('bye'));
   step(7100, () => { ov.remove(); document.body.classList.remove('pm-busy'); pzSet('dealer', 'laugh', false); done(); });
 };
+
+
+/* ---------- le mode Horde, lancé directement depuis « Jouer » (débloqué après avoir battu le Baron) ----------
+   Départ rapide : Jack te fait choisir 6 jetons parmi 12, te donne un peu d'or et ouvre son shop tout de suite.
+   Un classement à part ; les records de la partie normale ne bougent pas. */
+const hrdSoloOpen = () => { const m = G.meta || {}; return (m.wins || 0) > 0 || (m.baronWins || 0) > 0 || !!(m.hzBest && m.hzBest.score); };
+const HRD_SOLO = { pick: 6, offer: 12, gold: 700, slots: 7, ups: 2, up: { calibre: 2, cadence: 2, portee: 2, pv: 2, etage: 1, solide: 2, barriere: 1, remontant: 1 } };
+const DRAFT = { offer: [], sel: [] };
+(() => {
+  const nr = document.querySelector('#newrun .nr-head');
+  if (nr) nr.insertAdjacentHTML('afterend', `<div class="nr-modes" role="tablist"><button data-nrm="0" class="on" role="tab">${hT('CLASSIQUE', 'CLASSIC')}<small>${hT('30 manches contre le Baron', '30 rounds against the Baron')}</small></button><button data-nrm="1" role="tab">${hT('HORDE', 'HORDE')}<small id="nrm-hzs"></small></button></div>
+    <div class="nr-hz" id="nr-hz" hidden></div>`);
+  const box = document.querySelector('#newrun');
+  if (box) box.addEventListener('click', e => {
+    const b = e.target.closest('[data-nrm]'); if (!b) return;
+    e.stopPropagation(); firstGesture();
+    NR.hz = b.dataset.nrm === '1'; Snd.click(); renderNewRun(0);
+  }, true);
+  const rn = renderNewRun;
+  renderNewRun = function () {
+    const r = rn.apply(this, arguments);
+    const hz = !!NR.hz, open = hrdSoloOpen(), B = (G.meta && G.meta.hzBest) || {};
+    $('#newrun').classList.toggle('hzm', hz);
+    $$('#newrun [data-nrm]').forEach(x => x.classList.toggle('on', (x.dataset.nrm === '1') === hz));
+    const s = $('#nrm-hzs'); if (s) s.textContent = open ? (B.score ? hT(`record ${fmtS(B.score)}`, `best ${fmtS(B.score)}`) : hT('survis le plus longtemps', 'survive as long as you can')) : hT('🔒 bats le Baron', '🔒 beat the Baron');
+    const p = $('#nr-hz');
+    if (p) {
+      p.hidden = !hz;
+      if (hz) p.innerHTML = `<div class="nrh-fig"><img src="portraits/jack_${open ? 'keys' : 'brow'}.webp" alt="" draggable="false"></div>
+        <div class="nrh-txt"><h3>${hT('LA HORDE DE JACK', 'JACK\'S HORDE')}</h3>
+        ${open ? `<p>${hT('Pas d\'objectif : des cartes sans fin, de plus en plus nombreuses, des boss et des géants. Monte de niveau, passe au shop de Jack toutes les minutes, affronte Momo, Dina et Nox.', 'No goal: endless cards, more and more of them, bosses and giants. Level up, visit Jack\'s shop every minute, take on Momo, Dina and Nox.')}</p>
+          <p class="nrh-start">${hT(`Départ rapide : tu choisis ${HRD_SOLO.pick} jetons, ${HRD_SOLO.gold} or, ${HRD_SOLO.ups} améliorations, et le shop est ouvert.`, `Quick start: pick ${HRD_SOLO.pick} chips, ${HRD_SOLO.gold} gold, ${HRD_SOLO.ups} upgrades, and the shop is open.`)}</p>
+          ${B.score ? `<p class="nrh-rec">${hT('Ton record', 'Your best')} : <b>${fmtS(B.score)}</b> · ${hrdClock(B.t)} · ${hT('niveau', 'level')} ${B.lv}</p>` : ''}`
+        : `<p class="nrh-lock">${hT('« Le casino est fermé. Reviens quand t\'auras ruiné le Baron. »', '"The casino is closed. Come back when you\'ve ruined the Baron."')}</p><p>${hT('Bats le Baron (manche 30) une fois pour débloquer ce mode.', 'Beat the Baron (round 30) once to unlock this mode.')}</p>`}</div>`;
+    }
+    const go = $('#newrun .nr-go');
+    if (go && hz) { go.disabled = !open; go.textContent = open ? hT('LANCER LA HORDE', 'START THE HORDE') : hT('VERROUILLÉ', 'LOCKED'); }
+    return r;
+  };
+  const ng = nrGo;
+  nrGo = function () { if (NR.hz) { if (hrdSoloOpen()) { Snd.click(); hrdSoloStart(); } return; } return ng.apply(this, arguments); };
+  const cn = closeNewRun; closeNewRun = function () { NR.hz = false; const r = cn.apply(this, arguments); $('#newrun').classList.remove('hzm'); return r; };
+})();
+function hrdSoloStart() {
+  audioInit(); Music.resume(); DISC.length = 0;
+  hideScreens(); show('#newrun', false);
+  document.body.classList.remove('at-title');
+  for (const k in hc) delete hc[k];
+  const run = G.run = applyDeck(newRun(0), '');
+  G.meta.runs++; saveMeta(); G.speed = OPT().speed || 1;
+  Object.assign(run, { hzSolo: true, slots: HRD_SOLO.slots, gold: HRD_SOLO.gold, round: 30, up: Object.assign({}, HRD_SOLO.up) });
+  const H = hrdState(run); H.shopAt = 0; H.ups = HRD_SOLO.ups;
+  const cb = newCombat(); cb.stats = computeStats(run); cb.sc = roundScale(run, 30); cb.ended = true; G.cb = cb;
+  G.mode = 'hcut';
+  renderRack(); updateHUD();
+  // 12 jetons ULTIMES de types tous différents (dont un peu de la machine de départ)
+  const mine = shuffle(MACH9[run.machine || 0].ids.slice()).slice(0, 3), rest = shuffle(NORMAL_JOKERS.filter(id => !mine.includes(id)));
+  DRAFT.offer = mine.concat(rest).slice(0, HRD_SOLO.offer).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
+  shuffle(DRAFT.offer); DRAFT.sel = [];
+  hrdDraftDom();
+  show('#hz-draft', true); $('#hz-draft').scrollTop = 0;
+  $('#hz-draft').classList.remove('in'); void $('#hz-draft').offsetWidth; $('#hz-draft').classList.add('in');
+  hrdDraftPose('enter', true);
+  setTimeout(() => { hrdDraftPose('point'); typeInto('#hzd-say', hT(`Pas le temps de faire 30 manches. Prends ${HRD_SOLO.pick} jetons, et va te battre.`, `No time for 30 rounds. Take ${HRD_SOLO.pick} chips, and go fight.`), 'jack'); }, 500);
+  Music.play('jack'); BG.setMode('market');
+  hrdDraftRender();
+}
+function hrdDraftDom() {
+  if ($('#hz-draft')) return;
+  document.body.insertAdjacentHTML('beforeend', `
+  <section id="hz-draft" class="full hzj hzd" hidden aria-label="${hT('Choisis tes jetons', 'Pick your chips')}">
+    <div class="hzj-bg" aria-hidden="true"><i class="hzj-lamp"></i><i class="hzj-shelf s1"></i><i class="hzj-shelf s2"></i><i class="hzj-safe"></i></div>
+    <div class="hzj-wrap">
+      <div class="hzj-left"><div class="hzj-fig"><img class="hzj-im" id="hzd-im0" alt="" draggable="false"><img class="hzj-im" id="hzd-im1" alt="" draggable="false"></div><i class="hzj-counter" aria-hidden="true"></i><p class="say hzj-say" id="hzd-say"></p></div>
+      <div class="hzj-right">
+        <div class="hzj-head"><h2>${hT('LA HORDE DE JACK', 'JACK\'S HORDE')}</h2><div class="hzj-gold"><b id="hzd-n">0/${HRD_SOLO.pick}</b></div></div>
+        <p class="hzj-hint">${hT(`Choisis ${HRD_SOLO.pick} jetons ULTIMES. Tu commences avec ${HRD_SOLO.gold} or, ${HRD_SOLO.ups} améliorations et le shop de Jack ouvert.`, `Pick ${HRD_SOLO.pick} ULTIMATE chips. You start with ${HRD_SOLO.gold} gold, ${HRD_SOLO.ups} upgrades and Jack's shop open.`)}</p>
+        <div class="hzj-body"><div class="hzu-grid" id="hzd-grid"></div></div>
+        <div class="hzd-btns"><button class="btn ghost hzd-back" data-hzd="back">${hT('Retour', 'Back')}</button><button class="btn big hzj-go" data-hzd="go" id="hzd-go" disabled></button></div>
+      </div>
+    </div>
+  </section>`);
+  $('#hz-draft').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    firstGesture();
+    if (b.dataset.hzdi != null) {
+      const i = +b.dataset.hzdi, k = DRAFT.sel.indexOf(i);
+      if (k >= 0) DRAFT.sel.splice(k, 1); else if (DRAFT.sel.length < HRD_SOLO.pick) DRAFT.sel.push(i); else { Snd.deny(); return; }
+      Snd.chipPick && Snd.chipPick(); haptic(8);
+      if (DRAFT.sel.length === HRD_SOLO.pick) { hrdDraftPose('smirk'); typeInto('#hzd-say', hT('Pas mal. Pour un amateur.', 'Not bad. For an amateur.'), 'jack'); }
+      hrdDraftRender(); return;
+    }
+    if (b.dataset.hzd === 'go' && DRAFT.sel.length === HRD_SOLO.pick) { Snd.click(); hrdDraftGo(); return; }
+    if (b.dataset.hzd === 'back') { Snd.click(); show('#hz-draft', false); G.run = null; G.cb = null; toTitle(); }
+  });
+}
+function hrdDraftPose(p, instant) {
+  const a = $('#hzd-im0'), b = $('#hzd-im1'); if (!a || !b) return;
+  const src = 'portraits/jack_' + p + '.webp', top = a.classList.contains('on') ? a : b, low = top === a ? b : a;
+  if (instant || G.reduced) { top.src = src; top.classList.add('on'); low.classList.remove('on'); return; }
+  low.onload = () => { low.classList.add('on'); top.classList.remove('on'); low.onload = null; }; low.src = src;
+}
+function hrdDraftRender() {
+  const n = DRAFT.sel.length, need = HRD_SOLO.pick;
+  $('#hzd-n').textContent = `${n}/${need}`;
+  $('#hzd-grid').innerHTML = DRAFT.offer.map((j, i) => `<div class="hzu-c"><button class="hzu-pick hzd-c${DRAFT.sel.includes(i) ? ' on' : ''}" data-hzdi="${i}">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><small>${topCap(j)}</small></button></div>`).join('');
+  const go = $('#hzd-go'); go.disabled = n < need; go.textContent = n < need ? hT(`Choisis encore ${need - n}`, `Pick ${need - n} more`) : hT('ALLEZ, LA HORDE !', 'BRING ON THE HORDE!');
+}
+function hrdDraftGo() {
+  const run = G.run;
+  for (const i of DRAFT.sel) { const j = DRAFT.offer[i]; run.jokers.push(j); for (const p of j.parts) catSee('j', p.t); }
+  show('#hz-draft', false);
+  hrdBegin(false);
+  if (!G.headless) setTimeout(() => toast(hT('Le shop de Jack est déjà ouvert : bouton JACK.', 'Jack\'s shop is already open: JACK button.')), 2800);
+}
+// la fin d'une partie Horde lancée depuis « Jouer » : elle ne compte pas comme une victoire, ni dans les records normaux
+(() => {
+  const er = endRun;
+  endRun = function (cashed) {
+    const run = G.run;
+    if (!run || !run.hzSolo || run.hzSoloDone) return er.apply(this, arguments);
+    run.hzSoloDone = true;
+    const m = G.meta, keep = { best: m.best, bestScore: JSON.stringify(m.bestScore || {}), wins: m.wins, stakeMax: m.stakeMax };
+    const r0 = run.round; run.round = 30; run.won = false;
+    let out;
+    try { out = er.apply(this, arguments); }
+    finally {
+      run.round = r0;
+      m.best = keep.best; m.bestScore = JSON.parse(keep.bestScore); m.wins = keep.wins; m.stakeMax = keep.stakeMax;
+      saveMeta();
+    }
+    return out;
+  };
+  const cj = calcJetons;
+  calcJetons = function (run) { if (run && run.hzSolo && run.hz) return Math.round((Math.floor(run.hz.time / 60) * 2 + run.hz.lv + Math.floor(Math.sqrt(run.score || 0) / 60)) * STAKES[run.stake || 0].tok); return cj.apply(this, arguments); };
+  // le classement : les parties « Horde » vont dans l'onglet Horde, pas dans celui des mises
+  const la = lbAfterRun;
+  lbAfterRun = async function (run) { if (run && run.hzSolo) return; return la.apply(this, arguments); };
+})();
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
 else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});
