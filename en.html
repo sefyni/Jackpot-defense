@@ -4629,6 +4629,20 @@ body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:r
 .oacc-code::placeholder{letter-spacing:normal;font:600 16px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif}
 /* v17.1 · iPhone : l'appui long marche dans les cases de texte (Coller, Remplissage automatique du code reçu par mail) */
 input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-select:text}
+/* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
+   Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
+.bk-leaf{transform-style:flat;transition:none}
+.turning .bk-leaf.fwd,.turning .bk-leaf.bwd{transform:none}
+.bk-leaf .face{backface-visibility:visible;-webkit-backface-visibility:visible;transform:none}
+.bk-leaf.fwd .face.front{transform-origin:0 50%}
+.bk-leaf.fwd .face.back{left:-100%;right:100%;transform-origin:100% 50%;transform:scaleX(0)}
+.bk-leaf.bwd .face.front{transform-origin:100% 50%}
+.bk-leaf.bwd .face.back{left:100%;right:-100%;transform-origin:0 50%;transform:scaleX(0)}
+.turning .bk-leaf .face.front{animation:bkFold .62s linear forwards}
+.turning .bk-leaf .face.back{animation:bkUnfold .62s linear forwards}
+@keyframes bkFold{0%{transform:scaleX(1);animation-timing-function:cubic-bezier(.55,0,1,.6)}50%,100%{transform:scaleX(0)}}
+@keyframes bkUnfold{0%,50%{transform:scaleX(0);animation-timing-function:cubic-bezier(0,.4,.45,1)}100%{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.turning .bk-leaf .face{animation-duration:.01s}}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -5242,7 +5256,7 @@ input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-selec
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v17.2</p>
+  <p class="proto">Sefy Industries · v17.3</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24441,7 +24455,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v17.2</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v17.3</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
