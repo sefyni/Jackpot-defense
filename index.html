@@ -4627,6 +4627,8 @@ body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:r
 .oacc-link{align-self:flex-start;padding:2px 0;border:0;background:none;color:#9fd0ff;font:600 13px var(--f-pix);text-decoration:underline;cursor:pointer}
 .oacc-code{font:700 24px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.35em;text-align:center}
 .oacc-code::placeholder{letter-spacing:normal;font:600 16px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif}
+/* v17.1 · iPhone : l'appui long marche dans les cases de texte (Coller, Remplissage automatique du code reçu par mail) */
+input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-select:text}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -5240,7 +5242,7 @@ body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:r
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v17.0</p>
+  <p class="proto">Sefy Industries · v17.1</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -24587,7 +24589,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v17.0</p></div>`;
+        <p class="ov5">v17.1</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -33626,7 +33628,9 @@ function fpClose() {
    l'écran sursaute. « Mouvement réduit » : rien de tout ça. */
 const JZ = { mx: 0, my: 0, tx: 0, ty: 0, t: 0, raf: 0, last: 0, hov: null, sndT: 0 };
 const JZ_SEL = '.btn,.mbtn,.mini,.offer,.chm,.pk-chip,.tboard,.tsecret,.dc-item,.fp-ladb';
-function jzTitleOn() { const t = $('#title'); return !!t && !t.hidden && !G.reduced && !G.headless; }
+// v17.1 : sur téléphone (ou écran tactile), l'accueil ne tangue plus tout seul : c'était recalculé à chaque image, sur tout l'écran
+const jzLite = () => { try { return !LAY.pc || matchMedia('(pointer: coarse)').matches; } catch (e) { return true; } };
+function jzTitleOn() { if (jzLite()) return false; const t = $('#title'); return !!t && !t.hidden && !G.reduced && !G.headless; }
 function jzLoop(now) {
   JZ.raf = 0;
   const dt = Math.min(.05, (now - (JZ.last || now)) / 1000); JZ.last = now;
@@ -33706,7 +33710,7 @@ function jzInit() {
     // l'écran sursaute (seulement dans les menus : pas pendant le combat)
     const box = el.closest('.full, .ov, #title');
     const m0 = G.mode;
-    if (box && box.animate && m0 !== 'combat') setTimeout(() => { if (box.hidden || G.mode !== m0 || !box.isConnected || (box.id === 'bar' && BAR.leaving) || (box.id === 'market' && MK.leaving)) return; box.animate([{ translate: '0 0' }, { translate: '0 3px' }, { translate: '-2px -1px' }, { translate: '1px 1px' }, { translate: '0 0' }], { duration: 180, easing: 'ease-out' }); }, 0);
+    if (box && box.animate && m0 !== 'combat' && !jzLite()) setTimeout(() => { if (box.hidden || G.mode !== m0 || !box.isConnected || (box.id === 'bar' && BAR.leaving) || (box.id === 'market' && MK.leaving)) return; box.animate([{ translate: '0 0' }, { translate: '0 3px' }, { translate: '-2px -1px' }, { translate: '1px 1px' }, { translate: '0 0' }], { duration: 180, easing: 'ease-out' }); }, 0);
     if (jzTitleOn() && BG) BG.kick = Math.max(BG.kick || 0, .55);
   });
 }

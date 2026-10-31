@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v17.0-202610310300
+JACKPOT DEFENSE v17.1-202610310250
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v17.1 — le téléphone ne relance plus le jeu
+- Téléphone et tablette : l'écran d'accueil ne tangue plus tout seul, et l'écran entier ne sursaute plus à chaque
+  bouton touché. Ces deux effets faisaient travailler le téléphone sur tout l'écran, sans arrêt : sur iPhone, le jeu
+  pouvait se relancer en touchant un bouton (PROFIL…) ou sur l'écran d'accueil. Sur PC, rien ne change.
+- iPhone : on peut de nouveau coller dans les cases de texte (le code reçu par mail, ton mail, le code de
+  sauvegarde). L'iPhone peut aussi proposer tout seul le code reçu par mail, au-dessus du clavier.
 
 Nouveautés de la v17.0 — se connecter depuis l'accueil, mot de passe oublié
 - Sur l'écran d'accueil, un bouton bleu « SE CONNECTER » à côté de PROFIL : il ouvre la fenêtre du compte.
