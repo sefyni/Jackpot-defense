@@ -5242,7 +5242,7 @@ input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-selec
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v17.1</p>
+  <p class="proto">Sefy Industries · v17.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -17290,8 +17290,12 @@ function bkTurn(to) {
   }
   bkHydrate(st);
   void st.offsetWidth;
-  requestAnimationFrame(() => requestAnimationFrame(() => st.classList.add('turning')));
-  setTimeout(() => { BK.i = to; BK.busy = false; if (!$('#book').hidden) bkRender(); }, 640);
+  // v17.2 : le chrono part quand la page commence vraiment à tourner (préparer deux pages pleines de jetons prend du
+  // temps : avant, la page démarrait en retard et était coupée à mi-chemin)
+  let done = false;
+  const fin = () => { if (done) return; done = true; BK.i = to; BK.busy = false; if (!$('#book').hidden) bkRender(); };
+  requestAnimationFrame(() => requestAnimationFrame(() => { st.classList.add('turning'); setTimeout(fin, 680); }));
+  setTimeout(fin, 3000);
 }
 const bkStep = d => bkTurn(BK.i + d * (BK.pc ? 2 : 1));
 
@@ -24589,7 +24593,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v17.1</p></div>`;
+        <p class="ov5">v17.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;

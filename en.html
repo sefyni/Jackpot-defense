@@ -5242,7 +5242,7 @@ input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-selec
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v17.1</p>
+  <p class="proto">Sefy Industries · v17.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -17272,8 +17272,12 @@ function bkTurn(to) {
   }
   bkHydrate(st);
   void st.offsetWidth;
-  requestAnimationFrame(() => requestAnimationFrame(() => st.classList.add('turning')));
-  setTimeout(() => { BK.i = to; BK.busy = false; if (!$('#book').hidden) bkRender(); }, 640);
+  // v17.2 : le chrono part quand la page commence vraiment à tourner (préparer deux pages pleines de jetons prend du
+  // temps : avant, la page démarrait en retard et était coupée à mi-chemin)
+  let done = false;
+  const fin = () => { if (done) return; done = true; BK.i = to; BK.busy = false; if (!$('#book').hidden) bkRender(); };
+  requestAnimationFrame(() => requestAnimationFrame(() => { st.classList.add('turning'); setTimeout(fin, 680); }));
+  setTimeout(fin, 3000);
 }
 const bkStep = d => bkTurn(BK.i + d * (BK.pc ? 2 : 1));
 
@@ -24437,7 +24441,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v17.1</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v17.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;

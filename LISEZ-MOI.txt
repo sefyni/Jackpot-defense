@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v17.1-202610310250
+JACKPOT DEFENSE v17.2-202610311310
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,9 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v17.2 — correction
+- Carnets d'Anatole : les pages tournent jusqu'au bout (avant, la page démarrait en retard et sautait à mi-chemin).
 
 Nouveautés de la v17.1 — le téléphone ne relance plus le jeu
 - Téléphone et tablette : l'écran d'accueil ne tangue plus tout seul, et l'écran entier ne sursaute plus à chaque
