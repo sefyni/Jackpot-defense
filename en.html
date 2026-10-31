@@ -4585,6 +4585,34 @@ body.cvd .mcard.t3 .skull{color:#ff4fd8}
 /* téléphone : l'image donne elle-même sa hauteur (sans dépendre d'aspect-ratio), et pas d'ombre floue recalculée à chaque image */
 body:not(.lpc) .an-fig.pz-anat{aspect-ratio:auto;height:auto}
 body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:relative;inset:auto;display:block;height:auto;filter:none}
+
+/* ================= v16.9 · le compte (sauvegarde en ligne, facultative) ================= */
+.oacc{display:flex;flex-direction:column;gap:8px;margin:0 0 10px;padding:12px;border-radius:12px;background:linear-gradient(160deg,rgba(74,168,255,.16),rgba(0,0,0,.24));box-shadow:inset 0 0 0 2px rgba(74,168,255,.4);text-align:left}
+.oacc-t{display:flex;align-items:baseline;gap:8px;margin:0;font-size:15px;color:#cfe6ff}
+.oacc-t i{font-style:normal;font-size:12px;color:var(--muted)}
+.oacc-p{margin:0;font-size:13.5px;line-height:1.35;color:var(--cream)}
+.oacc-dim{font-size:12px;color:var(--muted)}
+.oacc-st{margin:0;min-height:1em;font-size:12.5px;color:#7fe0a4}
+.oacc-tabs{display:flex;gap:6px}
+.oacc-tabs button{flex:1;padding:9px 6px;border:0;border-radius:9px;background:rgba(0,0,0,.32);color:var(--muted);font:700 13px/1.1 var(--f-pix)}
+.oacc-tabs button.on{background:#2a6fd6;color:#fff;box-shadow:0 3px 0 #17407e}
+.oacc-in{width:100%;box-sizing:border-box;padding:11px 12px;border:0;border-radius:10px;background:#0d0818;box-shadow:inset 0 0 0 2px var(--edge);color:#fff;font:600 16px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-user-select:text;user-select:text}
+.oacc-in:focus{outline:none;box-shadow:inset 0 0 0 2px #4aa8ff,0 0 12px rgba(74,168,255,.35)}
+.oacc-in::placeholder{color:#6f6488}
+.oacc-row{display:flex;flex-wrap:wrap;gap:8px}
+.oacc-row .btn{flex:1}
+.oacc-del{align-self:flex-start;padding:2px 0;border:0;background:none;color:var(--muted);font:600 12px var(--f-pix);text-decoration:underline}
+.oacc-del.arm{color:#ff7a8a}
+.oacc-msg{margin:0;min-height:1em;font-size:12.5px;color:var(--gold)}
+.oacc-msg.bad{color:#ff7a8a}
+#accdlg{z-index:46}
+.acc-picks{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.acc-pick{display:flex;flex-direction:column;gap:3px;padding:12px 10px;border:0;border-radius:12px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 2px var(--edge);color:var(--cream);text-align:left;font:600 13px/1.25 var(--f-pix);cursor:pointer}
+.acc-pick.on{box-shadow:inset 0 0 0 2px #4aa8ff}
+.acc-pick b{font-size:16px;color:var(--gold)}
+.acc-pick small{color:var(--muted)}
+.acc-pick:active{transform:scale(.97)}
+@media (max-width:380px){.acc-picks{grid-template-columns:1fr}}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -5198,7 +5226,7 @@ body:not(.lpc) .pz-anat .pza-im,body:not(.lpc) .pz-anat:hover .pza-im{position:r
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v16.8</p>
+  <p class="proto">Sefy Industries · v16.9</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24378,7 +24406,7 @@ function renderOptions() {
       h += oRow('Default keys', '<button class="btn small ghost" data-oact="keyreset">Reset</button>', 'AZERTY: Q / D for the flipper, 1 to 4 with or without Shift');
       break;
     case 'profil': {
-      h += lbProfRow() + lbDataRow();
+      h += accRow() + lbProfRow() + lbDataRow();
       const L = m.life || {}, st = (a, b) => `<div class="ost"><dt>${a}</dt><dd>${b}</dd></div>`;
       h += '<dl class="ostats2">' + [
         st('Runs', fmtS(m.runs || 0)), st('Wins', fmtS(m.wins || 0)), st('Best round', roundLabel(m.best || 0)), st('Play time', fmtTime(L.time)),
@@ -24393,7 +24421,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v16.8</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v16.9</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -31287,7 +31315,7 @@ function tablePreview(g, w, id) {
 for (const id of Object.keys(ENEMIES)) if (ENEMIES[id].giant) ENEMIES[id].hp = Math.round(ENEMIES[id].hp * 1.5);
 
 /* ---------- tes données (RGPD) ---------- */
-const RGPD_TXT = 'Your name and your best scores (score, round, stake) go to the online leaderboard. Nothing else: your progress stays on this device.';
+const RGPD_TXT = 'Your name and your best scores (score, round, stake) go to the online leaderboard. Nothing else: your progress only goes online if you create an account (cloud save, above).';
 function lbDataRow() {
   const me = lbMe();
   return oRow('Your data', `<span class="rg-txt">${RGPD_TXT}</span>${me ? '<button class="btn small red" data-lbdel="1">Erase my data</button>' : ''}`, me ? 'you can erase everything from the leaderboard' : 'nothing on the leaderboard for now');
@@ -34225,6 +34253,314 @@ function fmKeep() { try { return LAY.pc ? 4 : 2; } catch (e) { return 4; } }
 (function audioWake() {
   const wake = () => { const ac = AU.ac; if (ac && ac.state !== 'running' && !document.hidden) { try { const p = ac.resume(); if (p && p.catch) p.catch(() => {}); } catch (e) { /* rien */ } } };
   for (const t of ['pointerdown', 'touchend', 'click', 'keydown']) addEventListener(t, wake, { capture: true, passive: true });
+})();
+
+
+/* ================= v16.9 · le compte (facultatif) : ta progression sur tous tes appareils ================= */
+// Un compte = un mail + un mot de passe (Supabase Auth, le même serveur que le classement). Il est relié au profil sur
+// lequel tu te connectes. Sa progression (la même que le code de sauvegarde : tickets, catalogue, records, skins, partie
+// en cours, pseudo du classement) part en ligne toute seule ; les réglages (son, écran, touches) restent ceux de chaque
+// appareil. Chaque envoi porte un numéro (rev) : si un autre appareil a sauvegardé entre-temps, rien n'est écrasé sans
+// ton accord.
+const T9 = (fr, en) => LANG === 'en' ? en : fr;
+const ACC_URL = LB.url, ACC_KEY = 'jackpot-defense-acct';
+const ACC = { s: null, mode: 'login', mail: '', pass: '', msg: '', bad: false, busy: false, t: 0, delArm: false, lastCheck: 0, pushing: false, checking: false, applying: false };
+try { const o = JSON.parse(localStorage.getItem(ACC_KEY) || 'null'); if (o && o.uid && o.rt) ACC.s = o; } catch (e) { /* rien */ }
+function accStore() { try { if (ACC.s) localStorage.setItem(ACC_KEY, JSON.stringify(ACC.s)); else localStorage.removeItem(ACC_KEY); } catch (e) { /* rien */ } }
+const accOn = () => !!(ACC.s && ACC.s.uid && ACC.s.prof === PROF.cur);
+const ACC_ERR = {
+  invalid_credentials: T9('Mail ou mot de passe incorrect.', 'Wrong email or password.'),
+  invalid_grant: T9('Mail ou mot de passe incorrect.', 'Wrong email or password.'),
+  user_already_exists: T9('Un compte existe déjà avec ce mail : connecte-toi.', 'An account already exists with this email: log in.'),
+  email_exists: T9('Un compte existe déjà avec ce mail : connecte-toi.', 'An account already exists with this email: log in.'),
+  weak_password: T9('Mot de passe trop faible : 6 caractères minimum.', 'Password too weak: at least 6 characters.'),
+  email_address_invalid: T9('Ce mail n\'est pas accepté. Essaie une autre adresse.', 'This email isn\'t accepted. Try another address.'),
+  validation_failed: T9('Vérifie ton mail et ton mot de passe.', 'Check your email and password.'),
+  email_not_confirmed: T9('Ton mail n\'est pas encore confirmé : ouvre le lien reçu par mail.', 'Your email isn\'t confirmed yet: open the link you received.'),
+  signup_disabled: T9('La création de compte est fermée pour le moment.', 'Account creation is closed for now.'),
+  email_provider_disabled: T9('La création de compte est fermée pour le moment.', 'Account creation is closed for now.'),
+  email_address_not_authorized: T9('La création de compte n\'est pas encore ouverte à tout le monde (réglage du serveur).', 'Account creation isn\'t open to everyone yet (server setting).'),
+  over_request_rate_limit: T9('Trop d\'essais : réessaie dans quelques minutes.', 'Too many tries: try again in a few minutes.'),
+  over_email_send_rate_limit: T9('Trop d\'essais : réessaie dans quelques minutes.', 'Too many tries: try again in a few minutes.'),
+  reseau: T9('Le serveur ne répond pas (pas d\'internet ?).', 'The server doesn\'t answer (no internet?).'),
+  session: T9('Ta connexion a expiré : reconnecte-toi.', 'You were logged out: log in again.'),
+  setup: T9('La sauvegarde en ligne n\'est pas encore installée sur le serveur.', 'Cloud saves aren\'t set up on the server yet.'),
+  trop_gros: T9('Ta sauvegarde est trop grosse pour partir en ligne.', 'Your save is too big to upload.'),
+  non_connecte: T9('Ta connexion a expiré : reconnecte-toi.', 'You were logged out: log in again.'),
+};
+const accErr = c => ACC_ERR[c] || T9('Erreur du serveur : ', 'Server error: ') + c;
+// un appel au serveur : { data } ou { error }
+async function accCall(path, o) {
+  o = o || {};
+  if (G.headless) return { error: 'reseau' };
+  const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null, to = setTimeout(() => ctl && ctl.abort(), 15000);
+  try {
+    const h = { apikey: LB.key, Accept: 'application/json' }, body = o.body !== undefined ? JSON.stringify(o.body) : undefined;
+    if (body !== undefined) h['Content-Type'] = 'application/json';
+    if (o.tok) h.Authorization = 'Bearer ' + o.tok;
+    const r = await fetch(ACC_URL + path, { method: o.method || (body !== undefined ? 'POST' : 'GET'), headers: h, body, signal: ctl ? ctl.signal : undefined, keepalive: !!(o.keep && body && body.length < 60000) });
+    const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) { j = null; }
+    if (!r.ok) {
+      let c = (j && (j.error_code || (typeof j.message === 'string' && j.message) || j.msg || j.error)) || '';
+      if (j && ['PGRST202', 'PGRST205', '42P01', '42883'].includes(j.code)) c = 'setup';
+      if ((j && j.code === 'PGRST301') || /jwt expired|invalid jwt/i.test(c) || (r.status === 401 && !c)) c = 'session';
+      return { error: c || (r.status >= 500 ? 'reseau' : 'http_' + r.status) };
+    }
+    return { data: j };
+  } catch (e) { return { error: 'reseau' }; }
+  finally { clearTimeout(to); }
+}
+// la session (jeton d'accès d'une heure, renouvelé tout seul)
+function accTake(j, mail) {
+  const u = j.user || {};
+  Object.assign(ACC.s, { mail: u.email || mail || ACC.s.mail, uid: u.id || ACC.s.uid, at: j.access_token, rt: j.refresh_token, exp: Date.now() + (j.expires_in || 3600) * 1000 });
+  accStore();
+}
+let accRef = null;
+function accToken(force) {
+  const s = ACC.s; if (!s) return Promise.resolve(null);
+  if (!force && s.at && Date.now() < s.exp - 90000) return Promise.resolve(s.at);
+  if (accRef) return accRef;
+  accRef = accCall('/auth/v1/token?grant_type=refresh_token', { body: { refresh_token: s.rt } }).then(r => {
+    if (ACC.s !== s) return ACC.s ? ACC.s.at : null;
+    if (r.data && r.data.access_token) { accTake(r.data); return s.at; }
+    if (r.error !== 'reseau') accDrop(ACC_ERR.session);
+    return null;
+  }).finally(() => { accRef = null; });
+  return accRef;
+}
+// un appel connecté (si le jeton vient d'expirer, on le renouvelle et on réessaie une fois)
+async function accAuthed(path, o) {
+  let tok = await accToken(); if (!tok) return { error: ACC.s ? 'reseau' : 'session' };
+  let r = await accCall(path, Object.assign({}, o, { tok }));
+  if (r.error === 'session' && ACC.s) { tok = await accToken(true); if (!tok) return r; r = await accCall(path, Object.assign({}, o, { tok })); }
+  return r;
+}
+function accDrop(msg) { clearTimeout(ACC.t); ACC.s = null; accStore(); ACC.msg = msg || ''; ACC.bad = !!msg; accPaint(); }
+// ce qui part en ligne : la même chose que le code de sauvegarde
+function accPack() { let cp = null; try { cp = JSON.parse(localStorage.getItem(RUN_KEY) || 'null'); } catch (e) { cp = null; } return { v: 1, m: G.meta, cp }; }
+// l'empreinte de la progression (sans les réglages propres à l'appareil) : on n'envoie que si elle a vraiment changé
+function accHash(d) {
+  const m = Object.assign({}, d.m); delete m.opts; delete m.ctrl;
+  const t = JSON.stringify([m, d.cp]); let h = 2166136261;
+  for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return (h >>> 0).toString(36) + t.length.toString(36);
+}
+const accChanged = () => !ACC.s || accHash(accPack()) !== ACC.s.hash;
+function accSum(m) { m = m || {}; return { best: m.best || 0, runs: m.runs || 0, wins: m.wins || 0, sec: Object.keys(m.secrets || {}).length, time: (m.life && m.life.time) || 0 }; }
+const accEmpty = () => { const m = G.meta || {}; return !(m.runs || m.best || m.wins || Object.keys(m.secrets || {}).length || loadCheckpoint()); };
+function accAgo(ms) {
+  const s = Math.max(0, (Date.now() - ms) / 1000), m = s / 60, h = m / 60, d = h / 24;
+  if (s < 60) return T9('à l\'instant', 'just now');
+  if (m < 60) return T9(`il y a ${Math.floor(m)} min`, `${Math.floor(m)} min ago`);
+  if (h < 24) return T9(`il y a ${Math.floor(h)} h`, `${Math.floor(h)} h ago`);
+  return T9(`il y a ${Math.floor(d)} j`, `${Math.floor(d)} d ago`);
+}
+// remplacer la progression de ce profil par celle du compte (seulement à l'écran titre)
+function accApply(row) {
+  const d = row && row.data;
+  if (!d || !d.m || typeof d.m !== 'object' || G.mode !== 'title') return false;
+  ACC.applying = true;
+  try {
+    localStorage.setItem(META_KEY, JSON.stringify(d.m));
+    if (d.cp) localStorage.setItem(RUN_KEY, JSON.stringify(d.cp)); else localStorage.removeItem(RUN_KEY);
+    const keepOpts = G.meta.opts, keepCtrl = G.meta.ctrl;
+    G.meta = loadMeta(); G.meta.opts = keepOpts; G.meta.ctrl = keepCtrl;
+    for (const k in SPR) if (k.startsWith('_chip')) delete SPR[k];
+    saveMeta(); applyOpts(true);
+  } catch (e) { return false; }
+  finally { ACC.applying = false; }
+  Object.assign(ACC.s, { rev: row.rev, dirty: false, hold: false, syncAt: Date.now(), hash: accHash(accPack()) }); accStore();
+  try { refreshTitle(); if (!$('#opts').hidden) renderOptions(); } catch (e) { /* rien */ }
+  return true;
+}
+// envoyer la progression (un envoi à la fois ; « conflit » = un autre appareil a sauvegardé entre-temps)
+async function accPush(force) {
+  if (!accOn() || ACC.s.hold) return;
+  if (ACC.pushing) { ACC.again = true; return; }
+  const s = ACC.s, data = accPack(), h = accHash(data);
+  if (force !== true && h === s.hash) { s.dirty = false; s.dirtyAt = 0; if (force === 'user') s.syncAt = Date.now(); accStore(); accPaint(); return; }
+  ACC.pushing = true; clearTimeout(ACC.t);
+  try {
+    s.dirty = false; s.dirtyAt = 0;
+    const r = await accAuthed('/rest/v1/rpc/save_put', { body: { p_data: data, p_rev: s.rev || 0 }, keep: document.hidden });
+    if (ACC.s !== s) return;
+    if (r.data) {
+      const row = Array.isArray(r.data) ? r.data[0] : r.data;
+      if (row && row.new_rev != null) s.rev = row.new_rev;
+      s.hash = h; s.syncAt = Date.now(); ACC.msg = ''; ACC.bad = false; accStore();
+    } else {
+      s.dirty = true; s.dirtyAt = s.dirtyAt || Date.now(); accStore();
+      if (r.error === 'conflit') ACC.recheck = true;
+      else if (r.error === 'reseau') accLater(30000);
+      else { ACC.msg = accErr(r.error); ACC.bad = true; }
+    }
+  } finally {
+    ACC.pushing = false; accPaint();
+    if (ACC.recheck) { ACC.recheck = false; accCheck(false); }
+    else if (ACC.again) { ACC.again = false; if (ACC.s && ACC.s.dirty) accLater(1500); }
+  }
+}
+function accLater(ms) { clearTimeout(ACC.t); ACC.t = setTimeout(() => accPush(), ms); }
+// la progression a changé : elle partira dans quelques secondes (au plus tard 45 s après le premier changement)
+function accDirty() {
+  if (ACC.applying || G.headless || !accOn()) return;
+  const s = ACC.s, n = Date.now();
+  if (!s.dirty) { s.dirty = true; s.dirtyAt = n; accStore(); }
+  accLater(n - (s.dirtyAt || n) > 45000 ? 0 : 8000);
+}
+// comparer avec la sauvegarde en ligne (au lancement, en revenant à l'écran titre, après la connexion)
+async function accCheck(fresh) {
+  if (!accOn() || ACC.checking) return;
+  ACC.checking = true; ACC.lastCheck = Date.now();
+  const s = ACC.s;
+  try {
+    const r = await accAuthed('/rest/v1/saves?select=data,rev,updated_at', {});
+    if (ACC.s !== s) return;
+    if (r.error) { if (r.error !== 'reseau') { ACC.msg = accErr(r.error); ACC.bad = true; } return; }
+    const row = Array.isArray(r.data) ? r.data[0] : null;
+    if (!row) { s.rev = 0; s.hold = false; s.dirty = true; accStore(); ACC.checking = false; await accPush(true); return; }
+    const changed = accChanged();
+    if (row.rev === s.rev) { s.hold = false; accStore(); if (changed) accLater(500); return; }
+    // le compte a changé ailleurs : si rien n'a bougé ici depuis la dernière synchro (ou si ce profil est neuf), on le prend
+    if ((fresh && accEmpty()) || (s.rev && !changed)) {
+      if (accApply(row)) toastAny(T9('Progression récupérée depuis ton compte.', 'Progress loaded from your account.'));
+      return;
+    }
+    // sinon c'est à toi de choisir (à l'écran titre)
+    s.hold = true; accStore();
+    if (G.mode === 'title') accAsk(row);
+  } finally { ACC.checking = false; accPaint(); }
+}
+// les deux progressions sont différentes : laquelle garder ?
+function accAsk(row) {
+  let ov = $('#accdlg');
+  if (!ov) { ov = document.createElement('section'); ov.id = 'accdlg'; ov.className = 'full lbn'; document.body.appendChild(ov); }
+  const a = accSum(row.data && row.data.m), b = accSum(G.meta), when = row.updated_at ? accAgo(Date.parse(row.updated_at)) : '';
+  const card = (t, S2, sub, act, cls) => `<button class="acc-pick ${cls}" data-accpick="${act}"><b>${t}</b>`
+    + `<span>${T9('Record', 'Best')} : ${S2.best ? T9('manche ', 'round ') + roundLabel(S2.best) : '—'}</span><span>${fmtS(S2.runs)} ${T9('parties', 'runs')} · ${S2.sec} ${T9('secrets', 'secrets')}</span>`
+    + `<span>${fmtTime(S2.time)} ${T9('de jeu', 'played')}</span>${sub ? `<small>${T9('sauvegardée ', 'saved ')}${sub}</small>` : ''}</button>`;
+  ov.innerHTML = `<div class="fi"><div class="panel lbn-box">
+      <h2 class="lbn-t">${T9('Quelle progression garder ?', 'Which progress do you keep?')}</h2>
+      <p class="lbn-p">${T9('Ton compte a une progression en ligne différente de celle de cet appareil.', 'Your account has online progress that differs from this device.')}</p>
+      <div class="acc-picks">${card(T9('Celle du compte', 'The account\'s'), a, when, 'cloud', 'on')}${card(T9('Celle de cet appareil', 'This device\'s'), b, '', 'here', '')}</div>
+      <p class="lbn-p">${T9('L\'autre sera remplacée.', 'The other one will be replaced.')}</p>
+    </div></div>`;
+  ov.hidden = false; Snd.pop();
+  ov.onclick = e => {
+    const p = e.target.closest('[data-accpick]'); if (!p || !accOn()) return;
+    ov.hidden = true; Snd.click();
+    if (p.dataset.accpick === 'cloud') { if (accApply(row)) toastAny(T9('Progression du compte chargée.', 'Account progress loaded.')); }
+    else { Object.assign(ACC.s, { rev: row.rev, hold: false, dirty: true }); accStore(); accPush(true); toastAny(T9('Ta progression part sur ton compte.', 'Your progress is going to your account.')); }
+    accPaint();
+  };
+}
+// créer un compte / se connecter
+async function accGo() {
+  if (ACC.busy) return;
+  const mail = String(ACC.mail || '').trim().toLowerCase(), pass = String(ACC.pass || ''), up = ACC.mode === 'signup';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { accSay(T9('Écris un mail valide.', 'Enter a valid email.'), true); Snd.deny(); return; }
+  if (pass.length < 6) { accSay(T9('Mot de passe : 6 caractères minimum.', 'Password: at least 6 characters.'), true); Snd.deny(); return; }
+  ACC.busy = true; ACC.msg = ''; ACC.bad = false; accPaint(true);
+  const r = await accCall(up ? '/auth/v1/signup' : '/auth/v1/token?grant_type=password', { body: { email: mail, password: pass } });
+  ACC.busy = false;
+  if (r.error) { ACC.msg = accErr(r.error); ACC.bad = true; Snd.deny(); accPaint(true); return; }
+  const j = r.data || {};
+  if (!j.access_token) {   // le serveur demande de confirmer le mail d'abord
+    ACC.mode = 'login'; ACC.msg = T9('Compte créé : ouvre le lien reçu par mail, puis connecte-toi ici.', 'Account created: open the link in your email, then log in here.'); ACC.bad = false;
+    accPaint(true); return;
+  }
+  ACC.s = { prof: PROF.cur, rev: 0, dirty: false };
+  accTake(j, mail);
+  ACC.pass = ''; ACC.msg = ''; ACC.bad = false; ACC.delArm = false;
+  Snd.record(); toastAny(up ? T9('Compte créé !', 'Account created!') : T9('Connecté !', 'Logged in!'));
+  accPaint(true);
+  accCheck(true);
+}
+async function accLogout() {
+  const s = ACC.s; if (!s) return;
+  if (accOn() && !s.hold) await accPush();
+  ACC.s = null; accStore(); clearTimeout(ACC.t);
+  if (s.at) accCall('/auth/v1/logout', { method: 'POST', tok: s.at });
+  ACC.msg = T9('Déconnecté. Ta progression reste sur cet appareil.', 'Logged out. Your progress stays on this device.'); ACC.bad = false;
+  accPaint(true);
+}
+async function accDelete() {
+  if (!ACC.delArm) { ACC.delArm = true; Snd.deny(); accPaint(true); clearTimeout(ACC.delT); ACC.delT = setTimeout(() => { ACC.delArm = false; accPaint(); }, 6000); return; }
+  ACC.delArm = false;
+  const r = await accAuthed('/rest/v1/rpc/delete_me', { body: {} });
+  if (r.error) { ACC.msg = accErr(r.error); ACC.bad = true; accPaint(true); return; }
+  ACC.s = null; accStore(); clearTimeout(ACC.t);
+  ACC.msg = T9('Compte et sauvegarde en ligne supprimés. Ta progression reste sur cet appareil.', 'Account and cloud save deleted. Your progress stays on this device.'); ACC.bad = false;
+  Snd.malus(); accPaint(true);
+}
+function accSay(msg, bad) { ACC.msg = msg; ACC.bad = !!bad; const m = $('#oacc-msg'); if (m) { m.textContent = msg; m.classList.toggle('bad', !!bad); } }
+// le bloc dans OPTIONS › Profil (et PROFIL › Records et sauvegarde)
+function accRow() {
+  const s = ACC.s;
+  let h = `<div class="oacc" id="oacc"><p class="oacc-t"><b>${T9('Sauvegarde en ligne', 'Cloud save')}</b><i>${T9('facultatif', 'optional')}</i></p>`;
+  if (!s) {
+    const up = ACC.mode === 'signup';
+    h += `<p class="oacc-p">${T9('Un compte avec ton mail : ta progression te suit sur tous tes appareils (téléphone, PC…) et se sauvegarde toute seule.', 'An account with your email: your progress follows you on every device (phone, PC…) and saves by itself.')}</p>
+      <div class="oacc-tabs"><button class="${up ? '' : 'on'}" data-acc="login">${T9('J\'ai un compte', 'I have an account')}</button><button class="${up ? 'on' : ''}" data-acc="signup">${T9('Créer un compte', 'Create an account')}</button></div>
+      <input id="acc-mail" class="oacc-in" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" placeholder="${T9('ton mail', 'your email')}" value="${esc(ACC.mail)}">
+      <input id="acc-pass" class="oacc-in" type="password" autocomplete="${up ? 'new-password' : 'current-password'}" maxlength="72" placeholder="${up ? T9('choisis un mot de passe (6 caractères min.)', 'choose a password (6+ characters)') : T9('mot de passe', 'password')}" value="${esc(ACC.pass)}">
+      <button class="btn gold" data-acc="go"${ACC.busy ? ' disabled' : ''}>${ACC.busy ? '…' : up ? T9('Créer mon compte', 'Create my account') : T9('Se connecter', 'Log in')}</button>`;
+    if (up) h += `<p class="oacc-p oacc-dim">${T9('Ta progression actuelle part sur ce compte. On garde ton mail et ta progression, rien d\'autre ; tu peux tout supprimer ici.', 'Your current progress goes to this account. We keep your email and your progress, nothing else; you can delete everything here.')}</p>`;
+  } else if (s.prof !== PROF.cur) {
+    h += `<p class="oacc-p">${T9(`Ton compte <b>${esc(s.mail)}</b> est relié au <b>profil ${s.prof + 1}</b>. Passe sur ce profil pour le sauvegarder en ligne.`, `Your account <b>${esc(s.mail)}</b> is linked to <b>profile ${s.prof + 1}</b>. Switch to that profile to save it online.`)}</p>
+      <div class="oacc-row"><button class="btn small ghost" data-acc="out">${T9('Se déconnecter', 'Log out')}</button></div>`;
+  } else {
+    const st = ACC.pushing || ACC.checking ? T9('Synchronisation…', 'Syncing…')
+      : s.hold ? T9('En attente : choisis quelle progression garder.', 'Waiting: choose which progress to keep.')
+      : s.dirty && s.dirtyAt ? T9('Pas encore envoyée : elle partira dès que possible.', 'Not sent yet: it will go as soon as possible.')
+      : s.syncAt ? T9('Sauvegardée ', 'Saved ') + accAgo(s.syncAt) + ' ✓' : '';
+    h += `<p class="oacc-p">${T9('Connecté', 'Logged in')} : <b>${esc(s.mail)}</b></p><p class="oacc-st">${st}</p>
+      <div class="oacc-row"><button class="btn small gold" data-acc="sync">${s.hold ? T9('Choisir', 'Choose') : T9('Sauvegarder maintenant', 'Save now')}</button><button class="btn small ghost" data-acc="out">${T9('Se déconnecter', 'Log out')}</button></div>
+      <button class="oacc-del${ACC.delArm ? ' arm' : ''}" data-acc="del">${ACC.delArm ? T9('Touche encore : supprimer mon compte et ma sauvegarde en ligne', 'Tap again: delete my account and my cloud save') : T9('Supprimer mon compte', 'Delete my account')}</button>`;
+  }
+  return h + `<p class="oacc-msg${ACC.bad ? ' bad' : ''}" id="oacc-msg">${esc(ACC.msg)}</p></div>`;
+}
+// redessiner le bloc (sans voler le clavier pendant que tu tapes)
+function accPaint(force) {
+  const el = $('#oacc'); if (!el) return;
+  const a = document.activeElement;
+  if (!force && a && el.contains(a) && a.tagName === 'INPUT') { accSay(ACC.msg, ACC.bad); return; }
+  el.outerHTML = accRow();
+}
+(function accInstall() {
+  // chaque sauvegarde du jeu prévient le compte
+  const sm = saveMeta; saveMeta = function () { sm(); accDirty(); };
+  const sc = saveCheckpoint; saveCheckpoint = function () { sc(); accDirty(); };
+  const cc = clearCheckpoint; clearCheckpoint = function () { cc(); accDirty(); };
+  // de retour à l'écran titre : on envoie, et on regarde si un autre appareil a joué
+  const tt = toTitle; toTitle = function () {
+    tt();
+    if (!BOOT.done || !accOn()) return;
+    setTimeout(() => { if (!accOn() || G.mode !== 'title') return; if (Date.now() - ACC.lastCheck > 15000 || ACC.s.hold) accCheck(false); else accPush(); }, 1200);
+  };
+  if (G.headless) return;
+  // au lancement, une fois l'intro finie
+  const first = () => { if (!BOOT.done) { setTimeout(first, 1000); return; } if (accOn()) accCheck(false); };
+  setTimeout(first, 2500);
+  document.addEventListener('visibilitychange', () => {
+    if (!accOn()) return;
+    if (document.hidden) { if (ACC.s.dirty && !ACC.s.hold) accPush(); }
+    else if (G.mode === 'title' && Date.now() - ACC.lastCheck > 30000) accCheck(false);
+  });
+  // taper son mail ne déclenche pas les touches du jeu ; Entrée valide
+  document.addEventListener('keydown', e => { const t = e.target; if (!t || !t.classList || !t.classList.contains('oacc-in')) return; if (e.key === 'Enter') { e.preventDefault(); accGo(); } e.stopPropagation(); });
+  document.addEventListener('input', e => { const t = e.target; if (t.id === 'acc-mail') ACC.mail = t.value; else if (t.id === 'acc-pass') ACC.pass = t.value; }, true);
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-acc]'); if (!b) return;
+    const a = b.dataset.acc;
+    if (a === 'login' || a === 'signup') { ACC.mode = a; ACC.msg = ''; ACC.bad = false; Snd.tab(); accPaint(true); return; }
+    Snd.click();
+    if (a === 'go') accGo();
+    else if (a === 'out') accLogout();
+    else if (a === 'del') accDelete();
+    else if (a === 'sync') { if (ACC.s && ACC.s.hold) accCheck(false); else accPush('user'); accPaint(true); }
+  });
 })();
 
 /* ---------- boucle ---------- */

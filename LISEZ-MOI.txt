@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v16.8-202610300400
+JACKPOT DEFENSE v16.9-202610310200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v16.9 — la sauvegarde en ligne (facultative)
+- Un compte avec ton mail et un mot de passe : OPTIONS › Profil (ou PROFIL › « Records et sauvegarde »),
+  « Créer un compte ». Ta progression te suit sur tous tes appareils : tickets, catalogue, records, skins,
+  partie en cours et pseudo du classement. Les réglages (son, écran, touches) restent ceux de chaque appareil.
+- Ça se sauvegarde tout seul, quelques secondes après chaque changement. Sur un autre appareil : « J'ai un compte »,
+  et ta progression arrive. Si les deux appareils ont avancé chacun de leur côté, le jeu te demande laquelle garder.
+- Pas de compte ? Rien ne change : le jeu marche comme avant, et le code de sauvegarde est toujours là.
+- « Se déconnecter » garde ta progression sur l'appareil. « Supprimer mon compte » efface le compte et sa sauvegarde.
+- À FAIRE UNE FOIS dans Supabase : coller le fichier supabase-sauvegarde-en-ligne.sql (SQL Editor > New query > Run),
+  et dans Authentication > Sign In / Providers > Email, décocher « Confirm email » (sinon il faut un serveur de mails).
 
 Nouveautés de la v16.8 — la version téléphone répare
 - Fini les gels : toucher un jeton (machine, rack, marché noir) figeait le jeu plusieurs secondes sur téléphone,

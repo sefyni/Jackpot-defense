@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v16.8-202610300400
+JACKPOT DEFENSE v16.9-202610310200
 
 A casino roguelite: a slot machine for chips, Zaza's bar, the Inspector's black market,
 and a pinball-flipper base defense. Last 30 rounds and break the Baron's bank.
@@ -20,6 +20,7 @@ Play
 - Crude language (OPTIONS › Game, on by default): swearing and dark humour from everyone. "No" for the clean version.
 - When you lose, Gaston mocks you, together with your pet.
 - New 3D intro: you ARE the chip, rolling across the table in first person; it wobbles, falls, JACKPOT DEFENSE lights up in neon and the camera pulls back over the whole table.
+- Optional cloud save: create an account with your email and a password (OPTIONS › Profile). Your progress (chips, catalogue, records, skins, run in progress, leaderboard name) follows you on every device and saves by itself; settings stay per device. If two devices both moved on, the game asks which progress to keep.
 - Phones: tapping a chip no longer freezes the game for seconds (its damage test now runs in the background), Mr Anatole shows up again on iPhone, no more accidental zoom (double-tap, pinch), sound comes back after a call or a locked screen, and music uses less memory.
 - Fixes: the Inspector's portrait always fits on screen; the black market and end screen no longer shrink too much on large screens; leaving Zaza's bar for combat no longer jolts the screen.
 - Every character now breathes, sways and changes pose on their own when nobody is talking. Anatole no longer bounces: softer motion and smooth pose changes for everyone.
