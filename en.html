@@ -36753,7 +36753,7 @@ const DRAFT = { offer: [], sel: [] };
         : `<p class="nrh-lock">${hT('« Le casino est fermé. Reviens quand t\'auras ruiné le Baron. »', '"The casino is closed. Come back when you\'ve ruined the Baron."')}</p><p>${hT('Bats le Baron (manche 30) une fois pour débloquer ce mode.', 'Beat the Baron (round 30) once to unlock this mode.')}</p>`}</div>`;
     }
     const go = $('#newrun .nr-go');
-    if (go && hz) { go.disabled = !open; go.textContent = open ? hT('LANCER LA HORDE', 'START THE HORDE') : hT('VERROUILLÉ', 'LOCKED'); }
+    if (go) { go.hidden = hz && !open; if (hz && open) { go.disabled = false; go.textContent = hT('LANCER LA HORDE', 'START THE HORDE'); } }
     return r;
   };
   const ng = nrGo;
