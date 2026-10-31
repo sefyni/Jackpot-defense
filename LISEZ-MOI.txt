@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v16.9-202610310200
+JACKPOT DEFENSE v17.0-202610310300
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,15 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v17.0 — se connecter depuis l'accueil, mot de passe oublié
+- Sur l'écran d'accueil, un bouton bleu « SE CONNECTER » à côté de PROFIL : il ouvre la fenêtre du compte.
+  Connecté, il devient vert et montre ton compte.
+- « Mot de passe oublié ? » : tu reçois un code à 6 chiffres par mail, tu le tapes dans le jeu avec ton
+  nouveau mot de passe, et tu es connecté. (Il faut que les mails soient réglés dans Supabase : voir plus bas.)
+- À FAIRE UNE FOIS dans Supabase pour les mails : Authentication > Emails > SMTP Settings (serveur de mails,
+  par exemple une adresse Gmail avec un mot de passe d'application), puis le modèle « Reset Password »
+  avec le code {{ .Token }} (fichier mail-mot-de-passe-oublie.html).
 
 Nouveautés de la v16.9 — la sauvegarde en ligne (facultative)
 - Un compte avec ton mail et un mot de passe : OPTIONS › Profil (ou PROFIL › « Records et sauvegarde »),
