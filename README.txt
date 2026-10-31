@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v17.3-202610311610
+JACKPOT DEFENSE v18.0-202611010300
 
 A casino roguelite: a slot machine for chips, Zaza's bar, the Inspector's black market,
 and a pinball-flipper base defense. Last 30 rounds and break the Baron's bank.

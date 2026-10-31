@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v17.3-202610311610
+JACKPOT DEFENSE v18.0-202611010300
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,23 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v18.0 — LE MODE HORDE
+- Après la victoire contre le Baron (manche 30) : une scène où tout le monde quitte le bar, puis Jack, le mari de Zaza,
+  révèle que le casino lui appartient. Ensuite, place à la HORDE : une seule manche sans fin, pas d'objectif.
+- Les cartes arrivent en formations (charges, murs, tenailles, tireurs, encerclements), de plus en plus nombreuses.
+  Des boss toutes les 2 min 30, des géants, et parfois 4 géants à la fois (un de chaque côté).
+- Une barre de niveau se remplit en abattant des cartes ; le score monte avec les cartes, le mult et le temps tenu.
+- Le shop de Jack ouvre toutes les minutes (bouton JACK, touche J sur PC). En y allant, les cartes proches se
+  désintègrent et les boss reculent. Chez Jack : piles de jetons à stock infini (+1 % de vie, dégâts, cadence, sorts, or),
+  paquets de jetons de la machine (prix selon la rareté) et améliorations (1 par niveau gagné). Au-delà de SECRET,
+  3 améliorations et le jeton se dédouble : la copie repart de la base et ne prend pas de place.
+- Toutes les 4 minutes, Momo, Dina ou Nox débarquent : bille, fléchette ou roue à tête de mort nettoient la table,
+  puis ils te défient. Gagne : 3 alliés pour toute la partie (Queues de Billard, archers, magiciens). Perds : ils te
+  lâchent une vague. Refuse : rien. Ceux que tu n'as pas battus reviennent plus tard.
+- Classement : un onglet « Horde ».
+- Le Punch-o-matic de l'Inspecteur a une nouvelle animation en 10 images. Momo, Dina, Nox, le Baron et Zaza ont
+  de nouvelles poses dans le jeu normal.
 
 Nouveautés de la v17.3 — correction
 - Carnets d'Anatole (PC) : la page qui tourne ne clignote plus en noir. Elle se replie vers la reliure, puis son dos
