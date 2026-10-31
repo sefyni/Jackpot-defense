@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v18.0-202611010300
+JACKPOT DEFENSE v18.1-202611010030
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,10 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v18.1
+- Jack a sa musique : un jazz noir lent et blasé (contrebasse, balais, trompette bouchée, vieux piano, ténor),
+  avec le thème du jeu caché dedans. Elle joue dans son shop et quand il se révèle.
 
 Nouveautés de la v18.0 — LE MODE HORDE
 - Après la victoire contre le Baron (manche 30) : une scène où tout le monde quitte le bar, puis Jack, le mari de Zaza,

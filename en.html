@@ -5525,7 +5525,7 @@ body.lpc .hzc-box{left:max(34%,260px);right:auto;width:min(560px,60%);bottom:28p
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.0</p>
+  <p class="proto">Sefy Industries · v18.1</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -12818,7 +12818,7 @@ const Music = (() => {
      Le synthé reste en secours : tant qu'un fichier n'est pas prêt (ou si OPTIONS › Audio › Musique = 8 bits), il joue.
      Le combat : un fichier par harmonie d'acte (combat_0…5) et par boss (combat_b0/2/3/5) ; le TAPIS accélère le fichier ;
      l'intensité ouvre un filtre ; la bille de roulette et les jetons (synthé) restent par-dessus, calés sur la grille. */
-  const FMAN = {"bar":{"loop":60.952381,"pad":1.0,"bpm":126,"g":1.499},"baron":{"loop":53.333333,"pad":1.0,"bpm":108,"g":0.366},"combat_0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.475},"combat_2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.49},"combat_5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.482},"combat_b2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_b3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.514},"dina":{"loop":45.714286,"pad":1.0,"bpm":168,"g":2.024},"final_1":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.183},"final_2":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.378},"final_3":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.417},"lounge":{"loop":42.666667,"pad":1.0,"bpm":90,"g":1.471},"market":{"loop":58.181818,"pad":1.0,"bpm":66,"g":0.275},"momo":{"loop":75.789474,"pad":1.0,"bpm":76,"g":1.765},"nox":{"loop":41.73913,"pad":1.0,"bpm":138,"g":0.321},"anatole":{"loop":30.0,"pad":1.0,"bpm":96,"g":1.55}};
+  const FMAN = {"bar":{"loop":60.952381,"pad":1.0,"bpm":126,"g":1.499},"baron":{"loop":53.333333,"pad":1.0,"bpm":108,"g":0.366},"combat_0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.475},"combat_2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.49},"combat_5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b0":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.482},"combat_b2":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.489},"combat_b3":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.493},"combat_b5":{"loop":30.0,"pad":1.0,"bpm":128,"g":1.514},"dina":{"loop":45.714286,"pad":1.0,"bpm":168,"g":2.024},"final_1":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.183},"final_2":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.378},"final_3":{"loop":22.325581,"pad":1.0,"bpm":172,"g":1.417},"lounge":{"loop":42.666667,"pad":1.0,"bpm":90,"g":1.471},"market":{"loop":58.181818,"pad":1.0,"bpm":66,"g":0.275},"momo":{"loop":75.789474,"pad":1.0,"bpm":76,"g":1.765},"jack":{"loop":53.333333,"pad":1.0,"bpm":72,"g":1.468},"nox":{"loop":41.73913,"pad":1.0,"bpm":138,"g":0.321},"anatole":{"loop":30.0,"pad":1.0,"bpm":96,"g":1.55}};
   const FM = { buf: {}, load: {}, use: [], fail: {}, h: 0, boss: false };
   const fmOn = () => { try { return !G.headless && !AU.offline && typeof fetch !== 'undefined' && OPT().musk !== 0; } catch (e) { return false; } };
   function fmFile(name) {
@@ -12911,6 +12911,7 @@ const Music = (() => {
     baron: { bpm: 108, sched: baronSched, vol: 2.1, swing: .35, setup: setupBaron },
     dina: { bpm: 168, sched: dinaSched, vol: .7, swing: 0, setup: setupDina },
     momo: { bpm: 76, sched: momoSched, vol: .95, swing: 1, setup: setupMomo },
+    jack: { bpm: 72, sched: momoSched, vol: .95, swing: 1, setup: setupMomo },
     nox: { bpm: 138, sched: noxSched, vol: 2.4, swing: 0, setup: setupNox },
     anatole: { bpm: 96, sched: noxSched, vol: 1.6, swing: 0, setup: setupNox },
   };
@@ -24724,7 +24725,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.0</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.1</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35940,7 +35941,7 @@ function hrdShopShow() {
   $('#hz-jack').classList.remove('in'); void $('#hz-jack').offsetWidth; $('#hz-jack').classList.add('in');
   hrdJackPose('lean', true);
   setTimeout(() => hrdJackSay(H.visits === 0 ? { pose: JACK.open[0][0], txt: HRD_EN ? JACK.open[0][2] : JACK.open[0][1] } : H.ups > 0 ? { pose: 'keys', txt: hT(`T'as ${H.ups} amélioration${H.ups > 1 ? 's' : ''} à faire. Donne.`, `You've got ${H.ups} upgrade${H.ups > 1 ? 's' : ''} coming. Hand it over.`) } : 'hello'), 250);
-  Music.play('market');
+  Music.play('jack');
   hrdShopRender();
   clearInterval(SHOP.iv); SHOP.iv = setInterval(hrdShopIdle, 1000);
 }
@@ -36584,7 +36585,7 @@ function hrdCutNext() {
     go(S.ms || 1900); return;
   }
   if (S.door === 'open') T(1400, () => { el.classList.add('open'); Snd.door(); });
-  if (S.enter) { el.classList.add('jackin'); Snd.shady ? Snd.shady() : Snd.baronSting(); Music.play('market'); }
+  if (S.enter) { el.classList.add('jackin'); Snd.shady ? Snd.shady() : Snd.baronSting(); Music.play('jack'); }
   const W = HK_WHO[S.who], txt = chL(S.line);
   $('#hzk-name').innerHTML = `<b>${HRD_EN ? W[1] : W[0]}</b>`;
   hrdCutPose(S.who, S.pose, S.enter);
