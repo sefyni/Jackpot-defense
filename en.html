@@ -5552,7 +5552,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.2</p>
+  <p class="proto">Sefy Industries · v18.3</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24752,7 +24752,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.2</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.3</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35294,8 +35294,8 @@ function boot(data) {
 const HRD_EN = document.documentElement.lang === 'en';
 const hT = (fr, en) => HRD_EN ? en : fr;
 const HRD = {
-  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, capPC: 110, capMob: 72, lead: 1.1,
-  bossAt: 120, bossEvery: 150, giantAt: 200, giantEvery: 300, quadAt: 300, quadEvery: 300,
+  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: .5, r1: .0075, rpm: 13, capPC: 110, capMob: 72, lead: 1.1,
+  bossAt: 180, bossEvery: 150, giantAt: 240, giantEvery: 300, quadAt: 420, quadEvery: 300,
   chalAt: 240, chalEvery: 240, shopFirst: 60, shopCd: 60, timePts: 20,
 };
 const hrdClock = s => { s = Math.max(0, Math.floor(s || 0)); const m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); };
@@ -35310,7 +35310,7 @@ function hrdState(run) {
   });
 }
 // l'expérience pour passer du niveau lv au suivant
-const hrdNeed = lv => Math.round(560 + 420 * lv + 70 * lv * lv);
+const hrdNeed = lv => Math.round(180 + 260 * lv + 90 * lv * lv);
 // la pression : des points de menace par seconde (3 min de montée, puis +5 % par minute)
 function hrdPressure(T) {
   const base = threat(29) / 34, r = Math.min(1, T / HRD.ramp), e = r * r * (3 - 2 * r);
@@ -35339,7 +35339,7 @@ function hrdSetup() {
   cb.rake.max = cb.rake.dur = s.rakeDur;
   if (s.rake2) { cb.rake2 = mkRake(cb.rake.ang + Math.PI); cb.rake2.max = cb.rake2.dur = s.rakeDur; }
   buildPosts();
-  cb.sc = roundScale(run, 30 + H.time / 60 * HRD.vr);
+  cb.sc = roundScale(run, hrdRound(H.time));
   cb.spawn = []; cb.spawnIdx = 0; cb.total = 0; cb.goal = 0; cb.goalHit = false; cb.reinfT = null; cb.reinfN = 0;
   cb.reinfTypes = ['soldat', 'coureur']; cb.reinfGap = 3;
   FB.on = false;
@@ -35377,7 +35377,7 @@ function hrdTick(cb, dt) {
   H.time += dt;
   const T = H.time, m = T / 60;
   Z.scT -= dt;
-  if (Z.scT <= 0) { Z.scT = 4; cb.sc = roundScale(run, 30 + m * HRD.vr); }
+  if (Z.scT <= 0) { Z.scT = 2; cb.sc = roundScale(run, hrdRound(T)); }
   const P = ptsOf(cb), d = P.chips - Z.xpSeen;
   if (d > 0) { Z.xpSeen = P.chips; hrdXp(d); }
   hrdDirector(cb, dt, T, m);
@@ -35412,7 +35412,7 @@ function hrdLevelUp(lv) {
 
 /* ---------- le directeur : formations, boss, géants ---------- */
 const hrdPool = () => SPAWNABLE.filter(id => ENEMIES[id] && (ENEMIES[id].from || 1) <= 30);
-const hrdElite = m => rnd() < Math.min(.42, .12 + .02 * m) ? pick(Object.keys(ELITES)) : null;
+const hrdElite = m => rnd() < Math.min(.42, Math.max(0, -.04 + .03 * m)) ? pick(Object.keys(ELITES)) : null;
 function hrdAlive(cb) { let n = 0; for (const e of cb.enemies) if (!e.dead && !e.boss && !e.d.giant && e.ai !== 'decoy') n++; return n + cb.hz.q.length; }
 function hrdPickF(m) {
   const opts = [['pack', 5], ['mixed', 4]];
@@ -35438,15 +35438,21 @@ const HRD_FNAME = {
   rush: () => hT('ÇA CHARGE !', 'CHARGE!'), wall: () => hT('UN MUR !', 'A WALL!'), pincer: () => hT('EN TENAILLE !', 'PINCER!'),
   snipe: () => hT('DES TIREURS !', 'SNIPERS!'), ring: () => hT('ENCERCLÉ !', 'SURROUNDED!'),
 };
+// v18.3 : un flot continu, de tous les côtés, sans alerte ni pause. Le débit monte en ligne droite,
+// et les cartes deviennent plus fortes avec le temps (comme une manche 1, puis 10, 20, 30… et au-delà).
+const hrdRound = T => 1 + T / HRD.rpm * 60 / 60;
 function hrdDirector(cb, dt, T, m) {
   const Z = cb.hz, H = hrdState();
-  Z.bud += hrdPressure(T) * dt;
+  Z.acc = (Z.acc || 0) + dt * (HRD.r0 + HRD.r1 * T);
+  const R = hrdRound(T), pool = SPAWNABLE.filter(id => ENEMIES[id] && (ENEMIES[id].from || 1) <= Math.max(1, R)), cap = hrdCap();
+  while (Z.acc >= 1) {
+    Z.acc -= 1;
+    if (hrdAlive(cb) >= cap) { Z.acc = Math.min(Z.acc, 1); break; }
+    hrdSpawnOne(cb, { type: pick(pool.length ? pool : ['coureur', 'soldat']), ang: rand(0, TAU), o: {} }, m);
+  }
   if (T >= H.nextBoss) { H.nextBoss += HRD.bossEvery; hrdBoss(cb, m); }
   if (T >= H.nextQuad) { H.nextQuad += HRD.quadEvery; hrdQuad(cb, m); }
   else if (T >= H.nextGiant) { H.nextGiant += HRD.giantEvery; hrdGiant(cb, m); }
-  if (!Z.nextF) Z.nextF = hrdPickF(m);
-  if (Z.bud >= Z.nextF.cost && hrdAlive(cb) + Z.nextF.U.length <= hrdCap()) { Z.bud -= Z.nextF.cost; hrdLaunch(cb, Z.nextF); Z.nextF = null; }
-  else if (Z.bud > Z.nextF.cost * 3) Z.bud = Z.nextF.cost * 3;
 }
 function hrdLaunch(cb, F) {
   const Z = cb.hz, L = HRD.lead, col = F.kind === 'rush' ? 'rush' : 'norm';
@@ -35470,28 +35476,17 @@ function hrdSpawnOne(cb, q, m) {
 function hrdBoss(cb, m) {
   const H = hrdState(), b = pick(BOSS_ORDER.filter(x => x !== H.lastBoss)), ang = rand(0, TAU);
   H.lastBoss = b;
-  cb.hz.tele.push({ ang, t: 1.8, max: 1.8, col: 'boss', w: .5 });
-  cb.hz.q.push({ t: 1.8, type: b, ang, o: { noElite: true } });
-  if (m >= 14) { const b2 = pick(BOSS_ORDER.filter(x => x !== b)); cb.hz.tele.push({ ang: ang + Math.PI, t: 1.8, max: 1.8, col: 'boss', w: .5 }); cb.hz.q.push({ t: 2.2, type: b2, ang: ang + Math.PI, o: { noElite: true } }); }
-  if (!G.headless) Snd.alarm();
+  cb.hz.q.push({ t: 0, type: b, ang, o: { noElite: true } });
+  if (m >= 14) { const b2 = pick(BOSS_ORDER.filter(x => x !== b)); cb.hz.q.push({ t: .4, type: b2, ang: ang + Math.PI, o: { noElite: true } }); }
 }
 function hrdGiant(cb) {
   const ang = rand(0, TAU);
-  cb.hz.tele.push({ ang, t: 1.8, max: 1.8, col: 'giant', w: .55 });
-  cb.hz.q.push({ t: 1.8, type: pick(GIANTS), ang, o: { noElite: true, hpMul: .65 } });
+  cb.hz.q.push({ t: 0, type: pick(GIANTS), ang, o: { noElite: true, hpMul: .65 } });
 }
 function hrdQuad(cb) {
   const ids = shuffle(GIANTS.slice());
-  [-Math.PI / 2, 0, Math.PI / 2, Math.PI].forEach((a, k) => {
-    cb.hz.tele.push({ ang: a, t: 2.2, max: 2.2, col: 'giant', w: .55 });
-    cb.hz.q.push({ t: 2.2 + k * .12, type: ids[k % ids.length], ang: a, o: { noElite: true, hpMul: .45 } });
-  });
-  if (G.headless) return;
-  Snd.alarm(); shake(5); haptic(80);
-  banner(hT('4 GÉANTS !', '4 GIANTS!'), hT('un de chaque côté de la table', 'one on each side of the table'), 'gt', 2.2);
-  setTimeoutGame(() => { if (!G.headless) banner(hT('4 GÉANTS !', '4 GIANTS!'), hT('un de chaque côté de la table', 'one on each side of the table'), 'gt', 2); }, 2.8);
+  [-Math.PI / 2, 0, Math.PI / 2, Math.PI].forEach((a, k) => cb.hz.q.push({ t: k * .12, type: ids[k % ids.length], ang: a, o: { noElite: true, hpMul: .45 } }));
 }
-
 /* ---------- le dessin : alertes au bord de la table, alliés, effets ---------- */
 const HRD_TCOL = { norm: '255,204,77', rush: '255,92,108', boss: '255,77,160', giant: '201,148,255' };
 function hrdDraw(cb) {
@@ -35770,6 +35765,10 @@ function hrdHud() {
     uc(dt);
     if (cb && cb.hz && G.cb === cb && !cb.demo && G.mode === 'combat' && hrdOn()) hrdTick(cb, dt);
   };
+  // pas d'alertes en horde : les boss et les géants entrent comme les autres cartes
+  const bi = bossIntro; bossIntro = function (e) { if (G.cb && G.cb.hz) return; return bi.apply(this, arguments); };
+  const ba = bossArrive; bossArrive = function (e) { if (G.cb && G.cb.hz) return; return ba.apply(this, arguments); };
+  const bn = banner; banner = function (t1, t2, cls) { if (G.cb && G.cb.hz && G.mode === 'combat' && cls === 'gt') return; return bn.apply(this, arguments); };
   const be = bossEscort; bossEscort = cb => (cb && cb.hz ? undefined : be(cb));
   const dp = drawPBalls; drawPBalls = cb => { dp(cb); if (cb && cb.hz) hrdDraw(cb); };
   const uh = updateHUD; updateHUD = function () { uh.apply(this, arguments); if (G.run && G.run.horde && G.cb && G.cb.hz) hrdHud(); };
@@ -36458,9 +36457,8 @@ function hrdChalEnd(after) {
 // défaite : ils te lâchent une vague de cartes
 function hrdPunish(id) {
   const cb = hrdCb(); if (!cb) return;
-  const m = hrdState().time / 60, n = Math.round(18 + m * 1.5), pool = hrdPool();
-  cb.hz.tele.push({ ring: true, t: 1.4, max: 1.4, col: 'rush' });
-  for (let k = 0; k < n; k++) cb.hz.q.push({ t: 1.4 + k * (11 / n), type: pick(pool), ang: rand(0, TAU), o: {} });
+  const m = hrdState().time / 60, n = Math.round(18 + m * 1.5), R = hrdRound(hrdState().time), pool = SPAWNABLE.filter(id => ENEMIES[id] && (ENEMIES[id].from || 1) <= Math.max(1, R));
+  for (let k = 0; k < n; k++) cb.hz.q.push({ t: k * (11 / n), type: pick(pool), ang: rand(0, TAU), o: {} });
   banner(hT(`LA VAGUE DE ${id === 'nox' ? 'NOX' : id.toUpperCase()}`, `${id === 'nox' ? 'NOX' : id.toUpperCase()}'S WAVE`), hT('perdu : à toi de te débrouiller', 'you lost: you\'re on your own'), 'bad', 2.4);
   Snd.alarm();
 }

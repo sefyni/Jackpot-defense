@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v18.2-202611010130
+JACKPOT DEFENSE v18.3-202611010200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,10 +12,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
-Nouveautés de la v18.2
+Nouveautés de la v18.3
 - « Jouer » propose deux modes : CLASSIQUE (30 manches) ou HORDE (débloqué après avoir battu le Baron).
   Horde directe : Jack te fait choisir 6 jetons ultimes, 700 or, 2 améliorations, shop ouvert tout de suite.
   Elle a son propre classement et ne touche pas aux records de la partie normale.
+- Horde : les cartes arrivent sans arrêt, de tous les côtés, sans alerte. Faibles au début, de plus en plus fortes
+  (et de plus en plus nombreuses) avec le temps.
 - Les nouvelles poses (Jack, Momo, Dina, Nox, le Baron ruiné, les au revoir, le Punch-o-matic) en haute définition.
 
 Nouveautés de la v18.1
