@@ -5591,7 +5591,7 @@ body.hz .rack-slots .slot.locked,body.hzshop .rack-slots .slot.locked{display:no
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.8</p>
+  <p class="proto">Sefy Industries · v18.9</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -24943,7 +24943,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v18.8</p></div>`;
+        <p class="ov5">v18.9</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35707,7 +35707,7 @@ function boot(data) {
 const HRD_EN = document.documentElement.lang === 'en';
 const hT = (fr, en) => HRD_EN ? en : fr;
 const HRD = {
-  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: 1.1, r1: .008, rpm: 13, capPC: 110, capMob: 72, lead: 1.1,
+  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: 1.1, r1: .008, rpm: 13, capPC: 110, capMob: 44, lead: 1.1,
   bossAt: 180, bossEvery: 150, giantAt: 240, giantEvery: 300, quadAt: 420, quadEvery: 300,
   chalAt: 240, chalEvery: 240, shopFirst: 60, shopCd: 60, timePts: 20,
 };
@@ -35862,10 +35862,12 @@ function hrdDirector(cb, dt, T, m) {
   const Z = cb.hz, H = hrdState();
   Z.acc = (Z.acc || 0) + dt * (HRD.r0 + HRD.r1 * T);
   const R = hrdRound(T), pool = SPAWNABLE.filter(id => ENEMIES[id] && !HRD_NOSPAWN.includes(id) && (ENEMIES[id].from || 1) <= Math.max(1, R)), cap = hrdCap();
+  // au-delà du plafond (plus bas sur téléphone), les cartes en trop « fusionnent » : moins de cartes, chacune plus costaude
   while (Z.acc >= 1) {
     Z.acc -= 1;
-    if (hrdAlive(cb) >= cap) { Z.acc = Math.min(Z.acc, 1); break; }
-    hrdSpawnOne(cb, { type: pick(pool.length ? pool : ['coureur', 'soldat']), ang: rand(0, TAU), o: {} }, m);
+    if (hrdAlive(cb) >= cap) { Z.ovf = Math.min(60, (Z.ovf || 0) + 1); continue; }
+    const k = Math.min(3, Math.floor(Z.ovf || 0)); if (k) Z.ovf -= k;
+    hrdSpawnOne(cb, { type: pick(pool.length ? pool : ['coureur', 'soldat']), ang: rand(0, TAU), o: k ? { hpMul: 1 + k, big: 1 + k * .6 } : {} }, m);
   }
   if (T >= H.nextBoss) { H.nextBoss += HRD.bossEvery; hrdBoss(cb, m); }
   if (T >= H.nextQuad) { H.nextQuad += HRD.quadEvery; hrdQuad(cb, m); }
@@ -35885,6 +35887,7 @@ function hrdSpawnOne(cb, q, m) {
   const o = { hpMul: q.o.hpMul || 1 };
   // toujours depuis le bord de la table, parfois d'un peu plus loin
   if (q.ang != null && !G.headless) { const p = spawnPoint(q.ang), d = Math.hypot(p.x, p.y) || 1, k = 1 + rand(0, .28); o.x = p.x * k; o.y = p.y * k; }
+  if (q.o.big > 1) o.big = q.o.big;
   if (!q.o.noElite) { const el = hrdElite(m); if (el && (ENEMIES[q.type].tp || 0) > 0) o.elite = el; }
   const e = spawnEnemy(q.type, q.ang, o);
   if (!e) return;
@@ -35944,7 +35947,7 @@ function hrdFling(e, from, kind) {
   const Z = G.cb && G.cb.hz; if (!Z || G.headless) return;
   const a = from ? Math.atan2(e.y - from.y, e.x - from.x) : Math.atan2(e.y, e.x) + rand(-.3, .3), sp = rand(150, 260);
   Z.flung.push({ x: e.x, y: e.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 30, rot: rand(0, TAU), vr: rand(-14, 14), t: 0, life: .9, w: Math.max(5, e.r * 1.4), h: Math.max(7, e.r * 2), col: e.d.rim || '#fff3e6', kind: kind || 'fling' });
-  if (Z.flung.length > 140) Z.flung.shift();
+  if (Z.flung.length > (LAY.pc ? 140 : 40)) Z.flung.shift();
 }
 function hrdDrawFlung(cb, tN) {
   const L = cb.hz.flung; if (!L.length) return;
@@ -36305,6 +36308,17 @@ const HRD_LBS = { name: 'Horde', col: '#ff7a5c', tok: 1 };
       if (name === 'lb_me') return lr.call(this, 'hz_me', { p_id: String(body.p_id) });
     }
     return lr.apply(this, arguments);
+  };
+})();
+// sur téléphone, en horde : pas d'éclairs de MULT autour de l'écran (c'est l'effet le plus lourd, et le MULT y reste haut longtemps)
+(() => {
+  const ef = elecFrame;
+  elecFrame = function (dt) {
+    if (G.cb && G.cb.hz && !LAY.pc && G.run && G.run.horde) {
+      const E = ELEC; if (E.drawn && E.c) { try { (E.g || E.c.getContext('2d')).clearRect(0, 0, E.c.width, E.c.height); } catch (e) { /* rien */ } E.drawn = false; E.arcs.length = 0; }
+      return;
+    }
+    return ef.apply(this, arguments);
   };
 })();
 
