@@ -4944,6 +4944,10 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
 .hz-ostats .hz-obig dd{font-size:30px;color:var(--gold);text-shadow:0 3px 0 #b8323f}
 .hz-otitle{color:var(--gold)}
 .hzd .hzu-c{gap:4px}
+
+.hzd-btns .hzd-rr{flex:none;min-height:48px;padding:0 14px}
+.hzd-btns .hzd-rr:disabled{filter:grayscale(.8);opacity:.6}
+.hzd-c.on{order:-1}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5571,7 +5575,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.5</p>
+  <p class="proto">Sefy Industries · v18.6</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -16624,7 +16628,7 @@ function showStatus() {
 }
 
 /* ---------- rack ---------- */
-const canReorder = () => G.run && ['machine', 'market', 'cleared', 'bar', 'chooser'].includes(G.mode);
+const canReorder = () => G.run && ['machine', 'market', 'cleared', 'bar', 'chooser', 'hshop'].includes(G.mode);
 function renderRack() {
   if (G.headless || !G.run) return;
   if (tamponToBonus(G.run)) setTimeout(() => boostNote('tampon', 'Elle ne prend plus de place : +' + (G.run.tamponN || 1) + ' place' + ((G.run.tamponN || 1) > 1 ? 's' : '') + ' de jeton pour toute la partie.'), 300);
@@ -24923,7 +24927,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v18.5</p></div>`;
+        <p class="ov5">v18.6</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35863,6 +35867,8 @@ function hrdLaunch(cb, F) {
 }
 function hrdSpawnOne(cb, q, m) {
   const o = { hpMul: q.o.hpMul || 1 };
+  // toujours depuis le bord de la table, parfois d'un peu plus loin
+  if (q.ang != null && !G.headless) { const p = spawnPoint(q.ang), d = Math.hypot(p.x, p.y) || 1, k = 1 + rand(0, .28); o.x = p.x * k; o.y = p.y * k; }
   if (!q.o.noElite) { const el = hrdElite(m); if (el && (ENEMIES[q.type].tp || 0) > 0) o.elite = el; }
   const e = spawnEnemy(q.type, q.ang, o);
   if (!e) return;
@@ -36540,7 +36546,8 @@ function hrdSpellsHTML() {
     const S = PSPELLS[o.id], pr = hrdSpellPrice(o.id), own = have.includes(o.id);
     return `<div class="offer${o.sold || own ? ' sold' : ''}"><span class="slotico hzs-sp" style="--sc:${S.col}">${iconSVG(S.icon)}</span><div class="otext"><b>${esc(S.name)}<i class="otag">${hT('SORT', 'SPELL')}</i></b><span>${S.txt}</span></div>
       <div class="obuy">${o.sold || own ? `<em>${hT('APPRIS', 'LEARNED')}</em>` : `<button class="mini" data-spell="${i}" ${g < pr || full ? 'disabled' : ''}>${fmtN(pr)} or${full ? `<small>${hT('plus de place', 'no slot')}</small>` : ''}</button>`}</div></div>`;
-  }).join('') || `<p class="hzj-hint">${hT('Jack n\'a plus de sorts à vendre.', 'Jack has no more spells to sell.')}</p>`}</div>`;
+  }).join('') || `<p class="hzj-hint">${hT('Jack n\'a plus de sorts à vendre.', 'Jack has no more spells to sell.')}</p>`}</div>`
+  + hrdSection(hT('TES SORTS', 'YOUR SPELLS'), hT('revends-en un pour faire de la place', 'sell one to make room')) + `<div class="hzj-list">${have.map(id => { const S = PSPELLS[id]; return `<div class="offer"><span class="slotico hzs-sp" style="--sc:${S.col}">${iconSVG(S.icon)}</span><div class="otext"><b>${esc(S.name)}</b><span>${S.txt}</span></div><div class="obuy"><button class="mini dark" data-spsell="${id}">${hT('Revendre', 'Sell')} +${spellSellValue(id)}</button></div></div>`; }).join('') || `<p class="hzj-hint">${hT('Aucun sort.', 'No spells.')}</p>`}</div>`;
 }
 function hrdBuySpell(i) {
   const H = hrdState(), run = G.run, o = H.spOffer && H.spOffer[i]; if (!o || o.sold) return;
@@ -36678,6 +36685,7 @@ function hrdShopClick(e) {
   if (b.dataset.pack != null) { hrdOpenPack(+b.dataset.pack); return; }
   if (b.dataset.buy) { const [i, k] = b.dataset.buy.split(':').map(Number); hrdBuyChip(i, k); return; }
   if (b.dataset.spell != null) { hrdBuySpell(+b.dataset.spell); return; }
+  if (b.dataset.spsell) { spellSellClick(b); if (!spellsOf(G.run).includes(b.dataset.spsell)) { if (G.cb) initSpells(G.cb, G.run); hrdShopRender(); } return; }
   if (b.dataset.drink) { hrdBuyDrink(b.dataset.drink); return; }
   if (b.dataset.up) { hrdUpgrade(+b.dataset.up); return; }
   if (b.dataset.sell) { hrdSell(+b.dataset.sell); return; }
@@ -37226,7 +37234,7 @@ punchAnim = function (j, done) {
    Départ rapide : Jack te fait choisir 6 jetons parmi 12, te donne un peu d'or et ouvre son shop tout de suite.
    Un classement à part ; les records de la partie normale ne bougent pas. */
 const hrdSoloOpen = () => { const m = G.meta || {}; return (m.wins || 0) > 0 || (m.baronWins || 0) > 0 || !!(m.hzBest && m.hzBest.score); };
-const HRD_SOLO = { pick: 6, offer: 12, gold: 700, slots: 8, ups: 2, up: { calibre: 2, cadence: 2, portee: 2, pv: 2, etage: 1, solide: 2, barriere: 1, remontant: 1 } };
+const HRD_SOLO = { rerolls: 2, pick: 6, offer: 12, gold: 700, slots: 8, ups: 2, up: { calibre: 2, cadence: 2, portee: 2, pv: 2, etage: 1, solide: 2, barriere: 1, remontant: 1 } };
 const DRAFT = { offer: [], sel: [] };
 (() => {
   const nr = document.querySelector('#newrun .nr-head');
@@ -37278,7 +37286,7 @@ function hrdSoloStart() {
   // 12 jetons ULTIMES de types tous différents (dont un peu de la machine de départ)
   const rest = shuffle(hrdChipPool(NORMAL_JOKERS.slice()));
   DRAFT.offer = rest.slice(0, HRD_SOLO.offer).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
-  shuffle(DRAFT.offer); DRAFT.sel = [];
+  shuffle(DRAFT.offer); DRAFT.sel = []; DRAFT.rr = HRD_SOLO.rerolls;
   hrdDraftDom();
   show('#hz-draft', true); $('#hz-draft').scrollTop = 0;
   $('#hz-draft').classList.remove('in'); void $('#hz-draft').offsetWidth; $('#hz-draft').classList.add('in');
@@ -37298,7 +37306,7 @@ function hrdDraftDom() {
         <div class="hzj-head"><h2>${hT('LA HORDE DE JACK', 'JACK\'S HORDE')}</h2><div class="hzj-gold"><b id="hzd-n">0/${HRD_SOLO.pick}</b></div></div>
         <p class="hzj-hint">${hT(`Choisis ${HRD_SOLO.pick} jetons ULTIMES. Tu commences avec ${HRD_SOLO.gold} or, ${HRD_SOLO.ups} améliorations et le shop de Jack ouvert.`, `Pick ${HRD_SOLO.pick} ULTIMATE chips. You start with ${HRD_SOLO.gold} gold, ${HRD_SOLO.ups} upgrades and Jack's shop open.`)}</p>
         <div class="hzj-body"><div class="hzu-grid" id="hzd-grid"></div></div>
-        <div class="hzd-btns"><button class="btn ghost hzd-back" data-hzd="back">${hT('Retour', 'Back')}</button><button class="btn big hzj-go" data-hzd="go" id="hzd-go" disabled></button></div>
+        <div class="hzd-btns"><button class="btn ghost hzd-back" data-hzd="back">${hT('Retour', 'Back')}</button><button class="btn blue hzd-rr" data-hzd="rr" id="hzd-rr"></button><button class="btn big hzj-go" data-hzd="go" id="hzd-go" disabled></button></div>
       </div>
     </div>
   </section>`);
@@ -37314,6 +37322,13 @@ function hrdDraftDom() {
       hrdDraftRender(); return;
     }
     if (b.dataset.hzd === 'go' && DRAFT.sel.length === HRD_SOLO.pick) { Snd.click(); hrdDraftGo(); return; }
+    if (b.dataset.hzd === 'rr' && DRAFT.rr > 0) {
+      DRAFT.rr--; const keep = DRAFT.sel.map(i => DRAFT.offer[i]), used = keep.map(j => j.parts[0].t);
+      const fresh = shuffle(hrdChipPool(NORMAL_JOKERS.filter(id => !used.includes(id)))).slice(0, HRD_SOLO.offer - keep.length).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
+      DRAFT.offer = keep.concat(fresh); DRAFT.sel = keep.map((_, i) => i);
+      Snd.relance ? Snd.relance() : Snd.cardSweep && Snd.cardSweep(); hrdDraftPose('sigh'); typeInto('#hzd-say', hT('Encore ? … Tiens. Et c\'est la dernière fois que je mélange.', 'Again? … Here. And that\'s the last time I shuffle.'), 'jack');
+      hrdDraftRender(); return;
+    }
     if (b.dataset.hzd === 'back') { Snd.click(); show('#hz-draft', false); G.run = null; G.cb = null; toTitle(); }
   });
 }
@@ -37327,6 +37342,7 @@ function hrdDraftRender() {
   const n = DRAFT.sel.length, need = HRD_SOLO.pick;
   $('#hzd-n').textContent = `${n}/${need}`;
   $('#hzd-grid').innerHTML = DRAFT.offer.map((j, i) => `<div class="hzu-c"><button class="hzu-pick hzd-c${DRAFT.sel.includes(i) ? ' on' : ''}" data-hzdi="${i}">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><small>${topCap(j)}</small></button><button class="hzu-info" data-hzdd="${i}">${hT('Détails', 'Details')}</button></div>`).join('');
+  const rr = $('#hzd-rr'); if (rr) { rr.disabled = !(DRAFT.rr > 0); rr.textContent = hT(`Relancer (${DRAFT.rr || 0})`, `Reroll (${DRAFT.rr || 0})`); }
   const go = $('#hzd-go'); go.disabled = n < need; go.textContent = n < need ? hT(`Choisis encore ${need - n}`, `Pick ${need - n} more`) : hT('ALLEZ, LA HORDE !', 'BRING ON THE HORDE!');
 }
 function hrdDraftGo() {

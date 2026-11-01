@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v18.5-202611011215
+JACKPOT DEFENSE v18.6-202611011330
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,10 +12,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
-Nouveautés de la v18.5
+Nouveautés de la v18.6
 - « Jouer » propose deux modes : CLASSIQUE (30 manches) ou HORDE (débloqué après avoir battu le Baron).
   Horde directe : Jack te fait choisir 6 jetons ultimes, 700 or, 2 améliorations, shop ouvert tout de suite.
   Elle a son propre classement et ne touche pas aux records de la partie normale.
+- Horde : chez Jack on peut ranger, empiler et glisser-vendre ses jetons, et revendre ses sorts ;
+  les cartes arrivent toutes depuis le bord de la table (ou de plus loin) ; relance des jetons de départ.
 - Classement Horde : ses propres fonctions côté serveur (voir supabase-classement-horde.sql).
 - Horde : chrono en haut à gauche (style du jeu), table rouge, 8 places de jetons, départ plus rapide.
   Le shop de Jack : onglets Piles, Paquets (6 machines), Sorts, Les invendus de Zaza (boissons), Améliorer ;
