@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.4-202611021200
+JACKPOT DEFENSE v19.5-202611021300
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.5 — GASTON T'ACCUEILLE
+- Le tuto commence par une petite scène : la nuit, dans la ruelle derrière le Tapis Rouge. Gaston, le rat de
+  l'Inspecteur, déboule en courant, voit que t'es nouveau et t'explique qu'il doit t'apprendre le milieu. Puis il file
+  vers la porte du Tapis Rouge, elle s'ouvre, la lumière avale l'écran… et le tuto démarre. (« Passer › » pour aller direct.)
+- Mille et une nuits : pas de tuto dans le palais pour l'instant (une partie lancée dans le DLC ne déclenche plus le tuto).
 
 Nouveautés de la v19.4 — LE GRAND TOUR
 - Mode Horde au téléphone : l'écran « Nouvelle partie › Horde » n'est plus écrasé dans une colonne étroite, et le choix
