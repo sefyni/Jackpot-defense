@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.2-202611012200
+JACKPOT DEFENSE v19.3-202611020000
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,16 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.3 — CHEZ JACK
+- Le champagne de Jack (nouvel onglet CHAMPAGNE) : choisis 2 jetons simples différents, Jack sabre la bouteille et en
+  fait un mix qui garde les deux pouvoirs, sur une seule place. On peut même y mélanger les jetons FOUS (seulement
+  en Horde). Le prix monte à chaque bouteille.
+- Paquets corrompus : en ouvrant un paquet de machine, parfois (14 %, une fois par visite au plus), il grésille et se
+  corrompt. Il ne contient plus qu'UN jeton fou (parfois corrompu), à acheter cher.
+- L'animation de Jack qui améliore un jeton est plus propre : plus d'image cadrée autrement ni de jeton qui flotte
+  dans le vide, le nouveau jeton file tout seul dans ton rack.
+- Vestiaire › Univers : nouvelle vignette pour « Le casino » (la salle du Tapis Rouge, son néon, sa table, ses jetons).
 
 Nouveautés de la v19.2 — HORDE
 - Corrigé pour de bon : à partir de 2 min 30, une vieille règle des manches normales (anti-blocage) aspirait
