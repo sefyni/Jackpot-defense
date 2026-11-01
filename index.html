@@ -4948,6 +4948,9 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
 .hzd-btns .hzd-rr{flex:none;min-height:48px;padding:0 14px}
 .hzd-btns .hzd-rr:disabled{filter:grayscale(.8);opacity:.6}
 .hzd-c.on{order:-1}
+
+.hzd-new{animation:hzdNew .3s steps(3)}
+@keyframes hzdNew{from{opacity:0;transform:translateY(8px)}}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5575,7 +5578,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.6</p>
+  <p class="proto">Sefy Industries · v18.7</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -24927,7 +24930,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v18.6</p></div>`;
+        <p class="ov5">v18.7</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -37322,12 +37325,12 @@ function hrdDraftDom() {
       hrdDraftRender(); return;
     }
     if (b.dataset.hzd === 'go' && DRAFT.sel.length === HRD_SOLO.pick) { Snd.click(); hrdDraftGo(); return; }
-    if (b.dataset.hzd === 'rr' && DRAFT.rr > 0) {
-      DRAFT.rr--; const keep = DRAFT.sel.map(i => DRAFT.offer[i]), used = keep.map(j => j.parts[0].t);
-      const fresh = shuffle(hrdChipPool(NORMAL_JOKERS.filter(id => !used.includes(id)))).slice(0, HRD_SOLO.offer - keep.length).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
-      DRAFT.offer = keep.concat(fresh); DRAFT.sel = keep.map((_, i) => i);
-      Snd.relance ? Snd.relance() : Snd.cardSweep && Snd.cardSweep(); hrdDraftPose('sigh'); typeInto('#hzd-say', hT('Encore ? … Tiens. Et c\'est la dernière fois que je mélange.', 'Again? … Here. And that\'s the last time I shuffle.'), 'jack');
-      hrdDraftRender(); return;
+    if (b.dataset.hzd === 'rr') {
+      DRAFT.offer = shuffle(hrdChipPool(NORMAL_JOKERS.slice())).slice(0, HRD_SOLO.offer).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
+      DRAFT.sel = [];
+      Snd.relance ? Snd.relance() : Snd.cardSweep && Snd.cardSweep();
+      if (rnd() < .5) { hrdDraftPose('sigh'); typeInto('#hzd-say', hT('Encore ? … Tiens. Tout neuf.', 'Again? … Here. All new.'), 'jack'); }
+      hrdDraftRender(); const g = $('#hzd-grid'); if (g) bumpCls(g, 'hzd-new'); return;
     }
     if (b.dataset.hzd === 'back') { Snd.click(); show('#hz-draft', false); G.run = null; G.cb = null; toTitle(); }
   });
@@ -37342,7 +37345,7 @@ function hrdDraftRender() {
   const n = DRAFT.sel.length, need = HRD_SOLO.pick;
   $('#hzd-n').textContent = `${n}/${need}`;
   $('#hzd-grid').innerHTML = DRAFT.offer.map((j, i) => `<div class="hzu-c"><button class="hzu-pick hzd-c${DRAFT.sel.includes(i) ? ' on' : ''}" data-hzdi="${i}">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><small>${topCap(j)}</small></button><button class="hzu-info" data-hzdd="${i}">${hT('Détails', 'Details')}</button></div>`).join('');
-  const rr = $('#hzd-rr'); if (rr) { rr.disabled = !(DRAFT.rr > 0); rr.textContent = hT(`Relancer (${DRAFT.rr || 0})`, `Reroll (${DRAFT.rr || 0})`); }
+  const rr = $('#hzd-rr'); if (rr) rr.textContent = hT('Relancer', 'Reroll');
   const go = $('#hzd-go'); go.disabled = n < need; go.textContent = n < need ? hT(`Choisis encore ${need - n}`, `Pick ${need - n} more`) : hT('ALLEZ, LA HORDE !', 'BRING ON THE HORDE!');
 }
 function hrdDraftGo() {
