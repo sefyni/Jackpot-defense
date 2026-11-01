@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v18.9-202611011340
+JACKPOT DEFENSE v19.0-202611011800
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,22 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.0 — EXTENSION « MILLE ET UNE NUITS »
+- Un nouvel univers pour tout le jeu : le casino devient un palais sous la lune. Velours rubis et or, lanternes qui se
+  balancent, étoiles, croissant de lune, coupoles et minarets, poussière d'or qui monte.
+- Nouvel écran d'accueil, interface dorée (panneaux, boutons, onglets), machine à jetons en palais, table en cuir rubis
+  capitonné de clous d'or, anneau de laiton gravé et feutre grenat imprimé d'étoiles.
+- 20 musiques orientales : accueil (valse du Palais), combat (le Bazar, 4 tonalités + boss), le Baron, le marché noir,
+  Jack, le bar de Zaza, Momo, Dina, Nox, Anatole, le final contre le Baron en 3 phases et la scène d'au revoir.
+- Les salles changent aussi : le marché noir devient un souk, le bar de Zaza un salon de thé, Momo joue dans un riad
+  aux zelliges (billard turquoise), Dina sur une terrasse, Nox entre des rideaux rubis, le Baron dans un salon à arcades,
+  Jack dans une arrière-salle, et la scène d'au revoir se passe dans une salle du palais.
+- Pour l'avoir : l'extension s'achète (sur Steam, à la sortie) ET il faut battre le Baron avec chaque jeu en mise
+  blanche et en mise rouge. Elle s'active dans le Vestiaire, onglet « Univers ».
+- Code « courty » : Options › Profil › Changer d'appareil, colle « courty » puis « Charger ce code ». Tout est
+  débloqué sur ce profil, pour toujours (jeux, mises, machines, vestiaire, mode Horde, Mille et une nuits).
+- Pour tester l'extension seule : toucher 7 fois la version en bas de l'écran titre.
 
 Nouveautés de la v18.9
 - « Jouer » propose deux modes : CLASSIQUE (30 manches) ou HORDE (débloqué après avoir battu le Baron).
