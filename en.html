@@ -5571,7 +5571,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.4</p>
+  <p class="proto">Sefy Industries · v18.5</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24771,7 +24771,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.4</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.5</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35897,6 +35897,18 @@ const HRD_LBS = { name: 'Horde', col: '#ff7a5c', tok: 1 };
       }
     } catch (e) { /* rien */ }
     return p;
+  };
+})();
+// le classement Horde a ses propres fonctions côté serveur (hz_submit, hz_top, hz_me)
+(() => {
+  const lr = lbRpc;
+  lbRpc = function (name, body) {
+    if (body && +body.p_stake === HRD_LB) {
+      if (name === 'lb_submit') return lr.call(this, 'hz_submit', { p_id: String(body.p_id), p_secret: body.p_secret, p_pseudo: (lbMe() || {}).pseudo || '?', p_score: Math.round(body.p_score), p_round: body.p_round | 0, p_deck: body.p_deck || '' });
+      if (name === 'lb_top' || name === 'lb_top100') return lr.call(this, 'hz_top', { p_limit: name === 'lb_top' ? 10 : 100 });
+      if (name === 'lb_me') return lr.call(this, 'hz_me', { p_id: String(body.p_id) });
+    }
+    return lr.apply(this, arguments);
   };
 })();
 
