@@ -4734,25 +4734,36 @@ body:not(.lpc) .hzj-go small{display:none}
 .offer .obuy .mini small{display:block;font-size:10px;opacity:.75}
 .hzs-sp{display:grid;place-items:center;width:50px;height:50px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 3px var(--sc)}
 .hzs-sp svg,.hzs-sp .ico{width:30px;height:30px;color:var(--sc);fill:currentColor}
-/* les paquets de machines */
-.hzj-packs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.hzj-pack{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px 10px;border:0;border-radius:12px;background:var(--panel-2);box-shadow:inset 0 0 0 2px var(--edge),0 4px 0 #000}
-.hzp-box{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;aspect-ratio:3/4;max-height:150px;border-radius:8px;overflow:hidden;background:repeating-linear-gradient(135deg,var(--mc) 0 10px,color-mix(in srgb,var(--mc) 70%,#000) 10px 20px);box-shadow:inset 0 0 0 3px #fff3e6,inset 0 0 0 6px var(--ink);color:#fff3e6;text-align:center}
-.hzp-shine{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.45) 50%,transparent 58%);animation:hzFoil 2.6s steps(8) infinite}
-@keyframes hzFoil{0%,40%{transform:translateX(-45%)}100%{transform:translateX(45%)}}
-.hzp-ic{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 3px var(--mc)}
-.hzp-ic svg,.hzp-ic .ico{width:28px;height:28px}
-.hzp-box b{position:relative;font-size:13px;line-height:1.05;padding:3px 6px;border-radius:5px;background:rgba(20,13,31,.85)}
-.hzp-box small{position:relative;font-size:11px;padding:1px 5px;border-radius:4px;background:rgba(20,13,31,.7)}
-.hzj-pack em{font-style:normal;font-size:13px;color:var(--ink);background:var(--gold);padding:2px 10px;border-radius:6px;box-shadow:0 2px 0 var(--gold-d)}
-.hzj-pack:hover .hzp-box{transform:translateY(-3px)}
-.hzj-pack.tear .hzp-box{animation:hzTear .48s steps(6) forwards}
-@keyframes hzTear{30%{transform:rotate(-6deg)}60%{transform:rotate(6deg) scale(1.06)}100%{transform:scale(1.25);opacity:0}}
-.hzj-pk{grid-column:1/-1;padding:10px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),inset 0 4px 0 var(--mc)}
+/* les paquets de machines : de vrais paquets de cartes (bords crantés, alu, sceau), ouverture rapide */
+.hzj-packs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px}
+.hzj-pack{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0;border:0;background:none}
+.hzp-box{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:100%;max-width:130px;aspect-ratio:5/7;padding:0 6px 14px;color:#fff3e6;text-align:center;
+  clip-path:polygon(0 4%,5% 0,10% 4%,15% 0,20% 4%,25% 0,30% 4%,35% 0,40% 4%,45% 0,50% 4%,55% 0,60% 4%,65% 0,70% 4%,75% 0,80% 4%,85% 0,90% 4%,95% 0,100% 4%,100% 96%,95% 100%,90% 96%,85% 100%,80% 96%,75% 100%,70% 96%,65% 100%,60% 96%,55% 100%,50% 96%,45% 100%,40% 96%,35% 100%,30% 96%,25% 100%,20% 96%,15% 100%,10% 96%,5% 100%,0 96%);
+  background:linear-gradient(180deg,rgba(255,255,255,.35) 0 7%,transparent 7% 12%,rgba(0,0,0,.25) 12% 13%,transparent 13%),
+    radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--mc) 85%,#fff) 0 22%,var(--mc) 23% 45%,color-mix(in srgb,var(--mc) 55%,#000) 100%);
+  filter:drop-shadow(0 4px 0 #000);transition:transform .12s}
+.hzp-box::before{content:'';position:absolute;left:8%;right:8%;top:16%;bottom:30%;border-radius:8px;border:2px dashed rgba(255,243,230,.45)}
+.hzp-shine{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 44%,rgba(255,255,255,.5) 50%,transparent 56%);animation:hzFoil 2.2s ease-in-out infinite}
+@keyframes hzFoil{0%,50%{transform:translateX(-45%)}100%{transform:translateX(45%)}}
+.hzp-ic{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);display:grid;place-items:center;width:46%;aspect-ratio:1;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px #fff3e6,0 0 0 6px var(--ink)}
+.hzp-ic svg,.hzp-ic .ico{width:62%;height:62%}
+.hzp-box b{position:relative;font-size:12px;line-height:1.05;padding:3px 6px;border-radius:5px;background:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,243,230,.3)}
+.hzp-box small{position:relative;font-size:10px;margin-top:3px;opacity:.85}
+.hzj-pack em{font-style:normal;font-size:12px;color:var(--ink);background:var(--gold);padding:2px 12px;border-radius:6px;box-shadow:0 2px 0 var(--gold-d)}
+.hzj-pack:hover .hzp-box{transform:translateY(-4px) rotate(-1.5deg)}
+.hzj-pack:active .hzp-box{transform:scale(.96)}
+.hzj-pack.tear .hzp-box{animation:hzTear .26s ease-in forwards}
+.hzj-pack.tear em{opacity:0}
+@keyframes hzTear{0%{transform:none}35%{transform:rotate(-7deg) scale(1.06)}65%{transform:rotate(6deg) scale(1.1)}100%{transform:translateY(-16px) scale(1.2);opacity:0;filter:brightness(2.2) drop-shadow(0 4px 0 #000)}}
+.hzj-pk{grid-column:1/-1;padding:10px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),inset 0 4px 0 var(--mc);animation:hzPk .18s ease-out}
+@keyframes hzPk{from{opacity:.4;transform:scaleY(.85)}}
 .hzp-n{display:block;font-size:14px;letter-spacing:.06em;color:var(--mc);margin:2px 0 8px}
-.hzp-c{animation:hzPop .3s var(--d,0s) steps(4) both}
-@keyframes hzPop{from{opacity:0;transform:translateY(8px)}}
+.hzp-c{animation:hzFly .32s var(--d,0s) cubic-bezier(.2,1.5,.4,1) both}
+.hzp-c .oicon{animation:hzSpin .38s var(--d,0s) ease-out both}
+@keyframes hzFly{from{opacity:0;transform:translateY(-26px) scale(.6)}}
+@keyframes hzSpin{from{transform:rotate(-200deg) scale(.4)}}
 .stk-hint{color:#5fd68a!important}
+@media (max-width:760px){.hzj-packs{gap:10px 8px}.hzp-box b{font-size:10px}}
 /* les boissons de Zaza */
 .hzj-cat{margin:8px 2px 6px;font-size:13px;letter-spacing:.14em;color:var(--cat)}
 .hzj-drinks{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:6px}
@@ -4951,6 +4962,8 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
 
 .hzd-new{animation:hzdNew .3s steps(3)}
 @keyframes hzdNew{from{opacity:0;transform:translateY(8px)}}
+
+body.hz .rack-slots .slot.locked,body.hzshop .rack-slots .slot.locked{display:none}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5578,7 +5591,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.7</p>
+  <p class="proto">Sefy Industries · v18.8</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24778,7 +24791,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.7</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.8</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -36139,7 +36152,7 @@ function hrdPacksHTML() {
     if (!p.open) return `<button class="hzj-pack" data-pack="${i}" style="--mc:${col}"><span class="hzp-box"><i class="hzp-shine"></i><span class="hzp-ic">${iconSVG((M.ids || [])[0] || 'jackpot')}</span><b>${esc(M.name)}</b><small>${hT('3 jetons', '3 chips')}</small></span><em>${hT('OUVRIR', 'OPEN')}</em></button>`;
     return `<div class="hzj-pk" style="--mc:${col}"><b class="hzp-n">${esc(M.name)}</b><div class="hzj-list">${p.chips.map((j, k) => {
       const sold = p.sold.includes(k), pr = hrdChipPrice(j), partner = !sold && stackPartner(j), noRoom = !partner && free < needSlots(j);
-      return `<div class="offer hzp-c${sold ? ' sold' : ''}" style="--d:${k * .1}s">${hrdChipBtn(j)}<div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${rarVar(j)})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${partner ? `<span class="stk-hint">${hT('s\'empile sur ton jeton', 'stacks on your chip')}</span>` : ''}</div>
+      return `<div class="offer hzp-c${sold ? ' sold' : ''}" style="--d:${p.fresh ? k * .07 : 0}s${p.fresh ? '' : ';animation:none'}">${hrdChipBtn(j)}<div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${rarVar(j)})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${partner ? `<span class="stk-hint">${hT('s\'empile sur ton jeton', 'stacks on your chip')}</span>` : ''}</div>
         <div class="obuy">${sold ? `<em>${hT('ACHETÉ', 'BOUGHT')}</em>` : `<button class="mini" data-buy="${i}:${k}" ${g < pr || noRoom ? 'disabled' : ''}>${fmtN(pr)} or${noRoom ? `<small>${hT('rack plein', 'rack full')}</small>` : ''}</button>`}</div></div>`;
     }).join('')}</div></div>`;
   }).join('')}</div>`;
@@ -36149,7 +36162,7 @@ function hrdOpenPack(i) {
   const b = $(`#hzj-body [data-pack="${i}"]`);
   Snd.cardSwish && Snd.cardSwish(); haptic(25);
   for (const j of p.chips) for (const pt of j.parts) catSee('j', pt.t);
-  if (b && !G.reduced) { b.classList.add('tear'); SHOP.busy = true; setTimeout(() => { SHOP.busy = false; p.open = true; Snd.stack(3); hrdShopRender(); }, 480); }
+  if (b && !G.reduced) { b.classList.add('tear'); SHOP.busy = true; setTimeout(() => { SHOP.busy = false; p.open = true; p.fresh = true; Snd.stack(3); hrdShopRender(); p.fresh = false; }, 240); }
   else { p.open = true; hrdShopRender(); }
 }
 function hrdBuyChip(i, k) {
