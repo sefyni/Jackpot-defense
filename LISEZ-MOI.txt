@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.3-202611020000
+JACKPOT DEFENSE v19.4-202611021200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,19 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.4 — LE GRAND TOUR
+- Mode Horde au téléphone : l'écran « Nouvelle partie › Horde » n'est plus écrasé dans une colonne étroite, et le choix
+  des 6 jetons ne déborde plus à droite (le compteur, la 3e colonne et le bouton sont entiers). Boutons du draft sur une ligne.
+- Chez Jack : l'onglet PILES a retrouvé son icône.
+- Vestiaire au téléphone : les 6 onglets passent sur 2 rangées lisibles (le texte débordait des boutons), et le panneau
+  garde la même hauteur d'un onglet à l'autre (Tables ne rapetisse plus). Pareil pour les Options (Audio, Crédits).
+- Nouvelle partie au PC : la table de démo du fond (et son canon) ne passe plus derrière le texte du jeu choisi.
+- Fin de partie : les bandeaux « nouvelle machine / succès débloqués » s'affichent en bas, plus par-dessus le titre.
+- Bannières de boss au PC : la phrase d'explication revient à la ligne au lieu de traverser toute la table.
+- Mille et une nuits : le texte du boss reste lisible devant les lanternes (fond sombre, lanternes atténuées), « Nouvelle
+  partie » tient sur une ligne au téléphone, l'enseigne « La maison joue… » passe en or et rubis, et la sauvegarde en
+  ligne (Options › Profil, Connexion) passe aussi en or et rubis au lieu du bleu.
 
 Nouveautés de la v19.3 — CHEZ JACK
 - Le champagne de Jack (nouvel onglet CHAMPAGNE) : choisis 2 jetons simples différents, Jack sabre la bouteille et en

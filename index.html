@@ -4793,7 +4793,7 @@ body:not(.lpc) .hzj-go small{display:none}
 .hzu-info,.hzu-sell{min-height:28px;border:0;border-radius:8px;background:var(--ink);color:var(--muted);font-size:12px;box-shadow:inset 0 0 0 2px var(--edge)}
 .hzu-info{color:var(--cream)}
 @media (max-width:760px){
-  .hzj-wrap{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 8px 8px}
+  .hzj-wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 8px 8px}
   .hzj-left{display:grid;grid-template-columns:96px 1fr;align-items:end;gap:8px}
   .hzj-fig{width:96px;height:110px;flex:none}
   .hzj-counter{display:none}
@@ -5011,6 +5011,10 @@ body.hz .rack-slots .slot.locked,body.hzshop .rack-slots .slot.locked{display:no
 .hzj-pkc .hzp-n small{display:block;font-size:11px;color:var(--muted);text-shadow:none;letter-spacing:.06em}
 .hzp-fou{box-shadow:inset 0 0 0 1.5px rgba(57,255,176,.6)!important}
 .hzp-only{display:block;font-size:11px;color:#9affd6}
+
+/* v19.4 : au téléphone, rien ne déborde à droite (draft de la horde, shop) */
+.hzj-left,.hzj-right{min-width:0}
+@media (max-width:760px){.hzd-btns .hzj-go{font-size:15px;line-height:1.1;padding:0 10px;white-space:nowrap;min-height:48px}.hzd-btns .hzd-back,.hzd-btns .hzd-rr{min-height:48px;padding:0 12px;font-size:13px}}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5304,6 +5308,42 @@ body.th-orient .hzj-bg{background:linear-gradient(180deg,rgba(10,1,4,.2),rgba(10
 body.th-orient .hzj-bg::before{background:radial-gradient(60% 50% at 28% 12%,rgba(255,190,90,.22),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='-13 0 26 44'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.5' cy='.55' r='.6'%3E%3Cstop offset='0' stop-color='%23fff2b8'/%3E%3Cstop offset='.5' stop-color='%23ffb347'/%3E%3Cstop offset='1' stop-color='%23a8520a'/%3E%3C/radialGradient%3E%3C/defs%3E %3Cpath d='M-2 0h4l1 3h-6z' fill='%23c8922e'/%3E%3Cpath d='M-7 9Q0 1 7 9z' fill='%23e8b54a' stroke='%236b4210' stroke-width='.8'/%3E%3Cpath d='M-8 9h16l3 10-3 11h-16l-3-11z' fill='url(%23g)' stroke='%236b4210' stroke-width='1.2'/%3E %3Cpath d='M-3 9v21M3 9v21M-11 19h22' stroke='%236b4210' stroke-width='.9'/%3E%3Cpath d='M-7 30h14l-2 3h-10z' fill='%23a8741c'/%3E%3Cpath d='M-4 33h8l-4 6z' fill='%23e8b54a'/%3E%3Cpath d='M0 39v5' stroke='%23c22a48' stroke-width='1.6'/%3E%3C/svg%3E") 22% 0/30px 52px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='-13 0 26 44'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.5' cy='.55' r='.6'%3E%3Cstop offset='0' stop-color='%23fff2b8'/%3E%3Cstop offset='.5' stop-color='%235fe0c8'/%3E%3Cstop offset='1' stop-color='%230d5a52'/%3E%3C/radialGradient%3E%3C/defs%3E %3Cpath d='M-2 0h4l1 3h-6z' fill='%23c8922e'/%3E%3Cpath d='M-7 9Q0 1 7 9z' fill='%23e8b54a' stroke='%236b4210' stroke-width='.8'/%3E%3Cpath d='M-8 9h16l3 10-3 11h-16l-3-11z' fill='url(%23g)' stroke='%236b4210' stroke-width='1.2'/%3E %3Cpath d='M-3 9v21M3 9v21M-11 19h22' stroke='%236b4210' stroke-width='.9'/%3E%3Cpath d='M-7 30h14l-2 3h-10z' fill='%23a8741c'/%3E%3Cpath d='M-4 33h8l-4 6z' fill='%23e8b54a'/%3E%3Cpath d='M0 39v5' stroke='%23c22a48' stroke-width='1.6'/%3E%3C/svg%3E") 78% 0/30px 52px no-repeat!important}
 body.th-orient .hzj-bg::after{background:linear-gradient(180deg,#e8b54a 0 3px,transparent 3px),repeating-linear-gradient(90deg,#5a0d22 0 40px,#4a0a1c 40px 80px)!important;box-shadow:0 -6px 0 #3a0816!important}
 body.th-orient .hzj-lamp{width:46px!important;height:76px!important;margin-left:-23px!important;border-radius:0!important;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='44' viewBox='-13 0 26 44'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.5' cy='.55' r='.6'%3E%3Cstop offset='0' stop-color='%23fff2b8'/%3E%3Cstop offset='.5' stop-color='%23ffb347'/%3E%3Cstop offset='1' stop-color='%23a8520a'/%3E%3C/radialGradient%3E%3C/defs%3E %3Cpath d='M-2 0h4l1 3h-6z' fill='%23c8922e'/%3E%3Cpath d='M-7 9Q0 1 7 9z' fill='%23e8b54a' stroke='%236b4210' stroke-width='.8'/%3E%3Cpath d='M-8 9h16l3 10-3 11h-16l-3-11z' fill='url(%23g)' stroke='%236b4210' stroke-width='1.2'/%3E %3Cpath d='M-3 9v21M3 9v21M-11 19h22' stroke='%236b4210' stroke-width='.9'/%3E%3Cpath d='M-7 30h14l-2 3h-10z' fill='%23a8741c'/%3E%3Cpath d='M-4 33h8l-4 6z' fill='%23e8b54a'/%3E%3Cpath d='M0 39v5' stroke='%23c22a48' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat!important;box-shadow:none!important;transform-origin:50% 0;animation:thSway 5s ease-in-out infinite alternate}
+
+/* ===== v19.4 · le grand tour : petites finitions partout ===== */
+/* Vestiaire (téléphone) : les 6 onglets en 2 rangées de 3, plus de texte qui déborde */
+body:not(.lpc) #vs-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+body:not(.lpc) #vs-tabs .otab{flex:none;min-width:0;padding:8px 4px;font-size:13px;overflow:hidden;text-overflow:ellipsis}
+body:not(.lpc) #vs-tabs .otab small{font-size:11px;opacity:.8}
+/* Vestiaire : même hauteur pour tous les onglets (le panneau ne saute plus d'un onglet à l'autre) */
+#vest>.vs{min-height:min(100%,720px);margin-top:0;margin-bottom:auto}
+body.lpc #vest>.vs{margin-top:auto}
+/* Nouvelle partie : la table de démo du fond ne passe plus derrière les textes */
+body:has(#newrun:not([hidden])) #cv{opacity:.28;transition:opacity .25s}
+/* Nouvelle partie (téléphone) : le panneau garde sa largeur, même en mode Horde */
+body:not(.lpc) #newrun>.nr{width:min(calc(100vw - 32px),470px)}
+/* Fin de partie : les bandeaux « débloqué » passent en bas, le titre reste lisible */
+body:has(#over:not([hidden])) #unote,body:has(#win:not([hidden])) #unote{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important}
+body:has(#over:not([hidden])) #achpop,body:has(#win:not([hidden])) #achpop{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 108px)!important}
+/* Mille et une nuits : le texte du boss reste lisible devant les lanternes */
+body.th-orient #bossbar small{display:table;margin:5px auto 0;padding:3px 10px;border-radius:9px;background:rgba(30,4,10,.78);box-shadow:inset 0 0 0 1px rgba(242,196,90,.35)}
+body.th-orient #bossbar small:empty{display:none}
+body.th-orient:has(#bossbar:not([hidden])) .th-lans{opacity:.4;transition:opacity .4s}
+/* Mille et une nuits : « Nouvelle partie » tient sur une ligne au téléphone */
+body.th-orient:not(.lpc) #newrun .nr-head h2{white-space:nowrap;font-size:clamp(16px,5.2vw,24px)}
+/* Mille et une nuits : l'enseigne « La maison joue » en or et rubis, pas en néon rose */
+body.th-orient #evx .evx-neon{border-color:#f2c45a;box-shadow:0 0 10px #d9962a,0 0 22px rgba(242,170,60,.55),inset 0 0 10px rgba(242,180,80,.6);background:rgba(40,6,14,.55)}
+body.th-orient #evx .evx-neon b{color:#fff3d6;text-shadow:0 0 4px #fff,0 0 10px #f2c45a,0 0 22px #e0902a,0 0 40px #c8283a}
+/* Bannières (boss, manche…) : la phrase sous le titre revient à la ligne au PC au lieu de traverser toute la table */
+#banner .b2{max-width:min(560px,92%);margin-left:auto;margin-right:auto}
+/* Options : même hauteur d'un onglet à l'autre (Audio, Crédits ne « sautent » plus au milieu) */
+#opts>.opt{min-height:min(100%,720px);margin-top:0;margin-bottom:auto}
+body.lpc #opts>.opt{margin-top:auto}
+/* Mille et une nuits : la sauvegarde en ligne passe en or et rubis (elle restait bleue) */
+body.th-orient .oacc{background:linear-gradient(160deg,rgba(242,196,90,.14),rgba(0,0,0,.28));box-shadow:inset 0 0 0 1.5px rgba(242,196,90,.45)}
+body.th-orient .oacc-t{color:#ffe2a0}
+body.th-orient .oacc-tabs button.on{background:linear-gradient(#e0405e,#a3172f);color:#fff3d6;box-shadow:0 3px 0 #5a0a18,inset 0 0 0 1px rgba(255,220,150,.4)}
+body.th-orient .oacc-in{background:#1c050b;box-shadow:inset 0 0 0 1.5px rgba(242,196,90,.35)}
+body.th-orient .oacc a,body.th-orient #accbox a{color:#f2c45a}
 
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
@@ -5918,7 +5958,7 @@ body.th-orient .hzj-lamp{width:46px!important;height:76px!important;margin-left:
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.3</p>
+  <p class="proto">Sefy Industries · v19.4</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -25274,7 +25314,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v19.3</p></div>`;
+        <p class="ov5">v19.4</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
