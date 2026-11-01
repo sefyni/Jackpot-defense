@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.1-202611012100
+JACKPOT DEFENSE v19.2-202611012200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.2 — HORDE
+- Corrigé pour de bon : à partir de 2 min 30, une vieille règle des manches normales (anti-blocage) aspirait
+  toutes les cartes près de la base dès leur arrivée. Elle est coupée en Horde.
+- Plus AUCUNE carte n'apparaît au milieu de la table, à aucun moment : les éclats des Paires, les œufs du Coucou,
+  les pièges des cartes à gratter, les renforts et doubles des boss, les cartes relevées par le Jugement… naissent
+  tous au bord du tapis (ou plus loin), dans la même direction.
+- Les cartes qui sautent ou se téléportent (Tricheur, Glitch, Sablier) ne viennent plus en Horde, et les
+  événements de la Maison sont coupés pendant la Horde.
+- Après le Baron, la Horde démarre plus fort : les cartes arrivent avec la force d'une manche 10 et un peu plus
+  nombreuses. La Horde lancée depuis « Jouer » garde son départ plus doux.
 
 Nouveautés de la v19.1
 - Mille et une nuits beaucoup plus léger : plus aucun effet de flou/ombre portée coûteux (logo, lanternes, machine,

@@ -5871,7 +5871,7 @@ body.th-orient .hzj-lamp{width:46px!important;height:76px!important;margin-left:
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.1</p>
+  <p class="proto">Sefy Industries · v19.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -13969,7 +13969,7 @@ function moveToward(e, dt, sp, minD) {
 function updateEnemy(e, dt) {
   e.born += dt;
   if (e.tapis && G.cb.tapis && G.cb.t - (G.cb.tapisT || 0) > 20) { e.regen = 0; e.kbx = 0; e.kby = 0; }
-  if (G.cb.t > 150 && !e.boss && !G.cb.demo && G.cb.spawnIdx >= G.cb.spawn.length && !e.d.giant && !e.d.arc && !e.d.prop && e.ai !== 'decoy' && !(G.cb.bosses || []).some(b => !b.dead)) { if (!e.tapis) { e.tapis = true; e.stop = 0; dbg('stall_rush'); } e.regen = 0; const d0 = Math.hypot(e.x, e.y); if (d0 > 60) { e.x *= 60 / d0; e.y *= 60 / d0; } }
+  if (G.cb.t > 150 && !(G.run && G.run.horde) && !e.boss && !G.cb.demo && G.cb.spawnIdx >= G.cb.spawn.length && !e.d.giant && !e.d.arc && !e.d.prop && e.ai !== 'decoy' && !(G.cb.bosses || []).some(b => !b.dead)) { if (!e.tapis) { e.tapis = true; e.stop = 0; dbg('stall_rush'); } e.regen = 0; const d0 = Math.hypot(e.x, e.y); if (d0 > 60) { e.x *= 60 / d0; e.y *= 60 / d0; } }
   if (e.deal > 0) e.deal -= dt;
   if (e.flash > 0) e.flash -= dt;
   if (e.vuln > 0) e.vuln -= dt;
@@ -25075,7 +25075,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.1</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35619,7 +35619,7 @@ const hT = (fr, en) => HRD_EN ? en : fr;
 const HRD = {
   ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: 1.1, r1: .008, rpm: 13, capPC: 110, capMob: 44, lead: 1.1,
   bossAt: 180, bossEvery: 150, giantAt: 240, giantEvery: 300, quadAt: 420, quadEvery: 300,
-  chalAt: 240, chalEvery: 240, shopFirst: 60, shopCd: 60, timePts: 20,
+  chalAt: 240, chalEvery: 240, shopFirst: 60, shopCd: 60, timePts: 20, postOff: 117, postRate: 1.25,
 };
 const hrdClock = s => { s = Math.max(0, Math.floor(s || 0)); const m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); };
 const hrdOn = () => !!(G.run && G.run.horde && !G.run.over);
@@ -35766,11 +35766,14 @@ const HRD_FNAME = {
 // v18.3 : un flot continu, de tous les côtés, sans alerte ni pause. Le débit monte en ligne droite,
 // et les cartes deviennent plus fortes avec le temps (comme une manche 1, puis 10, 20, 30… et au-delà).
 // le Tricheur se téléporte près de la base : dans un flot continu, c'est injuste
-const HRD_NOSPAWN = ['tricheur'];
-const hrdRound = T => 1 + T / HRD.rpm * 60 / 60;
+const HRD_NOSPAWN = ['tricheur', 'glitch', 'sablier'];
+// v19.2 : après le Baron, la Horde démarre plus fort (cartes d'une manche ~10, débit +25 %) ; la Horde solo garde son départ doux
+const hrdPost = () => !!(G.run && G.run.horde && !G.run.hzSolo);
+const hrdRound = T => 1 + (T + (hrdPost() ? HRD.postOff : 0)) / HRD.rpm * 60 / 60;
 function hrdDirector(cb, dt, T, m) {
   const Z = cb.hz, H = hrdState();
-  Z.acc = (Z.acc || 0) + dt * (HRD.r0 + HRD.r1 * T);
+  Z.acc = (Z.acc || 0) + dt * (HRD.r0 * (hrdPost() ? HRD.postRate : 1) + HRD.r1 * (T + (hrdPost() ? HRD.postOff * .5 : 0)));
+  if (cb.evs && cb.evs.length) { cb.evs = []; cb.event = null; cb.ev = {}; cb.evF = 1; }
   const R = hrdRound(T), pool = SPAWNABLE.filter(id => ENEMIES[id] && !HRD_NOSPAWN.includes(id) && (ENEMIES[id].from || 1) <= Math.max(1, R)), cap = hrdCap();
   // au-delà du plafond (plus bas sur téléphone), les cartes en trop « fusionnent » : moins de cartes, chacune plus costaude
   while (Z.acc >= 1) {
@@ -35944,6 +35947,26 @@ function hrdDrawFx(cb, tN) {
     }
   }
 }
+
+/* ---------- v19.2 · en Horde, AUCUNE carte n'apparaît au milieu de la table ----------
+   Tout ce qui naîtrait à l'intérieur (éclats des Paires, œufs, pièges, renforts des boss, doubles, cartes relevées…)
+   est reposé au bord du tapis (ou un peu plus loin), dans la même direction. Seuls tes leurres restent où tu les poses. */
+const HRD_INPLACE = ['leurre', 'fantome', 'glitch_f'];
+const _hrdSpawnEnemy = spawnEnemy;
+spawnEnemy = function (type, ang, o) {
+  o = o || {};
+  if (hrdOn() && G.cb && o.x != null && !o.king && !HRD_INPLACE.includes(type)) {
+    const d = Math.hypot(o.x, o.y), a = d > 1 ? Math.atan2(o.y, o.x) : rand(0, TAU), p = spawnPoint(a), R = Math.hypot(p.x, p.y);
+    if (d < R) { const rr = R * rand(1, 1.15); o = Object.assign({}, o, { x: Math.cos(a) * rr, y: Math.sin(a) * rr }); }
+  }
+  return _hrdSpawnEnemy.call(this, type, ang, o);
+};
+// pas d'événements de la Maison pendant la Horde (certains posent des cartes près de la base)
+const _hrdEvRoundStart = evRoundStart;
+evRoundStart = function (cb, run) {
+  if (run && run.horde) { cb.evs = []; cb.event = null; cb.wave = null; cb.ev = {}; cb.evF = 1; cb.evMult = {}; return; }
+  return _hrdEvRoundStart.apply(this, arguments);
+};
 
 
 /* ---------- les alliés gagnés aux défis : ils restent toute la partie ----------
