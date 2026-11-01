@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.0-202611011800
+JACKPOT DEFENSE v19.1-202611012100
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,11 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.1
+- Mille et une nuits beaucoup plus léger : plus aucun effet de flou/ombre portée coûteux (logo, lanternes, machine,
+  salles), le ciel est dessiné une seule fois en image, et il ne s'anime que sur l'écran titre (figé en partie).
+  Le jeu tourne aussi vite avec l'extension que sans.
 
 Nouveautés de la v19.0 — EXTENSION « MILLE ET UNE NUITS »
 - Un nouvel univers pour tout le jeu : le casino devient un palais sous la lune. Velours rubis et or, lanternes qui se
