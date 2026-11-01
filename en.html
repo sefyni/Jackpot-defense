@@ -4632,25 +4632,27 @@ input,textarea{-webkit-touch-callout:default;-webkit-user-select:text;user-selec
 
 /* ================= v18.0 · le mode horde ================= */
 body:not(.hz) #hz-hud,body:not(.hz) #hz-shopb,body:not(.hz) #hz-lvup{display:none!important}
-body.hz #bossbar{top:64px}
-/* le chrono et la barre de niveau */
-#hz-hud{position:absolute;z-index:15;top:8px;left:50%;transform:translateX(-50%);width:min(250px,56vw);padding:6px 10px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(32,18,40,.92),rgba(14,8,22,.88));box-shadow:inset 0 0 0 2px rgba(255,204,77,.28),0 6px 18px rgba(0,0,0,.45);pointer-events:none;font-variant-numeric:tabular-nums}
-.hzh-top{display:flex;align-items:center;justify-content:center;gap:8px;line-height:1}
-.hzh-tag{font-size:10px;letter-spacing:.24em;color:#ff7a5c;font-weight:700;padding:2px 6px;border-radius:5px;background:rgba(255,92,108,.14);box-shadow:inset 0 0 0 1px rgba(255,92,108,.4)}
-.hzh-clock{font-size:24px;color:#ffe2a0;text-shadow:0 0 12px rgba(255,190,80,.45),0 2px 0 #000;letter-spacing:.04em}
-.hzh-lv{display:flex;align-items:center;gap:7px;margin-top:5px}
-.hzh-lvn{display:flex;align-items:baseline;gap:3px;color:#ffcc4d;min-width:42px}
-.hzh-lvn small{font-size:9px;letter-spacing:.14em;color:#c9a96b}
-.hzh-lvn b{font-size:18px;text-shadow:0 2px 0 #000}
-.hzh-bar{position:relative;flex:1;height:9px;border-radius:99px;background:#1a0f22;box-shadow:inset 0 0 0 1px rgba(255,204,77,.25),inset 0 2px 3px rgba(0,0,0,.6);overflow:hidden}
-.hzh-bar i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#ff9a3d,#ffcc4d 60%,#fff1b8);box-shadow:0 0 10px rgba(255,204,77,.7);transition:transform .25s ease-out}
-.hzh-bar em{position:absolute;top:0;bottom:0;width:40%;left:-40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:hzSheen 2.6s ease-in-out infinite}
-@keyframes hzSheen{0%,55%{left:-40%}100%{left:110%}}
-.hzh-ups{font-size:13px;color:#1b1024;background:linear-gradient(#ffe08a,#ffb347);border-radius:99px;padding:1px 7px 2px;box-shadow:0 0 12px rgba(255,204,77,.75);animation:hzUps 1.1s ease-in-out infinite alternate}
+body.hz #bossbar{top:10px}
+body.hz:not(.lpc) #bossbar{top:78px}
+/* le chrono et la barre de niveau : en haut à gauche, dans la DA du jeu (ardoise, bord épais, ombre portée) */
+#hz-hud{position:absolute;z-index:15;top:8px;left:10px;width:176px;padding:7px 10px 9px;border-radius:14px;background:var(--ink);box-shadow:inset 0 0 0 3px var(--edge),0 4px 0 #000;pointer-events:none;font-variant-numeric:tabular-nums}
+.hzh-top{display:flex;align-items:baseline;justify-content:space-between;gap:6px;line-height:1}
+.hzh-tag{font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+.hzh-clock{font:700 26px/1 var(--f-pix);color:var(--gold);text-shadow:0 3px 0 #b8323f,0 5px 0 #000;letter-spacing:.03em}
+.hzh-lv{display:flex;align-items:center;gap:6px;margin-top:8px}
+.hzh-lvn{display:flex;align-items:baseline;gap:3px;min-width:36px;color:var(--cream)}
+.hzh-lvn small{font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.hzh-lvn b{font-size:17px}
+.hzh-bar{position:relative;flex:1;height:10px;border-radius:5px;background:#0b0712;box-shadow:inset 0 0 0 2px var(--edge);overflow:hidden}
+.hzh-bar i{position:absolute;left:2px;top:2px;bottom:2px;right:2px;transform-origin:0 50%;transform:scaleX(0);border-radius:3px;background:var(--gold);box-shadow:inset 0 -3px 0 var(--gold-d);transition:transform .25s ease-out}
+.hzh-bar em{display:none}
+.hzh-ups{font-size:13px;color:var(--ink);background:var(--gold);border-radius:6px;padding:1px 6px 2px;box-shadow:0 2px 0 var(--gold-d);animation:hzUps .9s steps(2) infinite}
 .hzh-ups b{margin-left:1px}
-@keyframes hzUps{to{transform:scale(1.12);box-shadow:0 0 18px rgba(255,204,77,.95)}}
-#hz-hud.lvup{animation:hzLvB .7s cubic-bezier(.2,1.6,.4,1)}
-@keyframes hzLvB{0%{transform:translateX(-50%) scale(1)}35%{transform:translateX(-50%) scale(1.12);box-shadow:inset 0 0 0 2px #ffcc4d,0 0 30px rgba(255,204,77,.8)}100%{transform:translateX(-50%) scale(1)}}
+@keyframes hzUps{50%{transform:translateY(-2px)}}
+#hz-hud.lvup{animation:hzLvB .5s steps(4)}
+@keyframes hzLvB{0%,100%{transform:none}50%{transform:scale(1.08);box-shadow:inset 0 0 0 3px var(--gold),0 4px 0 #000}}
+body.lpc #hz-hud{top:14px;left:14px;width:200px}
+body.lpc .hzh-clock{font-size:30px}
 /* le gros « NIVEAU 4 » */
 #hz-lvup{position:absolute;z-index:17;left:50%;top:34%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;text-align:center}
 #hz-lvup small{font-size:15px;letter-spacing:.4em;color:#ffe2a0;text-shadow:0 2px 0 #000}
@@ -4662,114 +4664,143 @@ body.hz #bossbar{top:64px}
 @keyframes hzLvIn{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}22%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1;transform:translate(-50%,-56%) scale(1)}100%{opacity:0;transform:translate(-50%,-64%) scale(.96)}}
 @keyframes hzRing{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.8)}}
 /* le bouton du shop */
-.hz-shopb{position:absolute;z-index:16;right:10px;bottom:132px;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border:0;border-radius:99px;background:linear-gradient(180deg,#3a2232,#1c1020);box-shadow:inset 0 0 0 2px #5a3a4a,0 5px 0 #0b0610,0 8px 16px rgba(0,0,0,.4);color:#c9b3c8;filter:saturate(.5);transition:filter .3s,transform .12s}
-.hzs-ring{position:absolute;left:3px;top:50%;width:50px;height:50px;margin-top:-25px;border-radius:50%;background:conic-gradient(#ffcc4d calc(var(--p,0)*360deg),rgba(255,255,255,.08) 0);-webkit-mask:radial-gradient(circle,transparent 21px,#000 22px);mask:radial-gradient(circle,transparent 21px,#000 22px)}
-.hzs-face{position:relative;width:44px;height:44px;margin:3px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#7a4a2a,#2a140a)}
-.hzs-face img{position:absolute;left:-30%;top:-4%;width:160%;max-width:none}
+.hz-shopb{position:absolute;z-index:16;right:10px;bottom:132px;display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:0;border-radius:14px;background:var(--panel);box-shadow:inset 0 0 0 3px var(--edge),0 5px 0 #000;color:var(--muted);transition:transform .08s}
+.hzs-ring{position:absolute;left:4px;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:10px;background:conic-gradient(var(--gold) calc(var(--p,0)*360deg),rgba(255,255,255,.06) 0);-webkit-mask:linear-gradient(#000,#000) content-box exclude,linear-gradient(#000,#000);mask:linear-gradient(#000,#000) content-box exclude,linear-gradient(#000,#000);padding:3px}
+.hzs-face{position:relative;width:42px;height:42px;margin:3px;border-radius:8px;overflow:hidden;background:#3a1e10}
+.hzs-face img{position:absolute;left:-30%;top:-4%;width:160%;max-width:none;filter:grayscale(.6) brightness(.75)}
 .hzs-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05}
-.hzs-txt b{font-size:17px;letter-spacing:.08em;color:#fff3e6}
+.hzs-txt b{font-size:17px;letter-spacing:.06em;color:var(--cream)}
 .hzs-txt small{font-size:12px;font-variant-numeric:tabular-nums}
-.hz-shopb kbd{display:none;font:inherit;font-size:10px;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.1);color:#c9b3c8}
+.hz-shopb kbd{display:none;font:inherit;font-size:10px;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.1);color:var(--muted)}
 body.lpc .hz-shopb kbd{display:inline-block}
-.hz-shopb.rdy{filter:none;color:#ffcc4d;background:linear-gradient(180deg,#6a3a1a,#3a1e10);box-shadow:inset 0 0 0 2px #ffcc4d,0 5px 0 #4a2a0a,0 0 24px rgba(255,204,77,.55);animation:hzShopP 1.2s ease-in-out infinite alternate;cursor:pointer}
-.hz-shopb.rdy .hzs-ring{background:conic-gradient(#ffcc4d 360deg,#ffcc4d 0);opacity:.9;animation:hzSpin 3s linear infinite}
-.hz-shopb.rdy:active{transform:translateY(3px)}
-@keyframes hzShopP{to{box-shadow:inset 0 0 0 2px #ffe08a,0 5px 0 #4a2a0a,0 0 38px rgba(255,204,77,.85)}}
-@keyframes hzSpin{to{transform:rotate(360deg)}}
+.hz-shopb.rdy{background:var(--gold);color:var(--ink);box-shadow:0 5px 0 var(--gold-d),0 9px 0 #000;cursor:pointer;animation:hzShopP .8s steps(2) infinite}
+.hz-shopb.rdy .hzs-txt b{color:var(--ink)}
+.hz-shopb.rdy .hzs-ring{background:var(--ink)}
+.hz-shopb.rdy .hzs-face img{filter:none}
+.hz-shopb.rdy:active{transform:translateY(4px);box-shadow:0 1px 0 var(--gold-d)}
+@keyframes hzShopP{50%{transform:translateY(-3px)}}
 body.lpc .hz-shopb{right:18px;bottom:18px;transform-origin:100% 100%;scale:1.15}
-/* ---------- le shop de Jack ---------- */
-.hzj{z-index:46;padding:0;background:#0d0710;overflow:hidden}
-.hzj.in .hzj-wrap{animation:hzjIn .45s cubic-bezier(.2,1.2,.4,1)}
-@keyframes hzjIn{from{opacity:0;transform:translateY(24px) scale(.97)}}
-.hzj-bg{position:absolute;inset:0;background:radial-gradient(70% 55% at 30% 18%,rgba(255,190,90,.22),transparent 70%),repeating-linear-gradient(90deg,#2a1218 0 46px,#24101a 46px 92px),#1a0c12;pointer-events:none}
-.hzj-bg::after{content:'';position:absolute;left:0;right:0;bottom:0;height:38%;background:linear-gradient(180deg,#3a1e10,#1a0c06);box-shadow:0 -6px 0 #6a3a1a,0 -10px 0 #c99a3b}
-.hzj-lamp{position:absolute;left:22%;top:0;width:120px;height:46px;margin-left:-60px;border-radius:0 0 60px 60px;background:linear-gradient(#1f5a37,#123a22);box-shadow:0 30px 90px 40px rgba(255,200,100,.18)}
-.hzj-shelf{position:absolute;right:4%;width:42%;height:12px;background:#4a2414;box-shadow:0 4px 0 #2a120a}
+/* ---------- le shop de Jack : l'arrière-boutique, dans la DA du jeu ---------- */
+.hzj{z-index:46;padding:0;background:#120a10;overflow:hidden}
+body.hzshop #rack{z-index:47}
+.hzj.in .hzj-wrap{animation:hzjIn .35s steps(5)}
+@keyframes hzjIn{from{opacity:0;transform:translateY(16px)}}
+.hzj-bg{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#2a1218 0 46px,#24101a 46px 92px);pointer-events:none}
+.hzj-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 28% 12%,rgba(255,190,90,.2),transparent 70%)}
+.hzj-bg::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;background:repeating-linear-gradient(90deg,#3a1e10 0 120px,#341a0e 120px 240px);box-shadow:0 -6px 0 #6a3a1a,0 -10px 0 #c99a3b}
+.hzj-lamp{position:absolute;left:22%;top:0;width:120px;height:44px;margin-left:-60px;border-radius:0 0 60px 60px;background:#1f5a37;box-shadow:inset 0 -6px 0 #123a22}
+.hzj-shelf{position:absolute;right:3%;width:40%;height:12px;background:#4a2414;box-shadow:0 4px 0 #2a120a}
 .hzj-shelf.s1{top:16%}.hzj-shelf.s2{top:34%}
-.hzj-shelf::before{content:'';position:absolute;left:6%;right:6%;bottom:12px;height:46px;background:repeating-linear-gradient(90deg,#c8283a 0 16px,transparent 16px 26px,#ffcc4d 26px 42px,transparent 42px 52px,#4aa8ff 52px 68px,transparent 68px 78px,#5fd68a 78px 94px,transparent 94px 104px);-webkit-mask:repeating-linear-gradient(180deg,#000 0 4px,rgba(0,0,0,.65) 4px 5px);mask:repeating-linear-gradient(180deg,#000 0 4px,rgba(0,0,0,.65) 4px 5px);opacity:.5;border-radius:3px}
-.hzj-safe{position:absolute;right:6%;bottom:38%;width:80px;height:90px;border-radius:6px;background:linear-gradient(#5a5a66,#2a2a33);box-shadow:inset 0 0 0 4px #1a1a20;opacity:.6}
-.hzj-wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(260px,38%) 1fr;gap:18px;width:min(1200px,100%);height:100%;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 18px calc(env(safe-area-inset-bottom,0px) + 16px)}
+.hzj-shelf::before{content:'';position:absolute;left:6%;right:6%;bottom:12px;height:46px;background:repeating-linear-gradient(90deg,#c8283a 0 16px,transparent 16px 26px,#ffcc4d 26px 42px,transparent 42px 52px,#4aa8ff 52px 68px,transparent 68px 78px,#5fd68a 78px 94px,transparent 94px 104px);-webkit-mask:repeating-linear-gradient(180deg,#000 0 4px,rgba(0,0,0,.6) 4px 5px);mask:repeating-linear-gradient(180deg,#000 0 4px,rgba(0,0,0,.6) 4px 5px);opacity:.55}
+.hzj-safe{position:absolute;right:5%;bottom:36%;width:80px;height:90px;border-radius:6px;background:#3a3a44;box-shadow:inset 0 0 0 4px #1a1a20,inset 0 -8px 0 #24242c;opacity:.7}
+.hzj-wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(240px,34%) 1fr;gap:18px;width:min(1200px,100%);height:100%;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 14px}
 .hzj-left{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:0}
 .hzj-fig{position:relative;flex:1 1 auto;min-height:0;width:100%}
-.hzj-im{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;opacity:0;transition:opacity .22s;filter:drop-shadow(0 18px 24px rgba(0,0,0,.6))}
+.hzj-im{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;opacity:0;transition:opacity .2s;filter:drop-shadow(0 14px 0 rgba(0,0,0,.35))}
 .hzj-im.on{opacity:1}
-.hzj-counter{position:relative;flex:none;display:block;height:20px;margin:-14px -8px 0;border-radius:6px;background:linear-gradient(#7a4a26,#4a2414);box-shadow:0 4px 0 #2a120a,inset 0 2px 0 #c99a3b}
-.hzj-say{position:relative;flex:none;margin-top:10px;min-height:64px;padding:10px 14px;border-radius:12px;background:#fff3e6;color:#1b1024;font-size:16px;line-height:1.3;text-align:left;box-shadow:0 4px 0 #0b0610}
-.hzj-right{display:flex;flex-direction:column;min-height:0;padding:14px;border-radius:18px;background:linear-gradient(180deg,rgba(34,20,40,.96),rgba(18,10,24,.96));box-shadow:inset 0 0 0 3px #4a2c3a,0 10px 30px rgba(0,0,0,.5)}
+.hzj-counter{position:relative;flex:none;display:block;height:18px;margin:-12px -8px 0;border-radius:6px;background:#6a3a1a;box-shadow:0 4px 0 #2a120a,inset 0 3px 0 #c99a3b}
+.hzj-say{position:relative;flex:none;margin-top:10px;min-height:60px;padding:10px 14px;border-radius:12px;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.3;text-align:left;box-shadow:0 4px 0 #000}
+.hzj-right{display:flex;flex-direction:column;min-height:0;padding:12px}
 .hzj-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.hzj-head h2{font-size:26px;letter-spacing:.06em;color:#ffcc4d;text-shadow:0 3px 0 #6a3a10}
-.hzj-gold{display:flex;align-items:center;gap:6px;font-size:22px;color:#ffe2a0;padding:4px 12px;border-radius:99px;background:#140b1c;box-shadow:inset 0 0 0 2px #6a4e12}
-.hzj-tabs{display:flex;gap:6px;margin:12px 0 10px}
-.hzj-tabs button{flex:1;min-height:40px;border:0;border-radius:10px;background:#2a1a30;color:#c9b3c8;font-size:15px;letter-spacing:.06em;box-shadow:0 3px 0 #120a18}
-.hzj-tabs button.on{background:linear-gradient(#ffcc4d,#e0a040);color:#2a160a;box-shadow:0 3px 0 #6a4e12}
-.hzj-tabs button i{font-style:normal;color:#ff5c6c;margin-left:4px}
-.hzj-tabs button.on i{color:#8a1a24}
+.hzj-sign{display:flex;flex-direction:column;font:700 26px/1 var(--f-pix);letter-spacing:.05em;color:var(--gold);text-shadow:0 3px 0 #b8323f,0 5px 0 #000;text-align:left}
+.hzj-sign small{font-size:11px;letter-spacing:.14em;color:var(--muted);text-shadow:none;margin-top:6px;font-weight:600}
+.hzj-gold{display:flex;align-items:center;gap:6px;font-size:22px;color:var(--gold);padding:4px 12px;border-radius:10px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge)}
+.hzj-tabs{display:flex;gap:6px;margin:12px 0 10px;overflow-x:auto;scrollbar-width:none}
+.hzj-tabs::-webkit-scrollbar{display:none}
+.hzj-tabs button{position:relative;flex:1 0 auto;display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 10px;border:0;border-radius:10px;background:var(--ink);color:var(--muted);font-size:14px;letter-spacing:.05em;box-shadow:inset 0 0 0 2px var(--edge),0 3px 0 #000}
+.hzj-tabs button .ico,.hzj-tabs button svg{width:18px;height:18px;flex:none}
+.hzj-tabs button.on{background:var(--gold);color:var(--ink);box-shadow:0 3px 0 var(--gold-d),0 5px 0 #000;transform:translateY(-1px)}
+.hzj-tabs button i{position:absolute;top:-6px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--red);color:#fff;font:600 12px/18px var(--f-pix);font-style:normal;box-shadow:0 2px 0 var(--red-d)}
+.hzj-tabs button i:empty{display:none}
 .hzj-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;text-align:left}
-.hzj-hint{font-size:13px;color:#b9a3c4;margin:0 2px 10px}
-.hzj-go{margin-top:10px;background:linear-gradient(#ff5c6c,#d83a4c);box-shadow:0 5px 0 #8a1a24}
+.hzj-sec{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:2px 2px 10px}
+.hzj-sec b{font-size:15px;letter-spacing:.12em;color:var(--gold)}
+.hzj-sec span{font-size:13px;color:var(--muted)}
+.hzj-hint{font-size:13px;color:var(--muted);margin:0 2px 10px}
+.hzj-list{display:grid;gap:8px}
+.hzj .offer{grid-template-columns:52px minmax(0,1fr) auto!important;grid-template-areas:none!important}
+.hzj .offer>*{grid-area:auto!important}
+.hzj .obuy{min-width:92px}
+.hzj .otext b{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:15px}
+.hzj .otext span{font-size:12px}
+.hzj-go{margin-top:10px}
 .hzj-go small{font-size:11px;opacity:.7;margin-left:8px}
 body:not(.lpc) .hzj-go small{display:none}
-/* les piles */
-.hzj-piles{display:grid;gap:8px}
-.hzj-pile{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:linear-gradient(90deg,color-mix(in srgb,var(--pc) 16%,#1a1020),#1a1020 70%);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--pc) 40%,transparent)}
-.hzj-pile.got{animation:hzGot .45s ease-out}
-@keyframes hzGot{30%{transform:scale(1.03);box-shadow:inset 0 0 0 2px var(--pc),0 0 18px color-mix(in srgb,var(--pc) 60%,transparent)}}
-.hzj-stk{width:48px;height:56px}
-.hzj-pt{display:flex;flex-direction:column;line-height:1.2}
-.hzj-pt b{font-size:16px;color:#fff3e6}
-.hzj-pt small{font-size:12px;color:#c9b3c8}
-.hzj-pt em{font-style:normal;font-size:13px;color:var(--pc)}
-.hzj-pb{display:flex;flex-direction:column;gap:5px}
-.hzj-pb .mini{white-space:nowrap}
-/* les paquets */
-.hzj-packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
-.hzj-pack{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:180px;padding:12px;border:0;border-radius:14px;background:#1a1020;box-shadow:inset 0 0 0 2px #4a2c3a}
-.hzp-foil{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:120px;height:140px;border-radius:10px;overflow:hidden;color:#fff3e6;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.4)}
-.hzp-foil i{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);animation:hzFoil 2.4s ease-in-out infinite}
-@keyframes hzFoil{0%,30%{transform:translateX(-40%)}100%{transform:translateX(40%)}}
-.hzp-foil b{position:relative;font-size:14px;line-height:1.1;padding:0 6px}
-.hzp-foil small{position:relative;font-size:11px;opacity:.8;margin-top:4px}
-.k-mach .hzp-foil{background:linear-gradient(160deg,#ffcc4d,#b8862a 55%,#6a4e12)}
-.k-casino .hzp-foil{background:linear-gradient(160deg,#b07cff,#6b4fc2 55%,#2c1a58)}
-.k-lux .hzp-foil{background:linear-gradient(160deg,#2a2030,#0d080f 55%,#2a2030);box-shadow:inset 0 0 0 3px #ffcc4d,0 6px 0 rgba(0,0,0,.4)}
-.hzj-pack em{font-style:normal;font-size:14px;color:#ffcc4d;padding:3px 12px;border-radius:99px;background:rgba(255,204,77,.12)}
-.hzj-pack:hover .hzp-foil{animation:hzWig .5s ease-in-out}
-@keyframes hzWig{25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
-.hzj-pack.tear .hzp-foil{animation:hzTear .52s ease-in forwards}
-@keyframes hzTear{0%{transform:none}30%{transform:rotate(-5deg) scale(1.05)}55%{transform:rotate(5deg) scale(1.08)}100%{transform:scale(1.3);opacity:0;filter:brightness(2.5)}}
-.hzj-pk{grid-column:1/-1;padding:10px;border-radius:14px;background:#1a1020;box-shadow:inset 0 0 0 2px #4a2c3a}
-.hzp-n{display:block;font-size:13px;letter-spacing:.08em;color:#ffcc4d;margin-bottom:6px}
-.hzp-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px}
-.hzp-c{display:grid;grid-template-columns:40px 1fr auto;grid-template-rows:auto auto auto;column-gap:8px;align-items:center;padding:6px 8px;border-radius:10px;background:#24152c;animation:hzPop .4s var(--d,0s) cubic-bezier(.2,1.5,.4,1) both}
-@keyframes hzPop{from{opacity:0;transform:translateY(10px) scale(.85)}}
-.hzp-c>.chip{grid-row:1/4;width:40px;height:40px}
-.hzp-c>b{font-size:14px;color:#fff3e6;line-height:1.1}
-.hzp-c>.rtag2{justify-self:start}
-.hzp-c>small{grid-column:2;font-size:11px;color:#b9a3c4;line-height:1.2}
-.hzp-c>small.hzp-stk{color:#5fd68a}
-.hzp-c>button,.hzp-c>em{grid-column:3;grid-row:1/4}
-.hzp-c>em{font-style:normal;font-size:12px;color:#5fd68a}
-.hzp-c.sold{opacity:.55}
-.hzp-c button small{display:block;font-size:10px;opacity:.75}
+.hzj-pile .hzj-stk{width:48px;height:52px}
+.hzj-pile{box-shadow:inset 0 0 0 2px var(--edge),inset 6px 0 0 var(--pc)}
+.hzj-pile.got{animation:hzGot .3s steps(3)}
+@keyframes hzGot{50%{transform:translateX(4px)}}
+.hzj-pile .obuy .mini{white-space:nowrap}
+.offer .obuy .mini small{display:block;font-size:10px;opacity:.75}
+.hzs-sp{display:grid;place-items:center;width:50px;height:50px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 3px var(--sc)}
+.hzs-sp svg,.hzs-sp .ico{width:30px;height:30px;color:var(--sc);fill:currentColor}
+/* les paquets de machines */
+.hzj-packs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hzj-pack{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px 10px;border:0;border-radius:12px;background:var(--panel-2);box-shadow:inset 0 0 0 2px var(--edge),0 4px 0 #000}
+.hzp-box{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;aspect-ratio:3/4;max-height:150px;border-radius:8px;overflow:hidden;background:repeating-linear-gradient(135deg,var(--mc) 0 10px,color-mix(in srgb,var(--mc) 70%,#000) 10px 20px);box-shadow:inset 0 0 0 3px #fff3e6,inset 0 0 0 6px var(--ink);color:#fff3e6;text-align:center}
+.hzp-shine{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.45) 50%,transparent 58%);animation:hzFoil 2.6s steps(8) infinite}
+@keyframes hzFoil{0%,40%{transform:translateX(-45%)}100%{transform:translateX(45%)}}
+.hzp-ic{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 3px var(--mc)}
+.hzp-ic svg,.hzp-ic .ico{width:28px;height:28px}
+.hzp-box b{position:relative;font-size:13px;line-height:1.05;padding:3px 6px;border-radius:5px;background:rgba(20,13,31,.85)}
+.hzp-box small{position:relative;font-size:11px;padding:1px 5px;border-radius:4px;background:rgba(20,13,31,.7)}
+.hzj-pack em{font-style:normal;font-size:13px;color:var(--ink);background:var(--gold);padding:2px 10px;border-radius:6px;box-shadow:0 2px 0 var(--gold-d)}
+.hzj-pack:hover .hzp-box{transform:translateY(-3px)}
+.hzj-pack.tear .hzp-box{animation:hzTear .48s steps(6) forwards}
+@keyframes hzTear{30%{transform:rotate(-6deg)}60%{transform:rotate(6deg) scale(1.06)}100%{transform:scale(1.25);opacity:0}}
+.hzj-pk{grid-column:1/-1;padding:10px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),inset 0 4px 0 var(--mc)}
+.hzp-n{display:block;font-size:14px;letter-spacing:.06em;color:var(--mc);margin:2px 0 8px}
+.hzp-c{animation:hzPop .3s var(--d,0s) steps(4) both}
+@keyframes hzPop{from{opacity:0;transform:translateY(8px)}}
+.stk-hint{color:#5fd68a!important}
+/* les boissons de Zaza */
+.hzj-cat{margin:8px 2px 6px;font-size:13px;letter-spacing:.14em;color:var(--cat)}
+.hzj-drinks{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:6px}
+.hzj-dr{padding:8px 6px}
+.hzj-dr b{font-size:13px;text-align:center;line-height:1.1}
+.hzj-dr .dlv{font-size:11px;color:var(--gold);letter-spacing:.1em}
+.hzj-dr .deff{font-size:11px;color:var(--muted);text-align:center;line-height:1.2;min-height:28px}
+.hzj-dr.maxed{opacity:.6}
+.hzj-dr .stamp{position:static;transform:none}
 /* les améliorations */
-.hzu-head{display:flex;align-items:center;gap:10px;padding:8px 12px;margin-bottom:8px;border-radius:12px;background:#1a1020;box-shadow:inset 0 0 0 2px #4a2c3a;color:#c9b3c8}
-.hzu-head b{font-size:24px;color:#8d7fa8}
-.hzu-head.have{box-shadow:inset 0 0 0 2px #ffcc4d,0 0 18px rgba(255,204,77,.25)}
-.hzu-head.have b{color:#ffcc4d;text-shadow:0 0 12px rgba(255,204,77,.6)}
+.hzu-head{display:flex;align-items:center;gap:10px;padding:8px 12px;margin-bottom:8px;border-radius:12px;background:var(--ink);box-shadow:inset 0 0 0 2px var(--edge);color:var(--muted)}
+.hzu-head b{font-size:24px;color:var(--dim)}
+.hzu-head.have{box-shadow:inset 0 0 0 3px var(--gold)}
+.hzu-head.have b{color:var(--gold)}
 .hzu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .hzu-c{display:flex;flex-direction:column;gap:4px}
-.hzu-pick{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px 8px;border:0;border-radius:12px;background:#24152c;box-shadow:inset 0 0 0 2px #3a2440;color:#fff3e6;text-align:center;transition:transform .1s,box-shadow .2s}
+.hzu-pick{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px 8px;border:0;border-radius:12px;background:var(--panel-2);box-shadow:inset 0 0 0 2px var(--edge),0 3px 0 #000;color:var(--cream);text-align:center}
 .hzu-pick .chip{width:48px;height:48px}
 .hzu-pick b{font-size:13px;line-height:1.1}
 .hzu-pick em{font-style:normal;font-size:12px}
-.hzu-l{color:#ffcc4d}.hzu-s{color:#c9a8ff;text-shadow:0 0 8px rgba(201,168,255,.6)}.hzu-d{color:#ffb347}.hzu-no{color:#8d7fa8}
-.hzu-free{font-size:10px;color:#5fd68a}
-.hzu-pick:not([data-off]):not([aria-disabled]){box-shadow:inset 0 0 0 2px #ffcc4d,0 0 14px rgba(255,204,77,.3);animation:hzUpP 1.4s ease-in-out infinite alternate}
-@keyframes hzUpP{to{box-shadow:inset 0 0 0 2px #ffe08a,0 0 22px rgba(255,204,77,.5)}}
-.hzu-pick:not([data-off]):not([aria-disabled]):active{transform:scale(.96)}
+.hzu-l{color:var(--gold)}.hzu-s{color:var(--r-secrete)}.hzu-d{color:var(--peach)}.hzu-no{color:var(--dim)}
+.hzu-free{font-size:10px;color:var(--green)}
+.hzu-pick:not([data-off]):not([aria-disabled]){box-shadow:inset 0 0 0 3px var(--gold),0 3px 0 #000}
+.hzu-pick:not([data-off]):not([aria-disabled]):active{transform:translateY(2px)}
 .hzu-c.no .hzu-pick{opacity:.55}
-.hzu-c.dup .hzu-pick{box-shadow:inset 0 0 0 2px rgba(95,214,138,.5)}
-.hzu-sell{min-height:28px;border:0;border-radius:8px;background:#1a1020;color:#b9a3c4;font-size:12px;box-shadow:inset 0 0 0 1px #3a2440}
+.hzu-c.dup .hzu-pick{box-shadow:inset 0 0 0 2px var(--green),0 3px 0 #000}
+.hzu-info,.hzu-sell{min-height:28px;border:0;border-radius:8px;background:var(--ink);color:var(--muted);font-size:12px;box-shadow:inset 0 0 0 2px var(--edge)}
+.hzu-info{color:var(--cream)}
+@media (max-width:760px){
+  .hzj-wrap{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 8px 8px}
+  .hzj-left{display:grid;grid-template-columns:96px 1fr;align-items:end;gap:8px}
+  .hzj-fig{width:96px;height:110px;flex:none}
+  .hzj-counter{display:none}
+  .hzj-say{margin:0;min-height:52px;font-size:13px}
+  .hzj-right{padding:8px}
+  .hzj-sign{font-size:20px}.hzj-sign small{display:none}
+  .hzj-gold{font-size:18px}
+  .hzj-tabs{margin:8px 0}
+  .hzj-tabs button{font-size:12px;min-height:36px;padding:0 8px}
+  .hzj-tabs button span{display:none}
+  .hzj-tabs button.on span{display:inline}
+  .hzj-bg::after{height:16%}
+  .hzj-shelf,.hzj-safe{display:none}
+  .hzj-packs{grid-template-columns:repeat(3,1fr);gap:6px}
+  .hzp-box b{font-size:11px}
+  .hzu-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+  .hza-st{height:min(64%,520px)}
+}
 /* Jack améliore un jeton */
 .hzj-anim{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 45%,rgba(40,20,20,.6),rgba(6,3,8,.94) 70%);opacity:0;transition:opacity .25s}
 .hzj-anim.in{opacity:1}.hzj-anim.out2{opacity:0}
@@ -4795,23 +4826,6 @@ body:not(.lpc) .hzj-go small{display:none}
 .hzj-anim.new .hza-lbl{opacity:1;transform:translateX(-50%) scale(1) rotate(-3deg);transition:transform .45s .2s cubic-bezier(.2,1.6,.4,1),opacity .2s .2s}
 .hza-say{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);width:min(440px,100%);min-height:48px;padding:8px 12px;border-radius:12px;background:#fff3e6;color:#1b1024;font-size:15px;text-align:left;box-shadow:0 4px 0 #0b0610}
 .hza-skip{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 12px)}
-@media (max-width:760px){
-  .hzj-wrap{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px calc(env(safe-area-inset-bottom,0px) + 10px)}
-  .hzj-left{display:grid;grid-template-columns:108px 1fr;align-items:end;gap:8px}
-  .hzj-fig{width:108px;height:124px;flex:none}
-  .hzj-counter{display:none}
-  .hzj-say{margin:0;min-height:58px;font-size:14px}
-  .hzj-right{padding:10px}
-  .hzj-head h2{font-size:20px}
-  .hzj-gold{font-size:18px}
-  .hzj-tabs{margin:8px 0}
-  .hzj-tabs button{font-size:13px;min-height:36px}
-  .hzj-bg::after{height:20%}
-  .hzj-shelf,.hzj-safe{display:none}
-  .hzj-packs{grid-template-columns:1fr}
-  .hzu-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
-  .hza-st{height:min(64%,520px)}
-}
 /* ---------- les défis ---------- */
 .hzc{position:absolute;inset:0;z-index:30;pointer-events:auto;background:radial-gradient(ellipse at 50% 60%,transparent 30%,rgba(8,4,14,.55));animation:hzcIn .3s ease-out}
 @keyframes hzcIn{from{opacity:0}}
@@ -4925,6 +4939,11 @@ body.lpc #newrun .nr-modes,body.lpc #newrun .nr-hz{grid-column:1 / -1}
 body.lpc #newrun .nr-modes{max-width:560px;justify-self:center}
 body.lpc #newrun.hzm .nr-info{grid-column:1 / -1;max-width:560px;justify-self:center;width:100%}
 body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
+
+/* l'écran de fin de la horde */
+.hz-ostats .hz-obig dd{font-size:30px;color:var(--gold);text-shadow:0 3px 0 #b8323f}
+.hz-otitle{color:var(--gold)}
+.hzd .hzu-c{gap:4px}
 /* v17.3 · carnets (PC) : la page tourne sans 3D (la vraie 3D clignotait en noir sur certaines cartes graphiques).
    Elle se replie vers la reliure, puis son dos se déplie de l'autre côté. */
 .bk-leaf{transform-style:flat;transition:none}
@@ -5552,7 +5571,7 @@ body.lpc #newrun .nr-hz{max-width:760px;justify-self:center}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v18.3</p>
+  <p class="proto">Sefy Industries · v18.4</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -24752,7 +24771,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.3</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v18.4</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35294,7 +35313,7 @@ function boot(data) {
 const HRD_EN = document.documentElement.lang === 'en';
 const hT = (fr, en) => HRD_EN ? en : fr;
 const HRD = {
-  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: .5, r1: .0075, rpm: 13, capPC: 110, capMob: 72, lead: 1.1,
+  ramp: 300, p0: .2, grow: 1.045, pay: 15, vr: .7, r0: 1.1, r1: .008, rpm: 13, capPC: 110, capMob: 72, lead: 1.1,
   bossAt: 180, bossEvery: 150, giantAt: 240, giantEvery: 300, quadAt: 420, quadEvery: 300,
   chalAt: 240, chalEvery: 240, shopFirst: 60, shopCd: 60, timePts: 20,
 };
@@ -35306,7 +35325,7 @@ function hrdState(run) {
   return run.hz || (run.hz = {
     time: 0, lv: 0, xp: 0, ups: 0, used: 0, piles: { hp: 0, dmg: 0, rate: 0, sp: 0, gold: 0 },
     shopAt: HRD.shopFirst, visits: 0, chalAt: HRD.chalAt, beaten: {}, met: {}, allies: [],
-    nextBoss: HRD.bossAt, nextGiant: HRD.giantAt, nextQuad: HRD.quadAt, lastBoss: null, kills0: run.kills || 0,
+    nextBoss: HRD.bossAt, nextGiant: HRD.giantAt, nextQuad: HRD.quadAt, lastBoss: null, kills0: run.kills || 0, boss0: run.bossKills || 0, gold0: (run.stats && run.stats.gold) || 0,
   });
 }
 // l'expérience pour passer du niveau lv au suivant
@@ -35332,6 +35351,7 @@ function hrdSetup() {
   run.malus = []; run.pendingMalus = []; run.skulls = 0; run.pendingSkulls = 0;
   run.stolen = []; run.sealed = []; run.seized = [];
   run.boost = {}; run.shots = []; run.K = run.K || {};
+  run.slots = Math.max(run.slots || 5, 8);   // en horde : les 8 places de jetons d'office
   try { tkPreRound(run); } catch (e) { /* rien */ }
   const cb = newCombat(); G.cb = cb;
   const s = cb.stats = computeStats(run);
@@ -35364,6 +35384,7 @@ function hrdBegin(resume) {
   renderRack(); renderSpellBar(); showStatus(); updateHUD(); tableWake();
   try { petsRoundStart(); } catch (e) { /* rien */ }
   hrdHudMount();
+  try { buildBG(); } catch (e) { /* rien */ }
   saveCheckpoint();
   if (!G.headless) {
     banner(resume ? hT('LA HORDE CONTINUE', 'THE HORDE GOES ON') : hT('MODE HORDE', 'HORDE MODE'), hT('tiens bon, monte de niveau, passe voir Jack', 'hold on, level up, visit Jack'), 'boss', 2.6);
@@ -35440,11 +35461,13 @@ const HRD_FNAME = {
 };
 // v18.3 : un flot continu, de tous les côtés, sans alerte ni pause. Le débit monte en ligne droite,
 // et les cartes deviennent plus fortes avec le temps (comme une manche 1, puis 10, 20, 30… et au-delà).
+// le Tricheur se téléporte près de la base : dans un flot continu, c'est injuste
+const HRD_NOSPAWN = ['tricheur'];
 const hrdRound = T => 1 + T / HRD.rpm * 60 / 60;
 function hrdDirector(cb, dt, T, m) {
   const Z = cb.hz, H = hrdState();
   Z.acc = (Z.acc || 0) + dt * (HRD.r0 + HRD.r1 * T);
-  const R = hrdRound(T), pool = SPAWNABLE.filter(id => ENEMIES[id] && (ENEMIES[id].from || 1) <= Math.max(1, R)), cap = hrdCap();
+  const R = hrdRound(T), pool = SPAWNABLE.filter(id => ENEMIES[id] && !HRD_NOSPAWN.includes(id) && (ENEMIES[id].from || 1) <= Math.max(1, R)), cap = hrdCap();
   while (Z.acc >= 1) {
     Z.acc -= 1;
     if (hrdAlive(cb) >= cap) { Z.acc = Math.min(Z.acc, 1); break; }
@@ -35773,7 +35796,7 @@ function hrdHud() {
   const dp = drawPBalls; drawPBalls = cb => { dp(cb); if (cb && cb.hz) hrdDraw(cb); };
   const uh = updateHUD; updateHUD = function () { uh.apply(this, arguments); if (G.run && G.run.horde && G.cb && G.cb.hz) hrdHud(); };
   const snr = startNextRound; startNextRound = function () { if (G.run && G.run.horde && !G.run.over) { hrdBegin(true); return; } return snr.apply(this, arguments); };
-  const sr = startRun; startRun = function (cp) { document.body.classList.remove('hz'); return sr.apply(this, arguments); };
+  const sr = startRun; startRun = function (cp) { document.body.classList.remove('hz', 'hzshop'); const r = sr.apply(this, arguments); try { buildBG(); } catch (e) { /* rien */ } return r; };
   // les piles de jetons de Jack : +1 % par pile
   const cs = computeStats;
   computeStats = function (run) {
@@ -35805,13 +35828,17 @@ function hrdHud() {
       run.hzRec = run.score > (B.score || 0);
       B.t = Math.max(B.t || 0, H.time); B.lv = Math.max(B.lv || 0, H.lv); B.score = Math.max(B.score || 0, Math.round(run.score));
     }
-    document.body.classList.remove('hz');
+    document.body.classList.remove('hz', 'hzshop');
     const r = er.apply(this, arguments);
+    try { buildBG(); } catch (e) { /* rien */ }
     if (run && run.horde && run.hzFinal) try { hrdOver(run); } catch (e) { /* rien */ }
     return r;
   };
   const ug = uiGameOver;
   uiGameOver = function () { const r = ug.apply(this, arguments); if (G.run && G.run.horde && G.run.hz) { const sm = document.querySelector('#godie .gd-stamp small'); if (sm) sm.textContent = hT(`Tenu ${hrdClock(G.run.hz.time)} dans la horde · niveau ${G.run.hz.lv}`, `Lasted ${hrdClock(G.run.hz.time)} in the horde · level ${G.run.hz.lv}`); } return r; };
+  // la table de la horde : un tapis rouge
+  TBP.hz = Object.assign({}, TBP.classic, { felt: ['#c03a46', '#8e1f2e', '#4a0a16'], rail: ['#2e1a1c', '#1a0c0e', '#070304'], line: '#000000', stitch: 'rgba(255,204,77,.75)', hi: 'rgba(255,214,160,.25)' });
+  const sk = skinOf; skinOf = function (kind) { if (kind === 'table' && G.run && G.run.horde && !G.run.over && G.mode !== 'title') return 'hz'; return sk.apply(this, arguments); };
   const op = openPause;
   openPause = function () { const r = op.apply(this, arguments); if (hrdOn() && hrdCb()) { const H = hrdState(), e = $('#pa-sub'); if (e) e.textContent = hT(`Horde · ${hrdClock(H.time)} · niveau ${H.lv} · score ${fmtS(hrdTotal())} · ${Math.floor(G.run.gold)} or`, `Horde · ${hrdClock(H.time)} · level ${H.lv} · score ${fmtS(hrdTotal())} · ${Math.floor(G.run.gold)} gold`); } return r; };
   // le temps de jeu des rubriques « en combat » (pause des astuces, etc.) : la horde reste « en manche »
@@ -35819,11 +35846,18 @@ function hrdHud() {
 })();
 // l'écran de fin
 function hrdOver(run) {
-  const F = run.hzFinal;
+  const F = run.hzFinal, H = run.hz || {}, st = run.stats || {};
   $('#o-title').innerHTML = hT('LA HORDE<br>T\'A EU', 'THE HORDE<br>GOT YOU');
   $('#o-sub').textContent = hT(`Tu as tenu ${hrdClock(F.t)} dans la horde de Jack · niveau ${F.lv}.`, `You lasted ${hrdClock(F.t)} in Jack's horde · level ${F.lv}.`);
-  const st = $('#o-stats');
-  if (st) st.insertAdjacentHTML('afterbegin', `<div class="hz-ocell"><dt>${hT('Temps dans la horde', 'Time in the horde')}</dt><dd>${hrdClock(F.t)}</dd></div><div class="hz-ocell"><dt>${hT('Niveau atteint', 'Level reached')}</dt><dd>${F.lv}</dd></div>`);
+  const beaten = Object.keys(H.beaten || {}).length, met = Object.keys(H.met || {}).length, piles = Object.values(H.piles || {}).reduce((a, b) => a + b, 0);
+  const cells = [
+    [hT('Temps tenu', 'Time survived'), hrdClock(F.t), 'big'], [hT('Niveau atteint', 'Level reached'), F.lv, 'big'],
+    [hT('Cartes abattues', 'Cards knocked down'), fmtN(F.kills)], [hT('Boss abattus', 'Bosses down'), fmtN((run.bossKills || 0) - (H.boss0 || 0))],
+    [hT('Or gagné', 'Gold earned'), fmtN(Math.round((st.gold || 0) - (H.gold0 || 0)))], [hT('Piles achetées', 'Stacks bought'), fmtN(piles)],
+    [hT('Défis gagnés', 'Challenges won'), `${beaten} / ${met}`], [hT('Alliés', 'Allies'), fmtN((H.allies || []).length)],
+  ];
+  const os = $('#o-stats'); if (os) { os.innerHTML = cells.map(([a, b, c]) => `<div class="${c ? 'hz-obig' : ''}"><dt>${a}</dt><dd>${b}</dd></div>`).join(''); os.classList.add('hz-ostats'); }
+  const ttl = $('#o-title'); if (ttl) ttl.classList.add('hz-otitle');
   const sc = $('#o-score');
   if (sc && run.hzSolo) { sc.querySelectorAll('em,i').forEach(x => x.remove()); sc.insertAdjacentHTML('beforeend', run.hzRec ? `<em class="hz-orec">${hT('RECORD DE LA HORDE !', 'HORDE RECORD!')}</em>` : `<i>${hT('record de la horde', 'horde record')} : ${fmtS((G.meta.hzBest || {}).score || 0)}</i>`); hrdLbSend(run); }
   else if (sc && run.hzRec) sc.insertAdjacentHTML('beforeend', `<em class="hz-orec">${hT('RECORD DE LA HORDE !', 'HORDE RECORD!')}</em>`);
@@ -35895,14 +35929,18 @@ const hrdPilePrice = (P, n) => Math.round(P.base * Math.pow(1.06, n) * priceMul(
 const hrdPileCost = (P, n0, k) => { let c = 0; for (let i = 0; i < k; i++) c += hrdPilePrice(P, n0 + i); return c; };
 const HRD_RPRICE = { commun: 110, rare: 260, ultime: 620, fou: 950 };
 const hrdChipPrice = j => Math.round((HRD_RPRICE[j.kind] || 200) * priceMul() * (1 + .02 * hrdState().time / 60));
-const SHOP = { tab: 'piles', busy: false, idleT: 0, pose: 'lean' };
-
+const SHOP = { tab: 'piles', busy: false, idleT: 0, pose: 'lean', det: [], sig: '' };
+const HRD_NOPE = ['bumper'];   // en horde, le flipper repousse déjà les cartes : le Bumper ne sert à rien
+const hrdChipPool = ids => ids.filter(id => !HRD_NOPE.includes(id));
+const HRD_TABS = [
+  { k: 'piles', ic: 'pile', n: ['PILES', 'STACKS'] }, { k: 'packs', ic: 'jackpot', n: ['PAQUETS', 'PACKS'] }, { k: 'spells', ic: 'tornade', n: ['SORTS', 'SPELLS'] },
+  { k: 'bar', ic: 'cocktail', n: ['ZAZA', 'ZAZA'] }, { k: 'up', ic: 'punchm', n: ['AMÉLIORER', 'UPGRADE'] },
+];
 function hrdShopOpen() {
   const H = hrdState(), cb = hrdCb();
   if (!cb || G.mode !== 'combat' || G.paused || cb.hz.busy || G.run.over) return;
   if (H.time < H.shopAt) { Snd.deny(); toast(hT(`Jack ouvre dans ${hrdClock(Math.ceil(H.shopAt - H.time))}.`, `Jack opens in ${hrdClock(Math.ceil(H.shopAt - H.time))}.`)); return; }
   cb.hz.busy = true; G.mode = 'hshop';
-  // en partant au shop : les cartes proches se désintègrent, les boss perdent des PV et reculent
   const R = Math.min(cb.stats.range * .9, 70);
   hrdFx({ type: 'dissolve', R, life: .7 });
   for (const e of cb.enemies.slice()) {
@@ -35922,7 +35960,7 @@ function hrdShopOpen() {
 }
 function hrdShopDom() {
   let el = $('#hz-jack'); if (el) return el;
-  document.body.insertAdjacentHTML('beforeend', `
+  (ROOT || document.body).insertAdjacentHTML('beforeend', `
   <section id="hz-jack" class="full hzj" hidden aria-label="${hT('Le shop de Jack', 'Jack\'s shop')}">
     <div class="hzj-bg" aria-hidden="true"><i class="hzj-lamp"></i><i class="hzj-shelf s1"></i><i class="hzj-shelf s2"></i><i class="hzj-safe"></i></div>
     <div class="hzj-wrap">
@@ -35931,15 +35969,11 @@ function hrdShopDom() {
         <i class="hzj-counter" aria-hidden="true"></i>
         <p class="say hzj-say" id="hzj-say"></p>
       </div>
-      <div class="hzj-right">
-        <div class="hzj-head"><h2>${hT('LE SHOP DE JACK', 'JACK\'S SHOP')}</h2><div class="hzj-gold"><span class="coin" aria-hidden="true"></span><b id="hzj-gold">0</b></div></div>
-        <div class="hzj-tabs" role="tablist">
-          <button data-hzt="piles" role="tab">${hT('PILES', 'STACKS')}</button>
-          <button data-hzt="packs" role="tab">${hT('PAQUETS', 'PACKS')}</button>
-          <button data-hzt="up" role="tab">${hT('AMÉLIORER', 'UPGRADE')}<i id="hzj-upn"></i></button>
-        </div>
+      <div class="hzj-right panel">
+        <div class="hzj-head"><h2 class="hzj-sign">${hT('CHEZ JACK', 'JACK\'S PLACE')}<small>${hT('prêteur · revendeur · pas de crédit', 'pawn · resale · no credit')}</small></h2><div class="hzj-gold"><span class="coin" aria-hidden="true"></span><b id="hzj-gold">0</b></div></div>
+        <div class="hzj-tabs" role="tablist">${HRD_TABS.map(t => `<button data-hzt="${t.k}" role="tab">${iconSVG(t.ic)}<span>${HRD_EN ? t.n[1] : t.n[0]}</span>${t.k === 'up' ? '<i id="hzj-upn"></i>' : ''}</button>`).join('')}</div>
         <div class="hzj-body" id="hzj-body"></div>
-        <button class="btn big hzj-go" id="hzj-go">${hT('RETOUR À LA HORDE', 'BACK TO THE HORDE')}<small>Échap</small></button>
+        <button class="btn big red hzj-go" id="hzj-go">${hT('RETOUR À LA HORDE', 'BACK TO THE HORDE')}<small>Échap</small></button>
       </div>
     </div>
     <div class="hzj-anim" id="hzj-anim" hidden></div>
@@ -35964,22 +35998,37 @@ function hrdJackSay(k) {
   typeInto('#hzj-say', L.txt, 'jack');
   SHOP.idleT = now();
 }
+// le rack reste visible (et utilisable) pendant le shop : on ne le recouvre pas
+function hrdShopFit() {
+  const el = $('#hz-jack'), rk = $('#rack'); if (!el || el.hidden) return;
+  el.style.bottom = ''; el.style.right = '';
+  if (!rk || rk.offsetParent === null) return;
+  const r = rk.getBoundingClientRect();
+  if (r.top > innerHeight * .5) el.style.bottom = Math.max(0, innerHeight - r.top) + 'px';
+  else if (r.left > innerWidth * .5) el.style.right = Math.max(0, innerWidth - r.left) + 'px';
+}
+addEventListener('resize', () => { try { hrdShopFit(); } catch (e) { /* rien */ } });
 function hrdShopShow() {
   const run = G.run, H = hrdState();
   if (!run || run.over) return;
   hrdShopDom();
-  if (H.packVisit !== H.visits) { H.packVisit = H.visits; H.packs = hrdGenPacks(); }
+  if (H.packVisit !== H.visits) { H.packVisit = H.visits; H.packs = hrdGenPacks(); H.spOffer = hrdGenSpells(); H.barOffer = hrdGenBar(); }
   SHOP.tab = H.ups > 0 ? 'up' : SHOP.tab || 'piles';
-  show('#hz-jack', true); $('#hz-jack').scrollTop = 0;
+  document.body.classList.add('hzshop');
+  show('#hz-jack', true); $('#hz-jack').scrollTop = 0; hrdShopFit();
   $('#hz-jack').classList.remove('in'); void $('#hz-jack').offsetWidth; $('#hz-jack').classList.add('in');
   hrdJackPose('lean', true);
   setTimeout(() => hrdJackSay(H.visits === 0 ? { pose: JACK.open[0][0], txt: HRD_EN ? JACK.open[0][2] : JACK.open[0][1] } : H.ups > 0 ? { pose: 'keys', txt: hT(`T'as ${H.ups} amélioration${H.ups > 1 ? 's' : ''} à faire. Donne.`, `You've got ${H.ups} upgrade${H.ups > 1 ? 's' : ''} coming. Hand it over.`) } : 'hello'), 250);
   Music.play('jack');
+  renderRack();
   hrdShopRender();
-  clearInterval(SHOP.iv); SHOP.iv = setInterval(hrdShopIdle, 1000);
+  clearInterval(SHOP.iv); SHOP.iv = setInterval(hrdShopIdle, 700);
 }
+const hrdRackSig = () => G.run ? G.run.jokers.map(j => j.uid + j.kind + (j.secret ? 's' : '') + (j.hzUp || 0)).join(',') + '|' + Math.floor(G.run.gold) + '|' + spellsOf(G.run).join(',') : '';
 function hrdShopIdle() {
   if ($('#hz-jack').hidden) { clearInterval(SHOP.iv); return; }
+  // le joueur a vendu ou rangé un jeton depuis son rack : on remet le shop à jour
+  const sig = hrdRackSig(); if (sig !== SHOP.sig && !SHOP.busy) hrdShopRender();
   if (SHOP.busy || now() - SHOP.idleT < 7000) return;
   SHOP.idleT = now();
   hrdJackPose(pick(JACK.idle.filter(p => p !== SHOP.pose)));
@@ -35988,9 +36037,15 @@ function hrdShopClose() {
   const cb = hrdCb(), H = hrdState();
   if (SHOP.busy) return;
   clearInterval(SHOP.iv);
-  show('#hz-jack', false);
+  show('#hz-jack', false); document.body.classList.remove('hzshop');
   H.visits++; H.shopAt = H.time + HRD.shopCd;
-  if (cb) { cb.hz.busy = false; cb.invuln = Math.max(cb.invuln || 0, 1.2); }
+  if (cb) {
+    cb.hz.busy = false; cb.invuln = Math.max(cb.invuln || 0, 1.2);
+    // Jack répare les bumpers de la table
+    try { buildPosts(); } catch (e) { /* rien */ }
+    const s = computeStats(G.run); if (s.rake2 && !cb.rake2) { cb.rake2 = mkRake(cb.rake.ang + Math.PI); cb.rake2.max = cb.rake2.dur = s.rakeDur; }
+    for (const rk of [cb.rake, cb.rake2]) if (rk) { rk.broken = false; rk.dur = rk.max; }
+  }
   if (G.run && !G.run.over) {
     G.mode = 'combat';
     Music.play('combat');
@@ -35999,32 +36054,32 @@ function hrdShopClose() {
     if (!G.headless) { const L = JK_LINE('leave'); toast(`Jack : « ${L.txt} »`); Snd.door(); }
   }
 }
+function hrdDet(j) { SHOP.det.push(j); return SHOP.det.length - 1; }
+function hrdChipBtn(j, cls) { return chipHTML(j, 'button', `data-hzdet="${hrdDet(j)}" aria-label="${hT('Détails', 'Details')} : ${esc(jName(j))}"`, 'oicon ' + (cls || '')); }
 function hrdShopRender() {
   const run = G.run, H = hrdState();
+  SHOP.det = []; SHOP.sig = hrdRackSig();
   $('#hzj-gold').textContent = fmtN(Math.floor(run.gold));
-  $('#hzj-upn').textContent = H.ups > 0 ? ' ✦' + H.ups : '';
+  $('#hzj-upn').textContent = H.ups > 0 ? H.ups : '';
   $$('#hz-jack [data-hzt]').forEach(b => { b.classList.toggle('on', b.dataset.hzt === SHOP.tab); b.setAttribute('aria-selected', b.dataset.hzt === SHOP.tab ? 'true' : 'false'); });
   const body = $('#hzj-body');
-  if (SHOP.tab === 'piles') body.innerHTML = hrdPilesHTML();
-  else if (SHOP.tab === 'packs') body.innerHTML = hrdPacksHTML();
-  else body.innerHTML = hrdUpHTML();
+  body.innerHTML = SHOP.tab === 'piles' ? hrdPilesHTML() : SHOP.tab === 'packs' ? hrdPacksHTML() : SHOP.tab === 'spells' ? hrdSpellsHTML() : SHOP.tab === 'bar' ? hrdBarHTML() : hrdUpHTML();
+  updateHUD();
 }
-// une petite tour de jetons, qui grandit avec les achats
 function hrdStackSVG(col, dark, n) {
   const k = Math.min(9, 2 + Math.floor(n / 3));
   let h = '';
   for (let i = 0; i < k; i++) { const y = 46 - i * 5; h += `<ellipse cx="24" cy="${y + 2.4}" rx="15" ry="5" fill="${dark}"/><rect x="9" y="${y - 2.6}" width="30" height="5" fill="${dark}"/><ellipse cx="24" cy="${y - 2.6}" rx="15" ry="5" fill="${col}"/><path d="M14 ${y - 2.6}h3M31 ${y - 2.6}h3" stroke="#fff6ea" stroke-width="1.6" opacity=".7"/>`; }
   return `<svg class="hzj-stk" viewBox="0 0 48 56" aria-hidden="true">${h}</svg>`;
 }
+const hrdSection = (t, s) => `<div class="hzj-sec"><b>${t}</b>${s ? `<span>${s}</span>` : ''}</div>`;
 function hrdPilesHTML() {
   const H = hrdState(), g = Math.floor(G.run.gold);
-  return `<p class="hzj-hint">${hT('Stock infini. Chaque pile ajoute +1 % pour toute la partie. Le prix monte un peu à chaque achat.', 'Endless stock. Each stack adds +1% for the whole run. The price goes up a little each time.')}</p>
-  <div class="hzj-piles">${HRD_PILES.map(P => {
+  return hrdSection(hT('PILES DE JETONS', 'CHIP STACKS'), hT('stock infini · +1 % chacune, pour toute la partie', 'endless stock · +1% each, for the whole run')) + `<div class="hzj-list">${HRD_PILES.map(P => {
     const n = H.piles[P.k] || 0, p1 = hrdPilePrice(P, n), p5 = hrdPileCost(P, n, 5);
-    return `<div class="hzj-pile" style="--pc:${P.col};--pd:${P.dark}">
-      ${hrdStackSVG(P.col, P.dark, n)}
-      <div class="hzj-pt"><b>${HRD_EN ? P.n[1] : P.n[0]}</b><small>${HRD_EN ? P.d[1] : P.d[0]}</small><em>${n ? `×${n} · +${n}${NB}%` : hT('aucune', 'none')}</em></div>
-      <div class="hzj-pb"><button class="mini" data-pile="${P.k}" data-n="1" ${g < p1 ? 'disabled' : ''}><span class="coin"></span>${fmtN(p1)}</button><button class="mini dark" data-pile="${P.k}" data-n="5" ${g < p5 ? 'disabled' : ''}>×5 · ${fmtN(p5)}</button></div>
+    return `<div class="offer hzj-pile" style="--pc:${P.col};--pd:${P.dark}">${hrdStackSVG(P.col, P.dark, n)}
+      <div class="otext"><b>${HRD_EN ? P.n[1] : P.n[0]}${n ? `<i class="otag">×${n}</i>` : ''}</b><span>${HRD_EN ? P.d[1] : P.d[0]}${n ? ` · <em class="more">+${n}${NB}%</em>` : ''}</span></div>
+      <div class="obuy"><button class="mini" data-pile="${P.k}" data-n="1" ${g < p1 ? 'disabled' : ''}>${fmtN(p1)} or</button><button class="mini dark" data-pile="${P.k}" data-n="5" ${g < p5 ? 'disabled' : ''}>×5 · ${fmtN(p5)}</button></div>
     </div>`;
   }).join('')}</div>`;
 }
@@ -36036,37 +36091,35 @@ function hrdBuyPile(k, n) {
   Snd.coin(); Snd.stack(Math.min(4, n)); haptic(20);
   if (n > 1) hrdJackSay(rnd() < .5 ? { pose: 'wow', txt: hT('Cinq d\'un coup ?! … Tu me plais, toi.', 'Five at once?! … I like you.') } : 'pile');
   else if (rnd() < .5) hrdJackSay('pile');
-  refreshStats(); updateHUD(); hrdShopRender();
+  refreshStats(); hrdShopRender();
   const el = $(`#hzj-body [data-pile="${k}"]`); if (el) bumpCls(el.closest('.hzj-pile'), 'got');
 }
-/* ---- les paquets de la machine : on les ouvre (gratuit), on achète les jetons qu'on veut ---- */
+/* ---- les paquets : 6 machines différentes, 3 jetons chacune ---- */
 function hrdRollChip(ids, m, lux) {
   const id = pick(ids), r = rnd(), sh = Math.min(.15, m * .01);
   let kind = 'commun', lv = 1;
   if (lux || r < .2 + sh) { kind = 'ultime'; lv = 3; } else if (r < .55 + sh) { kind = 'rare'; lv = 2; }
   return mkJoker(kind, [{ t: id, lv }], 1);
 }
+const hrdMachines = () => MACH9.map((M, i) => ({ M, i, ids: hrdChipPool(M.ids || []).filter(id => NORMAL_JOKERS.includes(id)) })).filter(x => x.ids.length >= 3);
 function hrdGenPacks() {
-  const run = G.run, m = hrdState().time / 60, mine = MACH9[run.machine || 0].ids, packs = [];
-  packs.push({ kind: 'mach', chips: [0, 1, 2].map(() => hrdRollChip(mine, m)), open: false, sold: [] });
-  packs.push({ kind: 'casino', chips: [0, 1, 2].map(() => hrdRollChip(NORMAL_JOKERS, m)), open: false, sold: [] });
-  if (hrdState().visits >= 2) {
-    const ch = [hrdRollChip(NORMAL_JOKERS, m, true), hrdRollChip(NORMAL_JOKERS, m, true)];
-    try { const fp = fousPool(); if (fp.length) ch.push(mkFou(fouPick(fp))); } catch (e) { /* rien */ }
-    packs.push({ kind: 'lux', chips: ch, open: false, sold: [] });
-  }
-  return packs;
+  const m = hrdState().time / 60;
+  return shuffle(hrdMachines()).slice(0, 6).map(x => {
+    const ids = shuffle(x.ids.slice());
+    return { mi: x.i, chips: [0, 1, 2].map(k => hrdRollChip([ids[k % ids.length]], m)), open: false, sold: [] };
+  });
 }
-const HRD_PACKN = { mach: ['Paquet de ta machine', 'Your machine pack'], casino: ['Paquet du casino', 'Casino pack'], lux: ['Paquet de luxe', 'Luxury pack'] };
+const hrdMachCol = i => { const id = (MACH9[i].ids || [])[0]; return id && JK[id] ? JK[id].col : '#ffcc4d'; };
 function hrdPacksHTML() {
   const H = hrdState(), g = Math.floor(G.run.gold), free = freeSlots();
-  return `<p class="hzj-hint">${hT('Ouvre les paquets (c\'est gratuit), achète les jetons que tu veux. Le prix dépend de la rareté. Nouveaux paquets à chaque visite.', 'Open the packs (it\'s free), buy the chips you want. Price depends on rarity. New packs every visit.')}</p>
-  <div class="hzj-packs">${(H.packs || []).map((p, i) => {
-    const nm = HRD_EN ? HRD_PACKN[p.kind][1] : HRD_PACKN[p.kind][0];
-    if (!p.open) return `<button class="hzj-pack k-${p.kind}" data-pack="${i}"><span class="hzp-foil"><i></i><b>${nm}</b><small>${p.chips.length} ${hT('jetons', 'chips')}</small></span><em>${hT('Ouvrir', 'Open')}</em></button>`;
-    return `<div class="hzj-pk k-${p.kind}"><b class="hzp-n">${nm}</b><div class="hzp-chips">${p.chips.map((j, k) => {
+  const P = H.packs || [];
+  return hrdSection(hT('PAQUETS DE MACHINES', 'MACHINE PACKS'), hT('6 machines · ouvre (gratuit), achète ce que tu veux · nouveaux paquets à chaque visite', '6 machines · open (free), buy what you want · new packs every visit')) + `<div class="hzj-packs">${P.map((p, i) => {
+    const M = MACH9[p.mi], col = hrdMachCol(p.mi);
+    if (!p.open) return `<button class="hzj-pack" data-pack="${i}" style="--mc:${col}"><span class="hzp-box"><i class="hzp-shine"></i><span class="hzp-ic">${iconSVG((M.ids || [])[0] || 'jackpot')}</span><b>${esc(M.name)}</b><small>${hT('3 jetons', '3 chips')}</small></span><em>${hT('OUVRIR', 'OPEN')}</em></button>`;
+    return `<div class="hzj-pk" style="--mc:${col}"><b class="hzp-n">${esc(M.name)}</b><div class="hzj-list">${p.chips.map((j, k) => {
       const sold = p.sold.includes(k), pr = hrdChipPrice(j), partner = !sold && stackPartner(j), noRoom = !partner && free < needSlots(j);
-      return `<div class="hzp-c${sold ? ' sold' : ''}" style="--d:${k * .12}s">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><i class="rtag2" style="--rc:var(--r-${rarVar(j)})">${rarLabel(j)}</i><small>${topCap(j)}</small>${partner ? `<small class="hzp-stk">${hT('s\'empile', 'stacks')}</small>` : ''}${sold ? `<em>${hT('ACHETÉ', 'BOUGHT')}</em>` : `<button class="mini" data-buy="${i}:${k}" ${g < pr || noRoom ? 'disabled' : ''}><span class="coin"></span>${fmtN(pr)}${noRoom ? `<small>${hT('rack plein', 'rack full')}</small>` : ''}</button>`}</div>`;
+      return `<div class="offer hzp-c${sold ? ' sold' : ''}" style="--d:${k * .1}s">${hrdChipBtn(j)}<div class="otext"><b>${esc(jName(j))}<i class="rtag2" style="--rc:var(--r-${rarVar(j)})">${rarLabel(j)}</i></b><span>${topCap(j)}</span>${partner ? `<span class="stk-hint">${hT('s\'empile sur ton jeton', 'stacks on your chip')}</span>` : ''}</div>
+        <div class="obuy">${sold ? `<em>${hT('ACHETÉ', 'BOUGHT')}</em>` : `<button class="mini" data-buy="${i}:${k}" ${g < pr || noRoom ? 'disabled' : ''}>${fmtN(pr)} or${noRoom ? `<small>${hT('rack plein', 'rack full')}</small>` : ''}</button>`}</div></div>`;
     }).join('')}</div></div>`;
   }).join('')}</div>`;
 }
@@ -36074,9 +36127,9 @@ function hrdOpenPack(i) {
   const H = hrdState(), p = H.packs && H.packs[i]; if (!p || p.open) return;
   const b = $(`#hzj-body [data-pack="${i}"]`);
   Snd.cardSwish && Snd.cardSwish(); haptic(25);
-  if (b && !G.reduced) { b.classList.add('tear'); SHOP.busy = true; setTimeout(() => { SHOP.busy = false; p.open = true; Snd.stack(3); hrdShopRender(); }, 520); }
-  else { p.open = true; hrdShopRender(); }
   for (const j of p.chips) for (const pt of j.parts) catSee('j', pt.t);
+  if (b && !G.reduced) { b.classList.add('tear'); SHOP.busy = true; setTimeout(() => { SHOP.busy = false; p.open = true; Snd.stack(3); hrdShopRender(); }, 480); }
+  else { p.open = true; hrdShopRender(); }
 }
 function hrdBuyChip(i, k) {
   const H = hrdState(), run = G.run, p = H.packs && H.packs[i]; if (!p || p.sold.includes(k)) return;
@@ -36087,7 +36140,55 @@ function hrdBuyChip(i, k) {
   if (partner) { run.jokers.push(j); applyStack(partner, j); } else run.jokers.push(j);
   for (const pt of j.parts) catSee('j', pt.t);
   Snd.coin(); hrdJackSay('chip');
-  refreshStats(); renderRack(); updateHUD(); hrdShopRender();
+  refreshStats(); renderRack(); hrdShopRender();
+}
+/* ---- les sorts ---- */
+function hrdGenSpells() {
+  const have = spellsOf(G.run), ids = shuffle(Object.keys(PSPELLS).filter(id => !have.includes(id) && !PSPELLS[id].base && !PSPELLS[id].fou));
+  return ids.slice(0, 4).map(id => ({ id, sold: false }));
+}
+const hrdSpellPrice = id => Math.round(PSPELLS[id].price * 1.9 * priceMul() * (1 + .03 * hrdState().time / 60));
+function hrdSpellsHTML() {
+  const H = hrdState(), g = Math.floor(G.run.gold), have = spellsOf(G.run), full = have.length >= SPELL_SLOTS;
+  return hrdSection(hT('SORTS', 'SPELLS'), hT(`${have.length}/${SPELL_SLOTS} places · nouveaux sorts à chaque visite`, `${have.length}/${SPELL_SLOTS} slots · new spells every visit`)) + `<div class="hzj-list">${(H.spOffer || []).map((o, i) => {
+    const S = PSPELLS[o.id], pr = hrdSpellPrice(o.id), own = have.includes(o.id);
+    return `<div class="offer${o.sold || own ? ' sold' : ''}"><span class="slotico hzs-sp" style="--sc:${S.col}">${iconSVG(S.icon)}</span><div class="otext"><b>${esc(S.name)}<i class="otag">${hT('SORT', 'SPELL')}</i></b><span>${S.txt}</span></div>
+      <div class="obuy">${o.sold || own ? `<em>${hT('APPRIS', 'LEARNED')}</em>` : `<button class="mini" data-spell="${i}" ${g < pr || full ? 'disabled' : ''}>${fmtN(pr)} or${full ? `<small>${hT('plus de place', 'no slot')}</small>` : ''}</button>`}</div></div>`;
+  }).join('') || `<p class="hzj-hint">${hT('Jack n\'a plus de sorts à vendre.', 'Jack has no more spells to sell.')}</p>`}</div>`;
+}
+function hrdBuySpell(i) {
+  const H = hrdState(), run = G.run, o = H.spOffer && H.spOffer[i]; if (!o || o.sold) return;
+  const pr = hrdSpellPrice(o.id);
+  if (spellsOf(run).length >= SPELL_SLOTS) { Snd.deny(); return; }
+  if (run.gold < pr) { hrdJackSay('broke'); Snd.deny(); return; }
+  run.gold -= pr; o.sold = true; learnSpell(o.id);
+  if (G.cb) initSpells(G.cb, run);
+  Snd.coin(); Snd.bouclier && Snd.bouclier(); hrdJackSay({ pose: 'smirk', txt: hT('Un sort. Fais pas de bêtises avec.', 'A spell. Don\'t do anything stupid with it.') });
+  renderSpellBar(); hrdShopRender();
+}
+/* ---- les invendus de Zaza : ses boissons, sans le bar ---- */
+const HRD_BARX = ['mystere'];
+function hrdGenBar() { return Object.keys(UPG).filter(id => !HRD_BARX.includes(id)); }
+const hrdDrinkPrice = (id, lv) => Math.round(UPG[id].price[Math.min(lv, UPG[id].price.length - 1)] * barScale(30) * 1.25 * priceMul());
+function hrdBarHTML() {
+  const run = G.run, g = Math.floor(run.gold), cats = {};
+  for (const id of hrdGenBar()) (cats[UPG[id].cat] || (cats[UPG[id].cat] = [])).push(id);
+  return hrdSection(hT('LES INVENDUS DE ZAZA', 'ZAZA\'S LEFTOVERS'), hT('ses boissons, restées au frais · elles durent toute la partie', 'her drinks, kept on ice · they last the whole run')) + Object.keys(cats).map(c => `<div class="hzj-cat" style="--cat:${UPG_CATS[c].col}">${UPG_CATS[c].name}</div><div class="hzj-drinks">${cats[c].map(id => {
+    const U = UPG[id], lv = upLv(run, id), maxed = lv >= U.max, pr = maxed ? 0 : hrdDrinkPrice(id, lv);
+    return `<div class="drink hzj-dr${maxed ? ' maxed' : ''}">${glassHTML(U.glass, U.liq)}<b>${esc(U.name)}</b><span class="dlv">${'●'.repeat(lv)}${'○'.repeat(Math.max(0, U.max - lv))}</span><span class="deff">${maxed ? hT('au maximum', 'maxed') : U.txt(lv + 1)}</span>${maxed ? `<em class="stamp">MAX</em>` : `<button class="mini" data-drink="${id}" ${g < pr ? 'disabled' : ''}>${fmtN(pr)} or</button>`}</div>`;
+  }).join('')}</div>`).join('');
+}
+function hrdBuyDrink(id) {
+  const run = G.run, U = UPG[id]; if (!U) return;
+  const lv = upLv(run, id); if (lv >= U.max) return;
+  const pr = hrdDrinkPrice(id, lv);
+  if (run.gold < pr) { hrdJackSay('broke'); Snd.deny(); return; }
+  run.gold -= pr; run.up[id] = lv + 1;
+  if (id === 'etage') run.floors.push(BAL.floorHp);
+  run.stats.drinks = (run.stats.drinks || 0) + 1;
+  Snd.pour ? Snd.pour() : Snd.coin(); setTimeout(() => Snd.gulp && Snd.gulp(), 350);
+  hrdJackSay({ pose: rnd() < .5 ? 'glass' : 'coffee', txt: pick(HRD_EN ? ['Zaza made that. Don\'t tell her I sold it.', 'Still cold. Barely.', 'Cheers. Or whatever.'] : ['C\'est Zaza qui l\'a fait. Lui dis pas que je l\'ai vendu.', 'Encore frais. À peu près.', 'Santé. Ou un truc du genre.']) });
+  refreshStats(); renderRack(); hrdShopRender();
 }
 /* ---- l'amélioration : un niveau = une amélioration ; au-delà de SECRET, 3 améliorations = une copie ---- */
 function hrdUpStep(j) {
@@ -36112,7 +36213,7 @@ function hrdUpHTML() {
     const st = hrdUpStep(j), can = !st.no && H.ups > 0;
     return `<div class="hzu-c${st.no ? ' no' : ''}${j.hzDup ? ' dup' : ''}">
       <button class="hzu-pick" data-up="${j.uid}" ${st.no ? 'aria-disabled="true"' : ''} ${can ? '' : 'data-off="1"'}>${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><i class="rtag2" style="--rc:var(--r-${rarVar(j)})">${rarLabel(j)}</i>${hrdUpLabel(j)}${j.hzDup ? `<small class="hzu-free">${hT('copie · sans place', 'copy · no slot')}</small>` : ''}</button>
-      <button class="hzu-sell" data-sell="${j.uid}" title="${hT('Revendre à Jack', 'Sell to Jack')}">${hT('Revendre', 'Sell')} +${sellValue(j)}</button>
+      <button class="hzu-info" data-hzdet="${hrdDet(j)}">${hT('Détails', 'Details')}</button><button class="hzu-sell" data-sell="${j.uid}" title="${hT('Revendre à Jack', 'Sell to Jack')}">${hT('Revendre', 'Sell')} +${sellValue(j)}</button>
     </div>`;
   }).join('');
   return `<div class="hzu-head${H.ups ? ' have' : ''}"><b>✦ ${H.ups}</b><span>${H.ups ? hT(`amélioration${H.ups > 1 ? 's' : ''} à utiliser · touche un jeton`, `upgrade${H.ups > 1 ? 's' : ''} to use · tap a chip`) : hT('Gagne des niveaux dans la horde pour en avoir', 'Level up in the horde to get some')}</span></div>
@@ -36150,7 +36251,7 @@ function hrdUpgrade(uid) {
   const before = JSON.parse(JSON.stringify(j));
   const res = hrdApplyUp(j);
   hrdUpAnim(before, j, res, () => {
-    refreshStats(); renderRack(); updateHUD(); hrdShopRender();
+    refreshStats(); renderRack(); hrdShopRender();
     const nm = jName(j);
     if (res.copy) { toast(hT(`${nm} se dédouble ! La copie ne prend pas de place.`, `${nm} splits in two! The copy takes no slot.`)); }
     else if (res.st.k === 'secret') toast(hT(`${nm} passe en rareté secrète !`, `${nm} goes secret rarity!`));
@@ -36166,25 +36267,39 @@ function hrdSell(uid) {
     const k = run.jokers.indexOf(j); if (k < 0) return;
     run.jokers.splice(k, 1); addGold(sellValue(j)); try { noteSold(j); } catch (e) { /* rien */ }
     Snd.coin(); hrdJackSay('sell');
-    refreshStats(); renderRack(); updateHUD(); hrdShopRender();
+    refreshStats(); renderRack(); hrdShopRender();
+  });
+}
+function hrdSell(uid) {
+  const run = G.run, i = run.jokers.findIndex(x => x.uid === uid); if (i < 0 || SHOP.busy) return;
+  const j = run.jokers[i];
+  if ((run.stolen || []).includes(j.uid)) return;
+  askConfirm(hT(`Revendre <b>${esc(jName(j))}</b> à Jack pour <b>${sellValue(j)} or</b> ?`, `Sell <b>${esc(jName(j))}</b> to Jack for <b>${sellValue(j)} gold</b>?`), hT('Revendre', 'Sell'), () => {
+    const k = run.jokers.indexOf(j); if (k < 0) return;
+    run.jokers.splice(k, 1); addGold(sellValue(j)); try { noteSold(j); } catch (e) { /* rien */ }
+    Snd.coin(); hrdJackSay('sell');
+    refreshStats(); renderRack(); hrdShopRender();
   });
 }
 function hrdShopClick(e) {
   const b = e.target.closest('button'); if (!b) { const say = e.target.closest('#hzj-say'); if (say) typeFinish(say); return; }
   firstGesture();
+  if (b.dataset.hzdet != null) { const j = SHOP.det[+b.dataset.hzdet]; if (j) openDetail(j, 'shop'); return; }
   if (SHOP.busy && !b.closest('#hzj-anim')) return;
   if (b.id === 'hzj-go') { Snd.click(); hrdShopClose(); return; }
-  if (b.dataset.hzt) { SHOP.tab = b.dataset.hzt; Snd.click(); hrdShopRender(); return; }
+  if (b.dataset.hzt) { SHOP.tab = b.dataset.hzt; Snd.click(); hrdShopRender(); $('#hzj-body').scrollTop = 0; return; }
   if (b.dataset.pile) { hrdBuyPile(b.dataset.pile, +b.dataset.n || 1); return; }
   if (b.dataset.pack != null) { hrdOpenPack(+b.dataset.pack); return; }
   if (b.dataset.buy) { const [i, k] = b.dataset.buy.split(':').map(Number); hrdBuyChip(i, k); return; }
+  if (b.dataset.spell != null) { hrdBuySpell(+b.dataset.spell); return; }
+  if (b.dataset.drink) { hrdBuyDrink(b.dataset.drink); return; }
   if (b.dataset.up) { hrdUpgrade(+b.dataset.up); return; }
   if (b.dataset.sell) { hrdSell(+b.dataset.sell); return; }
   if (b.dataset.hza === 'skip') { hrdUpAnimSkip(); return; }
 }
 document.addEventListener('keydown', e => {
   if (!G.run || !G.run.horde) return;
-  if (G.mode === 'hshop' && e.key === 'Escape' && !$('#hz-jack').hidden) { e.preventDefault(); e.stopPropagation(); if (SHOP.busy) hrdUpAnimSkip(); else hrdShopClose(); return; }
+  if (G.mode === 'hshop' && e.key === 'Escape' && !$('#hz-jack').hidden && $('#detail').hidden) { e.preventDefault(); e.stopPropagation(); if (SHOP.busy) hrdUpAnimSkip(); else hrdShopClose(); return; }
   if (G.mode === 'combat' && !G.paused && (e.key === 'j' || e.key === 'J') && !e.repeat && !(e.target && /input|textarea/i.test(e.target.tagName))) { e.preventDefault(); hrdShopOpen(); }
 }, true);
 
@@ -36457,7 +36572,7 @@ function hrdChalEnd(after) {
 // défaite : ils te lâchent une vague de cartes
 function hrdPunish(id) {
   const cb = hrdCb(); if (!cb) return;
-  const m = hrdState().time / 60, n = Math.round(18 + m * 1.5), R = hrdRound(hrdState().time), pool = SPAWNABLE.filter(id => ENEMIES[id] && (ENEMIES[id].from || 1) <= Math.max(1, R));
+  const m = hrdState().time / 60, n = Math.round(18 + m * 1.5), R = hrdRound(hrdState().time), pool = SPAWNABLE.filter(id => ENEMIES[id] && !HRD_NOSPAWN.includes(id) && (ENEMIES[id].from || 1) <= Math.max(1, R));
   for (let k = 0; k < n; k++) cb.hz.q.push({ t: k * (11 / n), type: pick(pool), ang: rand(0, TAU), o: {} });
   banner(hT(`LA VAGUE DE ${id === 'nox' ? 'NOX' : id.toUpperCase()}`, `${id === 'nox' ? 'NOX' : id.toUpperCase()}'S WAVE`), hT('perdu : à toi de te débrouiller', 'you lost: you\'re on your own'), 'bad', 2.4);
   Snd.alarm();
@@ -36520,7 +36635,7 @@ function hrdIntro() {
 }
 function hrdCutDom() {
   if ($('#hz-cut')) return;
-  document.body.insertAdjacentHTML('beforeend', `
+  (ROOT || document.body).insertAdjacentHTML('beforeend', `
   <section id="hz-cut" class="hzk" hidden aria-live="polite">
     <svg class="hzk-bg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <defs>
@@ -36725,7 +36840,7 @@ punchAnim = function (j, done) {
    Départ rapide : Jack te fait choisir 6 jetons parmi 12, te donne un peu d'or et ouvre son shop tout de suite.
    Un classement à part ; les records de la partie normale ne bougent pas. */
 const hrdSoloOpen = () => { const m = G.meta || {}; return (m.wins || 0) > 0 || (m.baronWins || 0) > 0 || !!(m.hzBest && m.hzBest.score); };
-const HRD_SOLO = { pick: 6, offer: 12, gold: 700, slots: 7, ups: 2, up: { calibre: 2, cadence: 2, portee: 2, pv: 2, etage: 1, solide: 2, barriere: 1, remontant: 1 } };
+const HRD_SOLO = { pick: 6, offer: 12, gold: 700, slots: 8, ups: 2, up: { calibre: 2, cadence: 2, portee: 2, pv: 2, etage: 1, solide: 2, barriere: 1, remontant: 1 } };
 const DRAFT = { offer: [], sel: [] };
 (() => {
   const nr = document.querySelector('#newrun .nr-head');
@@ -36775,8 +36890,8 @@ function hrdSoloStart() {
   G.mode = 'hcut';
   renderRack(); updateHUD();
   // 12 jetons ULTIMES de types tous différents (dont un peu de la machine de départ)
-  const mine = shuffle(MACH9[run.machine || 0].ids.slice()).slice(0, 3), rest = shuffle(NORMAL_JOKERS.filter(id => !mine.includes(id)));
-  DRAFT.offer = mine.concat(rest).slice(0, HRD_SOLO.offer).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
+  const rest = shuffle(hrdChipPool(NORMAL_JOKERS.slice()));
+  DRAFT.offer = rest.slice(0, HRD_SOLO.offer).map(id => mkJoker('ultime', [{ t: id, lv: 3 }], 1));
   shuffle(DRAFT.offer); DRAFT.sel = [];
   hrdDraftDom();
   show('#hz-draft', true); $('#hz-draft').scrollTop = 0;
@@ -36788,7 +36903,7 @@ function hrdSoloStart() {
 }
 function hrdDraftDom() {
   if ($('#hz-draft')) return;
-  document.body.insertAdjacentHTML('beforeend', `
+  (ROOT || document.body).insertAdjacentHTML('beforeend', `
   <section id="hz-draft" class="full hzj hzd" hidden aria-label="${hT('Choisis tes jetons', 'Pick your chips')}">
     <div class="hzj-bg" aria-hidden="true"><i class="hzj-lamp"></i><i class="hzj-shelf s1"></i><i class="hzj-shelf s2"></i><i class="hzj-safe"></i></div>
     <div class="hzj-wrap">
@@ -36804,6 +36919,7 @@ function hrdDraftDom() {
   $('#hz-draft').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     firstGesture();
+    if (b.dataset.hzdd != null) { const j = DRAFT.offer[+b.dataset.hzdd]; if (j) openDetail(j, 'shop'); return; }
     if (b.dataset.hzdi != null) {
       const i = +b.dataset.hzdi, k = DRAFT.sel.indexOf(i);
       if (k >= 0) DRAFT.sel.splice(k, 1); else if (DRAFT.sel.length < HRD_SOLO.pick) DRAFT.sel.push(i); else { Snd.deny(); return; }
@@ -36824,7 +36940,7 @@ function hrdDraftPose(p, instant) {
 function hrdDraftRender() {
   const n = DRAFT.sel.length, need = HRD_SOLO.pick;
   $('#hzd-n').textContent = `${n}/${need}`;
-  $('#hzd-grid').innerHTML = DRAFT.offer.map((j, i) => `<div class="hzu-c"><button class="hzu-pick hzd-c${DRAFT.sel.includes(i) ? ' on' : ''}" data-hzdi="${i}">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><small>${topCap(j)}</small></button></div>`).join('');
+  $('#hzd-grid').innerHTML = DRAFT.offer.map((j, i) => `<div class="hzu-c"><button class="hzu-pick hzd-c${DRAFT.sel.includes(i) ? ' on' : ''}" data-hzdi="${i}">${chipHTML(j, 'span')}<b>${esc(jName(j))}</b><small>${topCap(j)}</small></button><button class="hzu-info" data-hzdd="${i}">${hT('Détails', 'Details')}</button></div>`).join('');
   const go = $('#hzd-go'); go.disabled = n < need; go.textContent = n < need ? hT(`Choisis encore ${need - n}`, `Pick ${need - n} more`) : hT('ALLEZ, LA HORDE !', 'BRING ON THE HORDE!');
 }
 function hrdDraftGo() {
