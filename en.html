@@ -5513,6 +5513,29 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
 
 /* v19.8 */
 
+/* ===== v19.9 · moins d'encombrement ===== */
+/* plus de compteur dégâts/s en combat (il reste dans les fiches « Apport aux dégâts ») */
+#dpsm{display:none!important}
+/* les places pas encore gagnées ne s'affichent plus dans le rack */
+#rack-slots .slot.locked{display:none!important}
+/* fin de partie : Rejouer, Partager, Menu (la collection et le catalogue restent dans le menu) */
+#over #o-punch,#over #o-cata{display:none!important}
+#over .tbtns{grid-template-columns:minmax(0,1fr)!important}
+#over #o-share{min-height:44px;font-size:14px}
+/* titre : un seul bouton Profil (la Connexion est dedans) */
+#t-acc{display:none!important}
+#title .mgrid #t-stats{grid-column:1 / -1!important}
+.pr-cloud{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin:10px 0 4px;min-height:48px;font-size:15px}
+.pr-cloud small{font-size:11px;opacity:.85}
+.pr-ach .pr-plaq.in-ach{margin-top:10px}
+/* la machine : seulement « dedans » et le risque de crâne */
+#m-next,#m-slots,.minfo.mbug{display:none!important}
+/* les règles en version courte */
+#rules-body.rl-short>*:not(.rl-ess){display:none!important}
+.rl-ess ol{margin:6px 0 12px;padding-left:22px;text-align:left;display:grid;gap:9px;font-size:15px;line-height:1.35}
+.rl-ess li::marker{color:var(--gold);font-weight:700}
+.rl-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6126,7 +6149,7 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.8</p>
+  <p class="proto">Sefy Industries · v19.9</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -22759,7 +22782,7 @@ function openBar() {
   $('#baron').hidden = true; $('#baron').className = 'baron'; $('.bar-scene').classList.remove('baron-on');
   renderBar();
   BG.setMode('bar'); Music.play('bar');
-  let line = BAR.firstVisit ? (hasDeck(run, 'barman') ? 'A fellow bartender! For you, friend prices on everything. And the first one\'s on me.' : pick(ZAZA.first)) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : (petZazaHello(run) || pick(ZAZA.hello));
+  let line = (BAR.firstVisit && !run.zzHi && (run.zzHi = 1)) ? (hasDeck(run, 'barman') ? 'A fellow bartender! For you, friend prices on everything. And the first one\'s on me.' : pick(ZAZA.first)) : BAR.gambler ? pick(ZAZA.baron) : BAR.visitor ? pick(ZAZA['v_' + BAR.visitor]) : BAR.ciment ? pick(ZAZA.ciment) : isBossRound(r) ? pick(r === 30 && !run.inf ? ZAZA.final : ZAZA.boss) : BAR.market ? pick(ZAZA.market) : (petZazaHello(run) || pick(ZAZA.hello));
   barStop();
   const nextUp = BAR.gambler ? () => { if (G.mode === 'bar' && !BAR.leaving && baronPending() && $('#baron').hidden) baronArrive(); }
     : BAR.visitor ? () => { if (G.mode === 'bar' && !BAR.leaving && BAR.visState === 'wait') visitorArrive(BAR.visitor); } : null;
@@ -25333,7 +25356,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.8</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.9</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -38755,6 +38778,73 @@ function hhDeco(t) {
 }
 const _hhMid98 = EVH.happyhour.mid;
 EVH.happyhour.mid = function (cb, S2, t) { try { hhDeco(t); } catch (e) { /* rien */ } return _hhMid98.apply(this, arguments); };
+
+/* ===== v19.9 · le reste du ménage : moins d'encombrement partout ===== */
+// réglages qui ne servent à rien : la pause quand on change de fenêtre et la confirmation d'abandon sont toujours actives,
+// le ×2 se retient tout seul, les particules suivent la Qualité, plus de compteur FPS ni de bulles au survol au téléphone
+function cl99Opts() { const o = OPT(); o.autopause = 1; o.confirm = 1; o.fps = 0; if (!LAY.pc) o.hover = 0; }
+const _applyOpts99 = applyOpts;
+applyOpts = function () { try { cl99Opts(); } catch (e) { } return _applyOpts99.apply(this, arguments); };
+const _renderOptions99 = renderOptions;
+renderOptions = function () {
+  const r = _renderOptions99.apply(this, arguments);
+  try {
+    const kill = ['autopause', 'confirm', 'speed', 'fps', 'parts'].concat(LAY.pc ? [] : ['hover']);
+    document.querySelectorAll('#opts .orow').forEach(row => { const c = row.querySelector('[data-opt]'); if (c && kill.includes(c.dataset.opt)) row.remove(); });
+  } catch (e) { /* rien */ }
+  return r;
+};
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#b-speed,#lp-speed')) setTimeout(() => { try { OPT().speed = G.speed; saveMeta(); } catch (x) { } }, 0); }, true);
+
+// le titre : Profil et Connexion ne font plus qu'un (la sauvegarde en ligne est dans le Profil)
+const _openProfiles99 = openProfiles;
+openProfiles = function () {
+  const r = _openProfiles99.apply(this, arguments);
+  try {
+    const body = $('#pr-body'); if (!body) return r;
+    // les plaques d'or rejoignent les succès (un seul endroit pour les trophées)
+    const pq = body.querySelector('.pr-plaq'), ach = body.querySelector('.pr-ach');
+    if (pq && ach && !ach.contains(pq)) { pq.classList.add('in-ach'); ach.appendChild(pq); }
+    if (!body.querySelector('.pr-cloud')) {
+      const b = document.createElement('button'); b.className = 'btn blue pr-cloud';
+      b.innerHTML = `☁ ${hT('Sauvegarde en ligne', 'Cloud save')}<small>${lbMe() ? esc(lbMe().pseudo || '') : hT('ta progression sur tous tes appareils', 'your progress on every device')}</small>`;
+      b.onclick = ev => { ev.stopPropagation(); Snd.click(); accOpen(); };
+      body.insertBefore(b, body.firstChild.nextSibling);
+    }
+  } catch (e) { /* rien */ }
+  return r;
+};
+
+// la machine : 2 infos au lieu de 6 (ce qu'il y a dedans, et le risque de crâne) ; le bonus seulement s'il existe
+setInterval(() => {
+  if (G.mode !== 'machine') return;
+  const b = $('#m-bonus'); if (b) b.hidden = /\+0\s?%/.test(b.textContent);
+}, 400);
+
+// les règles : l'essentiel en 6 points, le détail derrière « Tout lire »
+const _openRules99 = openRules;
+openRules = function () {
+  const r = _openRules99.apply(this, arguments);
+  try {
+    const box = $('#rules-body'); if (!box || box.querySelector('.rl-ess')) return r;
+    const pts = [
+      hT('Des cartes foncent sur ta <b>base</b>, au centre. Elle tire toute seule : garde-la debout.', 'Cards rush your <b>base</b> in the middle. It fires by itself: keep it standing.'),
+      hT('Fais tourner ton <b>flipper</b> autour de la base pour <b>parer</b> les tirs.', 'Swing your <b>flipper</b> around the base to <b>parry</b> shots.'),
+      hT('Lance ta <b>BILLE</b> et tes <b>sorts</b> (BOMBE, GEL…) au bon moment.', 'Throw your <b>BALL</b> and use your <b>spells</b> (BOMB, FREEZE…) at the right time.'),
+      hT('Entre deux manches : la <b>machine</b> te donne des jetons, le <b>bar</b> de Zaza améliore ton canon.', 'Between rounds: the <b>machine</b> gives you chips, Zaza\'s <b>bar</b> upgrades your cannon.'),
+      hT('Deux jetons identiques s\'<b>empilent</b> et montent de rareté. Deux différents se <b>mixent</b> au verre de Zaza.', 'Two identical chips <b>stack</b> and level up. Two different ones <b>mix</b> in Zaza\'s glass.'),
+      hT('Un boss toutes les 5 manches, et le <b>Baron</b> à la 30e. Bats-le pour faire sauter la banque.', 'A boss every 5 rounds, and the <b>Baron</b> on round 30. Beat him to break the bank.'),
+    ];
+    box.classList.add('rl-short');
+    box.insertAdjacentHTML('afterbegin', `<div class="rl-ess"><div class="opt-head"><h2>${hT('L\'ESSENTIEL', 'THE BASICS')}</h2><button class="btn ghost small rl-x">${hT('Fermer', 'Close')}</button></div>
+      <ol>${pts.map(p => `<li>${p}</li>`).join('')}</ol>
+      <div class="rl-row"><button class="btn gold small rl-tuto">${hT('Rejouer le tuto', 'Replay the tutorial')}</button><button class="btn ghost small rl-all">${hT('Tout lire ›', 'Read everything ›')}</button></div></div>`);
+    box.querySelector('.rl-all').onclick = e => { e.stopPropagation(); box.classList.remove('rl-short'); box.querySelector('.rl-ess').remove(); Snd.tab && Snd.tab(); };
+    box.querySelector('.rl-x').onclick = e => { e.stopPropagation(); show('#rules', false); Snd.click(); };
+    box.querySelector('.rl-tuto').onclick = e => { e.stopPropagation(); show('#rules', false); if (G.mode === 'title' || $('#title') && !$('#title').hidden) tutoStart({ replay: true }); else toast(hT('Le tuto se rejoue depuis l\'écran titre.', 'Replay the tutorial from the title screen.')); };
+  } catch (e) { /* rien */ }
+  return r;
+};
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
 else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});

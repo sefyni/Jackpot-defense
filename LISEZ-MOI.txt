@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.8-202611021700
+JACKPOT DEFENSE v19.9-202611021200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,18 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.9 — MOINS D'ENCOMBREMENT
+- Combat : plus de compteur « dégâts/s » (l'info reste dans les fiches de jeton, « Apport aux dégâts »).
+- Le rack n'affiche plus les places pas encore gagnées (elles apparaissent quand tu les débloques).
+- Options allégées : la pause quand tu changes de fenêtre et la confirmation d'abandon sont toujours actives, le ×2
+  se retient tout seul, les particules suivent la Qualité, plus de compteur FPS, plus de bulles au survol au téléphone.
+- Fin de partie : Rejouer, Partager, Menu (la collection et le catalogue restent dans le menu).
+- Zaza ne répète plus « Nouveau ? La première est pour moi » à chaque visite : une fois par partie.
+- Écran titre : un seul bouton Profil ; la sauvegarde en ligne est dedans (bouton « Sauvegarde en ligne »).
+- Profil : les plaques d'or sont rangées avec les succès (un seul endroit pour les trophées).
+- La machine n'affiche plus que l'essentiel : ce qu'il y a dedans et le risque de crâne (le bonus seulement s'il existe).
+- Règles : l'essentiel en 6 points, avec « Rejouer le tuto » ; tout le détail reste derrière « Tout lire ».
 
 Nouveautés de la v19.8 — LE GRAND MÉNAGE
 - Le grand ménage des jetons : la famille Multiplicateurs (et son sort Jackpot) quitte le jeu, ainsi que les jetons
