@@ -5455,6 +5455,60 @@ body.lpc .gsti-bub::after{left:calc(var(--rs) * .5 - 4px)}
 @media (prefers-reduced-motion:reduce){.gsti *{animation:none!important;transition:none!important}}
 body.lpc .gsti-bub p{font-size:20px}
 
+/* ===== v19.6 · la première heure ===== */
+/* 4 · écran titre d'un débutant : pas de classement, pas de pub d'extension, pas de compteurs géants, JOUER en avant */
+body.t-newbie .tchipzone,body.t-newbie #th-teaser,body.t-newbie #t-books-n,body.t-newbie #t-vest-n{display:none!important}
+body.t-newbie #t-play{animation:tNewbie 1.6s ease-in-out infinite;position:relative}
+@keyframes tNewbie{50%{box-shadow:0 0 0 4px rgba(255,204,77,.55),0 0 28px rgba(255,90,110,.65);transform:scale(1.025)}}
+@media (prefers-reduced-motion:reduce){body.t-newbie #t-play{animation:none}}
+/* 5 · fiches de jeton : ce qui marche + le niveau suivant, le reste derrière « Tout voir » */
+#detail .caps li.cap-more{display:none}
+#detail.caps-all .caps li.cap-more{display:grid}
+#detail .dnote.cap-more{display:none}
+#detail.caps-all .dnote.cap-more{display:block}
+#detail .caps li.cap-next{opacity:.88;box-shadow:inset 3px 0 0 var(--gold)}
+#detail .caps li.cap-next b{color:var(--gold)}
+#detail .cap-nx{display:block;font-style:normal;font-size:9.5px;letter-spacing:.1em;color:var(--gold);opacity:.8;margin-top:2px}
+#detail .cap-all{display:block;margin:6px auto 2px}
+/* 5 · lisibilité au téléphone : plus rien sous 12-13 px dans les fiches, le bar et le shop */
+body:not(.lpc) .caps li{font-size:14.5px}
+body:not(.lpc) .caps li b{font-size:12px}
+body:not(.lpc) .dnote{font-size:13.5px}
+body:not(.lpc) .drink .deff{font-size:12.5px;line-height:1.25}
+body:not(.lpc) .drink .dcat{font-size:10.5px}
+body:not(.lpc) .hzu-c small,body:not(.lpc) .hzd-c small{font-size:12px}
+/* 8 · fin de partie : le score et REJOUER en grand, le reste en petit */
+#over .tbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:min(100%,440px);margin-left:auto;margin-right:auto}
+#over #o-again{grid-column:1 / -1;min-height:64px;font-size:clamp(22px,6.4vw,30px);box-shadow:0 5px 0 #6a1020,0 0 26px rgba(255,90,110,.45)}
+#over #o-share,#over #o-punch,#over #o-cata{min-height:40px;padding:6px 4px;font-size:12.5px;line-height:1.1;filter:saturate(.75) brightness(.92)}
+#over #o-menu{grid-column:1 / -1;min-height:38px;font-size:13px;opacity:.85}
+#over .ostats{opacity:.92}
+body:not(.lpc) #over .ostats dd{font-size:18px}
+/* 9 · la lampe du Djinn */
+.djinn{position:fixed;inset:0;z-index:140;display:grid;place-items:center;opacity:0;transition:opacity .35s}
+.djinn.dj-in{opacity:1}.djinn.dj-out{opacity:0}
+.dj-dim{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(60,10,24,.55),rgba(10,2,6,.88))}
+.dj-box{position:relative;width:min(92vw,460px);padding:18px 16px 16px;border-radius:18px;text-align:center;background:linear-gradient(180deg,#3a0c1a,#1c050b);box-shadow:0 0 0 2px #f2c45a,0 0 0 6px #3a0c1a,0 0 0 8px rgba(242,196,90,.45),0 10px 0 #000,0 0 50px rgba(242,170,60,.35)}
+.dj-lamp{position:relative;width:150px;height:96px;margin:0 auto 4px;cursor:pointer}
+.dj-lamp svg{width:100%;height:100%;filter:drop-shadow(0 0 14px rgba(242,196,90,.55))}
+.dj-lamp.rub{animation:djRub .32s ease-in-out}
+@keyframes djRub{25%{transform:translateX(-7px) rotate(-5deg)}75%{transform:translateX(7px) rotate(5deg)}}
+.dj-smoke{position:absolute;left:84%;top:18%;width:26px;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(180,140,255,.8),transparent);opacity:0}
+.djinn.dj-open .dj-smoke{animation:djSmoke 1.6s ease-out infinite}
+.dj-smoke.s2{animation-delay:.4s!important}.dj-smoke.s3{animation-delay:.8s!important}
+@keyframes djSmoke{0%{transform:translate(0,0) scale(.5);opacity:0}25%{opacity:1}100%{transform:translate(-30px,-80px) scale(2.6);opacity:0}}
+.dj-tag{display:block;font:700 12px/1 var(--f-pix);letter-spacing:.22em;color:#ff8fae}
+.dj-say{margin:8px 0 10px;font-size:15px;color:#ffe9c2;min-height:1.4em}
+.dj-w{display:grid;gap:8px}
+.dj-c{display:grid;grid-template-columns:40px 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:10px 12px;border:0;border-radius:12px;text-align:left;background:rgba(255,220,150,.08);box-shadow:inset 0 0 0 1.5px rgba(242,196,90,.5);color:#fff3d6;cursor:pointer;animation:djIn .3s steps(3) both}
+.dj-c:nth-child(2){animation-delay:.1s}.dj-c:nth-child(3){animation-delay:.2s}
+@keyframes djIn{from{opacity:0;transform:translateY(8px)}}
+.dj-c:hover{background:rgba(255,220,150,.16)}
+.dj-c .dj-ic{grid-row:1 / 3;width:36px;height:36px;color:#f2c45a}
+.dj-c b{font:700 15px/1.1 var(--f-pix);color:#f2c45a}
+.dj-c span{font-size:13px;line-height:1.3;color:#f0dcc0}
+body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6068,7 +6122,7 @@ body.lpc .gsti-bub p{font-size:20px}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.5</p>
+  <p class="proto">Sefy Industries · v19.6</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -16420,7 +16474,8 @@ function render(dtReal) {
   }
   for (const e of E) {
     if (e.dead || e.ratHide || (fog && fogHides(e.x, e.y))) continue;
-    const sp = spr(e.sk || e.type), card = sp.n, sc = e.r / e.d.r;
+    cbzRing(e, t);
+    const sp = spr(e.sk || e.type), card = sp.n, sc = e.r / e.d.r * (e.boss ? 1 : CBZ.k);
     const still = e.contact || e.frzT > 0 || e.stunT > 0 || e.deal > 0;
     let by = e.y + (still ? 0 : Math.sin(t * 9 + e.wob) * .35) - (e.xZ || 0);
     let bx = e.x;
@@ -18479,6 +18534,7 @@ function collectOutcome() {
   // Miroir brisé : 7 manches de malheur, un crâne de plus à chaque tirage
   if (T.miroirbrise[1] > 0 && (K.brise || 0) < 7 && !M.first) nMal++;
   if (T.avion[4] > 0) nMal = Math.max(0, nMal - 1);
+  if (nMal && run.soft && (run.round || 0) < 2) { nMal = 0; softSay('skull', hT('Un crâne sur la ligne ! D\'habitude, c\'est un <b>malus</b> pour la manche suivante (et trois crânes, c\'est la Ruine). Je te laisse souffler : ils comptent à partir de la <b>manche 3</b>.', 'A skull on the line! Usually that means a <b>curse</b> for the next round (three skulls is Ruin). I\'ll let you breathe: they count from <b>round 3</b>.')); }
   if (nMal) {
     malus = rollMalus(nMal); run.pendingMalus = malus; run.pendingSkulls = nMal >= 2 ? nMal : 0;
     if (T.miroirbrise[2] > 0 && (K.brise || 0) < 7) addGold(10 * nMal, 'brise');
@@ -20576,7 +20632,7 @@ async function lbRegister(raw) {
   return { ok: true };
 }
 // il faut un pseudo pour lancer une partie (sauf si le classement ne répond pas)
-const lbNeedPseudo = () => !lbMe() && !LB.skip && !G.meta.lbOff && !G.headless;
+const lbNeedPseudo = () => false;
 function lbAsk(next, from) {
   let ov = $('#lbname');
   if (!ov) { ov = document.createElement('section'); ov.id = 'lbname'; ov.className = 'full lbn'; document.body.appendChild(ov); }
@@ -25217,6 +25273,7 @@ function renderOptions() {
       h += oRow('Crude language', oTog('cru', o.cru), 'swearing and dark humour · No: clean version');
       h += oRow('Pause when you switch windows', oTog('autopause', o.autopause));
       h += oRow('Confirm before giving up', oTog('confirm', o.confirm));
+      h += oRow(hT('Enchaîner', 'Fast flow'), oTog('chain', o.chain), hT('la machine se tire et s\'arrête toute seule, le bar est sauté quand il n\'y a rien à prendre', 'the machine pulls and stops by itself, the bar is skipped when there is nothing to take'));
       break;
     case 'audio':
       h += oRow('Master volume', oSlider('vol', o.vol));
@@ -25272,7 +25329,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.5</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.6</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -38244,6 +38301,264 @@ tutoStart = function (o) {
     TU.intro.say = skipped ? TU_SAY0.slice() : [hT('Bon. Bienvenue au **Tapis Rouge**. Pas de panique, je reste avec toi.', 'Right. Welcome to the **Tapis Rouge**. Don\'t panic, I\'m staying with you.'), TU_SAY0[TU_SAY0.length - 1]];
     _tutoStart0(o);
   });
+};
+
+/* ===== v19.6 · la première heure : moins de texte, moins d'interruptions ===== */
+const nqCombat = () => G.mode === 'combat' && G.cb && !G.cb.ended && !G.cb.demo && !G.paused;
+const nqVis = s => { const e = $(s); return !!(e && !e.hidden && (e.classList.contains('show') || getComputedStyle(e).opacity > .05)); };
+
+/* --- 1 · plus de pseudo obligatoire au lancement : on le propose à la fin de la première partie --- */
+const _lbAsk0 = lbAsk;
+lbAsk = function (next, from) {
+  _lbAsk0(next, from);
+  if (from !== 'end') return;
+  const ov = $('#lbname'); if (!ov) return;
+  const t = ov.querySelector('.lbn-t'), ps = ov.querySelectorAll('.lbn-p'), sk = $('#lbn-skip');
+  if (t) t.innerHTML = `<svg class="ico"><use href="#i-couronne"/></svg>${hT('Ton score mérite le classement !', 'Your score deserves the leaderboard!')}`;
+  if (ps[0]) ps[0].innerHTML = hT('Choisis un pseudo et ta partie apparaît au <b>classement en ligne</b>. 20 lettres maximum, tu pourras le changer dans OPTIONS › Profil.', 'Pick a name and your run shows up on the <b>online leaderboard</b>. 20 letters max, you can change it in OPTIONS › Profile.');
+  if (sk) { sk.hidden = false; sk.textContent = hT('Plus tard', 'Later'); sk.onclick = () => { G.meta.lbLater = 1; saveMeta(); ov.hidden = true; }; }
+};
+const _lbAfterRun0 = lbAfterRun;
+lbAfterRun = function (run) {
+  const r = _lbAfterRun0(run);
+  try {
+    if (!lbMe() && !G.meta.lbLater && !G.meta.lbOff && !G.headless && lbRunOk(run) && !(run && run.tuto))
+      setTimeout(() => { if (!lbMe() && ($('#over') && !$('#over').hidden || $('#win') && !$('#win').hidden)) lbAsk(() => lbAfterRun(run), 'end'); }, 2600);
+  } catch (e) { /* rien */ }
+  return r;
+};
+
+/* --- 2 · une seule file de notifications : rien pendant le combat, une à la fois entre les manches --- */
+const NQ = { t: 0 };
+const _achNext0 = achNext;
+achNext = function () {
+  if (ACHQ.q.length && (nqCombat() || nqVis('#unote'))) { clearTimeout(NQ.t); NQ.t = setTimeout(() => { ACHQ.t = null; achNext(); }, 900); ACHQ.t = NQ.t; return; }
+  return _achNext0();
+};
+const _machNote0 = machNote;
+machNote = function (i) {
+  if (nqCombat() || nqVis('#achpop')) { setTimeout(() => machNote(i), 1100); return; }
+  return _machNote0(i);
+};
+
+/* --- 3 · les 2 premières parties : les crânes ne comptent pas avant la manche 3, le verre de Zaza arrive à la manche 3 --- */
+function softSay(k, html) {
+  const T = G.meta.softSaid || (G.meta.softSaid = {}); if (T[k]) return;
+  T[k] = 1; saveMeta(); setTimeout(() => queueTip(html), 700);
+}
+const _zmixGlassRender0 = zmixGlassRender;
+zmixGlassRender = function () {
+  const r = _zmixGlassRender0.apply(this, arguments);
+  const el = $('#zm-glass'), run = G.run; if (!el || !run) return r;
+  const lock = !!run.soft && (run.round || 0) < 2;
+  el.style.visibility = lock ? 'hidden' : '';
+  if (!lock && run.soft && G.mode === 'bar') softSay('mix', hT('Nouveau au comptoir : <b>le verre de Zaza</b>. Glisse deux jetons dedans : elle en fait un <b>mix</b> qui garde les deux pouvoirs, sur une seule place.', 'New at the counter: <b>Zaza\'s glass</b>. Drop two chips in: she mixes them into one that keeps both powers, in a single slot.'));
+  return r;
+};
+
+/* --- 4 · l'écran titre d'un débutant : juste l'essentiel tant qu'aucune partie n'est finie --- */
+const tNewbie = () => !G.meta.ended && !((G.meta.runs || 0) > 1) && !(G.meta.allOpen);
+const _refreshTitle0 = refreshTitle;
+refreshTitle = function () {
+  const r = _refreshTitle0.apply(this, arguments);
+  document.body.classList.toggle('t-newbie', tNewbie());
+  return r;
+};
+const _endRun0 = endRun;
+endRun = function () { if (!(G.run && G.run.tuto)) { G.meta.ended = (G.meta.ended || 0) + 1; saveMeta(); } return _endRun0.apply(this, arguments); };
+const _showWin0 = showWin;
+showWin = function () { G.meta.ended = (G.meta.ended || 0) + 1; saveMeta(); return _showWin0.apply(this, arguments); };
+
+/* --- 5 · les fiches de jeton : ce qui marche + le niveau suivant ; le reste derrière « Tout voir » --- */
+const _openDetail0 = openDetail;
+openDetail = function (j, where) {
+  const r = _openDetail0.apply(this, arguments);
+  try {
+    const box = $('#detail'); if (!box) return r;
+    let hid = 0;
+    box.querySelectorAll('ol.caps').forEach(ol => {
+      const lis = [...ol.children]; let nextShown = false;
+      lis.forEach(li => {
+        if (li.classList.contains('on')) return;
+        if (!nextShown && !li.classList.contains('secret')) { nextShown = true; li.classList.add('cap-next'); const b = li.querySelector('b'); if (b && !b.dataset.nx) { b.dataset.nx = 1; b.insertAdjacentHTML('beforeend', `<i class="cap-nx">${hT('suivant', 'next')}</i>`); } return; }
+        li.classList.add('cap-more'); hid++;
+      });
+    });
+    box.querySelectorAll('.dpart .dnote.dim').forEach(n => { n.classList.add('cap-more'); hid++; });
+    if (hid && !box.querySelector('.cap-all')) {
+      const last = box.querySelectorAll('.dpart'); const host = last[last.length - 1];
+      if (host) host.insertAdjacentHTML('afterend', `<button class="btn ghost small cap-all">${hT('Tout voir ▾', 'See all ▾')}</button>`);
+      const b = box.querySelector('.cap-all');
+      if (b) b.onclick = e => { e.stopPropagation(); box.classList.toggle('caps-all'); b.textContent = box.classList.contains('caps-all') ? hT('Moins ▴', 'Less ▴') : hT('Tout voir ▾', 'See all ▾'); };
+    }
+    box.classList.remove('caps-all');
+  } catch (e) { /* rien */ }
+  return r;
+};
+
+/* --- 6 · « Enchaîner » (Options › Jeu) : la machine se tire et s'arrête toute seule, le bar est sauté quand il n'y a rien à prendre --- */
+const CHN = { pulled: false, t: 0, barAt: 0, goAt: 0 };
+const _openJPM0 = openJPM;
+openJPM = function () { CHN.jpm = false; return _openJPM0.apply(this, arguments); };
+const _openMachine0 = openMachine;
+openMachine = function () { CHN.pulled = false; CHN.goAt = 0; return _openMachine0.apply(this, arguments); };
+function chnFree() { return !tipOpen && !(TIPQ && TIPQ.length) && $('#detail').hidden && !document.querySelector('#coach:not([hidden]) .co-bub') && !document.querySelector('#lbname:not([hidden])'); }
+function chnTick() {
+  if (!G.run || !OPT().chain || G.paused || TUTO.on || !chnFree()) return;
+  const now = performance.now();
+  if (G.mode === 'chooser') {
+    const lv = [$('#jpm-lever'), ...document.querySelectorAll('#jpm .jpm-go')].find(x => x && !x.disabled && x.offsetParent && (x.id === 'jpm-lever' || /^(TIRER|PULL)/i.test(x.textContent.trim())));
+    if (!CHN.jpm && lv) { CHN.jpm = true; setTimeout(() => { if (OPT().chain && G.mode === 'chooser') lv.click(); }, 500); }
+    return;
+  }
+  if (G.mode === 'machine' && typeof M !== 'undefined') {
+    const sp = $('#m-spin');
+    if (M.state === 'ready' && !CHN.pulled && sp && !sp.disabled) { CHN.pulled = true; sp.click(); return; }
+    if (M.state === 'spinning' && sp && !sp.disabled && now - CHN.t > 420) { CHN.t = now; sp.click(); return; }
+    const go = $('#m-go');
+    if (M.state === 'done' && go && !go.disabled) { if (!CHN.goAt) CHN.goAt = now + 900; else if (now > CHN.goAt) { CHN.goAt = 0; go.click(); } }
+    return;
+  }
+  if (G.mode === 'bar') {
+    const bar = $('#bar'); if (!bar || bar.hidden || BAR.busy) { CHN.barAt = 0; return; }
+    const buy = [...bar.querySelectorAll('button[data-buyd],button[data-buys],button[data-buy]')].some(b => !b.disabled && b.offsetParent);
+    const extra = ['#baron', '#vis-dina', '#vis-momo', '#vis-nox', '#b-market'].some(s => { const e = $(s); return e && !e.hidden && e.offsetParent; });
+    const go = $('#b-go');
+    if (buy || extra || !go || go.disabled) { CHN.barAt = 0; return; }
+    if (!CHN.barAt) { CHN.barAt = now + 1300; toast(hT('Rien à prendre au bar : direction la table.', 'Nothing to grab at the bar: off to the table.')); }
+    else if (now > CHN.barAt) { CHN.barAt = 0; go.click(); }
+    return;
+  }
+  CHN.barAt = 0;
+}
+setInterval(chnTick, 200);
+
+/* --- 7 · un combat plus lisible : cartes un peu plus grosses au téléphone, un anneau de couleur par type, alerte quand une carte va toucher, ralenti sur les parades en série --- */
+const CBZ = { k: 1 };
+function cbzFit() { CBZ.k = LAY.pc ? 1 : 1.14; }
+addEventListener('resize', cbzFit); setTimeout(cbzFit, 0);
+const CBZ_COL = { melee: '255,90,90', shooter: '255,170,60', arc: '255,170,60', caster: '200,130,255', healer: '90,230,140', guard: '120,200,255', thief: '255,220,80', giant: '220,100,255', ace: '255,215,90', cor: '255,140,200', vic: '200,200,220' };
+function cbzRing(e, t) {
+  const cb = G.cb; if (!cb || cb.demo || e.ai === 'decoy') return;
+  const r = e.r * (e.boss ? 1 : CBZ.k), near = !e.boss && edist(e) - e.r < BAL.rakeR + 9;
+  const col = e.boss ? '255,215,90' : CBZ_COL[e.ai] || '220,220,240';
+  ctx.save(); ctx.translate(e.x, e.y + r * .82); ctx.scale(1, .42);
+  if (near) {
+    const p = .5 + .5 * Math.sin(t * 14);
+    ctx.fillStyle = `rgba(255,40,60,${.18 + .2 * p})`; ctx.beginPath(); ctx.arc(0, 0, r * (1.25 + .15 * p), 0, TAU); ctx.fill();
+    ctx.strokeStyle = `rgba(255,70,80,${.6 + .35 * p})`; ctx.lineWidth = 1.3;
+  } else { ctx.strokeStyle = `rgba(${col},.5)`; ctx.lineWidth = .8; }
+  ctx.beginPath(); ctx.arc(0, 0, r * 1.05, 0, TAU); ctx.stroke(); ctx.restore();
+}
+const _drawBase0 = drawBase;
+drawBase = function (cb, t) {
+  _drawBase0.apply(this, arguments);
+  if (!cb || cb.demo) return;
+  const lim = BAL.rakeR + 9, R = BAL.baseR + 5.5;
+  for (const e of cb.enemies) {
+    if (e.dead || e.ratHide || e.ai === 'decoy' || edist(e) - e.r > lim) continue;
+    const a = Math.atan2(e.y, e.x), p = .5 + .5 * Math.sin(t * 14);
+    ctx.strokeStyle = `rgba(255,60,70,${.55 + .4 * p})`; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(0, 0, R, a - .32, a + .32); ctx.stroke();
+  }
+};
+const _parry0 = parry;
+parry = function (p) {
+  const cb = G.cb, s0 = cb ? cb.streak : 0;
+  const r = _parry0.apply(this, arguments);
+  if (!cb || G.headless || G.reduced || p.friendly || cb.streak <= s0) return r;
+  cb.hitstop = Math.max(cb.hitstop, .1);
+  if (cb.streak >= 3 && cb.streak % 3 === 0) {
+    cb.hitstop = Math.max(cb.hitstop, .3);
+    floater(p.x, p.y - 7, hT(`PARADE ×${cb.streak} !`, `PARRY ×${cb.streak}!`), '#ffd76a', 1.25);
+    fxPush({ type: 'ring', x: p.x, y: p.y, r0: 3, r1: 18, col: '255,215,106', life: .35, max: .35 });
+  }
+  return r;
+};
+
+/* --- 9 · le palais a ses propres règles : la lampe du Djinn (après chaque boss) et les boss-mirages --- */
+const DJINN = { on: false };
+function djWishes(run) {
+  const g = Math.round(80 + 15 * (run.round || 1));
+  const up = run.jokers.filter(j => { try { return !hrdUpStep(j).no; } catch (e) { return false; } });
+  return [
+    { k: 'gold', ic: 'jackpot', t: hT('Le trésor d\'Ali Baba', 'Ali Baba\'s treasure'), d: hT(`+${g} or, tout de suite.`, `+${g} gold, right now.`), go: () => addGold(g, 'djinn') },
+    { k: 'heal', ic: 'coeur', t: hT('Le souffle du désert', 'Desert breath'), d: hT('Ta base revient à fond, et +15 PV max pour la partie.', 'Your base is fully repaired, and +15 max HP for the run.'), go: () => { run.djHp = (run.djHp || 0) + 15; refreshStats(); try { run.hp = computeStats(run).maxHp; } catch (e) { } updateHUD(); } },
+    up.length ? { k: 'up', ic: 'star', t: hT('Le tapis volant', 'The flying carpet'), d: hT('Un de tes jetons, au hasard, monte d\'un niveau de rareté.', 'One of your chips, at random, goes up one rarity.'), go: () => { const j = pick(up); hrdApplyUp(j); refreshStats(); renderRack(); toast(hT(`${jName(j)} monte d'un niveau !`, `${jName(j)} levels up!`)); } }
+      : { k: 'gold2', ic: 'jackpot', t: hT('La caverne', 'The cave'), d: hT(`+${g * 2} or, mais tu le mérites.`, `+${g * 2} gold, you earned it.`), go: () => addGold(g * 2, 'djinn') },
+  ];
+}
+function djShow() {
+  const run = G.run; if (!run || DJINN.on) return;
+  DJINN.on = true; run.djAt = run.round;
+  const W = djWishes(run);
+  const el = document.createElement('div'); el.id = 'djinn'; el.className = 'djinn';
+  el.innerHTML = `<i class="dj-dim"></i><div class="dj-box"><div class="dj-lamp"><i class="dj-smoke s1"></i><i class="dj-smoke s2"></i><i class="dj-smoke s3"></i><svg viewBox="0 0 120 70" aria-hidden="true"><path d="M8 52c10 6 30 8 52 8s38-4 46-12l10-14c2-3-2-5-4-3l-9 8c-4-10-18-16-35-16-4-6-14-6-18 0C34 23 22 30 20 40 14 38 8 40 6 44c-2 4 0 6 2 8z" fill="#e7b54a" stroke="#7a4e14" stroke-width="3"/><path d="M46 22c2-6 10-6 12 0" fill="none" stroke="#7a4e14" stroke-width="3"/><ellipse cx="52" cy="62" rx="26" ry="5" fill="#b8862a" stroke="#7a4e14" stroke-width="3"/><path d="M28 44c10 4 34 4 46 0" stroke="#fff2c0" stroke-width="2" opacity=".6"/></svg></div>
+    <small class="dj-tag">✦ ${hT('LA LAMPE DU DJINN', 'THE DJINN\'S LAMP')} ✦</small><p class="dj-say">${hT('Frotte la lampe…', 'Rub the lamp…')}</p>
+    <div class="dj-w" hidden>${W.map((w, i) => `<button class="dj-c" data-dj="${i}">${iconSVG(w.ic, 'dj-ic')}<b>${w.t}</b><span>${w.d}</span></button>`).join('')}</div></div>`;
+  document.body.appendChild(el); void el.offsetWidth; el.classList.add('dj-in');
+  Snd.chime && Snd.chime();
+  const lamp = el.querySelector('.dj-lamp'); let rubs = 0;
+  const rub = () => {
+    if (el.classList.contains('dj-open')) return;
+    rubs++; lamp.classList.remove('rub'); void lamp.offsetWidth; lamp.classList.add('rub'); Snd.scratch ? Snd.scratch() : Snd.tap && Snd.tap(); haptic(15);
+    if (rubs >= 3) {
+      el.classList.add('dj-open'); Snd.secret ? Snd.secret(1) : Snd.jackpot && Snd.jackpot();
+      el.querySelector('.dj-say').textContent = hT('« Trois vœux ? Non. Un seul. Choisis bien, mortel. »', '"Three wishes? No. Just one. Choose wisely, mortal."');
+      setTimeout(() => { el.querySelector('.dj-w').hidden = false; }, 500);
+    }
+  };
+  // pointerup + click (au téléphone, le bar peut avaler le « click » d'un toucher) ; un seul déclenchement
+  const act = e => {
+    const now = performance.now(); if (e.type === 'click' && now - (el._pu || 0) < 450) return; if (e.type === 'pointerup') el._pu = now;
+    if (e.target.closest('.dj-lamp')) { rub(); return; }
+    const b = e.target.closest('[data-dj]'); if (!b) return;
+    const w = W[+b.dataset.dj]; if (!w) return;
+    try { w.go(); } catch (err) { /* rien */ }
+    Snd.coinShower ? Snd.coinShower() : Snd.coin && Snd.coin();
+    el.classList.add('dj-out'); setTimeout(() => el.remove(), 450); DJINN.on = false;
+  };
+  el.addEventListener('pointerup', act); el.addEventListener('click', act);
+  ['pointerdown', 'touchstart', 'touchend', 'mousedown'].forEach(k => el.addEventListener(k, e => e.stopPropagation()));
+}
+const _openBar9 = openBar;
+openBar = function () {
+  const r = _openBar9.apply(this, arguments);
+  try {
+    const run = G.run;
+    if (typeof thOn === 'function' && thOn() && run && !run.horde && !run.tuto && run.round > 0 && run.round % 5 === 0 && run.djAt !== run.round && run.round <= 30)
+      { const tryShow = (n) => { if (G.mode !== 'bar' || !G.run || G.run.djAt === G.run.round) return; const busy = tipOpen || document.querySelector('#coach:not([hidden]) .co-bub') || BAR.busy; if (busy && n < 80) { G.run.djCalm = 0; setTimeout(() => tryShow(n + 1), 700); return; } if ((G.run.djCalm = (G.run.djCalm || 0) + 1) < 3 && n < 80) { setTimeout(() => tryShow(n + 1), 700); return; } djShow(); }; setTimeout(() => tryShow(0), 900); }
+  } catch (e) { /* rien */ }
+  return r;
+};
+// les PV max du souffle du désert
+const _computeStats9 = computeStats;
+computeStats = function (run) {
+  const s = _computeStats9.apply(this, arguments);
+  if (run && run.djHp && s && s.maxHp) s.maxHp += run.djHp;
+  return s;
+};
+// les boss du palais : toutes les 7 s, mirage — ils se téléportent un peu plus loin sur leur cercle et laissent deux fausses cartes
+const _updateCombat9 = updateCombat;
+updateCombat = function (dt) {
+  const r = _updateCombat9.apply(this, arguments);
+  try {
+    const cb = G.cb;
+    if (cb && !cb.demo && !cb.ended && !cb.tuto && typeof thOn === 'function' && thOn() && G.run && !G.run.horde) {
+      for (const e of cb.enemies) {
+        if (!e.boss || e.dead) continue;
+        e.mirT = (e.mirT || 0) + dt;
+        if (e.mirT < 7) continue;
+        e.mirT = 0;
+        const d = Math.max(BAL.rakeR + 22, edist(e)), a0 = Math.atan2(e.y, e.x), a1 = a0 + (rnd() < .5 ? -1 : 1) * rand(.7, 1.3);
+        const ox = e.x, oy = e.y;
+        e.x = Math.cos(a1) * d; e.y = Math.sin(a1) * d;
+        for (let k = 0; k < 2; k++) { const a = a0 + (k ? .25 : -.25); const o = spawnEnemy('leurre', 0, { x: Math.cos(a) * d, y: Math.sin(a) * d }); if (o) { o.hp = o.maxHp = Math.max(1, cb.stats.dmg * 1.5); o.mirage = 1; } }
+        if (!G.headless) { fxPush({ type: 'ring', x: ox, y: oy, r0: 2, r1: 16, col: '242,196,90', life: .45, max: .45 }); fxPush({ type: 'ring', x: e.x, y: e.y, r0: 16, r1: 2, col: '242,196,90', life: .45, max: .45 }); floater(e.x, e.y - 10, hT('MIRAGE', 'MIRAGE'), '#f2c45a', 1.1); Snd.whoosh && Snd.whoosh(); }
+      }
+    }
+  } catch (e) { /* rien */ }
+  return r;
 };
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);

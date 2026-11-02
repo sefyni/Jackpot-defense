@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.5-202611021300
+JACKPOT DEFENSE v19.6-202611021500
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,30 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.6 — LA PREMIÈRE HEURE
+- Plus de pseudo obligatoire pour jouer : on te le propose à la fin de ta première partie (« Ton score mérite le
+  classement »), avec un bouton « Plus tard ».
+- Notifications : plus rien ne s'affiche pendant le combat (succès, machines débloquées), tout arrive entre deux
+  manches, une notification à la fois.
+- Les 2 premières parties sont plus douces : les crânes de la machine ne comptent qu'à partir de la manche 3, le verre
+  de Zaza (les mix) arrive à la manche 3, et Gaston explique chaque nouveauté quand elle arrive.
+- Écran titre d'un débutant : tant qu'aucune partie n'est finie, pas de classement, pas de pub d'extension, pas de
+  compteurs géants, et le bouton JOUER est mis en avant.
+- Fiches de jeton : on voit ce qui marche et le niveau suivant, le reste est derrière « Tout voir ». Textes plus grands
+  au téléphone (fiches, bar, shop).
+- Nouvelle option « Enchaîner » (Options › Jeu) : la machine se tire et s'arrête toute seule, et le bar est sauté
+  quand il n'y a rien à prendre.
+- Combat plus lisible : cartes un peu plus grosses au téléphone, un anneau de couleur sous chaque carte selon son type
+  (rouge : corps à corps, orange : tireur, violet : sorcier/géant, vert : soigneur, bleu : garde, or : boss), et une
+  alerte rouge quand une carte va toucher ta base. Petit ralenti et « PARADE ×3 ! » sur les parades en série.
+- Fin de partie : le score et REJOUER en grand, le reste (partager, collection, catalogue, menu) en petit.
+- Mille et une nuits a maintenant ses propres règles :
+  · La lampe du Djinn : après chaque boss (manches 5, 10, 15, 20, 25), une lampe apparaît au bar. Frotte-la 3 fois :
+    le Djinn t'accorde UN vœu parmi trois (le trésor d'Ali Baba : de l'or ; le souffle du désert : base réparée et
+    +15 PV max pour la partie ; le tapis volant : un de tes jetons monte d'un niveau de rareté).
+  · Les boss-mirages : dans le palais, chaque boss se téléporte toutes les 7 secondes un peu plus loin sur son cercle
+    et laisse deux fausses cartes derrière lui. Il faut le retrouver.
 
 Nouveautés de la v19.5 — GASTON T'ACCUEILLE
 - Le tuto commence par une petite scène : la nuit, dans la ruelle derrière le Tapis Rouge. Gaston, le rat de
