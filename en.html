@@ -5511,6 +5511,8 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
 
 /* v19.7 */
 
+/* v19.8 */
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6124,7 +6126,7 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.7</p>
+  <p class="proto">Sefy Industries · v19.8</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -17977,7 +17979,7 @@ function bookPages(n) {
     const mT = t => Object.keys(MALUS).filter(id => MALUS[id].tier === t && (!MALUS[id].old || catHas('m', id))).map(id => ['m', id]);
     P.push({ k: 'grid', sec: 'The curses', toc: 'Curses, events and spells', title: 'The skulls', col: '#e0365a', note: '1 skull: it stings. 2: it bites. 3: get your umbrella out.', blocks: [blk(`${TIERS[1].the} · 1 skull`, 'icons', mT(1), 3), blk(`${TIERS[2].the} · 2 skulls`, 'icons', mT(2), 3)] });
     P.push({ k: 'grid', sec: 'The curses', title: TIERS[3].the, col: '#ff5c6c', note: '3 skulls. That\'s when I close up shop.', blocks: [blk(null, 'icons', mT(3), 3)] });
-    P.push({ k: 'grid', sec: 'The curses', title: 'Events and spells', col: '#a98bff', note: 'The Sorcerers read my notebooks. I know it.', blocks: [blk('The events', 'icons', Object.keys(EVENTS).map(id => ['v', id])), blk('The Sorcerers\' spells', 'icons', Object.keys(SPELLS).map(id => ['s', id]))] });
+    P.push({ k: 'grid', sec: 'The curses', title: 'Events and spells', col: '#a98bff', note: 'The Sorcerers read my notebooks. I know it.', blocks: [blk('The events', 'icons', EV_IDS.map(id => ['v', id])), blk('The Sorcerers\' spells', 'icons', Object.keys(SPELLS).map(id => ['s', id]))] });
     P.push({ k: 'grid', sec: 'The curses', title: 'The Heist', col: '#ffcc4d', note: 'An event: the House safe on the table, its guards all around. I saw nothing.', blocks: [blk('The event', 'icons', [['v', 'casse']], 1), blk('Its cards', 'cards', ['coffre', 'vigile'].map(id => ['e', id]), 1)] });
     const ckA = id => UPG[id].cat === 'canon' || UPG[id].cat === 'rateau';
     P.push({ k: 'grid', sec: 'Zaza\'s bar', toc: 'The bar and your spells', title: 'The drinks', col: '#ff9a3d', note: 'Zaza doesn\'t do credit. Not even for me.', blocks: [blk(null, 'icons', Object.keys(UPG).filter(ckA).map(id => ['d', id]), 4)] });
@@ -18294,7 +18296,7 @@ function rulesSections() {
     ['Chips', `<p>Each chip has 3 abilities: common unlocks 1, rare 2, ultimate 3. The 4th wakes up in <b>secret rarity</b>, at the Black Market's <b>Punch-o-matic</b>: 300 gold, on an ULTIMATE chip, which also gains +25% power. It lasts the whole run.</p>\n      <p>Each chip has its <b>family</b> (its color): elementals, bullets, star signs, galactics, mythologicals, bar games, flipper, base, luck, curses, multipliers, neighbors. And each chip gives your <b>BALL a power</b> (split, ricochet, fire, ice, lightning…): check its card.</p>\n      <p><b>Duplicates.</b> A chip of the same type as one of yours is a duplicate: drop it on top to <b>stack</b> it. Levels add up: common + common = rare, rare + common = ultimate. <b>Nothing is lost</b>: each level beyond ultimate becomes a <b>star ★</b> (+5% power, up to +50%).</p>\n      <p>Your table has 5 slots: one is earned with 3 clovers at the machine, one is bought at the Black Market, and the last one comes… when the Inspector scams you with a counterfeit. Some wild chips add more.</p>\n      <p><b>Order matters.</b> Two neighboring chips can form a combo, and star signs of the same element form <b>Constellations</b> (+MULT). <b>Neighbor</b> chips (Reflection, Loudspeaker, Bridge, Pivot…) act according to their place: to the left, or above on PC.</p>\n      <ul class="combo-rules">${COMBOS.map(c => `<li><b>${c.name}</b> (${JK[c.a].name} + ${JK[c.b].name}) : ${c.txt}</li>`).join('')}${CONSTEL.map(c => `<li><b>${c.name}</b> (${c.signs.map(s => JK[s].name).join(', ')}): +0.3 MULT per pair of neighboring signs, +1 MULT with all three together.</li>`).join('')}</ul>`],
     ['Bar and market', `<p><b>Zaza's bar</b>: each round, one drink for the <b>cannon</b>, one for the <b>flipper</b> and one for the <b>base</b>. They last the whole run. <b>Shots</b> boost a single round.</p>\n      <p><b>Zaza's Mix</b>: on the counter, in front of her, there's her glass. Slide two of your single chips into it, of different types (or tap the glass, then the chips): she shakes, and out comes a mix, both powers in a single slot. Once per visit (twice if she's in the mood).</p>\n      <p><b>The Black Market</b>: at the end of the alley, the Inspector sells chips that "fell off a truck", the only table slot you can buy, items and <b>spells</b>. You can haggle… at your own risk.</p>\n      <p><b>The regulars</b> (Dina, Momo, Madame Nox) sometimes drop by the bar and challenge you. Each win gives you a star ★: at 2 stars, their bonus chip; at 3, their gift (a wild chip). Stars reset every run.</p>\n      <p>Some characters also hide a <b>bonus chip</b>: invisible, it takes no slot on your table. It only lasts one run: pull off the feat again every run. Monsieur Anatole, in the Catalogue, keeps track of the ones you've earned.</p>`],
     ['Curse', `<ul>${[1, 2, 3].map(t => `<li><b style="color:${TIERS[t].col}">${TIERS[t].the}</b> : ${MALUS_BY_TIER(t).map(id => `${MALUS[id].name} (${MALUS[id].txt})`).join(' · ')}.</li>`).join('')}</ul>`],
-    ['La Maison plays', `<p>Three times every 10 rounds (at rounds 4, 7 and 9, then 3, 6 and 9 of each ten: 13, 16, 19…), La Maison starts a <b>table game</b>: the lights dim, the felt flips over, a rule, and "Place your bets…". Green stake: every round. From round 50: <b>double table</b>, two games at once.</p>\n      <p>Rounds 1 to 10: the <b>Main Hall</b> games. Rounds 11 to 20: the <b>Private Lounge</b> ones. Rounds 21 to 30: the <b>Backstage</b> ones. After that: all of them.</p>\n      <ul>${Object.keys(EVENTS).map(id => `<li><b>${EVENTS[id].name}</b>: ${EVENTS[id].txt} <i>Gold plaque: ${EVENTS[id].plaque}.</i></li>`).join('')}</ul>\n      <p>Each perfect success earns a <b>gold plaque</b> (in your Profile).</p>`],
+    ['La Maison plays', `<p>Three times every 10 rounds (at rounds 4, 7 and 9, then 3, 6 and 9 of each ten: 13, 16, 19…), La Maison starts a <b>table game</b>: the lights dim, the felt flips over, a rule, and "Place your bets…". Green stake: every round. From round 50: <b>double table</b>, two games at once.</p>\n      <p>Rounds 1 to 10: the <b>Main Hall</b> games. Rounds 11 to 20: the <b>Private Lounge</b> ones. Rounds 21 to 30: the <b>Backstage</b> ones. After that: all of them.</p>\n      <ul>${EV_IDS.map(id => `<li><b>${EVENTS[id].name}</b>: ${EVENTS[id].txt} <i>Gold plaque: ${EVENTS[id].plaque}.</i></li>`).join('')}</ul>\n      <p>Each perfect success earns a <b>gold plaque</b> (in your Profile).</p>`],
     ['Toughs and Giants', `<p>From round 11, the <b>Toughs</b>: cards that don't die like the others.</p>\n      <ul>${['sablier', 'compteur', 'miroir', 'zero', 'glitch', 'parieur'].map(id => `<li><b>${ENEMIES[id].name}</b> (from round ${ENEMIES[id].from}): ${ENEMIES[id].info}</li>`).join('')}</ul>\n      <p>A Tough that stays more than 25 s on the table (20 s for the Zero), or that goes ALL-IN, wears out: it loses its trick.</p>\n      <p>Once every 10 rounds (from the 6th), a <b>Giant</b> enters mid-round ("WARNING!"). No ALL-IN while it's there.</p>\n      <ul>${GIANTS.map(id => `<li><b>${ENEMIES[id].name}</b>${GNT.from[ENEMIES[id].giant] > 6 ? ` (from round ${GNT.from[ENEMIES[id].giant]})` : ''} : ${ENEMIES[id].info}</li>`).join('')}</ul>`],
     ['Arcana and enhanced cards', `<p>From round 21 (and in endless rounds), a <b>Major Arcana</b> sometimes enters mid-round: a big tarot card, one per round at most. No ALL-IN while it's there.</p>\n      <ul>${ARCANES.map(id => `<li><b>${ENEMIES[id].name}</b> : ${ENEMIES[id].info.replace(/^Arcane [IVXL]+\. /, '')}</li>`).join('')}</ul>\n      <p>From round 16, some cards are <b>enhanced</b> (4% of cards, up to 12% at round 30):</p>\n      <ul>${ENH_IDS.map(id => `<li><b>${ENH[id].name}</b> : ${ENH[id].txt}</li>`).join('')}</ul>`],
     ['The Baron', `<p><b>The final boss.</b> At round 30, he comes down to his table himself. Three lives: his <b>big deal</b> (every card, and his face cards protecting him), <b>hatless</b> (his spells, which your BALL can cut, and his Aces), then <b>he plays</b>: one of each bar mini-game, mandatory. Each game lost turns a friend against you. Every 20${NB}s, Nox's wheel: red = +10% damage for them, black = +15% for you. Victory: 2 wild chips to choose out of 4.</p>\n      <p><b>At poker</b>, once every ten rounds: he bets two wild chips you can't find anywhere else. You bet a chip (mandatory) and you only win one of the two… unless you <b>double</b> with a 2nd chip: then you take both. Don't like your hand? <b>New hand</b>: 50 gold, twice per run.</p>\n      <p>5-card poker: you swap up to 3 cards once. The best hand wins: <b>${POKER_HANDS.slice().reverse().join(' › ')}</b>. Same combination: the highest wins (a Pair of Kings beats a Pair of 10s). Golden cards show what counts in your hand.</p>\n      <p><b>Exact same hand</b> (same combination, same ranks)? Zaza steps in and settles it with a coin toss. And the Baron cheats a little…</p>`],
@@ -23443,7 +23445,7 @@ const CAT_TABS = [
   { id: 'combos', name: 'Combos', items: () => COMBOS.map(c => ['c', c.id]) },
   { id: 'tessorts', name: 'Your spells', items: () => Object.keys(PSPELLS).map(id => ['q', id]) },
   { id: 'sorts', name: 'Enemy spells', items: () => Object.keys(SPELLS).map(id => ['s', id]) },
-  { id: 'events', name: 'Events', items: () => Object.keys(EVENTS).map(id => ['v', id]) },
+  { id: 'events', name: 'Events', items: () => EV_IDS.map(id => ['v', id]) },
   { id: 'habitues', name: 'Regulars', items: () => PEOPLE.map(id => ['p', id]) },
   { id: 'animaux', name: 'Pets', items: () => PET_IDS.map(id => ['a', id]) },
   { id: 'elites', name: 'Elites', items: () => [...Object.keys(ELITES).map(id => ['l', id]), ...ENH_IDS.map(id => ['n', id])] },
@@ -25331,7 +25333,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.7</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.8</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -25604,7 +25606,7 @@ function skinProgress(need) {
     case 'wins': return m.wins || 0;
     case 'runs': return m.runs || 0;
     case 'secret': return m.secret ? 1 : 0;
-    case 'plaques': return Object.keys(m.plaques || {}).filter(k => EVENTS[k]).length;
+    case 'plaques': return Object.keys(m.plaques || {}).filter(k => EV_IDS.includes(k)).length;
     default: return L[need.k] || 0;
   }
 }
@@ -27943,7 +27945,7 @@ document.addEventListener('click', tuBlock, true);
    Les anciens événements (Embuscade, Marée rouge, Pluie de piques, Sabbat) sont devenus des vagues sans annonce. */
 const EVX = { on: false, freeze: false, hold: false, el: null, t: 0, i: 0, steps: null, cb: null, done: null, fast: false, flipT: -1, tick: 0 };
 const EV_IDS = Object.keys(EVENTS);
-const PLAQUES_MAX = 12;
+const PLAQUES_MAX = 7;
 const evSalle = r => r <= 10 ? 1 : r <= 20 ? 2 : r <= 30 ? 3 : 0;
 const evEase = p => p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
 
@@ -32188,7 +32190,7 @@ function xDrawTop3(cb, t) { arcDrawTop(cb, t); }
 /* ---------- la Table d'Or (Vestiaire : nouvel onglet « Tables ») ---------- */
 const TABLE_SKINS = [
   { id: 'classic', name: 'Tapis Rouge', txt: 'The house\'s green felt and red leather.' },
-  { id: 'or', name: 'Golden Table', txt: 'The big-night felt: black leather, gilded wood, golden felt.', need: { k: 'plaques', n: 12, txt: 'Win all 12 gold plaques' } },
+  { id: 'or', name: 'Golden Table', txt: 'The big-night felt: black leather, gilded wood, golden felt.', need: { k: 'plaques', n: 7, txt: 'Win all 7 gold plaques' } },
 ];
 const TBP = {
   classic: { rail: ['#9b2d45', '#6e1a2e', '#3a0c18'], line: '#1c040b', seam: 'rgba(30,4,12,.55)', hi: 'rgba(255,190,200,.28)', stitch: 'rgba(255,214,160,.55)', wood: ['#5a3418', '#a8692f', '#6b3d1a'], woodLine: '#2a1608', felt: ['#2a8a6c', '#1d6a55', '#0f4136'], pr: a => `rgba(255,236,190,${a})`, bot: 'TRIPLE = ULTIMATE  ·  PAIR = MIX' },
@@ -36385,16 +36387,16 @@ function hrdHud() {
   const uh = updateHUD; updateHUD = function () { uh.apply(this, arguments); if (G.run && G.run.horde && G.cb && G.cb.hz) hrdHud(); };
   const snr = startNextRound; startNextRound = function () { if (G.run && G.run.horde && !G.run.over) { hrdBegin(true); return; } return snr.apply(this, arguments); };
   const sr = startRun; startRun = function (cp) { document.body.classList.remove('hz', 'hzshop'); const r = sr.apply(this, arguments); try { buildBG(); } catch (e) { /* rien */ } return r; };
-  // les piles de jetons de Jack : +1 % par pile
+  // les piles de jetons de Jack : +2 % par pile (v19.8)
   const cs = computeStats;
   computeStats = function (run) {
     const s = cs.apply(this, arguments), P = run && run.hz && run.horde ? run.hz.piles : null;
     if (P) {
-      if (P.hp) s.maxHp = Math.max(10, Math.round(s.maxHp * (1 + .01 * P.hp)));
-      if (P.dmg) s.dmg *= 1 + .01 * P.dmg;
-      if (P.rate) s.rate *= 1 + .01 * P.rate;
-      if (P.sp) { const f = Math.pow(.99, P.sp); s.spellCdMul *= f; s.bombCd *= f; s.gelCd *= f; }
-      if (P.gold) s.goldMul = (s.goldMul || 1) * (1 + .01 * P.gold);
+      if (P.hp) s.maxHp = Math.max(10, Math.round(s.maxHp * (1 + .02 * P.hp)));
+      if (P.dmg) s.dmg *= 1 + .02 * P.dmg;
+      if (P.rate) s.rate *= 1 + .02 * P.rate;
+      if (P.sp) { const f = Math.pow(.98, P.sp); s.spellCdMul *= f; s.bombCd *= f; s.gelCd *= f; }
+      if (P.gold) s.goldMul = (s.goldMul || 1) * (1 + .02 * P.gold);
       s.goldMul = (s.goldMul || 1) * 1.8;
     }
     return s;
@@ -36536,11 +36538,11 @@ const JACK = {
 };
 const JK_LINE = k => { const L = pick(JACK[k]); return { pose: L[0], txt: HRD_EN ? L[2] : L[1] }; };
 const HRD_PILES = [
-  { k: 'hp', col: '#5fd68a', dark: '#1f5a37', n: ['Pile de vie', 'Health stack'], d: [`+1${NB}% de PV max`, `+1${NB}% max HP`], base: 45 },
-  { k: 'dmg', col: '#ff5c6c', dark: '#6a1a24', n: ['Pile de dégâts', 'Damage stack'], d: [`+1${NB}% de dégâts`, `+1${NB}% damage`], base: 60 },
-  { k: 'rate', col: '#4aa8ff', dark: '#173b66', n: ['Pile de cadence', 'Fire-rate stack'], d: [`+1${NB}% de cadence de tir`, `+1${NB}% fire rate`], base: 60 },
-  { k: 'sp', col: '#a98bff', dark: '#33215e', n: ['Pile de sorts', 'Spell stack'], d: [`−1${NB}% de recharge des sorts`, `−1${NB}% spell cooldown`], base: 50 },
-  { k: 'gold', col: '#ffcc4d', dark: '#6a4e12', n: ['Pile d\'or', 'Gold stack'], d: [`+1${NB}% d'or gagné`, `+1${NB}% gold earned`], base: 70 },
+  { k: 'hp', col: '#5fd68a', dark: '#1f5a37', n: ['Pile de vie', 'Health stack'], d: [`+2${NB}% de PV max`, `+2${NB}% max HP`], base: 45 },
+  { k: 'dmg', col: '#ff5c6c', dark: '#6a1a24', n: ['Pile de dégâts', 'Damage stack'], d: [`+2${NB}% de dégâts`, `+2${NB}% damage`], base: 60 },
+  { k: 'rate', col: '#4aa8ff', dark: '#173b66', n: ['Pile de cadence', 'Fire-rate stack'], d: [`+2${NB}% de cadence de tir`, `+2${NB}% fire rate`], base: 60 },
+  { k: 'sp', col: '#a98bff', dark: '#33215e', n: ['Pile de sorts', 'Spell stack'], d: [`−2${NB}% de recharge des sorts`, `−2${NB}% spell cooldown`], base: 50 },
+  { k: 'gold', col: '#ffcc4d', dark: '#6a4e12', n: ['Pile d\'or', 'Gold stack'], d: [`+2${NB}% d'or gagné`, `+2${NB}% gold earned`], base: 70 },
 ];
 const hrdPilePrice = (P, n) => Math.round(P.base * Math.pow(1.06, n) * priceMul());
 const hrdPileCost = (P, n0, k) => { let c = 0; for (let i = 0; i < k; i++) c += hrdPilePrice(P, n0 + i); return c; };
@@ -36692,7 +36694,7 @@ function hrdStackSVG(col, dark, n) {
 const hrdSection = (t, s) => `<div class="hzj-sec"><b>${t}</b>${s ? `<span>${s}</span>` : ''}</div>`;
 function hrdPilesHTML() {
   const H = hrdState(), g = Math.floor(G.run.gold);
-  return hrdSection(hT('PILES DE JETONS', 'CHIP STACKS'), hT('stock infini · +1 % chacune, pour toute la partie', 'endless stock · +1% each, for the whole run')) + `<div class="hzj-list">${HRD_PILES.map(P => {
+  return hrdSection(hT('PILES DE JETONS', 'CHIP STACKS'), hT('stock infini · +2 % chacune, pour toute la partie', 'endless stock · +2% each, for the whole run')) + `<div class="hzj-list">${HRD_PILES.map(P => {
     const n = H.piles[P.k] || 0, p1 = hrdPilePrice(P, n), p5 = hrdPileCost(P, n, 5);
     return `<div class="offer hzj-pile" style="--pc:${P.col};--pd:${P.dark}">${hrdStackSVG(P.col, P.dark, n)}
       <div class="otext"><b>${HRD_EN ? P.n[1] : P.n[0]}${n ? `<i class="otag">×${n}</i>` : ''}</b><span>${HRD_EN ? P.d[1] : P.d[0]}${n ? ` · <em class="more">+${n}${NB}%</em>` : ''}</span></div>
@@ -38645,6 +38647,114 @@ openDetail = function (j) {
   try { if (j && j.parts && j.parts.some(p => PAL_IDS.includes(p.t))) { const f = document.querySelector('#detail .fam'); if (f) f.innerHTML = f.innerHTML.replace(' · ' + MACH9[0].name, ' · ' + hT('trésor du palais', 'palace treasure')); } } catch (e) { /* rien */ }
   return r;
 };
+
+/* ===== v19.8 · le grand ménage : la famille Multiplicateurs et les jetons sans intérêt sortent du jeu, 5 événements en moins, et les 7 qui restent sont refaits ===== */
+// (on les retire des machines, des boutiques et du catalogue ; ils restent connus du code pour les vieilles sauvegardes)
+const RETIRED = 'ovation rappel tableau projecteur crescendo grandfinal fronton comptetours doubleourien pilejetons tapisvert chef minimaliste bricabrac echo pont pivot siamois parasite boussole engrenage serrelivres catalyseur miroirbrise dette ivresse insomnie allergie sablier trefle4 cookie pochette extincteur ascenseur metal argile collante vierge capricorne mercure anubis jenga tilt'.split(' ');
+const RET_S = new Set(RETIRED);
+for (const M2 of MACH9) {
+  M2.ids = M2.ids.filter(id => !RET_S.has(id));
+  if (M2.builds) { const gone = new Set(RETIRED.map(id => JK[id] && JK[id].name)); M2.builds = M2.builds.map(([n, L]) => [n, L.filter(x => !gone.has(x))]).filter(b => b[1].length >= 2); }
+}
+for (let i = NORMAL_JOKERS.length - 1; i >= 0; i--) if (RET_S.has(NORMAL_JOKERS[i])) NORMAL_JOKERS.splice(i, 1);
+// le sort de la famille Multiplicateurs (Jackpot) n'est plus proposé (il reste lisible dans une vieille partie)
+try { Object.defineProperty(PSPELLS, 'jackpotS', { enumerable: false }); } catch (e) { /* rien */ }
+// les événements : on garde Rien ne va plus, Happy Hour, Le Tiercé, Main de poker, Jackpot progressif, Bandit manchot, Le Casse
+for (const id of ['bonneteau', 'blackjack', 'quitte', 'des', 'allin']) { const k = EV_IDS.indexOf(id); if (k >= 0) EV_IDS.splice(k, 1); }
+for (const id in EVENTS) if (EVENTS[id].excl) EVENTS[id].excl = EVENTS[id].excl.filter(x => EV_IDS.includes(x));
+Object.assign(EVENTS.poker, { rule: hT('Chaque main cache un GÉANT, et ses cartes sont coriaces. Abats les 5 en temps limité : MULT !', 'Every hand hides a GIANT, and its cards are tough. Take all 5 down in time: MULT!') });
+Object.assign(EVENTS.tierce, { rule: hT('Plus ton cheval rapporte, plus il traîne : fouette-le à la BILLE, freine les autres !', 'The more your horse pays, the slower it is: whip it with the BALL, slow the others!') });
+Object.assign(EVENTS.casse, { rule: hT('Le coffre est blindé et des voleurs en sortent sans arrêt. S\'il s\'échappe, tu perds TOUT ton or !', 'The safe is armored and thieves keep pouring out. If it escapes, you lose ALL your gold!') });
+Object.assign(EVENTS.happyhour, { rule: hT('Les cocktails de Zaza sur la table : bois les shots à la BILLE.', 'Zaza\'s cocktails on the table: drink the shots with the BALL.') });
+
+/* --- Main de poker : un géant dans CHAQUE main, et des cartes plus robustes --- */
+const _pkDeal98 = pkDeal;
+pkDeal = function (cb, S2) {
+  const r = _pkDeal98.apply(this, arguments);
+  try {
+    const H = S2.cur; if (!H || H.pk98) return r; H.pk98 = 1;
+    const live = H.es.filter(e => e && !e.dead);
+    if (live.length && !live.some(e => e.pkGiant)) { const e = live.reduce((a, b) => (b.pk.r > a.pk.r ? b : a)); e.pkGiant = true; e.r *= 1.9; e.maxHp *= 3.4; e.hp = e.maxHp; e.spd *= .62; e.gold *= 4; e.dmg *= 2; if (!G.headless) floater(e.x, e.y - e.r - 6, hT('GÉANT !', 'GIANT!'), '#ffd23f', 4.8); }
+    for (const e of live) if (!e.pkGiant) { e.maxHp *= 1.6; e.hp = e.maxHp; }
+    H.chrono = (H.chrono || PKR.chrono) + 1;
+  } catch (e) { /* rien */ }
+  return r;
+};
+
+/* --- Le Tiercé : plus le cheval rapporte, plus il est lent ; la BILLE devient indispensable --- */
+const TC_SLOW = o => o >= 6 ? .55 : o >= 3 ? .76 : 1;
+const _tcTick98 = EVH.tierce.tick;
+EVH.tierce.tick = function (cb, S2, dt) {
+  const mine = S2.pick >= 0 && S2.h ? S2.h[S2.pick] : null, before = mine ? mine.prog : 0, wasDone = mine ? mine.done : true;
+  const r = _tcTick98.apply(this, arguments);
+  try {
+    if (mine && S2.ph === 'race' && !wasDone && !mine.done) {
+      const H = TC_H[mine.i], K = TC_SLOW(H.odds) * (mine.boost > 0 ? 1.3 : 1);
+      if (K !== 1) mine.prog = before + (mine.prog - before) * K;
+      if (!S2.said98 && TC_SLOW(H.odds) < 1) { S2.said98 = 1; if (!G.headless) { const p = tcPos(mine); floater(p.x, p.y - 10, hT('IL TRAÎNE ! FOUETTE-LE À LA BILLE', 'IT\'S DRAGGING! WHIP IT WITH THE BALL'), '#ffd36b', 4.6); } }
+    }
+  } catch (e) { /* rien */ }
+  return r;
+};
+
+/* --- Le Casse : coffre blindé, voleurs qui en sortent sans arrêt, et tout ton or s'il s'échappe --- */
+const _csTick98 = EVH.casse.tick;
+EVH.casse.tick = function (cb, S2, dt) {
+  const res0 = S2.res;
+  const r = _csTick98.apply(this, arguments);
+  try {
+    const e = S2.safe;
+    if (e && !S2.cs98) { S2.cs98 = 1; e.maxHp *= 4; e.hp = e.maxHp; S2.thT = 1.5; }
+    if (e && !e.dead && !S2.res) {
+      S2.thT -= dt;
+      if (S2.thT <= 0) {
+        S2.thT = 2.2;
+        const a = Math.atan2(e.y, e.x) + rand(-.4, .4), o = spawnEnemy(ENEMIES.coureur ? 'coureur' : 'soldat', a, { x: e.x + rand(-4, 4), y: e.y + rand(-4, 4) });
+        if (o) { o.gold = (o.gold || 1) * 3; o.csThief = 1; if (!G.headless) floater(e.x, e.y - 10, hT('VOLEUR !', 'THIEF!'), '#ff8a5c', 3.6); }
+      }
+    }
+    if (S2.res === 'esc' && !S2.lost98 && G.run) {
+      S2.lost98 = 1;
+      const lost = Math.round(G.run.gold || 0); G.run.gold = 0;
+      if (!G.headless) { floater(0, -BAL.baseR - 14, hT(`LE COFFRE S'EST ENFUI ! −${lost} OR`, `THE SAFE GOT AWAY! −${lost} GOLD`), '#ff5c6c', 6); Snd.lose && Snd.lose(); haptic(90); try { talk('croup', 'La banque gagne. Toujours.'); } catch (x) { } }
+      try { updateHUD(); } catch (x) { }
+    }
+  } catch (err) { /* rien */ }
+  return r;
+};
+
+/* --- Happy Hour : des cocktails partout sur la table, pour l'ambiance --- */
+const HH_DECO = [['#ff7eb6', 'm'], ['#5fd68a', 'h'], ['#ffd36b', 'c'], ['#4fd8ff', 'm'], ['#ff7a3d', 'h'], ['#c9a8ff', 'c'], ['#ff5c6c', 'm'], ['#9be15d', 'h']];
+function hhDeco(t) {
+  const n = HH_DECO.length;
+  for (let i = 0; i < n; i++) {
+    const a = i / n * TAU + .2, R0 = 82, x = Math.cos(a) * R0, y = Math.sin(a) * R0 * .96, [col, k] = HH_DECO[i];
+    ctx.save(); ctx.translate(x, y); ctx.scale(1.05, 1.05);
+    const gl = .35 + .25 * Math.sin(t * 2 + i);
+    ctx.fillStyle = `rgba(255,220,160,${gl * .35})`; ctx.beginPath(); ctx.ellipse(0, 4.6, 5.2, 1.6, 0, 0, TAU); ctx.fill();
+    ctx.lineWidth = .55; ctx.strokeStyle = 'rgba(240,248,255,.9)';
+    if (k === 'm') { // martini
+      ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(-3.6, -3.4); ctx.lineTo(3.6, -3.4); ctx.lineTo(0, .6); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-4.4, -4.4); ctx.lineTo(4.4, -4.4); ctx.lineTo(0, 1); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, 1); ctx.lineTo(0, 4.2); ctx.moveTo(-2.2, 4.4); ctx.lineTo(2.2, 4.4); ctx.stroke();
+      ctx.fillStyle = '#7fd36b'; ctx.beginPath(); ctx.arc(1.4, -3.6, .9, 0, TAU); ctx.fill();
+    } else if (k === 'h') { // highball avec paille
+      ctx.fillStyle = col; ctx.fillRect(-2.2, -2.2, 4.4, 6); ctx.strokeRect(-2.6, -4.4, 5.2, 8.6);
+      ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fillRect(-1.6, -1.6, 1.4, 1.4); ctx.fillRect(.3, .2, 1.3, 1.3);
+      ctx.strokeStyle = '#ff5c6c'; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(.8, 3.6); ctx.lineTo(2.4, -6); ctx.lineTo(4.2, -6.8); ctx.stroke();
+    } else { // coupe de champagne
+      ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(0, -2.4, 3.6, 1.6, 0, 0, Math.PI); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(0, -2.6, 4.2, 1.2, 0, 0, TAU); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-4.2, -2.6); ctx.quadraticCurveTo(0, 2.6, 4.2, -2.6); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, -.4); ctx.lineTo(0, 4.2); ctx.moveTo(-2.2, 4.4); ctx.lineTo(2.2, 4.4); ctx.stroke();
+      if (!G.reduced) { ctx.fillStyle = 'rgba(255,255,255,.8)'; const b = (t * .8 + i * .3) % 1; ctx.beginPath(); ctx.arc(.6, -2 - b * 3, .35, 0, TAU); ctx.fill(); }
+    }
+    if (!G.reduced && Math.sin(t * 3 + i * 1.7) > .92) { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(-2.6, -4.6, .5, 0, TAU); ctx.fill(); }
+    ctx.restore();
+  }
+}
+const _hhMid98 = EVH.happyhour.mid;
+EVH.happyhour.mid = function (cb, S2, t) { try { hhDeco(t); } catch (e) { /* rien */ } return _hhMid98.apply(this, arguments); };
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
 else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});

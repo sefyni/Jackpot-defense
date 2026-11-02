@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.7-202611021600
+JACKPOT DEFENSE v19.8-202611021700
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,20 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.8 — LE GRAND MÉNAGE
+- Le grand ménage des jetons : la famille Multiplicateurs (et son sort Jackpot) quitte le jeu, ainsi que les jetons
+  peu utiles ou pas assez originaux (43 en tout). Il reste les jetons qui ont un vrai pouvoir et les jetons simples
+  (cadence, dégâts, PV…). Chaque machine garde au moins 9 jetons.
+- La Maison joue : il reste 7 événements, et ils sont refaits :
+  · Rien ne va plus, Jackpot progressif, Bandit manchot (inchangés).
+  · Main de poker : chaque main cache un GÉANT, et ses cartes sont plus coriaces (un peu plus de temps pour la casser).
+  · Happy Hour : les cocktails de Zaza décorent toute la table (martinis, highballs, coupes de champagne).
+  · Le Casse : le coffre est blindé (4× plus de vie) et des voleurs en sortent sans arrêt, les poches pleines d'or.
+    Si le coffre s'échappe, tu perds TOUT ton or.
+  · Le Tiercé : plus ton cheval rapporte, plus il traîne (le tocard est très lent) : fouette-le à la BILLE.
+  · Les plaques d'or passent à 7 (une par événement), et la Table d'Or demande les 7.
+- Horde : les piles de jetons de Jack donnent maintenant +2 % chacune (au lieu de +1 %).
 
 Nouveautés de la v19.7 — LES TRÉSORS DU PALAIS
 - Mille et une nuits : 10 jetons du palais, qui sortent des machines seulement dans le palais (4 par machine) :
