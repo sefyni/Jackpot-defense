@@ -5509,6 +5509,8 @@ body:not(.lpc) #over .ostats dd{font-size:18px}
 .dj-c span{font-size:13px;line-height:1.3;color:#f0dcc0}
 body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
 
+/* v19.7 */
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6122,7 +6124,7 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.6</p>
+  <p class="proto">Sefy Industries · v19.7</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -25329,7 +25331,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.6</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.7</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -38558,6 +38560,89 @@ updateCombat = function (dt) {
       }
     }
   } catch (e) { /* rien */ }
+  return r;
+};
+
+/* ===== v19.7 · les 10 jetons du palais (seulement dans Mille et une nuits) ===== */
+CATS.palais = { n: 'Palais', s: 'Palais', col: '#f2c45a', dark: '#3a0c1a', txt: 'les trésors du palais : des bonus purs, qui se renforcent entre eux' };
+const PAL_SET = hT('Bonus du palais : à partir de 2 jetons du palais dans ton rack, chacun ajoute +3 % de dégâts et +2 % de cadence à toute ta base.', 'Palace bonus: with 2 or more palace chips in your rack, each one adds +3% damage and +2% fire rate to your whole base.');
+const PAL9 = [
+  { id: 'cimeterre', n: hT('Cimeterre', 'Scimitar'), l: '+18 %', caps: [hT('Dégâts du canon +[18 %].', 'Cannon damage +[18%].'), hT('+[8 %] de chance de coup critique.', '+[8%] critical hit chance.'), hT('Tes critiques font ×2,5.', 'Your crits deal ×2.5.'), hT('Lame d\'Ali Baba : dégâts +[18 %] de plus.', 'Ali Baba\'s blade: another +[18%] damage.')],
+    fx: (s, v) => { s.dmgMul *= 1 + .18 * v[1]; if (v[2] > 0) s.crit += .08 * v[2]; if (v[3] > 0) s.critMult = Math.max(s.critMult, 2.5); if (v[4] > 0) s.dmgMul *= 1 + .18 * v[4]; },
+    ic: [{ d: 'M22 84L30 76C44 60 60 32 86 12C82 42 64 68 40 82L31 90Z', f: 1 }, { d: 'M14 72L32 90M22 80L12 90', s: 8 }] },
+  { id: 'tapisvol', n: hT('Tapis volant', 'Flying carpet'), l: hT('portée', 'range'), caps: [hT('Portée du canon +[15 %].', 'Cannon range +[15%].'), hT('Tes balles volent +[25 %] plus vite.', 'Your bullets fly +[25%] faster.'), hT('Cadence +[10 %].', 'Fire rate +[10%].'), hT('Vent du désert : portée +[15 %] de plus.', 'Desert wind: another +[15%] range.')],
+    fx: (s, v) => { s.rangeMul *= 1 + .15 * v[1]; if (v[2] > 0) s.bulletSpdMul *= 1 + .25 * v[2]; if (v[3] > 0) s.rateMul *= 1 + .1 * v[3]; if (v[4] > 0) s.rangeMul *= 1 + .15 * v[4]; },
+    ic: [{ d: 'M8 38Q29 28 50 38T92 38L92 64Q71 54 50 64T8 64Z', f: 1 }, { d: 'M10 68V80M22 66V78M34 68V80M66 68V80M78 66V78M90 68V80', s: 4 }] },
+  { id: 'lampe', n: hT('Lampe d\'Aladdin', 'Aladdin\'s lamp'), l: hT('cadence', 'rate'), caps: [hT('Cadence +[12 %].', 'Fire rate +[12%].'), hT('Dégâts du canon +[10 %].', 'Cannon damage +[10%].'), hT('Ta base gagne +1 armure (chaque coup reçu fait 1 de moins).', 'Your base gains +1 armor (each hit deals 1 less).'), hT('Le génie s\'éveille : cadence +[12 %] de plus.', 'The genie wakes: another +[12%] fire rate.')],
+    fx: (s, v) => { s.rateMul *= 1 + .12 * v[1]; if (v[2] > 0) s.dmgMul *= 1 + .1 * v[2]; if (v[3] > 0) s.armor += 1; if (v[4] > 0) s.rateMul *= 1 + .12 * v[4]; },
+    ic: [{ d: 'M8 66C16 72 32 74 48 74S78 70 84 62L94 50C96 47 92 45 90 47L82 54C78 45 66 40 52 40C49 34 40 34 37 40C26 42 17 48 15 58C10 56 5 58 4 62C3 65 5 66 8 66Z', f: 1 }, { d: 'M30 84H66', s: 7 }] },
+  { id: 'turban', n: hT('Turban d\'or', 'Golden turban'), l: '+20 PV', caps: [hT('Ta base gagne +[20] PV max.', 'Your base gains +[20] max HP.'), hT('+1 armure.', '+1 armor.'), hT('Ta base se répare de [0,5] PV par seconde.', 'Your base repairs [0.5] HP per second.'), hT('Couronne du sultan : PV max ×[1,15].', 'Sultan\'s crown: max HP ×[1.15].')],
+    fx: (s, v) => { s.hpAdd += 20 * v[1]; if (v[2] > 0) s.armor += 1; if (v[3] > 0) s.regen += .5 * v[3]; if (v[4] > 0) s.hpMul *= 1 + .15 * v[4]; },
+    ic: [{ d: 'M12 62C12 34 30 18 50 18S88 34 88 62ZM44 42A6 6 0 1 0 56 42A6 6 0 1 0 44 42Z', f: 1, e: 1 }, { d: 'M10 70H90', s: 10 }] },
+  { id: 'babouche', n: hT('Babouches', 'Slippers'), l: 'flipper', caps: [hT('Ton flipper est +[15 %] plus large.', 'Your flipper is +[15%] wider.'), hT('Chaque parade répare [1] PV.', 'Each parry repairs [1] HP.'), hT('Cadence +[10 %].', 'Fire rate +[10%].'), hT('Pas de velours : flipper +[15 %] de plus.', 'Velvet steps: another +[15%] flipper width.')],
+    fx: (s, v) => { s.rakeHalfMul *= 1 + .15 * v[1]; if (v[2] > 0) s.parryHeal += 1 * v[2]; if (v[3] > 0) s.rateMul *= 1 + .1 * v[3]; if (v[4] > 0) s.rakeHalfMul *= 1 + .15 * v[4]; },
+    ic: [{ d: 'M8 70C8 58 22 52 40 52L62 50C74 48 84 40 90 28C95 40 91 56 80 64C70 72 56 76 36 76L14 76C10 76 8 74 8 70Z', f: 1 }] },
+  { id: 'sablier', n: hT('Sablier du désert', 'Desert hourglass'), l: 'crit', caps: [hT('+[8 %] de chance de coup critique.', '+[8%] critical hit chance.'), hT('Cadence +[8 %].', 'Fire rate +[8%].'), hT('Tes critiques font ×2,2.', 'Your crits deal ×2.2.'), hT('Le temps s\'arrête : +[8 %] de critique de plus.', 'Time stands still: another +[8%] crit chance.')],
+    fx: (s, v) => { s.crit += .08 * v[1]; if (v[2] > 0) s.rateMul *= 1 + .08 * v[2]; if (v[3] > 0) s.critMult = Math.max(s.critMult, 2.2); if (v[4] > 0) s.crit += .08 * v[4]; },
+    ic: [{ d: 'M22 8H78M22 92H78', s: 8 }, { d: 'M30 12C30 34 46 42 46 50C46 58 30 66 30 88H70C70 66 54 58 54 50C54 42 70 34 70 12Z', f: 1 }] },
+  { id: 'narguile', n: hT('Narguilé', 'Hookah'), l: hT('régén', 'regen'), caps: [hT('Ta base se répare de [0,4] PV par seconde.', 'Your base repairs [0.4] HP per second.'), hT('Tous tes soins ×1,3.', 'All your healing ×1.3.'), hT('+[15] PV max.', '+[15] max HP.'), hT('Fumée bleue : la réparation par seconde double.', 'Blue smoke: per-second repair doubles.')],
+    fx: (s, v) => { s.regen += .4 * v[1]; if (v[2] > 0) s.healMul *= 1.3; if (v[3] > 0) s.hpAdd += 15 * v[3]; if (v[4] > 0) s.regen += .4 * v[4]; },
+    ic: [{ d: 'M40 92H60L64 70C72 64 72 52 62 48V30H38V48C28 52 28 64 36 70Z', f: 1 }, { d: 'M50 30V10M62 58C80 58 88 70 82 86', s: 5 }] },
+  { id: 'scarabee', n: hT('Scarabée d\'or', 'Golden scarab'), l: hT('or', 'gold'), caps: [hT('+[15 %] d\'or sur les cartes abattues.', '+[15%] gold from cards you take down.'), hT('+[20] or au début de chaque manche.', '+[20] gold at the start of each round.'), hT('Dégâts du canon +[10 %].', 'Cannon damage +[10%].'), hT('Trésor des pharaons : +[15 %] d\'or de plus sur les cartes.', 'Pharaoh\'s treasure: another +[15%] gold from cards.')],
+    fx: (s, v) => { if (v[3] > 0) s.dmgMul *= 1 + .1 * v[3]; },
+    ic: [{ d: 'M30 58A20 26 0 1 0 70 58A20 26 0 1 0 30 58ZM40 26A10 8 0 1 0 60 26A10 8 0 1 0 40 26Z', f: 1 }, { d: 'M30 50L12 42M30 64L10 70M70 50L88 42M70 64L90 70M44 20L38 10M56 20L62 10', s: 5 }] },
+  { id: 'miroirviz', n: hT('Miroir du Vizir', 'Vizier\'s mirror'), l: hT('dégâts', 'dmg'), caps: [hT('Dégâts du canon +[12 %].', 'Cannon damage +[12%].'), hT('Portée +[12 %].', 'Range +[12%].'), hT('+[6 %] de chance de coup critique.', '+[6%] critical hit chance.'), hT('Reflet maudit : dégâts +[12 %] de plus.', 'Cursed reflection: another +[12%] damage.')],
+    fx: (s, v) => { s.dmgMul *= 1 + .12 * v[1]; if (v[2] > 0) s.rangeMul *= 1 + .12 * v[2]; if (v[3] > 0) s.crit += .06 * v[3]; if (v[4] > 0) s.dmgMul *= 1 + .12 * v[4]; },
+    ic: [{ d: 'M26 40A24 24 0 1 0 74 40A24 24 0 1 0 26 40ZM35 40A15 15 0 1 0 65 40A15 15 0 1 0 35 40Z', f: 1, e: 1 }, { d: 'M50 66V92M40 80H60', s: 9 }] },
+  { id: 'croissant', n: hT('Croissant de lune', 'Crescent moon'), l: hT('lune', 'moon'), caps: [hT('Dégâts +[8 %] et cadence +[8 %].', 'Damage +[8%] and fire rate +[8%].'), hT('Portée +[8 %].', 'Range +[8%].'), hT('+1 armure.', '+1 armor.'), hT('Pleine lune : dégâts et cadence +[8 %] de plus.', 'Full moon: another +[8%] damage and fire rate.')],
+    fx: (s, v) => { s.dmgMul *= 1 + .08 * v[1]; s.rateMul *= 1 + .08 * v[1]; if (v[2] > 0) s.rangeMul *= 1 + .08 * v[2]; if (v[3] > 0) s.armor += 1; if (v[4] > 0) { s.dmgMul *= 1 + .08 * v[4]; s.rateMul *= 1 + .08 * v[4]; } },
+    ic: [{ d: 'M60 8A42 42 0 1 0 92 70A34 34 0 1 1 60 8Z', f: 1 }, { d: 'M30 20L33 28L41 29L35 34L37 42L30 38L23 42L25 34L19 29L27 28Z', f: 1 }] },
+];
+const PAL_IDS = PAL9.map(p => p.id);
+for (const p of PAL9) {
+  const j = { id: p.id, name: p.n, cat: 'palais', m: 0, el: null, fam: hT('Palais', 'Palace'), col: CATS.palais.col, dark: CATS.palais.dark, lab: p.l, note: PAL_SET, raw: p.caps, caps: p.caps.map(capFn), palace: true };
+  JOKERS.push(j); JK[p.id] = j;
+  TK_STATS[p.id] = p.fx;
+  ICONS[p.id] = p.ic;
+}
+// le bonus du palais
+const _computeStats97 = computeStats;
+computeStats = function (run) {
+  const s = _computeStats97.apply(this, arguments);
+  if (!s || !s.T) return s;
+  const n = PAL_IDS.filter(id => s.T[id] && s.T[id][1] > 0).length;
+  s.palaceN = n;
+  if (n >= 2) { s.dmg *= 1 + .03 * n; s.rate *= 1 + .02 * n; }
+  return s;
+};
+// les machines du palais ressortent aussi les trésors du palais (4 au hasard par machine)
+const _pickPool97 = pickPool;
+pickPool = function (run, mi) {
+  const p = _pickPool97.apply(this, arguments);
+  try {
+    if (typeof thOn === 'function' && thOn() && run && !run.horde && !run.tuto && Array.isArray(p)) {
+      for (const id of shuffle(PAL_IDS.slice()).slice(0, 4)) if (!p.includes(id)) p.push(id);
+    }
+  } catch (e) { /* rien */ }
+  return p;
+};
+// le Scarabée d'or : plus d'or sur les cartes, et de l'or à chaque début de manche
+const _addGold97 = addGold;
+addGold = function (g, src) {
+  try { const T = G.cb && G.cb.stats && G.cb.stats.T; if (src === 'kill' && T && T.scarabee && T.scarabee[1] > 0) g *= 1 + .15 * T.scarabee[1] + .15 * T.scarabee[4]; } catch (e) { /* rien */ }
+  return _addGold97.call(this, g, src);
+};
+const _beginRound97 = beginRound;
+beginRound = function () {
+  const r = _beginRound97.apply(this, arguments);
+  try { const T = G.cb && G.cb.stats && G.cb.stats.T; if (T && T.scarabee && T.scarabee[2] > 0 && !G.cb.demo) { const g = Math.round(20 * T.scarabee[2]); setTimeout(() => { if (G.cb && !G.cb.ended) { _addGold97(g, 'scarabee'); floater(0, -16, `+${g} or`, '#f2c45a', 1); } }, 1200); } } catch (e) { /* rien */ }
+  return r;
+};
+// la fiche : « Famille Palais · trésor du palais » (pas de machine d'origine)
+const _openDetail97 = openDetail;
+openDetail = function (j) {
+  const r = _openDetail97.apply(this, arguments);
+  try { if (j && j.parts && j.parts.some(p => PAL_IDS.includes(p.t))) { const f = document.querySelector('#detail .fam'); if (f) f.innerHTML = f.innerHTML.replace(' · ' + MACH9[0].name, ' · ' + hT('trésor du palais', 'palace treasure')); } } catch (e) { /* rien */ }
   return r;
 };
 

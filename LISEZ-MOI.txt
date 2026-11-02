@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.6-202611021500
+JACKPOT DEFENSE v19.7-202611021600
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v19.7 — LES TRÉSORS DU PALAIS
+- Mille et une nuits : 10 jetons du palais, qui sortent des machines seulement dans le palais (4 par machine) :
+  Cimeterre (dégâts, critiques), Tapis volant (portée, balles rapides), Lampe d'Aladdin (cadence, armure),
+  Turban d'or (PV, armure, réparation), Babouches (flipper large, parades qui soignent), Sablier du désert
+  (critiques), Narguilé (réparation, soins), Scarabée d'or (or), Miroir du Vizir (dégâts, portée),
+  Croissant de lune (dégâts et cadence). Chacun a ses 3 niveaux et sa rareté secrète.
+- Bonus du palais : à partir de 2 jetons du palais dans le rack, chacun ajoute +3 % de dégâts et +2 % de cadence.
 
 Nouveautés de la v19.6 — LA PREMIÈRE HEURE
 - Plus de pseudo obligatoire pour jouer : on te le propose à la fin de ta première partie (« Ton score mérite le
