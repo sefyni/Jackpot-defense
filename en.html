@@ -5536,6 +5536,292 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
 .rl-ess li::marker{color:var(--gold);font-weight:700}
 .rl-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 
+/* ===== v20.0 · les décors dessinés (le palais garde les siens) ===== */
+body:not(.th-orient) .fp-wall{background:linear-gradient(180deg,rgba(5,3,10,.1),rgba(5,3,10,.32) 70%,rgba(5,3,10,.6)),url(decors/baron.webp) 50% 0/max(100%,calc((14px + var(--fpH)) / 0.74 * 2.143)) auto no-repeat,#05030a}
+body:not(.th-orient) .fp-wall::before,body:not(.th-orient) .fp-wall::after{display:none}
+body:not(.th-orient) .fpn-wall{background:linear-gradient(180deg,rgba(5,3,10,.1),rgba(5,3,10,.32) 70%,rgba(5,3,10,.6)),url(decors/nox.webp) 50% 0/max(100%,calc((14px + var(--fpH)) / 0.8 * 2.110)) auto no-repeat,#05030a}
+body:not(.th-orient) .fpn-wall::before,body:not(.th-orient) .fpn-wall::after{display:none}
+body:not(.th-orient) .fpd-wall{background:linear-gradient(180deg,rgba(5,3,10,.1),rgba(5,3,10,.32) 70%,rgba(5,3,10,.6)),url(decors/dina.webp) 50% 0/max(100%,calc((14px + var(--fpH)) / 0.8 * 2.105)) auto no-repeat,#05030a}
+body:not(.th-orient) .fpd-wall::before,body:not(.th-orient) .fpd-wall::after{display:none}
+body:not(.th-orient) .fpm-wall{background:linear-gradient(180deg,rgba(5,3,10,.1),rgba(5,3,10,.32) 70%,rgba(5,3,10,.6)),url(decors/momo.webp) 50% 0/max(100%,calc((14px + var(--fpH)) / 0.62 * 2.027)) auto no-repeat,#05030a}
+body:not(.th-orient) .fpm-wall::before,body:not(.th-orient) .fpm-wall::after{display:none}
+body:not(.th-orient) .fp-cam .dc>:not(.dc-glow),body:not(.th-orient) .fpn-stars,body:not(.th-orient) .fpd-neon,body:not(.th-orient) .fpd-lights,body:not(.th-orient) .fpm-sign{display:none}
+body:not(.th-orient) #bar{background:linear-gradient(rgba(12,6,18,.52),rgba(12,6,18,.74)),url(decors/bar.webp) 50% 50%/cover #0c0612}
+body:not(.th-orient) .bar-wall{background:linear-gradient(rgba(12,6,18,.05),rgba(12,6,18,.35)),url(decors/bar.webp) 50% 34%/max(100%,420px) auto no-repeat #1a0a14}
+body:not(.th-orient) .bar-wall .lamp,body:not(.th-orient) .bar-wall .shelf{display:none}
+body:not(.th-orient) #market{background:linear-gradient(rgba(12,6,18,.52),rgba(12,6,18,.74)),url(decors/marche.webp) 50% 50%/cover #08060e}
+body:not(.th-orient) .alley{background:linear-gradient(rgba(8,6,14,.05),rgba(8,6,14,.3)),url(decors/marche.webp) 50% 55%/max(100%,420px) auto no-repeat #120c18}
+body:not(.th-orient) .alley>:not(.al-glow):not(.al-neon):not(.al-rain):not(.al-siren){display:none}
+body:not(.th-orient) #machine{background:linear-gradient(rgba(12,6,18,.52),rgba(12,6,18,.74)),url(decors/machine.webp) 50% 50%/cover #0c0612}
+body:not(.th-orient) #over,body:not(.th-orient) #over.lost{background:linear-gradient(rgba(10,4,10,.5),rgba(10,4,10,.78)),url(decors/defaite.webp) 50% 50%/cover #0b0610}
+body:not(.th-orient) #win{background:linear-gradient(rgba(14,6,20,.5),rgba(14,6,20,.8)),url(decors/victoire.webp) 50% 50%/cover #0b0610}
+body:not(.th-orient) .fbcut.k-intro{background:linear-gradient(rgba(8,4,14,.3),rgba(8,4,14,.78)),url(decors/baronfinal.webp) 50% 50%/cover #0b0610}
+body:not(.th-orient) .fbcut.k-bye{background:linear-gradient(rgba(14,6,20,.35),rgba(14,6,20,.8)),url(decors/victoire.webp) 50% 50%/cover #0b0610}
+body:not(.th-orient) .hzj-bg{background:linear-gradient(rgba(14,8,10,.5),rgba(14,8,10,.78)),url(decors/jack.webp) 50% 40%/cover #120a10}
+body:not(.th-orient) .hzj-bg::after,body:not(.th-orient) .hzj-bg>*{display:none}
+body:not(.th-orient) .lib-bg{background:url(decors/biblio.webp) 50% 50%/cover no-repeat #0a0503}
+body:not(.th-orient) .hzk{background:url(decors/aurevoir.webp) 76.1% 50%/cover #0a0508}
+body:not(.th-orient) .hzk .hzk-bg{visibility:hidden}
+body:not(.th-orient) .gsti{--fl:22.5%;background:#05060c}
+body:not(.th-orient) .gsti::before,body:not(.th-orient) .gsti::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url(decors/ruelle.webp) 50% 77.5%/cover no-repeat}
+body:not(.th-orient) .gsti::before{filter:brightness(.55) saturate(.75)}
+body:not(.th-orient) .gsti.g-neon::before{animation:gstiImgNeon 1.1s steps(1) forwards}
+@keyframes gstiImgNeon{0%,18%,34%{filter:brightness(.6) saturate(.8)}10%,26%,44%,100%{filter:none}}
+body:not(.th-orient) .gsti::after{background-image:url(decors/ruelle-ouverte.webp);opacity:0;transition:opacity .7s}
+body:not(.th-orient) .gsti.g-open::after{opacity:1}
+body:not(.th-orient) .gsti>.gsti-sky,body:not(.th-orient) .gsti>.gsti-moon,body:not(.th-orient) .gsti>.gsti-wall,body:not(.th-orient) .gsti>.gsti-pipe,body:not(.th-orient) .gsti>.gsti-door,body:not(.th-orient) .gsti>.gsti-lamp,body:not(.th-orient) .gsti>.gsti-cone,body:not(.th-orient) .gsti>.gsti-crate,body:not(.th-orient) .gsti>.gsti-bin,body:not(.th-orient) .gsti>.gsti-floor,body:not(.th-orient) .gsti>.gsti-puddle,body:not(.th-orient) .gsti>.gsti-steam{display:none}
+body:not(.th-orient) .gsti.g-exit .gsti-g{transform:translateX(calc(36vw - var(--rs) * .5)) translateY(-3%) scale(.5)}
+body:not(.th-orient) .gsti-flash{background:radial-gradient(circle at 50.8% 62%,#fff6dc,#ffcc4d 40%,#ff7a3d 75%,#c8283a)}
+@media (max-aspect-ratio:3/4){body:not(.th-orient) .gsti{--fl:17%}body:not(.th-orient) .gsti::before{background:url(decors/ruelle.webp) 50% 100%/auto 76% no-repeat,linear-gradient(#04080e,#1a6878 23.6%,#207c8d 24.5%)}body:not(.th-orient) .gsti::after{background:url(decors/ruelle-ouverte.webp) 50% 100%/auto 76% no-repeat,linear-gradient(#04080e,#1a6878 23.6%,#257c90 24.5%)}body:not(.th-orient) .gsti-bub{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}body:not(.th-orient) .gsti-g{left:4%}body:not(.th-orient) .gsti.g-exit .gsti-g{transform:translateX(calc(46vw - var(--rs) * .5)) translateY(-3%) scale(.5)}}
+/* ===== v20.1 · retours ===== */
+.mg-act{counter-reset:stk}
+.mg-act .btn[data-stake]{counter-increment:stk;position:relative;transition:transform .12s,box-shadow .12s,filter .12s}
+body.lpc .mg-act .btn[data-stake]::before{content:counter(stk);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px;line-height:1;background:rgba(40,20,0,.82);color:#ffe6a0;box-shadow:inset 0 -2px 0 rgba(0,0,0,.4)}
+.mg-act .btn[data-stake]:is(:hover,:focus-visible,.gp-focus){transform:translateY(-4px) scale(1.03);outline:none!important;box-shadow:0 0 0 3px #fff,0 0 0 7px #ff4fa0,0 8px 0 rgba(0,0,0,.45),0 0 22px rgba(255,79,160,.55)!important;filter:brightness(1.08)}
+.mg-act:has(.btn[data-stake]:is(:hover,:focus-visible,.gp-focus)) .btn[data-stake]:not(:hover):not(:focus-visible):not(.gp-focus){filter:brightness(.62) saturate(.6)}
+body.gp-on .btn.gold.gp-focus{outline-color:#fff!important}
+.mk-scene::after,.bar-scene::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6}
+.mk-scene::after{box-shadow:inset 0 0 0 3px #2a2238}
+.bar-scene::after{box-shadow:inset 0 0 0 3px #5a3420}
+body.lpc #market .mk-scene{height:184px}
+body.lpc #market .mk-scene .insp{top:4px;bottom:auto;height:calc(100% - 4px);width:auto;aspect-ratio:156/178;left:0}
+body:not(.th-orient) .fpd-bottle,body:not(.th-orient) .fpd-darts,body:not(.th-orient) .fpd-ash{display:none}
+/* ===== v20.2 · l'interface de Dina : marqueur, scotch, vrais jetons ===== */
+@font-face{font-family:'PMarker20';src:url(fonts/permanent-marker.woff2) format('woff2');font-display:swap}
+body:not(.th-orient) #mini.fpn .fpn-dina svg.fp-table ellipse{display:none}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-title{justify-content:center;align-items:center;gap:10px}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-title b{font:400 30px/1 'PMarker20',var(--f-pix),sans-serif;color:#ff4fa0;rotate:-3deg;text-shadow:2px 3px 0 #1a0710,0 0 14px rgba(255,79,160,.4)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-title small{font:400 13px/1 'PMarker20',var(--f-pix),sans-serif;letter-spacing:.06em;color:#24140f;background:#e9dfc6;padding:5px 10px 4px;rotate:3deg;box-shadow:0 2px 3px rgba(0,0,0,.45);clip-path:polygon(0 12%,4% 0,9% 10%,15% 2%,85% 0,92% 9%,100% 3%,97% 50%,100% 92%,93% 100%,86% 91%,10% 100%,4% 90%,0 100%,2% 50%)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-tw .say{position:relative;background:#f1e8d4;color:#1d1416;font:400 18px/1.28 'PMarker20',var(--f-pix),sans-serif;padding:12px 18px 10px;border-radius:2px;rotate:-1.2deg;box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 0 30px rgba(120,90,40,.18);text-shadow:none}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-tw .say::before,body:not(.th-orient) #mini.fpn .mg-dina .mg-tw .say::after{content:"";display:block;position:absolute;top:-9px;width:52px;height:19px;background:rgba(236,226,198,.82);box-shadow:0 1px 2px rgba(0,0,0,.25);border:0;transform:none;clip-path:polygon(0 10%,6% 0,94% 6%,100% 0,98% 92%,100% 100%,4% 94%,0 100%)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-tw .say::before{left:-12px;rotate:-30deg}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-tw .say::after{right:-12px;left:auto;rotate:26deg}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-pot{background:none;padding:0}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-pot-row{font:400 17px/1.2 'PMarker20',var(--f-pix),sans-serif;color:#f7f0ff;rotate:-1deg;text-shadow:0 2px 0 #000,0 0 10px rgba(0,0,0,.9)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-pot-row b{font:400 20px/1 'PMarker20',var(--f-pix),sans-serif;color:#ffe14d}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-hint{font:400 17px/1.25 'PMarker20',var(--f-pix),sans-serif;color:#fff;text-shadow:0 2px 0 #000,0 0 10px #000}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-hint b{color:#ff4fa0}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-score{font:400 17px/1.2 'PMarker20',var(--f-pix),sans-serif;text-shadow:0 2px 0 #000}
+body:not(.th-orient) #mini.fpn .mg-dina #mg-cv{border-radius:2px;rotate:-1deg;box-shadow:0 14px 22px rgba(0,0,0,.65),0 0 0 2px #0e0806}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-res{background:none!important;box-shadow:none!important;border-radius:0;padding:0;font:400 46px/1 'PMarker20',var(--f-pix),sans-serif;rotate:-8deg;text-shadow:3px 4px 0 #120a0e,0 0 18px rgba(0,0,0,.8)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-res.win{color:#ffe14d}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-res.lose{color:#ff4fa0}
+/* les mises : de vraies piles de jetons avec un bout de scotch */
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act{align-items:flex-end}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act{flex-wrap:nowrap;background:linear-gradient(transparent,rgba(12,5,8,.55) 55%)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-stake]{flex:1 1 0;max-width:132px;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;padding:6px 0 4px;background:none!important;border:0;box-shadow:none!important;color:#1d1416;filter:none}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-stake]:is(:hover,:focus-visible,.gp-focus){transform:translateY(-6px)!important;box-shadow:none!important;filter:none}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act:has(.btn[data-stake]:is(:hover,:focus-visible,.gp-focus)) .btn[data-stake]:not(:hover):not(:focus-visible):not(.gp-focus){filter:brightness(.55) saturate(.6)}
+body:not(.th-orient) #mini.fpn .mg-dina .dn-stack{position:relative;display:block;width:62px;height:calc(18px + var(--n) * 5px);transition:filter .15s}
+body:not(.th-orient) #mini.fpn .mg-dina .dn-stack b{position:absolute;left:calc(50% - 31px + var(--x,0px));bottom:calc(var(--i) * 5px);width:62px;height:18px;border-radius:50%;background:radial-gradient(ellipse 34% 30% at 50% 47%,var(--c2) 0 92%,transparent 96%),radial-gradient(ellipse 50% 46% at 50% 47%,var(--c1) 0 70%,transparent 74%),repeating-conic-gradient(from 8deg at 50% 47%,var(--c1) 0 22deg,var(--c2) 22deg 36deg);box-shadow:0 5px 0 var(--c3),0 6px 0 rgba(0,0,0,.35)}
+body:not(.th-orient) #mini.fpn .mg-dina .btn[data-stake]:is(:hover,:focus-visible,.gp-focus) .dn-stack{filter:drop-shadow(0 0 10px rgba(255,79,160,.9))}
+body:not(.th-orient) #mini.fpn .mg-dina .dn-tape{display:block;min-width:76px;padding:6px 10px 4px;font:400 19px/1 'PMarker20',var(--f-pix),sans-serif;color:#1d1416;background:#e9dfc6;box-shadow:0 3px 4px rgba(0,0,0,.45);rotate:var(--r,-2deg);clip-path:polygon(0 10%,5% 0,12% 8%,88% 2%,95% 9%,100% 0,98% 50%,100% 94%,92% 100%,10% 92%,3% 100%,0 92%,2% 50%)}
+body:not(.th-orient) #mini.fpn .mg-dina .btn[data-stake]:is(:hover,:focus-visible,.gp-focus) .dn-tape{background:#ff4fa0;color:#fff}
+body.lpc:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-stake]::before{left:calc(50% - 46px);top:0;width:24px;height:24px;transform:none;border-radius:50%;background:none;border:2px solid #ff4fa0;color:#ff4fa0;font:400 14px/1 'PMarker20',var(--f-pix),sans-serif;box-shadow:none;rotate:-8deg}
+/* LANCER : une bande de gaffer noir taguée ; Continuer / Partir : du scotch de peintre */
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn:not([data-stake]){border:0;border-radius:2px;font:400 24px/1 'PMarker20',var(--f-pix),sans-serif;letter-spacing:.04em;padding:14px 20px 11px;rotate:-1deg;clip-path:polygon(0 9%,3% 0,40% 6%,97% 2%,100% 8%,99% 50%,100% 93%,96% 100%,55% 95%,3% 100%,0 92%,1% 50%)}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-throw]{background:#151215!important;color:#ff4fa0;text-shadow:0 0 12px rgba(255,79,160,.7);box-shadow:none}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-throw]:is(:focus-visible,.gp-focus){color:#fff;text-shadow:0 0 16px #ff4fa0}
+@media (hover:hover){body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-throw]:hover{color:#fff;text-shadow:0 0 16px #ff4fa0}body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-mg]:hover{background:#ff4fa0!important;color:#fff}}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-mg]{background:#e9dfc6!important;color:#1d1416;box-shadow:none;text-shadow:none;font-size:20px}
+body:not(.th-orient) #mini.fpn .mg-dina .mg-act .btn[data-mg]:is(:focus-visible,.gp-focus){background:#ff4fa0!important;color:#fff}
+/* ===== v20.3 · les interfaces des persos : Nox (tarot), Momo (ardoise), le Baron (laiton), Jack (registre) ===== */
+@font-face{font-family:'Cinzel20';font-weight:600;src:url(fonts/cinzel-600.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'Cinzel20';font-weight:700;src:url(fonts/cinzel-700.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'Fell20';font-style:italic;src:url(fonts/imfell-italic.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'Fell20';font-style:normal;src:url(fonts/imfell-italic.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'Sketch20';font-weight:700;src:url(fonts/cabin-sketch-700.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'PHand20';src:url(fonts/patrick-hand.woff2) format('woff2');font-display:swap}
+@font-face{font-family:'Elite20';src:url(fonts/special-elite.woff2) format('woff2');font-display:swap}
+body:not(.th-orient) #mini.fpn svg.fpn-table :is(ellipse,path,circle){display:none}
+body:not(.th-orient) #poker.fp svg.fp-table ellipse[fill="none"]{display:none}
+
+/* ---------- Madame Nox : tarot, velours, filets dorés ---------- */
+body:not(.th-orient) #mini.fpn .mg-nox .mg-title{justify-content:center;align-items:baseline;gap:10px}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-title b{font:700 25px/1 'Cinzel20',Georgia,serif;letter-spacing:.06em;color:#f3d68a;text-shadow:0 1px 0 #6a4510,0 2px 6px #000,0 0 16px rgba(169,139,255,.55)}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-title small{font:600 11px/1 'Cinzel20',Georgia,serif;letter-spacing:.32em;color:#cbb8ff}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-title small::before{content:"✦ "}body:not(.th-orient) #mini.fpn .mg-nox .mg-title small::after{content:" ✦"}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-tw .say{position:relative;background:rgba(16,7,30,.86);color:#f1e6ff;font:italic 400 19px/1.3 'Fell20',Georgia,serif;padding:9px 26px 8px;border-radius:0;border:1px solid #c9a24a;outline:1px solid rgba(201,162,74,.45);outline-offset:3px;box-shadow:0 10px 18px rgba(0,0,0,.55)}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-tw .say::before,body:not(.th-orient) #mini.fpn .mg-nox .mg-tw .say::after{content:"";display:block;position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;background:#e9c877;border:0;transform:rotate(45deg);box-shadow:0 0 6px rgba(233,200,119,.8)}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-tw .say::before{left:-8px}body:not(.th-orient) #mini.fpn .mg-nox .mg-tw .say::after{right:-8px}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-pot{background:none;padding:0}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-pot-row{font:600 13px/1.2 'Cinzel20',Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#dccdff;text-shadow:0 2px 4px #000}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-pot-row b{font:700 16px/1 'Cinzel20',Georgia,serif;color:#f3d68a}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-hint{font:italic 400 18px/1.25 'Fell20',Georgia,serif;color:#ece2ff;text-shadow:0 2px 6px #000}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-hint b{color:#f3d68a;font-style:normal}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-res{background:none!important;box-shadow:none!important;padding:0;border-radius:0;font:700 40px/1 'Cinzel20',Georgia,serif;letter-spacing:.06em;rotate:-4deg;text-shadow:0 2px 0 #3a2208,0 0 22px rgba(169,139,255,.9),0 0 4px #000}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-res.win{color:#f3d68a}body:not(.th-orient) #mini.fpn .mg-nox .mg-res.lose{color:#ff7aa0}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act{flex-wrap:nowrap;align-items:flex-end;gap:12px;background:linear-gradient(transparent,rgba(10,4,20,.6) 55%)}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn.tc,body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn.tc:is(:hover,:focus-visible,.gp-focus){flex:0 1 96px;min-width:0;height:auto;aspect-ratio:2/3;max-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:2px;padding:9px 6px 8px;border:0;border-radius:6px;color:#f3d68a;background:radial-gradient(ellipse at 50% 38%,#3d1f6e,#1b0c36 70%,#120824)!important;box-shadow:inset 0 0 0 2px #0d0618,inset 0 0 0 3px #c9a24a,inset 0 0 0 6px #170a2e,inset 0 0 0 7px rgba(201,162,74,.55),0 8px 0 rgba(0,0,0,.45),0 12px 18px rgba(0,0,0,.4)!important;filter:none;transition:transform .15s,box-shadow .15s,filter .15s}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn.tc:is(:hover,:focus-visible,.gp-focus){transform:translateY(-10px) rotate(-2deg)!important;box-shadow:inset 0 0 0 2px #0d0618,inset 0 0 0 3px #f3d68a,inset 0 0 0 6px #170a2e,inset 0 0 0 7px rgba(243,214,138,.8),0 0 0 2px rgba(203,184,255,.6),0 0 26px rgba(169,139,255,.85),0 14px 20px rgba(0,0,0,.5)!important}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act:has(.btn.tc:is(:hover,:focus-visible,.gp-focus)) .btn.tc:not(:hover):not(:focus-visible):not(.gp-focus){filter:brightness(.55) saturate(.6)}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-num{font:600 10px/1 'Cinzel20',Georgia,serif;letter-spacing:.14em;color:#cbb8ff}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-sym{display:grid;place-items:center;width:46px;height:46px}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-sym svg{width:100%;height:100%;fill:#f3d68a;filter:drop-shadow(0 0 6px rgba(243,214,138,.55))}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-orb{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--o) 45%,#fff),var(--o) 45%,color-mix(in srgb,var(--o) 50%,#000));box-shadow:0 0 0 2px #c9a24a,0 0 14px var(--o)}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-name{font:700 10.5px/1.1 'Cinzel20',Georgia,serif;letter-spacing:.08em;color:#f3d68a;text-align:center;white-space:nowrap}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-amt{display:flex;align-items:center;gap:4px;font:700 15px/1 'Cinzel20',Georgia,serif;color:#fff3cf}
+body:not(.th-orient) #mini.fpn .mg-nox .tc-amt .coin{width:13px;height:13px}
+body.lpc:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn.tc::before{left:4px;top:4px;width:18px;height:18px;transform:none;border-radius:50%;background:#120824;border:1px solid #c9a24a;color:#f3d68a;font:700 10px/1 'Cinzel20',Georgia,serif;box-shadow:none}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn:not(.tc){border-radius:0;border:1px solid #c9a24a;outline:1px solid rgba(201,162,74,.45);outline-offset:3px;background:rgba(16,7,30,.9)!important;color:#f3d68a;font:700 18px/1 'Cinzel20',Georgia,serif;letter-spacing:.16em;box-shadow:0 8px 16px rgba(0,0,0,.5);text-shadow:0 0 10px rgba(169,139,255,.6)}
+body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn:not(.tc):is(:focus-visible,.gp-focus){background:#2a1450!important;color:#fff}
+@media (hover:hover){body:not(.th-orient) #mini.fpn .mg-nox .mg-act .btn:not(.tc):hover{background:#2a1450!important;color:#fff}}
+
+/* ---------- Momo la Craie : ardoise, craie, pièces en laiton ---------- */
+body:not(.th-orient) #mini.fpn .mg-momo .mg-title{justify-content:center;align-items:baseline;gap:10px}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-title b{font:700 28px/1 'Sketch20','PHand20',sans-serif;color:#f4f2ea;letter-spacing:.02em;rotate:-2deg;text-shadow:0 0 2px rgba(255,255,255,.5),0 2px 6px #000}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-title small{font:400 15px/1 'PHand20',sans-serif;letter-spacing:.04em;color:#ffe680;text-transform:lowercase;border-bottom:2px solid rgba(255,230,128,.6);padding-bottom:1px;rotate:2deg;text-shadow:0 2px 4px #000}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-tw .say{position:relative;background:radial-gradient(ellipse at 40% 30%,#323a35,#1c221f 75%);color:#f2f1ea;font:400 20px/1.2 'PHand20',sans-serif;padding:7px 18px 6px;border-radius:3px;border:5px solid #6a3c20;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 0 18px rgba(255,255,255,.06),0 8px 14px rgba(0,0,0,.55);text-shadow:0 0 1px rgba(255,255,255,.7),0 0 5px rgba(255,255,255,.18);rotate:-.8deg}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-tw .say::before{display:none}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-pot{background:none;padding:0}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-pot-row{font:400 18px/1.15 'PHand20',sans-serif;color:#f4f2ea;text-shadow:0 0 1px rgba(255,255,255,.5),0 2px 4px #000}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-pot-row b{font:400 19px/1 'PHand20',sans-serif;color:#ffe680}
+body:not(.th-orient) #mini.fpn .mg-momo:has(.btn[data-coin]) .pool-sides{display:none}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-hint{font:400 17px/1.2 'PHand20',sans-serif;color:#f4f2ea;text-shadow:0 2px 4px #000}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-hint b.py{color:#ffe680}body:not(.th-orient) #mini.fpn .mg-momo .mg-hint b.pr{color:#ff8f80}
+body:not(.th-orient) #mini.fpn .mg-momo .pool-sides .ps{background:radial-gradient(ellipse at 40% 30%,#323a35,#1c221f 80%)!important;border-radius:3px;box-shadow:inset 0 0 0 3px #5a3218,0 4px 8px rgba(0,0,0,.45)!important;font-family:'PHand20',sans-serif}
+body:not(.th-orient) #mini.fpn .mg-momo .pool-sides .ps b{font:700 17px/1 'Sketch20','PHand20',sans-serif;color:#f4f2ea;letter-spacing:.04em}
+body:not(.th-orient) #mini.fpn .mg-momo .pool-sides .ps small{font:400 14px/1.1 'PHand20',sans-serif;color:#d8d6cc}
+body:not(.th-orient) #mini.fpn .mg-momo .pool-sides .ps.on{box-shadow:inset 0 0 0 3px #5a3218,0 0 0 2px rgba(255,230,128,.85),0 4px 8px rgba(0,0,0,.45)!important}
+body:not(.th-orient) #mini.fpn .mg-momo .pool-sides .ps em{background:none!important;box-shadow:none!important;color:#ffe680;font:700 13px/1 'Sketch20','PHand20',sans-serif;border:2px solid rgba(255,230,128,.8);border-radius:50%;padding:3px 7px;rotate:-6deg}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-res{background:none!important;box-shadow:none!important;padding:0;border-radius:0;font:700 46px/1 'Sketch20','PHand20',sans-serif;rotate:-6deg;text-shadow:0 0 2px rgba(255,255,255,.6),0 3px 0 #0c100e,0 0 18px rgba(0,0,0,.9)}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-res.win{color:#ffe680}body:not(.th-orient) #mini.fpn .mg-momo .mg-res.lose{color:#ff8f80}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act{background:linear-gradient(transparent,rgba(4,14,9,.55) 55%)}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn[data-coin]{flex:0 0 auto;width:72px;height:72px;min-width:0;border-radius:50%;padding:0;border:0;display:grid;place-items:center;font:700 17px/1 'Sketch20','PHand20',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#4a2c08;text-shadow:0 1px 0 rgba(255,244,200,.7);background:radial-gradient(circle at 50% 50%,transparent 58%,rgba(90,50,8,.55) 59% 61%,transparent 62%),radial-gradient(circle at 34% 28%,#fff1b8,#e3b34c 42%,#a8741e 78%,#6a4510)!important;box-shadow:inset 0 0 0 3px #8a5a14,inset 0 0 0 5px #f0cd78,0 6px 0 #4a2e08,0 10px 16px rgba(0,0,0,.5)!important;transition:transform .15s}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn[data-coin="face"]{background:radial-gradient(circle at 50% 50%,transparent 58%,rgba(60,60,70,.55) 59% 61%,transparent 62%),radial-gradient(circle at 34% 28%,#ffffff,#c9ccd4 42%,#8a8e99 78%,#4a4e58)!important;color:#2a2c33;box-shadow:inset 0 0 0 3px #6a6e78,inset 0 0 0 5px #e8eaf0,0 6px 0 #2a2c33,0 10px 16px rgba(0,0,0,.5)!important}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn[data-coin]:is(:focus-visible,.gp-focus){transform:translateY(-6px) rotate(-6deg);outline:3px solid #ffe680!important;outline-offset:3px}
+@media (hover:hover){body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn[data-coin]:hover{transform:translateY(-6px) rotate(-6deg)}}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn:not([data-coin]){border-radius:3px;border:5px solid #6a3c20;background:radial-gradient(ellipse at 40% 30%,#323a35,#1c221f 75%)!important;color:#f4f2ea;font:700 22px/1 'Sketch20','PHand20',sans-serif;letter-spacing:.04em;box-shadow:0 6px 12px rgba(0,0,0,.5)!important;text-shadow:0 0 2px rgba(255,255,255,.6)}
+body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn:not([data-coin]):is(:focus-visible,.gp-focus){color:#ffe680;border-color:#8a5028}
+@media (hover:hover){body:not(.th-orient) #mini.fpn .mg-momo .mg-act .btn:not([data-coin]):hover{color:#ffe680;border-color:#8a5028}}
+
+/* ---------- Le Baron : acajou, plaques en laiton, carte des mains ---------- */
+body:not(.th-orient) #poker.fp .pk-top .say{background:linear-gradient(#3a1a10,#22100a);color:#f3e3c0;font:italic 400 19px/1.28 'Fell20',Georgia,serif;padding:8px 22px;border-radius:3px;border:2px solid #c9a24a;box-shadow:inset 0 0 0 3px #22100a,inset 0 0 0 4px rgba(201,162,74,.4),0 10px 16px rgba(0,0,0,.55);text-shadow:0 1px 0 #000}
+body:not(.th-orient) #poker.fp .pk-side small{font:600 11px/1 'Cinzel20',Georgia,serif;letter-spacing:.22em;color:#e9c877;text-shadow:0 1px 0 rgba(0,0,0,.7)}
+body:not(.th-orient) #poker.fp .pk-vs{font:700 16px/1 'Cinzel20',Georgia,serif;color:#e9c877;letter-spacing:.1em}
+body:not(.th-orient) #poker.fp .pk-cap{font:italic 400 14px/1.15 'Fell20',Georgia,serif;color:#f1e3c0}
+body:not(.th-orient) #poker.fp .pk-info{font:italic 400 17px/1.2 'Fell20',Georgia,serif;color:#f1e8d0;text-shadow:0 1px 3px #000}
+body:not(.th-orient) #poker.fp .pk-info b{font-style:normal;font-family:'Cinzel20',Georgia,serif;color:#e9c877}
+body:not(.th-orient) #poker.fp .pk-lab span{font:600 11px/1 'Cinzel20',Georgia,serif;letter-spacing:.2em;color:#e9c877}
+body:not(.th-orient) #poker.fp .pk-lab b{font:700 17px/1.1 'Cinzel20',Georgia,serif;color:#f3d68a}
+body:not(.th-orient) #poker.fp .pk-lab em{font:italic 400 15px/1 'Fell20',Georgia,serif}
+body:not(.th-orient) #poker.fp .pk-res{background:none!important;box-shadow:none!important;padding:0;border-radius:0;font:700 42px/1 'Cinzel20',Georgia,serif;letter-spacing:.05em;rotate:-4deg;text-shadow:0 2px 0 #2a1606,0 0 18px rgba(0,0,0,.9),0 0 30px rgba(243,214,138,.5)}
+body:not(.th-orient) #poker.fp .pk-res.win{color:#f3d68a}body:not(.th-orient) #poker.fp .pk-res.lose{color:#ff8a8a}
+body:not(.th-orient) #poker.fp .pk-act .btn{border:0;border-radius:3px;font:700 18px/1 'Cinzel20',Georgia,serif;letter-spacing:.14em;color:#2a1606;text-shadow:0 1px 0 rgba(255,240,200,.6);background:radial-gradient(circle at 14px 50%,#5a3a10 0 2.4px,#f8e3a0 2.6px 3.6px,transparent 3.8px),radial-gradient(circle at calc(100% - 14px) 50%,#5a3a10 0 2.4px,#f8e3a0 2.6px 3.6px,transparent 3.8px),linear-gradient(180deg,#f6dc94,#d4a23e 52%,#9a6a1a)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 0 0 1px rgba(90,50,10,.7),0 4px 0 #4a2e08,0 8px 14px rgba(0,0,0,.45)!important}
+body:not(.th-orient) #poker.fp .pk-act .btn:is(.red,.ghost,.purple,.blue){color:#f3e3c0;text-shadow:0 1px 0 #000;background:radial-gradient(circle at 14px 50%,#c9a24a 0 3px,transparent 3.4px),radial-gradient(circle at calc(100% - 14px) 50%,#c9a24a 0 3px,transparent 3.4px),linear-gradient(#4a2214,#2a120a)!important;box-shadow:inset 0 0 0 2px #c9a24a,inset 0 0 0 4px #2a120a,0 4px 0 #120804,0 8px 14px rgba(0,0,0,.45)!important}
+body:not(.th-orient) #poker.fp .pk-act .btn:is(:focus-visible,.gp-focus){filter:brightness(1.12);outline:2px solid #fff3cf!important;outline-offset:3px}
+@media (hover:hover){body:not(.th-orient) #poker.fp .pk-act .btn:hover{filter:brightness(1.12)}}
+body:not(.th-orient) #poker.fp .pk-ladder,body.lpc:not(.th-orient) #poker.fp .pk-ladder{background:#efe4c8!important;border-radius:2px;box-shadow:0 0 0 1px #b89a5a,0 0 0 4px #efe4c8,0 0 0 5px #8a6a2a,0 12px 22px rgba(0,0,0,.6)!important;padding:8px 6px}
+body:not(.th-orient) #poker.fp .pk-ladder li{background:none!important;border-bottom:1px dotted rgba(90,60,20,.4);border-radius:0}
+body:not(.th-orient) #poker.fp .pk-ladder li b{font:700 12px/1.1 'Cinzel20',Georgia,serif;color:#3a2410;letter-spacing:.03em}
+body:not(.th-orient) #poker.fp .pk-ladder li small,body:not(.th-orient) #poker.fp .pk-ladder .lh small{font:italic 400 12.5px/1.1 'Fell20',Georgia,serif;color:#6a5030}
+body:not(.th-orient) #poker.fp .pk-ladder li.me{box-shadow:inset 3px 0 0 #b8323f!important;background:rgba(184,50,63,.08)!important}
+body:not(.th-orient) #poker.fp .pk-ladder li.him{box-shadow:inset -3px 0 0 #5a3a8a!important;background:rgba(90,58,138,.08)!important}
+body:not(.th-orient) #poker.fp .pk-ladder li.me.him{box-shadow:inset 3px 0 0 #b8323f,inset -3px 0 0 #5a3a8a!important}
+
+/* ---------- Chez Jack : le registre du prêteur, tapé à la machine ---------- */
+body:not(.th-orient) #hz-jack .hzj-say{background:#f3ecd8;color:#231a12;font:400 16px/1.35 'Elite20','Courier New',monospace;border-radius:2px;rotate:-1deg;box-shadow:0 8px 16px rgba(0,0,0,.55),inset 0 0 26px rgba(140,110,60,.2)}
+body:not(.th-orient) #hz-jack .hzj-say::before{display:none}
+body:not(.th-orient) #hz-jack .hzj-right.panel{color:#2a2018;background:linear-gradient(90deg,transparent 30px,rgba(190,60,60,.4) 30px 31px,transparent 31px),repeating-linear-gradient(180deg,transparent 0 29px,rgba(70,100,150,.16) 29px 30px),radial-gradient(ellipse at 50% 0%,#f6efdc,#e8dcc0 80%)!important;border-radius:3px;box-shadow:0 0 0 1px #b8a57a,0 18px 34px rgba(0,0,0,.65),inset 0 0 40px rgba(130,100,50,.18)!important;border:0}
+body:not(.th-orient) #hz-jack .hzj-sign{font:400 30px/1 'Elite20','Courier New',monospace;color:#231a12;text-shadow:none;letter-spacing:.04em}
+body:not(.th-orient) #hz-jack .hzj-sign small{font:400 12px/1 'Elite20','Courier New',monospace;color:#7a6a52;letter-spacing:.08em}
+body:not(.th-orient) #hz-jack .hzj-gold{background:none;box-shadow:none;border:2px solid #b8323f;border-radius:4px;color:#b8323f;font:400 21px/1 'Elite20','Courier New',monospace;rotate:2deg;padding:3px 10px}
+body:not(.th-orient) #hz-jack .hzj-tabs{gap:4px;border-bottom:2px solid #8a7450;padding:0 2px;margin-bottom:12px}
+body:not(.th-orient) #hz-jack .hzj-tabs button{border-radius:7px 7px 0 0;background:#d6c49a;color:#4a3a24;font:400 13px/1 'Elite20','Courier New',monospace;box-shadow:inset 0 -3px 0 rgba(0,0,0,.08);min-height:36px}
+body:not(.th-orient) #hz-jack .hzj-tabs button.on{background:#efe2bf;color:#231a12;box-shadow:0 -2px 0 #8a7450,inset 0 0 0 1px #8a7450;transform:none}
+body:not(.th-orient) #hz-jack .hzj-tabs button svg,body:not(.th-orient) #hz-jack .hzj-tabs button .ico{filter:sepia(1) saturate(.4) brightness(.45)}
+body:not(.th-orient) #hz-jack .hzj-body{color:#2a2018;font-family:'Elite20','Courier New',monospace}
+body:not(.th-orient) #hz-jack .hzj-body :is(h3,h4,.hzj-sec){font:400 15px/1.2 'Elite20','Courier New',monospace;color:#231a12;letter-spacing:.06em}
+body:not(.th-orient) #hz-jack .hzj-body :is(p,small,.otext,.more,.stk-hint,.mini){color:#4a3a28}
+body:not(.th-orient) #hz-jack .hzj-body .offer{background:rgba(255,255,255,.28)!important;border-radius:2px;box-shadow:inset 0 0 0 1px rgba(110,85,45,.35)!important;border-left-color:currentColor;color:#231a12}
+body:not(.th-orient) #hz-jack .hzj-body .offer :is(b,strong){color:#231a12}
+body:not(.th-orient) #hz-jack .hzj-body .btn{background:none!important;border:2px solid #b8323f;border-radius:3px;color:#b8323f!important;font:400 14px/1 'Elite20','Courier New',monospace;text-shadow:none;box-shadow:none!important;rotate:-1.5deg}
+body:not(.th-orient) #hz-jack .hzj-body .btn:is(:disabled,[disabled],.off,.dis){border-color:#9a8c74;color:#9a8c74!important;opacity:.8}
+body:not(.th-orient) #hz-jack .hzj-body .btn:is(:focus-visible,.gp-focus){background:rgba(184,50,63,.12)!important;outline:2px solid #231a12!important}
+@media (hover:hover){body:not(.th-orient) #hz-jack .hzj-body .btn:not(:disabled):hover{background:rgba(184,50,63,.12)!important}}
+body:not(.th-orient) #hz-jack .hzj-go{background:#231a12!important;color:#f3ecd8!important;font:400 22px/1 'Elite20','Courier New',monospace!important;letter-spacing:.1em;border-radius:3px;box-shadow:0 5px 0 #000,0 10px 18px rgba(0,0,0,.45)!important;text-shadow:none!important}
+body:not(.th-orient) #hz-jack .hzj-go small{color:#b8a57a}
+body:not(.th-orient) #poker.fp .pk-hint{font:italic 400 17px/1.25 'Fell20',Georgia,serif;color:#f1e8d0;text-shadow:0 1px 3px #000}
+body:not(.th-orient) #poker.fp .pk-hint b{font-style:normal;font-family:'Cinzel20',Georgia,serif;color:#e9c877}
+body:not(.lpc):not(.th-orient) #poker.fp .pk-act .btn{font-size:14px;letter-spacing:.05em;padding-left:22px;padding-right:22px;line-height:1.1}
+body:not(.th-orient) #hz-jack .hzj-sec b{font:400 15px/1.2 'Elite20','Courier New',monospace;color:#231a12;letter-spacing:.08em;text-decoration:underline;text-underline-offset:3px}
+body:not(.th-orient) #hz-jack .hzj-sec span{color:#6a5a44}
+body:not(.th-orient) #hz-jack .otext b{color:#231a12}
+body:not(.th-orient) #hz-jack .otext span{color:#5a4a36}
+body:not(.th-orient) #hz-jack .otag{background:none!important;color:#5a3a8a!important;box-shadow:inset 0 0 0 1px #5a3a8a!important}
+body:not(.th-orient) #hz-jack :is(.obuy .mini,.drink .mini,.hzj-pack em,.hzu-info,.hzu-sell){background:none!important;border:2px solid #b8323f;border-radius:3px;color:#b8323f!important;font:400 14px/1 'Elite20','Courier New',monospace;text-shadow:none;box-shadow:none!important;rotate:-1.5deg}
+body:not(.th-orient) #hz-jack .obuy .mini.dark{border-color:#231a12;color:#231a12!important;rotate:1deg}
+body:not(.th-orient) #hz-jack .hzu-info{border-color:#231a12;color:#231a12!important;rotate:1deg}
+body:not(.th-orient) #hz-jack :is(.obuy .mini,.drink .mini,.hzu-info,.hzu-sell):is(:disabled,[disabled],[aria-disabled="true"],[data-off]){border-color:#9a8c74;color:#9a8c74!important}
+body:not(.th-orient) #hz-jack .hzj-cat{color:color-mix(in srgb,var(--cat,#b8323f) 70%,#000)!important;font-family:'Elite20','Courier New',monospace}
+body:not(.th-orient) #hz-jack .drink{background:rgba(255,255,255,.3)!important;box-shadow:inset 0 0 0 1px rgba(110,85,45,.35)!important;border-radius:2px}
+body:not(.th-orient) #hz-jack .drink b{color:#231a12}body:not(.th-orient) #hz-jack .drink .dlv{color:#8a6a1a}body:not(.th-orient) #hz-jack .drink .deff{color:#5a4a36}
+body:not(.th-orient) #hz-jack .hzm{background:rgba(90,60,20,.1)!important;box-shadow:inset 0 0 0 1px rgba(110,85,45,.35)!important}
+body:not(.th-orient) #hz-jack .hzm-slot{background:rgba(90,60,20,.12)!important;box-shadow:inset 0 0 0 2px rgba(110,85,45,.4)!important}
+body:not(.th-orient) #hz-jack .hzm-slot i{color:#8a6a3a!important}
+body:not(.th-orient) #hz-jack :is(.hzm-hint,.hzj-hint){color:#4a3a28!important}
+body:not(.th-orient) #hz-jack .hzu-head{background:#231a12!important;color:#efe4c8!important;border-radius:2px;font-family:'Elite20','Courier New',monospace}
+body:not(.th-orient) #hz-jack .hzu-pick{background:rgba(255,255,255,.35)!important;box-shadow:inset 0 0 0 1px rgba(110,85,45,.45)!important;color:#231a12!important;border-radius:3px}
+body:not(.th-orient) #hz-jack .hzu-pick b{color:#231a12!important}
+body:not(.th-orient) #hz-jack .hzu-c.no .hzu-pick{opacity:.65}
+body:not(.th-orient) #hz-jack .rtag2{color:color-mix(in srgb,var(--rc,#8a6a1a) 55%,#000)!important;background:none!important;box-shadow:inset 0 0 0 1px currentColor!important}
+body:not(.th-orient) #hz-jack .hzu-pick em,body:not(.th-orient) #hz-jack .hzm-c em{color:#6a4a8a!important;text-shadow:none!important}
+body:not(.th-orient) #hz-jack .hzm-c{background:rgba(255,255,255,.35)!important;box-shadow:inset 0 0 0 1px rgba(110,85,45,.45)!important;color:#231a12!important;border-radius:3px}
+body:not(.th-orient) #hz-jack .hzm-c b{color:#231a12!important}
+body:not(.th-orient) #hz-jack .hzm-c.on{box-shadow:inset 0 0 0 2px #b8323f!important;background:rgba(184,50,63,.1)!important}
+/* ===== v20.4 · les tables dessinées : le dessus de table prolonge le mur, les objets posés dessus font partie du dessin ===== */
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-nox svg.fp-table{background:#03000a}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-nox svg.fp-table > :not(defs){display:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-nox .fpn-props{position:absolute;left:0;right:0;top:calc(14px + var(--fpH) - 3px);bottom:auto;height:auto;aspect-ratio:1.6;margin-top:-10.135%;background:url(decors/table-nox.webp) 50% 0/100% auto no-repeat;pointer-events:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-nox .fpn-props > *{display:none}
+body:not(.lpc):not(.th-orient) #mini.fpn .fpn-room.fpn-nox .fpn-props{left:-12.5%;right:-12.5%;margin-top:-12.669%}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-momo svg.fp-table{background:#0b100e}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-momo svg.fp-table > :not(defs){display:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-momo .fpn-props{position:absolute;left:0;right:0;top:calc(14px + var(--fpH) - 3px);bottom:auto;height:auto;aspect-ratio:1.6;margin-top:-2.449%;background:url(decors/table-momo.webp) 50% 0/100% auto no-repeat;pointer-events:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-momo .fpn-props > *{display:none}
+body:not(.lpc):not(.th-orient) #mini.fpn .fpn-room.fpn-momo .fpn-props{left:-12.5%;right:-12.5%;margin-top:-3.061%}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-dina svg.fp-table{background:#09000d}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-dina svg.fp-table > :not(defs){display:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-dina .fpn-props{position:absolute;left:0;right:0;top:calc(14px + var(--fpH) - 3px);bottom:auto;height:auto;aspect-ratio:1.6;margin-top:-5.405%;background:url(decors/table-dina.webp) 50% 0/100% auto no-repeat;pointer-events:none}
+body:not(.th-orient) #mini.fpn .fpn-room.fpn-dina .fpn-props > *{display:none}
+body:not(.lpc):not(.th-orient) #mini.fpn .fpn-room.fpn-dina .fpn-props{left:-12.5%;right:-12.5%;margin-top:-6.756%}
+body:not(.th-orient) #poker.fp .fp-room svg.fp-table{background:#060511}
+body:not(.th-orient) #poker.fp .fp-room svg.fp-table > :not(defs){display:none}
+body:not(.th-orient) #poker.fp .fp-room .fpn-props{position:absolute;left:0;right:0;top:calc(14px + var(--fpH) - 3px);bottom:auto;height:auto;aspect-ratio:1.6;margin-top:-2.703%;background:url(decors/table-baron.webp) 50% 0/100% auto no-repeat;pointer-events:none}
+body:not(.th-orient) #poker.fp .fp-room .fpn-props > *{display:none}
+body:not(.lpc):not(.th-orient) #poker.fp .fp-room .fpn-props{left:-12.5%;right:-12.5%;margin-top:-3.379%}
+body:not(.th-orient) #bar{background:linear-gradient(rgba(12,6,18,.5),rgba(12,6,18,.72)),url(decors/bar2.webp) 50% 40%/cover #0c0115}
+
+/* ===== v21.1 · les jeux du milieu dans le style des décors ===== */
+/* les plateaux sont dessinés avec leurs ombres : plus de cadre ni d'ombre carrée autour */
+body:not(.th-orient) #mini.fpn #mg-cv{box-shadow:none;border-radius:0}
+body:not(.th-orient) #mini.fpn .mg-dina #mg-cv{rotate:none;box-shadow:none;border-radius:0}
+/* le billard : un peu moins penché, on vise mieux */
+body:not(.th-orient) #mini.fpn .mg-momo .mg-stage{transform:perspective(1100px) rotateX(32deg) scale(.92);margin-block:-26px -24px}
+/* les cartes du Baron : vieux papier, encre, filet rouge */
+body:not(.th-orient) #poker.fp .pc:not(.back){background:radial-gradient(120% 80% at 30% 8%,rgba(255,250,236,.75),rgba(255,250,236,0) 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .1 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(170deg,#f3e8cf,#e0cda4);color:#1b1310;border-radius:6px;box-shadow:inset 0 0 0 1.5px #1b1310,inset 0 0 0 4px #f1e5c8,inset 0 0 0 5px rgba(130,26,36,.5),0 4px 0 rgba(0,0,0,.55),0 10px 16px rgba(0,0,0,.6)}
+body:not(.th-orient) #poker.fp .pc.red{color:#9b1d27}
+body:not(.th-orient) #poker.fp .pc .pc-c{left:6px;top:6px}
+body:not(.th-orient) #poker.fp .pc .pc-c.r{left:auto;top:auto;right:6px;bottom:6px}
+body:not(.th-orient) #poker.fp .pc .pc-c b{font:700 16px/1 'Cinzel20',Georgia,serif}
+body.lpc:not(.th-orient) #poker.fp .pc .pc-c b{font-size:19px}
+body:not(.th-orient) #poker.fp .pc .pc-m>.ico{filter:drop-shadow(.5px .5px 0 rgba(0,0,0,.35))}
+body:not(.th-orient) #poker.fp .pc .pc-m.fig .crown{color:#c99a3c;filter:drop-shadow(0 0 .6px #1b1310) drop-shadow(0 1px 0 #1b1310)}
+body:not(.th-orient) #poker.fp .pc .pc-m.fig b{font:700 24px/1 'Cinzel20',Georgia,serif}
+body.lpc:not(.th-orient) #poker.fp .pc .pc-m.fig b{font-size:29px}
+body:not(.th-orient) #poker.fp .pc .pc-n{font:700 7px/1 'Cinzel20',Georgia,serif;letter-spacing:.14em;opacity:.8}
+body.lpc:not(.th-orient) #poker.fp .pc .pc-n{font-size:8px}
+body:not(.th-orient) #poker.fp .pc.sel .pc-x{font:700 10px/1 'Cinzel20',Georgia,serif;letter-spacing:.1em;background:#8e1a26;color:#f3e6c4;box-shadow:0 0 0 1.5px #1b1310,0 2px 0 #2a0608}
+/* le dos : bordeaux, treillis doré, losange de laiton */
+body:not(.th-orient) #poker.fp .pc.back{background:radial-gradient(ellipse 55% 42% at 50% 50%,rgba(240,190,100,.22),rgba(240,190,100,0) 70%),repeating-linear-gradient(45deg,rgba(214,168,84,.4) 0 1px,rgba(0,0,0,0) 1px 6px),repeating-linear-gradient(-45deg,rgba(214,168,84,.4) 0 1px,rgba(0,0,0,0) 1px 6px),linear-gradient(170deg,#6a1424,#3c0914);border-radius:6px;box-shadow:inset 0 0 0 1.5px #140608,inset 0 0 0 4px #e6d6b0,inset 0 0 0 5px #b8862e,0 4px 0 rgba(0,0,0,.55),0 10px 16px rgba(0,0,0,.6)}
+body:not(.th-orient) #poker.fp .pc.back i{inset:auto;left:50%;top:50%;width:30%;aspect-ratio:1;border-radius:3px;transform:translate(-50%,-50%) rotate(45deg);background:radial-gradient(circle at 35% 30%,#f6dc94,#b8862e 60%,#6a4310);box-shadow:0 0 0 1.5px #140608,0 0 0 3px #e6d6b0,0 0 0 4px #140608,0 2px 5px rgba(0,0,0,.5)}
+/* les états, avec les mêmes filets */
+body:not(.th-orient) #poker.fp .pc.in{box-shadow:inset 0 0 0 1.5px #1b1310,inset 0 0 0 4px #f1e5c8,inset 0 0 0 5px rgba(130,26,36,.5),0 0 0 2.5px #d9a94a,0 0 18px rgba(230,180,80,.55),0 8px 0 rgba(0,0,0,.45)}
+body:not(.th-orient) #poker.fp .pc.out{opacity:.78;filter:sepia(.45) brightness(.6) saturate(.7)}
+body:not(.th-orient) #poker.fp .pc.sel{box-shadow:inset 0 0 0 1.5px #1b1310,inset 0 0 0 4px #f1e5c8,0 0 0 2.5px #8e1a26,0 3px 0 rgba(0,0,0,.45)}
+/* le tapis : un filet doré peint autour des mains, la lumière de la lampe au centre */
+body:not(.th-orient) #poker.fp .pk-felt{position:relative;isolation:isolate}
+body:not(.th-orient) #poker.fp .pk-felt::before{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:4%;bottom:0;border-radius:50%;border:1.5px solid rgba(214,168,84,.3);box-shadow:0 0 0 6px rgba(214,168,84,.05),inset 0 0 0 5px rgba(214,168,84,.06);background:radial-gradient(ellipse 60% 55% at 50% 45%,rgba(190,220,200,.07),rgba(0,0,0,0) 70%);pointer-events:none}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6149,7 +6435,7 @@ body:has(#coach:not([hidden]) .co-bub) .djinn{visibility:hidden}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v19.9</p>
+  <p class="proto">Sefy Industries · v21.1</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -23664,7 +23950,7 @@ const VISITORS = {
       arrive: ['… Hey. A game? I\'ve got time. I always have time.', 'Chalk is life. You playing?', 'Momo. Just Momo. A little pool?'],
       refuse: ['No worries. The table isn\'t going anywhere.', '… Another time. Or never. That\'s fine too.', 'I understand. Pool has to be earned.'],
       accept: ['Good. Heads or tails?', 'Easy now. Choose: heads or tails?'],
-      turn: ['Hmm…', 'Gently…', 'The cushion… always the cushion.', '*he rubs his chalk*'],
+      turn: ['Hmm…', 'Gently…', 'The cushion… always the cushion.'],
       win: ['Nice shot. Zaza, pour him a drink. On my tab.', 'You play with heart. That deserves respect.', '… You\'ve got the touch. Go have a drink, it\'s on me.'],
       lose: ['Sorry, kid. That\'s life.', 'Your ball didn\'t want to. Don\'t hold it against it.', 'Pool is like the sea. It gives, it takes back.'],
       broke: ['Broke? We\'ll play for honor. If you win, I\'ll still buy you a drink.'],
@@ -24086,10 +24372,12 @@ GAMES.dina = {
   },
   draw(g, t) {
     // mur du pub : briques sombres et néon rose
+    if (!dinaPly20(g)) {
     g.fillStyle = '#2a1520'; g.fillRect(0, 0, 300, 300);
     g.fillStyle = 'rgba(255,255,255,.035)';
     for (let y = 0; y < 300; y += 16) for (let x = (y / 16) % 2 ? -14 : 0; x < 300; x += 28) g.fillRect(x + 1, y + 1, 26, 14);
     const glow = g.createRadialGradient(150, 152, 60, 150, 152, 190); glow.addColorStop(0, 'rgba(255,79,160,.0)'); glow.addColorStop(1, 'rgba(255,79,160,.16)'); g.fillStyle = glow; g.fillRect(0, 0, 300, 300);
+    }
     this.board(g);
     if (DA.mine) this.dart(g, DA.mine, '#5fd4ff', 1, 0);
     if (DA.hers) this.dart(g, DA.hers, '#ff4fa0', 1, 0);
@@ -25356,7 +25644,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v19.9</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v21.1</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -34685,7 +34973,7 @@ function pzList(arr, pose, extra) {
 /* ---------- les nouvelles répliques (chacune écrite pour sa pose) ---------- */
 pzBank(ZAZA, { first: 'gift', hello: ['work', 'wink', 'sly', 'meh'], buy: ['sly', 'wink', 'gift'], shot: ['sly', 'laugh'], broke: ['sus', 'meh', 'mad'], leave: ['wink', 'laugh'], market: 'sly', ciment: 'work', boss: 'sus', baron: 'shock', final: 'sus', v_dina: 'bored', v_momo: 'laugh', v_nox: 'shock' }, {
   hello: [
-    ['bored', '*pop* … Oh, it\'s you. I thought it was a customer.'],
+    ['bored', 'Oh, it\'s you. I thought it was a customer.'],
     ['work', 'Hang on, I\'m shaking. Cocktails are like you: they need a good stir.'],
     ['meh', 'I\'ve been washing this glass since 1987. Still dirty. Like this bar.'],
     ['sus', 'You lost another floor, didn\'t you. It\'s all over your face.'],
@@ -34705,7 +34993,7 @@ pzBank(ZAZA, { first: 'gift', hello: ['work', 'wink', 'sly', 'meh'], buy: ['sly'
 });
 pzBank(BARON, { arrive: ['sly', 'happy'], stake: 'threat', deal: 'sly', raise: ['laugh', 'happy'], swap: 'sly', call: ['bored', 'sus'], draw: 'cheat', cheat: ['cheat', 'oops'], win: ['mad', 'shock'], lose: ['laugh', 'sly', 'bored'], gold: 'sus', broke: 'bored' }, {
   arrive: [
-    ['happy', '*tips his hat* Good evening. Your chips look delicious.'],
+    ['happy', 'Good evening. Your chips look delicious.'],
     ['threat', 'Sit down. That wasn\'t a question.'],
   ],
   deal: [['sly', 'I\'ll deal. No, my sleeve is not moving on its own.']],
@@ -34717,24 +35005,24 @@ pzBank(BARON, { arrive: ['sly', 'happy'], stake: 'threat', deal: 'sly', raise: [
   ],
   win: [
     ['shock', 'My monocle! It fell in my cognac. Like my pride.'],
-    ['mad', '*bites his cigar* Keep them. I curse you. Politely.'],
+    ['mad', 'Keep them. I curse you. Politely.'],
   ],
   lose: [
-    ['bored', '*smoke ring* Another one. My collection thanks you.'],
+    ['bored', 'Another one. My collection thanks you.'],
     ['laugh', 'The house always wins. I am the house.'],
   ],
 });
 pzBank(LINES, { hello: ['wink', 'gift', 'cop'], accept: ['bored', 'wink'], refuse: ['cop', 'mad'], vexed: 'mad', buy: ['greedy', 'wink'], scam: 'laugh', scamSlot: 'secret', slot: 'greedy', item: 'greedy', spell: 'wink', spellFull: 'sus', spellSold: 'greedy', broke: ['sus', 'cop'], poke: ['sus', 'bored', 'cop', 'secret', 'wink'], hint: 'secret', name: 'secret', named: 'secret', punchOffer: 'gift', punchPick: 'sus', punchSure: 'wink', punchNotUlt: 'bored', punchMix: 'bored', punchBrokeMix: 'greedy', punchCursed: 'shock', punchFou: 'shock', punchFake: 'laugh', punchAlready: 'bored', punchStolen: 'cop', punchBroke: 'greedy', punchNone: 'bored', punchCancel: 'bored', punchGo: 'wink', punchWork: 'shock', punchDuring: 'secret', punchDone: 'laugh', punchSold: 'bored' }, {
   hello: [
-    ['gift', '*opens his coat* Welcome. Everything seized, nothing declared.'],
+    ['gift', 'Welcome. Everything seized, nothing declared.'],
     ['cop', 'Police! Wallet check. …Oh, it\'s full? Come in.'],
   ],
   buy: [['greedy', 'I count. I recount. It\'s for my retirement. An early one.']],
-  refuse: [['mad', '*crushes his cigarette* Haggle again and you\'re spending the night in a cell.']],
+  refuse: [['mad', 'Haggle again and you\'re spending the night in a cell.']],
   scam: [['laugh', 'Counterfeit! HAHA. Kidding. No, it really is one.']],
   broke: [['sus', 'Can\'t pay? Turn out your pockets. I\'m good at that.']],
   poke: [
-    ['bored', '*blows smoke* I\'m thinking. Doesn\'t show, but I\'m thinking.'],
+    ['bored', 'I\'m thinking. Doesn\'t show, but I\'m thinking.'],
     ['secret', 'Shh. The cat is wired.'],
     ['wink', 'My hat? Seized from a magician. It was empty. So was the magician.'],
   ],
@@ -34742,7 +35030,7 @@ pzBank(LINES, { hello: ['wink', 'gift', 'cop'], accept: ['bored', 'wink'], refus
 });
 pzList(AN_HELLO, ['happy', 'gift'], [['happy', 'Look! A solid gold ace. Well, painted cardboard. Magnificent!']]);
 pzList(AN_IDLE, ['secret', 'sly', 'think', 'sus'], [
-  ['think', '*loupe* This chip has a scratch. It has lived. Like me.'],
+  ['think', 'This chip has a scratch. It has lived. Like me.'],
   ['secret', 'Between us: my brother wears a corset. A collector\'s secret.'],
   ['mad', 'Touching without gloves?! Sir! Madam! …Fine, touch.'],
   ['laugh', 'My brother lost a poker game to a cat. I framed the photo!'],
@@ -34758,7 +35046,7 @@ pzList(BKS_IDLE, ['secret', 'think', 'sad'], [
 ]);
 pzBank(VISITORS.dina.lines, { arrive: ['sly', 'rock'], refuse: ['mock', 'laugh'], accept: ['rock', 'sly'], turn: ['think', 'throw'], win: ['shock', 'mad', 'sad'], lose: ['rock', 'mock', 'laugh'], broke: 'bored', riv: ['mad', 'sad'], gift: 'sly', boost: 'rock', boostAgain: 'sly' }, {
   arrive: [
-    ['bored', '*pop* … Oh. An opponent. Finally.'],
+    ['bored', 'Oh. An opponent. Finally.'],
     ['rock', 'YO! The Red Carpet is mine tonight! Who wants to lose?'],
   ],
   refuse: [['mock', 'Bwaaah! Chicken! Go drink your milk.']],
@@ -34782,7 +35070,7 @@ pzBank(VISITORS.momo.lines, { arrive: ['happy', 'think'], refuse: ['oops', 'sad'
   ],
   refuse: [['sad', 'Ah. Well. I\'ll go talk to my cue, then.']],
   turn: [
-    ['think', '*chalk, chalk, chalk* … There. Now I\'m ready.'],
+    ['think', 'There. Now I\'m ready.'],
     ['sly', 'Cushion, cushion, pocket. Or pocket, cushion, wall. We\'ll see.'],
   ],
   win: [
@@ -34806,7 +35094,7 @@ pzBank(VISITORS.nox.lines, { arrive: ['sly', 'think', 'wink'], refuse: 'bored', 
   lose: [['laugh', 'HAHA! The spirits love your gold. So do I.']],
   lied: [
     ['secret', 'Shh. What the ball doesn\'t know can\'t hurt it.'],
-    ['sad', '*looks at a Death card* Oh. That wasn\'t for you. Not yet.'],
+    ['sad', 'Oh. That wasn\'t for you. Not yet.'],
   ],
 });
 
@@ -36540,8 +36828,8 @@ const HRD_LBS = { name: 'Horde', col: '#ff7a5c', tok: 1 };
 /* ---------- le shop de Jack : piles de jetons, paquets de la machine, améliorations ---------- */
 const JACK = {
   open: [['lean', 'Bienvenue chez moi. Touche à rien… sauf si tu payes.', 'Welcome to my place. Touch nothing… unless you pay.'], ['watch', 'T\'as une minute. Pas deux.', 'You\'ve got one minute. Not two.']],
-  hello: [['lean', 'Ah. Encore toi.', 'Oh. You again.'], ['paper', 'Fais vite, je lis.', 'Make it quick, I\'m reading.'], ['yawn', '*bâille* … Tu veux quoi ?', '*yawns* … What do you want?'], ['glass', 'Je t\'écoute. Enfin, j\'essaie.', 'I\'m listening. Well, I\'m trying.'], ['coffee', 'Mon café refroidit. Dépêche.', 'My coffee\'s getting cold. Hurry.'], ['sus', 'T\'as survécu ? Bon. Achète.', 'You survived? Fine. Buy something.']],
-  pile: [['push', 'Une pile. Tiens.', 'One stack. Here.'], ['smirk', 'Ça, c\'est de l\'or bien dépensé.', 'Now that\'s gold well spent.'], ['cash', '*ding* Merci.', '*ding* Thanks.'], ['count', 'Continue comme ça, j\'aime bien compter.', 'Keep going, I like counting.']],
+  hello: [['lean', 'Ah. Encore toi.', 'Oh. You again.'], ['paper', 'Fais vite, je lis.', 'Make it quick, I\'m reading.'], ['yawn', 'Tu veux quoi ?', 'What do you want?'], ['glass', 'Je t\'écoute. Enfin, j\'essaie.', 'I\'m listening. Well, I\'m trying.'], ['coffee', 'Mon café refroidit. Dépêche.', 'My coffee\'s getting cold. Hurry.'], ['sus', 'T\'as survécu ? Bon. Achète.', 'You survived? Fine. Buy something.']],
+  pile: [['push', 'Une pile. Tiens.', 'One stack. Here.'], ['smirk', 'Ça, c\'est de l\'or bien dépensé.', 'Now that\'s gold well spent.'], ['cash', 'Merci.', 'Thanks.'], ['count', 'Continue comme ça, j\'aime bien compter.', 'Keep going, I like counting.']],
   chip: [['cash', 'Bon choix. Pour une fois.', 'Good pick. For once.'], ['smirk', 'Il te va bien. Moins bien qu\'à moi.', 'Suits you. Less than me.'], ['count', 'Vendu. Pas repris, pas échangé.', 'Sold. No refunds, no exchanges.']],
   broke: [['sigh', 'Pas d\'or, pas de jetons.', 'No gold, no chips.'], ['shrug', 'Reviens quand t\'es riche.', 'Come back when you\'re rich.'], ['brow', 'Avec ça ? Non.', 'With that? No.']],
   full: [['brow', 'Ton rack est plein. Revends un jeton d\'abord.', 'Your rack is full. Sell a chip first.']],
@@ -36550,13 +36838,13 @@ const JACK = {
   corrupt: [['shock', '… Il est corrompu, ce paquet. Un fou dedans. Je le touche pas. Mais je le vends.', '… This pack is corrupted. A wild chip inside. I don\'t touch it. But I sell it.'], ['sus', 'Ça grésille. Un fou. Ça se paie cher, ces bêtes-là.', 'It\'s crackling. A wild one. Those cost a lot.']],
   fouBuy: [['brow', 'Tu l\'as voulu. Le fou est à toi. Me le ramène pas.', 'You asked for it. The wild one\'s yours. Don\'t bring it back.'], ['smirk', 'Un fou dans ton rack. Bonne chance.', 'A wild chip in your rack. Good luck.']],
   mix: [['glass', 'Deux jetons, une bouteille. Choisis.', 'Two chips, one bottle. Pick.'], ['smirk', 'Mon champagne mélange tout. Même les fous.', 'My champagne mixes anything. Even the wild ones.']],
-  mixDone: [['cash', '*pop* Santé. Une place de libre.', '*pop* Cheers. One slot freed.'], ['smirk', 'Millésime Jack. Ça se boit pas, ça se joue.', 'Vintage Jack. Not for drinking, for playing.'], ['laugh', 'Ha ! Ça mousse. Il est à toi.', 'Ha! It\'s foaming. It\'s yours.']],
+  mixDone: [['cash', 'Santé. Une place de libre.', 'Cheers. One slot freed.'], ['smirk', 'Millésime Jack. Ça se boit pas, ça se joue.', 'Vintage Jack. Not for drinking, for playing.'], ['laugh', 'Ha ! Ça mousse. Il est à toi.', 'Ha! It\'s foaming. It\'s yours.']],
   mixBad: [['brow', 'Celui-là, même mon champagne en veut pas.', 'Not even my champagne wants that one.']],
   mixSame: [['sigh', 'Deux pareils ? Empile-les, c\'est gratuit.', 'Two of the same? Stack them, it\'s free.']],
   faux: [['laugh', 'Une contrefaçon ? Ha. Non.', 'A fake? Ha. No.']],
   maudit: [['sus', 'Maudit ? Garde tes malédictions pour toi.', 'Cursed? Keep your curses to yourself.']],
   sell: [['count', 'Je te le reprends. Pour trois fois rien.', 'I\'ll take it back. For next to nothing.'], ['smirk', 'Merci. Je le revendrai le double.', 'Thanks. I\'ll sell it for double.']],
-  leave: [['point', 'Allez, file. Et reviens pas les mains vides.', 'Go on, beat it. And don\'t come back empty-handed.'], ['clap', '*applaudit mollement* Va te battre.', '*claps lazily* Go fight.'], ['sigh', 'Enfin du calme.', 'Finally, some quiet.']],
+  leave: [['point', 'Allez, file. Et reviens pas les mains vides.', 'Go on, beat it. And don\'t come back empty-handed.'], ['clap', 'Va te battre.', 'Go fight.'], ['sigh', 'Enfin du calme.', 'Finally, some quiet.']],
   idle: ['glass', 'paper', 'yawn', 'coffee', 'watch', 'lean', 'sus'],
 };
 const JK_LINE = k => { const L = pick(JACK[k]); return { pose: L[0], txt: HRD_EN ? L[2] : L[1] }; };
@@ -36974,7 +37262,7 @@ function hrdUpAnim(before, after, res, done) {
   for (const k of ['s2', 's3', 's4', 's5', 's8']) { const im = new Image(); im.src = 'portraits/jack_' + k + '.webp'; }
   place(c1, 's1');
   say('C\'est quoi, cette camelote ?', 'What is this junk?'); Snd.chipPick && Snd.chipPick();
-  T(1000, () => { frame(bite); place(c1, bite); if (bite === 's2') { say('*croc* … C\'est même pas du vrai.', '*crunch* … It\'s not even real.'); Snd.bite && Snd.bite(); } else { say('*renifle* … Ça sent le perdant.', '*sniffs* … Smells like a loser.'); Snd.sneeze && Snd.sneeze(); } });
+  T(1000, () => { frame(bite); place(c1, bite); if (bite === 's2') { say('C\'est même pas du vrai.', 'It\'s not even real.'); Snd.bite && Snd.bite(); } else { say('Ça sent le perdant.', 'Smells like a loser.'); Snd.sneeze && Snd.sneeze(); } });
   T(2100, () => { frame('s5'); place(c1, 's5'); ov.classList.add('trash'); say('À la poubelle.', 'In the trash.'); Snd.clink && Snd.clink(); });
   T(3000, () => { frame('s4'); place(c2, 's4'); ov.classList.add('new'); Snd.secret ? Snd.secret(res.st.k === 'secret' ? 2 : 1) : Snd.jackpot(); haptic(60); say('Tiens. Du vrai, cette fois.', 'Here. The real thing, this time.'); $('#hza-lbl').textContent = res.copy ? hT('DÉDOUBLÉ !', 'SPLIT!') : res.st.k === 'secret' ? hT('RARETÉ SECRÈTE !', 'SECRET RARITY!') : res.st.k === 'hup' ? '★'.repeat(after.hzUp || 0) + '☆'.repeat(3 - (after.hzUp || 0)) : rarLabel(after).toUpperCase() + ' !'; });
   // v19.3 : plus d'image « push » (cadrée autrement, sur un tapis vert) ni de jeton qui flotte dans le vide :
@@ -37354,8 +37642,8 @@ const HK_WHO = { baron: ['Le Baron', 'The Baron', 'baron'], zaza: ['Zaza', 'Zaza
 const HK_CUT = [
   { title: ['LE BARON EST RUINÉ', 'THE BARON IS BROKE'], sub: ['le Tapis Rouge ferme ses portes…', 'the Red Carpet is closing its doors…'], ms: 2600 },
   { who: 'baron', pose: 'broke', line: ['Ruiné… RUINÉ ! Même mes poches sont vides !', 'Broke… BROKE! Even my pockets are empty!'] },
-  { who: 'baron', pose: 'cry', line: ['Mon casino… mon beau casino… *snif*', 'My casino… my beautiful casino… *sniff*'] },
-  { who: 'baron', pose: 'shame', line: ['*enlève son chapeau* … Je m\'en vais.', '*takes off his hat* … I\'m leaving.'] },
+  { who: 'baron', pose: 'cry', line: ['Mon casino… mon beau casino', 'My casino… my beautiful casino'] },
+  { who: 'baron', pose: 'shame', line: ['Je m\'en vais.', 'I\'m leaving.'] },
   { who: 'baron', pose: 'bye', line: ['Mais je reviendrai ! Tu m\'entends ? JE REVIENDRAI !', 'But I\'ll be back! You hear me? I\'LL BE BACK!'], door: 'open' },
   { walk: 'baron' },
   { who: 'zaza', pose: 'bye', line: ['Sans patron, plus de bar… Prends soin de toi, chéri.', 'No boss, no bar… Take care of yourself, darling.'] },
@@ -38844,6 +39132,580 @@ openRules = function () {
     box.querySelector('.rl-tuto').onclick = e => { e.stopPropagation(); show('#rules', false); if (G.mode === 'title' || $('#title') && !$('#title').hidden) tutoStart({ replay: true }); else toast(hT('Le tuto se rejoue depuis l\'écran titre.', 'Replay the tutorial from the title screen.')); };
   } catch (e) { /* rien */ }
   return r;
+};
+
+
+/* ===== v20.0 · les décors dessinés : la porte de « tout le monde s'en va » est dans l'image ===== */
+const _hrdCutLayout20 = hrdCutLayout;
+hrdCutLayout = function () {
+  _hrdCutLayout20.apply(this, arguments);
+  const el = $('#hz-cut'); if (!el || document.body.classList.contains('th-orient')) return;
+  const W = el.clientWidth || innerWidth, Hh = el.clientHeight || innerHeight, k = Math.max(W / 1920, Hh / 873);
+  const ox = (W - 1920 * k) * .761, oy = (Hh - 873 * k) / 2;
+  el.style.setProperty('--dx', (ox + 1461 * k).toFixed(0) + 'px');
+  el.style.setProperty('--dy', (oy + 580 * k).toFixed(0) + 'px');
+  el.style.setProperty('--dk', (k * 310 / 390).toFixed(3));
+};
+
+/* ===== v20.1 · retours : mises 1/2/3 au clavier, Jack bien calé contre le rack, Jack ne lit plus le journal ===== */
+document.addEventListener('keydown', e => {
+  const mn = $('#mini'); if (!mn || mn.hidden || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+  const n = '123456'.indexOf(e.key); if (n < 0) return;
+  const bs = mn.querySelectorAll('#mg-act .btn[data-stake]'); if (!bs[n]) return;
+  e.preventDefault(); e.stopPropagation(); bs[n].focus(); bs[n].click();
+}, true);
+hrdShopFit = function () {
+  const el = $('#hz-jack'), rk = $('#rack'); if (!el || el.hidden) return;
+  el.style.bottom = ''; el.style.right = '';
+  if (!rk || rk.offsetParent === null) return;
+  const r = rk.getBoundingClientRect(), E = el.getBoundingClientRect(), k = (E.width / (el.offsetWidth || 1)) || 1;
+  if (r.top > E.top + E.height * .5) el.style.bottom = Math.max(0, (E.bottom - r.top) / k) + 'px';
+  else if (r.left > E.left + E.width * .5) el.style.right = Math.max(0, (E.right - r.left) / k) + 'px';
+};
+try { const rk = $('#rack'); if (rk && window.ResizeObserver) new ResizeObserver(() => { try { hrdShopFit(); } catch (e) { /* rien */ } }).observe(rk); } catch (e) { /* rien */ }
+const _hrdShopShow20 = hrdShopShow;
+hrdShopShow = function () { const r = _hrdShopShow20.apply(this, arguments); [120, 450, 900].forEach(t => setTimeout(() => { try { hrdShopFit(); } catch (e) { /* rien */ } }, t)); return r; };
+try {
+  JACK.idle = JACK.idle.filter(p => p !== 'paper');
+  for (const k in JACK) if (Array.isArray(JACK[k]) && Array.isArray(JACK[k][0])) JACK[k] = JACK[k].filter(l => l[0] !== 'paper');
+  if (PZ_IX.jack) PZ_IX.jack.poses = PZ_IX.jack.poses.filter(p => p !== 'paper');
+} catch (e) { /* rien */ }
+
+/* ===== v20.2 · l'interface de Dina : la cible clouée sur une planche taguée, les mises en vrais jetons ===== */
+const dinaDeco20 = () => MG.id === 'dina' && !document.body.classList.contains('th-orient') && fpnOn();
+const DPLY = { c: null, k: 0 };
+function dinaPly20(g) {
+  if (!dinaDeco20()) return false;
+  const k = MG.k || 1;
+  if (!DPLY.c || DPLY.k !== k) {
+    const c = document.createElement('canvas'), n = Math.ceil(300 * k); c.width = c.height = n;
+    const b = c.getContext('2d'); b.scale(k, k);
+    let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+    // trois planches de contreplaqué sombre
+    ['#30201a', '#2a1b14', '#2e1e16'].forEach((col, i) => { b.fillStyle = col; b.fillRect(i * 100, 0, 100, 300); });
+    b.strokeStyle = 'rgba(0,0,0,.55)'; b.lineWidth = 2; for (const x of [100, 200]) { b.beginPath(); b.moveTo(x, 0); b.lineTo(x, 300); b.stroke(); }
+    b.strokeStyle = 'rgba(0,0,0,.18)'; b.lineWidth = .8;
+    for (let i = 0; i < 46; i++) { const x0 = rnd() * 300, w = 6 + rnd() * 10; b.beginPath(); for (let y = 0; y <= 300; y += 10) b.lineTo(x0 + Math.sin(y / 40 + i) * w * .3, y); b.stroke(); }
+    // un coup de bombe rose derrière la cible
+    const gl = b.createRadialGradient(150, 152, 90, 150, 152, 175); gl.addColorStop(0, 'rgba(255,79,160,.55)'); gl.addColorStop(1, 'rgba(255,79,160,0)');
+    b.fillStyle = gl; b.fillRect(0, 0, 300, 300);
+    b.fillStyle = 'rgba(255,79,160,.75)';
+    for (let i = 0; i < 260; i++) { const a = rnd() * 6.283, r = 138 + Math.pow(rnd(), 2) * 40, s = .4 + rnd() * 1.3; b.beginPath(); b.arc(150 + Math.cos(a) * r, 152 + Math.sin(a) * r, s, 0, 6.283); b.fill(); }
+    // deux coulures
+    b.strokeStyle = 'rgba(255,79,160,.6)'; b.lineCap = 'round';
+    for (const [x, l] of [[62, 70], [236, 48]]) { b.lineWidth = 3; b.beginPath(); b.moveTo(x, 205); b.lineTo(x + 1, 205 + l); b.stroke(); b.beginPath(); b.arc(x + 1, 207 + l, 2.6, 0, 6.283); b.fillStyle = 'rgba(255,79,160,.6)'; b.fill(); }
+    // les trous des fléchettes ratées
+    b.fillStyle = 'rgba(0,0,0,.6)';
+    for (let i = 0; i < 70; i++) { const a = rnd() * 6.283, r = 140 + rnd() * 26; b.fillRect(150 + Math.cos(a) * r, 152 + Math.sin(a) * r, 1.4, 1.4); }
+    // le score à la craie (les bâtons de Dina)
+    b.strokeStyle = 'rgba(240,235,225,.7)'; b.lineWidth = 1.6;
+    const tally = (x, y, n) => { for (let i = 0; i < Math.min(4, n); i++) { b.beginPath(); b.moveTo(x + i * 5, y); b.lineTo(x + i * 5 + 1, y + 16); b.stroke(); } if (n >= 5) { b.beginPath(); b.moveTo(x - 3, y + 12); b.lineTo(x + 19, y + 3); b.stroke(); } };
+    tally(14, 268, 5); tally(40, 268, 5); tally(66, 268, 3);
+    // quatre vis aux coins
+    for (const [x, y] of [[12, 12], [288, 12], [12, 288], [288, 288]]) { b.fillStyle = '#9a9488'; b.beginPath(); b.arc(x, y, 3.4, 0, 6.283); b.fill(); b.strokeStyle = '#3a3630'; b.lineWidth = 1; b.beginPath(); b.moveTo(x - 2.2, y); b.lineTo(x + 2.2, y); b.stroke(); }
+    // un coin plus sombre
+    const vg = b.createRadialGradient(150, 150, 120, 150, 150, 230); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.5)'); b.fillStyle = vg; b.fillRect(0, 0, 300, 300);
+    DPLY.c = c; DPLY.k = k;
+  }
+  g.drawImage(DPLY.c, 0, 0, 300, 300);
+  return true;
+}
+// les mises en vraies piles de jetons (2, 4, 6 jetons), le montant sur un bout de scotch
+const DCHIP = [['#f3eadb', '#24171c', '#b8ab98'], ['#ff4fa0', '#f7ecdc', '#9a1d5a'], ['#1d1418', '#ffcc4d', '#000']];
+const dinaUi20 = () => MG.id === 'dina' && !document.body.classList.contains('th-orient') && !G.reduced && !G.headless;
+function dinaDress20() {
+  if (!dinaUi20()) return;
+  $$('#mg-act .btn[data-stake]:not(.dn-ok)').forEach((bt, i) => {
+    const v = bt.dataset.stake, n = [2, 3, 5][i] || 5, C = DCHIP[i % 3];
+    let chips = ''; for (let j = 0; j < n; j++) chips += `<b style="--i:${j};--x:${((j * 7919) % 7) - 3}px"></b>`;
+    bt.innerHTML = `<i class="dn-stack" style="--n:${n};--c1:${C[0]};--c2:${C[1]};--c3:${C[2]}">${chips}</i><span class="dn-tape" style="--r:${[-3, 2, -1][i % 3]}deg">${v}</span>`;
+    bt.setAttribute('aria-label', v + ' or'); bt.classList.add('dn-ok');
+  });
+}
+// la planche et les jetons prennent un peu plus de place : la cible rétrécit d'autant
+const _mgSize20 = mgSize;
+mgSize = function () {
+  _mgSize20();
+  if (!dinaUi20() || !fpnOn()) return;
+  const cv = $('#mg-cv'), w0 = cv && cv.clientWidth; if (!w0) return;
+  const w = Math.max(190, w0 - (LAY.pc ? 60 : 96)), dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.style.maxWidth = w + 'px'; cv.width = Math.round(w * dpr); cv.height = Math.round(w * MG.H / MG.W * dpr); MG.k = cv.width / MG.W;
+};
+const _mgAct20 = mgAct;
+mgAct = function (h) { _mgAct20(h); dinaDress20(); };
+
+/* ===== v20.3 · Nox : les mises et les couleurs deviennent des cartes de tarot ===== */
+const npcUi20 = id => MG.id === id && !document.body.classList.contains('th-orient') && !G.reduced && !G.headless;
+const TAROT20 = [
+  ['XVIII', hT('LA LUNE', 'THE MOON'), '<svg viewBox="0 0 24 24"><path d="M15.5 2.2A10 10 0 1 0 21.8 17 8 8 0 1 1 15.5 2.2z"/></svg>'],
+  ['XVII', hT('L’ÉTOILE', 'THE STAR'), '<svg viewBox="0 0 24 24"><path d="M12 1.5l2.1 6.4 6.4-2.1-4 5.2 4 5.2-6.4-2.1L12 20.5l-2.1-6.4-6.4 2.1 4-5.2-4-5.2 6.4 2.1z"/></svg>'],
+  ['XIX', hT('LE SOLEIL', 'THE SUN'), '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 .8l1.3 4h-2.6zM12 23.2l-1.3-4h2.6zM.8 12l4-1.3v2.6zM23.2 12l-4 1.3v-2.6zM4.1 4.1l3.7 2-1.8 1.8zM19.9 19.9l-3.7-2 1.8-1.8zM19.9 4.1l-2 3.7-1.8-1.8zM4.1 19.9l2-3.7 1.8 1.8z"/></svg>'],
+];
+const ORB20 = { rouge: '#d7263d', noir: '#4a3a66', vert: '#1f9a54' };
+function noxDress20() {
+  if (!npcUi20('nox')) return;
+  $$('#mg-act .btn[data-stake]:not(.tc)').forEach((bt, i) => {
+    const t = TAROT20[i % 3];
+    bt.classList.add('tc');
+    bt.innerHTML = `<span class="tc-num">${t[0]}</span><span class="tc-sym">${t[2]}</span><span class="tc-name">${t[1]}</span><span class="tc-amt"><span class="coin"></span>${bt.dataset.stake}</span>`;
+  });
+  $$('#mg-act .btn[data-col]:not(.tc)').forEach(bt => {
+    const name = (bt.childNodes[0] && bt.childNodes[0].textContent || bt.dataset.col).trim(), sm = bt.querySelector('small');
+    bt.classList.add('tc');
+    bt.innerHTML = `<span class="tc-num">✦</span><span class="tc-sym"><i class="tc-orb" style="--o:${ORB20[bt.dataset.col] || '#888'}"></i></span><span class="tc-name">${name}</span><span class="tc-amt">${sm ? sm.textContent : ''}</span>`;
+  });
+}
+const _mgSize20n = mgSize;
+mgSize = function () {
+  _mgSize20n();
+  const cut = npcUi20('nox') ? (LAY.pc ? 86 : 104) : npcUi20('momo') && (PO.phase === 'coin' || PO.phase === 'flip') ? (LAY.pc ? 70 : 64) : 0;
+  if (!cut || !fpnOn()) return;
+  const cv = $('#mg-cv'), w0 = cv && cv.clientWidth; if (!w0) return;
+  const w = Math.max(190, w0 - cut), dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.style.maxWidth = w + 'px'; cv.width = Math.round(w * dpr); cv.height = Math.round(w * MG.H / MG.W * dpr); MG.k = cv.width / MG.W;
+};
+const _mgAct20n = mgAct;
+mgAct = function (h) { _mgAct20n(h); noxDress20(); if (npcUi20('momo') && MG.open) requestAnimationFrame(() => { try { mgSize(); } catch (e) { /* rien */ } }); };
+
+/* ===== v21.1 · les jeux du milieu redessinés dans le style des décors : encre, bois, laiton, lumière de lampe ===== */
+const gzOn = () => !document.body.classList.contains('th-orient') && !(typeof thOn === 'function' && thOn());
+const GZI = '#0b0608';
+const GZ = { noise: null };
+function gzR(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+function gzCv(w, h, k) { const c = document.createElement('canvas'); c.width = Math.ceil(w * k); c.height = Math.ceil(h * k); const b = c.getContext('2d'); b.scale(k, k); return [c, b]; }
+function gzNoise() {
+  if (GZ.noise) return GZ.noise;
+  const c = document.createElement('canvas'); c.width = c.height = 96;
+  const b = c.getContext('2d'), d = b.createImageData(96, 96), r = gzR(11);
+  for (let i = 0; i < d.data.length; i += 4) { const v = r() * 255 | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+  b.putImageData(d, 0, 0); return (GZ.noise = c);
+}
+// le grain du papier / du feutre (à appeler dans une zone découpée)
+function gzGrain(b, k, x, y, w, h, a, mode) {
+  b.save(); b.globalAlpha = a; b.globalCompositeOperation = mode || 'overlay';
+  const p = b.createPattern(gzNoise(), 'repeat'); try { p.setTransform(new DOMMatrix().scale(1 / k)); } catch (e) { /* vieux navigateur */ }
+  b.fillStyle = p; b.fillRect(x, y, w, h); b.restore();
+}
+// des hachures d'encre (dans la zone découpée)
+function gzHatch(b, x0, y0, x1, y1, ang, gap, col, lw) {
+  b.save(); b.strokeStyle = col; b.lineWidth = lw;
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, R = Math.hypot(x1 - x0, y1 - y0) / 2 + 2;
+  b.translate(cx, cy); b.rotate(ang); b.beginPath();
+  for (let t = -R; t <= R; t += gap) { b.moveTo(-R, t); b.lineTo(R, t); }
+  b.stroke(); b.restore();
+}
+// un croissant (le côté à l'ombre d'un objet rond)
+function gzCres(b, cx, cy, R, dx, dy) { b.beginPath(); b.arc(cx, cy, R, 0, TAU); b.moveTo(cx + dx + R, cy + dy); b.arc(cx + dx, cy + dy, R, 0, TAU, true); }
+function gzBrass(b, x0, y0, x1, y1) { const g = b.createLinearGradient(x0, y0, x1, y1); g.addColorStop(0, '#f4d88c'); g.addColorStop(.45, '#c99a3c'); g.addColorStop(1, '#6e4614'); return g; }
+const GZF = (w, px) => `${w} ${px}px Cinzel20, Georgia, serif`;
+const gzReset = () => { NOXG.k = 0; MOG.k = 0; DNG.k = 0; DNW.k = 0; };
+try { if (document.fonts) { document.fonts.load(GZF(700, 12)).then(gzReset, () => {}); document.fonts.ready.then(gzReset); } } catch (e) { /* rien */ }
+
+/* ---------- la roue de Madame Nox : acajou, laiton, cases d'émail, lumière de bougie ---------- */
+const NOXG = { k: 0, base: null, rotor: null, light: null };
+const NOX_C = { rouge: '#b01f2d', noir: '#1c1517', vert: '#21774a' };
+function noxBuild(k) {
+  const R = 132, cx = 150, cy = 150, r0 = 74, rp = 84, r1 = R - 20, rnd = gzR(5);
+  // le bol (fixe)
+  const [c1, b] = gzCv(300, 300, k);
+  let gr = b.createRadialGradient(cx, cy + 8, R * .82, cx, cy + 8, R * 1.13); gr.addColorStop(0, 'rgba(0,0,0,.62)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  b.fillStyle = gr; b.beginPath(); b.arc(cx, cy + 8, R * 1.13, 0, TAU); b.fill();
+  b.save(); b.translate(cx, cy);
+  gr = b.createLinearGradient(-R, -R, R, R); gr.addColorStop(0, '#7a3c19'); gr.addColorStop(.5, '#4a210e'); gr.addColorStop(1, '#250e06');
+  b.fillStyle = gr; b.beginPath(); b.arc(0, 0, R, 0, TAU); b.fill();
+  b.save(); b.beginPath(); b.arc(0, 0, R, 0, TAU); b.arc(0, 0, r1, 0, TAU, true); b.clip();
+  for (let i = 0; i < 46; i++) { const rr = r1 + rnd() * (R - r1), a = rnd() * TAU, l = .4 + rnd() * 1.6; b.strokeStyle = rnd() < .7 ? 'rgba(18,5,2,.38)' : 'rgba(255,190,120,.13)'; b.lineWidth = .5 + rnd() * .5; b.beginPath(); b.arc(0, 0, rr, a, a + l); b.stroke(); }
+  gzGrain(b, k, -R, -R, 2 * R, 2 * R, .22);
+  b.restore();
+  // la piste de la bille, vernie
+  gr = b.createRadialGradient(0, 0, R - 19, 0, 0, R - 7); gr.addColorStop(0, '#2a1107'); gr.addColorStop(.55, '#7e421d'); gr.addColorStop(1, '#3a170a');
+  b.fillStyle = gr; b.beginPath(); b.arc(0, 0, R - 7, 0, TAU); b.arc(0, 0, R - 19, 0, TAU, true); b.fill();
+  b.lineCap = 'round'; b.strokeStyle = 'rgba(255,216,160,.42)'; b.lineWidth = 2.6; b.beginPath(); b.arc(0, 0, R - 12.5, -2.75, -1.35); b.stroke();
+  b.strokeStyle = 'rgba(255,216,160,.16)'; b.lineWidth = 1.4; b.beginPath(); b.arc(0, 0, R - 12.5, .6, 1.2); b.stroke();
+  // le jonc de laiton
+  b.strokeStyle = '#b8862e'; b.lineWidth = 2.6; b.beginPath(); b.arc(0, 0, R - 1.8, 0, TAU); b.stroke();
+  b.strokeStyle = '#f6d88f'; b.lineWidth = 1; b.beginPath(); b.arc(0, 0, R - 2.2, -2.9, -1.1); b.stroke();
+  // l'encre
+  b.strokeStyle = GZI; b.lineWidth = 2.8; b.beginPath(); b.arc(0, 0, R, 0, TAU); b.stroke();
+  b.lineWidth = 1; b.strokeStyle = 'rgba(0,0,0,.7)'; b.beginPath(); b.arc(0, 0, R - 7, 0, TAU); b.stroke();
+  b.lineWidth = 1.8; b.strokeStyle = GZI; b.beginPath(); b.arc(0, 0, R - 19, 0, TAU); b.stroke();
+  // les losanges qui font rebondir la bille
+  for (let i = 0; i < 8; i++) {
+    const a = i * TAU / 8 + TAU / 16; b.save(); b.rotate(a); b.translate(R - 13, 0);
+    b.beginPath(); b.moveTo(-5, 0); b.lineTo(0, -2.4); b.lineTo(5, 0); b.lineTo(0, 2.4); b.closePath();
+    b.fillStyle = gzBrass(b, -4, -2, 4, 2); b.fill(); b.strokeStyle = GZI; b.lineWidth = .8; b.stroke(); b.restore();
+  }
+  b.restore();
+  // le plateau qui tourne
+  const [c2, r] = gzCv(300, 300, k);
+  r.translate(cx, cy);
+  for (let i = 0; i < W_N; i++) {
+    const a = i * W_STEP - W_STEP / 2, col = WHEEL[i];
+    r.fillStyle = NOX_C[col]; r.beginPath(); r.arc(0, 0, r1, a, a + W_STEP); r.arc(0, 0, rp, a + W_STEP, a, true); r.closePath(); r.fill();
+    r.fillStyle = i % 2 ? '#2e1309' : '#3a190b'; r.beginPath(); r.arc(0, 0, rp, a, a + W_STEP); r.arc(0, 0, r0, a + W_STEP, a, true); r.closePath(); r.fill();
+  }
+  // l'émail : reflet vers l'intérieur, ombre vers l'extérieur
+  gr = r.createRadialGradient(0, 0, rp, 0, 0, r1); gr.addColorStop(0, 'rgba(255,235,200,.12)'); gr.addColorStop(.7, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.28)');
+  r.fillStyle = gr; r.beginPath(); r.arc(0, 0, r1, 0, TAU); r.arc(0, 0, rp, 0, TAU, true); r.fill();
+  gr = r.createRadialGradient(0, 0, r0, 0, 0, rp); gr.addColorStop(0, 'rgba(0,0,0,.45)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  r.fillStyle = gr; r.beginPath(); r.arc(0, 0, rp, 0, TAU); r.arc(0, 0, r0, 0, TAU, true); r.fill();
+  r.save(); r.beginPath(); r.arc(0, 0, r1, 0, TAU); r.arc(0, 0, r0, 0, TAU, true); r.clip(); gzGrain(r, k, -r1, -r1, 2 * r1, 2 * r1, .2); r.restore();
+  // les frettes de laiton, cernées d'encre
+  for (let i = 0; i < W_N; i++) {
+    const a = i * W_STEP - W_STEP / 2, ca = Math.cos(a), sa = Math.sin(a);
+    r.strokeStyle = GZI; r.lineWidth = 2.6; r.beginPath(); r.moveTo(ca * r0, sa * r0); r.lineTo(ca * r1, sa * r1); r.stroke();
+    r.strokeStyle = '#c99a3c'; r.lineWidth = 1.2; r.beginPath(); r.moveTo(ca * r0, sa * r0); r.lineTo(ca * r1, sa * r1); r.stroke();
+  }
+  // les symboles, lisibles depuis l'extérieur
+  r.textAlign = 'center'; r.textBaseline = 'middle'; r.lineJoin = 'round';
+  for (let i = 0; i < W_N; i++) {
+    const a = i * W_STEP, rm = r1 - 9, w = WHEEL[i];
+    r.save(); r.rotate(a); r.translate(rm, 0); r.rotate(Math.PI / 2);
+    r.font = w === 'vert' ? GZF(700, 11) : `700 10px Georgia, serif`;
+    const ch = w === 'vert' ? '0' : w === 'rouge' ? '♦' : '♠';
+    r.strokeStyle = GZI; r.lineWidth = 2.4; r.strokeText(ch, 0, .5); r.fillStyle = w === 'noir' ? '#d8cfbd' : '#f1e6cc'; r.fillText(ch, 0, .5);
+    r.restore();
+  }
+  r.strokeStyle = GZI; r.lineWidth = 2; for (const rr of [r1, r0]) { r.beginPath(); r.arc(0, 0, rr, 0, TAU); r.stroke(); }
+  r.lineWidth = 1.2; r.beginPath(); r.arc(0, 0, rp, 0, TAU); r.stroke();
+  r.strokeStyle = '#c99a3c'; r.lineWidth = .8; r.beginPath(); r.arc(0, 0, r1 - 1.4, 0, TAU); r.stroke();
+  // le cône d'acajou et la tourelle
+  gr = r.createRadialGradient(-20, -24, 4, 0, 0, r0); gr.addColorStop(0, '#a5642f'); gr.addColorStop(.6, '#5a2a10'); gr.addColorStop(1, '#250e05');
+  r.fillStyle = gr; r.beginPath(); r.arc(0, 0, r0 - 1, 0, TAU); r.fill();
+  r.save(); r.beginPath(); r.arc(0, 0, r0 - 1, 0, TAU); r.clip();
+  for (let i = 0; i < 26; i++) { const rr = 10 + rnd() * (r0 - 12), a = rnd() * TAU; r.strokeStyle = 'rgba(20,6,2,.3)'; r.lineWidth = .5; r.beginPath(); r.arc(0, 0, rr, a, a + .5 + rnd()); r.stroke(); }
+  r.restore();
+  r.strokeStyle = GZI; r.lineWidth = 2; r.beginPath(); r.arc(0, 0, r0 - 1, 0, TAU); r.stroke();
+  for (let q = 0; q < 4; q++) {
+    r.save(); r.rotate(q * Math.PI / 2 + Math.PI / 4);
+    r.lineCap = 'round'; r.strokeStyle = GZI; r.lineWidth = 5.4; r.beginPath(); r.moveTo(0, 0); r.lineTo(28, 0); r.stroke();
+    r.strokeStyle = '#c99a3c'; r.lineWidth = 3; r.beginPath(); r.moveTo(0, 0); r.lineTo(28, 0); r.stroke();
+    r.strokeStyle = '#f6dc94'; r.lineWidth = .9; r.beginPath(); r.moveTo(4, -.8); r.lineTo(26, -.8); r.stroke();
+    r.fillStyle = GZI; r.beginPath(); r.arc(30, 0, 4.6, 0, TAU); r.fill();
+    r.fillStyle = gzBrass(r, 27, -3, 33, 3); r.beginPath(); r.arc(30, 0, 3.5, 0, TAU); r.fill();
+    r.restore();
+  }
+  r.fillStyle = GZI; r.beginPath(); r.arc(0, 0, 9.5, 0, TAU); r.fill();
+  r.fillStyle = gzBrass(r, -7, -7, 7, 7); r.beginPath(); r.arc(0, 0, 8.2, 0, TAU); r.fill();
+  r.fillStyle = 'rgba(255,248,220,.85)'; r.beginPath(); r.arc(-2.6, -2.8, 1.8, 0, TAU); r.fill();
+  // la lumière (fixe) : la bougie à gauche, l'ombre hachurée en bas à droite
+  const [c3, L] = gzCv(300, 300, k);
+  L.save(); L.beginPath(); L.arc(cx, cy, R, 0, TAU); L.clip();
+  gr = L.createRadialGradient(cx - 70, cy - 80, 10, cx - 70, cy - 80, 240); gr.addColorStop(0, 'rgba(255,205,135,.15)'); gr.addColorStop(.55, 'rgba(255,205,135,0)'); gr.addColorStop(1, 'rgba(0,0,0,.18)');
+  L.fillStyle = gr; L.fillRect(0, 0, 300, 300);
+  gzCres(L, cx, cy, R + 1, -30, -30); L.clip('nonzero');
+  L.fillStyle = 'rgba(0,0,0,.12)'; L.fillRect(0, 0, 300, 300);
+  gzHatch(L, 0, 0, 300, 300, -Math.PI / 4, 3.2, 'rgba(8,3,5,.3)', .6);
+  L.restore();
+  // le repère du croupier, en laiton, posé sur le jonc
+  L.beginPath(); L.moveTo(143, 1.5); L.lineTo(157, 1.5); L.lineTo(150, 17); L.closePath();
+  L.fillStyle = gzBrass(L, 143, 2, 157, 16); L.fill(); L.strokeStyle = GZI; L.lineWidth = 1.4; L.lineJoin = 'round'; L.stroke();
+  Object.assign(NOXG, { k, base: c1, rotor: c2, light: c3 });
+}
+const _noxDraw0 = GAMES.nox.draw;
+GAMES.nox.draw = function (g, t) {
+  if (!gzOn()) return _noxDraw0.call(this, g, t);
+  const k = MG.k || 1; if (NOXG.k !== k) noxBuild(k);
+  const cx = 150, cy = 150, R = 132, r0 = 74, r1 = R - 20;
+  g.drawImage(NOXG.base, 0, 0, 300, 300);
+  g.save(); g.translate(cx, cy); g.rotate(RO.wA); g.drawImage(NOXG.rotor, -150, -150, 300, 300); g.restore();
+  if (RO.phase !== 'stake' && RO.phase !== 'broke') {
+    const S = RO.spin, f = S ? Math.min(1, S.t / S.T) : 1;
+    const rad = f < .62 ? R - 10 : lerp(R - 10, (r0 + r1) / 2 - 4, Math.min(1, (f - .62) / .3)) + (f < .95 ? Math.abs(Math.sin(f * 60)) * 3 * (1 - f) : 0);
+    const bx = cx + Math.cos(RO.bA) * rad, by = cy + Math.sin(RO.bA) * rad;
+    g.fillStyle = 'rgba(0,0,0,.5)'; g.beginPath(); g.ellipse(bx + 1.6, by + 2, 4.6, 3.8, 0, 0, TAU); g.fill();
+    const bg = g.createRadialGradient(bx - 1.5, by - 1.7, .4, bx, by, 4.8); bg.addColorStop(0, '#fffdf4'); bg.addColorStop(.6, '#e6dcc4'); bg.addColorStop(1, '#a89d86');
+    g.fillStyle = bg; g.beginPath(); g.arc(bx, by, 4.4, 0, TAU); g.fill();
+    g.strokeStyle = GZI; g.lineWidth = .9; g.stroke();
+  }
+  g.drawImage(NOXG.light, 0, 0, 300, 300);
+};
+
+/* ---------- le billard de Momo : acajou, feutre olive sous la lampe, poches de cuir et coins de laiton ---------- */
+const MOG = { k: 0, c: null };
+const MO_COL = { cue: ['#fbf4e2', '#efe5cf', '#9c927c'], me: ['#fff0b0', '#e2ae26', '#7a560c'], him: ['#ffb0b8', '#a8202f', '#4e0a14'] };
+function momoBuild(k) {
+  const [c, b] = gzCv(340, 200, k), rnd = gzR(9);
+  const FL = PT.L - 6, FT = PT.T - 6, FR = PT.R + 6, FB = PT.B + 6, IL = PT.L - 10, IT = PT.T - 10, IR = PT.R + 10, IB = PT.B + 10;
+  // les bandes en acajou
+  let gr = b.createLinearGradient(0, 0, 0, 200); gr.addColorStop(0, '#80401a'); gr.addColorStop(.5, '#4f230e'); gr.addColorStop(1, '#2c1206');
+  rrPath(b, 1, 1, 338, 198, 15); b.fillStyle = gr; b.fill();
+  b.save(); rrPath(b, 1, 1, 338, 198, 15); b.rect(IR, IT, IL - IR, IB - IT); b.clip('evenodd');
+  for (let i = 0; i < 70; i++) {
+    const hz = i < 40, y0 = rnd(), w = .5 + rnd() * .6;
+    b.strokeStyle = rnd() < .72 ? 'rgba(20,6,2,.42)' : 'rgba(255,175,95,.14)'; b.lineWidth = w; b.beginPath();
+    if (hz) { const y = y0 < .5 ? 2 + y0 * 2 * 9 : 189 + (y0 - .5) * 2 * 9; for (let x = 0; x <= 340; x += 12) b.lineTo(x, y + Math.sin(x / 37 + i) * .9); }
+    else { const x = y0 < .5 ? 2 + y0 * 2 * 9 : 329 + (y0 - .5) * 2 * 9; for (let y = 0; y <= 200; y += 12) b.lineTo(x + Math.sin(y / 29 + i) * .9, y); }
+    b.stroke();
+  }
+  gzGrain(b, k, 0, 0, 340, 200, .22);
+  b.restore();
+  gr = b.createLinearGradient(0, 0, 0, 200); gr.addColorStop(0, 'rgba(255,170,90,.6)'); gr.addColorStop(.25, 'rgba(255,170,90,.1)'); gr.addColorStop(1, 'rgba(255,170,90,0)');
+  rrPath(b, 2.6, 2.6, 334.8, 194.8, 13.6); b.strokeStyle = gr; b.lineWidth = 1.1; b.stroke();
+  rrPath(b, 1, 1, 338, 198, 15); b.strokeStyle = GZI; b.lineWidth = 2.4; b.stroke();
+  // les diamants de nacre
+  const dia = (x, y, rot) => { b.save(); b.translate(x, y); b.rotate(rot); b.beginPath(); b.moveTo(-2.6, 0); b.lineTo(0, -1.5); b.lineTo(2.6, 0); b.lineTo(0, 1.5); b.closePath(); b.fillStyle = '#efe4c8'; b.fill(); b.strokeStyle = GZI; b.lineWidth = .6; b.stroke(); b.restore(); };
+  for (let i = 1; i < 8; i++) { if (i === 4) continue; const x = PT.L + (PT.R - PT.L) * i / 8; dia(x, 6.4, 0); dia(x, 193.6, 0); }
+  for (let i = 1; i < 4; i++) { const y = PT.T + (PT.B - PT.T) * i / 4; dia(6.4, y, Math.PI / 2); dia(333.6, y, Math.PI / 2); }
+  // les coussins
+  b.fillStyle = '#2b4218'; b.fillRect(IL, IT, IR - IL, IB - IT);
+  b.strokeStyle = GZI; b.lineWidth = 1.6; b.strokeRect(IL, IT, IR - IL, IB - IT);
+  // le feutre
+  b.save(); b.beginPath(); b.rect(FL, FT, FR - FL, FB - FT); b.clip();
+  gr = b.createRadialGradient(170, 96, 16, 170, 100, 200); gr.addColorStop(0, '#62843a'); gr.addColorStop(.5, '#3d5a24'); gr.addColorStop(1, '#1d3011');
+  b.fillStyle = gr; b.fillRect(FL, FT, FR - FL, FB - FT);
+  // la tache de lumière de la lampe
+  b.save(); b.translate(170, 92); b.scale(1, .5); gr = b.createRadialGradient(0, 0, 10, 0, 0, 132); gr.addColorStop(0, 'rgba(236,244,176,.24)'); gr.addColorStop(1, 'rgba(236,244,176,0)'); b.fillStyle = gr; b.beginPath(); b.arc(0, 0, 132, 0, TAU); b.fill(); b.restore();
+  gzGrain(b, k, FL, FT, FR - FL, FB - FT, .26);
+  // le poil du feutre, quelques traces de craie
+  for (let i = 0; i < 26; i++) { const y = FT + rnd() * (FB - FT), x = FL + rnd() * (FR - FL); b.strokeStyle = 'rgba(200,230,150,.05)'; b.lineWidth = 1 + rnd() * 2; b.beginPath(); b.moveTo(x, y); b.lineTo(x + 30 + rnd() * 50, y + rnd() * 2 - 1); b.stroke(); }
+  const hx = PT.L + (PT.R - PT.L) * .25;
+  b.strokeStyle = 'rgba(235,240,215,.12)'; b.lineWidth = .8; b.beginPath(); b.moveTo(hx, FT); b.lineTo(hx, FB); b.stroke();
+  b.fillStyle = 'rgba(235,240,215,.4)'; for (const x of [hx, PT.L + (PT.R - PT.L) * .75]) { b.beginPath(); b.arc(x, 100, 1.3, 0, TAU); b.fill(); }
+  b.fillStyle = 'rgba(120,170,225,.11)'; b.beginPath(); b.ellipse(276, 150, 9, 4, .4, 0, TAU); b.fill(); b.beginPath(); b.ellipse(58, 44, 6, 3, -.3, 0, TAU); b.fill();
+  // l'ombre des bandes, hachurée
+  b.save(); b.beginPath(); b.rect(FL, FT, FR - FL, FB - FT); b.rect(FR - 9, FT + 9, -(FR - FL - 18), FB - FT - 18); b.clip('evenodd');
+  b.fillStyle = 'rgba(0,0,0,.22)'; b.fillRect(FL, FT, FR - FL, FB - FT);
+  gzHatch(b, FL, FT, FR, FB, .7, 3, 'rgba(6,12,3,.38)', .6); b.restore();
+  for (const [x0, y0, x1, y1] of [[FL, FT, FL, FT + 16], [FL, FB, FL, FB - 16], [FL, FT, FL + 16, FT], [FR, FT, FR - 16, FT]]) { gr = b.createLinearGradient(x0, y0, x1, y1); gr.addColorStop(0, 'rgba(0,0,0,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); b.fillStyle = gr; b.fillRect(FL, FT, FR - FL, FB - FT); }
+  b.restore();
+  b.strokeStyle = GZI; b.lineWidth = 1.2; b.strokeRect(FL, FT, FR - FL, FB - FT);
+  b.strokeStyle = 'rgba(190,220,130,.2)'; b.lineWidth = .7; b.strokeRect(IL + 1.2, IT + 1.2, IR - IL - 2.4, IB - IT - 2.4);
+  // les poches : plaque de laiton, trou de cuir
+  for (const [px, py] of POCKETS) {
+    b.fillStyle = GZI; b.beginPath(); b.arc(px, py, PT.pocketR + 4.6, 0, TAU); b.fill();
+    b.fillStyle = gzBrass(b, px - 12, py - 12, px + 12, py + 12); b.beginPath(); b.arc(px, py, PT.pocketR + 3.4, 0, TAU); b.fill();
+    b.strokeStyle = 'rgba(255,244,200,.55)'; b.lineWidth = .8; b.beginPath(); b.arc(px, py, PT.pocketR + 2.6, -2.6, -1.2); b.stroke();
+    gr = b.createRadialGradient(px - 2, py - 2, 1, px, py, PT.pocketR + .5); gr.addColorStop(0, '#000'); gr.addColorStop(.8, '#0e0806'); gr.addColorStop(1, '#2a160c');
+    b.fillStyle = gr; b.beginPath(); b.arc(px, py, PT.pocketR + .5, 0, TAU); b.fill();
+    b.save(); b.beginPath(); b.arc(px, py, PT.pocketR - .5, 0, TAU); b.clip(); gzHatch(b, px - 12, py - 12, px + 12, py + 12, .8, 3, 'rgba(110,80,50,.28)', .4); gzHatch(b, px - 12, py - 12, px + 12, py + 12, -.8, 3, 'rgba(110,80,50,.28)', .4); b.restore();
+    b.strokeStyle = GZI; b.lineWidth = 1.2; b.beginPath(); b.arc(px, py, PT.pocketR + .5, 0, TAU); b.stroke();
+  }
+  Object.assign(MOG, { k, c });
+}
+function gzCue(g, cue, ang, back, his) {
+  const ca = Math.cos(ang), sa = Math.sin(ang), P = d => [cue.x - ca * (back + d), cue.y - sa * (back + d)];
+  const seg = (d0, d1, col, w) => { const [x0, y0] = P(d0), [x1, y1] = P(d1); g.strokeStyle = col; g.lineWidth = w; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); };
+  g.save(); g.lineCap = 'round';
+  g.globalAlpha = .35; g.strokeStyle = '#000'; g.lineWidth = 4; g.beginPath(); g.moveTo(P(0)[0] + 3, P(0)[1] + 4); g.lineTo(P(124)[0] + 3, P(124)[1] + 4); g.stroke(); g.globalAlpha = 1;
+  seg(0, 124, GZI, 5);
+  g.lineCap = 'butt';
+  seg(0, 2.5, '#6fa8d8', 3); seg(2.5, 6.5, '#efe6d2', 3); seg(6.5, 82, his ? '#b98a54' : '#dcb47c', 3); seg(82, 85, '#c99a3c', 3.4); seg(85, 124, his ? '#24100a' : '#3a1a0a', 3.4);
+  g.lineCap = 'round'; g.globalAlpha = .55; seg(8, 80, '#fff2d6', .8); g.globalAlpha = 1;
+  g.restore();
+}
+const _momoDraw0 = GAMES.momo.draw, _momoBall0 = GAMES.momo.ball;
+GAMES.momo.ball = function (g, b) {
+  if (!gzOn()) return _momoBall0.call(this, g, b);
+  const R = PT.r, C = MO_COL[b.kind];
+  g.fillStyle = 'rgba(0,0,0,.42)'; g.beginPath(); g.ellipse(b.x + 1.6, b.y + 2.1, R, R * .82, 0, 0, TAU); g.fill();
+  const gr = g.createRadialGradient(b.x - R * .38, b.y - R * .42, R * .08, b.x, b.y, R); gr.addColorStop(0, C[0]); gr.addColorStop(.35, C[1]); gr.addColorStop(1, C[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(b.x, b.y, R, 0, TAU); g.fill();
+  if (b.kind !== 'cue') {
+    g.fillStyle = '#f5ecd6'; g.beginPath(); g.arc(b.x, b.y, R * .46, 0, TAU); g.fill(); g.strokeStyle = 'rgba(11,6,8,.6)'; g.lineWidth = .35; g.stroke();
+    g.fillStyle = GZI; g.font = b.kind === 'me' ? `700 5px ${FONT}` : GZF(700, 4.6); g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(b.kind === 'me' ? '★' : 'M', b.x, b.y + .3);
+  }
+  g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.ellipse(b.x - R * .38, b.y - R * .44, R * .22, R * .14, -.6, 0, TAU); g.fill();
+  g.strokeStyle = GZI; g.lineWidth = .9; g.beginPath(); g.arc(b.x, b.y, R, 0, TAU); g.stroke();
+};
+GAMES.momo.draw = function (g, t) {
+  if (!gzOn()) return _momoDraw0.call(this, g, t);
+  const k = MG.k || 1; if (MOG.k !== k) momoBuild(k);
+  g.drawImage(MOG.c, 0, 0, 340, 200);
+  const cue = cueBall();
+  if (PO.phase === 'aim' && cue && !cue.in) {
+    const D = PO.drag;
+    if (D) {
+      const dx = D.x0 - D.x, dy = D.y0 - D.y, L = Math.hypot(dx, dy);
+      if (L >= 8) {
+        const ang = Math.atan2(dy, dx), pow = clamp(L / 110, .08, 1), gd = poolGuide(ang);
+        g.save(); g.setLineDash([3, 4]); g.lineCap = 'round'; g.strokeStyle = 'rgba(240,242,225,.78)'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(cue.x, cue.y); g.lineTo(gd.x, gd.y); g.stroke(); g.setLineDash([]);
+        g.strokeStyle = 'rgba(240,242,225,.85)'; g.lineWidth = 1; g.beginPath(); g.arc(gd.x, gd.y, PT.r, 0, TAU); g.stroke();
+        if (gd.ball) { const nx = gd.ball.x - gd.x, ny = gd.ball.y - gd.y, nl = Math.hypot(nx, ny) || 1; g.strokeStyle = gd.ball.kind === 'me' ? 'rgba(240,198,70,.95)' : 'rgba(220,80,96,.95)'; g.lineWidth = 1.3; g.beginPath(); g.moveTo(gd.ball.x, gd.ball.y); g.lineTo(gd.ball.x + nx / nl * 40, gd.ball.y + ny / nl * 40); g.stroke(); }
+        g.restore();
+        gzCue(g, cue, ang, 10 + pow * 26, false);
+        // la jauge, incrustée dans la bande du bas
+        g.fillStyle = 'rgba(8,3,2,.85)'; rrPath(g, 119, 188.6, 102, 8, 4); g.fill(); g.strokeStyle = GZI; g.lineWidth = .9; g.stroke();
+        const pg = g.createLinearGradient(120, 0, 220, 0); pg.addColorStop(0, '#7fbf5a'); pg.addColorStop(.55, '#e6b43a'); pg.addColorStop(1, '#c4303a');
+        g.save(); rrPath(g, 120.5, 190, 99 * pow, 5.2, 2.6); g.clip(); g.fillStyle = pg; g.fillRect(120, 189, 100, 7); g.restore();
+        g.strokeStyle = '#c99a3c'; g.lineWidth = .7; rrPath(g, 119.6, 189.2, 100.8, 6.8, 3.4); g.stroke();
+      }
+    } else {
+      const pulse = .5 + .5 * Math.sin(t * 5);
+      g.strokeStyle = `rgba(240,242,225,${.3 + .45 * pulse})`; g.lineWidth = 1.4; g.beginPath(); g.arc(cue.x, cue.y, PT.r + 4 + pulse * 2, 0, TAU); g.stroke();
+    }
+  }
+  if (PO.phase === 'him' && PO.ai && cue) {
+    const P = PO.ai.plan, kk = clamp(PO.ai.t / 1.2, 0, 1), ang = P.ang + (1 - kk) * Math.sin(t * 3) * .5;
+    gzCue(g, cue, ang, 10 + 22 * kk * P.pow, true);
+  }
+  for (const b of PO.balls) if (!b.in) this.ball(g, b);
+  // la pièce : du laiton gravé
+  if (PO.phase === 'flip' || PO.phase === 'coin') {
+    const c = PO.coin, tt = c ? Math.min(1.3, c.t) : 0, spin = c && !c.done ? Math.cos(tt * 22) : 1, up = c ? Math.sin(Math.min(1, tt / 1.3) * Math.PI) * 40 : 0;
+    const face = c && (c.done || tt > 1.25) ? c.res : (spin > 0 ? 'pile' : 'face');
+    g.fillStyle = 'rgba(0,0,0,.4)'; g.beginPath(); g.ellipse(172, 104, 18 * Math.max(.3, 1 - up / 60), 7, 0, 0, TAU); g.fill();
+    g.save(); g.translate(170, 100 - up); g.scale(Math.max(.08, Math.abs(spin)), 1);
+    g.fillStyle = GZI; g.beginPath(); g.arc(0, 0, 19.2, 0, TAU); g.fill();
+    g.fillStyle = gzBrass(g, -16, -16, 16, 16); g.beginPath(); g.arc(0, 0, 18, 0, TAU); g.fill();
+    g.strokeStyle = 'rgba(80,50,10,.8)'; g.lineWidth = 1; g.beginPath(); g.arc(0, 0, 14.5, 0, TAU); g.stroke();
+    g.fillStyle = '#4a300a'; g.font = GZF(700, 14); g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(face === 'pile' ? 'P' : 'F', 0, 1);
+    g.restore();
+    if (c && c.done) { g.font = GZF(700, 15); g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round'; g.strokeStyle = GZI; g.lineWidth = 3.4; g.strokeText(c.res === 'pile' ? 'PILE' : 'FACE', 170, 140); g.fillStyle = '#f3e6c4'; g.fillText(c.res === 'pile' ? 'PILE' : 'FACE', 170, 140); }
+  }
+};
+const _poolClock0 = poolClock;
+poolClock = function (g) {
+  if (!gzOn()) return _poolClock0(g);
+  if (PO.phase !== 'aim' || PO.aimT == null) return;
+  const k = clamp(PO.aimT / PO_AIM, 0, 1), low = PO.aimT <= 4, x = 120, w = 100;
+  g.save();
+  g.fillStyle = 'rgba(14,6,3,.9)'; rrPath(g, x - 22, 1.6, w + 44, 10, 5); g.fill(); g.strokeStyle = GZI; g.lineWidth = .9; g.stroke();
+  g.strokeStyle = '#c99a3c'; g.lineWidth = .6; rrPath(g, x - 21, 2.5, w + 42, 8.2, 4.1); g.stroke();
+  g.fillStyle = 'rgba(255,240,210,.1)'; rrPath(g, x, 5, w, 3.6, 1.8); g.fill();
+  g.fillStyle = low ? '#d2404c' : '#e2b04a'; if (k > .02) { rrPath(g, x, 5, w * k, 3.6, 1.8); g.fill(); }
+  g.font = GZF(700, 7.5); g.textAlign = 'right'; g.textBaseline = 'middle'; g.fillStyle = low ? '#ff9aa4' : '#f3e6c4';
+  g.fillText(String(Math.ceil(PO.aimT)), x - 5, 7);
+  g.restore();
+};
+
+/* ---------- la cible de Dina : sisal, fils d'acier, cerclage, accrochée sur le mur de briques ---------- */
+const DN_PAD = { x: 20, y: 18, W: 340 };
+['W', 'H'].forEach(p => Object.defineProperty(GAMES.dina, p, { get: () => gzOn() ? DN_PAD.W : 300, configurable: true }));
+const DNW = { k: 0, c: null }, DNG = { k: 0, c: null };
+// le mur (dans l'espace 330 × 330) : briques, bombe rose, fondu vers la pénombre de la salle
+function dinaWall(k) {
+  const S = DN_PAD.W, [c, b] = gzCv(S, S, k), rnd = gzR(23), cx = DN_PAD.x + DB.cx, cy = DN_PAD.y + DB.cy;
+  b.fillStyle = '#160910'; b.fillRect(0, 0, S, S);
+  const BR = ['#4c1f28', '#57232d', '#3f1a22', '#5e2832', '#45202a'];
+  for (let row = 0, y = 0; y < S; row++, y += 15) for (let x = row % 2 ? -15 : 0; x < S; x += 30) {
+    b.fillStyle = BR[(rnd() * BR.length) | 0]; b.fillRect(x + 1.2, y + 1.2, 27.6, 12.6);
+    b.fillStyle = 'rgba(255,150,180,.07)'; b.fillRect(x + 1.2, y + 1.2, 27.6, 1.4);
+    b.fillStyle = 'rgba(0,0,0,.35)'; b.fillRect(x + 1.2, y + 12.2, 27.6, 1.6);
+    if (rnd() < .25) { b.fillStyle = '#160910'; b.beginPath(); b.arc(x + 2 + rnd() * 26, y + (rnd() < .5 ? 1.5 : 13), 1.5 + rnd() * 2, 0, TAU); b.fill(); }
+  }
+  gzGrain(b, k, 0, 0, S, S, .3);
+  gzHatch(b, 0, 0, S, S, -.6, 3.4, 'rgba(0,0,0,.18)', .6);
+  // la bombe rose derrière la cible, et ses éclaboussures
+  let gr = b.createRadialGradient(cx, cy, 120, cx, cy, 190); gr.addColorStop(0, 'rgba(255,79,160,.55)'); gr.addColorStop(1, 'rgba(255,79,160,0)'); b.fillStyle = gr; b.fillRect(0, 0, S, S);
+  b.fillStyle = 'rgba(255,79,160,.7)';
+  for (let i = 0; i < 240; i++) { const a = rnd() * TAU, r = 150 + Math.pow(rnd(), 2) * 40, s = .4 + rnd() * 1.3; b.beginPath(); b.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, s, 0, TAU); b.fill(); }
+  b.strokeStyle = 'rgba(255,79,160,.6)'; b.lineCap = 'round';
+  for (const [x, l] of [[60, 50], [286, 36]]) { b.lineWidth = 2.6; b.beginPath(); b.moveTo(x, 236); b.lineTo(x + 1, 236 + l); b.stroke(); b.beginPath(); b.arc(x + 1, 238 + l, 2.4, 0, TAU); b.fillStyle = 'rgba(255,79,160,.6)'; b.fill(); }
+  // les bâtons de craie de Dina
+  b.strokeStyle = 'rgba(240,235,225,.72)'; b.lineWidth = 1.6;
+  const tally = (x, y, n) => { for (let i = 0; i < Math.min(4, n); i++) { b.beginPath(); b.moveTo(x + i * 5, y); b.lineTo(x + i * 5 + 1, y + 16); b.stroke(); } if (n >= 5) { b.beginPath(); b.moveTo(x - 3, y + 12); b.lineTo(x + 19, y + 3); b.stroke(); } };
+  tally(46, 286, 5); tally(72, 296, 5); tally(98, 304, 3);
+  // le fondu dans la pénombre : les bords disparaissent
+  b.globalCompositeOperation = 'destination-in';
+  gr = b.createRadialGradient(cx, cy, 144, cx, cy, 174); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(.5, 'rgba(0,0,0,.5)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  b.fillStyle = gr; b.fillRect(0, 0, S, S);
+  b.globalCompositeOperation = 'source-over';
+  // l'ombre portée de la cible sur le mur
+  gr = b.createRadialGradient(cx + 6, cy + 10, 140, cx + 6, cy + 10, 168); gr.addColorStop(0, 'rgba(0,0,0,.7)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); b.fillStyle = gr; b.beginPath(); b.arc(cx + 6, cy + 10, 168, 0, TAU); b.fill();
+  Object.assign(DNW, { k, c });
+}
+// la cible (dans l'espace 300, au même endroit qu'avant : rien ne change pour le jeu)
+function dinaBoard(k) {
+  const [c, b] = gzCv(300, 300, k), rnd = gzR(41), { cx, cy, R } = DB;
+  // le cerclage de bois, criblé de trous
+  let gr = b.createRadialGradient(cx - 30, cy - 40, 20, cx, cy, 150); gr.addColorStop(0, '#4a2a1a'); gr.addColorStop(1, '#1e0f08');
+  b.fillStyle = gr; b.beginPath(); b.arc(cx, cy, 148, 0, TAU); b.fill();
+  b.fillStyle = 'rgba(0,0,0,.65)'; for (let i = 0; i < 60; i++) { const a = rnd() * TAU, r = R * 1.24 + rnd() * (148 - R * 1.24); b.beginPath(); b.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, .7 + rnd() * .5, 0, TAU); b.fill(); }
+  b.strokeStyle = GZI; b.lineWidth = 2.4; b.beginPath(); b.arc(cx, cy, 148, 0, TAU); b.stroke();
+  // l'anneau des numéros (sisal noir)
+  b.fillStyle = '#151012'; b.beginPath(); b.arc(cx, cy, R * 1.2, 0, TAU); b.fill();
+  // les segments
+  const SC = { blk: '#1b1517', crm: '#d6c8a4', red: '#9f2330', grn: '#25663d' };
+  const ring = (r0, r1, cA, cB) => { for (let i = 0; i < 20; i++) { const a0 = -Math.PI / 2 - Math.PI / 20 + i * TAU / 20, a1 = a0 + TAU / 20; b.fillStyle = i % 2 ? cB : cA; b.beginPath(); b.arc(cx, cy, r1, a0, a1); b.arc(cx, cy, r0, a1, a0, true); b.closePath(); b.fill(); } };
+  ring(R * .629, R * .953, SC.blk, SC.crm); ring(R * .094, R * .582, SC.blk, SC.crm);
+  ring(R * .953, R, SC.red, SC.grn); ring(R * .582, R * .629, SC.red, SC.grn);
+  b.fillStyle = SC.grn; b.beginPath(); b.arc(cx, cy, R * .094, 0, TAU); b.fill();
+  b.fillStyle = SC.red; b.beginPath(); b.arc(cx, cy, R * .037, 0, TAU); b.fill();
+  // les fibres du sisal
+  b.save(); b.beginPath(); b.arc(cx, cy, R * 1.2, 0, TAU); b.clip();
+  for (let i = 0; i < 2600; i++) {
+    const a = rnd() * TAU, r = Math.sqrt(rnd()) * R * 1.2, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r, l = .8 + rnd() * 1.6, d = a + (rnd() - .5) * .6;
+    b.strokeStyle = rnd() < .6 ? 'rgba(0,0,0,.2)' : 'rgba(255,240,210,.09)'; b.lineWidth = .4; b.beginPath(); b.moveTo(x, y); b.lineTo(x + Math.cos(d) * l, y + Math.sin(d) * l); b.stroke();
+  }
+  gzGrain(b, k, cx - R * 1.2, cy - R * 1.2, R * 2.4, R * 2.4, .22);
+  // la lumière du plafonnier : haut éclairé, bas dans l'ombre (hachures)
+  gr = b.createRadialGradient(cx - 30, cy - 70, 10, cx, cy, R * 1.3); gr.addColorStop(0, 'rgba(255,225,205,.16)'); gr.addColorStop(.6, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.32)');
+  b.fillStyle = gr; b.fillRect(0, 0, 300, 300);
+  b.restore();
+  b.save(); gzCres(b, cx, cy, R * 1.2, -22, -26); b.clip('nonzero'); gzHatch(b, 0, 0, 300, 300, -Math.PI / 4, 3, 'rgba(0,0,0,.32)', .6); b.restore();
+  // les fils d'acier (avec leur ombre)
+  const wire = fn => { b.save(); b.translate(.6, .8); b.strokeStyle = 'rgba(0,0,0,.55)'; b.lineWidth = 1.1; fn(); b.restore(); b.strokeStyle = '#cdc6b8'; b.lineWidth = .75; fn(); };
+  wire(() => { for (let i = 0; i < 20; i++) { const a = -Math.PI / 2 - Math.PI / 20 + i * TAU / 20; b.beginPath(); b.moveTo(cx + Math.cos(a) * R * .094, cy + Math.sin(a) * R * .094); b.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); b.stroke(); } });
+  wire(() => { for (const r of [.037, .094, .582, .629, .953, 1]) { b.beginPath(); b.arc(cx, cy, R * r, 0, TAU); b.stroke(); } });
+  // les numéros en fil d'acier
+  b.font = GZF(700, 13); b.textAlign = 'center'; b.textBaseline = 'middle'; b.lineJoin = 'round';
+  DART_SEG.forEach((n, i) => { const a = -Math.PI / 2 + i * TAU / 20, x = cx + Math.cos(a) * R * 1.1, y = cy + Math.sin(a) * R * 1.1; b.strokeStyle = GZI; b.lineWidth = 2.6; b.strokeText(String(n), x, y + .5); b.fillStyle = '#e4ddcf'; b.fillText(String(n), x, y + .5); });
+  // le cerclage d'acier et l'encre
+  b.strokeStyle = '#6f6a60'; b.lineWidth = 3.2; b.beginPath(); b.arc(cx, cy, R * 1.205, 0, TAU); b.stroke();
+  b.strokeStyle = 'rgba(240,235,225,.55)'; b.lineWidth = 1; b.beginPath(); b.arc(cx, cy, R * 1.205, -2.7, -1.3); b.stroke();
+  b.strokeStyle = GZI; b.lineWidth = 2.2; b.beginPath(); b.arc(cx, cy, R * 1.225, 0, TAU); b.stroke();
+  Object.assign(DNG, { k, c });
+}
+const _dinaPly0 = dinaPly20;
+dinaPly20 = function (g) { if (!gzOn()) return _dinaPly0(g); return true; };
+const _dinaDraw0 = GAMES.dina.draw, _dinaBoard0 = GAMES.dina.board, _dinaDart0 = GAMES.dina.dart, _dinaCross0 = GAMES.dina.cross;
+GAMES.dina.board = function (g) {
+  if (!gzOn()) return _dinaBoard0.call(this, g);
+  const k = MG.k || 1; if (DNG.k !== k) dinaBoard(k);
+  g.drawImage(DNG.c, 0, 0, 300, 300);
+};
+GAMES.dina.dart = function (g, p, col, sc, ang) {
+  if (!gzOn()) return _dinaDart0.call(this, g, p, col, sc, ang);
+  g.save(); g.translate(p.x, p.y); g.scale(sc, sc); g.rotate(ang); g.lineCap = 'round'; g.lineJoin = 'round';
+  g.fillStyle = 'rgba(0,0,0,.45)'; g.beginPath(); g.ellipse(4, 5, 4, 2.4, .7, 0, TAU); g.fill();
+  g.strokeStyle = GZI; g.lineWidth = 2.6; g.beginPath(); g.moveTo(0, 0); g.lineTo(8, 8); g.stroke();
+  g.strokeStyle = '#d6dae2'; g.lineWidth = 1.1; g.beginPath(); g.moveTo(.4, .4); g.lineTo(8, 8); g.stroke();
+  g.strokeStyle = GZI; g.lineWidth = 5; g.beginPath(); g.moveTo(7, 7); g.lineTo(20, 20); g.stroke();
+  g.strokeStyle = '#c99a3c'; g.lineWidth = 3; g.beginPath(); g.moveTo(7.5, 7.5); g.lineTo(19.5, 19.5); g.stroke();
+  g.strokeStyle = 'rgba(60,35,8,.8)'; g.lineWidth = .6; for (let i = 0; i < 4; i++) { const d = 10 + i * 2.4; g.beginPath(); g.moveTo(d - 1.4, d + 1.4); g.lineTo(d + 1.4, d - 1.4); g.stroke(); }
+  g.beginPath(); g.moveTo(18, 18); g.lineTo(31, 22); g.lineTo(27, 27); g.lineTo(22, 31); g.closePath();
+  g.fillStyle = col; g.fill(); g.strokeStyle = GZI; g.lineWidth = 1.2; g.stroke();
+  g.strokeStyle = 'rgba(0,0,0,.4)'; g.lineWidth = .7; g.beginPath(); g.moveTo(19, 19); g.lineTo(28, 28); g.stroke();
+  g.restore();
+};
+GAMES.dina.cross = function (g, p, col, t) {
+  if (!gzOn()) return _dinaCross0.call(this, g, p, col, t);
+  const r = 9 + Math.sin(t * 10) * 1;
+  const path = () => { g.beginPath(); g.arc(p.x, p.y, r, 0, TAU); g.moveTo(p.x - r - 6, p.y); g.lineTo(p.x - r + 3, p.y); g.moveTo(p.x + r - 3, p.y); g.lineTo(p.x + r + 6, p.y); g.moveTo(p.x, p.y - r - 6); g.lineTo(p.x, p.y - r + 3); g.moveTo(p.x, p.y + r - 3); g.lineTo(p.x, p.y + r + 6); };
+  g.save(); g.lineCap = 'round'; path(); g.strokeStyle = GZI; g.lineWidth = 4.2; g.stroke();
+  path(); g.strokeStyle = col; g.lineWidth = 2; g.shadowColor = col; g.shadowBlur = 7; g.stroke();
+  g.restore();
+};
+GAMES.dina.draw = function (g, t) {
+  if (!gzOn()) return _dinaDraw0.call(this, g, t);
+  const k = MG.k || 1; if (DNW.k !== k) dinaWall(k);
+  g.drawImage(DNW.c, 0, 0, DN_PAD.W, DN_PAD.W);
+  g.save(); g.translate(DN_PAD.x, DN_PAD.y); _dinaDraw0.call(this, g, t); g.restore();
+};
+
+/* ---------- la visée sur une table inclinée : on remet le doigt à sa vraie place sur le feutre ---------- */
+const _mgPoint0 = mgPoint;
+mgPoint = function (e) {
+  const cv = MG.cv, st = cv && cv.parentElement;
+  if (!st) return _mgPoint0(e);
+  const cs = getComputedStyle(st);
+  if (!cs.transform || cs.transform === 'none') return _mgPoint0(e);
+  try {
+    const prev = st.style.transform; st.style.transform = 'none';
+    const rS = st.getBoundingClientRect(), rC = cv.getBoundingClientRect();
+    st.style.transform = prev;
+    const sc = rS.width / (st.offsetWidth || rS.width) || 1;
+    const [ox, oy] = cs.transformOrigin.split(' ').map(parseFloat);
+    const M = new DOMMatrix().translate(ox, oy).multiply(new DOMMatrix(cs.transform)).translate(-ox, -oy);
+    const X = (e.clientX - rS.left) / sc, Y = (e.clientY - rS.top) / sc;
+    const a1 = M.m11 - X * M.m14, b1 = M.m21 - X * M.m24, c1 = X * M.m44 - M.m41;
+    const a2 = M.m12 - Y * M.m14, b2 = M.m22 - Y * M.m24, c2 = Y * M.m44 - M.m42;
+    const det = a1 * b2 - a2 * b1; if (Math.abs(det) < 1e-9) return _mgPoint0(e);
+    const x = (c1 * b2 - c2 * b1) / det, y = (a1 * c2 - a2 * c1) / det;
+    const cl = (rC.left - rS.left) / sc, ct = (rC.top - rS.top) / sc, cw = rC.width / sc, ch = rC.height / sc;
+    return { x: (x - cl) / cw * MG.W, y: (y - ct) / ch * MG.H };
+  } catch (er) { return _mgPoint0(e); }
 };
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);

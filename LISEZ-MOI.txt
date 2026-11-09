@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v19.9-202611021200
+JACKPOT DEFENSE v21.1-202611100100
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,66 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v21.1 — LES JEUX DU MILIEU
+- La roue de Nox, le billard de Momo, la cible de Dina et les cartes du Baron sont redessinés dans le style
+  des décors : encre, bois, laiton, lumière de lampe.
+- La roue de Nox : acajou et laiton, cases d'émail plus lisibles, la bille tombe dans sa couleur.
+- Le billard de Momo : feutre olive sous la lampe, poches de cuir, vraie queue en bois. La table est moins
+  penchée, et la visée suit enfin ton doigt exactement (elle était un peu décalée sur la table inclinée).
+- La cible de Dina : vrai sisal, fils d'acier, accrochée sur le mur de briques.
+- Les cartes du Baron : vieux papier, chiffres gravés, dos bordeaux à treillis doré, filet peint sur le tapis.
+
+Nouveautés de la v21.0 — L'HISTOIRE DU TAPIS ROUGE (1925)
+- Le jeu raconte une histoire en 7 chapitres, du premier verre à la dernière mise. Elle avance avec tes
+  victoires contre le Baron (le compteur de l'histoire part de zéro avec cette version).
+- Des scènes avec les persos : au bar, dans les salles de Nox, Dina et Momo, au marché noir, chez le Baron,
+  dans la bibliothèque. « Passer › » en haut à droite si tu les as déjà vues.
+- Les répliques changent au fil des rencontres (comme dans Hades) et des chapitres.
+- 47 indices datés cachés dans les décors : quand « Ça brille » apparaît, touche-le, fouille le décor,
+  lis le document (et la lettre entière quand il y en a une). Tout se range dans les « Pièces à conviction »,
+  par date (bouton dans la bibliothèque d'Anatole et dans la pause).
+- 12 jetons rouges de Jack à retrouver à partir du chapitre III.
+- Un 3e carnet dans la bibliothèque : « Les secrets », 102 pages qui s'écrivent en jouant.
+- Au bar, Jack lit au bout du comptoir (touche-le), et à partir du chapitre III, la porte de son bureau s'ouvre.
+- Au 10e Baron battu, un choix. Puis deux combats spéciaux contre Jack, et une vraie fin.
+- Le mode horde reste à côté de l'histoire.
+- Quelques répliques remises en 1925 (plus de « 1987 »).
+- La version anglaise n'a pas encore l'histoire (elle sera traduite quand le texte français sera figé).
+
+Nouveautés de la v20.4 — LES TABLES DESSINÉES
+- Les tables de Nox, Momo, Dina et du Baron sont dessinées dans le prolongement de leur salle :
+  velours violet aux bougies, billard à la bière, comptoir punk au cendrier, feutre de poker au whisky et au cigare.
+- Les petits objets dessinés en code sur les tables sont remplacés par ceux du dessin.
+- Le bar de Zaza a un nouveau fond, plus haut, avec son comptoir (mieux sur téléphone).
+
+Nouveautés de la v20.3 — CHAQUE PERSO A SON STYLE
+- Madame Nox : lettres dorées, ses répliques en italique dans un cadre à filets dorés.
+  Les mises sont des cartes de tarot (la Lune, l'Étoile, le Soleil), les couleurs aussi.
+- Momo la Craie : écrit à la craie, ses répliques sur une ardoise encadrée de bois, pile ou face avec de vraies pièces.
+- Le Baron : ses répliques sur une plaque d'acajou, boutons en laiton vissés, la liste des mains sur une carte crème.
+- Chez Jack : le shop devient son registre de prêteur, tapé à la machine, avec les prix tamponnés en rouge.
+- Le grand ovale vide au milieu des tables a disparu.
+
+Nouveautés de la v20.2 — LA TABLE DE DINA
+- Nouvelle interface pour les fléchettes de Dina : écriture au marqueur, ses répliques sur un papier scotché,
+  la cible vissée sur une planche taguée (avec ses bâtons à la craie).
+- Les mises sont de vraies piles de jetons avec le montant sur un bout de scotch ; LANCER est une bande de gaffer.
+
+Nouveautés de la v20.1 — RETOURS
+- Jeux de Dina et de Nox : la mise survolée ou choisie à la manette est bien visible, numérotée 1, 2, 3
+  (et les touches 1, 2, 3 marchent au clavier).
+- L'Inspecteur reste dans son cadre au marché noir (pareil pour Zaza au bar).
+- Chez Jack : plus de bande bizarre à droite, le shop colle bien au rack.
+- Plus de didascalies dans les répliques (« *ouvre son manteau* », « *bâille* »…) : juste ce qu'ils disent.
+- Jack ne lit plus son journal (pose au bras raté, retirée). Plus de bouteilles ni de fléchettes en trop chez Dina.
+
+Nouveautés de la v20.0 — LES DÉCORS DESSINÉS
+- Tout le casino est redessiné : le bar de Zaza, le marché noir, la machine à jetons, le salon du Baron,
+  les tables de Nox, Dina et Momo, le bureau de Jack et la bibliothèque d'Anatole.
+- L'intro de Gaston se passe dans la vraie ruelle du Tapis Rouge, et la porte s'ouvre pour de bon.
+- Nouveaux écrans : défaite, victoire, l'arrivée du Baron, le Baron ruiné, et le bar qui se vide.
+- L'écran titre et le palais des Mille et une nuits ne changent pas.
 
 Nouveautés de la v19.9 — MOINS D'ENCOMBREMENT
 - Combat : plus de compteur « dégâts/s » (l'info reste dans les fiches de jeton, « Apport aux dégâts »).
