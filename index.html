@@ -6019,40 +6019,74 @@ body:not(.th-orient) #poker.fp .pk-felt::before{content:"";position:absolute;z-i
 .ci.end{opacity:0}
 .ci-world,.ci-a,.ci-b{position:absolute;inset:0;transform-style:preserve-3d}
 .ci i,.ci div,.ci section{display:block}
-/* --- 1 · dehors, la nuit, l'enseigne --- */
-.ci-a{transition:transform .5s cubic-bezier(.6,0,.8,.4)}
-.ci.dolly .ci-a{transform:translate3d(0,-12vh,760px)}
-.ci.inside .ci-a{opacity:0;transition:transform .5s cubic-bezier(.6,0,.8,.4),opacity .18s}
-.ci-sky{position:absolute;inset:-60%;transform:translateZ(-700px);background:radial-gradient(120% 70% at 50% 0%,#2c1640,#130a20 55%,#07040c)}
-.ci-moon{position:absolute;top:8%;left:14%;transform:translateZ(-500px) scale(1.6);width:11vmin;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 36%,#fff6dc,#f2d58c 60%,#b98a3a);box-shadow:0 0 40px rgba(255,220,150,.35);opacity:.8}
-.ci-facade{position:absolute;left:50%;bottom:22%;width:min(92vw,84vh);height:min(58vh,62vw);transform:translateX(-50%) translateZ(-120px);border-radius:6px 6px 0 0;
-  background:linear-gradient(180deg,rgba(0,0,0,.5),transparent 30%),repeating-linear-gradient(0deg,transparent 0 21px,#1d0f1c 21px 24px),repeating-linear-gradient(90deg,transparent 0 46px,#1d0f1c 46px 49px),linear-gradient(90deg,#3b1d2c,#4f2638 50%,#3b1d2c);box-shadow:0 0 0 4px #12080f,0 30px 80px #000}
-.ci-sign{position:absolute;left:50%;top:9%;transform:translateX(-50%);padding:10px 22px 9px;border-radius:14px;border:3px solid #4a2340;background:rgba(14,6,18,.92);white-space:nowrap;text-align:center;box-shadow:0 8px 0 #000}
+/* --- 1 · dehors, la nuit, l'enseigne : des plans à plusieurs profondeurs, la caméra (JS) les fait glisser --- */
+.ci-a{will-change:transform}
+.ci.inside .ci-a{opacity:0;transition:opacity .18s}
+.ci-sky{position:absolute;inset:-100%;transform:translateZ(-900px);background:radial-gradient(40% 30% at 50% 38%,#3a1d52,#170c26 55%,#07040c)}
+.ci-moon{position:absolute;top:6%;left:16%;width:12vmin;aspect-ratio:1;border-radius:50%;transform:translateZ(-700px) scale(1.8);background:radial-gradient(circle at 38% 36%,#fff6dc,#f2d58c 60%,#b98a3a);box-shadow:0 0 50px rgba(255,220,150,.4);opacity:.85}
+.ci-far{position:absolute;left:-45%;right:-45%;bottom:22%;height:62%;transform:translateZ(-620px) scale(1.69);transform-origin:50% 100%;opacity:.8}
+.ci-far i{position:absolute;bottom:0;left:var(--l);width:var(--w);height:var(--h);border-radius:3px 3px 0 0;
+  background:repeating-linear-gradient(0deg,#130a1c 0 15px,transparent 15px 24px) 0 6px,repeating-linear-gradient(90deg,#130a1c 0 13px,rgba(255,190,100,.42) 13px 21px),#130a1c;box-shadow:inset 0 0 0 5px #130a1c}
+.ci-far i:nth-child(3n){filter:brightness(.55)}.ci-far i:nth-child(4n+1){filter:hue-rotate(-30deg) brightness(.8)}
+.ci-bld{position:absolute;bottom:22%;width:40%;height:50%;transform:translateZ(-330px) scale(1.37);transform-origin:50% 100%;
+  background:linear-gradient(180deg,rgba(0,0,0,.6),transparent 40%),repeating-linear-gradient(0deg,transparent 0 19px,#120910 19px 22px),linear-gradient(90deg,#241321,#2e1828);box-shadow:inset 0 0 60px #000}
+.ci-bld.l{left:-26%}.ci-bld.r{right:-26%}
+.ci-bld::after{content:"";position:absolute;top:30%;width:12%;height:10%;background:linear-gradient(#ffcf7a,#e08a3a);box-shadow:0 0 22px rgba(255,180,90,.6),0 90px 0 -2px #3a2030}
+.ci-bld.l::after{right:18%}.ci-bld.r::after{left:18%}
+.ci-ground{position:absolute;left:-160%;right:-160%;top:78%;height:1150px;transform-origin:50% 0;transform:translateZ(-430px) rotateX(90deg);
+  background:repeating-linear-gradient(90deg,transparent 0 58px,rgba(0,0,0,.25) 58px 61px),repeating-linear-gradient(0deg,transparent 0 38px,rgba(0,0,0,.25) 38px 41px),linear-gradient(180deg,#24142c,#0d0712 70%)}
+.ci-ground::before,.ci-ground::after{content:"";position:absolute;left:50%;top:0;width:60%;height:70%;transform:translateX(-50%);opacity:0;transition:opacity .4s}
+.ci-ground::before{background:radial-gradient(28% 40% at 50% 30%,rgba(255,79,160,.45),transparent 70%)}
+.ci-ground::after{background:radial-gradient(12% 60% at 50% 30%,rgba(255,190,90,.6),transparent 75%)}
+.ci.neon .ci-ground::before,.ci.open .ci-ground::after{opacity:1}
+.ci.dolly .ci-ground,.ci.dolly .ci-post,.ci.dolly .ci-fog{opacity:0;transition:opacity .25s}
+.ci-facade{position:absolute;left:50%;bottom:22%;width:min(92vw,84vh);height:min(58vh,62vw);margin-left:calc(min(92vw,84vh) / -2);transform:translateZ(-120px);transform-style:preserve-3d;border-radius:6px 6px 0 0;
+  background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 35%),repeating-linear-gradient(0deg,transparent 0 21px,#1d0f1c 21px 24px),repeating-linear-gradient(90deg,transparent 0 46px,#1d0f1c 46px 49px),linear-gradient(90deg,#3b1d2c,#5a2a3e 50%,#3b1d2c)}
+.ci-fside{position:absolute;top:0;bottom:0;width:220px;background:linear-gradient(90deg,#1a0c16,#0a0408),repeating-linear-gradient(0deg,transparent 0 21px,#000 21px 24px)}
+.ci-fside.l{left:0;transform-origin:0 50%;transform:rotateY(90deg)}.ci-fside.r{right:0;transform-origin:100% 50%;transform:rotateY(-90deg);background:linear-gradient(270deg,#1a0c16,#0a0408)}
+.ci-roof{position:absolute;left:-12px;right:-12px;top:-16px;height:20px;border-radius:3px;background:linear-gradient(#5a3a2a,#2a1520);box-shadow:0 6px 0 #12080f}
+.ci-sign{position:absolute;left:50%;top:9%;transform:translateX(-50%) translateZ(26px);padding:10px 22px 9px;border-radius:14px;border:3px solid #4a2340;background:rgba(14,6,18,.94);white-space:nowrap;text-align:center;box-shadow:0 8px 0 #000,0 22px 30px rgba(0,0,0,.6)}
 .ci-sign b{display:block;font:700 clamp(26px,7.6vmin,54px)/1 var(--f-pix);letter-spacing:.06em;color:#4a2340}
 .ci-sign small{display:block;margin-top:6px;font:600 clamp(10px,2.4vmin,15px)/1 var(--f-pix);letter-spacing:.24em;color:#3a2a40}
-.ci.neon .ci-sign{border-color:#ff8fd0;box-shadow:0 8px 0 #000,0 0 18px rgba(255,79,160,.6),inset 0 0 12px rgba(255,79,160,.45);animation:ciNeon .55s steps(1) both}
-.ci.neon .ci-sign b{color:#ffeaf5;text-shadow:0 0 4px #fff,0 0 12px #ff4fa0,0 0 28px #ff2f8f}
+.ci.neon .ci-sign{border-color:#ff8fd0;box-shadow:0 8px 0 #000,0 0 22px rgba(255,79,160,.65),inset 0 0 12px rgba(255,79,160,.45);animation:ciNeon .55s steps(1) both}
+.ci.neon .ci-sign b{color:#ffeaf5;text-shadow:0 0 4px #fff,0 0 12px #ff4fa0,0 0 30px #ff2f8f,0 0 60px rgba(255,47,143,.5)}
 .ci.neon .ci-sign small{color:#ffcc4d;text-shadow:0 0 8px rgba(255,204,77,.7)}
 @keyframes ciNeon{0%,30%{opacity:.25}15%,45%,100%{opacity:1}}
+.ci-awn{position:absolute;left:50%;bottom:52%;width:46%;height:clamp(18px,3.4vmin,28px);transform:translateX(-50%) translateZ(48px);transform-style:preserve-3d;border-radius:4px;
+  background:radial-gradient(circle,#5a2a20 0 3px,transparent 4px) 9px 50%/18px 100% repeat-x,linear-gradient(#9a1d30,#5a0f1c);box-shadow:0 0 0 2px #2a0810}
+.ci.neon .ci-awn{background:radial-gradient(circle,#fff1c4 0 3px,rgba(255,200,90,.5) 4px,transparent 7px) 9px 50%/18px 100% repeat-x,linear-gradient(#b8233a,#6a1222)}
+.ci-awn-u{position:absolute;left:0;right:0;top:100%;height:48px;transform-origin:50% 0;transform:rotateX(-90deg);background:linear-gradient(#3a0a14,#1a0408)}
+.ci.open .ci-awn-u{background:linear-gradient(#a86a2a,#5a2a10)}
 .ci-door{position:absolute;left:50%;bottom:0;width:32%;height:52%;transform:translateX(-50%);border-radius:12px 12px 0 0;background:#0c0406;box-shadow:0 0 0 7px #2a1520,0 0 0 11px #5a3a2a;perspective:600px;overflow:hidden}
 .ci-glow{position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 60%,#fff2c8,#ffc35a 45%,#ff7a3d 80%,#c8283a);opacity:0;transition:opacity .35s}
 .ci-leaf{position:absolute;top:0;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#6a2a20 0 14px,#561f18 14px 16px);box-shadow:inset 0 0 0 4px #3a140f;transition:transform .55s cubic-bezier(.4,0,.2,1)}
 .ci-leaf.l{left:0;transform-origin:0 50%}.ci-leaf.r{right:0;transform-origin:100% 50%}
 .ci.open .ci-leaf.l{transform:rotateY(-82deg)}.ci.open .ci-leaf.r{transform:rotateY(82deg)}
 .ci.open .ci-glow{opacity:1}
-.ci-lamp{position:absolute;bottom:30%;width:14px;height:22px;border-radius:4px;background:#ffd58a;box-shadow:0 0 18px #ffb02e,0 0 50px rgba(255,170,60,.5)}
+.ci-lamp{position:absolute;bottom:30%;width:14px;height:22px;border-radius:4px;transform:translateZ(14px);background:#ffd58a;box-shadow:0 0 18px #ffb02e,0 0 50px rgba(255,170,60,.5)}
 .ci-lamp.l{left:24%}.ci-lamp.r{right:24%}
-.ci-street{position:absolute;left:-20%;right:-20%;bottom:0;height:22%;background:linear-gradient(180deg,#1c1024,#07040c);transform:rotateX(60deg);transform-origin:50% 0}
+.ci-fog{position:absolute;left:-60%;right:-60%;bottom:12%;height:24%;transform:translateZ(-40px);background:radial-gradient(50% 50% at 50% 60%,rgba(140,110,190,.28),transparent 70%);filter:blur(8px);animation:ciFog 4s linear}
+@keyframes ciFog{to{translate:8% 0}}
+.ci-post{position:absolute;bottom:-12%;width:18px;height:96%;transform:translateZ(270px);background:linear-gradient(90deg,#060408,#2e2030 45%,#060408)}
+.ci-post.l{left:3%}.ci-post.r{right:3%}
+.ci-post b{position:absolute;top:-1%;left:50%;width:46px;height:34px;margin-left:-23px;border-radius:10px 10px 16px 16px;background:radial-gradient(circle at 50% 60%,#fff3c8,#ffc35a 60%,#c88a2a);box-shadow:0 0 30px #ffb02e,0 0 90px rgba(255,170,60,.45)}
 .ci-rain{position:absolute;inset:0;width:100%;height:100%;z-index:3}
 /* --- 2 · dedans : le Baron et ses cartes --- */
-.ci-b{opacity:0;transform:translateZ(-300px);transition:opacity .4s,transform 1.4s cubic-bezier(.2,.7,.3,1)}
-.ci.inside .ci-b{opacity:1;transform:translateZ(0)}
-.ci-room{position:absolute;inset:-70%;transform:translateZ(-800px);background:radial-gradient(70% 55% at 50% 38%,#3a0d1c,#16050c 60%,#07030a)}
+.ci-b{opacity:0;transition:opacity .35s;will-change:transform}
+.ci.inside .ci-b{opacity:1}
+.ci-room{position:absolute;inset:-130%;transform:translateZ(-950px);background:radial-gradient(22% 26% at 50% 44%,rgba(255,170,90,.22),transparent 70%),radial-gradient(40% 40% at 50% 46%,transparent 30%,rgba(5,1,4,.85)),repeating-linear-gradient(90deg,#3a0a16 0 26px,#6a1626 26px 40px,#3a0a16 40px 62px)}
+.ci-col{position:absolute;top:-30%;bottom:-30%;width:10%;transform:translateZ(-300px) scale(1.33);background:linear-gradient(90deg,#0e0407,#4a2a18 28%,#a07838 50%,#4a2a18 72%,#0e0407);box-shadow:0 0 40px #000}
+.ci-col.l{left:2%}.ci-col.r{right:2%}
+.ci-hang{position:absolute;top:-6%;width:2px;height:30%;background:#1a1216;transform:translateZ(-140px)}
+.ci-hang.l{left:26%}.ci-hang.r{right:26%}
+.ci-hang::after{content:"";position:absolute;left:-26px;bottom:-14px;width:54px;height:24px;border-radius:50% 50% 8px 8px / 100% 100% 8px 8px;background:linear-gradient(#2f7a44,#123a1e);box-shadow:0 0 0 2px #c9a24a,0 18px 40px rgba(255,200,120,.75),0 5px 0 #fff0c0}
 .ci-spot{position:absolute;left:50%;top:-10%;width:70vmin;height:90%;transform:translateX(-50%) translateZ(-200px) scale(1.25);background:linear-gradient(180deg,rgba(255,220,150,.22),rgba(255,220,150,0));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
 .ci-baron{position:absolute;left:50%;top:8%;width:min(58vmin,420px);transform:translateX(-50%) translateZ(-260px) scale(1.25);opacity:.95}
 .ci-baron img{display:block;width:100%;filter:brightness(.08) contrast(1.4) drop-shadow(0 0 10px rgba(255,40,70,.75)) drop-shadow(0 0 30px rgba(200,20,50,.5))}
 .ci-table{position:absolute;left:50%;top:66%;width:min(130vmin,1100px);height:min(130vmin,1100px);margin:calc(min(130vmin,1100px) / -2) 0 0 calc(min(130vmin,1100px) / -2);transform:rotateX(62deg);transform-style:preserve-3d}
-.ci-felt{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#1f8a52,#126a3c 55%,#0a4426 70%,#5a2e14 70.5%,#3a1c0c 76%,transparent 76.5%);box-shadow:0 0 120px rgba(0,0,0,.7)}
+.ci-rim{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#3a1c0c 60%,#1a0a04);box-shadow:0 0 0 1px #12060200}
+.ci-rim:last-of-type{box-shadow:0 0 80px 20px rgba(0,0,0,.8)}
+.ci-felt{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#1f8a52,#126a3c 55%,#0a4426 70%,#5a2e14 70.5%,#3a1c0c 76%,transparent 76.5%);box-shadow:0 22px 0 #3a1c0c,0 30px 0 #24100a,0 40px 50px rgba(0,0,0,.85)}
 .ci-card{position:absolute;left:50%;top:50%;width:70px;height:100px;margin:-50px 0 0 -35px;transform-style:preserve-3d;transform-origin:50% 100%;
   transform:translate(var(--x),var(--z)) rotateZ(var(--r));transition:transform .5s cubic-bezier(.3,.7,.3,1) var(--d),opacity .3s}
 .ci-cf,.ci-cb{position:absolute;inset:0;border-radius:7px;backface-visibility:hidden}
@@ -6066,18 +6100,22 @@ body:not(.th-orient) #poker.fp .pk-felt::before{content:"";position:absolute;z-i
 .ci-wave{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border-radius:50%;border:6px solid rgba(255,214,120,.9);box-shadow:0 0 30px rgba(255,180,80,.8);opacity:0;transform:scale(.2)}
 .ci.slam .ci-wave{animation:ciWave .7s ease-out both}
 @keyframes ciWave{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(18)}}
+.ci-stk{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px;transform:translate(var(--x),var(--y));transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.3,1),opacity .45s .12s}
+.ci-stk i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,var(--c) 0 44%,#fbf6ea 45% 50%,var(--c) 51% 78%,#fbf6ea 79% 84%,var(--c) 85%);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
+.ci.slam .ci-stk{transform:translate(calc(var(--x) * 2.7),calc(var(--y) * 2.7)) rotateX(75deg) rotateZ(calc(var(--k) * 70deg - 50deg)) translateZ(80px);opacity:0}
 /* --- 3 · ton jeton --- */
 .ci-chip{position:absolute;left:50%;top:62%;width:min(34vmin,240px);aspect-ratio:1;margin:calc(min(34vmin,240px) / -2) 0 0 calc(min(34vmin,240px) / -2);transform-style:preserve-3d;transform:translateY(-130vh) rotateX(62deg) rotateZ(-40deg);opacity:0}
 .ci.drop .ci-chip{opacity:1;transform:translateY(0) rotateX(62deg) rotateZ(10deg);transition:transform .24s cubic-bezier(.6,0,1,.6)}
 .ci.slam .ci-chip{animation:ciBounce .45s ease-out}
 @keyframes ciBounce{30%{transform:translateY(-3vh) rotateX(62deg) rotateZ(14deg) scale(1.03,.94)}}
 .ci.flip .ci-chip{transform:translateY(-14vh) rotateX(0) rotateZ(0) scale(1.45);transition:transform .6s cubic-bezier(.3,1.35,.5,1)}
-.ci .ci-cface{position:absolute;inset:0;border-radius:50%;display:grid;place-content:center;gap:4px;text-align:center;
+.ci .ci-cface{position:absolute;inset:0;transform:translateZ(.5px);border-radius:50%;display:grid;place-content:center;gap:4px;text-align:center;
   background:radial-gradient(circle,#160c22 0 52%,transparent 52.5%),repeating-conic-gradient(#e8344a 0 18deg,#fbf6ea 18deg 24deg),#e8344a;
   box-shadow:inset 0 0 0 5px #9a1426,inset 0 0 0 calc(min(34vmin,240px) * .25) transparent,0 0 0 3px #5a0a18,0 18px 40px rgba(0,0,0,.6)}
 .ci-cface span{display:grid;justify-items:center;gap:5px;font:700 calc(min(34vmin,240px) * .1)/1 var(--f-pix);color:#ffeaf5;text-shadow:0 0 6px #ff4fa0,0 0 16px #ff2f8f}
 .ci-cface small{justify-self:center;padding:2px 8px;border-radius:6px;background:#2a6fd6;font:700 calc(min(34vmin,240px) * .07)/1.2 var(--f-pix);letter-spacing:.18em;color:#e8f0ff}
-.ci-cedge{position:absolute;inset:0;border-radius:50%;transform:translateZ(-10px);background:#7a0f22;box-shadow:0 0 0 3px #4a0612}
+.ci-cedge{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#a3172f 0 18deg,#d8ccb0 18deg 24deg);filter:brightness(.62)}
+.ci-cedge:last-child{box-shadow:0 0 0 2px #3a0410,0 20px 40px rgba(0,0,0,.6)}
 .ci.slam .ci-world{animation:ciShake .35s linear}
 @keyframes ciShake{20%{transform:translate(-8px,6px)}40%{transform:translate(7px,-5px)}60%{transform:translate(-5px,3px)}80%{transform:translate(3px,-2px)}}
 /* textes, flash, vignette */
@@ -41459,23 +41497,36 @@ function ciBuild() {
     const a = (i / CI_CARDS.length) * Math.PI * 2 + .3, R = 150 + (i % 2) * 70;
     return `<div class="ci-card${i % 2 ? '' : ' fl'}" style="--x:${Math.round(Math.cos(a) * R)}px;--z:${Math.round(Math.sin(a) * R * .8 - 40)}px;--r:${Math.round(rand(-30, 30))}deg;--d:${(i * .085).toFixed(3)}s"><div class="ci-cf ${red ? 'red' : ''}"><b>${r}</b><i>${s}</i><em>${s}</em></div><div class="ci-cb"></div></div>`;
   }).join('');
+  // le décor est inventé en volumes : immeubles au loin, épaisseur de la table, piles de jetons, tranche du jeton
+  const far = Array.from({ length: 9 }, (_, i) => `<i style="--h:${Math.round(rand(38, 92))}%;--w:${Math.round(rand(9, 16))}%;--l:${Math.round(i * 11.5 - 4)}%"></i>`).join('');
+  const rims = Array.from({ length: 6 }, (_, i) => `<i class="ci-rim" style="transform:translateZ(${-(i + 1) * 6}px)"></i>`).join('');
+  const STK = [[-190, 60, 9, '#2a6fd6'], [175, 40, 12, '#1d1a24'], [120, 150, 7, '#e8b93a']];
+  const stacks = STK.map(([x, y, n, c], k) => `<div class="ci-stk" style="--x:${x}px;--y:${y}px;--c:${c};--k:${k}">${Array.from({ length: n }, (_, i) => `<i style="transform:translateZ(${i * 4 + 2}px)"></i>`).join('')}</div>`).join('');
+  const edges = Array.from({ length: 7 }, (_, i) => `<i class="ci-cedge" style="transform:translateZ(${-(i + 1) * 2.2}px)"></i>`).join('');
   const el = document.createElement('div'); el.className = 'ci'; el.id = 'ci';
   el.innerHTML = `
   <div class="ci-world">
     <section class="ci-a">
       <i class="ci-sky"></i><i class="ci-moon"></i>
+      <div class="ci-far">${far}</div>
+      <i class="ci-bld l"></i><i class="ci-bld r"></i>
+      <i class="ci-ground"></i>
       <div class="ci-facade">
+        <i class="ci-fside l"></i><i class="ci-fside r"></i><i class="ci-roof"></i>
         <div class="ci-sign"><b>TAPIS ROUGE</b><small>BAR · JEUX · ALIBIS</small></div>
+        <div class="ci-awn"><i class="ci-awn-u"></i></div>
         <div class="ci-door"><i class="ci-glow"></i><i class="ci-leaf l"></i><i class="ci-leaf r"></i></div>
         <i class="ci-lamp l"></i><i class="ci-lamp r"></i>
       </div>
-      <i class="ci-street"></i>
+      <i class="ci-fog"></i>
+      <i class="ci-post l"><b></b></i><i class="ci-post r"><b></b></i>
     </section>
     <section class="ci-b">
-      <i class="ci-room"></i><i class="ci-spot"></i>
+      <i class="ci-room"></i><i class="ci-col l"></i><i class="ci-col r"></i>
+      <i class="ci-hang l"></i><i class="ci-hang r"></i><i class="ci-spot"></i>
       <div class="ci-baron"><img src="portraits/baron_sly.webp" alt=""></div>
-      <div class="ci-table"><i class="ci-felt"></i>${cards}<i class="ci-wave"></i></div>
-      <div class="ci-chip"><div class="ci-cface"><span>JACKPOT</span><small>DEFENSE</small></div><i class="ci-cedge"></i></div>
+      <div class="ci-table"><i class="ci-felt"></i>${stacks}${cards}<i class="ci-wave"></i></div>
+      <div class="ci-chip"><div class="ci-cface"><span>JACKPOT</span><small>DEFENSE</small></div>${edges}</div>
     </section>
   </div>
   <canvas class="ci-rain"></canvas>
@@ -41483,14 +41534,14 @@ function ciBuild() {
   <p class="ci-txt t2">${hT('…SAUF CE SOIR.', '…EXCEPT TONIGHT.')}</p>
   <i class="ci-flash"></i><i class="ci-vig"></i>`;
   box.appendChild(el);
-  CI.el = el; CI.rain = el.querySelector('.ci-rain');
+  CI.el = el; CI.rain = el.querySelector('.ci-rain'); CI.a = el.querySelector('.ci-a'); CI.b = el.querySelector('.ci-b');
   return el;
 }
 function ciRainFrame(t) {
   const cv = CI.rain; if (!cv) return;
   const w = cv.width = Math.min(innerWidth, 900), h = cv.height = Math.min(innerHeight, 900);
   const g = cv.getContext('2d'); g.clearRect(0, 0, w, h);
-  if (t > 1.75) return;
+  if (t > 1.6) { ciDust(g, w, h, t); if (t > 1.75) return; }
   if (!CI.drops.length) for (let i = 0; i < 90; i++) CI.drops.push([Math.random(), Math.random(), .6 + Math.random() * .8]);
   const k = t < 1.3 ? 1 : 1 - (t - 1.3) / .45;
   g.strokeStyle = `rgba(190,200,255,${.35 * k})`; g.lineWidth = 1.2; g.beginPath();
@@ -41499,6 +41550,33 @@ function ciRainFrame(t) {
     g.moveTo(x, y); g.lineTo(x - 4 * d[2], y + 22 * d[2]);
   }
   g.stroke();
+}
+function ciDust(g, w, h, t) {
+  if (!CI.dust) CI.dust = Array.from({ length: 46 }, () => [Math.random(), Math.random(), .4 + Math.random(), Math.random() * 6]);
+  const k = Math.min(1, (t - 1.6) / .5) * (t > 3.9 ? Math.max(0, 1 - (t - 3.9) / .4) : 1);
+  for (const d of CI.dust) {
+    const y = ((d[1] - t * .035 * d[2]) % 1 + 1) % 1, spread = .1 + y * .32;
+    const x = .5 + (d[0] - .5) * 2 * spread + Math.sin(t * 1.3 + d[3]) * .012;
+    g.globalAlpha = k * (.25 + .5 * Math.abs(Math.sin(t * 2 + d[3]))) * (1 - y * .6);
+    g.fillStyle = '#ffe2a0'; g.beginPath(); g.arc(x * w, y * h * .82, 1 + d[2] * 1.3, 0, 7); g.fill();
+  }
+  g.globalAlpha = 1;
+}
+// la caméra : elle glisse en continu, ce qui donne la profondeur (les plans proches bougent plus vite que le fond)
+const ciE = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+const ciEo = x => x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.pow(1 - x, 3);
+const ciEi = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * x;
+function ciCam(t) {
+  if (CI.a && t < 1.9) {
+    const k = ciEo(t / 1.05), d = ciEi((t - 1.0) / .55);
+    const yaw = 17 * (1 - k), pitch = -7 * (1 - k), z = -170 * (1 - k) + 780 * d, y = -13 * d, x = -6 * (1 - k);
+    CI.a.style.transform = `translate3d(${x}vw,${y}vh,${z}px) rotateX(${pitch}deg) rotateY(${yaw}deg)`;
+  }
+  if (CI.b && t > 1.45) {
+    const s = t - 1.55, k = ciEo(s / 1.25), o = ciE(s / 2.3), f = ciE((t - 3.66) / .45);
+    const yaw = (-15 + 20 * o) * (1 - f), pitch = (9 - 7 * o) * (1 - f), z = -380 * (1 - k) + 36 * o;
+    CI.b.style.transform = `translateZ(${z}px) rotateX(${pitch}deg) rotateY(${yaw}deg)`;
+  }
 }
 // chaque moment de l'intro : [seconde, action]
 function ciEvents() {
@@ -41520,13 +41598,13 @@ function ciEvents() {
 function ciFrame() {
   const t = (performance.now() - CI.t0) / 1000;
   while (CI.ev.length && CI.ev[0][0] <= t) CI.ev.shift()[1]();
-  ciRainFrame(t);
+  ciRainFrame(t); ciCam(t);
   return t;
 }
 function ciRun() {
   const box = $('#boot'); if (!ciBuild()) { bootGo2(); return; }
   box.className = 'boot go cion';
-  CI.on = true; CI.ev = ciEvents(); CI.drops = []; CI.t0 = performance.now();
+  CI.on = true; CI.ev = ciEvents(); CI.drops = []; CI.dust = null; CI.t0 = performance.now();
   const loop = () => {
     if (BOOT.done) return;
     const t = ciFrame();
