@@ -6013,6 +6013,87 @@ body:not(.th-orient) #poker.fp .pc.sel{box-shadow:inset 0 0 0 1.5px #1b1310,inse
 /* le tapis : un filet doré peint autour des mains, la lumière de la lampe au centre */
 body:not(.th-orient) #poker.fp .pk-felt{position:relative;isolation:isolate}
 body:not(.th-orient) #poker.fp .pk-felt::before{content:"";position:absolute;z-index:-1;left:3%;right:3%;top:4%;bottom:0;border-radius:50%;border:1.5px solid rgba(214,168,84,.3);box-shadow:0 0 0 6px rgba(214,168,84,.05),inset 0 0 0 5px rgba(214,168,84,.06);background:radial-gradient(ellipse 60% 55% at 50% 45%,rgba(190,220,200,.07),rgba(0,0,0,0) 70%);pointer-events:none}
+/* ===== v21.2 · la nouvelle intro (3D CSS) ===== */
+.ci{position:absolute;inset:0;z-index:5;overflow:hidden;perspective:900px;perspective-origin:50% 42%;background:#07040c;pointer-events:none;transition:opacity .45s}
+.boot.cion>*:not(.ci){opacity:0!important;pointer-events:none}
+.ci.end{opacity:0}
+.ci-world,.ci-a,.ci-b{position:absolute;inset:0;transform-style:preserve-3d}
+.ci i,.ci div,.ci section{display:block}
+/* --- 1 · dehors, la nuit, l'enseigne --- */
+.ci-a{transition:transform .5s cubic-bezier(.6,0,.8,.4)}
+.ci.dolly .ci-a{transform:translate3d(0,-12vh,760px)}
+.ci.inside .ci-a{opacity:0;transition:transform .5s cubic-bezier(.6,0,.8,.4),opacity .18s}
+.ci-sky{position:absolute;inset:-60%;transform:translateZ(-700px);background:radial-gradient(120% 70% at 50% 0%,#2c1640,#130a20 55%,#07040c)}
+.ci-moon{position:absolute;top:8%;left:14%;transform:translateZ(-500px) scale(1.6);width:11vmin;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 36%,#fff6dc,#f2d58c 60%,#b98a3a);box-shadow:0 0 40px rgba(255,220,150,.35);opacity:.8}
+.ci-facade{position:absolute;left:50%;bottom:22%;width:min(92vw,84vh);height:min(58vh,62vw);transform:translateX(-50%) translateZ(-120px);border-radius:6px 6px 0 0;
+  background:linear-gradient(180deg,rgba(0,0,0,.5),transparent 30%),repeating-linear-gradient(0deg,transparent 0 21px,#1d0f1c 21px 24px),repeating-linear-gradient(90deg,transparent 0 46px,#1d0f1c 46px 49px),linear-gradient(90deg,#3b1d2c,#4f2638 50%,#3b1d2c);box-shadow:0 0 0 4px #12080f,0 30px 80px #000}
+.ci-sign{position:absolute;left:50%;top:9%;transform:translateX(-50%);padding:10px 22px 9px;border-radius:14px;border:3px solid #4a2340;background:rgba(14,6,18,.92);white-space:nowrap;text-align:center;box-shadow:0 8px 0 #000}
+.ci-sign b{display:block;font:700 clamp(26px,7.6vmin,54px)/1 var(--f-pix);letter-spacing:.06em;color:#4a2340}
+.ci-sign small{display:block;margin-top:6px;font:600 clamp(10px,2.4vmin,15px)/1 var(--f-pix);letter-spacing:.24em;color:#3a2a40}
+.ci.neon .ci-sign{border-color:#ff8fd0;box-shadow:0 8px 0 #000,0 0 18px rgba(255,79,160,.6),inset 0 0 12px rgba(255,79,160,.45);animation:ciNeon .55s steps(1) both}
+.ci.neon .ci-sign b{color:#ffeaf5;text-shadow:0 0 4px #fff,0 0 12px #ff4fa0,0 0 28px #ff2f8f}
+.ci.neon .ci-sign small{color:#ffcc4d;text-shadow:0 0 8px rgba(255,204,77,.7)}
+@keyframes ciNeon{0%,30%{opacity:.25}15%,45%,100%{opacity:1}}
+.ci-door{position:absolute;left:50%;bottom:0;width:32%;height:52%;transform:translateX(-50%);border-radius:12px 12px 0 0;background:#0c0406;box-shadow:0 0 0 7px #2a1520,0 0 0 11px #5a3a2a;perspective:600px;overflow:hidden}
+.ci-glow{position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 60%,#fff2c8,#ffc35a 45%,#ff7a3d 80%,#c8283a);opacity:0;transition:opacity .35s}
+.ci-leaf{position:absolute;top:0;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#6a2a20 0 14px,#561f18 14px 16px);box-shadow:inset 0 0 0 4px #3a140f;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.ci-leaf.l{left:0;transform-origin:0 50%}.ci-leaf.r{right:0;transform-origin:100% 50%}
+.ci.open .ci-leaf.l{transform:rotateY(-82deg)}.ci.open .ci-leaf.r{transform:rotateY(82deg)}
+.ci.open .ci-glow{opacity:1}
+.ci-lamp{position:absolute;bottom:30%;width:14px;height:22px;border-radius:4px;background:#ffd58a;box-shadow:0 0 18px #ffb02e,0 0 50px rgba(255,170,60,.5)}
+.ci-lamp.l{left:24%}.ci-lamp.r{right:24%}
+.ci-street{position:absolute;left:-20%;right:-20%;bottom:0;height:22%;background:linear-gradient(180deg,#1c1024,#07040c);transform:rotateX(60deg);transform-origin:50% 0}
+.ci-rain{position:absolute;inset:0;width:100%;height:100%;z-index:3}
+/* --- 2 · dedans : le Baron et ses cartes --- */
+.ci-b{opacity:0;transform:translateZ(-300px);transition:opacity .4s,transform 1.4s cubic-bezier(.2,.7,.3,1)}
+.ci.inside .ci-b{opacity:1;transform:translateZ(0)}
+.ci-room{position:absolute;inset:-70%;transform:translateZ(-800px);background:radial-gradient(70% 55% at 50% 38%,#3a0d1c,#16050c 60%,#07030a)}
+.ci-spot{position:absolute;left:50%;top:-10%;width:70vmin;height:90%;transform:translateX(-50%) translateZ(-200px) scale(1.25);background:linear-gradient(180deg,rgba(255,220,150,.22),rgba(255,220,150,0));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
+.ci-baron{position:absolute;left:50%;top:8%;width:min(58vmin,420px);transform:translateX(-50%) translateZ(-260px) scale(1.25);opacity:.95}
+.ci-baron img{display:block;width:100%;filter:brightness(.08) contrast(1.4) drop-shadow(0 0 10px rgba(255,40,70,.75)) drop-shadow(0 0 30px rgba(200,20,50,.5))}
+.ci-table{position:absolute;left:50%;top:66%;width:min(130vmin,1100px);height:min(130vmin,1100px);margin:calc(min(130vmin,1100px) / -2) 0 0 calc(min(130vmin,1100px) / -2);transform:rotateX(62deg);transform-style:preserve-3d}
+.ci-felt{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#1f8a52,#126a3c 55%,#0a4426 70%,#5a2e14 70.5%,#3a1c0c 76%,transparent 76.5%);box-shadow:0 0 120px rgba(0,0,0,.7)}
+.ci-card{position:absolute;left:50%;top:50%;width:70px;height:100px;margin:-50px 0 0 -35px;transform-style:preserve-3d;transform-origin:50% 100%;
+  transform:translate(var(--x),var(--z)) rotateZ(var(--r));transition:transform .5s cubic-bezier(.3,.7,.3,1) var(--d),opacity .3s}
+.ci-cf,.ci-cb{position:absolute;inset:0;border-radius:7px;backface-visibility:hidden}
+.ci-cf{background:#fbf6ea;box-shadow:inset 0 0 0 2px #c9b98f;color:#1a1420;font:700 22px/1 var(--f-pix);display:grid;place-items:center}
+.ci-cf.red{color:#d42a3e}
+.ci-cf b{position:absolute;left:7px;top:6px;font-size:16px}.ci-cf i{font-style:normal;font-size:34px}.ci-cf em{position:absolute;right:7px;bottom:6px;font-style:normal;font-size:14px;transform:rotate(180deg)}
+.ci-cb{transform:rotateY(180deg);background:repeating-linear-gradient(45deg,#a3172f 0 6px,#7a0f22 6px 12px);box-shadow:inset 0 0 0 4px #fbf6ea}
+.ci.rise .ci-card{transform:translate(var(--x),var(--z)) rotateZ(var(--r)) rotateX(-72deg) translateZ(4px)}
+.ci.fly .ci-card.fl{transform:translate(calc(var(--x) * .4),620px) rotateZ(var(--r)) rotateX(-88deg) translateZ(520px) scale(1.5);transition:transform .7s cubic-bezier(.6,0,.9,.6) var(--d);opacity:1}
+.ci.slam .ci-card:not(.fl){transform:translate(calc(var(--x) * 3.2),calc(var(--z) * 3.2)) rotateZ(calc(var(--r) * 6)) rotateX(-20deg) translateZ(160px);opacity:0;transition:transform .55s cubic-bezier(.2,.8,.3,1),opacity .5s .1s}
+.ci-wave{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border-radius:50%;border:6px solid rgba(255,214,120,.9);box-shadow:0 0 30px rgba(255,180,80,.8);opacity:0;transform:scale(.2)}
+.ci.slam .ci-wave{animation:ciWave .7s ease-out both}
+@keyframes ciWave{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(18)}}
+/* --- 3 · ton jeton --- */
+.ci-chip{position:absolute;left:50%;top:62%;width:min(34vmin,240px);aspect-ratio:1;margin:calc(min(34vmin,240px) / -2) 0 0 calc(min(34vmin,240px) / -2);transform-style:preserve-3d;transform:translateY(-130vh) rotateX(62deg) rotateZ(-40deg);opacity:0}
+.ci.drop .ci-chip{opacity:1;transform:translateY(0) rotateX(62deg) rotateZ(10deg);transition:transform .24s cubic-bezier(.6,0,1,.6)}
+.ci.slam .ci-chip{animation:ciBounce .45s ease-out}
+@keyframes ciBounce{30%{transform:translateY(-3vh) rotateX(62deg) rotateZ(14deg) scale(1.03,.94)}}
+.ci.flip .ci-chip{transform:translateY(-14vh) rotateX(0) rotateZ(0) scale(1.45);transition:transform .6s cubic-bezier(.3,1.35,.5,1)}
+.ci .ci-cface{position:absolute;inset:0;border-radius:50%;display:grid;place-content:center;gap:4px;text-align:center;
+  background:radial-gradient(circle,#160c22 0 52%,transparent 52.5%),repeating-conic-gradient(#e8344a 0 18deg,#fbf6ea 18deg 24deg),#e8344a;
+  box-shadow:inset 0 0 0 5px #9a1426,inset 0 0 0 calc(min(34vmin,240px) * .25) transparent,0 0 0 3px #5a0a18,0 18px 40px rgba(0,0,0,.6)}
+.ci-cface span{display:grid;justify-items:center;gap:5px;font:700 calc(min(34vmin,240px) * .1)/1 var(--f-pix);color:#ffeaf5;text-shadow:0 0 6px #ff4fa0,0 0 16px #ff2f8f}
+.ci-cface small{justify-self:center;padding:2px 8px;border-radius:6px;background:#2a6fd6;font:700 calc(min(34vmin,240px) * .07)/1.2 var(--f-pix);letter-spacing:.18em;color:#e8f0ff}
+.ci-cedge{position:absolute;inset:0;border-radius:50%;transform:translateZ(-10px);background:#7a0f22;box-shadow:0 0 0 3px #4a0612}
+.ci.slam .ci-world{animation:ciShake .35s linear}
+@keyframes ciShake{20%{transform:translate(-8px,6px)}40%{transform:translate(7px,-5px)}60%{transform:translate(-5px,3px)}80%{transform:translate(3px,-2px)}}
+/* textes, flash, vignette */
+.ci-txt{position:absolute;left:0;right:0;z-index:4;margin:0;text-align:center;font:700 clamp(17px,4.6vmin,34px)/1.15 var(--f-pix);letter-spacing:.14em;color:#fff3d6;text-shadow:0 3px 0 #000,0 0 18px rgba(0,0,0,.9);opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.ci-txt.t1{top:14%}.ci-txt.t2{bottom:12%;font-size:clamp(24px,7vmin,48px);color:#ffd76a;text-shadow:0 3px 0 #000,0 0 20px rgba(255,170,60,.7)}
+.ci.say1 .ci-txt.t1{opacity:1;transform:none}
+.ci.say2 .ci-txt.t1{opacity:.35}
+.ci.say2 .ci-txt.t2{opacity:1;transform:none}
+.ci.flip .ci-txt{opacity:0!important}
+.ci-flash{position:absolute;inset:0;z-index:6;background:radial-gradient(circle at 50% 55%,#fff6dc,#ffcc4d 45%,rgba(255,122,61,0) 80%);opacity:0;pointer-events:none}
+.ci.inside .ci-flash{animation:ciFlash .55s ease-out}
+.ci.slam .ci-flash{animation:ciFlash2 .4s ease-out}
+@keyframes ciFlash{0%{opacity:.85}100%{opacity:0}}
+@keyframes ciFlash2{0%{opacity:.5}100%{opacity:0}}
+.ci-vig{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,.7))}
+
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -6626,7 +6707,7 @@ body:not(.th-orient) #poker.fp .pk-felt::before{content:"";position:absolute;z-i
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v21.1</p>
+  <p class="proto">Sefy Industries · v21.2</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -25987,7 +26068,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v21.1</p></div>`;
+        <p class="ov5">v21.2</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -41367,6 +41448,115 @@ mgPoint = function (e) {
     return { x: (x - cl) / cw * MG.W, y: (y - ct) / ch * MG.H };
   } catch (er) { return _mgPoint0(e); }
 };
+
+/* ===== v21.2 · la nouvelle intro : la nuit au Tapis Rouge, la menace du Baron, et ton jeton qui renverse la table (4,7 s, en vraie 3D CSS) ===== */
+const CI = { on: false, t0: 0, raf: 0, el: null, rain: null, drops: [], cards: [], ev: [] };
+const CI_END = 4.75;
+const CI_CARDS = [['K', '♥', 1], ['A', '♠', 0], ['Q', '♦', 1], ['J', '♣', 0], ['7', '♥', 1], ['10', '♠', 0], ['3', '♦', 1], ['9', '♣', 0]];
+function ciBuild() {
+  const box = $('#boot'); if (!box) return null;
+  const cards = CI_CARDS.map(([r, s, red], i) => {
+    const a = (i / CI_CARDS.length) * Math.PI * 2 + .3, R = 150 + (i % 2) * 70;
+    return `<div class="ci-card${i % 2 ? '' : ' fl'}" style="--x:${Math.round(Math.cos(a) * R)}px;--z:${Math.round(Math.sin(a) * R * .8 - 40)}px;--r:${Math.round(rand(-30, 30))}deg;--d:${(i * .085).toFixed(3)}s"><div class="ci-cf ${red ? 'red' : ''}"><b>${r}</b><i>${s}</i><em>${s}</em></div><div class="ci-cb"></div></div>`;
+  }).join('');
+  const el = document.createElement('div'); el.className = 'ci'; el.id = 'ci';
+  el.innerHTML = `
+  <div class="ci-world">
+    <section class="ci-a">
+      <i class="ci-sky"></i><i class="ci-moon"></i>
+      <div class="ci-facade">
+        <div class="ci-sign"><b>TAPIS ROUGE</b><small>BAR · JEUX · ALIBIS</small></div>
+        <div class="ci-door"><i class="ci-glow"></i><i class="ci-leaf l"></i><i class="ci-leaf r"></i></div>
+        <i class="ci-lamp l"></i><i class="ci-lamp r"></i>
+      </div>
+      <i class="ci-street"></i>
+    </section>
+    <section class="ci-b">
+      <i class="ci-room"></i><i class="ci-spot"></i>
+      <div class="ci-baron"><img src="portraits/baron_sly.webp" alt=""></div>
+      <div class="ci-table"><i class="ci-felt"></i>${cards}<i class="ci-wave"></i></div>
+      <div class="ci-chip"><div class="ci-cface"><span>JACKPOT</span><small>DEFENSE</small></div><i class="ci-cedge"></i></div>
+    </section>
+  </div>
+  <canvas class="ci-rain"></canvas>
+  <p class="ci-txt t1">${hT('LA MAISON GAGNE TOUJOURS…', 'THE HOUSE ALWAYS WINS…')}</p>
+  <p class="ci-txt t2">${hT('…SAUF CE SOIR.', '…EXCEPT TONIGHT.')}</p>
+  <i class="ci-flash"></i><i class="ci-vig"></i>`;
+  box.appendChild(el);
+  CI.el = el; CI.rain = el.querySelector('.ci-rain');
+  return el;
+}
+function ciRainFrame(t) {
+  const cv = CI.rain; if (!cv) return;
+  const w = cv.width = Math.min(innerWidth, 900), h = cv.height = Math.min(innerHeight, 900);
+  const g = cv.getContext('2d'); g.clearRect(0, 0, w, h);
+  if (t > 1.75) return;
+  if (!CI.drops.length) for (let i = 0; i < 90; i++) CI.drops.push([Math.random(), Math.random(), .6 + Math.random() * .8]);
+  const k = t < 1.3 ? 1 : 1 - (t - 1.3) / .45;
+  g.strokeStyle = `rgba(190,200,255,${.35 * k})`; g.lineWidth = 1.2; g.beginPath();
+  for (const d of CI.drops) {
+    const y = ((d[1] + t * 1.6 * d[2]) % 1) * h, x = d[0] * w - y * .12;
+    g.moveTo(x, y); g.lineTo(x - 4 * d[2], y + 22 * d[2]);
+  }
+  g.stroke();
+}
+// chaque moment de l'intro : [seconde, action]
+function ciEvents() {
+  const el = CI.el, S = f => { try { f(); } catch (e) { /* pas de son */ } };
+  return [
+    [.05, () => S(() => Snd.bootCoin())],
+    [.32, () => { el.classList.add('neon'); S(() => Snd.bootNeon()); }],
+    [.9, () => { el.classList.add('open'); S(() => Snd.bootSlam(0)); }],
+    [1.12, () => el.classList.add('dolly')],
+    [1.55, () => { el.classList.add('inside'); S(() => Snd.bootSlam(2)); }],
+    [1.85, () => { el.classList.add('rise', 'say1'); S(() => Snd.bootTag(0)); }],
+    [2.35, () => el.classList.add('fly')],
+    [3.02, () => { el.classList.add('drop'); }],
+    [3.24, () => { el.classList.add('slam', 'say2'); S(() => { Snd.bootSlam(6); Snd.bootTag(1); }); haptic(60); }],
+    [3.72, () => { el.classList.add('flip'); S(() => Snd.bootChip()); }],
+    [4.3, () => el.classList.add('end')],
+  ];
+}
+function ciFrame() {
+  const t = (performance.now() - CI.t0) / 1000;
+  while (CI.ev.length && CI.ev[0][0] <= t) CI.ev.shift()[1]();
+  ciRainFrame(t);
+  return t;
+}
+function ciRun() {
+  const box = $('#boot'); if (!ciBuild()) { bootGo2(); return; }
+  box.className = 'boot go cion';
+  CI.on = true; CI.ev = ciEvents(); CI.drops = []; CI.t0 = performance.now();
+  const loop = () => {
+    if (BOOT.done) return;
+    const t = ciFrame();
+    if (t >= CI_END) { ciEnd(); return; }
+    CI.raf = requestAnimationFrame(loop);
+  };
+  CI.raf = requestAnimationFrame(loop);
+  BOOT.timers.push(setTimeout(ciEnd, (CI_END + 4) * 1000));
+  // un toucher après la première seconde : on passe directement au titre
+  setTimeout(() => { if (CI.on) box.addEventListener('pointerdown', ciSkip, { once: true }); }, 1000);
+}
+function ciSkip(e) { if (e) e.preventDefault(); if (CI.on) ciEnd(); }
+function ciEnd() {
+  if (!CI.on) return;
+  CI.on = false; cancelAnimationFrame(CI.raf);
+  const el = CI.el;
+  bootEnd();
+  if (el) setTimeout(() => el.remove(), 700);
+}
+bootGo = function () {
+  if (BOOT.step) return;
+  if (!CI.force && (G.reduced || G.headless) || !window.CSS || !CSS.supports('transform-style', 'preserve-3d')) { bootGo2(); return; }
+  BOOT.step = 1;
+  firstGesture(); audioInit(); duckMusic(true);
+  ciRun();
+};
+// plus besoin de préparer l'ancienne intro WebGL : moins de travail au démarrage
+bootShow = function () { bootShow1(); };
+// on précharge le portrait du Baron pour qu'il soit là à la 2e seconde
+try { const im = new Image(); im.src = 'portraits/baron_sly.webp'; } catch (e) { /* rien */ }
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
 else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});

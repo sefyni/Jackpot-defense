@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v21.1-202611100100
+JACKPOT DEFENSE v21.2-202611101200
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v21.2 — LA NOUVELLE INTRO
+- Après « Insérer un jeton » : une intro en 3D de 5 secondes. La pluie, l'enseigne du Tapis Rouge qui
+  s'allume, la porte qui s'ouvre, le Baron derrière sa table, ses cartes qui te foncent dessus…
+  et ton jeton qui claque sur le tapis. « La maison gagne toujours… sauf ce soir. »
+- Touche l'écran pour la passer. Les appareils sans 3D gardent l'ancienne intro simple.
 
 Nouveautés de la v21.1 — LES JEUX DU MILIEU
 - La roue de Nox, le billard de Momo, la cible de Dina et les cartes du Baron sont redessinés dans le style
