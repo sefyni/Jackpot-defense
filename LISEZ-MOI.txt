@@ -44,6 +44,15 @@ Nouveautés de la v21.6 aperçu — LES PROTOTYPES DU CHANTIER (version de test,
   de temps en temps la main qui tourne la bague d’Élise). Tant que les images ne sont pas
   faites, on garde les mains dessinées.
 
+Nouveautés de la v21.6 — L'ÉCRAN DE JEU EN HD
+- La table de jeu passe en haute définition (avant, elle était en gros pixels) : rail de cuir
+  capitonné avec des clous de laiton, jonc de laiton poli, anneau de noyer verni, feutre au grain
+  fin, et les inscriptions gravées en lettres dorées.
+- Les cartes de ta main : papier crème vieilli, cadre art déco, nom du sort gravé sur un bandeau
+  de noyer. Les places vides (sort qui se recharge) passent en bois sombre et laiton.
+- Les bulles des persos, les astuces de Gaston et les petits messages deviennent des cartons crème
+  tapés à la machine ; « Nouvelle carte » et les succès deviennent des plaques de cuivre.
+
 Nouveautés de la v21.5 — ENTREZ, LA MAISON VOUS ATTEND
 - Au lancement, le film se joue tout seul : une main gantée prend un jeton rouge marqué d'un
   smiley de sang parmi les jetons des personnages… puis la machine bugue. Un clic le passe.

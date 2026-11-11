@@ -6392,6 +6392,39 @@ body:not(.th-orient) #evx .btn small{font-family:"Elite20",Georgia,serif!importa
 body:not(.th-orient) #over,body:not(.th-orient) #over.lost{background:linear-gradient(rgba(10,4,10,.4),rgba(10,4,10,.74)),url(decors/defaite.webp) 50% 45%/cover #0b0610}
 body:not(.th-orient) #win{background:linear-gradient(rgba(10,4,10,.45),rgba(10,4,10,.8)),url(decors/victoire.webp) 50% 40%/cover #0b0610}
 body:not(.th-orient) .fbcut.k-bye{background:linear-gradient(rgba(10,4,10,.3),rgba(10,4,10,.8)),url(decors/victoire.webp) 50% 40%/cover #0b0610}
+
+/* ===== v21.6 · les bulles, annonces et astuces dans la DA du casino ===== */
+body:not(.th-orient){--cream:#f2e5c8}
+/* les cartons crème : bulles des persos, astuces de Gaston, messages courts */
+body:not(.th-orient) :is(.bubble,#pet-say,.otoast,#toast,.co-bub,.an-bubble,.bks-bubble){background:linear-gradient(180deg,#f7eed8,#e9d8b2)!important;color:#2b1a0f!important;border-radius:4px!important;box-shadow:0 0 0 2px #b88a3a,0 0 0 4px #1b120c,0 8px 14px rgba(0,0,0,.45)!important;text-shadow:none!important}
+body:not(.th-orient) :is(.bubble,#pet-say,.otoast,#toast,.an-bubble,.bks-bubble){font-family:"Elite20","Special Elite",Georgia,serif!important;font-weight:400!important;letter-spacing:.01em}
+body:not(.th-orient) :is(.bubble,#pet-say,.an-bubble,.bks-bubble) b{color:#7a1420;font-weight:700}
+body:not(.th-orient) .bubble::before{border-right-color:#efe2c0!important;filter:drop-shadow(-2px 0 0 #b88a3a)}
+body:not(.th-orient) #pet-say::before{border-bottom-color:#f5ead0!important;filter:drop-shadow(0 -2px 0 #b88a3a)}
+body:not(.th-orient) #pet-say .ps-n{font:700 10px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.16em!important}
+body:not(.th-orient) .otoast{padding:8px 16px 7px!important;font-size:15px!important}
+/* l'astuce de Gaston */
+body:not(.th-orient) #coach .co-bub p{font:400 15px/1.35 "Elite20","Special Elite",Georgia,serif!important;color:#2b1a0f!important}
+body:not(.th-orient) #coach .co-bub p b{color:#7a1420!important;font-weight:700}
+body:not(.th-orient) #coach .co-bub small{font:400 11px/1 "Elite20",Georgia,serif!important;color:#7a5a35!important;letter-spacing:.06em}
+body:not(.th-orient) #coach .co-bub .co-g{filter:drop-shadow(1px 1px 0 #1b120c) drop-shadow(-1px -1px 0 #1b120c)!important}
+/* l'astuce du bas (#tip) : petite plaque de bois */
+body:not(.th-orient) #tip{background:linear-gradient(180deg,#2c1f17,#1b1310)!important;color:#f0e0bd!important;border-radius:5px!important;box-shadow:0 0 0 2px #b88a3a,0 0 0 4px #120c09,0 6px 10px rgba(0,0,0,.45)!important;font-family:"Elite20","Special Elite",Georgia,serif!important}
+/* les plaques de cuivre : nouvelle carte, succès, note */
+body:not(.th-orient) :is(#newnote,.achpop){background:linear-gradient(180deg,#2c1f17,#1b1310)!important;border:0!important;border-radius:5px!important;box-shadow:0 0 0 2px #b88a3a,0 0 0 4px #120c09,inset 0 0 0 1px rgba(255,230,180,.08),0 8px 14px rgba(0,0,0,.5)!important}
+body:not(.th-orient) :is(#newnote .nn-txt small,.achpop small){font:700 10px/1.1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.18em!important;color:#d9a35b!important;text-shadow:none!important}
+body:not(.th-orient) :is(#newnote .nn-txt b,.achpop b){font:700 15px/1.15 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.04em!important;color:#f3e6c4!important;text-shadow:0 2px 0 #000!important}
+body:not(.th-orient) .achpop .ap-ic{color:#e5bb5a}
+/* (les coins libres du cadre : la touche du sort est dans les deux autres) */
+/* ===== v21.6 · les cartes de la main : papier crème vieilli, cadre art déco, lettres gravées ===== */
+body:not(.th-orient) #abs .pc-face{background:radial-gradient(120% 60% at 50% -4%,rgba(255,248,230,.7),rgba(255,248,230,0) 60%),linear-gradient(168deg,#f7eed8 0%,#eddcb6 60%,#dcc595 100%)!important;box-shadow:inset 0 0 0 1px #2b1a0f,inset 0 0 0 3px #f5ead0,inset 0 0 0 4px #b88a3a,inset 0 0 0 6px #f5ead0,inset 0 0 0 7px color-mix(in srgb,var(--sc) 65%,#2b1a0f),inset 0 -10px 14px -10px rgba(110,70,20,.35),0 2px 0 #22080e,0 6px 12px rgba(0,0,0,.45)!important}
+body:not(.th-orient) #abs .pc-face::after{content:"";position:absolute;inset:9px;z-index:1;pointer-events:none;opacity:.9;background:linear-gradient(#b88a3a,#b88a3a) right top/9px 1.5px no-repeat,linear-gradient(#b88a3a,#b88a3a) right top/1.5px 9px no-repeat,linear-gradient(#b88a3a,#b88a3a) left bottom/9px 1.5px no-repeat,linear-gradient(#b88a3a,#b88a3a) left bottom/1.5px 9px no-repeat}
+body:not(.th-orient) #abs .pcard:not(.fou) .pc-face .pc-n{background:linear-gradient(180deg,#3a2618,#1f140d)!important;color:#f3e2b8!important;font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;letter-spacing:.1em!important;text-shadow:0 1px 0 #000!important;box-shadow:inset 0 1px 0 #b88a3a,inset 0 -2px 0 color-mix(in srgb,var(--sc) 80%,#b88a3a)!important}
+body:not(.th-orient) #abs .pc-face :is(.pc-k,.pc-k2){font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;color:#4a2a14!important}
+/* les places vides (le sort se recharge) : bois sombre, pointillés de laiton, chiffre gravé */
+body:not(.th-orient) #abs .pc-slot{border:2px dashed rgba(184,138,58,.55)!important;background:radial-gradient(ellipse at 50% 30%,rgba(60,38,22,.55),rgba(18,11,7,.7))!important}
+body:not(.th-orient) #abs .pc-cd{font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;color:#f3e2b8!important;text-shadow:0 2px 0 #000!important}
+body:not(.th-orient) #abs .pc-pilespot{border-color:rgba(184,138,58,.3)!important;background:rgba(18,11,7,.35)!important}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -40673,6 +40706,120 @@ document.addEventListener('pointerdown', () => { if (RAIN.a && RAIN.a.paused && 
    ni les gerbes de pièces quand on abat une carte. (L'Or qui roule, un malus de la horde, reste : ce sont des pièces à ramasser.) */
 celebrate = function () { /* plus de pluie de pièces */ };
 coinBurst = function () { /* plus de gerbe de pièces */ };
+
+/* ================= v21.6 · la table de jeu en HD, dans la DA du casino =================
+   Avant : rendue en gros pixels (grain rétro). Maintenant : pleine définition, rail de cuir capitonné avec clous de laiton,
+   jonc de laiton poli, anneau de noyer verni (veinage, reflet), feutre au grain fin, lettres gravées (Cinzel).
+   Le thème « Mille et une nuits » garde son dessin à lui. */
+function rnd216(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+function arcText216(g, text, rad, center, size, bottom, weight) {
+  g.font = `${weight || 700} ${size}px Cinzel20, Cinzel, Georgia, serif`;
+  g.textBaseline = 'middle';
+  const chars = [...text], track = size * .22;
+  const ws = chars.map(ch => g.measureText(ch).width + track);
+  const total = ws.reduce((a, b) => a + b, 0), dir = bottom ? -1 : 1;
+  let ang = center - dir * (total / 2) / rad;
+  for (let i = 0; i < chars.length; i++) {
+    const w = ws[i]; ang += dir * (w / 2) / rad;
+    g.save(); g.translate(Math.cos(ang) * rad, Math.sin(ang) * rad); g.rotate(ang + (bottom ? -Math.PI / 2 : Math.PI / 2));
+    g.fillText(chars[i], -(w - track) / 2, 0); g.restore();
+    ang += dir * (w / 2) / rad;
+  }
+}
+function buildBG216() {
+  bgPX = 1;
+  const w = cv.width, h = cv.height;
+  bgC = document.createElement('canvas'); bgC.width = w; bgC.height = h;
+  const g = bgC.getContext('2d'), k = S * DPR, cx = CX * DPR, cy = CY * DPR;
+  const RF = 95, RW = 100, RR = 110, TP = tbPal(), R = rnd216(1925), gold = TP === TBP.or;
+  g.save(); g.translate(cx, cy); g.scale(k, k);
+  // l'ombre de la table sur le sol
+  let gr = g.createRadialGradient(0, 5, RR * .9, 0, 5, RR * 1.2);
+  gr.addColorStop(0, 'rgba(0,0,0,.6)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 5, RR * 1.2, 0, TAU); g.fill();
+  // le rail de cuir
+  gr = g.createRadialGradient(-34, -44, 16, 0, 0, RR);
+  gr.addColorStop(0, TP.rail[0]); gr.addColorStop(.72, TP.rail[1]); gr.addColorStop(1, TP.rail[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RR, 0, TAU); g.fill();
+  g.lineWidth = .9; g.strokeStyle = TP.line; g.stroke();
+  // le capitonnage : des creux en losange et un clou de laiton à chaque croisement
+  const RM = (RW + RR) / 2 + .6;
+  for (let i = 0; i < 36; i++) {
+    const a = i / 36 * TAU, x = Math.cos(a) * RM, y = Math.sin(a) * RM;
+    g.strokeStyle = TP.seam; g.lineWidth = .45;
+    g.beginPath(); g.moveTo(Math.cos(a - .05) * (RW + 2), Math.sin(a - .05) * (RW + 2)); g.lineTo(x, y); g.lineTo(Math.cos(a + .05) * (RR - 1.5), Math.sin(a + .05) * (RR - 1.5)); g.stroke();
+    const sg = g.createRadialGradient(x - .35, y - .35, .1, x, y, 1.05);
+    sg.addColorStop(0, '#fff2c0'); sg.addColorStop(.45, '#d9a640'); sg.addColorStop(1, '#5a3a10');
+    g.fillStyle = sg; g.beginPath(); g.arc(x, y, .95, 0, TAU); g.fill();
+  }
+  g.strokeStyle = TP.hi; g.lineWidth = 1.6; g.lineCap = 'round'; g.beginPath(); g.arc(0, 0, RR - 2.2, Math.PI * 1.06, Math.PI * 1.72); g.stroke(); g.lineCap = 'butt';
+  // le jonc de laiton poli entre le cuir et le bois
+  gr = g.createLinearGradient(-RR, -RR, RR, RR);
+  gr.addColorStop(0, '#fff0b8'); gr.addColorStop(.3, '#d29a3a'); gr.addColorStop(.55, '#7a5016'); gr.addColorStop(.8, '#e6b955'); gr.addColorStop(1, '#5a3a10');
+  g.strokeStyle = gr; g.lineWidth = 1.7; g.beginPath(); g.arc(0, 0, RW + .9, 0, TAU); g.stroke();
+  g.strokeStyle = 'rgba(30,14,4,.8)'; g.lineWidth = .3; g.beginPath(); g.arc(0, 0, RW + 1.85, 0, TAU); g.stroke();
+  // l'anneau de noyer verni, avec son veinage
+  gr = g.createRadialGradient(0, 0, RF, 0, 0, RW);
+  gr.addColorStop(0, TP.wood[0]); gr.addColorStop(.5, TP.wood[1]); gr.addColorStop(1, TP.wood[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RW, 0, TAU); g.arc(0, 0, RF, 0, TAU, true); g.fill();
+  g.save(); g.beginPath(); g.arc(0, 0, RW, 0, TAU); g.arc(0, 0, RF, 0, TAU, true); g.clip('evenodd');
+  for (let i = 0; i < 140; i++) {
+    const a = R() * TAU, l = .12 + R() * .5, r = RF + .4 + R() * (RW - RF - .8);
+    g.strokeStyle = R() < .6 ? `rgba(45,22,6,${.25 + R() * .3})` : `rgba(255,214,150,${.08 + R() * .14})`;
+    g.lineWidth = .18 + R() * .3; g.beginPath(); g.arc(0, 0, r, a, a + l); g.stroke();
+  }
+  gr = g.createLinearGradient(-RW, -RW, RW * .4, RW * .4);
+  gr.addColorStop(0, 'rgba(255,236,200,.28)'); gr.addColorStop(.35, 'rgba(255,236,200,.04)'); gr.addColorStop(1, 'rgba(0,0,0,.18)');
+  g.fillStyle = gr; g.fillRect(-RW, -RW, RW * 2, RW * 2);
+  g.restore();
+  g.strokeStyle = TP.woodLine; g.lineWidth = .6; g.beginPath(); g.arc(0, 0, RF, 0, TAU); g.stroke();
+  // le filet de laiton incrusté au bord du feutre
+  g.strokeStyle = gold ? 'rgba(80,50,8,.9)' : 'rgba(232,186,90,.9)'; g.lineWidth = .55; g.beginPath(); g.arc(0, 0, RF - .8, 0, TAU); g.stroke();
+  // le feutre
+  gr = g.createRadialGradient(0, -12, 6, 0, 0, RF);
+  gr.addColorStop(0, TP.felt[0]); gr.addColorStop(.62, TP.felt[1]); gr.addColorStop(1, TP.felt[2]);
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RF - 1.2, 0, TAU); g.fill();
+  g.restore();
+  // le grain du feutre : fin, irrégulier, comme de la laine tissée
+  const R2 = (RF - 1.5) * k, x0 = Math.max(0, Math.floor(cx - R2)), x1 = Math.min(w, Math.ceil(cx + R2)), y0 = Math.max(0, Math.floor(cy - R2)), y1 = Math.min(h, Math.ceil(cy + R2));
+  if (x1 > x0 && y1 > y0) {
+    const img = g.getImageData(x0, y0, x1 - x0, y1 - y0), d = img.data, iw = x1 - x0, RN = rnd216(47);
+    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
+      const dx = x - cx, dy = y - cy; if (dx * dx + dy * dy > R2 * R2) continue;
+      const n = (RN() - .5) * 11 + ((x + y * 3) % 5 === 0 ? -3 : 0), o = ((y - y0) * iw + (x - x0)) * 4;
+      d[o] = clamp(d[o] + n, 0, 255); d[o + 1] = clamp(d[o + 1] + n * 1.15, 0, 255); d[o + 2] = clamp(d[o + 2] + n, 0, 255);
+    }
+    g.putImageData(img, x0, y0);
+  }
+  g.save(); g.translate(cx, cy); g.scale(k, k);
+  // un voile sombre au bord du feutre, sous le rail (la lumière de la lampe tombe au centre)
+  gr = g.createRadialGradient(0, -6, RF * .55, 0, 0, RF);
+  gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,.32)');
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RF - 1.2, 0, TAU); g.fill();
+  // l'impression sur le feutre : ligne de mise, cases des joueurs, emblème, lettres gravées dorées
+  g.strokeStyle = TP.pr(.3); g.lineWidth = .6; g.beginPath(); g.arc(0, 0, 76, 0, TAU); g.stroke();
+  g.lineWidth = .3; g.beginPath(); g.arc(0, 0, 74.4, 0, TAU); g.stroke();
+  const suits = ['s', 'h', 'c', 'd'];
+  for (let i = 0; i < 8; i++) {
+    const a = i / 8 * TAU + Math.PI / 8, x = Math.cos(a) * 85.5, y = Math.sin(a) * 85.5;
+    g.strokeStyle = TP.pr(.26); g.lineWidth = .45; g.beginPath(); g.arc(x, y, 4.4, 0, TAU); g.stroke();
+    g.save(); g.translate(x, y); g.rotate(a + Math.PI / 2); suitPath(g, suits[i % 4], 2.3); g.fillStyle = i % 4 === 1 || i % 4 === 3 ? 'rgba(200,60,70,.42)' : TP.pr(.3); g.fill(); g.restore();
+  }
+  g.strokeStyle = 'rgba(232,186,90,.24)'; g.lineWidth = .8; g.beginPath(); g.arc(0, 0, 25, 0, TAU); g.stroke();
+  g.setLineDash([1.2, 1.3]); g.lineWidth = .45; g.beginPath(); g.arc(0, 0, 28, 0, TAU); g.stroke(); g.setLineDash([]);
+  for (let i = 0; i < 4; i++) { const a = i / 4 * TAU; g.save(); g.rotate(a); g.translate(0, -31.5); suitPath(g, suits[i], 1.5); g.fillStyle = 'rgba(232,186,90,.3)'; g.fill(); g.restore(); }
+  g.fillStyle = TP.pr(.36);
+  arcText216(g, 'LA MAISON GAGNE TOUJOURS', 90, -Math.PI / 2, 4, false, 700);
+  arcText216(g, TP.bot, 90, Math.PI / 2, 3.3, true, 600);
+  g.restore();
+}
+const _bg216 = buildBG;
+buildBG = function () {
+  if (typeof thOn === 'function' && thOn()) return _bg216.apply(this, arguments);
+  return buildBG216();
+};
+// les lettres gravées utilisent Cinzel : on redessine la table quand la police est arrivée
+try { if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('700 12px Cinzel20'), document.fonts.load('600 12px Cinzel20')]).then(() => { try { if (bgC && cv && cv.width) buildBG(); } catch (e) { /* rien */ } }); } catch (e) { /* rien */ }
 
 const CV_ANIMS = {};
 /* ===== v21.6 (aperçu) · les conversations à choix, façon I'm Not a Human, et le combat final =====
