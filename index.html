@@ -6910,6 +6910,23 @@ body:not(.th-orient) #machine .lever .lbase{background:linear-gradient(90deg,#5a
 body:not(.th-orient) #machine .lever .arm{background:linear-gradient(90deg,#7a5418,#fff0c0 45%,#7a5418)!important}
 body:not(.th-orient) #machine .mhelp{background:radial-gradient(circle at 40% 35%,#4a2e18,#1f140d)!important;color:#f3d38a!important;box-shadow:0 0 0 1.5px #b88a3a!important;font-family:'Cinzel20','Cinzel',Georgia,serif!important;text-shadow:none!important}
 body:not(.th-orient) #machine .lever .ball{background:radial-gradient(circle at 35% 30%,#ff9a8a,#b3202c 55%,#5a0a12)!important;box-shadow:0 0 0 1.5px #2a0a0e,0 3px 4px rgba(0,0,0,.5)!important}
+/* ===== les cassettes de Dina : ses étiquettes écrites à la main, et son poste ===== */
+body:not(.th-orient) :is(.bd-cas[data-bcs] .xm-cas,.xm-cas[data-cas]){background:50% 50%/100% 100% no-repeat #1a1210!important;border-radius:3px!important;box-shadow:0 1px 0 rgba(0,0,0,.55),0 3px 5px rgba(0,0,0,.35)!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs] .xm-cas,.xm-cas[data-cas])::before,body:not(.th-orient) :is(.bd-cas[data-bcs] .xm-cas,.xm-cas[data-cas])::after{display:none!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs] .xm-cas,.xm-cas[data-cas]) b{display:none!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs="c1"] .xm-cas,.xm-cas[data-cas="c1"]){background-image:url(decors/ui/cas_c1.webp)!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs="c2"] .xm-cas,.xm-cas[data-cas="c2"]){background-image:url(decors/ui/cas_c2.webp)!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs="c3"] .xm-cas,.xm-cas[data-cas="c3"]){background-image:url(decors/ui/cas_c3.webp)!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs="c4"] .xm-cas,.xm-cas[data-cas="c4"]){background-image:url(decors/ui/cas_c4.webp)!important}
+body:not(.th-orient) :is(.bd-cas[data-bcs="full"] .xm-cas,.xm-cas[data-cas="full"]){background-image:url(decors/ui/cas_full.webp)!important}
+body:not(.th-orient) #dn-box .dn-btn .xm-cas{width:46px!important;height:46px!important;background:url(decors/ui/poste.webp) 50% 58%/150% no-repeat #1a1210!important;border-radius:6px!important;box-shadow:0 0 0 1.5px #b88a3a,0 3px 5px rgba(0,0,0,.4)!important}
+body:not(.th-orient) #dn-box .dn-btn .xm-cas::before,body:not(.th-orient) #dn-box .dn-btn .xm-cas::after,body:not(.th-orient) #dn-box .dn-btn .xm-cas b{display:none!important}
+body:not(.th-orient) #dn-box .dn-list [data-dc]:not([data-dc="room"])::before{content:"";display:inline-block;width:38px;height:25px;margin-right:8px;vertical-align:middle;border-radius:2px;background:50% 50%/100% 100% no-repeat;box-shadow:0 1px 2px rgba(0,0,0,.5)}
+body:not(.th-orient) #dn-box .dn-list [data-dc="c1"]::before{background-image:url(decors/ui/cas_c1.webp)}
+body:not(.th-orient) #dn-box .dn-list [data-dc="c2"]::before{background-image:url(decors/ui/cas_c2.webp)}
+body:not(.th-orient) #dn-box .dn-list [data-dc="c3"]::before{background-image:url(decors/ui/cas_c3.webp)}
+body:not(.th-orient) #dn-box .dn-list [data-dc="c4"]::before{background-image:url(decors/ui/cas_c4.webp)}
+body:not(.th-orient) #dn-box .dn-list [data-dc="full"]::before{background-image:url(decors/ui/cas_full.webp)}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7674,7 +7691,7 @@ body:not(.th-orient) #machine .lever .ball{background:radial-gradient(circle at 
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v21.9 aperçu</p>
+  <p class="proto">Sefy Industries · v22.0 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -27038,7 +27055,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v21.9 aperçu</p></div>`;
+        <p class="ov5">v22.0 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -36433,6 +36450,7 @@ const ART_IMG = {};
 (function artLoad() {
   if (typeof Image === 'undefined' || typeof CARD_ART === 'undefined') return;
   for (const t in CARD_ART) {
+    if (["b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "garde", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
     const im = new Image();
     im.onload = () => { ART_IMG[t] = im; delete SPR[t]; };
     im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(CARD_ART[t]);
@@ -43251,6 +43269,17 @@ const JET_ART = ["aimant", "aimbot", "allergie", "allin", "anubis", "argile", "a
     const im = IMG[id];
     if (im) { const s = size * 1.08; g.drawImage(im, cx - s / 2, cy - s / 2, s, s); return; }
     return _di.apply(this, arguments);
+  };
+})();
+/* la cassette qui joue en bas de l'écran : la bonne étiquette selon le morceau (Démo 1 à 4, Face B) */
+(function () {
+  if (typeof xmCard !== 'function') return;
+  const _xc = xmCard;
+  const casOf = l => { const m = /D[ée]mo\s*(\d)/i.exec(l || ''); if (m) return 'c' + m[1]; return /face\s*b/i.test(l || '') ? 'full' : ''; };
+  xmCard = function (label) {
+    const r = _xc.apply(this, arguments);
+    try { const c = document.querySelector('#xm-card .xm-cas'); if (c) { const k = casOf(label); if (k) c.dataset.cas = k; else delete c.dataset.cas; } } catch (e) { }
+    return r;
   };
 })();
 
