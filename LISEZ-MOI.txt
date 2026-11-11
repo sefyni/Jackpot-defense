@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v21.8 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v21.9 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v21.9 — LA MACHINE À SOUS ET LES JETONS FOUS
+- La machine à jetons quitte l'arcade : meuble en noyer serti de laiton, fronton émaillé à la couleur
+  de la machine, JACKPOT en lettres dorées gravées, ampoules à filament, rouleaux en ivoire,
+  levier en laiton, bac en feutre vert. Plus de néon.
+- Les 30 jetons fous et les 9 jetons bonus des habitués (Triple-20, Carambole, Œil de Nox, Zapotron,
+  Cocktail de Zaza, Bernard, Volée de Dina, Coup de queue, Roue de Nox) sont gravés à leur tour :
+  les 189 jetons du jeu ont maintenant tous leur gravure.
 
 Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - Les 150 jetons des machines sont gravés : chaque jeton a son dessin crème façon jeton de casino
@@ -25,7 +33,7 @@ Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
   petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
 
-Nouveautés de la v21.8 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v21.9 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.
