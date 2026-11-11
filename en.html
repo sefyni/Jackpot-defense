@@ -6613,6 +6613,12 @@ body:not(.th-orient) .jpm-lever .lbase{background:linear-gradient(90deg,#5a3a10,
 body:not(.th-orient) .jpm-lever .arm{background:linear-gradient(90deg,#7a5418,#fff0c0 45%,#7a5418)}
 body:not(.th-orient) .jpm-lever .ball{background:radial-gradient(circle at 35% 30%,#ff9a8a,#b3202c 55%,#5a0a12);box-shadow:0 0 0 1.5px #2a0a0e,0 3px 4px rgba(0,0,0,.5)}
 body:not(.th-orient) .neon{animation:none!important}
+/* v22.5 · la vraie pluie (canvas) remplace les rayures */
+.bt-rain2{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.boot.tr.enter .bt-rain2{opacity:0;transition:opacity .6s}
+.boot.vid .bt-rain2{display:none}
+/* v22.5 · l'affiche du classement dans le couloir : le mot écrit sur le papier part, la plaque « CLASSEMENT » au-dessus reste */
+body:not(.th-orient) .hl-pin b{visibility:hidden!important}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7377,7 +7383,7 @@ body:not(.th-orient) .neon{animation:none!important}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.4 aperçu</p>
+  <p class="proto">Sefy Industries · v22.5 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26589,7 +26595,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.4 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.5 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -41108,6 +41114,92 @@ const JET_ART = ["aimant", "aimbot", "allergie", "allin", "anubis", "argile", "a
     return r;
   };
 })();
+/* ===== v22.5 · la vraie pluie devant le Tapis Rouge =====
+   Plus de rayures qui défilent : chaque goutte tombe pour de bon, en trois profondeurs (loin, milieu, tout près),
+   penchée par le vent qui forcit par rafales ; près du néon, de la lanterne et de la porte, les gouttes prennent leur lumière ;
+   en touchant le trottoir elles éclaboussent (un petit anneau et des gouttelettes qui rebondissent), dans la rue elles
+   font des ronds dans les flaques. Le son est une vraie averse de rue (music/rain.*, faite goutte par goutte). */
+(function () {
+  const box = document.getElementById('boot'), old = box && box.querySelector('.bt-rain');
+  if (!box || !old) return;
+  const cv = document.createElement('canvas'); cv.className = 'bt-rain2'; cv.setAttribute('aria-hidden', 'true'); old.replaceWith(cv);
+  const g = cv.getContext('2d');
+  let W = 0, H = 0, dpr = 1, fac = { x: 0, y: 0, w: 1, h: 1 }, drops = [], fx = [], last = 0, raf = 0, wind = .16, windT = .16, gustAt = 0;
+  // les lumières de la façade (en fractions de l'image 1265 × 664) : néon rouge, lanterne, porte, la fenêtre de Nox
+  const LIGHTS = [[.505, .28, .2, [255, 70, 80], 1], [.502, .15, .1, [255, 210, 140], .9], [.505, .55, .1, [255, 190, 110], .7], [.705, .05, .06, [140, 150, 255], .6]];
+  const LAYERS = [
+    { n: .0006, len: [9, 16], w: .9, a: [.10, .18], v: [820, 980], z: .35 },
+    { n: .00036, len: [20, 32], w: 1.2, a: [.18, .30], v: [1250, 1500], z: .65 },
+    { n: .00006, len: [55, 95], w: 2.1, a: [.14, .24], v: [2100, 2500], z: 1 },
+  ];
+  const R = (a, b) => a + Math.random() * (b - a);
+  function size() {
+    dpr = Math.min(1.5, window.devicePixelRatio || 1);
+    W = box.clientWidth; H = box.clientHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const f = box.querySelector('.bt-fac'); if (f) { const r = f.getBoundingClientRect(), b = box.getBoundingClientRect(); fac = { x: r.left - b.left, y: r.top - b.top, w: r.width, h: r.height }; }
+    const want = [];
+    for (const L of LAYERS) { const n = Math.round(W * H * L.n); for (let i = 0; i < n; i++) want.push(mk(L, true)); }
+    drops = want;
+  }
+  // où la goutte touche le sol : plus elle est proche, plus c'est bas (le trottoir, puis la rue mouillée)
+  const groundY = L => fac.y + fac.h * (L.z < .5 ? R(.80, .87) : L.z < .9 ? R(.84, .95) : R(.92, 1.02));
+  function mk(L, anywhere) {
+    const gy = groundY(L), x = R(-.15 * W, 1.1 * W);
+    return { L, x, y: anywhere ? R(-H * .2, gy) : R(-H * .25, -10), gy, len: R(L.len[0], L.len[1]), a: R(L.a[0], L.a[1]), v: R(L.v[0], L.v[1]) };
+  }
+  function lightAt(x, y) {
+    let r = 190, gr = 205, b = 230, k = 0;
+    for (const [lx, ly, rad, c, s] of LIGHTS) {
+      const dx = (x - (fac.x + lx * fac.w)) / (rad * fac.w), dy = (y - (fac.y + ly * fac.h)) / (rad * fac.w * 1.2), d = dx * dx + dy * dy;
+      if (d < 1) { const m = (1 - d) * s; r += (c[0] - r) * m; gr += (c[1] - gr) * m; b += (c[2] - b) * m; k = Math.max(k, m); }
+    }
+    return [r | 0, gr | 0, b | 0, k];
+  }
+  function splash(x, y, L) {
+    const street = y > fac.y + fac.h * .9, big = L.z >= .9;
+    fx.push({ k: street ? 'ring' : 'spl', x, y, t: 0, d: street ? R(.5, .8) : R(.22, .34), s: (big ? 1.7 : 1) * (street ? R(7, 13) : R(3, 6)) });
+    if (!street && Math.random() < (big ? .9 : .45)) for (let i = 0; i < (big ? 3 : 2); i++) fx.push({ k: 'bead', x, y, vx: R(-70, 70) * (big ? 1.4 : 1), vy: -R(70, 150) * (big ? 1.3 : 1), t: 0, d: R(.25, .4), y0: y });
+  }
+  function frame(now) {
+    raf = 0;
+    if (box.hidden || !box.isConnected || getComputedStyle(box).display === 'none') return;
+    const dt = Math.min(.05, last ? (now - last) / 1000 : .016); last = now;
+    // la façade peut être cachée au départ (pendant le film d'intro) : on la remesure, et on repart si elle vient d'apparaître
+    if (now - (frame.m || 0) > 700) { frame.m = now; const f = box.querySelector('.bt-fac'); if (f) { const r = f.getBoundingClientRect(); if (r.height > 10 && (fac.h < 10 || Math.abs(r.height - fac.h) > 4 || box.clientWidth !== W)) size(); } }
+    // le vent : il forcit et retombe par rafales
+    if (now > gustAt) { windT = R(.08, .3); gustAt = now + R(1800, 4200); }
+    wind += (windT - wind) * Math.min(1, dt * .9);
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    g.lineCap = 'round';
+    for (const d of drops) {
+      const L = d.L, sp = d.v * dt;
+      d.y += sp; d.x += sp * wind * (0.85 + L.z * .3);
+      if (d.y >= d.gy) { if (L.z > .5 || Math.random() < .25) splash(d.x, d.gy, L); Object.assign(d, mk(L, false)); continue; }
+      const [r, gg, b, k] = lightAt(d.x, d.y), a = d.a * (1 + k * 2.2);
+      const tx = d.x - d.len * wind, ty = d.y - d.len;
+      g.strokeStyle = `rgba(${r},${gg},${b},${Math.min(.85, a).toFixed(3)})`; g.lineWidth = L.w;
+      g.beginPath(); g.moveTo(tx, ty); g.lineTo(d.x, d.y); g.stroke();
+      if (L.z >= .9) { g.strokeStyle = `rgba(${r},${gg},${b},${(a * .35).toFixed(3)})`; g.lineWidth = L.w * 3; g.beginPath(); g.moveTo(tx, ty); g.lineTo(d.x, d.y); g.stroke(); }
+    }
+    // les éclaboussures et les ronds dans l'eau
+    for (let i = fx.length - 1; i >= 0; i--) {
+      const e = fx[i]; e.t += dt; const p = e.t / e.d; if (p >= 1) { fx.splice(i, 1); continue; }
+      const [r, gg, b, k] = lightAt(e.x, e.y);
+      if (e.k === 'bead') { e.x += e.vx * dt; e.vy += 900 * dt; const yy = e.y + e.vy * dt; e.y = Math.min(yy, e.y0); g.fillStyle = `rgba(${r},${gg},${b},${((1 - p) * .55 * (1 + k)).toFixed(3)})`; g.fillRect(e.x - .7, e.y - .7, 1.4, 1.4); continue; }
+      const rx = e.s * (e.k === 'ring' ? (.3 + p * 1.2) : (.4 + p)), al = (1 - p) * (e.k === 'ring' ? .22 : .38) * (1 + k * 1.5);
+      g.strokeStyle = `rgba(${r},${gg},${b},${Math.min(.8, al).toFixed(3)})`; g.lineWidth = e.k === 'ring' ? .9 : 1.1;
+      g.beginPath(); g.ellipse(e.x, e.y, rx, rx * .28, 0, 0, Math.PI * 2); g.stroke();
+    }
+    if (fx.length > 600) fx.splice(0, fx.length - 600);
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
+  const reduced = () => (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || (typeof G === 'object' && G && G.reduced);
+  window.addEventListener('resize', () => { size(); });
+  new MutationObserver(() => { if (!box.hidden) start(); }).observe(box, { attributes: true, attributeFilter: ['hidden', 'class', 'style'] });
+  setTimeout(() => { size(); if (reduced()) LAYERS.forEach(L => L.n *= .35); size(); start(); }, 60);
+  setInterval(() => { if (!raf && !box.hidden && box.isConnected) start(); }, 1000);
+})();
 
 const CV_ANIMS = {};
 /* ===== v21.6 (aperçu) · les conversations à choix, façon I'm Not a Human, et le combat final =====
@@ -41150,7 +41242,7 @@ const CVM = { on: false, a: 0, b: 0, fake: 0, k: 'dina' };
 function cvMusicStart(a, b) {
   CVM.on = true; CVM.a = a || 0; CVM.b = b || 0; CVM.fake = 0; CVM.t0 = performance.now();
   let ok = false;
-  try { ok = xmPlay(CVM.k, { a: CVM.a, b: CVM.b, noCard: true, end: () => { CVM.on = false; } }); } catch (e) { ok = false; }
+  try { ok = xmPlay(CVM.k, { a: CVM.a, b: CVM.b, noCard: true, end: () => { CVM.on = false; if (CV.on) setTimeout(() => { if (CV.on && !CVM.on) cvaPlay(); }, 500); } }); } catch (e) { ok = false; }
   // si le son ne démarre pas (pas de carte son, navigateur muet…), une horloge de secours garde le rythme
   setTimeout(() => { if (CVM.on && !(XM.on && XM.src)) CVM.fake = performance.now(); }, ok ? 1500 : 0);
 }
@@ -43196,6 +43288,48 @@ if (typeof openMini === 'function') {
     } catch (e) { /* rien */ }
     return r;
   };
+}
+
+/* ---------- v22.5 · la musique des conversations (choisie par Sefy, music/conv.mp3) ----------
+   Elle prend la place de la musique du lieu pendant qu'on parle, se tait quand la cassette de Dina joue (le morceau
+   fait partie de la scène), revient après, et rend la main à la musique du lieu quand on part. */
+const CVA = { el: null, prev: undefined, t: 0, want: 0 };
+function cvaVol() { try { return Math.max(0, Math.min(1, volOf('master') * volOf('mus'))) * .85; } catch (e) { return .7; } }
+function cvaFade(to, ms, then) {
+  const a = CVA.el; if (!a) return; clearInterval(CVA.t);
+  const v0 = a.volume, n = Math.max(1, Math.round((ms || 700) / 50)); let i = 0;
+  CVA.t = setInterval(() => { i++; a.volume = Math.max(0, Math.min(1, v0 + (to - v0) * i / n)); if (i >= n) { clearInterval(CVA.t); if (then) then(); } }, 50);
+}
+function cvaPlay() {
+  try {
+    if (G.headless || cvaVol() <= 0) return;
+    let a = CVA.el; if (!a) { a = CVA.el = new Audio('music/conv.mp3'); a.loop = true; a.preload = 'auto'; a.volume = 0; }
+    if (a.paused) { const p = a.play(); if (p && p.catch) p.catch(() => { /* le navigateur attend un clic */ }); }
+    cvaFade(cvaVol(), 900);
+  } catch (e) { /* rien */ }
+}
+function cvaPause(ms) { const a = CVA.el; if (!a || a.paused) return; cvaFade(0, ms || 600, () => { try { a.pause(); } catch (e) { /* rien */ } }); }
+{
+  const _open = cvOpen, _close = cvClose, _ms = cvMusicStart, _mst = cvMusicStop;
+  cvOpen = function () {
+    const was = CV.on, r = _open.apply(this, arguments);
+    if (!was && CV.on) {
+      try { CVA.prev = Music.current; Music.play(null); } catch (e) { CVA.prev = undefined; }
+      if (!CVM.on) cvaPlay();
+    }
+    return r;
+  };
+  cvClose = function () {
+    const r = _close.apply(this, arguments);
+    if (!CV.on) {
+      cvaPause(700);
+      setTimeout(() => { try { if (!CV.on && !(typeof CF === 'object' && CF && CF.on) && CVA.prev !== undefined) Music.play(CVA.prev); } catch (e) { /* rien */ } CVA.prev = undefined; }, 350);
+    }
+    return r;
+  };
+  // la cassette de Dina : la musique des conversations s'efface, puis revient quand le morceau s'arrête
+  cvMusicStart = function () { cvaPause(400); return _ms.apply(this, arguments); };
+  cvMusicStop = function () { const r = _mst.apply(this, arguments); if (CV.on) setTimeout(() => { if (CV.on && !CVM.on) cvaPlay(); }, 500); return r; };
 }
 
 const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};

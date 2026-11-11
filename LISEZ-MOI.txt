@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.4 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.5 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,17 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.5 aperçu — LA MUSIQUE DES CONVERSATIONS ET LA VRAIE PLUIE
+- Pendant les conversations, ta musique remplace celle du lieu. Elle s'efface quand Dina lance sa
+  cassette (le morceau fait partie de la scène), revient après, et rend la main en partant.
+- Devant le Tapis Rouge, une vraie pluie : chaque goutte tombe pour de bon, en trois profondeurs,
+  penchée par le vent qui souffle par rafales. Près du néon, de la lanterne et de la porte, les gouttes
+  prennent leur lumière. Elles éclaboussent le trottoir et font des ronds dans les flaques de la rue.
+- Le son de la pluie aussi : une vraie averse de rue (le rideau de gouttes, les « plic » sur le
+  trottoir, l'auvent, la gouttière qui déborde dans une flaque), en boucle sans couture.
+- Dans le couloir, l'affiche du classement : le mot écrit de travers sur le papier disparaît, la
+  plaque « CLASSEMENT » au-dessus reste.
 
 Nouveautés de la v22.4 aperçu — LE JETON DANS LA MAIN
 - Le jeton du joueur est peint (Gemini) : rouge, inserts crème, petite étoile dorée.
@@ -79,7 +90,7 @@ Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
   petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
 
-Nouveautés de la v22.4 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v22.5 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.
