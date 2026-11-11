@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v21.2-202611101200
+JACKPOT DEFENSE v21.6 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,11 +12,104 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
-Nouveautés de la v21.2 — LA NOUVELLE INTRO
-- Après « Insérer un jeton » : une intro en 3D de 5 secondes. La pluie, l'enseigne du Tapis Rouge qui
-  s'allume, la porte qui s'ouvre, le Baron derrière sa table, ses cartes qui te foncent dessus…
-  et ton jeton qui claque sur le tapis. « La maison gagne toujours… sauf ce soir. »
-- Touche l'écran pour la passer. Les appareils sans 3D gardent l'ancienne intro simple.
+Nouveautés de la v21.6 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+- C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
+  anciennes : les poses qui n'existent pas encore reprennent la plus proche.
+- Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.
+- Conversations façon I'm Not a Human : on choisit des intentions (un sujet, un geste, le silence,
+  montrer, regarder), jamais des phrases, puisque le joueur ne parle pas. Si on ne fait rien,
+  la barre de cuivre se vide et c'est le silence qui est choisi. Partir reste possible, mais
+  partir pendant la musique de Dina la blesse.
+  · Les 9 scènes à deux avec Dina, dans l'ordre : la batterie (sa musique en pleine conversation),
+    le mur, la guitare, la bague, l'anniversaire, le refrain, les lettres, la suite, le seul.
+  · Zaza · « Le vestiaire » : les six appels d'Élise. Débloque la fin « J'arrive ».
+  · La nuit de Dina : 4 heures du matin, la Face B en entier, le bureau de Jack, puis le combat.
+- Le combat final, sur le morceau de Dina : on se relève à chaque montée (taper vite), on esquive
+  (flèches), on frappe au bon moment, et on choisit quoi faire au sol (sa fléchette, l'alliance
+  d'Élise, ramper vers elle). Cinq fins : Le silence, La main, La fléchette, Jusqu'à la dernière
+  note, Au sol, plus les variantes « J'arrive » (Élise) et Gaston. On perd toujours.
+- Dans le menu Prototypes, on peut régler la confiance de Dina, Gaston, Élise et la fléchette
+  pour essayer toutes les fins.
+- Dans la salle de Dina, un bouton « Parler » lance la prochaine scène (selon sa confiance).
+- Les autres persos parlent aussi (premier jet, 21 conversations) : la toute première rencontre avec
+  Dina (le jeton rouge et le poignet), Zaza (la robe rouge, le café du Baron, le verre d'eau), Anatole
+  (le registre, les jetons rouges), le Baron (le masque, la boîte en fer, l'aveu), Momo (le billard, le
+  poème, ce qu'il sait), Madame Nox (le truc, le Mariage, la Mort), l'Inspecteur (l'insigne, la photo,
+  le mur), Jack (le bureau, le retour) et
+  Gaston (sans un mot). Toutes dans le menu Prototypes.
+- En jeu, un bouton « Parler » au bar de Zaza, au marché de l'Inspecteur, chez Momo et chez Nox lance
+  la prochaine conversation de ce perso.
+- Les mains du joueur : le jeu sait maintenant afficher de vraies images de mains, avec leurs
+  animations (au repos, posée à plat, les doigts qui tapotent, la main qui pousse une carte, et
+  de temps en temps la main qui tourne la bague d’Élise). Tant que les images ne sont pas
+  faites, on garde les mains dessinées.
+
+Nouveautés de la v21.5 — ENTREZ, LA MAISON VOUS ATTEND
+- Au lancement, le film se joue tout seul : une main gantée prend un jeton rouge marqué d'un
+  smiley de sang parmi les jetons des personnages… puis la machine bugue. Un clic le passe.
+- Ensuite, la façade du Tapis Rouge sous la pluie (on l'entend) : le bouton ENTRER fait entrer
+  dans le casino.
+- Nouvel accueil, vu à la première personne : le couloir du casino.
+  · La porte du fond : JOUER et DÉFI DU JOUR (et CONTINUER s'il y a une partie en cours).
+  · L'affiche griffonnée au mur de gauche : touche-la pour te retrouver face au classement.
+  · La porte entrouverte à droite : la bibliothèque d'Anatole.
+  · Le comptoir avec la sonnette : le vestiaire.
+  · Échap (ou MENU en haut à droite) : Options et Profil.
+- Les menus passent aux couleurs du casino : nouvelle partie, défi du jour, options, profils,
+  classement, succès… (bois sombre, cuivre, papier, lettres gravées).
+- Le logo JACKPOT DEFENSE passe aux couleurs du casino (lettres de cuivre, plaque rouge) et
+  flotte toujours.
+- Le bandeau qui défilait en bas de l'accueil et le bandeau « Mille et une nuits » disparaissent.
+- L'écran de jeu passe aussi aux couleurs du casino : à gauche, un panneau de cuir dans un
+  cadre de noyer ; à droite, tes jetons sur une table de feutre vert dans un cadre d'acajou.
+  Chiffres et étiquettes en lettres gravées.
+- L'annonce de la manche (« La Maison joue… ») devient une plaque de cuivre, les règles
+  s'affichent sur papier.
+- La fin de partie (horde comprise) et l'écran de victoire passent aux couleurs du casino.
+- Couloir : l'affiche « Classement » est bien droite, et la feuille du classement ne déborde
+  plus (les manches restent sur le papier).
+- Vestiaire : plus de compteurs, et les vignettes de l'onglet Univers sont de vraies images.
+- Menu pause : le bouton « Les carnets d'Anatole » disparaît.
+- Plus de pièces qui volent partout : ni pluie de pièces et de jetons (victoire, jackpot,
+  jeton secret…), ni gerbes de pièces quand on abat une carte. L'Or qui roule (un malus de
+  la horde) reste : ce sont des pièces à ramasser.
+- Nouveau fond de fin de partie (horde comprise) : une table abandonnée sous une lampe verte.
+- Nouveau fond de victoire : le salon du Baron, vide, son haut-de-forme renversé sur le tapis.
+- Version site / téléphone : le jeu remarche sans internet après la première ouverture
+  (une erreur l'en empêchait).
+
+Nouveautés de la v21.4
+- La façade du Tapis Rouge à l'entrée, sous la pluie, avec le zoom vers la porte.
+- La table du classement et l'étagère de la bibliothèque sont dessinées, avec deux carnets peints.
+
+Nouveautés de la v21.2 — LE GRAND MÉNAGE
+- La bibliothèque d'Anatole change de décor. Les carnets sont rangés debout sur une étagère,
+  et une étagère de la pièce cache une porte secrète (une poignée brille).
+- Derrière la porte : le tableau d'Anatole. Tout ce que tu trouves y est punaisé : la photo de
+  chaque personnage, ses pièces, ses lettres, les notes d'Anatole rangées en dossiers, les jetons
+  rouges, et des fils rouges entre ceux qui sont liés. Touche une photo pour ouvrir son dossier.
+- Le carnet n°3 et les « Pièces à conviction » du menu pause disparaissent : tout est sur le tableau.
+- La musique de Dina : au fil de tes visites, elle te fait écouter des bouts du morceau qu'elle
+  compose. Au chapitre V, elle te laisse choisir la musique de sa salle. Les cassettes restent
+  sur le tableau.
+- Le dernier combat a enfin sa musique. C'est Jack qui la met.
+- En arrivant chez Nox, Momo, Dina ou le Baron : une petite scène, seulement quand ils ont du
+  nouveau à te dire.
+- Les dialogues s'écrivent plus vite et sans saccade, même sur un grand écran.
+- Les persos qui s'en vont passent derrière le comptoir et sortent par la porte, au lieu de
+  glisser par-dessus tout l'écran.
+- Jack s'efface du comptoir quand quelqu'un d'autre arrive au bar.
+- La cible de Dina et le billard de Momo sont plus grands, le texte de Momo n'est plus caché par
+  la table, et la veste du portemanteau n'est plus coupée.
+- Au duel du Baron, l'étiquette ne passe plus sur le nom de Dina.
+- Chez Jack (horde) : la pastille n'est plus coupée, les piles ne glissent plus de côté et la
+  barre violette a disparu, nouveaux paquets en papier kraft, nouveau champagne.
+- La machine buguée et le panneau en bas à gauche (sorts, boissons, Canon/Flipper/Bille) ont un
+  nouveau look, dans le style des décors.
+- Accueil : nouvelle table du classement (aussi en Mille et une Nuits), nouveau jeton secret, le
+  bouton d'Anatole aux couleurs de l'accueil, et des petits ronds au-dessus de la mise pour voir
+  si c'est la 1re, la 2e…
+- Le Baron sans chapeau arrivera avec ses nouvelles images.
 
 Nouveautés de la v21.1 — LES JEUX DU MILIEU
 - La roue de Nox, le billard de Momo, la cible de Dina et les cartes du Baron sont redessinés dans le style
