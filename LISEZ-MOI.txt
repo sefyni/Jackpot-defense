@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v21.6 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v21.7 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,7 +12,7 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
-Nouveautés de la v21.6 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v21.7 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.
@@ -43,6 +43,18 @@ Nouveautés de la v21.6 aperçu — LES PROTOTYPES DU CHANTIER (version de test,
   animations (au repos, posée à plat, les doigts qui tapotent, la main qui pousse une carte, et
   de temps en temps la main qui tourne la bague d’Élise). Tant que les images ne sont pas
   faites, on garde les mains dessinées.
+
+Nouveautés de la v21.7 — PLUS DE NÉON
+- Le bar de Zaza et le marché noir passent aux couleurs du casino : comptoir et étal en noyer, cartes
+  de boissons et d'articles en cuir sombre serties de laiton, prix sur des boutons de laiton, « Offert »
+  sur feutre vert, « Au combat » en laque rouge. Les enseignes au néon deviennent des plaques gravées.
+- Toute la palette du jeu passe aux couleurs du casino (avant : seulement dans les menus) : plus de
+  violet, de rose ni de cyan néon, et plus de police pixel.
+- Le fond derrière la table : une salle sombre et chaude, plus de tourbillon violet.
+- Les annonces au milieu de la table (boss, bonnes et mauvaises nouvelles) en lettres gravées dorées,
+  la barre du boss en sang-de-bœuf sertie de laiton, les bulles qui s'affichent sur la table en carton
+  crème tapé à la machine.
+- Les scènes de l'histoire : texte tapé à la machine, plus lisible.
 
 Nouveautés de la v21.6 — L'ÉCRAN DE JEU EN HD
 - La table de jeu passe en haute définition (avant, elle était en gros pixels) : rail de cuir

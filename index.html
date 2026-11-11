@@ -6776,6 +6776,70 @@ body:not(.th-orient) #abs .pc-face :is(.pc-k,.pc-k2){font-family:'Cinzel20','Cin
 body:not(.th-orient) #abs .pc-slot{border:2px dashed rgba(184,138,58,.55)!important;background:radial-gradient(ellipse at 50% 30%,rgba(60,38,22,.55),rgba(18,11,7,.7))!important}
 body:not(.th-orient) #abs .pc-cd{font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;color:#f3e2b8!important;text-shadow:0 2px 0 #000!important}
 body:not(.th-orient) #abs .pc-pilespot{border-color:rgba(184,138,58,.3)!important;background:rgba(18,11,7,.35)!important}
+/* ===== v21.7 · le bar de Zaza et le marché noir : fini le néon, place au noyer, au cuir et au laiton ===== */
+body:not(.th-orient) :is(#bar,#market){--wood1:#3a2618;--wood2:#1f140d;--brass:#b88a3a;--brassL:#e5bb5a;--cr:#f3e2b8}
+/* les fonds de comptoir et de l'étal */
+body:not(.th-orient) #bar .counter,body:not(.th-orient) #market .mk-body{background:linear-gradient(180deg,#2e1f15 0%,#1c130d 100%)!important;border-radius:6px!important;box-shadow:0 0 0 2px var(--brass),0 0 0 4px #120c09,inset 0 0 0 1px rgba(255,230,180,.06),inset 0 10px 24px rgba(0,0,0,.45),0 14px 30px rgba(0,0,0,.55)!important}
+body:not(.th-orient) #bar .counter-top{background:linear-gradient(180deg,#6b4423,#3a2414)!important;box-shadow:inset 0 2px 0 rgba(255,220,160,.25),0 2px 0 #120c09!important}
+/* les cartes de boissons et d'articles : cuir sombre, filet de laiton */
+body:not(.th-orient) #bar .drink,body:not(.th-orient) #market .offer{background:linear-gradient(180deg,#3b2819,#24170f)!important;border:0!important;border-radius:5px!important;box-shadow:0 0 0 1.5px var(--brass),inset 0 0 0 1px rgba(255,230,180,.07),0 4px 8px rgba(0,0,0,.45)!important;color:var(--cr)!important}
+body:not(.th-orient) #bar .drink .dcat{font:700 11px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.18em!important;text-transform:uppercase;color:#d9a35b!important;text-shadow:none!important}
+body:not(.th-orient) :is(#bar .drink .dname,#bar .shot .stext b,#market .otext>b,#market .mks b,#market .mks-h b){font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;letter-spacing:.03em!important;color:var(--cr)!important;text-shadow:0 2px 0 #000!important}
+body:not(.th-orient) :is(#bar .drink .deff,#bar .shot .stext span,#market .otext>span,#market .mks small,#market .mks-h small,#bar .bar-foot .mk-gold,#market .mk-gold){font-family:"Elite20","Special Elite",Georgia,serif!important;font-weight:400!important;color:#e6d3ab!important}
+body:not(.th-orient) #market .otext>span b.n,body:not(.th-orient) #bar .drink .deff b{color:#f3c96a!important}
+body:not(.th-orient) #bar .drink .dlv{color:#e5bb5a!important;letter-spacing:.2em}
+/* les shots : une étagère de bois */
+body:not(.th-orient) #bar .shot{background:linear-gradient(180deg,rgba(58,38,24,.75),rgba(26,17,11,.85))!important;border-radius:5px!important;box-shadow:0 0 0 1px rgba(184,138,58,.55),inset 0 1px 0 rgba(255,230,180,.08)!important}
+/* les petits boutons : prix en laiton, « offert » sur feutre vert, « marchander / vendre » en noyer */
+body:not(.th-orient) :is(#bar,#market) .mini{background:linear-gradient(180deg,#f6dc94,#c99a3c 55%,#9a6c22)!important;color:#1b1310!important;border:0!important;border-radius:4px!important;font:700 13px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.06em!important;text-shadow:0 1px 0 rgba(255,240,190,.5)!important;box-shadow:inset 0 0 0 1px rgba(255,240,190,.55),0 0 0 1.5px #1b1310,0 3px 0 #1b1310!important}
+body:not(.th-orient) :is(#bar,#market) .mini.free{background:linear-gradient(180deg,#3f9a6e,#1f6a4a 60%,#14472f)!important;color:#f3e6c4!important;text-shadow:0 1px 0 #000!important;box-shadow:inset 0 0 0 1px rgba(230,200,120,.5),0 0 0 1.5px #1b1310,0 3px 0 #1b1310!important}
+body:not(.th-orient) :is(#bar,#market) .mini.dark{background:linear-gradient(180deg,#4a3120,#2a1b11)!important;color:#e6d3ab!important;text-shadow:0 1px 0 #000!important;box-shadow:inset 0 0 0 1px rgba(184,138,58,.6),0 0 0 1.5px #120c09,0 3px 0 #120c09!important}
+body:not(.th-orient) :is(#bar,#market) .mini:disabled{filter:grayscale(.6) brightness(.75)}
+/* les grands boutons du bas */
+body:not(.th-orient) #bar #b-go{background:linear-gradient(180deg,#b3283a,#7a1424 60%,#4e0c17)!important;color:#f6e7c3!important;border:0!important;border-radius:5px!important;font:700 19px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.08em!important;text-shadow:0 2px 0 #2a0610!important;box-shadow:inset 0 0 0 1px rgba(255,210,170,.35),0 0 0 2px var(--brass),0 0 0 4px #120c09,0 6px 0 #120c09!important}
+body:not(.th-orient) #bar #b-market{background:linear-gradient(180deg,#3b2819,#21150d)!important;color:#f3e2b8!important;border:0!important;border-radius:5px!important;font:700 14px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.06em!important;text-shadow:0 1px 0 #000!important;box-shadow:inset 0 0 0 1px rgba(255,230,180,.08),0 0 0 2px var(--brass),0 0 0 4px #120c09,0 5px 0 #120c09!important}
+body:not(.th-orient) #bar #b-market b{color:#f3c96a!important}
+body:not(.th-orient) #bar #b-market .mk-dot{background:#e5bb5a!important;box-shadow:0 0 6px rgba(229,187,90,.7)!important}
+body:not(.th-orient) #market #k-leave{background:linear-gradient(180deg,#3b2819,#21150d)!important;color:#f3e2b8!important;border:0!important;border-radius:5px!important;font:700 14px/1 'Cinzel20','Cinzel',Georgia,serif!important;box-shadow:0 0 0 2px var(--brass),0 0 0 4px #120c09!important}
+/* les étiquettes : nom de l'Inspecteur, compagnon, rareté, mix */
+body:not(.th-orient) #market .mk-name,body:not(.th-orient) #bar .zm-tag{background:linear-gradient(180deg,#f6dc94,#c99a3c 60%,#9a6c22)!important;color:#1b1310!important;border-radius:3px!important;font:700 11px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.14em!important;text-shadow:none!important;box-shadow:0 0 0 1.5px #1b1310!important}
+body:not(.th-orient) #market :is(.otag,.rtag2){font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-style:normal!important;letter-spacing:.08em!important}
+/* « tes sorts » : une rangée de casiers en bois */
+body:not(.th-orient) #market .mk-spells{background:rgba(20,13,8,.55)!important;border-radius:5px!important;box-shadow:inset 0 0 0 1px rgba(184,138,58,.45)!important}
+body:not(.th-orient) #market .mks{background:linear-gradient(180deg,#3b2819,#24170f)!important;box-shadow:0 0 0 1px rgba(184,138,58,.7)!important;border-radius:4px!important}
+body:not(.th-orient) #market .mks.e{background:rgba(20,13,8,.4)!important;box-shadow:inset 0 0 0 1px rgba(184,138,58,.3)!important}
+body:not(.th-orient) #market .mks-k{font-family:'Cinzel20','Cinzel',Georgia,serif!important;color:#e5bb5a!important}
+body:not(.th-orient) #market .slotico{background:rgba(20,13,8,.5)!important;box-shadow:inset 0 0 0 1px rgba(184,138,58,.5)!important}
+/* les enseignes : plus de néon, une plaque de laiton aux lettres gravées */
+body:not(.th-orient) :is(#bar .neon-bar,#market .al-neon){font:700 16px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.16em!important;color:#f3d48a!important;text-shadow:0 1px 0 #6b4210,0 2px 0 #1b1004!important;animation:none!important;padding:6px 10px 6px!important;border-radius:3px!important;background:linear-gradient(180deg,#2c1f17,#160f0a)!important;box-shadow:0 0 0 1.5px #b88a3a,0 0 0 3px #120c09,0 4px 8px rgba(0,0,0,.5)!important}
+body:not(.th-orient) :is(#bar .neon-bar small,#market .al-neon small){font:400 9px/1 "Elite20","Special Elite",Georgia,serif!important;letter-spacing:.22em!important;color:#d9c39a!important;text-shadow:none!important}
+body:not(.th-orient) #market .al-neon span{animation:none!important}
+body:not(.th-orient) #market :is(.otag,.rtag2){box-shadow:none!important;text-shadow:none!important;border-radius:2px!important}
+/* ===== v21.7 · la palette et la police du casino partout (avant : seulement dans les menus) =====
+   les couleurs néon (violet, rose, cyan) et la police pixel disparaissent de tous les écrans du jeu */
+body:not(.th-orient){
+  --ink:#120c09;--panel:#1d1410;--panel-2:#2a1d15;--edge:#7a5a30;--edge-hi:#c99a3c;
+  --cream:#f3e6c4;--muted:#d8c49c;--dim:#a08a64;
+  --red:#b01c30;--red-d:#5c0a14;--blue:#2e5a8c;--blue-d:#173050;--green:#2f7a52;--green-d:#174a30;
+  --orange:#b8742a;--orange-d:#6a3e10;--purple:#6e2f55;--purple-d:#3e1530;--gold:#e5bb5a;--gold-d:#8a6420;
+  --pink:#c8506e;--lilac:#b49a70;--teal:#4f9a86;--peach:#d9a066;
+  --f-pix:"Elite20","Special Elite",Georgia,serif;
+  background:#120c09;
+}
+/* les scènes de l'histoire : texte tapé à la machine, nom gravé */
+body:not(.th-orient) #st-sc .stsc-txt{font-family:"Elite20","Special Elite",Georgia,serif!important;font-size:17px!important;line-height:1.4!important;color:#f3e6c4!important}
+/* le fond derrière la table : plus de violet, une salle sombre et chaude */
+body:not(.th-orient) #bgfx{filter:sepia(.92) saturate(.75) brightness(.78) hue-rotate(-8deg)!important;image-rendering:auto!important}
+/* les annonces au milieu de la table (boss, bonne nouvelle, coup dur) : lettres gravées dorées */
+body:not(.th-orient) #banner .b1{font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;letter-spacing:.06em!important;color:#e5bb5a!important;text-shadow:0 2px 0 #6b4210,0 4px 0 #120c09,0 0 22px rgba(0,0,0,.6)!important}
+body:not(.th-orient) #banner.boss .b1{color:#e7c37a!important;text-shadow:0 2px 0 #7a1420,0 4px 0 #120c09,0 0 22px rgba(0,0,0,.6)!important}
+body:not(.th-orient) #banner.bad .b1{color:#d9505e!important}
+body:not(.th-orient) #banner .b2{font-family:"Elite20","Special Elite",Georgia,serif!important;font-weight:400!important;color:#f3e6c4!important}
+/* la barre du boss : jauge sang-de-bœuf sertie de laiton */
+body:not(.th-orient) #bossbar b{font:700 15px/1 'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.12em!important;color:#f3e2b8!important}
+body:not(.th-orient) #bossbar .bb{border-radius:3px!important;background:rgba(18,12,9,.75)!important;box-shadow:0 0 0 1.5px #120c09,0 0 0 3px #b88a3a,0 0 0 4.5px #120c09!important}
+body:not(.th-orient) #bossbar .bb i{background:linear-gradient(180deg,#c43a4a,#8a1626 55%,#5c0a14)!important}
+body:not(.th-orient) #bossbar small{font-family:"Elite20","Special Elite",Georgia,serif!important}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7540,7 +7604,7 @@ body:not(.th-orient) #abs .pc-pilespot{border-color:rgba(184,138,58,.3)!importan
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v21.6 aperçu</p>
+  <p class="proto">Sefy Industries · v21.7 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -26904,7 +26968,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v21.6 aperçu</p></div>`;
+        <p class="ov5">v21.7 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43031,6 +43095,39 @@ buildBG = function () {
 };
 // les lettres gravées utilisent Cinzel : on redessine la table quand la police est arrivée
 try { if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('700 12px Cinzel20'), document.fonts.load('600 12px Cinzel20')]).then(() => { try { if (bgC && cv && cv.width) buildBG(); } catch (e) { /* rien */ } }); } catch (e) { /* rien */ }
+
+/* v21.7 · les bulles dessinées sur la table (Frip, les cartes qui parlent…) : carton crème, filet de laiton, lettres à la machine */
+if (typeof drawBubbles === 'function') {
+  const _db217 = drawBubbles;
+  drawBubbles = function (cb, sx, sy) {
+    if (typeof thOn === 'function' && thOn()) return _db217.apply(this, arguments);
+    const fs = Math.round(clamp(S * 5, 13, 17) * DPR), pad = Math.round(8 * DPR), lh = Math.round(fs * 1.26), tail = 9 * DPR;
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.font = `400 ${fs}px Elite20, "Special Elite", Georgia, serif`; ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.lineJoin = 'round';
+    for (const b of cb.bubbles) {
+      const a = Math.min(1, b.t / .12, (b.life - b.t) / .35);
+      if (a <= 0) continue;
+      if (!b.lines || b.fs !== fs || !b.el7) { b.lines = wrapLines(b.text, Math.min(cv.width * .62, 230 * DPR)); b.fs = fs; b.el7 = 1; }
+      const lines = b.lines, bw = Math.max(...lines.map(l => ctx.measureText(l).width)) + pad * 2, bh = lines.length * lh - (lh - fs) + pad * 2;
+      const r = b.r || 12, ex = (CX + b.x * S) * DPR + sx, eyTop = (CY + (b.y - r - 1) * S) * DPR + sy, eyBot = (CY + (b.y + r + 1) * S) * DPR + sy;
+      const x = clamp(ex - bw / 2, 8 * DPR, cv.width - bw - 8 * DPR);
+      let y = eyTop - tail - bh, below = false;
+      if (y < 80 * DPR) { y = eyBot + tail; below = true; }
+      y = Math.min(y, cv.height - bh - 8 * DPR);
+      const tx = clamp(ex, x + 14 * DPR, x + bw - 14 * DPR);
+      const tri = () => { ctx.beginPath(); if (below) { ctx.moveTo(tx - 7 * DPR, y + 2); ctx.lineTo(tx, y - tail); ctx.lineTo(tx + 7 * DPR, y + 2); } else { ctx.moveTo(tx - 7 * DPR, y + bh - 2); ctx.lineTo(tx, y + bh + tail); ctx.lineTo(tx + 7 * DPR, y + bh - 2); } ctx.closePath(); };
+      ctx.globalAlpha = a;
+      ctx.strokeStyle = '#120c09'; ctx.lineWidth = 6 * DPR; rrPath(ctx, x, y, bw, bh, 4 * DPR); ctx.stroke(); tri(); ctx.stroke();
+      ctx.strokeStyle = '#b88a3a'; ctx.lineWidth = 3 * DPR; rrPath(ctx, x, y, bw, bh, 4 * DPR); ctx.stroke(); tri(); ctx.stroke();
+      const gr = ctx.createLinearGradient(0, y, 0, y + bh); gr.addColorStop(0, '#f7eed8'); gr.addColorStop(1, '#e6d4ac');
+      ctx.fillStyle = gr; rrPath(ctx, x, y, bw, bh, 4 * DPR); ctx.fill(); tri(); ctx.fill();
+      let left = Math.floor(b.t * 42) + 1;
+      ctx.fillStyle = '#2b1a0f';
+      for (let i = 0; i < lines.length && left > 0; i++) { ctx.fillText(lines[i].slice(0, left), x + pad, y + pad + i * lh); left -= lines[i].length + 1; }
+    }
+    ctx.restore();
+  };
+}
 
 const CV_ANIMS = {};
 /* ===== v21.6 (aperçu) · les conversations à choix, façon I'm Not a Human, et le combat final =====
