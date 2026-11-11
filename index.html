@@ -6840,6 +6840,37 @@ body:not(.th-orient) #bossbar b{font:700 15px/1 'Cinzel20','Cinzel',Georgia,seri
 body:not(.th-orient) #bossbar .bb{border-radius:3px!important;background:rgba(18,12,9,.75)!important;box-shadow:0 0 0 1.5px #120c09,0 0 0 3px #b88a3a,0 0 0 4.5px #120c09!important}
 body:not(.th-orient) #bossbar .bb i{background:linear-gradient(180deg,#c43a4a,#8a1626 55%,#5c0a14)!important}
 body:not(.th-orient) #bossbar small{font-family:"Elite20","Special Elite",Georgia,serif!important}
+/* ===== v21.7 · le marché noir garde son air de rue : caisses en bois, carton, craie, scotch (pas de laiton, pas de chic) ===== */
+body:not(.th-orient) #market.ov .mk-body{background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 2px,transparent 2px 46px),linear-gradient(180deg,#3a2c20,#251b13)!important;border-radius:2px!important;box-shadow:0 0 0 3px #17110c,inset 0 0 40px rgba(0,0,0,.55),0 14px 30px rgba(0,0,0,.6)!important}
+/* chaque article : une planche de caisse, écrite à la craie */
+body:not(.th-orient) #market.ov .offer{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 3px,transparent 3px 9px),linear-gradient(180deg,#43342a,#2c221b)!important;border-radius:1px!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,240,220,.06),0 3px 6px rgba(0,0,0,.5)!important;position:relative}
+body:not(.th-orient) #market.ov .offer::before{content:"";position:absolute;top:-8px;left:40%;width:44px;height:10px;background:rgba(222,206,160,.55);transform:rotate(-4deg);box-shadow:0 1px 2px rgba(0,0,0,.35);pointer-events:none;z-index:2}
+body:not(.th-orient) #market.ov :is(.otext>b,.mks b,.mks-h b){font-family:'PMarker20','Permanent Marker','Sketch20',cursive!important;font-weight:400!important;letter-spacing:.02em!important;color:#efe9dc!important;text-shadow:0 0 1px rgba(255,255,255,.25)!important}
+body:not(.th-orient) #market.ov :is(.otext>span,.mks small,.mks-h small,.mk-gold){font-family:"Elite20","Special Elite",monospace!important;color:#cfc6b4!important}
+body:not(.th-orient) #market.ov .otext>span b.n{color:#f2d27a!important}
+/* les prix : une étiquette en carton, écrite au feutre et scotchée de travers */
+body:not(.th-orient) #market.ov .mini{background:linear-gradient(180deg,#d6b27a,#b89058)!important;color:#1f140c!important;border-radius:1px!important;font:400 15px/1 'PMarker20','Permanent Marker',cursive!important;letter-spacing:.02em!important;text-shadow:none!important;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.45),inset 0 0 0 1px rgba(90,60,20,.4)!important}
+body:not(.th-orient) #market.ov .obuy .mini:nth-child(2n){transform:rotate(1.2deg)}
+/* « marchander » / « vendre » : gribouillé à la craie sur la planche */
+body:not(.th-orient) #market.ov .mini.dark{background:transparent!important;color:#efe9dc!important;font:400 14px/1 'PMarker20','Permanent Marker',cursive!important;box-shadow:inset 0 0 0 1.5px rgba(239,233,220,.55)!important;border-radius:3px!important;transform:rotate(.6deg)}
+body:not(.th-orient) #market.ov .mini:disabled{filter:grayscale(.5) brightness(.7)}
+/* les étiquettes (compagnon, sort, rareté…) : tracées à la craie */
+body:not(.th-orient) #market.ov :is(.otag,.rtag2){background:transparent!important;border:1px solid currentColor!important;font-family:'PMarker20','Permanent Marker',cursive!important;font-size:11px!important;letter-spacing:.04em!important;padding:1px 5px!important;opacity:.9}
+body:not(.th-orient) #market.ov .mk-name{background:linear-gradient(180deg,#d6b27a,#b89058)!important;color:#1f140c!important;border-radius:1px!important;font:400 13px/1 'PMarker20','Permanent Marker',cursive!important;letter-spacing:.03em!important;transform:rotate(-2deg);box-shadow:0 2px 0 rgba(0,0,0,.5)!important}
+/* l'enseigne : une plaque de tôle rouillée, lettres au pochoir blanc */
+body:not(.th-orient) #market.ov .al-neon{font:400 17px/1 'PMarker20','Permanent Marker',cursive!important;letter-spacing:.06em!important;color:#ece6d6!important;text-shadow:0 0 1px rgba(0,0,0,.6)!important;background:radial-gradient(ellipse at 30% 40%,rgba(160,70,30,.45),transparent 60%),linear-gradient(180deg,#4a3a30,#2a201a)!important;border-radius:2px!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),0 0 0 2px #17110c,0 4px 8px rgba(0,0,0,.6)!important;transform:rotate(-1.5deg)}
+body:not(.th-orient) #market.ov .al-neon small{font:400 9px/1 "Elite20",monospace!important;color:#bfb6a2!important;letter-spacing:.18em!important}
+/* tes sorts : des cases de cagette */
+body:not(.th-orient) #market.ov .mk-spells{background:rgba(20,15,11,.6)!important;border-radius:1px!important;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6)!important}
+body:not(.th-orient) #market.ov .mks{background:linear-gradient(180deg,#43342a,#2c221b)!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)!important;border-radius:1px!important}
+body:not(.th-orient) #market.ov .mks.e{background:transparent!important;box-shadow:inset 0 0 0 1.5px rgba(239,233,220,.18)!important}
+body:not(.th-orient) #market.ov .mks-k{font-family:'PMarker20','Permanent Marker',cursive!important;color:#efe9dc!important}
+body:not(.th-orient) #market.ov .slotico{background:rgba(0,0,0,.35)!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)!important;border-radius:50%!important}
+/* le bouton du retour : une planche clouée */
+body:not(.th-orient) #market.ov #k-leave{background:linear-gradient(180deg,#5a4434,#3a2c20)!important;color:#efe9dc!important;border-radius:1px!important;font:400 15px/1 'PMarker20','Permanent Marker',cursive!important;letter-spacing:.03em!important;box-shadow:0 0 0 2px #17110c,inset 0 1px 0 rgba(255,240,220,.1),0 4px 0 #0c0806!important}
+/* la bulle de l'Inspecteur : un bout de journal */
+body:not(.th-orient) #market.ov .bubble{background:linear-gradient(180deg,#e7e1d0,#d5ccb5)!important;color:#1d1914!important;border-radius:1px!important;box-shadow:0 0 0 2px #17110c,0 6px 10px rgba(0,0,0,.5)!important}
+body:not(.th-orient) #market.ov .bubble::before{border-right-color:#e3dcc9!important;filter:none!important}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
