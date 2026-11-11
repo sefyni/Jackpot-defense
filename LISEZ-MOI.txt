@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.0 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.1 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,10 +12,22 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
+Nouveautés de la v22.1 — LES BOSS ET LA CHASSE AU NÉON
+- Les cartes des Boss perdent leur visage : à la place, un smiley peint au sang qui coule, d'une
+  couleur différente pour chacun. Valet de Carreau orange, Dame de Cœur rose, Roi de Pique bleu,
+  Roi de Trèfle vert, Roi de Cœur rouge sang, Joker Noir violet, le Baron en or. Les mini-boss
+  gardent leurs figures.
+- La Jackpot Machine (le choix de la machine) prend le même meuble que la machine à sous : noyer,
+  laiton, ampoules à filament, JACKPOT en lettres dorées, plaques émaillées aux couleurs des
+  machines. Fini le violet et le bleu fluo.
+- Les boutons de couleur passent en teintes de cuir, de laque et de feutre (menu pause, empiler,
+  relancer, pile ou face…) : plus de bleu ciel ni d'orange vif.
+- Les titres en néon ne clignotent plus.
+
 Nouveautés de la v22.0 — LES FIGURES ET LES CASSETTES
 - Les figures des cartes ennemies sont peintes : Valet de Carreau, Valet de Trèfle (le garde),
   Dame de Cœur, Roi de Pique, Roi de Trèfle, Roi de Cœur et le Joker, en tableaux art déco aux
-  couleurs de leur couleur, avec la lettre et le symbole dans les coins. Les boss reprennent les mêmes.
+  couleurs de leur couleur, avec la lettre et le symbole dans les coins.
 - Les cassettes de Dina ont leurs vraies étiquettes écrites à la main (Démo 1 à 4, Face B) : sur le
   tableau d'Anatole, dans la petite carte qui joue en bas de l'écran, et dans la liste de son poste.
 - Le poste de Dina a son image.
@@ -41,7 +53,7 @@ Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
   petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
 
-Nouveautés de la v22.0 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v22.1 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.

@@ -6576,6 +6576,43 @@ body:not(.th-orient) #dn-box .dn-list [data-dc="c2"]::before{background-image:ur
 body:not(.th-orient) #dn-box .dn-list [data-dc="c3"]::before{background-image:url(decors/ui/cas_c3.webp)}
 body:not(.th-orient) #dn-box .dn-list [data-dc="c4"]::before{background-image:url(decors/ui/cas_c4.webp)}
 body:not(.th-orient) #dn-box .dn-list [data-dc="full"]::before{background-image:url(decors/ui/cas_full.webp)}
+/* ===== v22.1 · chasse au néon ===== */
+/* les boutons de couleur : plus de bleu ciel ni d'orange fluo, des teintes de cuir, de laque et de feutre */
+body:not(.th-orient) .btn.red{--b:#a3202f;--bd:#4e0b14}
+body:not(.th-orient) .btn.blue{--b:#2c4566;--bd:#121d2e}
+body:not(.th-orient) .btn.orange{--b:#8e5326;--bd:#40230c}
+body:not(.th-orient) .btn.green{--b:#245e40;--bd:#0d2a1a}
+body:not(.th-orient) .btn.purple{--b:#55304f;--bd:#241122}
+/* la Jackpot Machine (choix de la machine) : le même meuble que la machine à sous, noyer, laiton, plaques émaillées */
+body:not(.th-orient) .jpm-cab{background:linear-gradient(180deg,rgba(40,24,14,.25),rgba(14,8,5,.55)),url(decors/ui/wood.webp) 0 0/340px repeat #2e1f15!important;box-shadow:inset 0 0 0 2px #e5bb5a,inset 0 0 0 4px #4a2e14,inset 0 0 0 6px #b88a3a,inset 0 14px 24px rgba(255,220,160,.08),0 0 0 2px #120c09,0 18px 40px rgba(0,0,0,.65)!important}
+body:not(.th-orient) .jpm-top{background:radial-gradient(ellipse 90% 120% at 50% 0%,#5a1420,#120a07 78%)!important;box-shadow:inset 0 0 0 2px #b88a3a,inset 0 0 0 4px #120c09,inset 0 -10px 18px rgba(0,0,0,.45)!important}
+body:not(.th-orient) .jpm-top h2{font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;letter-spacing:.08em!important;color:#f3d38a!important;background:linear-gradient(180deg,#fff0c0,#e5bb5a 48%,#9a6a22);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none!important;filter:drop-shadow(0 2px 0 #2a1608) drop-shadow(0 3px 2px rgba(0,0,0,.6))}
+body:not(.th-orient) .jpm-top p{font-family:'Elite20','Courier New',monospace!important;font-weight:400!important;letter-spacing:.32em!important;color:#e9d7b0!important;text-shadow:0 1px 0 #000!important}
+body:not(.th-orient) #jpm .bulbs i{width:6px!important;height:6px!important;border-radius:50%!important;background:radial-gradient(circle at 40% 35%,#fff6d8,#f2b84a 55%,#8a5a18)!important;box-shadow:0 0 4px rgba(255,190,90,.65)!important}
+body:not(.th-orient) #jpm.won .jpm-top .bulbs i{background:radial-gradient(circle at 40% 35%,#fffbe8,#ffd98a 60%,#b07a28)!important;box-shadow:0 0 7px rgba(255,210,120,.85)!important}
+body:not(.th-orient) .jpm-win{background:#1a110b!important;box-shadow:inset 0 0 0 2px #b88a3a,inset 0 0 0 4px #120c09,inset 0 3px 10px rgba(0,0,0,.7)!important}
+body:not(.th-orient) .jpm-win::before{background:linear-gradient(#1a110b,rgba(26,17,11,.35))}
+body:not(.th-orient) .jpm-win::after{background:linear-gradient(rgba(26,17,11,.35),#1a110b)}
+body:not(.th-orient) .jpm-it{border-bottom:3px solid #1a110b;background:linear-gradient(180deg,rgba(255,240,210,.1),rgba(0,0,0,.28)),linear-gradient(90deg,color-mix(in srgb,var(--ca) 78%,#120a07),color-mix(in srgb,var(--cb) 58%,#2a1a10) 50%,color-mix(in srgb,var(--ca) 78%,#120a07));box-shadow:inset 0 0 0 1.5px rgba(229,187,90,.55),inset 0 0 0 3px rgba(18,12,9,.55)}
+body:not(.th-orient) .jpm-it b{font-family:'Cinzel20','Cinzel',Georgia,serif;font-weight:700;letter-spacing:.06em;color:#f3e6c4;text-shadow:0 2px 0 rgba(0,0,0,.7)}
+body:not(.th-orient) .jpm-ic{background:radial-gradient(circle at 40% 35%,#3a2618,#140c08);color:color-mix(in srgb,var(--cc) 50%,#f3e6c4);box-shadow:inset 0 0 0 1.5px #b88a3a,0 2px 0 rgba(0,0,0,.5)}
+body:not(.th-orient) .jpm-it.win{box-shadow:inset 0 0 0 2px #f3d38a,inset 0 0 0 4px rgba(18,12,9,.55),0 0 12px rgba(229,187,90,.4)}
+body:not(.th-orient) .jpm-line{box-shadow:0 0 0 2px #e5bb5a,0 0 0 4px rgba(18,12,9,.85),0 0 8px rgba(229,187,90,.35)}
+body:not(.th-orient) .jpm-line::before{border-left-color:#e5bb5a}
+body:not(.th-orient) .jpm-line::after{border-right-color:#e5bb5a}
+body:not(.th-orient) #jpm.spinning .jpm-line{animation:none}
+body:not(.th-orient) .jpm-res{background:rgba(18,12,9,.72);box-shadow:inset 0 0 0 1.5px rgba(229,187,90,.45)}
+body:not(.th-orient) .jpm-hint{font-family:'Elite20','Courier New',monospace;font-weight:400;color:#e9d7b0}
+body:not(.th-orient) .jpm-name{font-family:'Cinzel20','Cinzel',Georgia,serif;color:#f3e6c4;text-shadow:0 2px 0 #000}
+body:not(.th-orient) .jpm-bug{background:rgba(18,12,9,.6);color:#e9d7b0;box-shadow:inset 0 0 0 1.5px rgba(229,187,90,.55);font-family:'Elite20','Courier New',monospace;font-weight:400}
+body:not(.th-orient) .jpm-bug i{background:#e5bb5a;color:#2a1608}
+body:not(.th-orient) .jpm-next{color:#d9c9a3}
+body:not(.th-orient) .jpm-next b{color:#f3e6c4}
+body:not(.th-orient) .jpm-next svg{color:#e5bb5a}
+body:not(.th-orient) .jpm-lever .lbase{background:linear-gradient(90deg,#5a3a10,#f2d17a 45%,#6b4416)}
+body:not(.th-orient) .jpm-lever .arm{background:linear-gradient(90deg,#7a5418,#fff0c0 45%,#7a5418)}
+body:not(.th-orient) .jpm-lever .ball{background:radial-gradient(circle at 35% 30%,#ff9a8a,#b3202c 55%,#5a0a12);box-shadow:0 0 0 1.5px #2a0a0e,0 3px 4px rgba(0,0,0,.5)}
+body:not(.th-orient) .neon{animation:none!important}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7340,7 +7377,7 @@ body:not(.th-orient) #dn-box .dn-list [data-dc="full"]::before{background-image:
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.0 aperçu</p>
+  <p class="proto">Sefy Industries · v22.1 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26552,7 +26589,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.0 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.1 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35727,7 +35764,7 @@ const ART_IMG = {};
 (function artLoad() {
   if (typeof Image === 'undefined' || typeof CARD_ART === 'undefined') return;
   for (const t in CARD_ART) {
-    if (["b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "garde", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
+    if (["b_baron", "b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "garde", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
     const im = new Image();
     im.onload = () => { ART_IMG[t] = im; delete SPR[t]; };
     im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(CARD_ART[t]);
