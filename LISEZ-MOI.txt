@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v21.7 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v21.8 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -12,7 +12,20 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
 
-Nouveautés de la v21.7 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
+- Les 150 jetons des machines sont gravés : chaque jeton a son dessin crème façon jeton de casino
+  ancien, au centre de sa couleur de famille (dans le rack, au marché, sur la machine à sous).
+- Les sorts de base et les objets du marché passent sur des médaillons de laiton émaillé
+  (Bombe, Gel, Tornade, Orage, Bouclier, Surchauffe, Bon de relance, Trousse, Flipper doré).
+- Le dos des cartes : velours sang-de-bœuf, cadre doré, médaillon à la roulette.
+- La face des cartes de ta main : carton crème vieilli, double filet noir et or, éventails aux coins.
+- Derrière la table : la salle vue de haut, moquette art déco, les autres tables dans les coins,
+  la fumée des cigares.
+- Le comptoir du bar de Zaza en vrai noyer.
+- (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
+  petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
+
+Nouveautés de la v21.8 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.

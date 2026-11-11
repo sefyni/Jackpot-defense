@@ -6871,6 +6871,27 @@ body:not(.th-orient) #market.ov #k-leave{background:linear-gradient(180deg,#3a41
 /* la bulle de l'Inspecteur : un bout de journal */
 body:not(.th-orient) #market.ov .bubble{background:linear-gradient(180deg,#e2ddd0,#cbc5b5)!important;color:#141820!important;border-radius:1px!important;box-shadow:0 0 0 2px #0b0d13,0 6px 10px rgba(0,0,0,.5)!important}
 body:not(.th-orient) #market.ov .bubble::before{border-right-color:#ddd8ca!important;filter:none!important}
+
+/* ===== v21.8 · les premières images HD (Gemini) dans l'écran de jeu ===== */
+/* la salle derrière la table : vue de haut, moquette art déco, les autres tables dans les coins */
+#bgroom{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/room.webp) 50% 50%/cover no-repeat #0d0806}
+body.bg-room:not(.th-orient) #bgroom{opacity:1}
+body.bg-room:not(.th-orient) #bgfx{visibility:hidden}
+/* le dos des cartes : velours sang-de-bœuf, cadre doré, médaillon à la roulette */
+body:not(.th-orient) .pc-back{background:url(decors/ui/card-back.webp) 50% 50%/100% 100% no-repeat #5a1420!important}
+body:not(.th-orient) .pc-back .pc-emb{display:none!important}
+/* la face des cartes : carton crème vieilli, double filet noir et or, éventails aux coins */
+body:not(.th-orient) #abs .pcard:not(.fou) .pc-face{background:url(decors/ui/card-frame.webp) 50% 50%/100% 100% no-repeat #efe2c2!important;box-shadow:inset 0 0 0 1px #2b1a0f,inset 0 -12px 16px -12px color-mix(in srgb,var(--sc) 55%,transparent),0 2px 0 #22080e,0 6px 12px rgba(0,0,0,.45)!important}
+body:not(.th-orient) #abs .pcard:not(.fou) .pc-face::after{display:none!important}
+/* les icônes peintes (sorts et objets) : médaillons de laiton */
+img.ico-art{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(0,0,0,.45));pointer-events:none;-webkit-user-drag:none;user-select:none}
+body:not(.th-orient) #abs .pc-ico img.ico-art{width:118%;height:118%;margin:-9%}
+/* le comptoir du bar : du vrai noyer */
+body:not(.th-orient) #bar .counter{background:linear-gradient(180deg,rgba(28,17,11,.45),rgba(16,10,7,.7)),url(decors/ui/wood.webp) 0 0/420px repeat #2e1f15!important}
+body:not(.th-orient) #bar .counter-top{background:linear-gradient(180deg,rgba(255,220,160,.12),rgba(0,0,0,.25)),url(decors/ui/wood.webp) 0 0/420px repeat #4a2e18!important}
+/* les jetons gravés */
+img.jet-art{display:block;object-fit:contain;filter:drop-shadow(0 1px 0 rgba(0,0,0,.7)) drop-shadow(0 0 2px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
+body:not(.th-orient) #spick .spk-ic img.ico-art{width:132%;height:132%;margin:-16%}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7635,7 +7656,7 @@ body:not(.th-orient) #market.ov .bubble::before{border-right-color:#ddd8ca!impor
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v21.7 aperçu</p>
+  <p class="proto">Sefy Industries · v21.8 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -8342,7 +8363,7 @@ function injectIcons() {
   }
   defs.innerHTML = h + spellArtSymbols();
 }
-const iconSVG = (id, cls) => `<svg class="ico${cls ? ' ' + cls : ''}" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+let iconSVG = (id, cls) => `<svg class="ico${cls ? ' ' + cls : ''}" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 
 function drawIcon(g, id, cx, cy, size, color) {
   if (!drawIcon.raw) return drawIconH(g, id, cx, cy, size, color);
@@ -26999,7 +27020,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v21.7 aperçu</p></div>`;
+        <p class="ov5">v21.8 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43160,6 +43181,61 @@ if (typeof drawBubbles === 'function') {
   };
 }
 
+const JET_ART = ["aimant", "allergie", "allin", "anubis", "argile", "ascenseur", "babyfoot", "balance", "balledoree", "bande", "batteur", "belier", "bleubillard", "blizzard", "boomerang", "boulenoire", "boulet", "boussole", "braise", "bricabrac", "bullseye", "bumper", "cancer", "capricorne", "capture", "casemate", "catalyseur", "cerbere", "chatnoir", "chef", "chercheuse", "chevrotine", "cible", "cloche", "coccinelle", "cochonnet", "coffre", "collante", "comete", "comptetours", "contrat", "cookie", "crescendo", "dette", "domino", "doubleourien", "echo", "elastiques", "engrenage", "etincelle", "extincteur", "extrabille", "ferache", "fievre", "forge", "fosse", "fragment", "fronton", "gemeaux", "grandfinal", "hautparleur", "herisson", "hermes", "herse", "houle", "hydre", "hypotheque", "icare", "insomnie", "ivresse", "jenga", "jupiter", "kamikaze", "kicker", "kitsune", "lapin", "lion", "lune", "lunette", "magma", "mars", "meche", "meduse", "mercure", "metal", "mikado", "minimaliste", "minotaure", "miroirbrise", "mjolnir", "multibille", "muraille", "neptune", "ovation", "pachinko", "palet", "pandore", "parasite", "perforante", "phare", "phenix", "pileface", "pilejetons", "pivot", "pluton", "pochette", "poissons", "pont", "potager", "projecteur", "pulsar", "rafale", "rampe", "rappel", "rebours", "reflet", "ressort", "ricochet", "ronces", "sable", "sablier", "sagittaire", "saturne", "scorpion", "serrelivres", "siamois", "sisyphe", "soleil", "souffle", "spinner", "spirale", "strike", "tableau", "tapisvert", "taureau", "ticket", "tilt", "tirelire", "tourelle", "tracante", "trefle4", "uranus", "vapeur", "venin", "vent9", "venus", "verseau", "vierge", "yahtzee", "zero"];
+
+/* ===== v21.8 · les premières images HD (Gemini) dans l'écran de jeu =====
+   1. la salle derrière la table (#bgroom) : visible en manche (combat, horde), cachée ailleurs ;
+   2. les icônes de sorts et d'objets : le SVG est remplacé par le médaillon peint, là où on le voit en jeu
+      (cartes de la main, barre des sorts, choix des sorts, marché noir, panneau de gauche). */
+(function () {
+  const bgfx = document.getElementById('bgfx');
+  if (bgfx && !document.getElementById('bgroom')) { const d = document.createElement('div'); d.id = 'bgroom'; d.setAttribute('aria-hidden', 'true'); bgfx.after(d); }
+  if (typeof BG === 'object' && BG && typeof BG.setMode === 'function') {
+    const _sm = BG.setMode;
+    BG.setMode = function (m) { document.body.classList.toggle('bg-room', m === 'combat' || m === 'inf'); return _sm.apply(BG, arguments); };
+    if (BG.mode) document.body.classList.toggle('bg-room', BG.mode === 'combat' || BG.mode === 'inf');
+  }
+  // symbole du jeu → médaillon peint (les sorts de base ont leurs logos « sp_… », les objets du marché gardent leur nom)
+  const ART_IC = { sp_bomb: 'dynamite', sp_gel: 'givre', sp_tornade: 'tornade', sp_orage: 'foudre', sp_bouclier: 'rempart', sp_surchauffe: 'surchauffe', dynamite: 'dynamite', givre: 'givre', tornade: 'tornade', surchauffe: 'surchauffe', relance: 'relance', heart: 'heart', croupier: 'croupier' };
+  for (const id of ['trounoir', 'laser', 'artifice', 'temps', 'ctrlz', 'pileface', 'ecranbleu', 'erreur404', 'lag', 'bigbang', 'deluge', 'salve', 'etoiles', 'colere', 'bowling', 'multibilles', 'forteresse', 'coupbol', 'pacteS', 'jackpotS', 'echoS']) ART_IC['sp_' + id] = id;
+  function artIcoDom(root) {
+    if (!root || !root.querySelectorAll) return;
+    root.querySelectorAll('svg.ico > use').forEach(u => {
+      const id = (u.getAttribute('href') || '').replace('#i-', '');
+      const f = ART_IC[id]; if (!f) return;
+      const s = u.parentNode, im = document.createElement('img');
+      im.className = (s.getAttribute('class') || 'ico') + ' ico-art'; im.src = 'decors/ui/ic/' + f + '.webp'; im.alt = ''; im.draggable = false;
+      s.replaceWith(im);
+    });
+  }
+  window.artIcoDom = artIcoDom;
+  for (const f of new Set(Object.values(ART_IC))) { const i = new Image(); i.src = 'decors/ui/ic/' + f + '.webp'; }
+  const mo = new MutationObserver(ms => {
+    for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('svg.ico') || n.querySelector('svg.ico'))) { artIcoDom(n.matches('svg.ico') ? n.parentNode : n); }
+  });
+  for (const sel of ['#abs', '#spick', '#market', '#lp']) { const el = document.querySelector(sel); if (el) { artIcoDom(el); mo.observe(el, { childList: true, subtree: true }); } }
+})();
+/* les jetons : la gravure peinte (crème sur transparent) remplace le symbole dessiné, au centre du jeton.
+   Le bord, la couleur de famille et la rareté restent dessinés au code. JET_ART est rempli à la construction. */
+(function () {
+  if (typeof JET_ART === 'undefined' || !JET_ART.length) return;
+  const SET = new Set(JET_ART), src = id => 'decors/jet/' + id + '.webp';
+  const _isv = iconSVG;
+  iconSVG = (id, cls) => SET.has(id) ? `<img class="ico jet-art${cls ? ' ' + cls : ''}" src="${src(id)}" alt="" draggable="false">` : _isv(id, cls);
+  const IMG = {};
+  for (const id of SET) {
+    const im = new Image();
+    im.onload = () => { IMG[id] = im; if (typeof CHIPC === 'object' && CHIPC) for (const k in CHIPC) if (k.startsWith(id + '|')) delete CHIPC[k]; };
+    im.src = src(id);
+  }
+  const _di = drawIcon;
+  drawIcon = function (g, id, cx, cy, size, color) {
+    const im = IMG[id];
+    if (im) { const s = size * 1.08; g.drawImage(im, cx - s / 2, cy - s / 2, s, s); return; }
+    return _di.apply(this, arguments);
+  };
+})();
+
 const CV_ANIMS = {};
 /* ===== v21.6 (aperçu) · les conversations à choix, façon I'm Not a Human, et le combat final =====
    Le joueur ne parle jamais : on choisit des intentions (un sujet, un geste, le silence, montrer, regarder).
@@ -45249,7 +45325,7 @@ if (typeof openMini === 'function') {
   };
 }
 
-const HAND_IMGS = {"l": {}, "r": {}};
+const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1}, "r": {"idle": 1, "press": 1, "lift": 1}};
 /* v21.6 aperçu · les mains du joueur en vraies images (Gemini), avec leurs animations image par image.
    HAND_IMGS est rempli à la construction avec ce qui existe dans decors/hands/ ; sans images, on garde les mains dessinées.
    - au repos : hand_<l|r>_idle ; posée à plat (classe .grab du jeu) : hand_<l|r>_press ;
