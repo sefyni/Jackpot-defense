@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.3 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.4 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.4 aperçu — LE JETON DANS LA MAIN
+- Le jeton du joueur est peint (Gemini) : rouge, inserts crème, petite étoile dorée.
+- La main gauche le tient entre le pouce et l'index. Au repos, elle le fait rouler et le retourne.
+- Avant de pousser une carte, elle le pose sur la table (le jeton posé est peint aussi), puis le
+  reprend en rentrant.
+- Le petit liseré violet autour des mains a disparu.
+- La version normale ne change pas.
 
 Nouveautés de la v22.3 aperçu — GANTS NOIRS ET GLISSÉ DE CARTE
 - Le joueur porte des gants de cuir noir (reflets sur les phalanges, coutures sur le dos de la main).
@@ -71,7 +79,7 @@ Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
   petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
 
-Nouveautés de la v22.3 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v22.4 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.

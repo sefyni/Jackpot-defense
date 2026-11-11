@@ -7377,7 +7377,7 @@ body:not(.th-orient) .neon{animation:none!important}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.3 aperçu</p>
+  <p class="proto">Sefy Industries · v22.4 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26589,7 +26589,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.3 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.4 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43198,14 +43198,16 @@ if (typeof openMini === 'function') {
   };
 }
 
-const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
+const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
 /* v22.3 aperçu · les mains du joueur en vraies images (Gemini) : gants de cuir noir, et le geste de la carte qu'on fait glisser.
    HAND_IMGS est rempli à la construction avec ce qui existe dans decors/hands/ ; sans images, on garde les mains dessinées.
    Chaque main est un canvas : les images sont préchargées, on les dessine sans clignotement.
    Les états viennent du jeu (ses gestes ne changent pas, seules les images suivent) :
    - la main se lève vers la carte (z-index 10) : « rise » ; elle revient se poser : « rise » à l'envers ;
    - elle prend la carte (classe .grab) : deux doigts se posent (« down »), puis elle la pousse vers la pile (« drag ») ;
-   - elle la lâche : « release » (elle se relève), puis « rise » à l'envers en rentrant. */
+   - elle la lâche : « release » (elle se relève), puis « rise » à l'envers en rentrant.
+   Le jeton de la main gauche est peint lui aussi : elle le tient entre le pouce et l'index, le pose sur la table avant de
+   pousser une carte (le jeton posé est l'image decors/hands/chip.webp), le reprend (« pick ») et, au repos, le retourne (« flip »). */
 (function () {
   if (typeof handSVG !== 'function' || typeof HAND_IMGS === 'undefined' || !HAND_IMGS.l || !HAND_IMGS.r || !HAND_IMGS.l.idle || !HAND_IMGS.r.idle) return;
   const src = (side, k, i) => `decors/hands/hand_${side}_${k}${i ? '_' + String(i).padStart(2, '0') : ''}.webp`;
@@ -43214,10 +43216,17 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
   for (const side of ['l', 'r']) {
     const H = HAND_IMGS[side];
     for (const k of ['idle', 'press', 'lift']) if (H[k]) IM[side][k] = [load(src(side, k))];
+    if (side === 'l' && H.anims && H.anims.pick) IM.l.hold = [load(src('l', 'hold'))];
     for (const k in (H.anims || {})) { const a = []; for (let i = 1; i <= H.anims[k].n; i++) a.push(load(src(side, k, i))); IM[side][k] = a; }
     if (IM[side].drag) IM[side].dragged = [IM[side].drag[IM[side].drag.length - 1]];   // la carte poussée : dernière image du glissé
   }
-  const W = 286, Hh = 480;
+  const W = 286, Hh = 480, CHIP = !!IM.l.hold;
+  if (CHIP) {
+    const st = document.createElement('style');
+    st.textContent = '#abs .pc-hand .pc-chipw{visibility:hidden!important}#abs .pc-hand.l .pc-chip{left:auto!important;right:0!important;top:25%!important;width:28%!important;margin:-14% 0 0 0!important;transform:none!important;animation:none!important}#abs .pc-tchip{background:url(decors/hands/chip.webp) 50% 50%/contain no-repeat!important;box-shadow:0 2px 3px rgba(0,0,0,.55)!important;border-radius:50%}';
+    document.head.appendChild(st);
+  }
+  const restOf = st => st.side === 'l' && CHIP && !st.h.classList.contains('drop') ? 'hold' : 'idle';
   handSVG = function (side) {
     return `<canvas class="hand-img" data-side="${side}" width="${W}" height="${Hh}" aria-hidden="true"></canvas>` + (side === 'l' ? '<i class="pc-chipw" aria-hidden="true"><i class="pc-chip"></i></i>' : '');
   };
@@ -43253,13 +43262,18 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
   }
   function stateOf(h) { return h.classList.contains('grab') ? 'grab' : h.style.zIndex === '10' ? 'up' : 'idle'; }
   function onChange(st) {
-    const to = stateOf(st.h), from = st.state; if (to === from) return;
+    const to = stateOf(st.h), from = st.state, rest = restOf(st);
+    if (to === from) {   // seul le jeton a changé (posé ou repris), main au repos
+      if (st.side === 'l' && CHIP && to === 'idle' && rest !== st.rest && !st.anim) play(st, [['pick', rest === 'idle']], rest);
+      return;
+    }
     st.state = to;
     const midDown = st.anim && st.cur === 'down';
-    if (to === 'grab') play(st, from === 'idle' ? [['rise', false, 70], ['down', false], ['drag', false]] : [['down', false], ['drag', false]], 'dragged');
-    else if (to === 'up') play(st, from === 'grab' ? [midDown ? ['down', true] : ['release', false]] : [['rise', false]], 'lift');
-    else if (from === 'grab') play(st, [midDown ? ['down', true] : ['release', false], ['rise', true]], 'idle');
-    else play(st, [['rise', true]], 'idle');
+    const drop = st.rest === 'hold' ? [['pick', true, 60]] : [];   // elle lâche d'abord son jeton s'il est encore en main
+    if (to === 'grab') play(st, from === 'idle' ? drop.concat([['rise', false, 70], ['down', false], ['drag', false]]) : [['down', false], ['drag', false]], 'dragged');
+    else if (to === 'up') play(st, from === 'grab' ? [midDown ? ['down', true] : ['release', false]] : drop.concat([['rise', false]]), 'lift');
+    else if (from === 'grab') play(st, [midDown ? ['down', true] : ['release', false], ['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
+    else play(st, [['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
   }
   const mo = new MutationObserver(ms => { for (const m of ms) { const st = S[m.target.classList.contains('l') ? 'l' : 'r']; if (st && st.h === m.target) onChange(st); } });
   function watch() {
@@ -43269,12 +43283,16 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
       if (!S[side] || S[side].cv !== cv) {
         S[side] = { side, h, cv, state: stateOf(h), anim: null, shown: null };
         mo.observe(h, { attributes: true, attributeFilter: ['class', 'style'] });
-        const st = S[side], first = () => { if (!st.shown) still(st, 'idle'); };
+        const st = S[side], first = () => { if (!st.shown) still(st, restOf(st)); };
         const im0 = IM[side].idle[0]; if (im0.complete) first(); else im0.addEventListener('load', first, { once: true });
       }
     }
   }
   setInterval(watch, 800);
+  setInterval(() => {
+    const st = S.l; if (!CHIP || !st || st.anim || st.state !== 'idle' || st.rest !== 'hold' || document.hidden) return;
+    if (Math.random() < .42) play(st, [['flip', false]], 'hold');
+  }, 2600);
 })();
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
