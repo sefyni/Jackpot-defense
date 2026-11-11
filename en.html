@@ -7377,7 +7377,7 @@ body:not(.th-orient) .neon{animation:none!important}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.2 aperçu</p>
+  <p class="proto">Sefy Industries · v22.3 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26589,7 +26589,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.2 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.3 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43198,16 +43198,14 @@ if (typeof openMini === 'function') {
   };
 }
 
-const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 30, "loop": false}, "down": {"n": 5, "fps": 40, "loop": false}, "tap": {"n": 21, "fps": 26, "loop": false}, "breath": {"n": 10, "fps": 9, "loop": false}, "ring": {"n": 33, "fps": 13, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 30, "loop": false}, "down": {"n": 5, "fps": 40, "loop": false}, "tap": {"n": 21, "fps": 26, "loop": false}, "breath": {"n": 10, "fps": 9, "loop": false}}}};
-/* v22.2 aperçu · les mains du joueur en vraies images (Gemini), animées image par image.
+const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
+/* v22.3 aperçu · les mains du joueur en vraies images (Gemini) : gants de cuir noir, et le geste de la carte qu'on fait glisser.
    HAND_IMGS est rempli à la construction avec ce qui existe dans decors/hands/ ; sans images, on garde les mains dessinées.
-   Chaque main est un canvas : les images sont préchargées et décodées, on les dessine sans clignotement.
-   Les états viennent du jeu (rien n'est changé dans ses gestes) :
-   - main levée (le jeu la passe au-dessus des cartes, z-index 10) : « rise » à l'endroit ; elle se repose : « rise » à l'envers ;
-   - posée à plat sur une carte (classe .grab) : « down » ; elle la lâche : « down » à l'envers ;
-   - elle pianote (classe .drum, main droite) : « tap », de l'auriculaire à l'index ;
-   - au repos : elle respire (« breath », aller-retour lent), la gauche tourne parfois la bague d'Élise (« ring »)
-     ou pianote à son tour (« tap »). */
+   Chaque main est un canvas : les images sont préchargées, on les dessine sans clignotement.
+   Les états viennent du jeu (ses gestes ne changent pas, seules les images suivent) :
+   - la main se lève vers la carte (z-index 10) : « rise » ; elle revient se poser : « rise » à l'envers ;
+   - elle prend la carte (classe .grab) : deux doigts se posent (« down »), puis elle la pousse vers la pile (« drag ») ;
+   - elle la lâche : « release » (elle se relève), puis « rise » à l'envers en rentrant. */
 (function () {
   if (typeof handSVG !== 'function' || typeof HAND_IMGS === 'undefined' || !HAND_IMGS.l || !HAND_IMGS.r || !HAND_IMGS.l.idle || !HAND_IMGS.r.idle) return;
   const src = (side, k, i) => `decors/hands/hand_${side}_${k}${i ? '_' + String(i).padStart(2, '0') : ''}.webp`;
@@ -43217,23 +43215,23 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
     const H = HAND_IMGS[side];
     for (const k of ['idle', 'press', 'lift']) if (H[k]) IM[side][k] = [load(src(side, k))];
     for (const k in (H.anims || {})) { const a = []; for (let i = 1; i <= H.anims[k].n; i++) a.push(load(src(side, k, i))); IM[side][k] = a; }
+    if (IM[side].drag) IM[side].dragged = [IM[side].drag[IM[side].drag.length - 1]];   // la carte poussée : dernière image du glissé
   }
   const W = 286, Hh = 480;
   handSVG = function (side) {
     return `<canvas class="hand-img" data-side="${side}" width="${W}" height="${Hh}" aria-hidden="true"></canvas>` + (side === 'l' ? '<i class="pc-chipw" aria-hidden="true"><i class="pc-chip"></i></i>' : '');
   };
-  const S = { l: null, r: null };   // l'état de chaque main : canvas, état du jeu, animation en cours
+  const S = { l: null, r: null };
   function draw(st, im) {
     if (!im || !im.complete || !im.naturalWidth) return false;
     const g = st.cv.getContext('2d'); g.clearRect(0, 0, W, Hh); g.drawImage(im, 0, 0, W, Hh); st.shown = im; return true;
   }
   function still(st, k) { st.anim = null; st.rest = k; const a = IM[st.side][k] || IM[st.side].idle; draw(st, a[0]); }
-  // anime : une suite d'images (nom, sens), puis une image fixe ; « chain » enchaîne une autre animation
-  function play(st, k, rev, then, opt) {
-    const a = IM[st.side][k], A = HAND_IMGS[st.side].anims && HAND_IMGS[st.side].anims[k];
-    if (!a || !A || (typeof G === 'object' && G && G.reduced)) { if (opt && opt.chain) return play(st, opt.chain[0], opt.chain[1], then); still(st, then); return false; }
-    st.anim = { a, i: 0, rev: !!rev, fps: (opt && opt.fps) || A.fps || 12, t0: performance.now(), then, chain: opt && opt.chain, idle: !!(opt && opt.idle), pong: opt && opt.pong };
-    tick(); return true;
+  // une suite d'étapes [nom, à l'envers, images/s], puis une image fixe
+  function play(st, steps, then) {
+    steps = steps.filter(s => IM[st.side][s[0]] && HAND_IMGS[st.side].anims && HAND_IMGS[st.side].anims[s[0]]);
+    if (!steps.length || (typeof G === 'object' && G && G.reduced)) { still(st, then); return; }
+    st.anim = { steps, si: 0, t0: performance.now(), then }; tick();
   }
   let raf = 0;
   function tick() {
@@ -43242,35 +43240,26 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
       raf = 0; let busy = false;
       for (const side of ['l', 'r']) {
         const st = S[side]; if (!st || !st.anim) continue;
-        const A = st.anim, n = A.a.length, f = Math.floor((now - A.t0) * A.fps / 1000);
+        const A = st.anim, [k, rev, fps0] = A.steps[A.si], a = IM[side][k], n = a.length;
+        const fps = fps0 || HAND_IMGS[side].anims[k].fps || 24, f = Math.floor((now - A.t0) * fps / 1000);
         if (f >= n) {
-          if (A.pong) { st.anim = { a: A.a, i: 0, rev: !A.rev, fps: A.fps, t0: now, then: A.then, idle: A.idle }; busy = true; continue; }
-          if (A.chain) { const c = A.chain; st.anim = null; play(st, c[0], c[1], A.then); busy = true; continue; }
+          if (A.si + 1 < A.steps.length) { A.si++; A.t0 = now; busy = true; continue; }
           still(st, A.then); continue;
         }
-        const im = A.a[A.rev ? n - 1 - f : f]; if (im !== st.shown) draw(st, im); busy = true;
+        st.cur = k; const im = a[rev ? n - 1 - f : f]; if (im !== st.shown) draw(st, im); busy = true;
       }
       if (busy) tick();
     });
   }
-  // l'état que le jeu donne à la main → la transition qui va avec
-  function stateOf(h) { return h.classList.contains('grab') ? 'grab' : h.classList.contains('drum') ? 'drum' : h.style.zIndex === '10' ? 'up' : 'idle'; }
+  function stateOf(h) { return h.classList.contains('grab') ? 'grab' : h.style.zIndex === '10' ? 'up' : 'idle'; }
   function onChange(st) {
     const to = stateOf(st.h), from = st.state; if (to === from) return;
-    st.state = to; st.lastAct = performance.now();
-    if (to === 'up') {
-      if (from === 'grab') play(st, 'down', true, 'lift');
-      else play(st, 'rise', false, 'lift');
-    } else if (to === 'grab') {
-      if (from === 'idle' || from === 'drum') play(st, 'rise', false, 'press', { chain: ['down', false], fps: 60 });
-      else play(st, 'down', false, 'press');
-    } else if (to === 'drum') {
-      if (!play(st, 'tap', false, 'idle')) still(st, 'press');
-    } else { // retour au repos
-      if (from === 'grab') play(st, 'down', true, 'idle', { chain: ['rise', true] });
-      else if (from === 'up') play(st, 'rise', true, 'idle');
-      else if (!st.anim) still(st, 'idle');
-    }
+    st.state = to;
+    const midDown = st.anim && st.cur === 'down';
+    if (to === 'grab') play(st, from === 'idle' ? [['rise', false, 70], ['down', false], ['drag', false]] : [['down', false], ['drag', false]], 'dragged');
+    else if (to === 'up') play(st, from === 'grab' ? [midDown ? ['down', true] : ['release', false]] : [['rise', false]], 'lift');
+    else if (from === 'grab') play(st, [midDown ? ['down', true] : ['release', false], ['rise', true]], 'idle');
+    else play(st, [['rise', true]], 'idle');
   }
   const mo = new MutationObserver(ms => { for (const m of ms) { const st = S[m.target.classList.contains('l') ? 'l' : 'r']; if (st && st.h === m.target) onChange(st); } });
   function watch() {
@@ -43278,7 +43267,7 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
       const h = document.querySelector('.pc-hand.' + side), cv = h && h.querySelector('canvas.hand-img');
       if (!cv) continue;
       if (!S[side] || S[side].cv !== cv) {
-        S[side] = { side, h, cv, state: stateOf(h), anim: null, shown: null, lastAct: performance.now() };
+        S[side] = { side, h, cv, state: stateOf(h), anim: null, shown: null };
         mo.observe(h, { attributes: true, attributeFilter: ['class', 'style'] });
         const st = S[side], first = () => { if (!st.shown) still(st, 'idle'); };
         const im0 = IM[side].idle[0]; if (im0.complete) first(); else im0.addEventListener('load', first, { once: true });
@@ -43286,19 +43275,6 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
     }
   }
   setInterval(watch, 800);
-  // au repos : la respiration, et les tics (la bague d'Élise, la gauche qui pianote)
-  setInterval(() => {
-    if (document.hidden) return;
-    const now = performance.now();
-    for (const side of ['l', 'r']) {
-      const st = S[side]; if (!st || st.anim || st.state !== 'idle' || now - st.lastAct < 1800) continue;
-      const h = st.h; if (h.classList.contains('drop')) continue;
-      const r = Math.random();
-      if (side === 'l' && r < .09) { play(st, 'ring', false, 'idle', { idle: true }); st.lastAct = now; }
-      else if (side === 'l' && r < .14) { play(st, 'tap', false, 'idle', { idle: true }); st.lastAct = now; }
-      else if (r < .5) { play(st, 'breath', false, 'idle', { idle: true, pong: false, chain: ['breath', true] }); }
-    }
-  }, 1300);
 })();
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);

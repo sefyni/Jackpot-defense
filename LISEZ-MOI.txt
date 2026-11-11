@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.2 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.3 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.3 aperçu — GANTS NOIRS ET GLISSÉ DE CARTE
+- Le joueur porte des gants de cuir noir (reflets sur les phalanges, coutures sur le dos de la main).
+  La main gauche garde l'alliance et la bague d'Élise, par-dessus le gant.
+- Nouveau geste quand tu joues une carte : la main se lève, pose deux doigts sur la carte, la fait
+  glisser jusqu'à la pile en se penchant, puis la lâche et rentre. Même chose pour le balayage.
+- Retirés : pianoter, respirer, la bague qu'on tourne.
+- La version normale ne change pas.
 
 Nouveautés de la v22.2 aperçu — LES MAINS ANIMÉES
 - Les mains du joueur bougent pour de vrai : 121 images peintes (Gemini) avec des intermédiaires
@@ -63,7 +71,7 @@ Nouveautés de la v21.8 — LES PREMIÈRES IMAGES HD
 - (aperçu) Tes mains en vraies images : la gauche avec l'alliance et la petite bague d'Élise au
   petit doigt, la droite nue, toutes deux dans la manche du manteau gris.
 
-Nouveautés de la v22.2 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
+Nouveautés de la v22.3 aperçu — LES PROTOTYPES DU CHANTIER (version de test, pas pour Steam)
 - C'est la v21.5, plus les premiers prototypes du grand chantier. Les images sont encore les
   anciennes : les poses qui n'existent pas encore reprennent la plus proche.
 - Pour les essayer : dans le couloir, Échap (ou MENU) > PROTOTYPES.
