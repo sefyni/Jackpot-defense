@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.7 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.8 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,14 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.8 aperçu — LES CARTES DE BASE PEINTES
+- Le Sept de Pique (Tireur), le Deux de Carreau (Coureur), le Dix de Trèfle blindé, le Cinq de
+  Cœur (Soigneur), le Neuf de Pique tricheur et la Paire de Carreaux sont peints : carton crème,
+  rang et couleur dans les coins, emblème gravé au centre (revolver, chaussure ailée, bouclier,
+  fiole, carte dans la manche, deux cartes).
+- Leurs liserés bleu vif et rose sont adoucis (comme ceux du Huit de Trèfle et du Petit Carreau).
+- La bille « glitch » : bandes sang-de-bœuf et vert-de-gris au lieu du vert et du rose néon.
 
 Nouveautés de la v22.7 aperçu — PLUS DE NÉON EN MANCHE
 - La carte Glitch garde ses à-coups et son décalage de couleurs, mais en sang-de-bœuf et

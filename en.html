@@ -7443,7 +7443,7 @@ body:not(.th-orient) .an-plate.glitch b{text-shadow:2px 0 #b04848,-2px 0 #4a9a9a
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.7 aperçu</p>
+  <p class="proto">Sefy Industries · v22.8 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -11789,7 +11789,7 @@ function drawBallSkin(g, x, y, R, id, spin, t, powers) {
     case 'cracks': g.strokeStyle = 'rgba(255,220,120,.9)'; g.lineWidth = R * .1; g.beginPath(); g.moveTo(x - R * .6 + sx * .3, y - R * .2); g.lineTo(x, y + R * .1); g.lineTo(x + R * .5, y - R * .4 + sy * .3); g.moveTo(x, y + R * .1); g.lineTo(x + R * .1, y + R * .7); g.stroke(); break;
     case 'frost': g.strokeStyle = 'rgba(255,255,255,.7)'; g.lineWidth = R * .08; for (let k = 0; k < 3; k++) { const a = spin + k * 2.1; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * R, y + Math.sin(a) * R); g.stroke(); } break;
     case 'chip': g.strokeStyle = '#fff3e6'; g.lineWidth = R * .22; g.setLineDash([R * .32, R * .32]); g.beginPath(); g.arc(x, y, R * .8, spin, spin + TAU); g.stroke(); g.setLineDash([]); break;
-    case 'glitch': { const off = Math.sin(t * 37) * R * .25; g.fillStyle = 'rgba(57,255,136,.55)'; g.fillRect(x - R + off, y - R * .3, R * 2, R * .25); g.fillStyle = 'rgba(255,61,240,.5)'; g.fillRect(x - R - off, y + R * .15, R * 2, R * .2); break; }
+    case 'glitch': { const off = Math.sin(t * 37) * R * .25; g.fillStyle = 'rgba(74,154,154,.6)'; g.fillRect(x - R + off, y - R * .3, R * 2, R * .25); g.fillStyle = 'rgba(176,72,72,.55)'; g.fillRect(x - R - off, y + R * .15, R * 2, R * .2); break; }
     case 'craters': g.fillStyle = 'rgba(74,70,62,.45)'; for (const [a, r2, rs] of [[spin, .45, .22], [spin + 2, .5, .16], [spin + 4, .3, .12]]) { g.beginPath(); g.arc(x + Math.cos(a) * R * r2, y + Math.sin(a) * R * r2 * .7, R * rs, 0, TAU); g.fill(); } break;
     case 'crack1': g.strokeStyle = 'rgba(90,61,16,.85)'; g.lineWidth = R * .1; g.beginPath(); g.moveTo(x - R * .7, y - R * .3); g.lineTo(x - R * .1, y + R * .05); g.lineTo(x + R * .3, y - R * .2); g.stroke(); break;
     case 'rainbow': for (let k = 0; k < 6; k++) { g.fillStyle = ['#ff5c6c', '#ff8a3d', '#ffcc4d', '#5fd68a', '#4aa8ff', '#a98bff'][k]; g.globalAlpha = .55; g.fillRect(x - R + ((k * R / 3 + spin * 3) % (R * 2)), y - R, R / 3, R * 2); } g.globalAlpha = 1; break;
@@ -12860,15 +12860,15 @@ const ELITES = {
 };
 
 const ENEMIES = {
-  coureur: { name: 'Two of Diamonds', role: 'Runner', suit: 'd', rank: '2', hp: 10, spd: 17, dmg: 5, atk: .8, gold: 1, r: 5, tp: .55, ai: 'melee', rim: '#ff5c6c', from: 1, w: 3, info: 'Small fast card that rushes your base.' },
-  soldat: { name: 'Eight of Clubs', role: 'Soldier', suit: 'c', rank: '8', hp: 24, spd: 9.5, dmg: 9, atk: 1, gold: 2, r: 6, tp: 1, ai: 'melee', rim: '#e8e1f2', from: 1, w: 4, info: 'The basic card. Sturdy, in no hurry.' },
-  tireur: { name: 'Seven of Spades', role: 'Shooter', suit: 's', rank: '7', hp: 18, spd: 9, dmg: 8, sd: 6, atk: 3, gold: 3, r: 6, tp: 1.5, ai: 'shooter', stop: 76, rim: '#4aa8ff', from: 2, w: 2.2, info: 'Stays far away and fires projectiles. Block them with the flipper, or parry them.' },
-  paire: { name: 'Pair of Diamonds', role: 'Pair', suit: 'd', rank: '2', hp: 26, spd: 9, dmg: 8, atk: 1, gold: 3, r: 7, tp: 1.6, ai: 'melee', split: 2, rim: '#ff9a3d', from: 3, w: 1.6, info: 'Splits into 2 small fast Diamonds when it dies.' },
-  mini: { name: 'Little Diamond', role: 'Shard', suit: 'd', rank: 'A', hp: 6, spd: 20, dmg: 4, atk: .7, gold: .5, r: 4, tp: 0, ai: 'melee', rim: '#ff9a3d', info: 'Fast shard dropped by Pairs and the Jack.' },
-  blinde: { name: 'Armored Ten of Clubs', role: 'Armored', suit: 'c', rank: '10', hp: 32, shield: 30, spd: 6.5, dmg: 12, atk: 1.1, gold: 4, r: 7, tp: 2.1, ai: 'melee', rim: '#9fb4d8', from: 4, w: 1.4, info: 'Its shield absorbs your shots from the front. Fire, lightning and explosions go through.' },
-  soigneur: { name: 'Five of Hearts', role: 'Healer', suit: 'h', rank: '5', hp: 20, spd: 7.5, dmg: 6, atk: 1, gold: 4, r: 6, tp: 2, ai: 'healer', stop: 54, rim: '#ff7eb6', from: 6, w: 1, info: 'Heals the cards around it. Send your BALL at it: once marked, your base targets it first.' },
+  coureur: { name: 'Two of Diamonds', role: 'Runner', suit: 'd', rank: '2', hp: 10, spd: 17, dmg: 5, atk: .8, gold: 1, r: 5, tp: .55, ai: 'melee', rim: '#db878f', from: 1, w: 3, info: 'Small fast card that rushes your base.' },
+  soldat: { name: 'Eight of Clubs', role: 'Soldier', suit: 'c', rank: '8', hp: 24, spd: 9.5, dmg: 9, atk: 1, gold: 2, r: 6, tp: 1, ai: 'melee', rim: '#cac7d0', from: 1, w: 4, info: 'The basic card. Sturdy, in no hurry.' },
+  tireur: { name: 'Seven of Spades', role: 'Shooter', suit: 's', rank: '7', hp: 18, spd: 9, dmg: 8, sd: 6, atk: 3, gold: 3, r: 6, tp: 1.5, ai: 'shooter', stop: 76, rim: '#7daedb', from: 2, w: 2.2, info: 'Stays far away and fires projectiles. Block them with the flipper, or parry them.' },
+  paire: { name: 'Pair of Diamonds', role: 'Pair', suit: 'd', rank: '2', hp: 26, spd: 9, dmg: 8, atk: 1, gold: 3, r: 7, tp: 1.6, ai: 'melee', split: 2, rim: '#dba777', from: 3, w: 1.6, info: 'Splits into 2 small fast Diamonds when it dies.' },
+  mini: { name: 'Little Diamond', role: 'Shard', suit: 'd', rank: 'A', hp: 6, spd: 20, dmg: 4, atk: .7, gold: .5, r: 4, tp: 0, ai: 'melee', rim: '#dba777', info: 'Fast shard dropped by Pairs and the Jack.' },
+  blinde: { name: 'Armored Ten of Clubs', role: 'Armored', suit: 'c', rank: '10', hp: 32, shield: 30, spd: 6.5, dmg: 12, atk: 1.1, gold: 4, r: 7, tp: 2.1, ai: 'melee', rim: '#9ca7b9', from: 4, w: 1.4, info: 'Its shield absorbs your shots from the front. Fire, lightning and explosions go through.' },
+  soigneur: { name: 'Five of Hearts', role: 'Healer', suit: 'h', rank: '5', hp: 20, spd: 7.5, dmg: 6, atk: 1, gold: 4, r: 6, tp: 2, ai: 'healer', stop: 54, rim: '#db98b5', from: 6, w: 1, info: 'Heals the cards around it. Send your BALL at it: once marked, your base targets it first.' },
   sorcier: { name: 'Arcane', role: 'Sorcerer', suit: 'x', rank: '✦', hp: 30, spd: 8, dmg: 6, atk: 1, gold: 5, r: 6, tp: 2.5, ai: 'caster', stop: 61, rim: '#ae9fdb', from: 7, w: .8, info: "Casts spells on you. Kill it, or hit it with your BALL while it's casting to cut the spell." },
-  tricheur: { name: 'Cheating Nine of Spades', role: 'Cheater', suit: 's', rank: '9', hp: 20, spd: 9, dmg: 8, atk: .9, gold: 4, r: 6, tp: 1.7, ai: 'melee', blink: true, rim: '#5fd4c4', from: 12, w: 1, info: "Teleports straight toward your base." },
+  tricheur: { name: 'Cheating Nine of Spades', role: 'Cheater', suit: 's', rank: '9', hp: 20, spd: 9, dmg: 8, atk: .9, gold: 4, r: 6, tp: 1.7, ai: 'melee', blink: true, rim: '#79b6ae', from: 12, w: 1, info: "Teleports straight toward your base." },
   leurre: { name: 'Decoy', role: 'Decoy', suit: 'x', rank: '?', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', rim: '#dbc07f', info: 'Fake card placed by the Decoy spell: it draws your shots.' },
   voleur: { name: 'Pickpocket', role: 'Thief', suit: 'x', rank: '$', hp: 40, spd: 13, dmg: 0, atk: 9, gold: 12, r: 6, tp: 0, ai: 'thief', rim: '#98db8e', info: 'Steals one of your chips and circles your base. Take it down to get it back.' },
   garde: { name: 'Jack of Clubs', role: 'Guard', suit: 'c', rank: 'V', hp: 40, spd: 0, dmg: 12, atk: 1, gold: 3, r: 6, tp: 0, ai: 'guard', rim: '#5fd68a', info: 'Guard of the King of Clubs: while it lives, the King is invincible.' },
@@ -26654,7 +26654,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.7 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.8 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35830,7 +35830,7 @@ const ART_IMG = {};
 (function artLoad() {
   if (typeof Image === 'undefined' || typeof CARD_ART === 'undefined') return;
   for (const t in CARD_ART) {
-    if (["a_carreau", "a_coeur", "a_ermite", "a_jugement", "a_lune", "a_mort", "a_pendu", "a_pique", "a_roue", "a_trefle", "aimant", "b_baron", "b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "compteur", "coucou", "coucou_p", "domino", "fantome", "g_flambeur", "g_main", "g_xxl", "garde", "glitch", "glitch_f", "gratter", "leurre", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet", "meche", "miroir", "origami", "parieur", "pk", "sablier", "sangsue", "sorcier", "vigile", "voleur", "zero"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
+    if (["a_carreau", "a_coeur", "a_ermite", "a_jugement", "a_lune", "a_mort", "a_pendu", "a_pique", "a_roue", "a_trefle", "aimant", "b_baron", "b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "blinde", "compteur", "coucou", "coucou_p", "coureur", "domino", "fantome", "g_flambeur", "g_main", "g_xxl", "garde", "glitch", "glitch_f", "gratter", "leurre", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet", "meche", "miroir", "origami", "paire", "parieur", "pk", "sablier", "sangsue", "soigneur", "sorcier", "tireur", "tricheur", "vigile", "voleur", "zero"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
     const im = new Image();
     im.onload = () => { ART_IMG[t] = im; delete SPR[t]; };
     im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(CARD_ART[t]);
