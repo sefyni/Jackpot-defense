@@ -6672,6 +6672,13 @@ body:not(.th-orient) #machine .lever .ball{display:none!important}
 body:not(.th-orient) #machine .lever .lbase{width:21px!important;height:48px!important;left:-1px!important;bottom:0!important;border-radius:0!important;background:url(decors/ui/lever-base.webp) 50% 100%/contain no-repeat!important;box-shadow:none!important}
 /* v22.6 : le tambour des rouleaux peint (émail crème, joncs de laiton) */
 body:not(.th-orient) #machine .reel{background:url(decors/ui/reel.webp) 50% 50%/100% 100% no-repeat #efe2c2!important}
+/* v22.6 : « ATTENTION ! » (un Géant entre en jeu) : plus de bande de chantier jaune et noire, une barrière de casino
+   en laque sang-de-bœuf et noire, bordée de laiton */
+body:not(.th-orient) #banner.gt .b1{color:#e5bb5a!important;text-shadow:0 4px 0 #000,0 0 18px rgba(0,0,0,.6)!important}
+body:not(.th-orient) #banner.gt::before,body:not(.th-orient) #banner.gt::after{height:12px;border-radius:2px;background:repeating-linear-gradient(-45deg,#7e2228 0 10px,#160c0a 10px 20px)!important;box-shadow:inset 0 0 0 1.5px #b88a3a,inset 0 2px 0 rgba(255,230,180,.18),0 3px 0 rgba(0,0,0,.6)!important}
+/* v22.6 : les messages « glitch » (secrets) : décalage de couleurs adouci */
+body:not(.th-orient) #banner.glitch .b1{color:#f3e6c4!important;text-shadow:3px 0 0 #b04848,-3px 0 0 #4a9a9a,0 4px 0 #000!important}
+body:not(.th-orient) .an-plate.glitch b{text-shadow:2px 0 #b04848,-2px 0 #4a9a9a!important}
 
 #abs .pc-hand .hand-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
@@ -7436,7 +7443,7 @@ body:not(.th-orient) #machine .reel{background:url(decors/ui/reel.webp) 50% 50%/
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.6 aperçu</p>
+  <p class="proto">Sefy Industries · v22.7 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26647,7 +26654,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.6 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v22.7 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -31708,9 +31715,9 @@ function corDraw(e, bx, by, top, t) {
     const on = st.off > 0 || st.blip > 0;
     if (on || (C === 'glitch' && rnd() < .04)) {
       const w = e.r * 1.6, h = e.r * 2.2;
-      ctx.strokeStyle = 'rgba(255,61,240,.75)'; ctx.lineWidth = .5; ctx.strokeRect(bx - w / 2 + 1.2, by - h / 2 - .6, w, h);
-      ctx.strokeStyle = 'rgba(57,255,236,.75)'; ctx.strokeRect(bx - w / 2 - 1.2, by - h / 2 + .6, w, h);
-      ctx.fillStyle = 'rgba(57,255,236,.5)';
+      ctx.strokeStyle = 'rgba(176,72,72,.8)'; ctx.lineWidth = .5; ctx.strokeRect(bx - w / 2 + 1.2, by - h / 2 - .6, w, h);
+      ctx.strokeStyle = 'rgba(74,154,154,.8)'; ctx.strokeRect(bx - w / 2 - 1.2, by - h / 2 + .6, w, h);
+      ctx.fillStyle = 'rgba(243,230,196,.45)';
       for (let i = 0; i < 3; i++) { const yy = by - h / 2 + ((t * 37 + i * 13 + e.wob * 7) % h); ctx.fillRect(bx - w / 2 - 2 + ((i * 7) % 3), yy, w * (.4 + .3 * ((i * 5) % 2)), .7); }
     }
   } else if (C === 'parieur' && st.coinT > 0) {
@@ -33262,7 +33269,8 @@ function arcDraw(e, bx, by, top, t) {
     const p = 1 - st.flip / .7, sx = Math.max(.04, Math.abs(Math.cos(p * Math.PI))), sp = spr(e.type).n, D = cardDims(e.d.r), w = D.w * .88, h = D.h * 1.16, sc = e.r / e.d.r;
     ctx.save(); ctx.translate(bx, by); ctx.rotate(e.tilt); ctx.scale(sx * sc, sc);
     if (p < .5) {
-      ctx.fillStyle = '#2a1840'; rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.fill();
+      const bk_ = window.CARDBACK226; if (bk_ && bk_.complete && bk_.naturalWidth) { ctx.save(); rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.clip(); ctx.drawImage(bk_, -w / 2, -h / 2, w, h); ctx.restore(); rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.strokeStyle = '#d9a441'; ctx.lineWidth = .8; ctx.stroke(); ctx.restore(); return; }
+      ctx.fillStyle = '#4a1018'; rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.fill();
       ctx.strokeStyle = '#d9a441'; ctx.lineWidth = .8; ctx.stroke();
       ctx.save(); rrPath(ctx, -w / 2, -h / 2, w, h, D.rad * .6); ctx.clip();
       ctx.fillStyle = '#ffcc4d'; for (let i = 0; i < 9; i++) { const x = ((i * 37) % 11 - 5) * w * .08, y = ((i * 53) % 13 - 6) * h * .07; ctx.beginPath(); ctx.arc(x, y, .5 + (i % 3) * .25, 0, TAU); ctx.fill(); }
@@ -41289,6 +41297,9 @@ const PET_HD = ["boris", "coco", "gaston", "marcel"];
   im.onload = () => { window.FELT226 = im; try { if (typeof buildBG === 'function' && typeof bgC !== 'undefined' && bgC && cv && cv.width) buildBG(); } catch (e) { /* rien */ } };
   im.src = 'decors/ui/felt.webp';
 })();
+
+/* v22.6 · le dos de carte du casino, pour les tarots qui arrivent face cachée sur la table */
+(function () { const im = new Image(); im.decoding = 'async'; im.src = 'decors/ui/card-back.webp'; window.CARDBACK226 = im; })();
 
 const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
 /* v22.3 aperçu · les mains du joueur en vraies images (Gemini) : gants de cuir noir, et le geste de la carte qu'on fait glisser.

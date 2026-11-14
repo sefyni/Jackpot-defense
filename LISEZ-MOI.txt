@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.6 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.7 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.7 aperçu — PLUS DE NÉON EN MANCHE
+- La carte Glitch garde ses à-coups et son décalage de couleurs, mais en sang-de-bœuf et
+  vert-de-gris au lieu du rose et du cyan néon.
+- « ATTENTION ! » (un Géant entre en jeu) : la bande de chantier jaune et noire devient une
+  barrière de casino en laque sang-de-bœuf et noire, bordée de laiton.
+- Les messages « glitch » des secrets : décalage de couleurs adouci.
 
 Nouveautés de la v22.6 aperçu — L'ÉCRAN DE JEU EN HD
 - Tes mains (gants de cuir noir) passent dans la version normale : elles prennent la carte, la font
