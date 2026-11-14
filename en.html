@@ -6700,6 +6700,9 @@ body:not(.th-orient) .mall{display:inline-grid!important;place-items:center!impo
 .om-art .pet-hd{width:100%;height:100%}
 .ct-face .pet-hd{display:block;width:100%;height:100%}
 .lbb-pet .pet-hd{width:32px;height:32px}
+/* v23.2 : le curseur des réglages : la tête de Jack au smiley rouge sang (os crème, cerclé de laiton) à la place du jeton */
+body:not(.th-orient) .oslide input::-webkit-slider-thumb{background:url(decors/ui/jack-smiley.webp) center/100% 100% no-repeat!important;box-shadow:0 2px 0 rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.4)!important}
+body:not(.th-orient) .oslide input::-moz-range-thumb{background:url(decors/ui/jack-smiley.webp) center/100% 100% no-repeat!important;box-shadow:0 2px 0 rgba(0,0,0,.55)!important}
 
 #abs .pc-hand .hand-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
@@ -7464,7 +7467,7 @@ body:not(.th-orient) .mall{display:inline-grid!important;place-items:center!impo
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.1 aperçu</p>
+  <p class="proto">Sefy Industries · v23.2 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26675,7 +26678,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.1 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.2 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;

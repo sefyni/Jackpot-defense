@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v23.1 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v23.2 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,10 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v23.2 aperçu
+- Les curseurs des réglages (volumes…) : le jeton est remplacé par la tête de Jack au smiley
+  rouge sang, sur un disque couleur os cerclé de laiton.
 
 Nouveautés de la v23.1 aperçu
 - La façade du Tapis Rouge (l'écran d'entrée) en meilleure qualité : image agrandie deux fois
