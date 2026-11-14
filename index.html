@@ -6665,7 +6665,7 @@ body:not(.th-orient) #bgfx{filter:sepia(.55) saturate(.95) brightness(.95)}
 body.lpc:not(.th-orient) #lp{--panel:#24150f;--panel-2:#2a1d15;--edge:#8a6430;--edge-hi:#c99a3c;--cream:#f3e6c4;--muted:#d8c49c;--dim:#a88f66;--gold:#e5bb5a;
   background:#3a1712!important;border-right:0!important;box-shadow:4px 0 14px rgba(0,0,0,.45)!important;padding:20px 18px 18px 19px!important;font-family:"Elite20","Special Elite",Georgia,serif}
 body.lpc:not(.th-orient) #lp::after{content:""!important;position:absolute!important;inset:0!important;right:0!important;top:0!important;width:auto!important;height:auto!important;transform:none!important;
-  background:none!important;box-shadow:none!important;border:24px solid transparent;border-image:url(decors/ui-panel.webp) 104 fill / 24px stretch;z-index:-1;pointer-events:none}
+  background:none!important;box-shadow:none!important;border:24px solid transparent;border-image:url(decors/ui/ui-panel.webp) 76 fill / 24px stretch;z-index:-1;pointer-events:none}
 body.lpc:not(.th-orient) #lp *{font-family:"Elite20","Special Elite",Georgia,serif}
 body.lpc:not(.th-orient) #lp :is(.lp-round,.lp-score,.lp-base,.lp-money,.lp-kit){background:linear-gradient(180deg,rgba(34,20,13,.94),rgba(18,10,7,.96))!important;border-radius:5px!important;
   box-shadow:0 0 0 2px #a67c34,0 0 0 4px #140c08,inset 0 0 0 1px rgba(255,225,170,.08),0 6px 10px rgba(0,0,0,.45)!important}
@@ -6707,7 +6707,7 @@ body.lpc:not(.th-orient) #rack .rack-head span:first-child{font:700 16px/1 'Cinz
 body.lpc:not(.th-orient) #rack #r-count{font:700 14px/1 'Cinzel20','Cinzel',Georgia,serif!important;color:#f3e6c4!important;background:rgba(0,0,0,.4)!important;border-radius:3px!important;box-shadow:0 0 0 1px rgba(201,154,60,.5)!important}
 body.lpc:not(.th-orient) #rack #r-hint{font-style:italic!important;color:#d8c49c!important;bottom:46px!important;left:46px!important;right:46px!important}
 body.lpc:not(.th-orient) #rack .rtog{border-radius:4px!important;background:linear-gradient(180deg,#3a281c,#20150f)!important;color:#e5bb5a!important;box-shadow:0 0 0 2px #a67c34,0 0 0 4px #120c09!important}
-body.lpc:not(.th-orient) #rack .rack-slots{background:none!important;box-shadow:none!important;border-radius:0!important;border:34px solid transparent!important;border-image:url(decors/ui-rack.webp) 112 fill / 34px stretch!important;padding:2px 0!important}
+body.lpc:not(.th-orient) #rack .rack-slots{background:none!important;box-shadow:none!important;border-radius:0!important;border:34px solid transparent!important;border-image:url(decors/ui/ui-rack.webp) 76 fill / 34px stretch!important;padding:2px 0!important}
 body.lpc.combat.rkc:not(.th-orient) #rack .rack-slots{border-width:18px!important;border-image-width:18px!important;padding:2px 0!important}
 body.lpc:not(.th-orient) #rack .slot.empty{border:2px dashed rgba(229,187,90,.38)!important;background:rgba(0,0,0,.12)!important;border-radius:6px!important}
 body.lpc:not(.th-orient) #rack .slot.empty .sinfo small{font-style:italic;color:rgba(243,230,196,.62)!important}
@@ -6717,7 +6717,7 @@ body.lpc:not(.th-orient) #rack .slot .sinfo small{color:#e8d8b4!important}
 /* sur téléphone : la même table en bas */
 body:not(.lpc):not(.th-orient) #rack{background:linear-gradient(180deg,#24160f,#140c08)!important;border-top:3px solid #a67c34!important}
 body:not(.lpc):not(.th-orient) #rack .rack-head{font-family:'Cinzel20',Georgia,serif!important;color:#e5bb5a!important}
-body:not(.lpc):not(.th-orient) #rack .rack-slots{background:none!important;box-shadow:none!important;border-radius:0!important;border:14px solid transparent!important;border-image:url(decors/ui-rack.webp) 112 fill / 14px stretch!important}
+body:not(.lpc):not(.th-orient) #rack .rack-slots{background:none!important;box-shadow:none!important;border-radius:0!important;border:14px solid transparent!important;border-image:url(decors/ui/ui-rack-h.webp) 76 fill / 14px stretch!important}
 body:not(.lpc):not(.th-orient) #hud{background:linear-gradient(180deg,#24160f,#140c08)!important;box-shadow:inset 0 -3px 0 #a67c34,0 4px 10px rgba(0,0,0,.45)!important}
 body:not(.lpc):not(.th-orient) #hud *{font-family:"Elite20","Special Elite",Georgia,serif}
 body:not(.lpc):not(.th-orient) #hud b{font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700;font-variant-numeric:lining-nums tabular-nums}
@@ -6970,6 +6970,61 @@ body:not(.th-orient) .neon{animation:none!important}
 .boot.vid .bt-rain2{display:none}
 /* v22.5 · l'affiche du classement dans le couloir : le mot écrit sur le papier part, la plaque « CLASSEMENT » au-dessus reste */
 body:not(.th-orient) .hl-pin b{visibility:hidden!important}
+/* ===== v22.6 · les derniers écrans de l'ancienne DA ===== */
+/* la pastille de combo sous les jetons (« Illusion »…) : une petite plaque de laiton gravée, plus de contour rose */
+body:not(.th-orient) .cpill{background:linear-gradient(180deg,#3a2618,#1f140d)!important;box-shadow:inset 0 0 0 1.5px #b88a3a,inset 0 0 0 3px rgba(18,12,9,.6),0 2px 3px rgba(0,0,0,.45)!important;color:#f3d38a!important;font-family:'Cinzel20','Cinzel',Georgia,serif!important;font-weight:700!important;letter-spacing:.06em!important;border-radius:4px!important;padding:2px 10px!important;text-shadow:0 1px 0 #000!important}
+body:not(.th-orient) .cpill.const{background:linear-gradient(180deg,#2a2f22,#151a12)!important;color:#d9e6c4!important;box-shadow:inset 0 0 0 1.5px #8a9a5a,inset 0 0 0 3px rgba(12,14,9,.6),0 2px 3px rgba(0,0,0,.45)!important}
+/* le score de la manche : un carton de croupier sur bois sombre, cadre de laiton ; points sur feutre vert, mult en laque rouge */
+body:not(.th-orient) .tally{background:radial-gradient(ellipse at center,rgba(12,8,5,.5),rgba(10,6,4,.82))!important}
+body:not(.th-orient) .tl-card{background:linear-gradient(180deg,rgba(40,24,14,.35),rgba(14,8,5,.6)),url(decors/ui/wood.webp) 0 0/340px repeat #2e1f15!important;border-radius:10px!important;box-shadow:inset 0 0 0 2px #e5bb5a,inset 0 0 0 4px #4a2e14,inset 0 0 0 6px #b88a3a,0 14px 34px rgba(0,0,0,.65)!important}
+body:not(.th-orient) .tl-head{font-family:'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.1em!important;color:#f3d38a!important;background:linear-gradient(180deg,#fff0c0,#e5bb5a 48%,#9a6a22);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none!important;filter:drop-shadow(0 2px 0 #2a1608)}
+body:not(.th-orient) .tl-head small{font-family:'Elite20','Courier New',monospace!important;-webkit-text-fill-color:#e9d7b0;color:#e9d7b0!important;letter-spacing:.2em!important}
+body:not(.th-orient) .tl-eq>i{font-family:'Cinzel20','Cinzel',Georgia,serif!important;color:#f3d38a!important}
+body:not(.th-orient) .tl-box{border-radius:6px!important;box-shadow:inset 0 0 0 1.5px #b88a3a,inset 0 0 0 3px rgba(18,12,9,.55),0 3px 0 rgba(0,0,0,.45)!important}
+body:not(.th-orient) .tl-box small{font-family:'Cinzel20','Cinzel',Georgia,serif!important;letter-spacing:.14em!important;color:#f3e6c4!important}
+body:not(.th-orient) .tl-box b{font-family:'Cinzel20','Cinzel',Georgia,serif!important;color:#fff3dc!important;text-shadow:0 2px 0 rgba(0,0,0,.55)!important}
+body:not(.th-orient) .tl-chips{background:radial-gradient(ellipse at 50% 30%,#2f6e4b,#173a27 85%)!important}
+body:not(.th-orient) .tl-mult{background:radial-gradient(ellipse at 50% 30%,#a8303c,#5a1018 85%)!important}
+body:not(.th-orient) .tl-lines li{background:linear-gradient(180deg,#efe2c2,#e2d2ad)!important;border-radius:3px!important;box-shadow:0 1px 0 rgba(0,0,0,.35)!important}
+body:not(.th-orient) .tl-lines li span{color:#2b1a0f!important;font-family:'Elite20','Courier New',monospace!important}
+body:not(.th-orient) .tl-lines li em{font-family:'Cinzel20','Cinzel',Georgia,serif!important}
+body:not(.th-orient) .tl-lines li.c em{color:#1f5a3c!important}
+body:not(.th-orient) .tl-lines li.m em{color:#8f1d2c!important}
+body:not(.th-orient) .tl-res b{font-family:'Cinzel20','Cinzel',Georgia,serif!important;color:#f3d38a!important;background:linear-gradient(180deg,#fff0c0,#e5bb5a 50%,#9a6a22);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none!important;filter:drop-shadow(0 3px 0 #2a1608) drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+body:not(.th-orient) .tl-tot{background:rgba(18,12,9,.6)!important;box-shadow:inset 0 0 0 1.5px rgba(229,187,90,.45)!important;color:#d9c9a3!important;font-family:'Cinzel20','Cinzel',Georgia,serif!important}
+body:not(.th-orient) .tl-tot b{font-family:'Cinzel20','Cinzel',Georgia,serif!important;color:#f3e6c4!important}
+body:not(.th-orient) .tl-skip{font-family:'Elite20','Courier New',monospace!important;color:#d9c9a3!important}
+/* v22.6 : le cadre du kit (familier, boissons) disparaît tant qu'il est vide */
+#lp-kit:empty{visibility:hidden!important}
+/* v22.6 : les compagnons en HD (portrait dans un médaillon de noyer cerclé de laiton, pose d'action, pose contente) */
+.pet-hd{position:relative;display:inline-block;overflow:visible;vertical-align:middle}
+.pet-hd img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none;user-select:none}
+.pet-hd .ph-por{border-radius:50%;object-fit:cover}
+.pet-hd .ph-act,.pet-hd .ph-joy{opacity:0;transform:scale(1.4) translateY(-10%);filter:drop-shadow(0 3px 2px rgba(0,0,0,.5))}
+.pt-pet:is(.pt-sing,.pt-roar,.pt-shoot,.pt-coin) .pet-hd .ph-act{opacity:1}
+.pt-pet:is(.pt-sing,.pt-roar,.pt-shoot,.pt-coin) .pet-hd .ph-por{opacity:0}
+body.pet-joy .pt-pet:not(.pt-sing):not(.pt-roar):not(.pt-shoot):not(.pt-coin) .pet-hd .ph-joy{opacity:1}
+body.pet-joy .pt-pet:not(.pt-sing):not(.pt-roar):not(.pt-shoot):not(.pt-coin) .pet-hd .ph-por{opacity:0}
+.pt-pet.pt-roar .pet-hd{transform:none!important}
+body:not(.th-orient) .pt-pet{background:radial-gradient(circle at 50% 38%,#3a2618,#140c08 72%)!important}
+body:not(.th-orient) .pt-pet:not(.pt-talk){box-shadow:inset 0 0 0 2px #b88a3a,0 3px 0 rgba(0,0,0,.45)!important}
+body:not(.th-orient) .pt-pet.pt-talk{box-shadow:inset 0 0 0 2px #e5bb5a,0 0 0 3px rgba(229,187,90,.3),0 3px 0 rgba(0,0,0,.45)!important}
+body:not(.th-orient) .pt-pet.pt-sing::after{color:#e5bb5a}
+body:not(.th-orient) .pt-pet.pt-sing::before{color:#f3e6c4}
+/* v22.6 : une salle par acte derrière la table (I la salle de base, II salon rouge, III fumoir, IV billard, V galerie, VI salon du Baron) */
+#bgroom[data-act="2"]{background-image:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/rooms/room2.webp)}
+#bgroom[data-act="3"]{background-image:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/rooms/room3.webp)}
+#bgroom[data-act="4"]{background-image:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/rooms/room4.webp)}
+#bgroom[data-act="5"]{background-image:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/rooms/room5.webp)}
+#bgroom[data-act="6"]{background-image:radial-gradient(ellipse 55% 62% at 50% 50%,rgba(8,5,3,.42),rgba(8,5,3,0) 72%),url(decors/ui/rooms/room6.webp)}
+/* v22.6 : le levier de la machine à sous peint (laiton et boule sang-de-bœuf) */
+body:not(.th-orient) #machine .lever .arm{width:24px!important;height:114px!important;left:-4px!important;bottom:24px!important;border-radius:0!important;background:url(decors/ui/lever-arm.webp) 50% 100%/contain no-repeat!important;box-shadow:none!important}
+body:not(.th-orient) #machine .lever .ball{display:none!important}
+body:not(.th-orient) #machine .lever .lbase{width:21px!important;height:48px!important;left:-1px!important;bottom:0!important;border-radius:0!important;background:url(decors/ui/lever-base.webp) 50% 100%/contain no-repeat!important;box-shadow:none!important}
+/* v22.6 : le tambour des rouleaux peint (émail crème, joncs de laiton) */
+body:not(.th-orient) #machine .reel{background:url(decors/ui/reel.webp) 50% 50%/100% 100% no-repeat #efe2c2!important}
+
+#abs .pc-hand .hand-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
 #jdcv,#jdcf,#jdcvp{position:fixed;inset:0;font-family:"Elite20","Special Elite",Georgia,serif;color:#f3e6c4;-webkit-user-select:none;user-select:none}
 #jdcv{z-index:9000;overflow:hidden;background:#0d0806;cursor:pointer}
@@ -7119,8 +7174,6 @@ body:not(.th-orient) .hl-pin b{visibility:hidden!important}
 #jdcvp .cvp-list button.vu{opacity:.62}
 #jdcvp .cvp-list button.vu b::after{content:' · vue';font-family:'Elite20',Georgia,serif;font-size:12px;color:#a08a64;letter-spacing:0}
 .cv-talk.cv-float{position:absolute;left:16px;top:16px;z-index:6;margin:0}
-
-#abs .pc-hand .hand-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
 </style>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div id="root">
@@ -7734,7 +7787,7 @@ body:not(.th-orient) .hl-pin b{visibility:hidden!important}
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.5 aperçu</p>
+  <p class="proto">Sefy Industries · v22.6 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -13158,10 +13211,10 @@ const ENEMIES = {
   mini: { name: 'Petit Carreau', role: 'Éclat', suit: 'd', rank: 'A', hp: 6, spd: 20, dmg: 4, atk: .7, gold: .5, r: 4, tp: 0, ai: 'melee', rim: '#ff9a3d', info: 'Éclat rapide lâché par les Paires et le Valet.' },
   blinde: { name: 'Dix de Trèfle blindé', role: 'Blindé', suit: 'c', rank: '10', hp: 32, shield: 30, spd: 6.5, dmg: 12, atk: 1.1, gold: 4, r: 7, tp: 2.1, ai: 'melee', rim: '#9fb4d8', from: 4, w: 1.4, info: 'Son bouclier encaisse tes tirs de face. Le feu, la foudre et les explosions passent à travers.' },
   soigneur: { name: 'Cinq de Cœur', role: 'Soigneur', suit: 'h', rank: '5', hp: 20, spd: 7.5, dmg: 6, atk: 1, gold: 4, r: 6, tp: 2, ai: 'healer', stop: 54, rim: '#ff7eb6', from: 6, w: 1, info: 'Soigne les cartes autour de lui. Envoie-lui ta BILLE : marqué, ta base le vise en premier.' },
-  sorcier: { name: 'Arcane', role: 'Sorcier', suit: 'x', rank: '✦', hp: 30, spd: 8, dmg: 6, atk: 1, gold: 5, r: 6, tp: 2.5, ai: 'caster', stop: 61, rim: '#a98bff', from: 7, w: .8, info: "Lance des sorts sur toi. Tue-le, ou cogne-le avec ta BILLE pendant qu'il incante pour couper le sort." },
+  sorcier: { name: 'Arcane', role: 'Sorcier', suit: 'x', rank: '✦', hp: 30, spd: 8, dmg: 6, atk: 1, gold: 5, r: 6, tp: 2.5, ai: 'caster', stop: 61, rim: '#ae9fdb', from: 7, w: .8, info: "Lance des sorts sur toi. Tue-le, ou cogne-le avec ta BILLE pendant qu'il incante pour couper le sort." },
   tricheur: { name: 'Neuf de Pique tricheur', role: 'Tricheur', suit: 's', rank: '9', hp: 20, spd: 9, dmg: 8, atk: .9, gold: 4, r: 6, tp: 1.7, ai: 'melee', blink: true, rim: '#5fd4c4', from: 12, w: 1, info: "Se téléporte d'un coup vers ta base." },
-  leurre: { name: 'Leurre', role: 'Leurre', suit: 'x', rank: '?', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', rim: '#ffcc4d', info: 'Fausse carte posée par le sort Leurre : elle attire tes tirs.' },
-  voleur: { name: 'Pickpocket', role: 'Voleur', suit: 'x', rank: '$', hp: 40, spd: 13, dmg: 0, atk: 9, gold: 12, r: 6, tp: 0, ai: 'thief', rim: '#7dff6b', info: 'Te pique un jeton et tourne autour de ta base. Abats-le pour le récupérer.' },
+  leurre: { name: 'Leurre', role: 'Leurre', suit: 'x', rank: '?', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', rim: '#dbc07f', info: 'Fausse carte posée par le sort Leurre : elle attire tes tirs.' },
+  voleur: { name: 'Pickpocket', role: 'Voleur', suit: 'x', rank: '$', hp: 40, spd: 13, dmg: 0, atk: 9, gold: 12, r: 6, tp: 0, ai: 'thief', rim: '#98db8e', info: 'Te pique un jeton et tourne autour de ta base. Abats-le pour le récupérer.' },
   garde: { name: 'Valet de Trèfle', role: 'Garde', suit: 'c', rank: 'V', hp: 40, spd: 0, dmg: 12, atk: 1, gold: 3, r: 6, tp: 0, ai: 'guard', rim: '#5fd68a', info: 'Garde du Roi de Trèfle : tant qu\'il vit, le Roi est invincible.' },
   m_valet: { name: 'Valet de Carreau', role: 'Valet', suit: 'd', rank: 'V', hp: 70, spd: 8, dmg: 8, atk: 1, gold: 8, r: 8, tp: 4, ai: 'melee', split: 2, mob: 'b_valet', rim: '#ffcc4d', info: 'Le Valet revient en simple carte. Il lâche 2 Carreaux en mourant.' },
   m_dame: { name: 'Dame de Cœur', role: 'Dame', suit: 'h', rank: 'D', hp: 80, spd: 7, dmg: 8, sd: 6, atk: 1, gold: 8, r: 8, tp: 4.5, ai: 'healer', stop: 54, throws: true, mob: 'b_dame', rim: '#ffcc4d', info: 'La Dame revient : elle soigne ses voisines et lance des cœurs.' },
@@ -13170,36 +13223,36 @@ const ENEMIES = {
   m_roiC: { name: 'Roi de Cœur', role: 'Roi', suit: 'h', rank: 'R', hp: 120, spd: 7, dmg: 10, atk: 1, gold: 10, r: 8, tp: 5.5, ai: 'melee', fakes: 1, mob: 'b_roiC', rim: '#ffcc4d', info: 'Le Roi de Cœur revient : il se dédouble à mi-vie, seul le vrai saigne.' },
   m_joker: { name: 'Joker Noir', role: 'Joker', suit: 'j', rank: 'J', hp: 140, spd: 6, dmg: 10, atk: 1, gold: 14, r: 8, tp: 7, ai: 'caster', stop: 60, steal: true, mob: 'b_joker', rim: '#ffcc4d', info: 'Le Joker Noir revient : il te pique un jeton tant qu\'il vit, et lance des sorts.' },
   // v14.4 · les Vicieuses (dès les manches 2 à 4)
-  sangsue: { name: 'Sangsue', role: 'Sangsue', suit: 'x', rank: '', hp: 18, spd: 11, dmg: 0, atk: 1, gold: 3, r: 5.6, tp: 1.4, ai: 'vic', vic: 'sangsue', face: '#173222', rim: '#5fd68a', from: 2, w: .6, info: 'Elle se colle à ta base et pompe ton or et tes PV. Un coup de flipper ou ta BILLE la décolle.' },
-  origami: { name: 'Carte Origami', role: 'Origami', suit: 'x', rank: '', hp: 22, spd: 9, dmg: 7, atk: 1, gold: 3, r: 6, tp: 1.4, ai: 'vic', vic: 'origami', face: '#fbf7ef', rim: '#e8e1f2', from: 2, w: .8, info: 'À mi-vie, elle se plie en grue de papier : petite, rapide, en zigzag.' },
+  sangsue: { name: 'Sangsue', role: 'Sangsue', suit: 'x', rank: '', hp: 18, spd: 11, dmg: 0, atk: 1, gold: 3, r: 5.6, tp: 1.4, ai: 'vic', vic: 'sangsue', face: '#173222', rim: '#7ab890', from: 2, w: .6, info: 'Elle se colle à ta base et pompe ton or et tes PV. Un coup de flipper ou ta BILLE la décolle.' },
+  origami: { name: 'Carte Origami', role: 'Origami', suit: 'x', rank: '', hp: 22, spd: 9, dmg: 7, atk: 1, gold: 3, r: 6, tp: 1.4, ai: 'vic', vic: 'origami', face: '#fbf7ef', rim: '#cac7d0', from: 2, w: .8, info: 'À mi-vie, elle se plie en grue de papier : petite, rapide, en zigzag.' },
   grue: { name: 'Grue de papier', role: 'Grue', suit: 'x', rank: '', hp: 10, spd: 20, dmg: 6, atk: .8, gold: 1, r: 4.6, tp: 0, ai: 'vic', vic: 'grue', shape: 'crane', face: '#fbf7ef', rim: '#e8e1f2', info: 'Une Origami pliée : elle zigzague vers ta base.' },
-  gratter: { name: 'Carte à gratter', role: 'Carte à gratter', suit: 'x', rank: '', hp: 22, spd: 9.5, dmg: 8, atk: 1, gold: 2, r: 6, tp: 1.2, ai: 'vic', vic: 'gratter', face: '#e9e4f2', rim: '#aeb6c8', from: 3, w: .7, info: 'À sa mort : gros lot (de l\'or), rien… ou piège : 2 cartes surgissent.' },
-  domino: { name: 'Domino', role: 'Dominos', suit: 'x', rank: '', hp: 15, spd: 8, dmg: 8, atk: 1, gold: 1.4, r: 6, tp: 3.2, ai: 'vic', vic: 'domino', face: '#f5efe0', rim: '#17101f', from: 3, w: .35, info: 'Ils arrivent à 4, en file. Quand celui de devant tombe, le suivant bascule vers ta base.' },
-  coucou: { name: 'Coucou', role: 'Coucou', suit: 'x', rank: '', hp: 20, spd: 9, dmg: 7, atk: 1, gold: 3, r: 6, tp: 1.5, ai: 'vic', vic: 'coucou', face: '#2a1f3c', rim: '#a98bff', from: 3, w: .6, info: 'Il pond un œuf dans une carte voisine : un petit coucou en sort quand elle tombe.' },
-  coucou_p: { name: 'Petit coucou', role: 'Petit coucou', suit: 'x', rank: '', hp: 8, spd: 16, dmg: 4, atk: .8, gold: .5, r: 4.2, tp: 0, ai: 'vic', vic: 'petit', face: '#2a1f3c', rim: '#a98bff', info: 'Sorti d\'un œuf de Coucou.' },
-  meche: { name: 'Carte à mèche', role: 'Mèche', suit: 'x', rank: '', hp: 18, spd: 13.5, dmg: 6, atk: 1, gold: 3, r: 6, tp: 1.5, ai: 'vic', vic: 'meche', face: '#3a1410', rim: '#ff9a3d', from: 4, w: .5, info: 'Elle explose au bout de 7 s, ou sur ta base. Ta BILLE éteint la mèche.' },
-  aimant: { name: 'Carte Aimant', role: 'Aimant', suit: 'x', rank: '', hp: 40, spd: 7, dmg: 6, atk: 1, gold: 4, r: 6.5, tp: 2, ai: 'vic', vic: 'aimant', stop: 78, face: '#2a2238', rim: '#ff5c6c', from: 4, w: .4, info: 'Elle reste loin et attire tes tirs et ta BILLE.' },
-  fantome: { name: 'Fantôme', role: 'Fantôme', suit: 'x', rank: '', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', vic: 'fantome', face: '#2a2244', rim: '#c9a8ff', info: 'Laissé par la Métamorphose : il attire tes tirs quelques secondes.' },
+  gratter: { name: 'Carte à gratter', role: 'Carte à gratter', suit: 'x', rank: '', hp: 22, spd: 9.5, dmg: 8, atk: 1, gold: 2, r: 6, tp: 1.2, ai: 'vic', vic: 'gratter', face: '#e9e4f2', rim: '#9ea2ab', from: 3, w: .7, info: 'À sa mort : gros lot (de l\'or), rien… ou piège : 2 cartes surgissent.' },
+  domino: { name: 'Domino', role: 'Dominos', suit: 'x', rank: '', hp: 15, spd: 8, dmg: 8, atk: 1, gold: 1.4, r: 6, tp: 3.2, ai: 'vic', vic: 'domino', face: '#f5efe0', rim: '#16121a', from: 3, w: .35, info: 'Ils arrivent à 4, en file. Quand celui de devant tombe, le suivant bascule vers ta base.' },
+  coucou: { name: 'Coucou', role: 'Coucou', suit: 'x', rank: '', hp: 20, spd: 9, dmg: 7, atk: 1, gold: 3, r: 6, tp: 1.5, ai: 'vic', vic: 'coucou', face: '#2a1f3c', rim: '#ae9fdb', from: 3, w: .6, info: 'Il pond un œuf dans une carte voisine : un petit coucou en sort quand elle tombe.' },
+  coucou_p: { name: 'Petit coucou', role: 'Petit coucou', suit: 'x', rank: '', hp: 8, spd: 16, dmg: 4, atk: .8, gold: .5, r: 4.2, tp: 0, ai: 'vic', vic: 'petit', face: '#2a1f3c', rim: '#ae9fdb', info: 'Sorti d\'un œuf de Coucou.' },
+  meche: { name: 'Carte à mèche', role: 'Mèche', suit: 'x', rank: '', hp: 18, spd: 13.5, dmg: 6, atk: 1, gold: 3, r: 6, tp: 1.5, ai: 'vic', vic: 'meche', face: '#3a1410', rim: '#dba777', from: 4, w: .5, info: 'Elle explose au bout de 7 s, ou sur ta base. Ta BILLE éteint la mèche.' },
+  aimant: { name: 'Carte Aimant', role: 'Aimant', suit: 'x', rank: '', hp: 40, spd: 7, dmg: 6, atk: 1, gold: 4, r: 6.5, tp: 2, ai: 'vic', vic: 'aimant', stop: 78, face: '#2a2238', rim: '#db878f', from: 4, w: .4, info: 'Elle reste loin et attire tes tirs et ta BILLE.' },
+  fantome: { name: 'Fantôme', role: 'Fantôme', suit: 'x', rank: '', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', vic: 'fantome', face: '#2a2244', rim: '#bfaedb', info: 'Laissé par la Métamorphose : il attire tes tirs quelques secondes.' },
   // v14.5 · les Coriaces (dès les manches 11 à 14)
-  sablier: { name: 'Sablier', role: 'Sablier', suit: 'x', rank: '', hp: 30, spd: 9, dmg: 9, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'sablier', xf: 1, face: '#2a1f14', rim: '#ffcc4d', from: 11, w: .5, info: "Au moment de mourir, il rembobine 3 s : il revient où il était, avec ses PV d'alors. Une seule fois." },
-  compteur: { name: 'Compteur de cartes', role: 'Compteur de cartes', suit: 'x', rank: '', hp: 34, spd: 8.5, dmg: 9, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'compteur', xf: 1, face: '#14283a', rim: '#4fd8ff', from: 12, w: .45, info: "3 coups d'une même source (canon, BILLE, feu…) et elle ne lui fait plus rien… jusqu'à ce qu'une autre le touche." },
-  miroir: { name: 'Miroir', role: 'Miroir', suit: 'x', rank: '', hp: 26, spd: 8, dmg: 9, atk: 1, gold: 4, r: 6.2, tp: 2.2, ai: 'cor', cor: 'miroir', xf: 1, face: '#cfe3f2', rim: '#9fb4d8', from: 12, w: .45, info: "Tes tirs rebondissent dessus et repartent vers ta base : pare-les ! Ta BILLE et les explosions le cassent." },
-  zero: { name: 'Zéro', role: 'Zéro', suit: 'x', rank: '', hp: 22, spd: 8.5, dmg: 7, sd: 7, atk: 2.8, gold: 5, r: 6, tp: 2.4, ai: 'cor', cor: 'zero', xf: 1, stop: 72, face: '#0f5a2e', rim: '#5fd68a', from: 13, w: .4, info: "Seul son propre tir, renvoyé par une PARADE, le blesse (2 renvois). Au bout de 20 s, il se fissure." },
-  glitch: { name: 'Glitch', role: 'Glitch', suit: 'x', rank: '', hp: 24, spd: 10, dmg: 8, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'glitch', xf: 1, face: '#10101c', rim: '#39ffec', from: 13, w: .45, info: "Il avance par à-coups, devient intouchable 0,5 s toutes les 2 s et laisse parfois un faux double." },
-  glitch_f: { name: 'Faux double', role: 'Faux double', suit: 'x', rank: '', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', cor: 'glitchf', xf: 1, face: '#10101c', rim: '#39ffec', info: "Laissé par un Glitch : il attire tes tirs." },
-  parieur: { name: 'Parieur', role: 'Parieur', suit: 'x', rank: '', hp: 30, spd: 9, dmg: 9, atk: 1, gold: 5, r: 6, tp: 2.2, ai: 'cor', cor: 'parieur', xf: 1, face: '#3a1030', rim: '#ffcc4d', from: 14, w: .4, info: "À chaque coup qu'il prend : pile ou face. Dégâts ×2… ou rien du tout." },
+  sablier: { name: 'Sablier', role: 'Sablier', suit: 'x', rank: '', hp: 30, spd: 9, dmg: 9, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'sablier', xf: 1, face: '#2a1f14', rim: '#dbc07f', from: 11, w: .5, info: "Au moment de mourir, il rembobine 3 s : il revient où il était, avec ses PV d'alors. Une seule fois." },
+  compteur: { name: 'Compteur de cartes', role: 'Compteur de cartes', suit: 'x', rank: '', hp: 34, spd: 8.5, dmg: 9, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'compteur', xf: 1, face: '#14283a', rim: '#80c7db', from: 12, w: .45, info: "3 coups d'une même source (canon, BILLE, feu…) et elle ne lui fait plus rien… jusqu'à ce qu'une autre le touche." },
+  miroir: { name: 'Miroir', role: 'Miroir', suit: 'x', rank: '', hp: 26, spd: 8, dmg: 9, atk: 1, gold: 4, r: 6.2, tp: 2.2, ai: 'cor', cor: 'miroir', xf: 1, face: '#cfe3f2', rim: '#9ca7b9', from: 12, w: .45, info: "Tes tirs rebondissent dessus et repartent vers ta base : pare-les ! Ta BILLE et les explosions le cassent." },
+  zero: { name: 'Zéro', role: 'Zéro', suit: 'x', rank: '', hp: 22, spd: 8.5, dmg: 7, sd: 7, atk: 2.8, gold: 5, r: 6, tp: 2.4, ai: 'cor', cor: 'zero', xf: 1, stop: 72, face: '#0f5a2e', rim: '#7ab890', from: 13, w: .4, info: "Seul son propre tir, renvoyé par une PARADE, le blesse (2 renvois). Au bout de 20 s, il se fissure." },
+  glitch: { name: 'Glitch', role: 'Glitch', suit: 'x', rank: '', hp: 24, spd: 10, dmg: 8, atk: 1, gold: 4, r: 6, tp: 2.2, ai: 'cor', cor: 'glitch', xf: 1, face: '#10101c', rim: '#75dbd1', from: 13, w: .45, info: "Il avance par à-coups, devient intouchable 0,5 s toutes les 2 s et laisse parfois un faux double." },
+  glitch_f: { name: 'Faux double', role: 'Faux double', suit: 'x', rank: '', hp: 1, spd: 0, dmg: 0, atk: 9, gold: 0, r: 6, tp: 0, ai: 'decoy', cor: 'glitchf', xf: 1, face: '#10101c', rim: '#75dbd1', info: "Laissé par un Glitch : il attire tes tirs." },
+  parieur: { name: 'Parieur', role: 'Parieur', suit: 'x', rank: '', hp: 30, spd: 9, dmg: 9, atk: 1, gold: 5, r: 6, tp: 2.2, ai: 'cor', cor: 'parieur', xf: 1, face: '#3a1030', rim: '#dbc07f', from: 14, w: .4, info: "À chaque coup qu'il prend : pile ou face. Dégâts ×2… ou rien du tout." },
   // v14.5 · une carte de la Main de poker (Salon Privé)
-  pk: { name: 'Carte de la main', role: 'Carte de la main', suit: 'x', rank: '', hp: 14, spd: 9.5, dmg: 7, atk: 1, gold: 1.5, r: 6, tp: 0, ai: 'melee', xf: 'pk', face: '#fff8ee', rim: '#d9a441', info: "Le croupier en distribue 5 d'un coup : abats-les toutes en 3 s pour gagner du MULT." },
+  pk: { name: 'Carte de la main', role: 'Carte de la main', suit: 'x', rank: '', hp: 14, spd: 9.5, dmg: 7, atk: 1, gold: 1.5, r: 6, tp: 0, ai: 'melee', xf: 'pk', face: '#fff8ee', rim: '#ba9f6c', info: "Le croupier en distribue 5 d'un coup : abats-les toutes en 3 s pour gagner du MULT." },
   // v14.5 · les Géants (un par tranche de 10 manches, en pleine manche)
   g_golem: { name: 'Golem de 52 cartes', role: 'Golem de 52 cartes', suit: 'x', rank: '', hp: 260, spd: 5, dmg: 16, atk: 1.4, gold: 22, r: 17, tp: 0, ai: 'giant', giant: 'golem', xf: 1, shape: 'golem', face: '#e9e2d4', rim: '#3a2a20', info: "Un tas de 52 cartes qui marche. Chaque coup lui arrache des cartes, qui foncent sur toi. Il rétrécit." },
-  g_xxl: { name: 'Carte XXL', role: 'Carte XXL', suit: 'x', rank: '', hp: 300, spd: 4.2, dmg: 18, atk: 1.6, gold: 24, r: 18, tp: 0, ai: 'giant', giant: 'xxl', xf: 1, face: '#fff8ee', rim: '#e2384d', info: "Les tirs lui font peu. Chaque coup de BILLE plie un de ses coins : 4 coins pliés, elle s'effondre." },
-  g_flambeur: { name: 'Le Flambeur', role: 'Le Flambeur', suit: 'x', rank: '', hp: 240, spd: 6, dmg: 12, sd: 7, atk: 2.2, gold: 26, r: 15, tp: 0, stop: 56, ai: 'giant', giant: 'flambeur', xf: 1, face: '#3a1030', rim: '#ffcc4d', info: "Il te lance des jetons. Pare-les avec ton flipper : chaque jeton paré te rapporte de l'or." },
+  g_xxl: { name: 'Carte XXL', role: 'Carte XXL', suit: 'x', rank: '', hp: 300, spd: 4.2, dmg: 18, atk: 1.6, gold: 24, r: 18, tp: 0, ai: 'giant', giant: 'xxl', xf: 1, face: '#fff8ee', rim: '#c26a75', info: "Les tirs lui font peu. Chaque coup de BILLE plie un de ses coins : 4 coins pliés, elle s'effondre." },
+  g_flambeur: { name: 'Le Flambeur', role: 'Le Flambeur', suit: 'x', rank: '', hp: 240, spd: 6, dmg: 12, sd: 7, atk: 2.2, gold: 26, r: 15, tp: 0, stop: 56, ai: 'giant', giant: 'flambeur', xf: 1, face: '#3a1030', rim: '#dbc07f', info: "Il te lance des jetons. Pare-les avec ton flipper : chaque jeton paré te rapporte de l'or." },
   // v14.6 · le Casse (Coulisses)
   coffre: { name: 'Le coffre du Casse', role: 'Coffre du Casse', suit: 'x', rank: '', hp: 100, spd: 0, dmg: 0, atk: 9, gold: 30, r: 10, tp: 0, ai: 'safe', prop: 'coffre', xf: 1, shape: 'coffre', face: '#5a6478', rim: '#c3cde0', info: "Le Casse : il traverse la table, escorté par 3 vigiles. Tant qu'un vigile vit, il est intouchable. Ta BILLE lui fait ×3." },
-  vigile: { name: 'Vigile', role: 'Vigile', suit: 'x', rank: '', hp: 24, spd: 9, dmg: 9, atk: 1, gold: 3, r: 6, tp: 0, ai: 'guard', xf: 'vig', face: '#1d2a44', rim: '#7fd1ff', info: "Il tourne autour du coffre du Casse. Tant qu'un vigile vit, le coffre est intouchable." },
+  vigile: { name: 'Vigile', role: 'Vigile', suit: 'x', rank: '', hp: 24, spd: 9, dmg: 9, atk: 1, gold: 3, r: 6, tp: 0, ai: 'guard', xf: 'vig', face: '#1d2a44', rim: '#99c3db', info: "Il tourne autour du coffre du Casse. Tant qu'un vigile vit, le coffre est intouchable." },
   // v14.6 · les deux derniers Géants
   g_sabot: { name: 'Le Sabot', role: 'Le Sabot', suit: 'x', rank: '', hp: 210, spd: 5.5, dmg: 14, atk: 1.4, gold: 24, r: 16, tp: 0, stop: 58, ai: 'giant', giant: 'sabot', xf: 1, shape: 'sabot', face: '#1d5a3a', rim: '#d9a441', info: "Il se pose au bord de la table et distribue une carte toutes les 2 s (plus vite quand il est blessé). Abats-le vite." },
-  g_main: { name: 'La Main de la Maison', role: 'La Main de la Maison', suit: 'x', rank: '', hp: 250, spd: 5.5, dmg: 16, atk: 1.4, gold: 26, r: 13, tp: 0, stop: 60, ai: 'giant', giant: 'main', xf: 1, face: '#f6f1ea', rim: '#c9933a', info: "Toutes les 5 s, son râteau balaie une bande de la table (zone rouge juste avant) : il pousse les cartes vers toi, confisque ta BILLE et, s'il touche ta base, un coup et −5 or. Pare-le au flipper au bon moment : il casse et elle prend cher." },
+  g_main: { name: 'La Main de la Maison', role: 'La Main de la Maison', suit: 'x', rank: '', hp: 250, spd: 5.5, dmg: 16, atk: 1.4, gold: 26, r: 13, tp: 0, stop: 60, ai: 'giant', giant: 'main', xf: 1, face: '#f6f1ea', rim: '#ac9063', info: "Toutes les 5 s, son râteau balaie une bande de la table (zone rouge juste avant) : il pousse les cartes vers toi, confisque ta BILLE et, s'il touche ta base, un coup et −5 or. Pare-le au flipper au bon moment : il casse et elle prend cher." },
   // v14.6 · les Arcanes majeurs (dès la manche 21)
   a_mort: { name: 'La Mort', role: 'La Mort', suit: 'x', rank: '', hp: 120, spd: 5, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, ai: 'arc', arc: 'mort', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XIII. Lente… mais si elle touche ta base : −30 % de tes PV max d'un coup." },
   a_lune: { name: 'La Lune', role: 'La Lune', suit: 'x', rank: '', hp: 90, spd: 6, dmg: 10, atk: 1, gold: 14, r: 11, tp: 0, stop: 60, ai: 'arc', arc: 'lune', xf: 1, shape: 'tarot', face: '#f4ead2', rim: '#d9a441', from: 21, info: "Arcane XVIII. Les cartes autour d'elle deviennent des mirages : ton canon ne les voit pas. Ta BILLE les révèle." },
@@ -13216,10 +13269,10 @@ const ENEMIES = {
   // le boss final : le patron du Tapis Rouge, trois vies (PV par vie)
   b_baron: { name: 'Le Baron', suit: 'j', rank: 'B', hp: 11400, spd: 5, dmg: 22, sd: 9, atk: 1.2, gold: 300, r: 15, ai: 'b_baron', boss: true, stop: 60, rim: '#ffcc4d', intro: 'Trois vies. 1 : ses figures le protègent. 2 : ses sorts et ses As. 3 : il te défie à tous les jeux du bar.' },
   // ses As (2e vie) : de grosses cartes, chacune avec son sort
-  a_pique: { name: 'As de Pique', role: 'As de Pique', suit: 's', rank: 'A', hp: 150, spd: 6, dmg: 14, sd: 10, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'pique', stop: 72, rim: '#ffcc4d', info: '« Pique noire » : une boule noire qui casse ton flipper. Pare-la !' },
-  a_coeur: { name: 'As de Cœur', role: 'As de Cœur', suit: 'h', rank: 'A', hp: 150, spd: 6, dmg: 12, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'saignee', stop: 60, rim: '#ffcc4d', info: '« Saignée » : il soigne les cartes autour de lui et te vole des PV.' },
-  a_carreau: { name: 'As de Carreau', role: 'As de Carreau', suit: 'd', rank: 'A', hp: 150, spd: 6, dmg: 12, sd: 8, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'diamants', stop: 66, rim: '#ffcc4d', info: '« Pluie de diamants » : cinq éclats en éventail.' },
-  a_trefle: { name: 'As de Trèfle', role: 'As de Trèfle', suit: 'c', rank: 'A', hp: 150, spd: 6, dmg: 14, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'ronces', stop: 58, rim: '#ffcc4d', info: '« Ronces » : ton flipper ralentit, et deux cartes poussent.' },
+  a_pique: { name: 'As de Pique', role: 'As de Pique', suit: 's', rank: 'A', hp: 150, spd: 6, dmg: 14, sd: 10, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'pique', stop: 72, rim: '#dbc07f', info: '« Pique noire » : une boule noire qui casse ton flipper. Pare-la !' },
+  a_coeur: { name: 'As de Cœur', role: 'As de Cœur', suit: 'h', rank: 'A', hp: 150, spd: 6, dmg: 12, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'saignee', stop: 60, rim: '#dbc07f', info: '« Saignée » : il soigne les cartes autour de lui et te vole des PV.' },
+  a_carreau: { name: 'As de Carreau', role: 'As de Carreau', suit: 'd', rank: 'A', hp: 150, spd: 6, dmg: 12, sd: 8, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'diamants', stop: 66, rim: '#dbc07f', info: '« Pluie de diamants » : cinq éclats en éventail.' },
+  a_trefle: { name: 'As de Trèfle', role: 'As de Trèfle', suit: 'c', rank: 'A', hp: 150, spd: 6, dmg: 14, atk: 1, gold: 12, r: 9, tp: 6, ai: 'ace', spell: 'ronces', stop: 58, rim: '#dbc07f', info: '« Ronces » : ton flipper ralentit, et deux cartes poussent.' },
 };
 const BOSS_ORDER = ['b_valet', 'b_dame', 'b_roiP', 'b_roiT', 'b_roiC', 'b_joker'];
 /* ---------- les niveaux : 6 actes de 5 manches ----------
@@ -18149,7 +18202,7 @@ function render(dtReal) {
       ctx.strokeStyle = '#c3cde0'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(bx, by, rr2, ang - .8, ang + .8); ctx.stroke();
       ctx.strokeStyle = '#5c6a88'; ctx.lineWidth = .5; ctx.beginPath(); ctx.arc(bx, by, rr2 + .9, ang - .8, ang + .8); ctx.stroke();
     }
-    if (e.inv && e.type === 'b_roiT') { ctx.strokeStyle = `rgba(95,214,138,${.5 + .2 * Math.sin(t * 6)})`; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(bx, by, e.r * 1.5, 0, TAU); ctx.stroke(); }
+    if (e.inv && e.type === 'b_roiT') { ctx.save(); ctx.strokeStyle = 'rgba(20,12,6,.55)'; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.arc(bx, by, e.r * 1.5, 0, TAU); ctx.stroke(); ctx.strokeStyle = `rgba(229,187,90,${.6 + .2 * Math.sin(t * 6)})`; ctx.lineWidth = 1.2; ctx.setLineDash([e.r * .34, e.r * .16]); ctx.lineDashOffset = -t * e.r * .5; ctx.beginPath(); ctx.arc(bx, by, e.r * 1.5, 0, TAU); ctx.stroke(); ctx.restore(); }
     if (e.st.cast) {
       const c = e.st.cast, p = 1 - c.t / c.max, S2 = SPELLS[c.id] || BSPELLS[c.id];
       ctx.fillStyle = 'rgba(20,13,31,.85)'; ctx.beginPath(); ctx.arc(bx, top - 4.5, 4.2, 0, TAU); ctx.fill();
@@ -18703,9 +18756,8 @@ function updateLP(run, cb, r, inCombat) {
   setTxt('#lp-speed-v', G.speed === 2 ? '×2' : '×1');
   // ton équipement : boissons du bar et sorts
   const up = run.up || {}, ups = Object.keys(UPG).filter(k => up[k] > 0);
-  const kit = `<div class="lpk"><small>SORTS</small><div>${spellsOf(run).map((id, i) => `<span class="spill" style="--sc:${PSPELLS[id].col}" title="${esc(PSPELLS[id].name + ' : ' + PSPELLS[id].txt)}">${iconSVG(PSPELLS[id].icon)}<i>${i + 1}</i></span>`).join('')}</div></div>`
-    + petKitHTML(run) + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '')
-    + `<div class="lpk lpk-d"><small>BOISSONS${ups.length ? ` <i>${ups.reduce((a, k) => a + up[k], 0)}</i>` : ''}</small><div>${ups.length ? Object.keys(UPG_CATS).map(c => { const ks = ups.filter(k => UPG[k].cat === c); if (!ks.length) return ''; const n = ks.reduce((a, k) => a + up[k], 0); return `<span class="upill cat" style="--cat:${UPG_CATS[c].col}" title="${esc(ks.map(k => `${UPG[k].name} (${up[k]}) : ${UPG[k].txt(up[k])}`).join(' · '))}">${UPG_CATS[c].name}<b>${n}</b></span>`; }).join('') : '<em>rien encore</em>'}</div></div>`;
+  const kit = petKitHTML(run) + ((run.boosters || []).length ? `<div class="lpk"><small>JETONS BONUS</small><div>${run.boosters.map(id => `<span class="spill bon" style="--sc:${JK[id].col}" title="${esc(JK[id].name + ' : ' + JK[id].txt)}">${iconSVG(id)}</span>`).join('')}</div></div>` : '')
+    + (ups.length ? `<div class="lpk lpk-d"><small>BOISSONS${ups.length ? ` <i>${ups.reduce((a, k) => a + up[k], 0)}</i>` : ''}</small><div>${ups.length ? Object.keys(UPG_CATS).map(c => { const ks = ups.filter(k => UPG[k].cat === c); if (!ks.length) return ''; const n = ks.reduce((a, k) => a + up[k], 0); return `<span class="upill cat" style="--cat:${UPG_CATS[c].col}" title="${esc(ks.map(k => `${UPG[k].name} (${up[k]}) : ${UPG[k].txt(up[k])}`).join(' · '))}">${UPG_CATS[c].name}<b>${n}</b></span>`; }).join('') : ''}</div></div>` : '');
   lpKitSet(kit);
   const st = STAKES[run.stake || 0];
   setHTML('#lp-stake', `<span class="lps"><i style="background:${st.col}"></i>${st.name}</span>${run.deck ? `<span class="lp-deck" style="--dc:${deckById(run.deck).col}">${iconSVG(deckById(run.deck).icon)}${esc(deckLine(run))}</span>` : ''}`);
@@ -26666,7 +26718,7 @@ function handSVG0(side) {
    temps : les deux mains ; trois ou plus : un balayage rapide. Rechargée, la carte revient seule à sa place. */
 const PCG = {
   tel: { w: 52, h: 73, gap: 6, pile: 14, hw: 58, hh: 90, top: 6, rest: 24, ovl: 11 },
-  pc: { w: 66, h: 93, gap: 10, pile: 20, hw: 80, hh: 124, top: 8, rest: 34, ovl: 14 },
+  pc: { w: 66, h: 93, gap: 10, pile: 20, hw: 80, hh: 124, top: 8, rest: 34, ovl: 62 },
 };
 const PCS = { cards: [], pile: [], q: [], qT: 0, freeAt: 0, lay: null, hands: {}, pc: null, gen: 0 };
 const pcGeo = () => LAY.pc ? PCG.pc : PCG.tel;
@@ -26677,7 +26729,7 @@ function pcLayout0(n, availW) {
   const rowW = n * g.w + (n - 1) * g.gap, totW = rowW + g.pile + g.w, L = -totW / 2;
   const slot = k => L + k * (g.w + g.gap);
   const rc = L + rowW / 2, hs = Math.max(g.hw * .62, rowW * .27);
-  return { g, n, rowW, L, slot, pile: L + rowW + g.pile, hand: { l: rc - hs, r: rc + hs }, mid: rc };
+  return { g, n, rowW, L, slot, pile: L + rowW + g.pile, hand: LAY.pc ? { l: L - g.hw * .42, r: L + rowW + g.pile + g.w + g.hw * .42 } : { l: rc - hs, r: rc + hs }, mid: rc };
 }
 const pcCX = c => PCS.lay.slot(c.k) + PCS.lay.g.w / 2;
 const pcDY = g => -(g.h / 2 - g.ovl + .38 * g.hh);
@@ -27098,7 +27150,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v22.5 aperçu</p></div>`;
+        <p class="ov5">v22.6 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -36493,7 +36545,7 @@ const ART_IMG = {};
 (function artLoad() {
   if (typeof Image === 'undefined' || typeof CARD_ART === 'undefined') return;
   for (const t in CARD_ART) {
-    if (["b_baron", "b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "garde", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
+    if (["a_carreau", "a_coeur", "a_ermite", "a_jugement", "a_lune", "a_mort", "a_pendu", "a_pique", "a_roue", "a_trefle", "aimant", "b_baron", "b_dame", "b_joker", "b_roiC", "b_roiP", "b_roiT", "b_valet", "compteur", "coucou", "coucou_p", "domino", "fantome", "g_flambeur", "g_main", "g_xxl", "garde", "glitch", "glitch_f", "gratter", "leurre", "m_dame", "m_joker", "m_roiC", "m_roiP", "m_roiT", "m_valet", "meche", "miroir", "origami", "parieur", "pk", "sablier", "sangsue", "sorcier", "vigile", "voleur", "zero"].includes(t)) { const hd = new Image(); hd.onload = () => { ART_IMG[t] = hd; delete SPR[t]; }; hd.src = 'decors/cards/' + t + '.webp'; continue; }
     const im = new Image();
     im.onload = () => { ART_IMG[t] = im; delete SPR[t]; };
     im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(CARD_ART[t]);
@@ -36501,7 +36553,9 @@ const ART_IMG = {};
 })();
 function cardArt(g, type, d, r, w, h) {
   const im = ART_IMG[type]; if (!im || d.shape === 'golem' || d.shape === 'coffre' || d.shape === 'sabot' || d.shape === 'crane') return false;
-  const x = -w / 2 + r * .2, y = -h / 2 + r * .2, iw = w - r * .4, ih = h - r * .4, rad = r * .2;
+  const TW_ = d.shape === 'tarot' ? w * .88 : w, TH_ = d.shape === 'tarot' ? h * 1.16 : h;
+  const x = -TW_ / 2 + r * .2, y = -TH_ / 2 + r * .2, iw = TW_ - r * .4, ih = TH_ - r * .4, rad = r * .2;
+  if (d.suit === 'x' || d.suit === 'j') { g.save(); cardShape(g, d, w, h, cardDims(r).rad); g.fillStyle = '#140d0b'; g.fill(); g.lineWidth = Math.max(.5, r * .13); g.strokeStyle = d.rim; g.stroke(); g.restore(); }
   g.save(); rrPath(g, x, y, iw, ih, rad); g.clip();
   g.drawImage(im, x, y, iw, ih);
   g.restore();
@@ -43185,6 +43239,7 @@ function buildBG216() {
   gr = g.createRadialGradient(0, -12, 6, 0, 0, RF);
   gr.addColorStop(0, TP.felt[0]); gr.addColorStop(.62, TP.felt[1]); gr.addColorStop(1, TP.felt[2]);
   g.fillStyle = gr; g.beginPath(); g.arc(0, 0, RF - 1.2, 0, TAU); g.fill();
+  { const ft = window.FELT226; if (ft && ft.complete && ft.naturalWidth) { g.save(); g.beginPath(); g.arc(0, 0, RF - 1.2, 0, TAU); g.clip(); g.globalCompositeOperation = 'soft-light'; g.globalAlpha = .9; const pt = g.createPattern(ft, 'repeat'); if (pt.setTransform) pt.setTransform(new DOMMatrix().scale(.075)); g.fillStyle = pt; g.fillRect(-RF, -RF, RF * 2, RF * 2); g.restore(); } }
   g.restore();
   // le grain du feutre : fin, irrégulier, comme de la laine tissée
   const R2 = (RF - 1.5) * k, x0 = Math.max(0, Math.floor(cx - R2)), x1 = Math.min(w, Math.ceil(cx + R2)), y0 = Math.max(0, Math.floor(cy - R2)), y1 = Math.min(h, Math.ceil(cy + R2));
@@ -43261,6 +43316,7 @@ if (typeof drawBubbles === 'function') {
 }
 
 const JET_ART = ["aimant", "aimbot", "allergie", "allin", "anubis", "argile", "ascenseur", "avion", "babyfoot", "balance", "balledoree", "bande", "batteur", "belier", "bernard", "bleubillard", "blizzard", "boomerang", "boucle", "boulenoire", "boulet", "boussole", "braise", "bricabrac", "bullseye", "bumper", "cancer", "capricorne", "capture", "carambole", "casemate", "catalyseur", "cerbere", "chatnoir", "chef", "chercheuse", "chevrotine", "cible", "cloche", "coccinelle", "cochonnet", "cocktail", "coffre", "collante", "comete", "comptetours", "contrat", "cookie", "copiercoller", "corbeille", "crescendo", "ctrlz", "debord", "dette", "domino", "doubleourien", "duplication", "echo", "ecranbleu", "elastiques", "engrenage", "etincelle", "extincteur", "extrabille", "ferache", "fievre", "forge", "fosse", "fragment", "fronton", "fuite", "gemeaux", "graine", "grandfinal", "hautparleur", "herisson", "hermes", "herse", "houle", "hydre", "hypotheque", "icare", "insomnie", "instable", "introuvable", "ivresse", "jenga", "jupiter", "kamikaze", "kicker", "kitsune", "konami", "lag", "lapin", "lion", "lune", "lunette", "magma", "mars", "meche", "meduse", "mercure", "metal", "mikado", "minimaliste", "minotaure", "miroirbrise", "mjolnir", "modedieu", "multibille", "multithread", "muraille", "neptune", "noclip", "noxroue", "oeilnox", "ovation", "overclock", "pachinko", "palet", "pandore", "parasite", "perforante", "phare", "phenix", "piecesx2", "pileface", "pilejetons", "ping", "pivot", "pixelmort", "pluton", "pochette", "poissons", "pont", "potager", "projecteur", "pulsar", "queue", "rafale", "rampe", "rappel", "rebours", "reflet", "ressort", "ricochet", "ronces", "sable", "sablier", "sagittaire", "saturne", "sautimage", "savescum", "scorpion", "serrelivres", "siamois", "sisyphe", "soleil", "souffle", "speedrun", "spinner", "spirale", "strike", "surtension", "tableau", "tampon", "tapisvert", "taureau", "ticket", "tilt", "tirelire", "tourelle", "tracante", "trefle4", "triple20", "uranus", "vapeur", "venin", "vent9", "ventilo", "venus", "verseau", "vierge", "volee", "wallhack", "yahtzee", "zapotron", "zero"];
+const PET_HD = ["boris", "coco", "gaston", "marcel"];
 
 /* ===== v21.8 · les premières images HD (Gemini) dans l'écran de jeu =====
    1. la salle derrière la table (#bgroom) : visible en manche (combat, horde), cachée ailleurs ;
@@ -43410,6 +43466,136 @@ const JET_ART = ["aimant", "aimbot", "allergie", "allin", "anubis", "argile", "a
   new MutationObserver(() => { if (!box.hidden) start(); }).observe(box, { attributes: true, attributeFilter: ['hidden', 'class', 'style'] });
   setTimeout(() => { size(); if (reduced()) LAYERS.forEach(L => L.n *= .35); size(); start(); }, 60);
   setInterval(() => { if (!raf && !box.hidden && box.isConnected) start(); }, 1000);
+})();
+
+/* v22.6 · les compagnons en HD (Gemini) : un portrait dans le médaillon ; quand il agit (Coco vole une pièce, Marcel chante,
+   Boris rugit, Gaston tire) on voit sa pose d'action, et à la fin d'une manche gagnée, sa pose contente. */
+(function () {
+  if (typeof petSVG !== 'function' || typeof PET_HD === 'undefined' || !PET_HD.length) return;
+  const _ps = petSVG;
+  petSVG = function (id, cls) {
+    if (!PET_HD.includes(id)) return _ps(id, cls);
+    const u = k => `decors/pets/${id}_${k}.webp`;
+    return `<span class="pet-svg pet-hd ${cls || ''}" aria-hidden="true"><img class="ph-por" src="${u('por')}" alt="" draggable="false"><img class="ph-act" src="${u('act')}" alt="" draggable="false"><img class="ph-joy" src="${u('joy')}" alt="" draggable="false"></span>`;
+  };
+  setInterval(() => { try { document.body.classList.toggle('pet-joy', !!(G && G.mode === 'cleared')); } catch (e) { /* rien */ } }, 300);
+})();
+
+/* v22.6 · une salle par acte derrière la table : I les Carreaux (la salle de base), II les Cœurs (salon rouge),
+   III les Piques (fumoir), IV les Trèfles (salle de billard), V les Figures (galerie), VI la Table du Baron (salon privé).
+   En partie sans fin, les salles tournent. */
+(function () {
+  const el = document.getElementById('bgroom'); if (!el) return;
+  let last = 0;
+  setInterval(() => {
+    let n = 1;
+    try { const r = (G && G.run && G.run.round) || 1; n = r > 30 ? ((Math.ceil(r / 5) - 1) % 6) + 1 : Math.min(6, Math.max(1, Math.ceil(r / 5))); } catch (e) { n = 1; }
+    if (n !== last) { last = n; el.dataset.act = n; }
+  }, 500);
+})();
+
+/* v22.6 · la trame du feutre de la table centrale : chargée une fois, puis la table est redessinée */
+(function () {
+  const im = new Image(); im.decoding = 'async';
+  im.onload = () => { window.FELT226 = im; try { if (typeof buildBG === 'function' && typeof bgC !== 'undefined' && bgC && cv && cv.width) buildBG(); } catch (e) { /* rien */ } };
+  im.src = 'decors/ui/felt.webp';
+})();
+
+const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
+/* v22.3 aperçu · les mains du joueur en vraies images (Gemini) : gants de cuir noir, et le geste de la carte qu'on fait glisser.
+   HAND_IMGS est rempli à la construction avec ce qui existe dans decors/hands/ ; sans images, on garde les mains dessinées.
+   Chaque main est un canvas : les images sont préchargées, on les dessine sans clignotement.
+   Les états viennent du jeu (ses gestes ne changent pas, seules les images suivent) :
+   - la main se lève vers la carte (z-index 10) : « rise » ; elle revient se poser : « rise » à l'envers ;
+   - elle prend la carte (classe .grab) : deux doigts se posent (« down »), puis elle la pousse vers la pile (« drag ») ;
+   - elle la lâche : « release » (elle se relève), puis « rise » à l'envers en rentrant.
+   Le jeton de la main gauche est peint lui aussi : elle le tient entre le pouce et l'index, le pose sur la table avant de
+   pousser une carte (le jeton posé est l'image decors/hands/chip.webp), le reprend (« pick ») et, au repos, le retourne (« flip »). */
+(function () {
+  if (typeof handSVG !== 'function' || typeof HAND_IMGS === 'undefined' || !HAND_IMGS.l || !HAND_IMGS.r || !HAND_IMGS.l.idle || !HAND_IMGS.r.idle) return;
+  const src = (side, k, i) => `decors/hands/hand_${side}_${k}${i ? '_' + String(i).padStart(2, '0') : ''}.webp`;
+  const IM = { l: {}, r: {} };
+  const load = u => { const im = new Image(); im.decoding = 'async'; im.src = u; if (im.decode) im.decode().catch(() => { }); return im; };
+  for (const side of ['l', 'r']) {
+    const H = HAND_IMGS[side];
+    for (const k of ['idle', 'press', 'lift']) if (H[k]) IM[side][k] = [load(src(side, k))];
+    if (side === 'l' && H.anims && H.anims.pick) IM.l.hold = [load(src('l', 'hold'))];
+    for (const k in (H.anims || {})) { const a = []; for (let i = 1; i <= H.anims[k].n; i++) a.push(load(src(side, k, i))); IM[side][k] = a; }
+    if (IM[side].drag) IM[side].dragged = [IM[side].drag[IM[side].drag.length - 1]];   // la carte poussée : dernière image du glissé
+  }
+  const W = 286, Hh = 480, CHIP = !!IM.l.hold;
+  if (CHIP) {
+    const st = document.createElement('style');
+    st.textContent = '#abs .pc-hand .pc-chipw{visibility:hidden!important}#abs .pc-hand.l .pc-chip{left:auto!important;right:0!important;top:25%!important;width:28%!important;margin:-14% 0 0 0!important;transform:none!important;animation:none!important}#abs .pc-tchip{background:url(decors/hands/chip.webp) 50% 50%/contain no-repeat!important;box-shadow:0 2px 3px rgba(0,0,0,.55)!important;border-radius:50%}';
+    document.head.appendChild(st);
+  }
+  const restOf = st => st.side === 'l' && CHIP && !st.h.classList.contains('drop') ? 'hold' : 'idle';
+  handSVG = function (side) {
+    return `<canvas class="hand-img" data-side="${side}" width="${W}" height="${Hh}" aria-hidden="true"></canvas>` + (side === 'l' ? '<i class="pc-chipw" aria-hidden="true"><i class="pc-chip"></i></i>' : '');
+  };
+  const S = { l: null, r: null };
+  function draw(st, im) {
+    if (!im || !im.complete || !im.naturalWidth) return false;
+    const g = st.cv.getContext('2d'); g.clearRect(0, 0, W, Hh); g.drawImage(im, 0, 0, W, Hh); st.shown = im; return true;
+  }
+  function still(st, k) { st.anim = null; st.rest = k; const a = IM[st.side][k] || IM[st.side].idle; draw(st, a[0]); }
+  // une suite d'étapes [nom, à l'envers, images/s], puis une image fixe
+  function play(st, steps, then) {
+    steps = steps.filter(s => IM[st.side][s[0]] && HAND_IMGS[st.side].anims && HAND_IMGS[st.side].anims[s[0]]);
+    if (!steps.length || (typeof G === 'object' && G && G.reduced)) { still(st, then); return; }
+    st.anim = { steps, si: 0, t0: performance.now(), then }; tick();
+  }
+  let raf = 0;
+  function tick() {
+    if (raf) return;
+    raf = requestAnimationFrame(function loop(now) {
+      raf = 0; let busy = false;
+      for (const side of ['l', 'r']) {
+        const st = S[side]; if (!st || !st.anim) continue;
+        const A = st.anim, [k, rev, fps0] = A.steps[A.si], a = IM[side][k], n = a.length;
+        const fps = fps0 || HAND_IMGS[side].anims[k].fps || 24, f = Math.floor((now - A.t0) * fps / 1000);
+        if (f >= n) {
+          if (A.si + 1 < A.steps.length) { A.si++; A.t0 = now; busy = true; continue; }
+          still(st, A.then); continue;
+        }
+        st.cur = k; const im = a[rev ? n - 1 - f : f]; if (im !== st.shown) draw(st, im); busy = true;
+      }
+      if (busy) tick();
+    });
+  }
+  function stateOf(h) { return h.classList.contains('grab') ? 'grab' : h.style.zIndex === '10' ? 'up' : 'idle'; }
+  function onChange(st) {
+    const to = stateOf(st.h), from = st.state, rest = restOf(st);
+    if (to === from) {   // seul le jeton a changé (posé ou repris), main au repos
+      if (st.side === 'l' && CHIP && to === 'idle' && rest !== st.rest && !st.anim) play(st, [['pick', rest === 'idle']], rest);
+      return;
+    }
+    st.state = to;
+    const midDown = st.anim && st.cur === 'down';
+    const drop = st.rest === 'hold' ? [['pick', true, 60]] : [];   // elle lâche d'abord son jeton s'il est encore en main
+    if (to === 'grab') play(st, from === 'idle' ? drop.concat([['rise', false, 70], ['down', false], ['drag', false]]) : [['down', false], ['drag', false]], 'dragged');
+    else if (to === 'up') play(st, from === 'grab' ? [midDown ? ['down', true] : ['release', false]] : drop.concat([['rise', false]]), 'lift');
+    else if (from === 'grab') play(st, [midDown ? ['down', true] : ['release', false], ['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
+    else play(st, [['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
+  }
+  const mo = new MutationObserver(ms => { for (const m of ms) { const st = S[m.target.classList.contains('l') ? 'l' : 'r']; if (st && st.h === m.target) onChange(st); } });
+  function watch() {
+    for (const side of ['l', 'r']) {
+      const h = document.querySelector('.pc-hand.' + side), cv = h && h.querySelector('canvas.hand-img');
+      if (!cv) continue;
+      if (!S[side] || S[side].cv !== cv) {
+        S[side] = { side, h, cv, state: stateOf(h), anim: null, shown: null };
+        mo.observe(h, { attributes: true, attributeFilter: ['class', 'style'] });
+        const st = S[side], first = () => { if (!st.shown) still(st, restOf(st)); };
+        const im0 = IM[side].idle[0]; if (im0.complete) first(); else im0.addEventListener('load', first, { once: true });
+      }
+    }
+  }
+  setInterval(watch, 800);
+  setInterval(() => {
+    const st = S.l; if (!CHIP || !st || st.anim || st.state !== 'idle' || st.rest !== 'hold' || document.hidden) return;
+    if (Math.random() < .42) play(st, [['flip', false]], 'hold');
+  }, 2600);
 })();
 
 const CV_ANIMS = {};
@@ -45542,103 +45728,6 @@ function cvaPause(ms) { const a = CVA.el; if (!a || a.paused) return; cvaFade(0,
   cvMusicStart = function () { cvaPause(400); return _ms.apply(this, arguments); };
   cvMusicStop = function () { const r = _mst.apply(this, arguments); if (CV.on) setTimeout(() => { if (CV.on && !CVM.on) cvaPlay(); }, 500); return r; };
 }
-
-const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
-/* v22.3 aperçu · les mains du joueur en vraies images (Gemini) : gants de cuir noir, et le geste de la carte qu'on fait glisser.
-   HAND_IMGS est rempli à la construction avec ce qui existe dans decors/hands/ ; sans images, on garde les mains dessinées.
-   Chaque main est un canvas : les images sont préchargées, on les dessine sans clignotement.
-   Les états viennent du jeu (ses gestes ne changent pas, seules les images suivent) :
-   - la main se lève vers la carte (z-index 10) : « rise » ; elle revient se poser : « rise » à l'envers ;
-   - elle prend la carte (classe .grab) : deux doigts se posent (« down »), puis elle la pousse vers la pile (« drag ») ;
-   - elle la lâche : « release » (elle se relève), puis « rise » à l'envers en rentrant.
-   Le jeton de la main gauche est peint lui aussi : elle le tient entre le pouce et l'index, le pose sur la table avant de
-   pousser une carte (le jeton posé est l'image decors/hands/chip.webp), le reprend (« pick ») et, au repos, le retourne (« flip »). */
-(function () {
-  if (typeof handSVG !== 'function' || typeof HAND_IMGS === 'undefined' || !HAND_IMGS.l || !HAND_IMGS.r || !HAND_IMGS.l.idle || !HAND_IMGS.r.idle) return;
-  const src = (side, k, i) => `decors/hands/hand_${side}_${k}${i ? '_' + String(i).padStart(2, '0') : ''}.webp`;
-  const IM = { l: {}, r: {} };
-  const load = u => { const im = new Image(); im.decoding = 'async'; im.src = u; if (im.decode) im.decode().catch(() => { }); return im; };
-  for (const side of ['l', 'r']) {
-    const H = HAND_IMGS[side];
-    for (const k of ['idle', 'press', 'lift']) if (H[k]) IM[side][k] = [load(src(side, k))];
-    if (side === 'l' && H.anims && H.anims.pick) IM.l.hold = [load(src('l', 'hold'))];
-    for (const k in (H.anims || {})) { const a = []; for (let i = 1; i <= H.anims[k].n; i++) a.push(load(src(side, k, i))); IM[side][k] = a; }
-    if (IM[side].drag) IM[side].dragged = [IM[side].drag[IM[side].drag.length - 1]];   // la carte poussée : dernière image du glissé
-  }
-  const W = 286, Hh = 480, CHIP = !!IM.l.hold;
-  if (CHIP) {
-    const st = document.createElement('style');
-    st.textContent = '#abs .pc-hand .pc-chipw{visibility:hidden!important}#abs .pc-hand.l .pc-chip{left:auto!important;right:0!important;top:25%!important;width:28%!important;margin:-14% 0 0 0!important;transform:none!important;animation:none!important}#abs .pc-tchip{background:url(decors/hands/chip.webp) 50% 50%/contain no-repeat!important;box-shadow:0 2px 3px rgba(0,0,0,.55)!important;border-radius:50%}';
-    document.head.appendChild(st);
-  }
-  const restOf = st => st.side === 'l' && CHIP && !st.h.classList.contains('drop') ? 'hold' : 'idle';
-  handSVG = function (side) {
-    return `<canvas class="hand-img" data-side="${side}" width="${W}" height="${Hh}" aria-hidden="true"></canvas>` + (side === 'l' ? '<i class="pc-chipw" aria-hidden="true"><i class="pc-chip"></i></i>' : '');
-  };
-  const S = { l: null, r: null };
-  function draw(st, im) {
-    if (!im || !im.complete || !im.naturalWidth) return false;
-    const g = st.cv.getContext('2d'); g.clearRect(0, 0, W, Hh); g.drawImage(im, 0, 0, W, Hh); st.shown = im; return true;
-  }
-  function still(st, k) { st.anim = null; st.rest = k; const a = IM[st.side][k] || IM[st.side].idle; draw(st, a[0]); }
-  // une suite d'étapes [nom, à l'envers, images/s], puis une image fixe
-  function play(st, steps, then) {
-    steps = steps.filter(s => IM[st.side][s[0]] && HAND_IMGS[st.side].anims && HAND_IMGS[st.side].anims[s[0]]);
-    if (!steps.length || (typeof G === 'object' && G && G.reduced)) { still(st, then); return; }
-    st.anim = { steps, si: 0, t0: performance.now(), then }; tick();
-  }
-  let raf = 0;
-  function tick() {
-    if (raf) return;
-    raf = requestAnimationFrame(function loop(now) {
-      raf = 0; let busy = false;
-      for (const side of ['l', 'r']) {
-        const st = S[side]; if (!st || !st.anim) continue;
-        const A = st.anim, [k, rev, fps0] = A.steps[A.si], a = IM[side][k], n = a.length;
-        const fps = fps0 || HAND_IMGS[side].anims[k].fps || 24, f = Math.floor((now - A.t0) * fps / 1000);
-        if (f >= n) {
-          if (A.si + 1 < A.steps.length) { A.si++; A.t0 = now; busy = true; continue; }
-          still(st, A.then); continue;
-        }
-        st.cur = k; const im = a[rev ? n - 1 - f : f]; if (im !== st.shown) draw(st, im); busy = true;
-      }
-      if (busy) tick();
-    });
-  }
-  function stateOf(h) { return h.classList.contains('grab') ? 'grab' : h.style.zIndex === '10' ? 'up' : 'idle'; }
-  function onChange(st) {
-    const to = stateOf(st.h), from = st.state, rest = restOf(st);
-    if (to === from) {   // seul le jeton a changé (posé ou repris), main au repos
-      if (st.side === 'l' && CHIP && to === 'idle' && rest !== st.rest && !st.anim) play(st, [['pick', rest === 'idle']], rest);
-      return;
-    }
-    st.state = to;
-    const midDown = st.anim && st.cur === 'down';
-    const drop = st.rest === 'hold' ? [['pick', true, 60]] : [];   // elle lâche d'abord son jeton s'il est encore en main
-    if (to === 'grab') play(st, from === 'idle' ? drop.concat([['rise', false, 70], ['down', false], ['drag', false]]) : [['down', false], ['drag', false]], 'dragged');
-    else if (to === 'up') play(st, from === 'grab' ? [midDown ? ['down', true] : ['release', false]] : drop.concat([['rise', false]]), 'lift');
-    else if (from === 'grab') play(st, [midDown ? ['down', true] : ['release', false], ['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
-    else play(st, [['rise', true]].concat(rest === 'hold' ? [['pick', false]] : []), rest);
-  }
-  const mo = new MutationObserver(ms => { for (const m of ms) { const st = S[m.target.classList.contains('l') ? 'l' : 'r']; if (st && st.h === m.target) onChange(st); } });
-  function watch() {
-    for (const side of ['l', 'r']) {
-      const h = document.querySelector('.pc-hand.' + side), cv = h && h.querySelector('canvas.hand-img');
-      if (!cv) continue;
-      if (!S[side] || S[side].cv !== cv) {
-        S[side] = { side, h, cv, state: stateOf(h), anim: null, shown: null };
-        mo.observe(h, { attributes: true, attributeFilter: ['class', 'style'] });
-        const st = S[side], first = () => { if (!st.shown) still(st, restOf(st)); };
-        const im0 = IM[side].idle[0]; if (im0.complete) first(); else im0.addEventListener('load', first, { once: true });
-      }
-    }
-  }
-  setInterval(watch, 800);
-  setInterval(() => {
-    const st = S.l; if (!CHIP || !st || st.anim || st.state !== 'idle' || st.rest !== 'hold' || document.hidden) return;
-    if (Math.random() < .42) play(st, [['flip', false]], 'hold');
-  }, 2600);
-})();
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
 else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});

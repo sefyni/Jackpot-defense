@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.5 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.6 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,36 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.6 aperçu — L'ÉCRAN DE JEU EN HD
+- Tes mains (gants de cuir noir) passent dans la version normale : elles prennent la carte, la font
+  glisser vers la pile, et la main gauche tient le jeton rouge, le pose avant de pousser une carte,
+  le reprend et le fait tourner au repos.
+- Sur PC, les mains sont posées plus haut, de chaque côté des cartes : on voit enfin tout le gant.
+- Les cartes spéciales sont peintes : un emblème gravé crème sur un carton sombre teinté à la
+  couleur de la carte, filet doré (Arcane, Leurre, Pickpocket, Sangsue, Origami, Carte à gratter,
+  Domino, Coucou, Mèche, Aimant, Fantôme, Sablier, Compteur, Miroir, Zéro, Glitch, Parieur,
+  Carte de la main, XXL, Flambeur, Vigile, Main de la Maison). Fini les fonds violets néon.
+- Les 4 As : carton crème, grand pique, cœur, carreau ou trèfle gravé.
+- Les 6 tarots sont illustrés : la Mort en croupier squelette, la Lune, le Pendu, l'Ermite, la
+  Roue de Fortune, le Jugement, avec leur chiffre romain doré.
+- Les compagnons sont peints : Coco, Marcel, Boris et Gaston ont leur portrait dans un médaillon
+  de laiton, une pose quand ils agissent (Coco vole, Marcel chante, Boris rugit, Gaston tire) et
+  une pose contente quand la manche est gagnée.
+- Une salle par acte derrière la table : les Carreaux, le salon rouge des Cœurs, le fumoir des
+  Piques, la salle de billard des Trèfles, la galerie des Figures, le salon privé du Baron.
+- La machine à sous : nouvelle salle des machines, levier de laiton à boule sang-de-bœuf, tambours
+  des rouleaux en émail crème.
+- Nouveaux cadres plus fins, aux petits coins de laiton : le panneau de gauche et la table des
+  jetons (verticale sur PC, horizontale sur téléphone).
+- La table centrale : le feutre a la trame d'un vrai drap de laine.
+- Le panneau de gauche ne montre plus tes sorts (ils sont déjà dans ta main) ni « rien encore » ;
+  les boissons n'y apparaissent qu'une fois servies, et le cadre vide disparaît.
+- Le combo (« Illusion »…) s'affiche sur une plaque de laiton, le score de la manche sur une carte
+  en bois : points sur feutre vert, multiplicateur en laque rouge.
+- Le Roi de Trèfle protégé par ses gardes : anneau de laiton gravé à la place du cercle vert.
+- Madame Nox n'est plus coupée sous son enseigne.
+- En anglais, la devise gravée sur la table est traduite.
 
 Nouveautés de la v22.5 aperçu — LA MUSIQUE DES CONVERSATIONS ET LA VRAIE PLUIE
 - Pendant les conversations, ta musique remplace celle du lieu. Elle s'efface quand Dina lance sa
