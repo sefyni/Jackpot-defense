@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.8 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v22.9 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,16 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v22.9 aperçu
+- Les cinématiques qui se lancent toutes seules (salutations, scènes) ont la musique des
+  conversations, comme quand on appuie sur « Parler ». Une scène qui demande le silence ou sa
+  propre musique la garde.
+- « Découvertes » (fin de manche) passe en DA : carte de noyer bordée de laiton, titre doré,
+  fiches crème, icônes gravées.
+- Les icônes dessinées (crâne du malus, taximètre…) sont gravées dans le laiton au lieu de leurs
+  couleurs d'émoji.
+- Le chiffre du compteur rond de la machine (« DEDANS 15 jetons ») est bien centré.
 
 Nouveautés de la v22.8 aperçu — LES CARTES DE BASE PEINTES
 - Le Sept de Pique (Tireur), le Deux de Carreau (Coureur), le Dix de Trèfle blindé, le Cinq de
