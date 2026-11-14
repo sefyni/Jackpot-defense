@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v23.0 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v23.1 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,13 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v23.1 aperçu
+- La façade du Tapis Rouge (l'écran d'entrée) en meilleure qualité : image agrandie deux fois
+  (2530 × 1328), traits d'encre plus nets, sans rien changer au dessin.
+- Autour du compteur de MULT : plus d'électricité, de la fumée de cigare qui monte de la case,
+  de plus en plus épaisse quand le MULT grimpe, avec une bouffée à chaque gain. Le bourdonnement
+  électrique est remplacé par un souffle très léger.
 
 Nouveautés de la v23.0 aperçu
 - L'intro : nouvelle pluie, tirée de l'enregistrement « Pluie et orage » choisi par Sefy,

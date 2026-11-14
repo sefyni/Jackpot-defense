@@ -7464,7 +7464,7 @@ body:not(.th-orient) .mall{display:inline-grid!important;place-items:center!impo
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.0 aperçu</p>
+  <p class="proto">Sefy Industries · v23.1 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26675,7 +26675,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.0 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.1 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -41346,6 +41346,84 @@ const PET_HD = ["boris", "coco", "gaston", "marcel"];
   const _end = spEnd;
   spEnd = function () { stop(500); return _end.apply(this, arguments); };
   if (typeof stFx === 'function') { const _fx = stFx; stFx = function (k) { if (k === 'silence') stop(400); return _fx.apply(this, arguments); }; }
+})();
+
+/* v23.1 · autour du compteur de MULT : plus d'électricité, de la fumée de cigare qui monte de la case (de plus en plus
+   épaisse avec le MULT, une bouffée à chaque gain), et un souffle très léger à la place du bourdonnement. */
+(function () {
+  if (typeof elecFrame !== 'function' || typeof ELEC === 'undefined') return;
+  const _ef = elecFrame, SM = { p: [], acc: 0, snd: null, puff: 0 };
+  const spr = document.createElement('canvas'); spr.width = spr.height = 64;
+  { const x = spr.getContext('2d'), gr = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(232,222,202,.8)'); gr.addColorStop(.45, 'rgba(200,188,168,.34)'); gr.addColorStop(1, 'rgba(170,160,142,0)');
+    x.fillStyle = gr; x.fillRect(0, 0, 64, 64); }
+  const R = (a, b) => a + Math.random() * (b - a);
+  function sound(v) {
+    try {
+      if (typeof AU === 'undefined' || !AU.ac || !AU.amb || !AU.nbuf) return;
+      if (!SM.snd) {
+        const ac = AU.ac, s = ac.createBufferSource(); s.buffer = AU.nbuf; s.loop = true; s.start();
+        const hp = ac.createBiquadFilter(), lp = ac.createBiquadFilter(), g = ac.createGain();
+        hp.type = 'highpass'; hp.frequency.value = 110; lp.type = 'lowpass'; lp.frequency.value = 480; g.gain.value = 0;
+        s.connect(hp); hp.connect(lp); lp.connect(g); g.connect(AU.amb); SM.snd = { g, lp };
+      }
+      const t = AU.ac.currentTime; SM.snd.g.gain.setTargetAtTime(v * .045, t, .5); SM.snd.lp.frequency.setTargetAtTime(400 + v * 300, t, .5);
+    } catch (e) { /* rien */ }
+  }
+  elecFrame = function (dt) {
+    if (document.body.classList.contains('th-orient')) { sound(0); return _ef.apply(this, arguments); }
+    const E = ELEC;
+    if (!E.c) { E.c = $('#elc'); if (!E.c) return; }
+    const cb = G.cb, live = G.mode === 'combat' && !!cb && !cb.demo && !cb.tuto && !cb.ended && !G.paused && !G.headless && !!G.run;
+    const tgt = live ? elecLevel(liveMult(G.run, cb)) : 0;
+    E.I += (tgt - E.I) * Math.min(1, dt * 2.5);
+    E.burst = Math.max(0, E.burst - dt * 1.8);
+    if (ELEC2.kick) { ELEC2.kick = 0; SM.puff = 1; }
+    E.arcs.length = 0;
+    try { Amb.set('elec', 0); } catch (e) { /* rien */ }
+    const I = E.I;
+    sound(live ? Math.min(1, I * .9 + E.burst * .3) : 0);
+    if (!live) { SM.p.length = 0; E.burst = 0; SM.puff = 0; }
+    const act = live && !G.reduced && (I > .01 || E.burst > .02 || SM.puff);
+    if (!act && !SM.p.length) { if (E.drawn && E.g) { E.g.clearRect(0, 0, E.c.width, E.c.height); E.drawn = false; } return; }
+    const d = qDPR(), w = innerWidth, h = innerHeight;
+    if (E.w !== w * d || E.h !== h * d || !E.g) { E.c.width = w * d; E.c.height = h * d; E.w = w * d; E.h = h * d; E.g = E.c.getContext('2d'); }
+    const g = E.g; g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h); E.drawn = true;
+    const anchor = LAY.pc ? $('#lp-multbox') : ($('#h-mult') || $('#h-score'));
+    if (act && anchor) {
+      const now = performance.now();
+      if (!E.rc || E.rcA !== anchor || now - E.rcT > 250) { E.rc = anchor.getBoundingClientRect(); E.rcA = anchor; E.rcT = now; }
+      const r = E.rc;
+      if (r.width) {
+        const lite = (OPT().parts ? 1 : .5) * (G.run && G.run.horde && !LAY.pc ? .5 : 1);
+        SM.acc += dt * ((I > .02 ? 2.5 + I * 14 : 0) + E.burst * 16) * lite;
+        while (SM.acc >= 1) {
+          SM.acc--;
+          SM.p.push({ x: r.left + R(.08, .92) * r.width, y: r.top + R(0, .25) * r.height, vx: R(-5, 5), vy: -R(9, 20) * (.7 + I * .7),
+            s0: R(7, 12) + I * 7, life: 0, max: R(1.8, 3) + I * 1.2, ph: R(0, 6.3), a: .5 + I * .4 });
+        }
+        if (SM.puff) {
+          SM.puff = 0;
+          for (let i = 0; i < 12 * lite; i++) {
+            const u = Math.random(), top = u < .5;
+            SM.p.push({ x: r.left + R(0, 1) * r.width, y: top ? r.top : r.top + R(0, 1) * r.height, vx: R(-22, 22), vy: -R(14, 34),
+              s0: R(7, 12) + I * 5, life: 0, max: R(1, 1.8), ph: R(0, 6.3), a: .6 });
+          }
+        }
+      }
+    }
+    g.globalCompositeOperation = 'source-over';
+    for (let i = SM.p.length - 1; i >= 0; i--) {
+      const p = SM.p[i]; p.life += dt;
+      if (p.life >= p.max) { SM.p.splice(i, 1); continue; }
+      p.vx += Math.sin(p.life * 1.8 + p.ph) * dt * 9; p.vy *= 1 - dt * .35;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      const k = p.life / p.max, s = p.s0 * (1 + k * 2.4), al = Math.min(1, p.life / .3) * (1 - k) * p.a;
+      g.globalAlpha = Math.max(0, al); g.drawImage(spr, p.x - s, p.y - s, s * 2, s * 2);
+    }
+    g.globalAlpha = 1;
+    if (SM.p.length > 240) SM.p.splice(0, SM.p.length - 240);
+  };
 })();
 
 const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}, "pick": {"n": 6, "fps": 24, "loop": false}, "flip": {"n": 17, "fps": 18, "loop": false}}}, "r": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n": 8, "fps": 32, "loop": false}, "down": {"n": 5, "fps": 45, "loop": false}, "drag": {"n": 8, "fps": 22, "loop": false}, "release": {"n": 6, "fps": 30, "loop": false}}}};
