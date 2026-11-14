@@ -1,4 +1,4 @@
-JACKPOT DEFENSE v22.9 aperçu (prototypes, à ne pas publier)
+JACKPOT DEFENSE v23.0 aperçu (prototypes, à ne pas publier)
 
 Mettre ce dossier en ligne (gratuit), puis l'installer :
 1. Mets TOUT le contenu de ce dossier sur un hébergeur de site statique
@@ -11,6 +11,12 @@ Mettre ce dossier en ligne (gratuit), puis l'installer :
 
 Ta progression reste sur chaque appareil. Pour la transférer :
 PROFIL > « Records et sauvegarde » > « Copier mon code », puis « Charger ce code » sur l'autre appareil.
+
+Nouveautés de la v23.0 aperçu
+- L'intro : nouvelle pluie, tirée de l'enregistrement « Pluie et orage » choisi par Sefy,
+  réchauffée (aigus adoucis, léger écho de rue) et bouclée sans couture (1 min 35).
+- L'écran de défaite : Gaston et ton compagnon réapparaissent dans leurs médaillons (ils étaient
+  devenus invisibles avec les portraits peints), et le compagnon dans le classement aussi.
 
 Nouveautés de la v22.9 aperçu
 - Les cinématiques qui se lancent toutes seules (salutations, scènes) ont la musique des

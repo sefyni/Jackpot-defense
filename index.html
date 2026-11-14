@@ -7047,6 +7047,10 @@ body:not(.th-orient) .mcard .reward{color:#cfe0a8!important}
 body:not(.th-orient) svg.ico{--ic2:#1c120a}
 /* v22.9 : le compteur rond de la machine (« DEDANS 15 jetons ») : le chiffre bien centré */
 body:not(.th-orient) .mall{display:inline-grid!important;place-items:center!important;line-height:1!important;padding:2px 0 0!important;font-size:12px!important;font-variant-numeric:tabular-nums}
+/* v23.0 : les compagnons HD dans les médaillons de l'écran de défaite (Gaston et ton compagnon) et du classement */
+.om-art .pet-hd{width:100%;height:100%}
+.ct-face .pet-hd{display:block;width:100%;height:100%}
+.lbb-pet .pet-hd{width:32px;height:32px}
 
 #abs .pc-hand .hand-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35));pointer-events:none;-webkit-user-drag:none;user-select:none}
 /* ===== v21.6 (aperçu) · conversations à choix et combat final, dans la DA du casino ===== */
@@ -7811,7 +7815,7 @@ body:not(.th-orient) .mall{display:inline-grid!important;place-items:center!impo
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v22.9 aperçu</p>
+  <p class="proto">Sefy Industries · v23.0 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -27174,7 +27178,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v22.9 aperçu</p></div>`;
+        <p class="ov5">v23.0 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43533,7 +43537,7 @@ const PET_HD = ["boris", "coco", "gaston", "marcel"];
    comme quand on appuie sur « Parler ». Une scène qui demande le silence ou sa propre musique la garde. */
 (function () {
   if (typeof stPlay !== 'function' || typeof spNextScene !== 'function' || typeof spEnd !== 'function') return;
-  const A = new Audio(); A.loop = true; A.preload = 'none';
+  const A = new Audio(); A.loop = true; A.preload = 'none'; window.SCENE_MUS = A;
   const vol = () => { try { return Math.max(0, Math.min(1, volOf('master') * volOf('mus'))) * .85; } catch (e) { return .6; } };
   let on = false, fT = null;
   const fade = (to, ms, then) => { clearInterval(fT); const st = A.volume, t0 = performance.now(); fT = setInterval(() => { const k = Math.min(1, (performance.now() - t0) / ms); A.volume = Math.max(0, Math.min(1, st + (to - st) * k)); if (k >= 1) { clearInterval(fT); if (then) then(); } }, 40); };
