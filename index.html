@@ -116,7 +116,26 @@ body:not(.th-orient) #title #t-board,body:not(.th-orient) #title #t-board .tb-li
 @media (max-height:380px){#books.bk2 .bks-room.lib .bks-desk{--dh:112px}}
 
 </style>
-<style id="v234">#bar .cv-talk.cv-float{top:7px;left:8px;padding:6px 10px 5px;font-size:11px;gap:6px}#bar .cv-talk.cv-float svg{width:13px;height:13px}</style><style id="v234v">.zm-glass .zm-pic{position:absolute;inset:0;display:block;pointer-events:none}.zm-glass .zm-im{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}.zm-glass .zm-liq{position:absolute;inset:0;background:var(--zliq,#e8a0b8);mix-blend-mode:multiply;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}@keyframes zmCan{0%,100%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 3px rgba(229,187,90,.45))}50%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 9px rgba(229,187,90,.9))}}.zm-glass.hot{filter:drop-shadow(0 0 10px rgba(229,187,90,.95)) drop-shadow(0 0 2px #f3e6c4)}.zm-glass.picking{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 8px rgba(229,187,90,.85))}</style></head>
+<style id="v234">.cv-talk-x{pointer-events:auto!important}#bar .cv-talk.cv-float{top:7px;left:8px;padding:6px 10px 5px;font-size:11px;gap:6px}#bar .cv-talk.cv-float svg{width:13px;height:13px}#bar .neon-bar{transition:opacity .35s}#bar:not(.pzwide) .bar-scene.baron-on .neon-bar{opacity:0}#bar:not(.pzwide) .bar-scene.baron-on .bubble{left:min(33%,132px);right:min(27%,104px)}@media (max-width:520px){#bar:not(.pzwide) .bar-scene.baron-on .bubble{font-size:13px;line-height:1.3;padding:7px 9px}}</style><style id="v234v">.zm-glass .zm-pic{position:absolute;inset:0;display:block;pointer-events:none}.zm-glass .zm-im{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}.zm-glass .zm-liq{position:absolute;inset:0;background:var(--zliq,#e8a0b8);mix-blend-mode:multiply;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}@keyframes zmCan{0%,100%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 3px rgba(229,187,90,.45))}50%{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 9px rgba(229,187,90,.9))}}.zm-glass.hot{filter:drop-shadow(0 0 10px rgba(229,187,90,.95)) drop-shadow(0 0 2px #f3e6c4)}.zm-glass.picking{filter:drop-shadow(0 3px 2px rgba(0,0,0,.45)) drop-shadow(0 0 8px rgba(229,187,90,.85))}</style><style id="v236p">
+#cv-talk,.cv-talk-y{pointer-events:auto!important}
+#bar .cv-talk.cv-r{position:absolute;top:7px;left:auto;right:8px;z-index:6;margin:0;padding:6px 10px 5px;font-size:11px;gap:6px}
+#bar .cv-talk.cv-r svg{width:13px;height:13px}
+.bks-bubble .cv-talk{display:flex;width:max-content;margin:9px 0 0 auto;padding:6px 11px 5px;font-size:11px;gap:6px}
+.bks-bubble .cv-talk svg{width:13px;height:13px}
+.hzj-left .cv-talk{align-self:flex-start;margin:10px 0 0;flex:none}
+@media (max-width:760px){.hzj-left .cv-talk{grid-column:1/-1;justify-self:start;margin:4px 0 0}}
+#poker .pk-top .cv-talk{flex:none;margin-left:10px;padding:6px 10px 5px;font-size:11px;gap:6px}
+#poker .pk-top .cv-talk svg{width:13px;height:13px}
+/* PC (grands portraits sur les côtés) : « Parler » sous le nom du perso, plus dans le bandeau */
+#bar.pzwide .bar-scene .cv-talk,#market.pzwide .mk-scene .cv-talk{display:none!important}
+.pzf .cv-pzf{display:none}
+#bar.pzwide .pzf.on .cv-pzf,#market.pzwide .pzf.on .cv-pzf{display:inline-flex;position:absolute;bottom:max(8px,4%);transform:translateX(-50%);margin:0;padding:6px 12px 5px;font-size:12px;gap:7px;pointer-events:auto;z-index:3;white-space:nowrap}
+.pzf .cv-pzf svg{width:14px;height:14px}
+#bar.pzwide .pzf.on .pzf-name,#market.pzwide .pzf.on .pzf-name{bottom:calc(max(8px,4%) + 44px)}
+.pzf-l .cv-pzf{left:min(50%,calc(var(--gw,300px) / 2))}
+.pzf-r .cv-pzf{left:max(50%,calc(100% - var(--gw,300px) / 2))}
+</style>
+</head>
 <body>
 <style>
 /* Pixelify Sans (SIL OFL) intégrée : le jeu marche sans internet */
@@ -7818,7 +7837,7 @@ body:not(.th-orient) .oslide input::-moz-range-thumb{background:url(decors/ui/ja
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.5 aperçu</p>
+  <p class="proto">Sefy Industries · v23.6 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -27181,7 +27200,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v23.5 aperçu</p></div>`;
+        <p class="ov5">v23.6 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -45899,6 +45918,64 @@ function cvaPause(ms) { const a = CVA.el; if (!a || a.paused) return; cvaFade(0,
   // la cassette de Dina : la musique des conversations s'efface, puis revient quand le morceau s'arrête
   cvMusicStart = function () { cvaPause(400); return _ms.apply(this, arguments); };
   cvMusicStop = function () { const r = _mst.apply(this, arguments); if (CV.on) setTimeout(() => { if (CV.on && !CVM.on) cvaPlay(); }, 500); return r; };
+}
+
+
+/* v23.6 · « Parler » partout */
+if (typeof CV_SEQ !== 'undefined' && typeof cvTalkBtn === 'function') {
+  Object.assign(CV_SEQ, {
+    anatole: [['anatole_registre', 0], ['anatole_jetons', 1, 'registre_vu']],
+    baron: [['baron_masque', 0], ['baron_boite', 1, 'baron_porte'], ['baron_aveu', 3, 'baron_boite']],
+    jack: [['jack_accueil', 0], ['jack_retour', 0, 'vu_jack']],
+  });
+  CV_DATA.anatole_rien = { who: 'anatole', dec: 'biblio', start: 'a', nodes: { a: { L: [['anatole', 'write', "Pas maintenant, j'écris. Reviens avec quelque chose pour le registre."]], end: true } } };
+  CV_DATA.baron_rien = { who: 'baron', dec: 'baron', start: 'a', nodes: { a: { L: [['baron', 'sneer', "Une audience ? Prends rendez-vous. Dans dix ans."]], end: true } } };
+  CV_DATA.jack_rien = { who: 'jack', dec: 'jack', start: 'a', nodes: { a: { L: [['jack', 'chip', "J'ai déjà tout ce que je voulais savoir. Va jouer."]], end: true } } };
+  const cvWho = who => (who === 'dina' && typeof cvDinaNext === 'function') ? cvDinaNext() : cvNext(who);
+  // un 2e bouton, qui ne chasse pas celui de Zaza (cvTalkBtn enlève tous les .cv-talk-x de l'hôte)
+  window.cvTalkAdd = function (host, who, cls, mark) {
+    if (!host) return;
+    mark = mark || 'cv-talk-y1';
+    host.querySelectorAll('.' + mark).forEach(b => b.remove());
+    if (!who || !cvWho(who)) return;
+    host.insertAdjacentHTML('beforeend', `<button type="button" class="cv-talk cv-talk-y ${mark} ${cls || ''}" data-who="${who}">${CV_ICO.sujet}<span>Parler</span></button>`);
+    host.querySelector('.' + mark).addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); const id = cvWho(who); if (id) cvOpen(id); });
+  };
+  const wrap = (name, after) => {
+    try {
+      const f = eval(name); if (typeof f !== 'function') return;
+      const g = function () { const r = f.apply(this, arguments); try { after.apply(this, arguments); } catch (e) { /* rien */ } return r; };
+      eval(name + ' = g');
+    } catch (e) { /* rien */ }
+  };
+  // Anatole : dans sa bulle, à la bibliothèque
+  wrap('openBooks', () => cvTalkAdd($('#books .bks-bubble'), 'anatole', '', 'cv-talk-an'));
+  // le Baron : la table de poker (pas les duels) …
+  wrap('openPoker', o => { const h = $('#poker .pk-top'); if (o && o.duel) { if (h) h.querySelectorAll('.cv-talk-pk').forEach(b => b.remove()); return; } cvTalkAdd(h, 'baron', '', 'cv-talk-pk'); });
+  // … et le bar quand il passe, comme les visiteurs (Dina, Momo, Nox) : à droite, côté visiteur
+  const barSync = () => {
+    const here = el => el && !el.hidden && !el.classList.contains('walk-out');
+    let who = here($('#baron')) ? 'baron' : null;
+    if (!who && typeof VIS_IDS !== 'undefined') for (const id of VIS_IDS) if (here($('#vis-' + id))) { who = id; break; }
+    cvTalkAdd($('#bar .bar-scene'), who, 'cv-r', 'cv-talk-vis');
+  };
+  for (const n of ['baronArrive', 'visitorArrive', 'baronLeave', 'visitorLeave', 'openBar']) wrap(n, barSync);
+  // Jack : son shop
+  wrap('hrdShopShow', () => cvTalkAdd($('#hz-jack .hzj-left'), 'jack', '', 'cv-talk-jk'));
+  // PC : un bouton sous le nom de chaque grand portrait (bar : Zaza à gauche, le visiteur à droite ; marché : l'Inspecteur)
+  const pzfTalk = () => {
+    for (const sl of document.querySelectorAll('.pzf-box .pzf')) {
+      if (sl.querySelector('.cv-pzf')) continue;
+      sl.insertAdjacentHTML('beforeend', `<button type="button" class="cv-talk cv-talk-y cv-pzf">${CV_ICO.sujet}<span>Parler</span></button>`);
+      sl.querySelector('.cv-pzf').addEventListener('click', e => {
+        e.stopPropagation(); e.preventDefault();
+        const w = (sl.querySelector('img') || {}).dataset; const who = w && w.pz; if (!who) return;
+        const id = cvWho(who); if (id) cvOpen(id);
+      });
+    }
+  };
+  pzfTalk(); setTimeout(pzfTalk, 1500);
+  wrap('openBar', pzfTalk); wrap('openMarketPane', pzfTalk);
 }
 
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
