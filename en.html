@@ -7467,7 +7467,7 @@ body:not(.th-orient) .oslide input::-moz-range-thumb{background:url(decors/ui/ja
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.3 aperçu</p>
+  <p class="proto">Sefy Industries · v23.4 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profiles">
@@ -26678,7 +26678,7 @@ function renderOptions() {
       break;
     }
     case 'credits':
-      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.3 aperçu</p></div>`;
+      h += `<div class="ocred"><p class="ocl">JACKPOT <span>DEFENSE</span></p>\n        <p>Produced by <b>Sefy Industries</b>.</p>\n        <p>Characters: Zaza, the Baron, the Inspector, Dina, Momo and Madame Nox.</p>\n        <p>Music played by real instruments (FluidR3 soundfont by Frank Wen, MIT license). Voices and sound effects synthesized live.</p>\n        <p>Numbers: Jersey 15 (SIL OFL). Text: Pixelify Sans (SIL OFL).</p>\n        <p class="ov5">v23.4 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -35959,12 +35959,12 @@ function keyShort(act, dflt) {
 /* ================= v16.3 · les portraits « Casino Noir » (façon Hades) =================
    Chaque perso a 10 poses. À chaque réplique, il change de tête : la pose vient de la réplique
    (répliques écrites pour une pose précise), sinon de sa catégorie (gagne, perd, arrive…), sinon du ton. */
-const PZ_IX = {"zaza":{"w":792,"h":794,"rim":"#3ad8c8","poses":["bored","gift","laugh","mad","meh","shock","sly","sus","wink","work"]},"nox":{"w":760,"h":791,"rim":"#b98cff","poses":["bored","cast","laugh","mad","sad","secret","shock","sly","think","wink"]},"dina":{"w":783,"h":794,"rim":"#ff4fa0","poses":["bored","laugh","mad","mock","rock","sad","shock","sly","think","throw"]},"coll":{"w":1064,"h":1024,"rim":"#62e08e","poses":["gift","happy","laugh","mad","sad","secret","shock","sly","sus","think"]},"momo":{"w":760,"h":785,"rim":"#ffb347","poses":["broke","happy","laugh","mad","oops","sad","secret","shock","sly","think"]},"baron":{"w":799,"h":760,"rim":"#c77dff","poses":["bored","cheat","happy","laugh","mad","oops","shock","sly","sus","threat"]},"insp":{"w":760,"h":790,"rim":"#ff6a3d","poses":["bored","cop","gift","greedy","laugh","mad","pchip","phide","psecret","secret","shock","sus","wink"]}};
+const PZ_IX = {"zaza":{"w":790,"h":800,"rim":"#3ad8c8","poses":["bored","gift","laugh","mad","meh","shock","sly","sus","wink","work"]},"nox":{"w":790,"h":800,"rim":"#b98cff","poses":["bored","cast","laugh","mad","sad","secret","shock","sly","think","wink"]},"dina":{"w":790,"h":800,"rim":"#ff4fa0","poses":["bored","laugh","mad","mock","rock","sad","shock","sly","think","throw"]},"coll":{"w":790,"h":800,"rim":"#62e08e","poses":["gift","happy","laugh","mad","sad","secret","shock","sly","sus","think"]},"momo":{"w":790,"h":800,"rim":"#ffb347","poses":["broke","happy","laugh","mad","oops","sad","secret","shock","sly","think"]},"baron":{"w":790,"h":800,"rim":"#c77dff","poses":["bored","cheat","happy","laugh","mad","oops","shock","sly","sus","threat"]},"insp":{"w":790,"h":800,"rim":"#ff6a3d","poses":["bored","cop","gift","greedy","laugh","mad","pchip","phide","psecret","secret","shock","sus","wink"]}};
 const PZ_OF = { zaza: 'zaza', dealer: 'insp', baron: 'baron', anatole: 'coll', nox: 'nox', dina: 'dina', momo: 'momo' };
 const PZ_LEFT = { zaza: 1, dealer: 1, anatole: 1 };
 const PZ_DEF = { zaza: ['work', 'sly', 'wink'], dealer: ['bored', 'wink'], baron: ['sly', 'bored'], anatole: ['happy', 'sly'], nox: ['wink', 'sly'], dina: ['sly', 'bored'], momo: ['happy', 'think'] };
 // le recadrage « buste » (dans une image de 100 de large) et le visage (fiches, petites têtes)
-const PZ_FACE = { zaza: '24 2 52 52', dealer: '26 0 52 54', baron: '25 0 52 58', anatole: '26 0 50 52', nox: '24 2 52 52', dina: '26 0 52 54', momo: '26 0 52 52' };
+const PZ_FACE = { zaza: '15 0 50 52', dealer: '30 10 50 52', baron: '22 0 50 52', anatole: '22 1 50 52', nox: '22 3 50 52', dina: '13 0 50 52', momo: '20 0 50 52' };
 const PZ_LINE = new Map();
 const PZ = { pose: {}, t: {}, seen: {} };
 const pzSrc = (who, pose) => 'portraits/' + PZ_OF[who] + '_' + pose + '.webp';
