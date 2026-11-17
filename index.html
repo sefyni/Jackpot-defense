@@ -7856,7 +7856,7 @@ body:not(.th-orient) .oslide input::-moz-range-thumb{background:url(decors/ui/ja
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.8 aperçu</p>
+  <p class="proto">Sefy Industries · v23.9 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -27221,7 +27221,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v23.8 aperçu</p></div>`;
+        <p class="ov5">v23.9 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
@@ -43810,6 +43810,69 @@ const HAND_IMGS = {"l": {"idle": 1, "press": 1, "lift": 1, "anims": {"rise": {"n
   watch(); setTimeout(watch, 1500);
 })();
 
+
+/* v23.9 · toutes les poses branchées */
+(() => {
+  const ALL = {"zaza": ["back", "bored", "bye", "cold", "count", "dance", "fake", "gift", "guilt", "laugh", "lean", "leave", "lipstick", "listen", "mad", "meh", "mirror", "napkins", "pearl", "phone", "pour", "red", "ring", "sad", "secret", "shock", "shrug", "sly", "smoke", "soft", "sus", "tear", "think", "ticket", "tired", "warn", "water", "wink", "wipe", "work"], "baron": ["applause", "back", "bored", "bow", "box", "broke", "brother", "bye", "cane", "cards", "catch", "cheat", "cigar", "coffee", "cry", "fear", "grand", "happy", "hat", "laugh", "letter", "lose", "mad", "monocle", "mother", "nohat", "oops", "rival", "sea", "shame", "shock", "sincere", "sly", "sneer", "sus", "think", "threat", "tremble", "urn", "watch"], "coll": ["back", "board", "book", "bye", "chip", "coffee", "cry", "drop", "excited", "fear", "gift", "glasses", "hand", "happy", "hug", "ironic", "laugh", "lecture", "listen", "mad", "page", "peer", "pin", "read", "regret", "sad", "sea", "secret", "shock", "sly", "string", "sus", "think", "tin", "tired", "warm", "whisper", "write"], "momo": ["aim", "angry", "back", "beer", "blush", "broke", "bye", "chalk", "cheer", "command", "cry", "dart", "enter", "flex", "ginette", "grief", "happy", "helmet", "hug", "invite", "jealous", "joke", "keys", "laugh", "mad", "nervous", "oops", "parloir", "poem", "protect", "respect", "sad", "secret", "shock", "shoot", "sly", "stop", "think"], "dina": ["aim", "airguitar", "back", "blush", "boom", "bored", "brave", "bullseye", "bye", "chalk", "cheer", "cheers", "command", "confide", "counter", "crate", "cry", "dance", "defiant", "dream", "drum", "emptywin", "enter", "eyeroll", "friend", "goodbye", "gum", "headbang", "helmet", "helmeton", "hum", "humiliated", "hurt", "invite", "jealous", "keys", "lastline", "laugh", "laughcry", "lean", "letter", "listen", "mad", "mock", "nervous", "office", "pinky", "play", "pout", "proud", "rage", "reach", "respect", "ring", "rock", "sad", "scared", "shock", "shoulder", "showwall", "shy", "sing", "singloud", "sleepy", "sly", "smile", "tears", "think", "throw", "tipsy", "touched", "twirl", "whisper", "winfist"], "nox": ["applause", "back", "bored", "bye", "candles", "cast", "chairs", "child", "clap", "command", "crystal", "death", "enter", "fear", "fortune", "hope", "hurt", "invite", "laugh", "listen", "mad", "mother", "peek", "sad", "secret", "see", "shock", "skull", "sly", "spin", "tarot", "think", "trance", "trick", "truth", "vanish", "watch", "wink"], "insp": ["back", "badge", "bored", "bye", "car", "cheese", "cop", "gift", "greedy", "guilt", "laugh", "letter", "mad", "magnifier", "name", "nobadge", "notebook", "pchip", "phide", "photo", "pm1", "pm10", "pm2", "pm3", "pm4", "pm5", "pm6", "pm7", "pm8", "pm9", "psecret", "rain", "rat", "salute", "secret", "shock", "sus", "testify", "trench", "wink"], "jack": ["brow", "cash", "clap", "coffee", "count", "enter", "glass", "keys", "laugh", "lean", "mad", "owner", "paper", "point", "push", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "shock", "shrug", "sigh", "smirk", "sus", "watch", "wow", "yawn"]};
+  for (const k in ALL) { const c = PZ_IX[k]; if (!c) continue; for (const p of ALL[k]) if (!c.poses.includes(p)) c.poses.push(p); }
+  const ok = (who, p) => pzHas(who, p);
+  const add = (bank, cat, who, ps) => {
+    const ent = PZ_BANKS.find(x => x[0] === bank); if (!ent) return;
+    const cats = ent[1], v = cats[cat]; if (v == null) return;
+    const arr = Array.isArray(v) ? v : [v], nv = arr.concat(ps.filter(p => ok(who, p) && !arr.includes(p)));
+    cats[cat] = nv;
+    const L = bank[cat];
+    for (const t of (Array.isArray(L) ? L : [L])) if (typeof t === 'string') { const cur = PZ_LINE.get(t); if (cur == null || cur === v || cur === arr || (Array.isArray(cur) && arr.every(p => cur.includes(p)))) PZ_LINE.set(t, nv); }
+  };
+  const addList = (arr, who, ps) => { const ent = PZ_BANKS.find(x => x[0] && x[0].x === arr); if (ent) add(ent[0], 'x', who, ps); };
+  const line = (t, v) => { if (typeof t === 'string') PZ_LINE.set(t, v); else if (Array.isArray(t)) t.forEach(x => line(x, v)); };
+  try {
+    // Zaza
+    add(ZAZA, 'hello', 'zaza', ['wipe', 'lean', 'smoke', 'lipstick', 'mirror', 'count']);
+    add(ZAZA, 'buy', 'zaza', ['pour', 'count', 'ticket']);
+    add(ZAZA, 'shot', 'zaza', ['pour']);
+    add(ZAZA, 'broke', 'zaza', ['shrug', 'cold', 'warn']);
+    add(ZAZA, 'leave', 'zaza', ['bye']);
+    add(ZAZA, 'market', 'zaza', ['secret', 'warn']);
+    add(ZAZA, 'boss', 'zaza', ['warn', 'think']);
+    add(ZAZA, 'baron', 'zaza', ['cold', 'warn']);
+    add(ZAZA, 'final', 'zaza', ['tear', 'soft']);
+    add(ZAZA, 'v_dina', 'zaza', ['soft']); add(ZAZA, 'v_momo', 'zaza', ['shrug']); add(ZAZA, 'v_nox', 'zaza', ['smoke']);
+    // le Baron
+    add(BARON, 'arrive', 'baron', ['hat', 'bow', 'grand', 'cigar']);
+    add(BARON, 'stake', 'baron', ['sneer', 'cane']);
+    add(BARON, 'deal', 'baron', ['cards']);
+    add(BARON, 'raise', 'baron', ['cigar', 'sneer']);
+    add(BARON, 'swap', 'baron', ['cards']);
+    add(BARON, 'call', 'baron', ['monocle', 'think']);
+    add(BARON, 'draw', 'baron', ['cards']);
+    add(BARON, 'win', 'baron', ['tremble', 'lose']);
+    add(BARON, 'lose', 'baron', ['applause', 'sneer', 'grand']);
+    add(BARON, 'gold', 'baron', ['monocle']);
+    add(BARON, 'broke', 'baron', ['watch']);
+    // l'Inspecteur (marché noir)
+    add(LINES, 'hello', 'dealer', ['salute', 'trench', 'rain', 'badge']);
+    add(LINES, 'refuse', 'dealer', ['badge']);
+    add(LINES, 'buy', 'dealer', ['notebook']);
+    add(LINES, 'item', 'dealer', ['magnifier']);
+    add(LINES, 'spell', 'dealer', ['magnifier']);
+    add(LINES, 'poke', 'dealer', ['magnifier', 'notebook', 'trench']);
+    add(LINES, 'hint', 'dealer', ['notebook']);
+    add(LINES, 'punchPick', 'dealer', ['magnifier']);
+    if (typeof INSP_PET !== 'undefined') { line(INSP_PET.pitch, 'rat'); line(INSP_PET.bye, ['rat', 'bye']); line(INSP_PET.back, 'rat'); line(INSP_PET.hi, ['rat', 'cheese']); }
+    // Anatole (bibliothèque et cabinet)
+    if (typeof AN_HELLO !== 'undefined') addList(AN_HELLO, 'anatole', ['excited', 'glasses', 'peer']);
+    if (typeof AN_IDLE !== 'undefined') addList(AN_IDLE, 'anatole', ['read', 'write', 'peer', 'page', 'lecture', 'ironic', 'coffee']);
+    if (typeof BKS_HELLO !== 'undefined') addList(BKS_HELLO, 'anatole', ['excited', 'glasses', 'peer']);
+    if (typeof BKS_IDLE !== 'undefined') addList(BKS_IDLE, 'anatole', ['read', 'write', 'peer', 'page', 'lecture', 'ironic', 'coffee']);
+    // les visiteurs du bar
+    const M = VISITORS.momo.lines, Dn = VISITORS.dina.lines, N = VISITORS.nox.lines;
+    add(M, 'arrive', 'momo', ['flex', 'beer']); add(M, 'turn', 'momo', ['shoot']); add(M, 'win', 'momo', ['joke']); add(M, 'lose', 'momo', ['angry']); add(M, 'riv', 'momo', ['jealous']);
+    add(Dn, 'arrive', 'dina', ['gum', 'eyeroll', 'lean']); add(Dn, 'win', 'dina', ['pout', 'jealous']); add(Dn, 'lose', 'dina', ['winfist', 'proud', 'airguitar']); add(Dn, 'riv', 'dina', ['rage']); add(Dn, 'refuse', 'dina', ['eyeroll']);
+    add(N, 'arrive', 'nox', ['trance', 'peek']); add(N, 'spin', 'nox', ['trick']); add(N, 'win', 'nox', ['fear']); add(N, 'lose', 'nox', ['fortune', 'see']); add(N, 'lied', 'nox', ['truth']);
+  } catch (e) { /* une banque a changé de forme : on garde les poses déjà branchées */ }
+})();
+
 const CV_ANIMS = {};
 /* ===== v21.6 (aperçu) · les conversations à choix, façon I'm Not a Human, et le combat final =====
    Le joueur ne parle jamais : on choisit des intentions (un sujet, un geste, le silence, montrer, regarder).
@@ -45949,6 +46012,15 @@ if (typeof CV_SEQ !== 'undefined' && typeof cvTalkBtn === 'function') {
     baron: [['baron_masque', 0], ['baron_boite', 1, 'baron_porte'], ['baron_aveu', 3, 'baron_boite']],
     jack: [['jack_accueil', 0], ['jack_retour', 0, 'vu_jack']],
   });
+
+  // Gaston n'a pas encore de portrait : l'Inspecteur le présente, et la réplique de la fin est enfin la sienne
+  try {
+    const G2 = CV_DATA.gaston_fromage;
+    if (G2 && G2.nodes.a && G2.nodes.c) {
+      G2.nodes.a.L.push(['dealer', 'rat', "Lui, c'est Gaston. Il ne parle pas. Il juge."]);
+      G2.nodes.c.L = [['dealer', 'rat', "Il t'a adopté. Ou volé. Chez lui, c'est pareil."], ['act', { k: 'flag', v: 'vu_gaston' }]];
+    }
+  } catch (e) { /* rien */ }
   CV_DATA.anatole_rien = { who: 'anatole', dec: 'biblio', start: 'a', nodes: { a: { L: [['anatole', 'write', "Pas maintenant, j'écris. Reviens avec quelque chose pour le registre."]], end: true } } };
   CV_DATA.baron_rien = { who: 'baron', dec: 'baron', start: 'a', nodes: { a: { L: [['baron', 'sneer', "Une audience ? Prends rendez-vous. Dans dix ans."]], end: true } } };
   CV_DATA.jack_rien = { who: 'jack', dec: 'jack', start: 'a', nodes: { a: { L: [['jack', 'chip', "J'ai déjà tout ce que je voulais savoir. Va jouer."]], end: true } } };
