@@ -128,6 +128,13 @@ body:not(.th-orient) #title #t-board,body:not(.th-orient) #title #t-board .tb-li
 .bk-nav .btn .jd-arr{width:20px;height:20px}
 .cf-dodge b .jd-arr{width:1.2em;height:1.2em}
 </style>
+<style id="v238d">
+.nr-card.has-art{background:transparent}
+.nr-card.has-art .nr-pat,.nr-card.has-art .nr-cn,.nr-card.has-art .nr-med{display:none}
+.nr-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.nr-card.lk .nr-art{filter:grayscale(1) brightness(.6)}
+.bk-deck.has-art{background-color:transparent!important;background-size:cover!important;background-position:center!important;box-shadow:0 3px 3px rgba(0,0,0,.3)!important}
+</style>
 <style id="v236p">
 #cv-talk,.cv-talk-y{pointer-events:auto!important}
 #bar .cv-talk.cv-r{position:absolute;top:7px;left:auto;right:8px;z-index:6;margin:0;padding:6px 10px 5px;font-size:11px;gap:6px}
@@ -7849,7 +7856,7 @@ body:not(.th-orient) .oslide input::-moz-range-thumb{background:url(decors/ui/ja
     </div>
   </div>
   <div class="tticker" aria-hidden="true"><div class="tt-in" id="t-ticker"></div></div>
-  <p class="proto">Sefy Industries · v23.7 aperçu</p>
+  <p class="proto">Sefy Industries · v23.8 aperçu</p>
 </section>
 
 <section id="prof" class="full" hidden aria-label="Profils">
@@ -19313,9 +19320,11 @@ function closeNewRun() {
   if (G.mode === 'title') { show('#title', true); refreshTitle(); }
   Snd.click();
 }
+const DECK_ART = ["barman", "bille", "coffre", "collec", "inspecteur", "pack", "seconde", "sorts", "veinard", "xxl"];
 function deckCardHTML(D, won, cls) {
   const st = won > 0 ? STAKES[Math.min(STAKES.length, won) - 1] : null;
-  return `<div class="nr-card${cls ? ' ' + cls : ''}" style="--dc:${D.col}">
+  const ART = DECK_ART.includes(D.id);
+  return `<div class="nr-card${cls ? ' ' + cls : ''}${ART ? ' has-art' : ''}" style="--dc:${D.col}">${ART ? `<img class="nr-art" src="decors/decks/${D.id}.webp" alt="" draggable="false">` : ''}
     <span class="nr-pat" aria-hidden="true"></span>
     <i class="nr-cn tl">${iconSVG('su_s')}</i><i class="nr-cn tr">${iconSVG('su_h')}</i><i class="nr-cn bl">${iconSVG('su_d')}</i><i class="nr-cn br">${iconSVG('su_c')}</i>
     <span class="nr-med">${iconSVG(D.icon)}</span>${/\blk\b/.test(cls || '') ? `<span class="nr-lock">${LOCK_SVG}</span>` : ''}
@@ -19760,7 +19769,7 @@ function bkItem(c, id) {
     case 'T': { const ok = boostUnlocked(id); return { ok, art: protoChip(id, 'k-fou'), name: ok ? JK[id].name : '???' }; }
     case 'F': { const ok = giftDone(JK[id].gift); return { ok, art: protoChip(id, 'k-fou'), name: ok ? JK[id].name : '???' }; }
     case 'B': { const ok = skinOpen('bille', id), S2 = BILLE_SKINS.find(x => x.id === id); return { ok, art: `<canvas class="bk-ball" width="96" height="96" data-ball="${id}"></canvas>`, name: ok || !S2.secret ? S2.name : '???' }; }
-    case 'D': { const D = deckById(id), w = (G.meta.dw || {})[id] || 0; return { ok: true, art: `<span class="bk-deck" style="--dc:${D.col}"><span class="nr-med">${iconSVG(D.icon)}</span></span>`, name: D.name, sub: `<span class="bk-stk">${STAKES.map((S2, k) => `<i class="${k < w ? 'on' : ''}" style="--sc:${S2.col}"></i>`).join('')}</span>` }; }
+    case 'D': { const D = deckById(id), w = (G.meta.dw || {})[id] || 0; return { ok: true, art: DECK_ART.includes(id) ? `<span class="bk-deck has-art" style="--dc:${D.col};background-image:url(decors/decks/${id}.webp)"></span>` : `<span class="bk-deck" style="--dc:${D.col}"><span class="nr-med">${iconSVG(D.icon)}</span></span>`, name: D.name, sub: `<span class="bk-stk">${STAKES.map((S2, k) => `<i class="${k < w ? 'on' : ''}" style="--sc:${S2.col}"></i>`).join('')}</span>` }; }
     case 'k': { const ok = catHas('k', id), g = id[0] === 'g', i = +id.slice(1), M2 = (g ? GLITCH9 : MACH9)[i], C = (g ? GLITCH_PAL : MACH_PAL)[i]; return { ok, art: `<span class="bk-plate${g ? ' glitch' : ''}" style="--ca:${C.a};--cb:${C.b};--cc:${C.c}"><span class="chm-ico">${iconSVG(g ? 'faux' : MACH_ICON[i])}</span></span>`, name: ok ? M2.name : '???', sub: ok ? `<small class="bk-bug">bug : ${esc(M2.bugName)}</small>` : '' }; }
     case 'p': { const ok = catHas('p', id); return { ok, art: `<span class="bk-photo">${catTile('p', id)}<i class="bk-tape"></i></span>`, name: ok ? catTitle('p', id) : '???' }; }
     case 'a': { const ok = catHas('a', id); return { ok, art: `<span class="bk-photo">${catTile('a', id)}<i class="bk-tape"></i></span>`, name: ok ? PETS[id].name : '???' }; }
@@ -27212,7 +27221,7 @@ function renderOptions() {
         <p>Personnages : Zaza, le Baron, l'Inspecteur, Dina, Momo et Madame Nox.</p>
         <p>Musiques jouées par de vrais instruments (banque de sons FluidR3 de Frank Wen, licence MIT). Voix et bruitages synthétisés en direct.</p>
         <p>Chiffres : Jersey 15 (SIL OFL). Texte : Pixelify Sans (SIL OFL).</p>
-        <p class="ov5">v23.7 aperçu</p></div>`;
+        <p class="ov5">v23.8 aperçu</p></div>`;
       break;
   }
   $('#op-body').innerHTML = h;
